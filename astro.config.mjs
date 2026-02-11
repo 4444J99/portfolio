@@ -5,4 +5,9 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://4444j99.github.io',
   base: '/portfolio',
+  vite: {
+    build: {
+      chunkSizeWarningLimit: 1200,
+    },
+  },
 });

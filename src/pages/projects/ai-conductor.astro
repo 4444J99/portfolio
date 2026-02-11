@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="AI-Conductor Model — 4444j" description="The methodology for human-AI co-creation that produced ~289K words of documentation — AI generates volume, human directs and refines.">
@@ -16,99 +17,85 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
     >
       <h2>The Model</h2>
       <p>
-        The eight-organ system contains ~289,000 words of documentation — READMEs, essays, governance specifications, audit reports, planning documents. That volume was produced through a specific methodology I call the <strong>AI-conductor model</strong>: AI generates volume, human directs and refines.
-      </p>
-      <p>
-        This isn't "AI wrote my portfolio." It's a deliberate creative practice where the human acts as conductor — setting direction, maintaining quality, and making every structural decision — while AI acts as an instrument capable of producing drafts at speed.
+        Every creative team in 2026 is figuring out how to work with AI. Most approaches are "AI replaces human work" or "human ignores AI." I developed a third option: the <strong>AI-conductor model</strong>, where human acts as conductor — setting direction, maintaining quality, making every structural decision — while AI acts as an instrument capable of producing drafts at speed. This isn't "AI wrote my portfolio." It's a designed practice with explicit roles, quality gates, and attribution.
       </p>
 
       <h2>How It Works in Practice</h2>
       <p>
-        <strong>Human provides:</strong> Strategic direction, structural decisions, quality criteria, voice and tone, factual accuracy review, cross-reference verification, final approval.
+        <strong>Human provides:</strong> Strategic direction, structural decisions, quality criteria, voice and tone, factual accuracy review, final approval.
       </p>
       <p>
-        <strong>AI provides:</strong> Draft generation at speed, consistent formatting, template compliance, volume production, initial cross-reference checking, documentation of its own process.
+        <strong>AI provides:</strong> Draft generation at speed, consistent formatting, template compliance, volume production, initial cross-reference checking.
       </p>
       <p>
-        A typical workflow for a 3,000-word README:
+        A typical 3,000-word README: human writes brief → AI generates draft (~15-20K tokens) → human corrects facts, adjusts positioning → AI revises → human approves. Total: ~50-90K tokens, 30-60 minutes human time.
       </p>
-      <ul>
-        <li>Human writes a brief: target audience, key messages, technical details to include, tone</li>
-        <li>AI generates first draft (~15-20K tokens including context)</li>
-        <li>Human reviews: corrects facts, adjusts positioning, adds project-specific insight that AI couldn't know</li>
-        <li>AI revises based on feedback (~10-15K tokens)</li>
-        <li>Human does final review and approves</li>
-        <li>Total: ~50-90K tokens per README, 30-60 minutes human time</li>
-      </ul>
+
+      <SketchContainer
+        sketchId="token-stream"
+        height="350px"
+        mobileHeight="250px"
+        ariaLabel="Interactive token stream visualization: river of token rectangles flowing left to right through 4 phases (Context, Generation, Review, Validation). River widens at Generation and narrows at Review — the human bottleneck. Tokens change color through review: gold for verified, dim for flagged. Mouse X zooms into phases. Click tokens in Review to see verification status. Running counter ticks toward 289K."
+      />
 
       <h2>The Token Economy</h2>
       <p>
-        Effort is measured in LLM API tokens, not human-hours. This reframes creative production: the bottleneck isn't generation speed but review quality.
+        Effort is measured in LLM API tokens, not human-hours. The bottleneck isn't generation speed — it's review quality.
       </p>
-      <table>
-        <thead>
-          <tr><th>Task Type</th><th>Token Budget</th><th>Human Time</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>README Rewrite</td><td>~72K tokens</td><td>45-60 min</td></tr>
-          <tr><td>README Populate (new)</td><td>~88K tokens</td><td>60-90 min</td></tr>
-          <tr><td>Essay (4,000-5,000 words)</td><td>~120K tokens</td><td>90-120 min</td></tr>
-          <tr><td>Validation Pass (per repo)</td><td>~15K tokens</td><td>10-15 min</td></tr>
-          <tr><td>GitHub Actions Workflow</td><td>~55K tokens</td><td>30-45 min</td></tr>
-        </tbody>
-      </table>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Task Type</th><th>Token Budget</th><th>Human Time</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>README Rewrite</td><td>~72K tokens</td><td>45-60 min</td></tr>
+            <tr><td>README Populate (new)</td><td>~88K tokens</td><td>60-90 min</td></tr>
+            <tr><td>Essay (4,000-5,000 words)</td><td>~120K tokens</td><td>90-120 min</td></tr>
+            <tr><td>Validation Pass (per repo)</td><td>~15K tokens</td><td>10-15 min</td></tr>
+            <tr><td>GitHub Actions Workflow</td><td>~55K tokens</td><td>30-45 min</td></tr>
+          </tbody>
+        </table>
+      </div>
       <p>
-        Total system budget: ~6.5 million tokens across three phases.
+        Total system budget: ~6.5 million tokens across three phases. 289,000 words produced.
       </p>
 
-      <h2>What Makes This Different from "Using ChatGPT"</h2>
+      <h2>What Makes This Different</h2>
       <p>
-        Three things:
+        <strong>Governance.</strong> Every AI-generated document passes through the same promotion state machine as everything else. Specifications, quality gates, validation checklists. This prevents the most common AI failure: plausible text that doesn't say anything useful.
       </p>
       <p>
-        <strong>Governance.</strong> The AI-conductor model operates within the eight-organ system's governance. Every document has a specification, a quality gate, and a validation checklist. AI-generated content passes through the same promotion state machine as everything else. This prevents the most common AI writing failure: plausible-sounding text that doesn't actually say anything useful.
+        <strong>Attribution.</strong> Every document is transparent about its production method. No pretense that a human typed 289K words — and no pretense that AI produced quality work unsupervised.
       </p>
       <p>
-        <strong>Attribution.</strong> Every document in the system is transparent about its production method. The AI-conductor model is documented publicly. There's no pretense that a human sat down and typed 289,000 words — and no pretense that AI produced quality work unsupervised.
-      </p>
-      <p>
-        <strong>Artistic intent.</strong> The conductor metaphor is literal. A conductor doesn't play instruments, but the performance is their artistic vision. The structural decisions — what goes in each document, how documents relate, what voice to use, what to emphasize for which audience — are human decisions. AI is the orchestra.
+        <strong>Artistic intent.</strong> The conductor metaphor is literal. A conductor doesn't play instruments, but the performance is their artistic vision. The structural decisions — what goes in each document, how documents relate, what to emphasize for which audience — these are human decisions. AI is the orchestra.
       </p>
 
-      <h2>Risks and Mitigations</h2>
-      <p>
-        AI-specific risks we actively monitor:
-      </p>
+      <h2>Risks We Monitor</h2>
       <ul>
-        <li><strong>Hallucinated code examples</strong> — Mitigated by requiring all code samples to be tested or sourced from actual repos</li>
-        <li><strong>Generic boilerplate</strong> — Mitigated by project-specific briefs and human review for voice</li>
-        <li><strong>Incorrect cross-references</strong> — Mitigated by automated link checking (1,267 links audited)</li>
-        <li><strong>Missing context</strong> — Mitigated by providing extensive project context in each prompt and human review for accuracy</li>
+        <li><strong>Hallucinated code examples</strong> — all samples tested or sourced from actual repos</li>
+        <li><strong>Generic boilerplate</strong> — project-specific briefs and human review for voice</li>
+        <li><strong>Incorrect cross-references</strong> — automated link checking (1,267 links audited)</li>
+        <li><strong>Missing context</strong> — extensive project context in each prompt + human accuracy review</li>
       </ul>
 
-      <h2>The Production Record</h2>
+      <h2>Why This Matters</h2>
       <p>
-        The system was documented through an accelerated production timeline:
-      </p>
-      <ul>
-        <li><strong>Phase 1 (Documentation)</strong> — Bronze Sprint (7 flagships), Silver Sprint (58 READMEs, ~202K words), Gold Sprint (essays, health files, workflows)</li>
-        <li><strong>Phase 2 (Validation)</strong> — All 8 organs locked, 1,267 links audited, 31 dependency edges validated</li>
-        <li><strong>Phase 3 (Integration)</strong> — 5 GitHub Actions workflows, POSSE distribution, branch protection</li>
-        <li><strong>Gap-Fill Sprint</strong> — 11 repos created, 14 READMEs deployed, bringing total to ~289K words</li>
-      </ul>
-
-      <h2>Why This Matters for 2026</h2>
-      <p>
-        Every creative team is figuring out how to work with AI. Most approaches are either "AI replaces human work" or "human ignores AI." The conductor model is a third option: <strong>human-AI collaboration as a designed practice with explicit roles, quality gates, and attribution.</strong>
-      </p>
-      <p>
-        The eight-organ system is proof that this model produces real output at scale — not blog posts or social media content, but governance specifications, technical documentation, and systems architecture. The methodology is reusable. The quality gates are adaptable. The attribution model is honest.
-      </p>
-      <p>
-        This is probably the most relevant project for a Google creative team audience: not just what I built, but <em>how</em> I built it, and why the "how" is itself a creative contribution.
+        The eight-organ system is proof that human-AI collaboration produces real output at scale — not blog posts, but governance specifications, technical documentation, and systems architecture. The methodology is reusable. The quality gates are adaptable. The attribution model is honest. For a creative team evaluating how to integrate AI into practice, this is a working model, not a pitch deck.
       </p>
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<script>
+  import '../../components/sketches/sketch-loader';
+</script>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+</style>

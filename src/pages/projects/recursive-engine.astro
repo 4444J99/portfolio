@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="Recursive Engine (RE:GE) — 4444j" description="A symbolic operating system for myth and narrative — 21 organ handlers, a ritual syntax DSL, and 1,254 tests.">
@@ -16,10 +17,7 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
     >
       <h2>The Question</h2>
       <p>
-        Every software system tells a story. User flows are plot arcs. State machines are character development. Error handling is conflict resolution. We treat these as metaphors — but what if they could be engineering principles?
-      </p>
-      <p>
-        What if narrative structure — from Aristotle's <em>Poetics</em> through Propp's <em>Morphology of the Folktale</em> — could be encoded as executable rules? Not an AI that "writes stories," but a symbolic operating system where narrative principles govern how systems organize, evolve, and maintain coherence.
+        Every software system tells a story — user flows are plot arcs, state machines are character development, error handling is conflict resolution. We treat these as metaphors. I wanted to find out what happens when you treat them as engineering principles. What if narrative structure, from Aristotle through Propp, could be encoded as executable rules? Not an AI that "writes stories" — a symbolic operating system where narrative principles govern how systems organize and evolve.
       </p>
 
       <h2>What RE:GE Does</h2>
@@ -27,11 +25,18 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
         RE:GE is a pure Python engine where <strong>myths, identities, rituals, and recursive structures are first-class computational objects</strong>. It implements 21 organ handlers that process symbolic values through a ritual syntax DSL:
       </p>
       <ul>
-        <li><strong>Myth organs</strong> — encode narrative archetypes as transformation rules. A hero's journey is a function that takes an entity state and returns a transformed state.</li>
+        <li><strong>Myth organs</strong> — encode narrative archetypes as transformation rules. A hero's journey is a function: entity state in, transformed state out.</li>
         <li><strong>Identity organs</strong> — manage how entities maintain coherence across transformations. When a character "changes," what persists?</li>
-        <li><strong>Ritual organs</strong> — define sequences that must execute in order, with pre-conditions and post-conditions. Ceremonies as transactions.</li>
+        <li><strong>Ritual organs</strong> — define sequences that must execute in order, with pre/post-conditions. Ceremonies as transactions.</li>
         <li><strong>Recursive organs</strong> — handle self-reference: entities that describe themselves, systems that modify their own rules.</li>
       </ul>
+
+      <SketchContainer
+        sketchId="recursive-tree"
+        height="500px"
+        mobileHeight="300px"
+        ariaLabel="Interactive recursive syntax tree: branches grow upward, typed by DSL element (INVOKE, BINDING, WHEN). Some branches curve back into the trunk, visualizing recursion. Mouse guides growth direction. Click triggers recursion fold-back with DSL fragment display."
+      />
 
       <h2>The Ritual Syntax</h2>
       <p>
@@ -42,21 +47,21 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
   BINDING outcome TO identity.transform
   WHEN condition.readiness EXCEEDS threshold</code></pre>
       <p>
-        This isn't pseudo-code. It's the actual syntax the engine parses and executes.
+        This isn't pseudo-code. It's the actual syntax the engine parses and executes. The tree visualization above maps branch types to these DSL elements.
       </p>
 
       <h2>Testing the Untestable</h2>
       <p>
-        When your system's purpose is to formalize narrative — something humans experience as intuition and aesthetic judgment — how do you write assertions? We found three strategies:
+        The hardest part wasn't building the engine — it was proving it worked. When your system formalizes narrative, how do you write assertions? We found three strategies:
       </p>
       <p>
-        <strong>Structural invariants (~400 tests)</strong> — An identity transformation must preserve entity type. A ritual must execute all steps or none. A recursive invocation must terminate within bounded depth. These verify the engine doesn't violate its own rules, independent of any particular narrative content.
+        <strong>Structural invariants (~400 tests)</strong> — An identity transformation must preserve entity type. A ritual must execute all steps or none. A recursive invocation must terminate within bounded depth.
       </p>
       <p>
-        <strong>Reference implementations (~500 tests)</strong> — We encoded Propp's 31 functions, Campbell's monomyth stages, and Aristotle's six elements as test cases. If the engine claims to implement Propp's "Villainy" function, we verify it produces the correct state transition.
+        <strong>Reference implementations (~500 tests)</strong> — Propp's 31 functions, Campbell's monomyth stages, Aristotle's six elements encoded as test cases. If the engine claims to implement "Villainy," we verify the correct state transition.
       </p>
       <p>
-        <strong>Round-trip consistency (~350 tests)</strong> — Serialize an entity to DSL, parse it back, verify identity. Apply a transformation and its inverse, verify return to original state.
+        <strong>Round-trip consistency (~350 tests)</strong> — Serialize to DSL, parse back, verify identity. Apply transformation and inverse, verify return to original state.
       </p>
       <p>
         Result: <strong>1,254 tests, 85% line coverage</strong>.
@@ -64,32 +69,25 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
 
       <h2>Why Symbolic, Not Neural</h2>
       <p>
-        In the age of LLMs, why build a symbolic narrative engine? Three reasons:
+        <strong>Interpretability.</strong> Every transformation has a trace — which organ fired, what rule applied. As AI systems become more consequential, auditable narrative decisions matter.
       </p>
       <p>
-        <strong>Interpretability.</strong> LLMs generate narrative but can't explain why a particular story choice was made. RE:GE can. Every transformation has a trace — which organ fired, what rule applied, what condition was met. As AI systems become more consequential, auditable narrative decisions matter.
+        <strong>Composability.</strong> Build a myth organ on top of an identity organ on top of a recursive organ. Swap organs in and out. LLMs don't compose this way.
       </p>
       <p>
-        <strong>Composability.</strong> RE:GE's organs are composable — build a myth organ on top of an identity organ on top of a recursive organ. Swap organs in and out. Run the same entity through different frameworks and compare results. LLMs don't compose this way.
-      </p>
-      <p>
-        <strong>Governance integration.</strong> Because RE:GE lives within the eight-organ system, its operations are subject to the same governance. Dependency validation, promotion state machine, monthly audits — narrative computation within an institutional framework.
+        <strong>Governance integration.</strong> RE:GE lives within the eight-organ system. Dependency validation, promotion state machine, monthly audits — narrative computation within an institutional framework.
       </p>
 
-      <h2>Design Decisions</h2>
+      <h2>The Discovery</h2>
       <p>
-        <strong>Pure Python, no ML frameworks.</strong> No hidden model weights, no GPU required, no non-determinism from inference. Anyone can read the code. For infrastructure meant to last years, minimizing dependencies was essential.
-      </p>
-      <p>
-        <strong>Formalism enables creativity.</strong> The most common objection is that formalizing narrative kills it. Our experience is opposite — having 21 distinct organ types with formal interfaces created more creative possibilities than working without structure. When you know what an identity transformation guarantees, you can safely compose it with a myth transformation.
-      </p>
-
-      <h2>Where It Leads</h2>
-      <p>
-        RE:GE is the definitive ORGAN-I expression. It feeds everything else: ORGAN-II turns its concepts into generative art and performance. ORGAN-III packages its capabilities into products. The I→II→III flow made concrete: theory becomes art becomes commerce. The recursive engine recurses through the entire system.
+        The most surprising outcome wasn't technical — it was aesthetic. Having 21 distinct organ types with formal interfaces created <em>more</em> creative possibilities than working without structure. When you know what an identity transformation guarantees, you can safely compose it with a myth transformation. Formalism enables creativity. That insight reshaped how I think about every system I build.
       </p>
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<script>
+  import '../../components/sketches/sketch-loader';
+</script>

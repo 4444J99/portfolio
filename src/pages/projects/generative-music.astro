@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="Generative Music System — 4444j" description="Translating recursive narrative principles into real-time generative music — from symbolic events to live sound.">
@@ -16,90 +17,79 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
     >
       <h2>The Translation Problem</h2>
       <p>
-        Every creative technologist faces the same question: how do you get from a formal system to something people actually experience? ORGAN-I builds recursive engines and narrative formalisms. ORGAN-II turns them into art. But "turning theory into art" isn't a pipeline — it's a design problem. The choices made during translation are themselves artistic decisions.
-      </p>
-      <p>
-        This project translates recursive narrative principles from RE:GE into a real-time generative music system. The music doesn't illustrate the narrative — it <em>is</em> the narrative, in a different medium.
-      </p>
-
-      <h2>What "Generative Music" Means Here</h2>
-      <p>
-        Not AI-generated music from a neural network. Not algorithmic composition from predefined rules. Not random variation over a fixed structure.
-      </p>
-      <p>
-        <strong>Music that emerges from the interaction between formal systems and real-time conditions</strong>, where the formal systems encode narrative principles about transformation, identity, and recursion. When the recursive engine processes a "hero's journey" transformation, the music system translates that into a sonic arc: tension building through harmonic complexity, threshold moments as timbral shifts, resolution as return to tonal center.
+        How do you get from a formal system to something people actually experience? That's the core design problem of ORGAN-II. This project translates recursive narrative principles from RE:GE into a real-time generative music system. The music doesn't illustrate the narrative — it <em>is</em> the narrative, in a different medium. The choices made during translation are themselves artistic decisions, and that's where the interesting work lives.
       </p>
 
       <h2>Three-Layer Architecture</h2>
 
       <h3>Layer 1: The Symbolic Engine</h3>
       <p>
-        The recursive engine provides the structural backbone — a stream of typed, timestamped symbolic events: entity state changes, ritual phase transitions, myth function activations, recursive depth changes. These events are abstract; they carry no inherent sonic representation.
+        RE:GE provides the structural backbone — a stream of typed, timestamped symbolic events: entity state changes, ritual phase transitions, myth function activations, recursive depth changes. These events are abstract and carry no inherent sonic representation.
       </p>
 
       <h3>Layer 2: The Sonification Bridge</h3>
       <p>
         This is where the artistic decisions live. The bridge maps symbolic events to musical parameters:
       </p>
-      <table>
-        <thead>
-          <tr><th>Symbolic Event</th><th>Musical Parameter</th><th>Rationale</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Identity stability</td><td>Tonal center strength</td><td>Stable identity = clear tonic</td></tr>
-          <tr><td>Transformation intensity</td><td>Harmonic complexity</td><td>Greater change = more tension</td></tr>
-          <tr><td>Ritual phase</td><td>Rhythmic pattern</td><td>Ceremony = structured time</td></tr>
-          <tr><td>Recursive depth</td><td>Timbral layering</td><td>Self-reference = voices within voices</td></tr>
-          <tr><td>Myth function type</td><td>Melodic contour</td><td>Hero ascends, villain descends</td></tr>
-        </tbody>
-      </table>
-      <p>
-        These mappings represent one artistic interpretation. A different artist could use the same engine with completely different sonification rules and produce radically different music. The formal system enables creative variation rather than determining a single output.
-      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Symbolic Event</th><th>Musical Parameter</th><th>Rationale</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Identity stability</td><td>Tonal center strength</td><td>Stable identity = clear tonic</td></tr>
+            <tr><td>Transformation intensity</td><td>Harmonic complexity</td><td>Greater change = more tension</td></tr>
+            <tr><td>Ritual phase</td><td>Rhythmic pattern</td><td>Ceremony = structured time</td></tr>
+            <tr><td>Recursive depth</td><td>Timbral layering</td><td>Self-reference = voices within voices</td></tr>
+            <tr><td>Myth function type</td><td>Melodic contour</td><td>Hero ascends, villain descends</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3>Layer 3: The Performance System</h3>
       <p>
-        Real-time audio synthesis, spatialization, and interaction. Multi-channel audio placement based on narrative "location." Audience input feeding back into the symbolic engine. Clock management ensuring narrative time and musical time stay synchronized. Designed for live contexts — gallery installations, concert performances, interactive exhibits.
+        Real-time audio synthesis, spatialization, and interaction. Designed for live contexts — gallery installations, concert performances, interactive exhibits.
       </p>
+
+      <SketchContainer
+        sketchId="counterpoint"
+        height="300px"
+        mobileHeight="220px"
+        ariaLabel="Interactive waveform visualization: three layered waveforms representing the Symbolic Engine (angular), Sonification Bridge (smooth), and Performance System (complex). Horizontal mouse controls time speed. Click fires a symbolic event propagating through all layers. Vertical mouse controls recursive depth, triggering counterpoint voice splits."
+      />
 
       <h2>The Discovery: Recursion Sounds Like Counterpoint</h2>
       <p>
-        When the recursive engine enters self-referential processing — an entity examining itself, a system modifying its own rules — the natural musical analog turned out to be counterpoint. We initially tried mapping recursive depth to reverb (more recursion = more echo). It sounded terrible — muddy and indistinct.
+        This was the project's defining moment, and it wasn't planned. When the recursive engine enters self-referential processing — an entity examining itself, a system modifying its own rules — we initially tried mapping recursive depth to reverb. It sounded terrible.
       </p>
       <p>
-        Counterpoint emerged from experimentation: each recursive level gets its own melodic voice, related to but distinct from its parent. The result is Bach-like clarity where you can follow each level of self-reference. Voices commenting on voices. Melodies that contain themselves.
-      </p>
-      <p>
-        This wasn't planned. It was discovered. And that's the point — the formal system created the conditions for a musical insight that pure intuition wouldn't have found.
+        Counterpoint emerged from experimentation: each recursive level gets its own melodic voice, related to but distinct from its parent. The result is Bach-like clarity where you can follow each level of self-reference. Voices commenting on voices. The formal system created the conditions for a musical insight that pure intuition wouldn't have found.
       </p>
 
       <h2>Time Is the Hardest Translation</h2>
       <p>
-        Narrative time and musical time operate on different scales. A hero's journey might span hours; a musical phrase lasts seconds. We tried three approaches:
-      </p>
-      <p>
-        <strong>Linear compression</strong> — map narrative duration directly to musical duration. Result: boring. Important moments pass too quickly.
-      </p>
-      <p>
-        <strong>Event-driven</strong> — only generate music when symbolic events occur. Result: sparse and disconnected.
-      </p>
-      <p>
-        <strong>Continuous with event punctuation</strong> — maintain an ongoing musical texture driven by entity state, punctuated by significant events. This worked because it mirrors how we experience narrative: continuous consciousness punctuated by significant moments.
+        Narrative time and musical time operate on different scales. We tried linear compression (boring), event-driven (sparse), and finally landed on <strong>continuous with event punctuation</strong> — an ongoing musical texture driven by entity state, punctuated by significant events. This works because it mirrors how we experience narrative: continuous consciousness punctuated by significant moments.
       </p>
 
       <h2>Performance Contexts</h2>
       <ul>
-        <li><strong>Gallery installation</strong> — continuous operation (6-12 hours), visitors experience a fragment of an ongoing mythic process, spatial audio creates distinct narrative zones</li>
-        <li><strong>Live concert</strong> — performer shapes narrative conditions through gestural control, 20-45 minutes, one complete mythic cycle</li>
-        <li><strong>Network performance</strong> — multiple instances connected via network, each contributing to a shared narrative space, genuinely distributed music</li>
+        <li><strong>Gallery installation</strong> — continuous 6-12 hour operation, spatial audio creates distinct narrative zones</li>
+        <li><strong>Live concert</strong> — performer shapes narrative via gestural control, 20-45 minutes, one complete mythic cycle</li>
+        <li><strong>Network performance</strong> — multiple instances contributing to a shared narrative space</li>
       </ul>
-
-      <h2>Why Governance Helped</h2>
-      <p>
-        Having this system within the eight-organ model wasn't overhead — it was generative. Dependency validation forced clear API boundaries. The promotion state machine prevented calling it "art" before it produced interesting sound. ORGAN-V documentation forced clarity. Monthly audits kept tests passing during iteration. Governance as creative infrastructure, not bureaucratic constraint.
-      </p>
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<script>
+  import '../../components/sketches/sketch-loader';
+</script>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+</style>

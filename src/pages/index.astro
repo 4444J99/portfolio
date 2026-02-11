@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import SketchContainer from '../components/sketches/SketchContainer.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
@@ -54,10 +55,20 @@ const projects = [
   <Header />
   <main>
     <section class="hero">
-      <div class="container">
-        <p class="hero__label">Creative Technologist</p>
-        <h1 class="hero__title">I build autonomous creative systems and treat their governance as an artistic medium.</h1>
-        <p class="hero__sub">Coordinating theory, generative art, and commerce across an eight-organ infrastructure — 78 repositories, 8 organizations, ~289K words of public documentation.</p>
+      <div class="container hero__split">
+        <div class="hero__text">
+          <p class="hero__label">Creative Technologist</p>
+          <h1 class="hero__title">I build autonomous creative systems and treat their governance as an artistic medium.</h1>
+          <p class="hero__sub">Coordinating theory, generative art, and commerce across an eight-organ infrastructure — 78 repositories, 8 organizations, ~289K words of public documentation.</p>
+        </div>
+        <div class="hero__canvas">
+          <SketchContainer
+            sketchId="hero"
+            height="480px"
+            mobileHeight="320px"
+            ariaLabel="Interactive visualization: eight organ nodes breathing in coordinated rhythm, connected by flowing particle filaments. Hover to illuminate individual organs. Click to send pulses."
+          />
+        </div>
       </div>
     </section>
 
@@ -102,10 +113,29 @@ const projects = [
   <Footer />
 </Layout>
 
+<script>
+  import '../components/sketches/sketch-loader';
+</script>
+
 <style>
   .hero {
     padding: var(--space-4xl) 0 var(--space-3xl);
     border-bottom: 1px solid var(--border);
+  }
+
+  .hero__split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .hero__text {
+    min-width: 0;
+  }
+
+  .hero__canvas {
+    min-width: 0;
   }
 
   .hero__label {
@@ -139,5 +169,19 @@ const projects = [
 
   .stats-section {
     border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 768px) {
+    .hero__split {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__canvas {
+      order: 2;
+    }
+
+    .hero__text {
+      order: 1;
+    }
   }
 </style>

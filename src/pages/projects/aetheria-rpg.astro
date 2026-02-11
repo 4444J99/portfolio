@@ -3,9 +3,10 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
-<Layout title="Aetheria Classroom RPG — 4444j" description="A gamified education platform that traveled the full Theory→Art→Commerce pipeline. Honest post-mortem included.">
+<Layout title="Aetheria Classroom RPG — 4444j" description="A gamified education platform that traveled the full Theory to Art to Commerce pipeline. Honest post-mortem included.">
   <Header />
   <main>
     <ProjectDetail
@@ -16,92 +17,81 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
     >
       <h2>The Full Pipeline</h2>
       <p>
-        Aetheria is the project that traveled the complete I→II→III path. It started as ORGAN-I theory (gamification research, recursive pedagogy), passed through ORGAN-II art (game design, narrative design, UX), and became an ORGAN-III commerce product — a gamified classroom management platform that turns educational activities into RPG mechanics.
-      </p>
-      <p>
-        This write-up is a post-mortem: what worked, what failed, and what the eight-organ governance model looks like when theory actually meets market.
+        Aetheria is the project that proves the system works — and honestly reveals where it doesn't. It traveled the complete I→II→III path: from gamification theory to game design to revenue product. This write-up is a post-mortem, because honest reflection on what failed teaches more than polished success stories.
       </p>
 
       <h2>The Theory (ORGAN-I)</h2>
       <p>
-        Not shallow "add points and badges" gamification. Structural gamification — using game <em>design</em> principles to reshape learning experiences. Three theoretical streams:
+        Not shallow "add points and badges" gamification. Structural gamification — using game <em>design</em> principles to reshape learning:
       </p>
       <ul>
-        <li><strong>Gamification research</strong> — meaningful choices, progressive challenge, narrative context (Deterding et al.'s distinction between gamification and gameful design)</li>
-        <li><strong>Recursive pedagogy</strong> — learning is recursive; you revisit concepts at increasing depth. A Level 3 History Quest requires applying Level 2 knowledge in new contexts.</li>
-        <li><strong>Narrative as motivation</strong> — students are more engaged when their work contributes to a story. Not an arbitrary overlay, but narrative structure where academic mastery genuinely advances the plot.</li>
+        <li><strong>Meaningful choices</strong> over reward schedules (Deterding's gameful design)</li>
+        <li><strong>Recursive pedagogy</strong> — learning is recursive; Level 3 quests require applying Level 2 knowledge in new contexts</li>
+        <li><strong>Narrative as motivation</strong> — academic mastery genuinely advances the plot, not as arbitrary overlay</li>
       </ul>
 
       <h2>The Game Design (ORGAN-II)</h2>
       <p>
-        <strong>Character system:</strong> Students create a character with four stats — Insight, Craft, Valor, Empathy — mapping to learning modalities. All stats can grow; the game rewards balanced development.
+        <strong>Character system:</strong> Four stats — Insight, Craft, Valor, Empathy — mapping to learning modalities, all growable.
+        <strong>Quest design:</strong> Teachers create quests from assignment templates. A reading assignment becomes a "Library Expedition." The RPG framing provides structure that helps teachers design better assignments.
+        <strong>World building:</strong> Procedurally generated from curriculum — a chemistry unit generates a world where alchemical principles govern reality.
       </p>
-      <p>
-        <strong>Quest design:</strong> Teachers create quests from assignment templates. A reading assignment becomes a "Library Expedition." A group project becomes a "Guild Mission." The RPG framing provides structure — objectives, resources, timeline, success criteria — that helps teachers design better assignments.
-      </p>
-      <p>
-        <strong>World building:</strong> Aetheria's world is procedurally generated from curriculum content. A unit on the American Revolution generates a narrative arc about rebellion against a tyrannical empire. A chemistry unit generates a world where alchemical principles govern reality.
-      </p>
-      <p>
-        <strong>Dual interface:</strong> Students see quests and character progression. Teachers see assignments and learning outcomes. Same system, different lenses.
-      </p>
+
+      <SketchContainer
+        sketchId="pipeline"
+        height="400px"
+        mobileHeight="300px"
+        ariaLabel="Interactive pipeline visualization: three connected chambers (Theory, Art, Commerce) with particles flowing left to right. Some particles fail and fall through gaps, accumulating as visible sediment. Success and failure ratios match real project metrics. Hover chambers for labels. Click sediment to see failure reasons. Mouse Y controls pipeline strictness."
+      />
+
+      <h2>Metrics</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Metric</th><th>Value</th><th>Assessment</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Pilot classrooms</td><td>47</td><td>Below target (100)</td></tr>
+            <tr><td>Teacher retention (month 2)</td><td>68%</td><td>Acceptable</td></tr>
+            <tr><td>Teacher retention (month 6)</td><td>41%</td><td>Below target (60%)</td></tr>
+            <tr><td>Student engagement increase</td><td>+23%</td><td>Strong</td></tr>
+            <tr><td>NPS (teachers)</td><td>42</td><td>Good but not great</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h2>What Worked</h2>
       <p>
-        <strong>Student engagement: +23% assignment completion.</strong> The key differentiator was narrative integration — students cared about quest outcomes because the stories were connected to their actual learning, not overlaid on it.
+        <strong>Student engagement: +23% assignment completion.</strong> Narrative integration was the key — students cared about quest outcomes because the stories were connected to their actual learning.
       </p>
       <p>
-        <strong>Teacher retention after activation.</strong> Teachers who invested time in quest design (5+ custom quests) had over 80% renewal rates. The system was genuinely useful once you got past the learning curve.
-      </p>
-      <p>
-        <strong>The governance pipeline caught quality issues early.</strong> At the I→II transition, we verified the theoretical framework was sound. At the II→III transition, we verified the game design was functional and teacher-ready. Without these gates, we would have shipped before the game design was mature.
+        <strong>The governance pipeline caught quality issues early.</strong> At the I→II transition, we verified the theoretical framework. At II→III, we verified the game design was teacher-ready. Without these gates, we would have shipped too early.
       </p>
 
       <h2>What Failed</h2>
       <p>
-        <strong>Onboarding complexity.</strong> Initial setup required 2-3 hours. Teachers needed to understand the narrative engine, character system, and quest builder before creating their first classroom. We underestimated how little time teachers have.
+        <strong>Onboarding complexity.</strong> 2-3 hours of setup. Teachers don't have that time.
+        <strong>Free tier didn't demonstrate value.</strong> Without the narrative engine, it looked like every other gamification tool.
+        <strong>Wrong sales direction.</strong> Bottom-up (individual teachers) when value was clearest at school level.
       </p>
-      <p>
-        <strong>Free tier didn't demonstrate the value.</strong> Without the narrative engine, the free tier was just another gamification tool. Teachers evaluated it, concluded it was similar to ClassDojo, and didn't upgrade.
-      </p>
-      <p>
-        <strong>Wrong sales direction.</strong> We launched bottom-up (individual teachers) when the value was clearest at school level. Individual teacher sales were expensive and low-yield. $12/month was too high for teachers paying out of pocket.
-      </p>
-      <p>
-        <strong>Inconsistent generated content.</strong> Some curriculum-to-narrative mappings were brilliant (chemistry-as-alchemy). Others were awkward. Teachers fixing bad generated content eroded trust.
-      </p>
-
-      <h2>Metrics</h2>
-      <table>
-        <thead>
-          <tr><th>Metric</th><th>Value</th><th>Assessment</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Pilot classrooms</td><td>47</td><td>Below target (100)</td></tr>
-          <tr><td>Teacher retention (month 2)</td><td>68%</td><td>Acceptable</td></tr>
-          <tr><td>Teacher retention (month 6)</td><td>41%</td><td>Below target (60%)</td></tr>
-          <tr><td>Student engagement increase</td><td>+23%</td><td>Strong</td></tr>
-          <tr><td>NPS (teachers)</td><td>42</td><td>Good but not great</td></tr>
-        </tbody>
-      </table>
-
-      <h2>What We'd Do Differently</h2>
-      <ul>
-        <li><strong>Start with school-level sales.</strong> The product's value is clearest at scale — cross-classroom narrative worlds, longitudinal student data, admin dashboards.</li>
-        <li><strong>Better free tier.</strong> Include the narrative engine for one classroom. Let teachers experience the full product. Limit scale, not features.</li>
-        <li><strong>Template library.</strong> Ship with 50+ pre-built quest templates mapped to common curriculum standards. Reduce setup from hours to minutes.</li>
-        <li><strong>AI-assisted content generation.</strong> Generate drafts, teacher reviews and edits, system learns preferences. Dramatically better quality with lower teacher workload.</li>
-      </ul>
 
       <h2>Why Include a Failure?</h2>
       <p>
-        Aetheria didn't hit its targets. I'm including it anyway because the Google creative team explicitly values process documentation and honest reflection. The I→II→III pipeline worked as governance — it caught problems, preserved decisions, and enabled a clear post-mortem. The product needs iteration, but the system that produced it is sound.
-      </p>
-      <p>
-        That's what governance as creative infrastructure looks like in practice: not preventing failure, but making failure legible and recoverable.
+        The I→II→III pipeline worked as governance — it caught problems, preserved decisions, and enabled this post-mortem. The product needs iteration, but the system that produced it is sound. That's what governance as creative infrastructure looks like in practice: not preventing failure, but making failure legible and recoverable.
       </p>
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<script>
+  import '../../components/sketches/sketch-loader';
+</script>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+</style>

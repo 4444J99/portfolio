@@ -1,0 +1,47 @@
+---
+interface Props {
+  sketchId: string;
+  height?: string;
+  mobileHeight?: string;
+  ariaLabel: string;
+}
+
+const { sketchId, height = '500px', mobileHeight = '350px', ariaLabel } = Astro.props;
+---
+
+<div
+  class="sketch-container"
+  data-sketch={sketchId}
+  data-height={height}
+  data-mobile-height={mobileHeight}
+  role="img"
+  aria-label={ariaLabel}
+>
+  <noscript>
+    <p class="sketch-fallback">{ariaLabel}</p>
+  </noscript>
+</div>
+
+<style>
+  .sketch-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+
+  .sketch-container :global(canvas) {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .sketch-fallback {
+    padding: var(--space-xl);
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+  }
+</style>

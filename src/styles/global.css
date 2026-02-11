@@ -305,3 +305,46 @@ img {
   margin-top: var(--space-2xl);
   margin-bottom: var(--space-sm);
 }
+
+/* --- Sketch Containers --- */
+.prose .sketch-container {
+  margin: var(--space-2xl) 0;
+}
+
+/* --- Table Responsive Wrap --- */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: var(--space-md) 0;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .sketch-container canvas {
+    animation: none !important;
+  }
+}
+
+/* --- Mobile Sketch + Table Polish --- */
+@media (max-width: 768px) {
+  table {
+    font-size: 0.8rem;
+  }
+
+  th, td {
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+  }
+}

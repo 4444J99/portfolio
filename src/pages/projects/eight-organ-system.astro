@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="The Eight-Organ System — 4444j" description="An orchestration system coordinating 78 repositories across 8 GitHub organizations, treating governance as creative infrastructure.">
@@ -16,32 +17,38 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
     >
       <h2>The Insight</h2>
       <p>
-        Most creative technologists separate their work from how they organize it. Code goes in repos, management goes in project boards, and governance is overhead you tolerate. I wanted to see what happens when you treat the governance itself — the dependency rules, the promotion pipelines, the automated audits — as artistic decisions worthy of the same care you'd give to the work they coordinate.
+        I started from a conviction: the way you organize creative work <em>is</em> creative work. Most technologists treat governance as overhead — project boards, CI/CD, dependency rules. I wanted to find out what happens when you give those decisions the same care as the art they coordinate. The result surprised me: the governance model became the most interesting artifact in the system.
       </p>
-      <p>
-        The result is an eight-organ system: a documented infrastructure that coordinates theory, generative art, commercial products, governance, public process, community, and marketing as a single integrated practice.
-      </p>
+
+      <SketchContainer
+        sketchId="organ-system"
+        height="500px"
+        mobileHeight="350px"
+        ariaLabel="Interactive directed graph: 8 organ nodes with 78 repo particles orbiting. Directed edges enforce no-back-edges rule — particles flow I to II to III only. Hover organs to see repo counts. Click to send pulses along outgoing edges."
+      />
 
       <h2>How It Works</h2>
       <p>
         Eight GitHub organizations, each representing a distinct organ with a Greek ontological suffix:
       </p>
 
-      <table>
-        <thead>
-          <tr><th>Organ</th><th>Domain</th><th>What It Proves</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>I — Theoria</strong></td><td>Theory & epistemology</td><td>Intellectual depth, recursive systems</td></tr>
-          <tr><td><strong>II — Poiesis</strong></td><td>Generative art</td><td>Creative systems design</td></tr>
-          <tr><td><strong>III — Ergon</strong></td><td>Commerce & products</td><td>Product-market thinking, revenue</td></tr>
-          <tr><td><strong>IV — Taxis</strong></td><td>Orchestration</td><td>Governance design, architecture</td></tr>
-          <tr><td><strong>V — Logos</strong></td><td>Public process</td><td>Transparency, building in public</td></tr>
-          <tr><td><strong>VI — Koinonia</strong></td><td>Community</td><td>Collaborative infrastructure</td></tr>
-          <tr><td><strong>VII — Kerygma</strong></td><td>Marketing</td><td>POSSE distribution, content strategy</td></tr>
-          <tr><td><strong>VIII — Meta</strong></td><td>Umbrella</td><td>Cross-system integration</td></tr>
-        </tbody>
-      </table>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Organ</th><th>Domain</th><th>What It Proves</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>I — Theoria</strong></td><td>Theory & epistemology</td><td>Intellectual depth, recursive systems</td></tr>
+            <tr><td><strong>II — Poiesis</strong></td><td>Generative art</td><td>Creative systems design</td></tr>
+            <tr><td><strong>III — Ergon</strong></td><td>Commerce & products</td><td>Product-market thinking, revenue</td></tr>
+            <tr><td><strong>IV — Taxis</strong></td><td>Orchestration</td><td>Governance design, architecture</td></tr>
+            <tr><td><strong>V — Logos</strong></td><td>Public process</td><td>Transparency, building in public</td></tr>
+            <tr><td><strong>VI — Koinonia</strong></td><td>Community</td><td>Collaborative infrastructure</td></tr>
+            <tr><td><strong>VII — Kerygma</strong></td><td>Marketing</td><td>POSSE distribution, content strategy</td></tr>
+            <tr><td><strong>VIII — Meta</strong></td><td>Umbrella</td><td>Cross-system integration</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h2>The Registry</h2>
       <p>
@@ -56,12 +63,12 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
         <code>LOCAL → CANDIDATE → PUBLIC_PROCESS → GRADUATED → ARCHIVED</code>
       </p>
       <p>
-        Each transition has documented criteria and automated validation. A project can't claim "art" status until it actually produces interesting output. It can't claim "production" until tests pass and documentation meets threshold. The state machine prevents premature claims and ensures quality at each stage.
+        Each transition has documented criteria and automated validation. The state machine prevents premature claims and ensures quality at each stage — a project can't call itself "art" until it produces interesting output.
       </p>
 
       <h2>The Dependency Rule</h2>
       <p>
-        The most important architectural constraint: <strong>no back-edges</strong>. The flow is I→II→III only — theory feeds art feeds commerce. ORGAN-III cannot depend on ORGAN-II for maintenance. This forced clean API boundaries and modular architecture. 31 dependency edges are validated automatically, with zero circular dependencies.
+        The most important constraint, and the one that generated the most creative tension: <strong>no back-edges</strong>. Theory feeds art feeds commerce — I→II→III — and that flow is enforced automatically. ORGAN-III cannot depend on ORGAN-II for maintenance. This forced clean API boundaries and created genuine stakes: theory must commit to art without knowing if it will become commerce. 31 dependency edges, zero circular dependencies, validated on every change.
       </p>
 
       <h2>Automation</h2>
@@ -78,10 +85,7 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
 
       <h2>Why This Is Art</h2>
       <p>
-        The choice of eight organs (not seven, not ten) is a design decision. The Greek naming scheme is an aesthetic decision. The no-back-edges rule creates dramatic tension — theory must commit to art without knowing if it will become commerce. The promotion state machine creates narrative arcs for each project.
-      </p>
-      <p>
-        This isn't an engineer who also makes art, or an artist who codes on the side. The governance model, the registry schema, the dependency graph — these are the work. The system <em>is</em> the portfolio.
+        The choice of eight organs (not seven, not ten) is a design decision. The Greek naming scheme is an aesthetic decision. The no-back-edges rule creates dramatic tension. The promotion state machine creates narrative arcs for each project. This isn't an engineer who also makes art, or an artist who codes on the side — the governance model, the registry schema, the dependency graph, <em>these are the work</em>.
       </p>
 
       <h2>By the Numbers</h2>
@@ -116,3 +120,14 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
   </main>
   <Footer />
 </Layout>
+
+<script>
+  import '../../components/sketches/sketch-loader';
+</script>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+</style>
