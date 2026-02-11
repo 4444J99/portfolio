@@ -20,5 +20,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# intake files (personal documents for resume ingestion)
+intake/*
+!intake/README.md
+
 # jetbrains setting folder
 .idea/
