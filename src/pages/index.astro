@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const projects = [
+  {
+    title: 'The Eight-Organ System',
+    tagline: 'Governance as creative infrastructure',
+    description: 'An orchestration system coordinating 78 repositories across 8 GitHub organizations — treating dependency rules, promotion state machines, and automated audits as artistic decisions.',
+    href: `${base}projects/eight-organ-system/`,
+    tags: ['Systems', 'Governance'],
+    number: 1,
+  },
+  {
+    title: 'Recursive Engine (RE:GE)',
+    tagline: 'A symbolic operating system for myth and narrative',
+    description: 'A pure Python engine where myths, identities, rituals, and recursive structures are first-class computational objects. 21 organ handlers, a ritual syntax DSL, and 1,254 tests.',
+    href: `${base}projects/recursive-engine/`,
+    tags: ['Theory', 'Python'],
+    number: 2,
+  },
+  {
+    title: 'Generative Music System',
+    tagline: 'From recursive theory to real-time sound',
+    description: 'Translating symbolic narrative events into live generative music — where recursion becomes counterpoint and identity transformations become harmonic movement.',
+    href: `${base}projects/generative-music/`,
+    tags: ['Art', 'Audio'],
+    number: 3,
+  },
+  {
+    title: 'Aetheria Classroom RPG',
+    tagline: 'Theory to Art to Commerce: an educational RPG',
+    description: 'A gamified classroom platform that traveled the full I→II→III pipeline — from pedagogical theory to game design to revenue product. Honest post-mortem included.',
+    href: `${base}projects/aetheria-rpg/`,
+    tags: ['Product', 'Education'],
+    number: 4,
+  },
+  {
+    title: 'AI-Conductor Model',
+    tagline: 'Human-AI co-creation as artistic practice',
+    description: 'The methodology behind producing ~289K words of documentation with AI as volume generator and human as director, editor, and quality gate.',
+    href: `${base}projects/ai-conductor/`,
+    tags: ['AI', 'Process'],
+    number: 5,
+  },
+];
+---
+
+<Layout title="4444j — Creative Technologist">
+  <Header />
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="hero__label">Creative Technologist</p>
+        <h1 class="hero__title">I build autonomous creative systems and treat their governance as an artistic medium.</h1>
+        <p class="hero__sub">Coordinating theory, generative art, and commerce across an eight-organ infrastructure — 78 repositories, 8 organizations, ~289K words of public documentation.</p>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="container">
+        <h2 class="section__heading">Selected Work</h2>
+        <div class="project-grid">
+          {projects.map(project => (
+            <ProjectCard {...project} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section stats-section">
+      <div class="container">
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">78</div>
+            <div class="stat-label">Repositories</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Organizations</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">289K</div>
+            <div class="stat-label">Words Documented</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">1,254</div>
+            <div class="stat-label">Tests (RE:GE)</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">CI/CD Workflows</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .hero {
+    padding: var(--space-4xl) 0 var(--space-3xl);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero__label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__title {
+    max-width: 20ch;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__sub {
+    font-size: 1.1rem;
+    max-width: 55ch;
+    line-height: 1.7;
+  }
+
+  .section__heading {
+    margin-bottom: var(--space-2xl);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .stats-section {
+    border-top: 1px solid var(--border);
+  }
+</style>

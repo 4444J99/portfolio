@@ -1,0 +1,97 @@
+---
+interface Props {
+  title: string;
+  tagline: string;
+  tags: string[];
+  repo?: string;
+  liveUrl?: string;
+}
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const { title, tagline, tags, repo, liveUrl } = Astro.props;
+---
+
+<article class="project">
+  <header class="project__header">
+    <a href={base} class="project__back">&larr; All projects</a>
+    <div class="project__tags">
+      {tags.map(tag => <span class="tag">{tag}</span>)}
+    </div>
+    <h1 class="project__title">{title}</h1>
+    <p class="project__tagline">{tagline}</p>
+    {(repo || liveUrl) && (
+      <div class="project__links">
+        {repo && <a href={repo} target="_blank" rel="noopener noreferrer" class="project__link">GitHub &rarr;</a>}
+        {liveUrl && <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="project__link">Live &rarr;</a>}
+      </div>
+    )}
+  </header>
+  <div class="project__body prose">
+    <slot />
+  </div>
+</article>
+
+<style>
+  .project {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: var(--space-3xl) var(--space-lg);
+  }
+
+  .project__header {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .project__back {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-xl);
+    transition: color var(--transition-fast);
+  }
+
+  .project__back:hover {
+    color: var(--text-primary);
+  }
+
+  .project__tags {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .project__title {
+    margin-bottom: var(--space-sm);
+  }
+
+  .project__tagline {
+    font-size: 1.15rem;
+    color: var(--accent);
+    font-style: italic;
+    max-width: 55ch;
+  }
+
+  .project__links {
+    display: flex;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+
+  .project__link {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 6px;
+    transition: all var(--transition-fast);
+  }
+
+  .project__link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .project__body {
+    line-height: 1.8;
+  }
+</style>

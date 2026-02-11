@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="The Eight-Organ System — 4444j" description="An orchestration system coordinating 78 repositories across 8 GitHub organizations, treating governance as creative infrastructure.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="The Eight-Organ System"
+      tagline="Governance as creative infrastructure"
+      tags={['Systems', 'Governance', 'Architecture']}
+      repo="https://github.com/meta-organvm"
+    >
+      <h2>The Insight</h2>
+      <p>
+        Most creative technologists separate their work from how they organize it. Code goes in repos, management goes in project boards, and governance is overhead you tolerate. I wanted to see what happens when you treat the governance itself — the dependency rules, the promotion pipelines, the automated audits — as artistic decisions worthy of the same care you'd give to the work they coordinate.
+      </p>
+      <p>
+        The result is an eight-organ system: a documented infrastructure that coordinates theory, generative art, commercial products, governance, public process, community, and marketing as a single integrated practice.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        Eight GitHub organizations, each representing a distinct organ with a Greek ontological suffix:
+      </p>
+
+      <table>
+        <thead>
+          <tr><th>Organ</th><th>Domain</th><th>What It Proves</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>I — Theoria</strong></td><td>Theory & epistemology</td><td>Intellectual depth, recursive systems</td></tr>
+          <tr><td><strong>II — Poiesis</strong></td><td>Generative art</td><td>Creative systems design</td></tr>
+          <tr><td><strong>III — Ergon</strong></td><td>Commerce & products</td><td>Product-market thinking, revenue</td></tr>
+          <tr><td><strong>IV — Taxis</strong></td><td>Orchestration</td><td>Governance design, architecture</td></tr>
+          <tr><td><strong>V — Logos</strong></td><td>Public process</td><td>Transparency, building in public</td></tr>
+          <tr><td><strong>VI — Koinonia</strong></td><td>Community</td><td>Collaborative infrastructure</td></tr>
+          <tr><td><strong>VII — Kerygma</strong></td><td>Marketing</td><td>POSSE distribution, content strategy</td></tr>
+          <tr><td><strong>VIII — Meta</strong></td><td>Umbrella</td><td>Cross-system integration</td></tr>
+        </tbody>
+      </table>
+
+      <h2>The Registry</h2>
+      <p>
+        A machine-readable JSON registry (<code>registry-v2.json</code>) serves as the single source of truth for all 78 repositories. Every repo entry carries status, dependencies, documentation tier, and promotion state. Automated scripts validate the registry against the live state of every repo — checking CI/CD, documentation, dependency integrity, and constitutional compliance.
+      </p>
+
+      <h2>The State Machine</h2>
+      <p>
+        Work moves through a formal promotion pipeline:
+      </p>
+      <p>
+        <code>LOCAL → CANDIDATE → PUBLIC_PROCESS → GRADUATED → ARCHIVED</code>
+      </p>
+      <p>
+        Each transition has documented criteria and automated validation. A project can't claim "art" status until it actually produces interesting output. It can't claim "production" until tests pass and documentation meets threshold. The state machine prevents premature claims and ensures quality at each stage.
+      </p>
+
+      <h2>The Dependency Rule</h2>
+      <p>
+        The most important architectural constraint: <strong>no back-edges</strong>. The flow is I→II→III only — theory feeds art feeds commerce. ORGAN-III cannot depend on ORGAN-II for maintenance. This forced clean API boundaries and modular architecture. 31 dependency edges are validated automatically, with zero circular dependencies.
+      </p>
+
+      <h2>Automation</h2>
+      <p>
+        Five GitHub Actions workflows govern the system autonomously:
+      </p>
+      <ul>
+        <li><strong>validate-dependencies</strong> — checks the dependency graph on every registry change</li>
+        <li><strong>monthly-organ-audit</strong> — full system health check with Markdown report + JSON metrics</li>
+        <li><strong>promote-repo</strong> — handles state machine transitions with pre/post validation</li>
+        <li><strong>publish-process</strong> — syncs ORGAN-V content to public channels</li>
+        <li><strong>distribute-content</strong> — POSSE distribution to Mastodon, Discord, newsletter</li>
+      </ul>
+
+      <h2>Why This Is Art</h2>
+      <p>
+        The choice of eight organs (not seven, not ten) is a design decision. The Greek naming scheme is an aesthetic decision. The no-back-edges rule creates dramatic tension — theory must commit to art without knowing if it will become commerce. The promotion state machine creates narrative arcs for each project.
+      </p>
+      <p>
+        This isn't an engineer who also makes art, or an artist who codes on the side. The governance model, the registry schema, the dependency graph — these are the work. The system <em>is</em> the portfolio.
+      </p>
+
+      <h2>By the Numbers</h2>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">78</div>
+          <div class="stat-label">Repositories</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">8</div>
+          <div class="stat-label">Organizations</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">289K</div>
+          <div class="stat-label">Words</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">31</div>
+          <div class="stat-label">Dependencies</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Back-Edges</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">5</div>
+          <div class="stat-label">CI/CD Workflows</div>
+        </div>
+      </div>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

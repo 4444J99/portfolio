@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="About — 4444j" description="Artist-engineer building autonomous creative systems and treating governance as artistic medium.">
+  <Header />
+  <main>
+    <article class="about">
+      <div class="container container--narrow">
+        <h1>About</h1>
+
+        <section class="about__statement prose">
+          <h2>Artist Statement</h2>
+          <p>
+            I build autonomous creative systems and treat their governance as an artistic medium.
+          </p>
+          <p>
+            My practice centers on the eight-organ system — a documented infrastructure coordinating theory, generative art, commercial products, governance, public process, community, and marketing across 78 repositories. Rather than producing individual artworks, I produce the <em>systems</em> that generate, coordinate, and sustain creative work over time.
+          </p>
+          <p>
+            This isn't project-based art. It's infrastructure-as-practice: registry design, dependency validation, promotion state machines, automated health checks, and public documentation are all artistic decisions. The choice of how work moves between organs (Theory → Art → Commerce) is as important as any individual output.
+          </p>
+          <p>
+            My reference points include Julian Oliver's critical engineering (treating infrastructure as political/artistic medium), Nicky Case's Explorable Explanations (making systems visible and interactive), and Hundred Rabbits' sustainable tools (building creative infrastructure with radical transparency). Like these practitioners, I believe that protocols, governance structures, and documentation are primary artistic outputs — not supplementary.
+          </p>
+        </section>
+
+        <hr />
+
+        <section class="about__practice prose">
+          <h2>Practice</h2>
+          <p>
+            <strong>Discipline:</strong> Systems Art / Creative Technology / Governance Design
+          </p>
+          <p>
+            <strong>Medium:</strong> Software infrastructure, governance protocols, public documentation, generative systems
+          </p>
+          <p>
+            <strong>Duration:</strong> 5+ years of sustained practice
+          </p>
+          <p>
+            The eight-organ system is simultaneously: (a) working infrastructure that produces creative work, (b) a portfolio demonstrating systems thinking, (c) an argument that governance and art are not separate categories, and (d) a reusable model that other artist-engineers can learn from.
+          </p>
+        </section>
+
+        <hr />
+
+        <section class="about__contact prose">
+          <h2>Contact</h2>
+          <ul>
+            <li><a href="https://github.com/meta-organvm" target="_blank" rel="noopener noreferrer">GitHub (meta-organvm)</a> — eight-organ system hub</li>
+            <li><a href="https://github.com/4444j99" target="_blank" rel="noopener noreferrer">GitHub (personal)</a></li>
+            <li><a href="mailto:hello@4444j.dev">hello@4444j.dev</a></li>
+          </ul>
+        </section>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .about {
+    padding: var(--space-3xl) 0;
+  }
+
+  .about h1 {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .about__statement,
+  .about__practice,
+  .about__contact {
+    margin-bottom: var(--space-xl);
+  }
+
+  .about__contact ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .about__contact li {
+    margin-bottom: var(--space-sm);
+  }
+
+  .about__contact a {
+    color: var(--text-secondary);
+    transition: color var(--transition-fast);
+  }
+
+  .about__contact a:hover {
+    color: var(--accent);
+  }
+</style>
