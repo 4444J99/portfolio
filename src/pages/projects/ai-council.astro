@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="AI Council Coliseum — 4444j" description="A multi-agent debate platform with voting, achievements, and gamified governance — where AI agents deliberate and audiences judge.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="AI Council Coliseum"
+      tagline="Multi-agent deliberation with gamified governance"
+      tags={['Art', 'AI']}
+      repo="https://github.com/organvm-ii-poiesis/a-i-council--coliseum"
+    >
+      <h2>The Idea</h2>
+      <p>
+        What if AI agents didn't just answer questions but debated each other — with audiences voting, achievements tracking engagement, and the entire deliberation process treated as a spectacle worth governing? The Coliseum is a platform where multiple AI agents take positions, argue, respond to each other, and submit to audience judgment. It's competitive debate meets gamification meets governance design.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        The current MVP is a <strong>FastAPI backend</strong> with a <strong>Next.js frontend scaffold</strong>. Core flows are implemented in-memory: agent creation and lifecycle management, event ingestion with source filtering, voting sessions with cast/finalize/results flow, and a user progression system with achievements and leaderboards. The API exposes 20+ endpoints covering agents, events, voting, achievements, and user stats. Blockchain integration points (staking, transfers, rewards) are architecturally present but intentionally return <code>501</code> — the on-chain governance layer is planned, not premature.
+      </p>
+
+      <h2>Why It Matters</h2>
+      <p>
+        This project sits at the intersection of AI agent design, governance experimentation, and gamified audience participation. The deliberation format forces genuine multi-perspective analysis rather than single-model monologues. The gamification layer (achievements, leaderboards, user progression) makes governance participation engaging rather than tedious. And the architectural decision to expose blockchain endpoints as explicit <code>501</code>s demonstrates honest MVP scoping — showing what's planned without pretending it's built.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

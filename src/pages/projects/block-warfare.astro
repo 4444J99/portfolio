@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="TurfSynth AR — 4444j" description="A location-based augmented reality game where your real-world neighborhood procedurally generates the game around you.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="TurfSynth AR (My Block Warfare)"
+      tagline="Your neighborhood procedurally generates the game"
+      tags={['Commerce', 'Game']}
+      repo="https://github.com/organvm-iii-ergon/my-block-warfare"
+    >
+      <h2>The Idea</h2>
+      <p>
+        Location-based games overlay generic mechanics onto real geography. TurfSynth AR goes further: your actual neighborhood — its streets, landmarks, density, terrain — procedurally generates the game world around you. Walk past a park and it becomes a resource zone. Live near a dense commercial strip and the game plays differently than if you're in a suburban cul-de-sac. The real world isn't the backdrop; it's the level designer.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        A <strong>TypeScript monorepo</strong> (Node.js 20+, pnpm workspaces) with geospatial data processing at its core. The system ingests OpenStreetMap data and municipal datasets to build a typed geographic model. A procedural generation engine converts real-world features into game mechanics: building density affects resource availability, road networks define movement corridors, points of interest become strategic objectives. The AR layer renders game state onto camera feeds using device sensors for positioning. A territory control system tracks player-claimed zones with real geographic boundaries.
+      </p>
+
+      <h2>Why It Matters</h2>
+      <p>
+        Most location-based games treat geography as a random number generator for spawn points. TurfSynth treats it as a design parameter — the game should feel different in Brooklyn than in rural Montana because those places <em>are</em> different. The procedural generation from real geospatial data is the technical challenge; the design insight is that meaningful location-awareness produces gameplay that feels personal rather than generic. This is ORGAN-III commercial product design grounded in ORGAN-I's theoretical approach to context-aware systems.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

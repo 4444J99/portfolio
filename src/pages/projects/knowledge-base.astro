@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="My Knowledge Base — 4444j" description="Epistemological infrastructure for converting AI conversations into durable, searchable, interconnected knowledge with multi-modal retrieval.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="My Knowledge Base"
+      tagline="Turning AI conversations into durable, interconnected knowledge"
+      tags={['Theory', 'Knowledge']}
+      repo="https://github.com/organvm-i-theoria/my-knowledge-base"
+    >
+      <h2>The Problem</h2>
+      <p>
+        Every meaningful AI conversation generates knowledge that evaporates. You spend ninety minutes with Claude working through a recursive data structure design, and afterward that knowledge exists only inside a vendor-specific chat interface — unsearchable, unstructured, disconnected from every other conversation you've ever had. No export pathway, no atomization, no cross-conversation search, no intelligence extraction.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        The system addresses each failure with a dedicated subsystem. A <strong>multi-source export engine</strong> ingests from nine sources (Claude, ChatGPT, Gemini via browser automation; local files; Google Docs; Apple Notes). A <strong>five-strategy atomizer</strong> decomposes conversations into the smallest self-contained knowledge units. A <strong>three-modal search index</strong> (SQLite FTS5 + ChromaDB vectors + Reciprocal Rank Fusion) retrieves across keyword and semantic dimensions simultaneously. An <strong>LLM-powered intelligence layer</strong> (insight extraction, smart tagging, relationship detection) surfaces patterns you never explicitly articulated.
+      </p>
+      <p>
+        The stack is TypeScript with 200+ tests, backed by SQLite + ChromaDB + a knowledge graph with BFS traversal and vis.js export. It supports Anthropic, OpenAI, and Ollama backends interchangeably — fully local operation requires zero API keys.
+      </p>
+
+      <h2>Why It Matters</h2>
+      <p>
+        This is epistemological infrastructure — not a note-taking app with AI features, but a system that treats every AI exchange as raw material awaiting decomposition into atomic, retrievable, interconnected units of understanding. The knowledge graph, the federated indexer, and the intelligence extraction pipeline transform a passive chat archive into an active analytical instrument. It's the foundation that downstream organs build on: extracted patterns seed generative art in ORGAN-II, search architecture informs ORGAN-III products, and intelligence outputs feed ORGAN-V public essays.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

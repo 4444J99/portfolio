@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="Metasystem Master — 4444j" description="A real-time audience-participatory performance engine where collective input shapes live art through weighted consensus algorithms.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="Omni-Dromenon Engine (Metasystem Master)"
+      tagline="Collective audience input shaping live art in real time"
+      tags={['Art', 'Architecture']}
+      repo="https://github.com/organvm-ii-poiesis/metasystem-master"
+    >
+      <h2>The Idea</h2>
+      <p>
+        What if a live performance weren't scripted by a single director but shaped in real time by collective audience input — while performers retained expressive override authority? The Omni-Dromenon Engine is a real-time audience-participatory performance system where weighted consensus algorithms transform crowd decisions into artistic direction. It's not "Twitch Plays" chaos. It's structured collaboration with governance.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        The engine is a TypeScript + Python hybrid system built as a pnpm monorepo. Audience members submit inputs through a web interface; a consensus module aggregates and weights those inputs according to configurable trust and participation metrics. Performers see the collective direction but can override it — the override is itself a recorded artistic decision. The system handles real-time WebSocket communication, state synchronization across participants, and a performance timeline that captures every decision (audience and performer) as an auditable event log.
+      </p>
+
+      <h2>Why It Matters</h2>
+      <p>
+        This is ORGAN-II at its most ambitious — art that treats its own governance as part of the aesthetic. The consensus algorithms aren't backstage plumbing; they're the medium. Who gets weighted more? What happens when the crowd and the performer disagree? These are artistic questions answered by system design. The engine consumes theoretical foundations from ORGAN-I (the recursive-engine's identity models inform how performers and audience maintain coherence across transformations) and produces a framework that could become a commercial product in ORGAN-III.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

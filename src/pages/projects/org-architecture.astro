@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="Org Architecture & Community Health — 4444j" description="Organization-wide infrastructure for CI/CD, AI agents, and community health — inherited by every repo in the org.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="Org Architecture & Community Health"
+      tagline="One repo to govern them all"
+      tags={['Systems', 'Community']}
+      repo="https://github.com/organvm-i-theoria/.github"
+    >
+      <h2>The Idea</h2>
+      <p>
+        Managing organization-wide standards across dozens of repositories is tedious and error-prone. GitHub's special <code>.github</code> repository solves this by providing a single source of truth — workflows, templates, governance docs, and AI configurations that every org repo inherits automatically. Change it once here, and every repository benefits. This project takes that mechanism and builds a comprehensive organizational operating system on top of it.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        The repository provides three layers of infrastructure. <strong>Community health files</strong> — Code of Conduct, Contributing guidelines, Security policy, Support docs — are inherited by every repo in the organization that doesn't define its own. <strong>CI/CD workflows</strong> cover pipelines, security scanning (CodeQL, Gitleaks, TruffleHog), PR automation, health monitoring, and metrics — all with SHA-pinned action references for supply chain security. <strong>An AI framework</strong> provides production agents across security, infrastructure, development, languages, and documentation, plus chatmodes for specialized AI personas, all compatible with GitHub Copilot.
+      </p>
+
+      <h2>Why It Matters</h2>
+      <p>
+        In a system coordinating 78 repositories across 8 organizations, consistency isn't optional — it's structural. This repo ensures that every new repository starts with security scanning, conventional commit enforcement, and community health files without any manual setup. It demonstrates infrastructure-as-code thinking applied not to servers but to organizational culture: governance, contributor experience, and AI tooling as versionable, reviewable, inheritable artifacts.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

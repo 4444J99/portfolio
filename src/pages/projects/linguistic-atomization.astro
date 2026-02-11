@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="Linguistic Atomization Framework — 4444j" description="A computational rhetoric platform decomposing text into hierarchical atomic units across 46 canonical works in 15+ languages.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="LingFrame — Linguistic Atomization Framework"
+      tagline="Computational rhetoric across 46 works and 15 languages"
+      tags={['Theory', 'Language']}
+      repo="https://github.com/organvm-i-theoria/linguistic-atomization-framework"
+    >
+      <h2>The Idea</h2>
+      <p>
+        Rhetoric and stylistics have always operated at the level of the essay, the paragraph, the vague notion of "voice." This project asks what happens when you systematically decompose text into hierarchical atomic units — from morphemes through clauses through rhetorical moves — and apply six configurable analysis modules at every level of granularity. The result is a computational rhetoric platform, not an NLP pipeline: the analysis preserves the humanistic categories (tropes, figures, argumentative strategies) while making them countable, comparable, and visualizable.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        The framework processes a corpus of <strong>46 canonical works spanning 15+ languages and 12 literary traditions</strong>. Six analysis modules run at configurable granularity levels, producing interactive HTML visualizations alongside structured data exports. The core is Python 3.10+ with 142 tests, generating both analytical reports and explorable browser-based views of the atomized texts. Each work is decomposed into a hierarchy of linguistic units, and each unit carries annotations from every applicable analysis module.
+      </p>
+
+      <h2>Why It Matters</h2>
+      <p>
+        Most computational linguistics focuses on what text <em>means</em> (sentiment, topic, intent). This project focuses on what text <em>does</em> — how rhetorical structures produce effects, how syntactic choices create rhythm, how figurative language distributes across a work's architecture. The multilingual corpus (Homer to Borges, Sanskrit to Japanese) means every analytical claim is tested against genuine linguistic diversity, not just English prose. This is ORGAN-I theory that directly enables ORGAN-II generative work: you can't generate compelling text without understanding how compelling text is constructed.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

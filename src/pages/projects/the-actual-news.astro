@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="The Actual News — 4444j" description="A verifiable news ledger platform where truthfulness is the product and every claim ships with a machine-readable evidence graph.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="The Actual News"
+      tagline="News as a public service — verifiable by design"
+      tags={['Commerce', 'Media']}
+      repo="https://github.com/organvm-iii-ergon/the-actual-news"
+    >
+      <h2>The Idea</h2>
+      <p>
+        What if the platform itself made truthfulness the product? Not fact-checking after publication, but a native architecture where every published story ships with a machine-readable verification spine: atomic claims with confidence scores, content-addressed evidence graphs with provenance chains, and append-only correction history. Publication is gated by deterministic quality policies — not engagement metrics, not editorial discretion. If a story doesn't meet the evidence threshold, it doesn't publish. Period.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        A <strong>TypeScript microservice architecture</strong> with five services (Gateway, Story, Claim, Evidence, Verify), a Next.js frontend, and PostgreSQL storage. Every story has three layers: the <strong>Narrative</strong> (human-readable), the <strong>Claims Ledger</strong> (typed atomic statements with confidence scores and support status), and the <strong>Evidence Graph</strong> (content-addressed objects linked by typed, weighted edges). The publish gate is a single transactional SQL query evaluating primary evidence ratio, unsupported claim share, contradicted claims, and high-impact corroboration — all thresholds externalized into versioned policy packs. Seven conformance tests (CT-01 through CT-07) validate gate behavior against an RFC-style protocol spec with 10 hard invariants.
+      </p>
+
+      <h2>Why It Matters</h2>
+      <p>
+        The economic model follows from the architecture: if value comes from verification, not attention, then funding can decouple from clicks. The AGPL license ensures any deployment shares its source — a platform built on transparency should itself be transparent. Corrections are first-class immutable events, not quiet edits. Policy-as-code means a local civic newsroom and a national investigative platform can share the same engine with different quality thresholds. This is journalism infrastructure that takes its own principles seriously enough to encode them as invariants.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

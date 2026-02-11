@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="Narratological Algorithmic Lenses — 4444j" description="A monorepo for formalized narrative analysis tools — Python core, CLI, FastAPI service, and React frontend.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="Narratological Algorithmic Lenses"
+      tagline="Formalized narrative analysis as executable theory"
+      tags={['Theory', 'Narrative']}
+      repo="https://github.com/organvm-i-theoria/narratological-algorithmic-lenses"
+    >
+      <h2>The Idea</h2>
+      <p>
+        Narrative analysis has always been a humanistic practice — close reading, interpretive argument, scholarly intuition. This project asks: what if the analytical frameworks themselves (Propp's morphology, Greimas's actantial model, Genette's focalization) could be encoded as executable algorithms? Not as metaphors for code, but as actual Python libraries with typed models, diagnostic outputs, and testable assertions.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        The project is a monorepo spanning four packages: a <strong>Python core library</strong> (models, algorithms, diagnostics), a <strong>Typer CLI</strong> for terminal-based analysis, a <strong>FastAPI service</strong> for programmatic access, and a <strong>React + Vite frontend</strong> for interactive exploration. Source material — chat transcripts, primary texts, structured JSON exports — lives in a <code>specs/</code> directory organized by research stage (primary sources, completed studies, templates, open drafts).
+      </p>
+      <p>
+        The core library bundles a unified compendium of narratological algorithms as structured JSON, with a loader that resolves packaged resources first and falls back to repository paths for local development. Analysis runs against any text input and produces typed diagnostic output — not just "this is a hero's journey" but precisely which morphological functions were detected, at what confidence, with what structural relations.
+      </p>
+
+      <h2>Why It Matters</h2>
+      <p>
+        This isn't about replacing literary critics with algorithms. It's about giving narrative theory the same computational infrastructure that other formal disciplines take for granted — testable hypotheses, reproducible analyses, and composable tools. When a narratological claim is encoded as a function with assertions, disagreements become debuggable. The project bridges ORGAN-I's theoretical foundations with the kind of tooling that makes theory usable downstream in generative art (ORGAN-II) and product design (ORGAN-III).
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="Agentic Titan — 4444j" description="A polymorphic, model-agnostic multi-agent orchestration framework with nine topology patterns and 1,312 tests.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="Agentic Titan"
+      tagline="Multi-agent orchestration from laptop to production"
+      tags={['Orchestration', 'AI']}
+      repo="https://github.com/organvm-iv-taxis/agentic-titan"
+    >
+      <h2>The Idea</h2>
+      <p>
+        Multi-agent AI systems face a scaling problem: frameworks that work for two agents on a laptop collapse when you need 100+ agents with safety constraints, topology awareness, and production-grade observability. Agentic Titan is a polymorphic, model-agnostic orchestration framework that provides nine topology patterns, 22 agent archetypes, and the safety infrastructure to run them responsibly — from local development to Firecracker microVMs.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        The framework is <strong>Python 3.11+</strong> with 1,312 passing tests. Nine topology patterns (pipeline, fan-out, fan-in, mesh, hierarchical, ring, star, tree, custom) define how agents communicate. 22 agent archetypes provide pre-configured behavioral profiles. The safety layer includes sandboxed execution, resource limits, output validation, and audit logging. Model-agnostic design means agents can use any LLM backend (Anthropic, OpenAI, Ollama, custom) through a unified interface. Production infrastructure includes Prometheus metrics, structured logging, health checks, and graceful degradation under load.
+      </p>
+
+      <h2>Why It Matters</h2>
+      <p>
+        This is ORGAN-IV's flagship — the orchestration organ's answer to "how do you coordinate autonomous agents at scale?" The nine topology patterns aren't academic exercises; they encode real deployment patterns discovered while building the broader eight-organ system. The framework is consumed downstream by ORGAN-III products (the Hunter Protocol in <em>in-midst-my-life</em>, the verification pipeline in <em>The Actual News</em>) and provides the governance patterns that ORGAN-IV applies across the entire system. 1,312 tests at production-hardened status means this isn't a prototype — it's infrastructure.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

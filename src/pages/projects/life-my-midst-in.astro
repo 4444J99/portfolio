@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="Life My Midst In — 4444j" description="An interactive CV system that inverts the hiring dynamic — the employer becomes the interviewee, and the resume assembles itself.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="in-midst-my-life"
+      tagline="The employer becomes the interviewee"
+      tags={['Commerce', 'Product']}
+      repo="https://github.com/organvm-iii-ergon/life-my--midst--in"
+    >
+      <h2>The Idea</h2>
+      <p>
+        Traditional CVs force professionals to flatten their multifaceted identity into a single narrative optimized for a single imagined reader. This project inverts the dynamic entirely: the employer visits a link, answers questions about their role, team, and culture — and the system assembles a CV view curated specifically for what they're seeking. The candidate's complete professional identity is a structured, immutable ledger; what the employer sees is a dynamically filtered, role-specific snapshot assembled in real time.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        A feature-complete monorepo: <strong>Next.js 16 frontend</strong>, <strong>Fastify 5 REST API</strong>, <strong>Node.js orchestrator</strong>, plus four shared packages (Zod schemas, core logic, narrative model, design system). The core innovation is the <strong>mask system</strong> — 16 identity masks across cognitive, expressive, and operational categories that filter the same underlying truth for different professional audiences. A 5-factor compatibility scorer evaluates skill match, values alignment, growth fit, sustainability, and compensation. The stack includes PostgreSQL with pgvector, W3C Verifiable Credentials for cryptographic claim verification, and an autonomous <strong>Hunter Protocol</strong> that searches for matching job opportunities.
+      </p>
+
+      <h2>Why It Matters</h2>
+      <p>
+        This is the most architecturally sophisticated product in ORGAN-III — a full-stack SaaS application with 68+ commits, 21 database migrations, hexagonal architecture, and real theoretical grounding. The mask taxonomy draws on ORGAN-I's ontological frameworks. The inverted interview paradigm isn't a gimmick; it's a philosophical position about professional identity implemented as a working system. It demonstrates the full I→II→III pipeline: theory becomes design becomes product.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>
