@@ -1,0 +1,493 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<Layout title="Resume — 4444j" description="Creative technologist building autonomous creative systems. Resume and CV.">
+  <Header />
+  <main>
+    <article class="resume">
+      <div class="container container--narrow">
+
+        <header class="resume__header">
+          <h1>Anthony James Padavano</h1>
+          <p class="resume__title">Creative Technologist</p>
+          <div class="resume__contact">
+            <span class="resume__location">New York City</span>
+            <span class="resume__sep" aria-hidden="true">/</span>
+            <a href="mailto:padavano.anthony@gmail.com">padavano.anthony@gmail.com</a>
+            <span class="resume__sep" aria-hidden="true">/</span>
+            <a href="https://github.com/meta-organvm" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <span class="resume__sep" aria-hidden="true">/</span>
+            <a href={base}>Portfolio</a>
+          </div>
+        </header>
+
+        <hr />
+
+        <section class="resume__section prose">
+          <h2>Summary</h2>
+          <p>
+            Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 78 repositories across 8 GitHub organizations with ~289K words of public documentation. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer.
+          </p>
+        </section>
+
+        <hr />
+
+        <section class="resume__section">
+          <h2>Skills</h2>
+          <div class="resume__skills">
+            <div class="resume__skill-group">
+              <h3>Languages</h3>
+              <div class="resume__tags">
+                <span class="tag">Python</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Go</span>
+                <span class="tag">Rust</span>
+                <span class="tag">Bash</span>
+                <span class="tag">SQL</span>
+              </div>
+            </div>
+            <div class="resume__skill-group">
+              <h3>Frameworks</h3>
+              <div class="resume__tags">
+                <span class="tag">Node.js</span>
+                <span class="tag">Astro</span>
+                <span class="tag">React</span>
+                <span class="tag">Next.js</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">Express</span>
+              </div>
+            </div>
+            <div class="resume__skill-group">
+              <h3>AI / ML</h3>
+              <div class="resume__tags">
+                <span class="tag">LLM orchestration</span>
+                <span class="tag">Multi-agent systems</span>
+                <span class="tag">Prompt engineering</span>
+                <span class="tag">RAG pipelines</span>
+              </div>
+            </div>
+            <div class="resume__skill-group">
+              <h3>Systems</h3>
+              <div class="resume__tags">
+                <span class="tag">GitHub Actions</span>
+                <span class="tag">CI/CD</span>
+                <span class="tag">Docker</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Git</span>
+              </div>
+            </div>
+            <div class="resume__skill-group">
+              <h3>Creative</h3>
+              <div class="resume__tags">
+                <span class="tag">p5.js</span>
+                <span class="tag">Generative art</span>
+                <span class="tag">Audio synthesis</span>
+                <span class="tag">Interactive installations</span>
+              </div>
+            </div>
+            <div class="resume__skill-group">
+              <h3>Governance</h3>
+              <div class="resume__tags">
+                <span class="tag">Registry design</span>
+                <span class="tag">Dependency validation</span>
+                <span class="tag">State machines</span>
+                <span class="tag">Documentation systems</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr />
+
+        <section class="resume__section prose">
+          <h2>Selected Projects</h2>
+
+          <div class="resume__project">
+            <h3><a href={`${base}projects/eight-organ-system/`}>The Eight-Organ System</a></h3>
+            <p class="resume__project-sub">Governance as creative infrastructure — 78 repos, 8 orgs</p>
+            <ul>
+              <li>Designed orchestration architecture coordinating theory, art, commerce, community, and marketing as a single governed system</li>
+              <li>Built machine-readable registry, automated dependency validation (31 edges, zero back-edge violations), and promotion state machine</li>
+              <li>Authored ~289K words of public documentation; 5 GitHub Actions workflows for autonomous governance</li>
+            </ul>
+          </div>
+
+          <div class="resume__project">
+            <h3><a href={`${base}projects/recursive-engine/`}>Recursive Engine (RE:GE)</a></h3>
+            <p class="resume__project-sub">Symbolic operating system for myth and narrative — Python</p>
+            <ul>
+              <li>Implemented 21 organ handlers translating epistemological frameworks into executable code with a ritual syntax DSL</li>
+              <li>1,254 tests, 85% coverage; myths, identities, and recursive structures as first-class computational objects</li>
+            </ul>
+          </div>
+
+          <div class="resume__project">
+            <h3><a href={`${base}projects/ai-conductor/`}>AI-Conductor Model</a></h3>
+            <p class="resume__project-sub">Human-AI co-creation methodology</p>
+            <ul>
+              <li>Developed the workflow producing ~289K words: AI generates volume, human directs and refines</li>
+              <li>Includes quality gates, template compliance validation, and automated link checking across 78 repos</li>
+            </ul>
+          </div>
+
+          <div class="resume__project">
+            <h3><a href={`${base}projects/generative-music/`}>Generative Music System</a></h3>
+            <p class="resume__project-sub">Recursive theory to real-time sound</p>
+            <ul>
+              <li>Translates symbolic narrative events into live generative music — recursion as counterpoint, identity transformations as harmonic movement</li>
+            </ul>
+          </div>
+
+          <div class="resume__project">
+            <h3><a href={`${base}projects/aetheria-rpg/`}>Aetheria Classroom RPG</a></h3>
+            <p class="resume__project-sub">Educational RPG — Theory to Art to Commerce pipeline</p>
+            <ul>
+              <li>Traveled the full I&#8594;II&#8594;III pipeline from pedagogical theory to game design to revenue product; includes honest post-mortem</li>
+            </ul>
+          </div>
+        </section>
+
+        <hr />
+
+        <section class="resume__section prose">
+          <h2>Experience</h2>
+
+          <div class="resume__entry">
+            <h3>Independent Creative Technologist</h3>
+            <p class="resume__date">2021 — Present</p>
+            <ul>
+              <li>Designed and launched the eight-organ orchestration system coordinating 78 repositories across 8 GitHub organizations with automated dependency validation and ~289K words of documentation</li>
+              <li>Built recursive-engine (1,254 tests, 85% coverage) — a symbolic operating system translating epistemological frameworks into executable Python</li>
+              <li>Developed generative art and music systems, interactive installations, and AI-conductor workflow for human-AI co-creation</li>
+            </ul>
+          </div>
+
+          <div class="resume__entry">
+            <h3>Digital Marketing Manager</h3>
+            <p class="resume__date">2023 — 2024 &middot; Miami Dade College Foundation</p>
+            <ul>
+              <li>Designed and executed digital campaigns increasing donor engagement by 32% and surpassing fundraising goals</li>
+              <li>Rebuilt foundation website — 38% traffic growth, 22% improvement in donation conversions</li>
+              <li>Produced multimedia storytelling content driving 28% increase in click-through rates</li>
+            </ul>
+          </div>
+
+          <div class="resume__entry">
+            <h3>Multimedia Specialist</h3>
+            <p class="resume__date">2011 — Present &middot; AJP Media Arts</p>
+            <ul>
+              <li>Produced video, audio, and visual campaigns achieving 17.5M+ views and driving $2M in client fundraising and revenue</li>
+              <li>Integrated SEO and paid media strategies achieving 290% ROI for key campaigns</li>
+              <li>Launched and managed client websites with 42% engagement increase and 30% speed improvement</li>
+            </ul>
+          </div>
+
+          <div class="resume__entry">
+            <h3>Instructor</h3>
+            <p class="resume__date">2015 — Present &middot; Miami Dade College, FAU, Nova Southeastern, Keiser, and others</p>
+            <ul>
+              <li>Designed and delivered 100+ composition courses to 2,000+ students with 85% above-average grade achievement</li>
+              <li>Applied UX principles to create accessible course materials — 92% student approval rating</li>
+            </ul>
+          </div>
+
+          <div class="resume__entry">
+            <h3>Project Manager</h3>
+            <p class="resume__date">2007 — 2018 &middot; Majestic Design</p>
+            <ul>
+              <li>Led 50 commercial and residential construction projects from concept to completion — 90% on-time and within budget</li>
+              <li>Collaborated with marketing teams on 3D renderings and video walkthroughs, securing 25% increase in repeat business</li>
+            </ul>
+          </div>
+        </section>
+
+        <hr />
+
+        <section class="resume__section prose">
+          <h2>Education</h2>
+          <div class="resume__entry">
+            <h3>M.F.A. Creative Writing</h3>
+            <p class="resume__date">2015 — 2018 &middot; Florida Atlantic University</p>
+          </div>
+          <div class="resume__entry">
+            <h3>B.A. English Literature</h3>
+            <p class="resume__date">2010 — 2014 &middot; CUNY College of Staten Island</p>
+          </div>
+        </section>
+
+        <hr />
+
+        <section class="resume__section prose">
+          <h2>Certifications</h2>
+          <ul class="resume__certs">
+            <li><strong>Full-Stack Developer</strong> — Meta <span class="resume__date-inline">2023 — 2024</span></li>
+            <li><strong>UX Design</strong> — Google <span class="resume__date-inline">2022 — 2023</span></li>
+            <li><strong>Digital Marketing &amp; E-commerce</strong> — Google <span class="resume__date-inline">2022 — 2023</span></li>
+            <li><strong>Project Management</strong> — Google <span class="resume__date-inline">2022 — 2023</span></li>
+          </ul>
+        </section>
+
+        <hr />
+
+        <section class="resume__section">
+          <h2>Links</h2>
+          <ul class="resume__links">
+            <li><a href={base}>Portfolio</a> — 4444j99.github.io/portfolio</li>
+            <li><a href="https://github.com/meta-organvm" target="_blank" rel="noopener noreferrer">GitHub (system)</a> — meta-organvm</li>
+            <li><a href="https://github.com/4444j99" target="_blank" rel="noopener noreferrer">GitHub (personal)</a> — 4444j99</li>
+            <li><a href="mailto:hello@4444j.dev">Email</a> — hello@4444j.dev</li>
+          </ul>
+        </section>
+
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .resume {
+    padding: var(--space-3xl) 0;
+  }
+
+  .resume__header {
+    text-align: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .resume__header h1 {
+    margin-bottom: var(--space-xs);
+  }
+
+  .resume__title {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .resume__contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .resume__contact a {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: color var(--transition-fast);
+  }
+
+  .resume__contact a:hover {
+    color: var(--accent);
+  }
+
+  .resume__sep {
+    color: var(--border);
+    font-size: 0.8rem;
+  }
+
+  .resume__section {
+    margin-bottom: var(--space-md);
+  }
+
+  .resume__section h2 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .resume__skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .resume__skill-group h3 {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .resume__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .resume__project {
+    margin-bottom: var(--space-xl);
+  }
+
+  .resume__project h3 {
+    margin-bottom: 0;
+  }
+
+  .resume__project-sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: var(--space-sm);
+  }
+
+  .resume__entry {
+    margin-bottom: var(--space-xl);
+  }
+
+  .resume__entry h3 {
+    margin-bottom: 0;
+  }
+
+  .resume__date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .resume__links {
+    list-style: none;
+    padding: 0;
+  }
+
+  .resume__links li {
+    margin-bottom: var(--space-sm);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .resume__location {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .resume__certs {
+    list-style: none;
+    padding: 0;
+  }
+
+  .resume__certs li {
+    margin-bottom: var(--space-sm);
+    color: var(--text-secondary);
+  }
+
+  .resume__date-inline {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-left: var(--space-sm);
+  }
+
+  /* --- Print Styles --- */
+  @media print {
+    :global(body) {
+      background: white;
+      color: #111;
+      font-size: 11pt;
+      line-height: 1.5;
+    }
+
+    :global(.header),
+    :global(.footer) {
+      display: none;
+    }
+
+    :global(hr) {
+      border-color: #ddd;
+    }
+
+    :global(a) {
+      color: #111;
+      text-decoration: none;
+    }
+
+    :global(a[href^="http"])::after,
+    :global(a[href^="mailto"])::after {
+      content: " (" attr(href) ")";
+      font-size: 0.75em;
+      color: #666;
+      word-break: break-all;
+    }
+
+    :global(.tag) {
+      background: #f0f0f0;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+
+    :global(h1, h2, h3, h4) {
+      color: #111;
+    }
+
+    :global(p) {
+      color: #333;
+    }
+
+    :global(li) {
+      color: #333;
+    }
+
+    .resume {
+      padding: 0;
+    }
+
+    .resume__title {
+      color: #555;
+    }
+
+    .resume__contact a {
+      color: #333;
+    }
+
+    .resume__sep {
+      color: #999;
+    }
+
+    .resume__section h2 {
+      color: #555;
+    }
+
+    .resume__skill-group h3 {
+      color: #555;
+    }
+
+    .resume__project-sub,
+    .resume__date {
+      color: #666;
+    }
+
+    .resume__links li {
+      color: #333;
+    }
+
+    .resume__location {
+      color: #333;
+    }
+
+    .resume__certs li {
+      color: #333;
+    }
+
+    .resume__date-inline {
+      color: #666;
+    }
+
+    @page {
+      margin: 1cm;
+    }
+  }
+</style>

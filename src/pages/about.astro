@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <Layout title="About — 4444j" description="Artist-engineer building autonomous creative systems and treating governance as artistic medium.">
@@ -52,6 +54,7 @@ import Footer from '../components/Footer.astro';
           <ul>
             <li><a href="https://github.com/meta-organvm" target="_blank" rel="noopener noreferrer">GitHub (meta-organvm)</a> — eight-organ system hub</li>
             <li><a href="https://github.com/4444j99" target="_blank" rel="noopener noreferrer">GitHub (personal)</a></li>
+            <li><a href={`${base}resume/`}>Resume</a></li>
             <li><a href="mailto:hello@4444j.dev">hello@4444j.dev</a></li>
           </ul>
         </section>
