@@ -1,11 +1,11 @@
-export const PALETTE = {
-  bg: [10, 10, 11] as const,
-  accent: [201, 168, 76] as const,
-  accentHover: [218, 184, 92] as const,
-  text: [232, 230, 227] as const,
-  muted: [107, 105, 102] as const,
-  border: [42, 42, 48] as const,
-  card: [22, 22, 26] as const,
-};
+export type RGB = [number, number, number];
 
-export type SketchFactory = (p: any, container: HTMLElement) => void;
+export const PALETTE = {
+  bg: [10, 10, 11] as RGB,
+  accent: [201, 168, 76] as RGB,
+  accentHover: [218, 184, 92] as RGB,
+  text: [232, 230, 227] as RGB,
+  muted: [107, 105, 102] as RGB,
+  border: [42, 42, 48] as RGB,
+  card: [22, 22, 26] as RGB,
+};

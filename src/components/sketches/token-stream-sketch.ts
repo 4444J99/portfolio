@@ -15,17 +15,15 @@ interface Token {
   phase: number;
   width: number;
   height: number;
-  verified: boolean | null; // null = not yet reviewed
+  verified: boolean | null;
   alpha: number;
-  label: string;
 }
 
 export default function tokenStreamSketch(p: p5, container: HTMLElement) {
   let tokens: Token[] = [];
   let tokenCounter = 0;
   let spawnTimer = 0;
-  let selectedToken: Token | null = null;
-  let selectedAlpha = 0;
+  let selectedInfo: { verified: boolean; alpha: number } | null = null;
   let zoomPhase = -1;
   const isMobile = () => container.clientWidth < 768;
 
@@ -42,25 +40,16 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
     return PHASES[i].width * p.width;
   }
 
-  function riverY(phase: number, x: number): { top: number; bottom: number } {
+  function riverY(phase: number): { top: number; bottom: number } {
     const cx = p.height * 0.5;
     let halfHeight: number;
 
     switch (phase) {
-      case 0: // Context: medium
-        halfHeight = p.height * 0.12;
-        break;
-      case 1: // Generation: wide (AI volume)
-        halfHeight = p.height * 0.25;
-        break;
-      case 2: // Review: narrow (human bottleneck)
-        halfHeight = p.height * 0.08;
-        break;
-      case 3: // Validation: medium
-        halfHeight = p.height * 0.12;
-        break;
-      default:
-        halfHeight = p.height * 0.12;
+      case 0: halfHeight = p.height * 0.12; break;
+      case 1: halfHeight = p.height * 0.25; break;
+      case 2: halfHeight = p.height * 0.08; break;
+      case 3: halfHeight = p.height * 0.12; break;
+      default: halfHeight = p.height * 0.12;
     }
 
     return { top: cx - halfHeight, bottom: cx + halfHeight };
@@ -87,21 +76,18 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
     PHASES.forEach((phase, i) => {
       const px = phaseX(i);
       const pw = phaseWidth(i);
-      const { top, bottom } = riverY(i, px);
+      const { top, bottom } = riverY(i);
       const isZoomed = zoomPhase === i;
 
-      // Phase background
       p.noStroke();
       p.fill(...PALETTE.card, isZoomed ? 60 : 30);
       p.rect(px, top, pw, bottom - top, 4);
 
-      // Banks
       p.stroke(...PALETTE.border, isZoomed ? 80 : 40);
       p.strokeWeight(0.5);
       p.line(px, top, px + pw, top);
       p.line(px, bottom, px + pw, bottom);
 
-      // Phase label
       p.fill(...PALETTE.text, isZoomed ? 180 : 60);
       p.noStroke();
       p.textFont('JetBrains Mono, monospace');
@@ -109,7 +95,6 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
       p.textAlign(p.CENTER, p.CENTER);
       p.text(phase.label, px + pw / 2, top - 12);
 
-      // Bottleneck indicator for Review
       if (i === 2) {
         p.fill(...PALETTE.accent, 30 + Math.sin(time * 2) * 15);
         p.textSize(isMobile() ? 6 : 8);
@@ -121,7 +106,7 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
     spawnTimer++;
     if (spawnTimer > (isMobile() ? 12 : 6)) {
       spawnTimer = 0;
-      const { top, bottom } = riverY(0, 0);
+      const { top, bottom } = riverY(0);
       tokens.push({
         x: phaseX(0) - 5,
         y: p.lerp(top + 5, bottom - 5, Math.random()),
@@ -131,7 +116,6 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
         height: isMobile() ? 4 : 6,
         verified: null,
         alpha: 200,
-        label: '',
       });
       tokenCounter++;
     }
@@ -139,7 +123,7 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
     // Update + draw tokens
     tokens = tokens.filter((t) => t.x < p.width + 20 && t.alpha > 0);
     if (tokens.length > (isMobile() ? 80 : 150)) {
-      tokens = tokens.slice(-((isMobile() ? 80 : 150)));
+      tokens = tokens.slice(-(isMobile() ? 80 : 150));
     }
 
     tokens.forEach((token) => {
@@ -153,22 +137,20 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
         }
       }
 
-      // Adjust Y to fit within river banks
-      const { top, bottom } = riverY(token.phase, token.x);
+      // Fit within river banks
+      const { top, bottom } = riverY(token.phase);
       token.y = p.constrain(token.y, top + 3, bottom - 3);
-      // Gentle drift toward center
       const center = (top + bottom) / 2;
       token.y = p.lerp(token.y, center + (Math.random() - 0.5) * (bottom - top) * 0.6, 0.02);
 
       // Speed adjustments per phase
-      if (token.phase === 1) token.vx = p.lerp(token.vx, 1.2, 0.02); // Fast generation
-      if (token.phase === 2) token.vx = p.lerp(token.vx, 0.4, 0.05); // Slow review
-      if (token.phase === 3) token.vx = p.lerp(token.vx, 0.9, 0.02); // Normal validation
+      if (token.phase === 1) token.vx = p.lerp(token.vx, 1.2, 0.02);
+      if (token.phase === 2) token.vx = p.lerp(token.vx, 0.4, 0.05);
+      if (token.phase === 3) token.vx = p.lerp(token.vx, 0.9, 0.02);
 
       // Review decision
       if (token.phase >= 2 && token.verified === null) {
-        token.verified = Math.random() > 0.15; // ~85% pass
-        token.label = token.verified ? 'VERIFIED' : 'flagged';
+        token.verified = Math.random() > 0.15;
       }
 
       // Token color
@@ -197,23 +179,22 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
     p.text(`${countStr} tokens`, p.width - 15, p.height - 10);
 
     // Selected token info
-    if (selectedToken && selectedAlpha > 0) {
-      const statusText = selectedToken.verified
+    if (selectedInfo && selectedInfo.alpha > 0) {
+      const statusText = selectedInfo.verified
         ? 'Factual: VERIFIED'
         : 'Hallucinated: flagged';
-      const [sr, sg, sb] = selectedToken.verified ? PALETTE.accent : [180, 80, 80];
-      p.fill(sr, sg, sb, selectedAlpha);
+      const [sr, sg, sb] = selectedInfo.verified ? PALETTE.accent : [180, 80, 80] as [number, number, number];
+      p.fill(sr, sg, sb, selectedInfo.alpha);
       p.textAlign(p.CENTER, p.CENTER);
       p.textSize(isMobile() ? 10 : 13);
       p.text(statusText, p.width / 2, p.height * 0.12);
-      selectedAlpha -= 3;
+      selectedInfo.alpha -= 3;
     }
   };
 
-  p.mousePressed = function () {
+  function handleClick() {
     if (p.mouseX < 0 || p.mouseX > p.width || p.mouseY < 0 || p.mouseY > p.height) return;
 
-    // Find token near click in Review phase
     let nearest: Token | null = null;
     let nearDist = 15;
     tokens.forEach((t) => {
@@ -227,9 +208,15 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
     });
 
     if (nearest) {
-      selectedToken = nearest;
-      selectedAlpha = 220;
+      const found = nearest as Token;
+      selectedInfo = { verified: found.verified!, alpha: 220 };
     }
+  }
+
+  p.mousePressed = handleClick;
+  p.touchStarted = function () {
+    handleClick();
+    return false;
   };
 
   p.windowResized = function () {

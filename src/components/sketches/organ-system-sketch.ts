@@ -12,18 +12,12 @@ const ORGANS = [
   { name: 'VIII Meta', x: 0.5, y: 0.82, repos: 2 },
 ];
 
-// Directed edges: only I→II→III (and governance connections)
 const EDGES: [number, number][] = [
-  [0, 1], // I → II
-  [1, 2], // II → III
-  [3, 0], // IV → I (governance)
-  [3, 1], // IV → II
-  [3, 2], // IV → III
-  [7, 3], // VIII → IV
-  [4, 7], // V → VIII
-  [5, 4], // VI → V
-  [6, 5], // VII → VI
+  [0, 1], [1, 2], [3, 0], [3, 1], [3, 2],
+  [7, 3], [4, 7], [5, 4], [6, 5],
 ];
+
+const MAX_FLOW_PARTICLES = 80;
 
 interface RepoParticle {
   organ: number;
@@ -43,8 +37,6 @@ export default function organSystemSketch(p: p5, container: HTMLElement) {
   let repoParticles: RepoParticle[] = [];
   let flowParticles: FlowParticle[] = [];
   let hoveredOrgan = -1;
-  let pulseOrgan = -1;
-  let pulseTime = 0;
   const isMobile = () => container.clientWidth < 768;
 
   p.setup = function () {
@@ -103,18 +95,14 @@ export default function organSystemSketch(p: p5, container: HTMLElement) {
     }
 
     // Draw edges
-    EDGES.forEach(([from, to], ei) => {
+    EDGES.forEach(([from, to]) => {
       const [fx, fy] = organPos(from);
       const [tx, ty] = organPos(to);
-
       const isHighlighted = hoveredOrgan === from || hoveredOrgan === to;
-      const isPulsing = pulseOrgan === from && p.frameCount - pulseTime < 30;
 
       p.stroke(...PALETTE.border, isHighlighted ? 120 : 50);
       p.strokeWeight(isHighlighted ? 1.5 : 0.8);
       p.noFill();
-
-      // Arrow line
       p.line(fx, fy, tx, ty);
 
       // Arrowhead
@@ -133,7 +121,7 @@ export default function organSystemSketch(p: p5, container: HTMLElement) {
       );
     });
 
-    // Draw flow particles along edges
+    // Draw flow particles
     flowParticles.forEach((fp) => {
       const [from, to] = EDGES[fp.edge];
       const [fx, fy] = organPos(from);
@@ -153,6 +141,11 @@ export default function organSystemSketch(p: p5, container: HTMLElement) {
       }
     });
 
+    // Cap flow particles
+    if (flowParticles.length > MAX_FLOW_PARTICLES) {
+      flowParticles = flowParticles.slice(-MAX_FLOW_PARTICLES);
+    }
+
     // Draw repo particles orbiting organs
     repoParticles.forEach((rp) => {
       const [ox, oy] = organPos(rp.organ);
@@ -163,7 +156,6 @@ export default function organSystemSketch(p: p5, container: HTMLElement) {
       p.noStroke();
       p.fill(...PALETTE.accent, isOrgHighlighted ? 180 : 40);
       p.circle(x, y, rp.size);
-
       rp.angle += rp.speed;
     });
 
@@ -174,20 +166,14 @@ export default function organSystemSketch(p: p5, container: HTMLElement) {
       const pulse = 1 + Math.sin(time * 1.5 + i * 0.8) * 0.08;
       const r = nodeRadius * pulse;
 
-      // Glow
       p.noStroke();
       p.fill(...PALETTE.accent, isHovered ? 25 : 10);
       p.circle(ox, oy, r * 3);
-
-      // Core
       p.fill(...PALETTE.accent, isHovered ? 120 : 50);
       p.circle(ox, oy, r);
-
-      // Center bright
       p.fill(...PALETTE.text, isHovered ? 100 : 40);
       p.circle(ox, oy, r * 0.4);
 
-      // Label
       if (isHovered) {
         p.fill(...PALETTE.text, 220);
         p.noStroke();
@@ -201,33 +187,50 @@ export default function organSystemSketch(p: p5, container: HTMLElement) {
       }
     });
 
-    // "No back-edges" indicator
+    // Bottom label
     p.fill(...PALETTE.muted, 30 + Math.sin(time * 0.3) * 15);
     p.noStroke();
     p.textAlign(p.CENTER, p.CENTER);
     p.textSize(isMobile() ? 8 : 10);
     p.textFont('JetBrains Mono, monospace');
-    p.text('I → II → III  (no back-edges)', p.width / 2, p.height - 20);
+    p.text('I \u2192 II \u2192 III  (no back-edges)', p.width / 2, p.height - 20);
   };
 
-  p.mousePressed = function () {
-    if (hoveredOrgan >= 0) {
-      pulseOrgan = hoveredOrgan;
-      pulseTime = p.frameCount;
-
-      // Spawn burst particles along outgoing edges
-      EDGES.forEach(([from], ei) => {
-        if (from === hoveredOrgan) {
-          for (let i = 0; i < 5; i++) {
-            flowParticles.push({
-              edge: ei,
-              pos: 0,
-              speed: 0.015 + Math.random() * 0.01,
-            });
-          }
+  function handleClick() {
+    if (hoveredOrgan < 0) return;
+    EDGES.forEach(([from], ei) => {
+      if (from === hoveredOrgan) {
+        for (let i = 0; i < 5; i++) {
+          flowParticles.push({
+            edge: ei,
+            pos: 0,
+            speed: 0.015 + Math.random() * 0.01,
+          });
         }
-      });
+      }
+    });
+  }
+
+  p.mousePressed = handleClick;
+  p.touchStarted = function () {
+    // On touch, update mouseX/mouseY-based hover detection first
+    if (p.touches.length > 0) {
+      const touch = p.touches[0] as { x: number; y: number };
+      p.mouseX = touch.x;
+      p.mouseY = touch.y;
+      // Re-detect hover for the tap position
+      hoveredOrgan = -1;
+      for (let i = 0; i < ORGANS.length; i++) {
+        const [ox, oy] = organPos(i);
+        const nodeRadius = isMobile() ? 22 : 32;
+        if (p.dist(touch.x, touch.y, ox, oy) < nodeRadius + 15) {
+          hoveredOrgan = i;
+          break;
+        }
+      }
     }
+    handleClick();
+    return false;
   };
 
   p.windowResized = function () {

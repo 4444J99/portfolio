@@ -16,6 +16,7 @@ const { sketchId, height = '500px', mobileHeight = '350px', ariaLabel } = Astro.
   data-mobile-height={mobileHeight}
   role="img"
   aria-label={ariaLabel}
+  tabindex="0"
 >
   <noscript>
     <p class="sketch-fallback">{ariaLabel}</p>
@@ -34,8 +35,6 @@ const { sketchId, height = '500px', mobileHeight = '350px', ariaLabel } = Astro.
 
   .sketch-container :global(canvas) {
     display: block;
-    width: 100% !important;
-    height: 100% !important;
   }
 
   .sketch-fallback {

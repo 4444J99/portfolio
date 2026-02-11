@@ -39,7 +39,7 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
   let particles: Particle[] = [];
   let sediments: Sediment[] = [];
   let hoveredChamber = -1;
-  let selectedSediment: Sediment | null = null;
+  let selectedSediment: { reason: string; alpha: number } | null = null;
   let spawnTimer = 0;
   const isMobile = () => container.clientWidth < 768;
 
@@ -63,7 +63,6 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
 
   p.draw = function () {
     p.background(...PALETTE.bg);
-    const time = p.frameCount * 0.02;
     const cw = chamberWidth();
     const chamberTop = p.height * 0.15;
     const chamberBottom = p.height * 0.65;
@@ -90,8 +89,6 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
       p.stroke(...PALETTE.border, 60);
       p.strokeWeight(1);
       p.noFill();
-
-      // Arrow
       p.line(x1, cy, x2, cy);
       p.fill(...PALETTE.border, 60);
       p.noStroke();
@@ -103,13 +100,12 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
       const cx = chamberX(i);
       const isHovered = hoveredChamber === i;
 
-      // Chamber body
       p.noFill();
       p.stroke(...PALETTE.border, isHovered ? 120 : 60);
       p.strokeWeight(isHovered ? 1.5 : 1);
       p.rect(cx - cw / 2, chamberTop, cw, chamberH, 6);
 
-      // Gap at bottom for failures
+      // Gap at bottom
       const gapWidth = cw * 0.3 * (1 - strictness() * 0.5);
       p.fill(...PALETTE.bg);
       p.noStroke();
@@ -129,7 +125,6 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
       p.textSize(isMobile() ? 7 : 9);
       p.text(numerals[i], cx, chamberBottom + 14);
 
-      // Success rate indicator
       if (isHovered) {
         const rate = Math.round(chamber.successRate * 100 * (0.8 + strictness() * 0.4));
         p.fill(...PALETTE.accent, 160);
@@ -151,14 +146,14 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
         alive: true,
         success: true,
         settled: false,
-        color: [...PALETTE.accent, 180] as [number, number, number, number],
+        color: [...PALETTE.accent, 180],
       });
     }
 
     // Update + draw particles
     particles = particles.filter((pt) => pt.alive);
     if (particles.length > (isMobile() ? 60 : 120)) {
-      particles = particles.slice(-((isMobile() ? 60 : 120)));
+      particles = particles.slice(-(isMobile() ? 60 : 120));
     }
 
     particles.forEach((pt) => {
@@ -167,13 +162,11 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
       pt.x += pt.vx;
       pt.y += pt.vy;
 
-      // Check chamber transitions
       for (let i = 0; i < CHAMBERS.length; i++) {
         const cx = chamberX(i);
         const inChamber = Math.abs(pt.x - cx) < cw / 2;
 
         if (inChamber && pt.chamber === i) {
-          // Inside current chamber — check for failure
           const gapWidth = cw * 0.3 * (1 - strictness() * 0.5);
           const atBottom = pt.y > chamberBottom - 10;
           const overGap = Math.abs(pt.x - cx) < gapWidth / 2;
@@ -182,10 +175,9 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
             pt.success = false;
             pt.vy = 1.5;
             pt.vx = (Math.random() - 0.5) * 0.5;
-            pt.color = [...PALETTE.muted, 100] as [number, number, number, number];
+            pt.color = [...PALETTE.muted, 100];
           }
 
-          // Bounce off walls
           if (pt.y < chamberTop + 5) pt.vy = Math.abs(pt.vy) * 0.5 + 0.3;
           if (pt.y > chamberBottom - 5 && pt.success) pt.vy = -Math.abs(pt.vy) * 0.5 - 0.3;
 
@@ -197,12 +189,10 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
         }
       }
 
-      // Exit right side = success
       if (pt.x > p.width + 10) {
         pt.alive = false;
       }
 
-      // Failed particles settle as sediment
       if (!pt.success && pt.y > gapBottom) {
         pt.settled = true;
         pt.vy = 0;
@@ -216,7 +206,6 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
         pt.alive = false;
       }
 
-      // Draw particle
       p.noStroke();
       const [r, g, b, a] = pt.color;
       p.fill(r, g, b, a);
@@ -251,23 +240,28 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
     p.text('+23% engagement   |   41% month-6 retention', p.width / 2, p.height - 25);
   };
 
-  p.mousePressed = function () {
+  function handleClick() {
     if (p.mouseX < 0 || p.mouseX > p.width || p.mouseY < 0 || p.mouseY > p.height) return;
 
-    // Check if clicking near sediment
-    let nearest: Sediment | null = null;
+    let nearestSed: Sediment | null = null;
     let nearestDist = 30;
     sediments.forEach((sed) => {
       const d = p.dist(p.mouseX, p.mouseY, sed.x, sed.y);
       if (d < nearestDist) {
         nearestDist = d;
-        nearest = sed;
+        nearestSed = sed;
       }
     });
 
-    if (nearest) {
-      selectedSediment = { ...nearest, alpha: 150 };
+    if (nearestSed) {
+      selectedSediment = { reason: (nearestSed as Sediment).reason, alpha: 150 };
     }
+  }
+
+  p.mousePressed = handleClick;
+  p.touchStarted = function () {
+    handleClick();
+    return false;
   };
 
   p.windowResized = function () {

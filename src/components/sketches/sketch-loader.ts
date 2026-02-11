@@ -9,12 +9,17 @@ const sketchModules: Record<string, () => Promise<{ default: (p: p5, container: 
   'token-stream': () => import('./token-stream-sketch'),
 };
 
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+let prefersReducedMotion = motionQuery.matches;
+motionQuery.addEventListener('change', (e) => { prefersReducedMotion = e.matches; });
+
 const initialized = new Set<HTMLElement>();
 
 function isMobile(): boolean {
   return window.innerWidth < 768;
 }
+
+let resizeTimer: ReturnType<typeof setTimeout> | null = null;
 
 function initSketch(container: HTMLElement) {
   if (initialized.has(container)) return;
@@ -38,19 +43,44 @@ function initSketch(container: HTMLElement) {
     const sketchFn = sketchModule.default;
 
     new P5((p: p5) => {
-      // Let the sketch set up its functions
       sketchFn(p, container);
 
-      // For reduced motion: wrap draw to stop after first frame
+      // For reduced motion: render a fully-grown static frame then stop
       if (prefersReducedMotion && p.draw) {
         const originalDraw = p.draw.bind(p);
+        // Run draw multiple times silently to let state build up, then stop
+        let warmupFrames = 60; // simulate ~2s of animation
         p.draw = function () {
           originalDraw();
-          p.noLoop();
+          warmupFrames--;
+          if (warmupFrames <= 0) {
+            p.noLoop();
+          }
         };
+
+        // Allow click interactions to trigger a single redraw
+        const originalMousePressed = p.mousePressed?.bind(p);
+        if (originalMousePressed) {
+          p.mousePressed = function () {
+            originalMousePressed();
+            p.redraw();
+          };
+        }
       }
     }, container);
   });
+}
+
+function deferInit(container: HTMLElement) {
+  // Defer above-the-fold sketches to avoid blocking LCP
+  const rect = container.getBoundingClientRect();
+  const aboveFold = rect.top < window.innerHeight;
+
+  if (aboveFold && 'requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(() => initSketch(container), { timeout: 2000 });
+  } else {
+    initSketch(container);
+  }
 }
 
 function observeSketches() {
@@ -61,7 +91,7 @@ function observeSketches() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            initSketch(entry.target as HTMLElement);
+            deferInit(entry.target as HTMLElement);
             observer.unobserve(entry.target);
           }
         });
@@ -70,15 +100,18 @@ function observeSketches() {
     );
     containers.forEach((c) => observer.observe(c));
   } else {
-    containers.forEach(initSketch);
+    containers.forEach(deferInit);
   }
 
   window.addEventListener('resize', () => {
-    containers.forEach((container) => {
-      const height = container.dataset.height || '500px';
-      const mobileHeight = container.dataset.mobileHeight || '350px';
-      container.style.height = isMobile() ? mobileHeight : height;
-    });
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      containers.forEach((container) => {
+        const height = container.dataset.height || '500px';
+        const mobileHeight = container.dataset.mobileHeight || '350px';
+        container.style.height = isMobile() ? mobileHeight : height;
+      });
+    }, 100);
   });
 }
 

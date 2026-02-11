@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE } from './palette';
+import { PALETTE, type RGB } from './palette';
 
 const DSL_FRAGMENTS = [
   'INVOKE myth.hero_journey',
@@ -17,9 +17,9 @@ interface Branch {
   length: number;
   depth: number;
   type: 'invoke' | 'binding' | 'when';
-  growth: number; // 0-1
+  growth: number;
   children: Branch[];
-  recurseTarget: number | null; // y-position to curve back to
+  recurseTarget: number | null;
 }
 
 export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
@@ -61,17 +61,14 @@ export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
     const endY = branch.y + Math.sin(branch.angle) * branch.length;
     const childLen = branch.length * 0.72;
 
-    // Left branch
     const left = createBranch(endX, endY, branch.angle - 0.4 - Math.random() * 0.3, childLen, depth + 1);
     branch.children.push(left);
     growRecursive(left, depth + 1, maxDepth);
 
-    // Right branch
     const right = createBranch(endX, endY, branch.angle + 0.4 + Math.random() * 0.3, childLen, depth + 1);
     branch.children.push(right);
     growRecursive(right, depth + 1, maxDepth);
 
-    // Occasional third branch (recursion)
     if (Math.random() > 0.7 && depth > 1) {
       const recurse = createBranch(endX, endY, branch.angle + (Math.random() - 0.5) * 0.6, childLen * 0.8, depth + 1);
       recurse.recurseTarget = branch.y;
@@ -79,12 +76,12 @@ export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
     }
   }
 
-  function typeColor(type: string): [number, number, number] {
+  function typeColor(type: string): RGB {
     switch (type) {
-      case 'invoke': return PALETTE.accent as unknown as [number, number, number];
+      case 'invoke': return PALETTE.accent;
       case 'binding': return [120, 180, 200];
       case 'when': return [180, 140, 200];
-      default: return PALETTE.muted as unknown as [number, number, number];
+      default: return PALETTE.muted;
     }
   }
 
@@ -96,7 +93,6 @@ export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
     let endX = branch.x + Math.cos(branch.angle) * len;
     let endY = branch.y + Math.sin(branch.angle) * len;
 
-    // If this branch recurses, curve it back toward trunk
     if (branch.recurseTarget !== null && effectiveGrowth > 0.7) {
       const curveFactor = (effectiveGrowth - 0.7) / 0.3;
       endY = p.lerp(endY, branch.recurseTarget, curveFactor * 0.4);
@@ -106,7 +102,6 @@ export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
     const alphaBase = Math.max(20, 80 - branch.depth * 10);
     const sway = Math.sin(time * 0.5 + branch.x * 0.01 + branch.depth) * 2;
 
-    // Draw branch line
     p.stroke(r, g, b, alphaBase + 30);
     p.strokeWeight(Math.max(0.5, 3 - branch.depth * 0.4));
     p.noFill();
@@ -115,7 +110,6 @@ export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
     const swayY = endY + sway * 0.5;
     p.line(branch.x, branch.y, swayX, swayY);
 
-    // Node glow at junction
     if (effectiveGrowth > 0.9) {
       const pulse = Math.sin(time * 2 + branch.depth) * 0.3 + 0.7;
       p.noStroke();
@@ -125,7 +119,6 @@ export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
       p.circle(swayX, swayY, 5);
     }
 
-    // Recurse visual: dotted line curving back
     if (branch.recurseTarget !== null && effectiveGrowth > 0.8) {
       p.stroke(r, g, b, 30);
       p.strokeWeight(0.5);
@@ -138,10 +131,12 @@ export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
       }
     }
 
-    // Draw children
+    // Use computed endpoint positions for children
+    const childStartX = swayX;
+    const childStartY = swayY;
     branch.children.forEach((child) => {
-      child.x = swayX;
-      child.y = swayY;
+      child.x = childStartX;
+      child.y = childStartY;
       drawBranch(child, effectiveGrowth);
     });
   }
@@ -153,11 +148,9 @@ export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
     branch.children.forEach(growAll);
   }
 
-  // Mouse influence on growth direction
   function applyMouseInfluence(branch: Branch) {
     if (p.mouseX <= 0 || p.mouseX >= p.width || p.mouseY <= 0 || p.mouseY >= p.height) return;
-    const dx = p.mouseX - branch.x;
-    const mouseAngle = Math.atan2(p.mouseY - branch.y, dx);
+    const mouseAngle = Math.atan2(p.mouseY - branch.y, p.mouseX - branch.x);
     branch.angle = p.lerp(branch.angle, branch.angle + (mouseAngle - branch.angle) * 0.02, 0.1);
     branch.children.forEach(applyMouseInfluence);
   }
@@ -166,11 +159,8 @@ export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
     p.background(...PALETTE.bg);
     time = p.frameCount * 0.02;
 
-    // Grow tree
     branches.forEach(growAll);
     branches.forEach(applyMouseInfluence);
-
-    // Draw all branches
     branches.forEach((b) => drawBranch(b, 1));
 
     // Legend
@@ -200,15 +190,17 @@ export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
     }
   };
 
-  p.mousePressed = function () {
+  function handleClick() {
     if (p.mouseX < 0 || p.mouseX > p.width || p.mouseY < 0 || p.mouseY > p.height) return;
-
-    // Flash a DSL fragment
     flashText = DSL_FRAGMENTS[Math.floor(Math.random() * DSL_FRAGMENTS.length)];
     flashAlpha = 220;
-
-    // Rebuild tree for recursion fold-back effect
     buildTree();
+  }
+
+  p.mousePressed = handleClick;
+  p.touchStarted = function () {
+    handleClick();
+    return false;
   };
 
   p.windowResized = function () {

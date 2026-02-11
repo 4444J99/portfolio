@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE } from './palette';
+import { PALETTE, type RGB } from './palette';
 
 interface WavePoint {
   x: number;
@@ -10,14 +10,13 @@ interface Voice {
   phase: number;
   amplitude: number;
   frequency: number;
-  color: [number, number, number];
+  color: RGB;
   label: string;
 }
 
 export default function counterpointSketch(p: p5, container: HTMLElement) {
   const isMobile = () => container.clientWidth < 768;
 
-  // Three layers
   const layers: Voice[] = [
     { phase: 0, amplitude: 0.2, frequency: 0.03, color: [201, 168, 76], label: 'Symbolic Engine' },
     { phase: 0.5, amplitude: 0.15, frequency: 0.02, color: [120, 180, 200], label: 'Sonification Bridge' },
@@ -44,28 +43,24 @@ export default function counterpointSketch(p: p5, container: HTMLElement) {
     return Math.floor((1 - p.mouseY / p.height) * 3);
   }
 
-  function generateWave(voice: Voice, yCenter: number, time: number): WavePoint[] {
+  function generateWave(voice: Voice, yCenter: number, t: number): WavePoint[] {
     const points: WavePoint[] = [];
     const steps = isMobile() ? 80 : 150;
     for (let i = 0; i <= steps; i++) {
       const x = (i / steps) * p.width;
-      const t = time * timeScale();
+      const ts = t * timeScale();
 
-      // Angular/stepped for symbolic, smooth for bridge, complex for performance
       let yOff: number;
       if (voice.label === 'Symbolic Engine') {
-        // Angular stepped waveform
-        const raw = Math.sin(x * voice.frequency + t + voice.phase);
+        const raw = Math.sin(x * voice.frequency + ts + voice.phase);
         yOff = Math.round(raw * 4) / 4 * voice.amplitude * p.height;
       } else if (voice.label === 'Sonification Bridge') {
-        // Smooth sine
-        yOff = Math.sin(x * voice.frequency + t + voice.phase) * voice.amplitude * p.height;
+        yOff = Math.sin(x * voice.frequency + ts + voice.phase) * voice.amplitude * p.height;
       } else {
-        // Complex: multiple harmonics
         yOff = (
-          Math.sin(x * voice.frequency + t + voice.phase) * 0.5 +
-          Math.sin(x * voice.frequency * 2.3 + t * 1.5 + voice.phase) * 0.3 +
-          Math.sin(x * voice.frequency * 0.7 + t * 0.8 + voice.phase) * 0.2
+          Math.sin(x * voice.frequency + ts + voice.phase) * 0.5 +
+          Math.sin(x * voice.frequency * 2.3 + ts * 1.5 + voice.phase) * 0.3 +
+          Math.sin(x * voice.frequency * 0.7 + ts * 0.8 + voice.phase) * 0.2
         ) * voice.amplitude * p.height;
       }
 
@@ -74,7 +69,7 @@ export default function counterpointSketch(p: p5, container: HTMLElement) {
     return points;
   }
 
-  function drawWave(points: WavePoint[], color: [number, number, number], alpha: number) {
+  function drawWave(points: WavePoint[], color: RGB, alpha: number) {
     p.noFill();
     p.stroke(...color, alpha);
     p.strokeWeight(1.5);
@@ -82,7 +77,6 @@ export default function counterpointSketch(p: p5, container: HTMLElement) {
     points.forEach((pt) => p.vertex(pt.x, pt.y));
     p.endShape();
 
-    // Subtle fill below
     p.fill(...color, alpha * 0.05);
     p.noStroke();
     p.beginShape();
@@ -104,7 +98,6 @@ export default function counterpointSketch(p: p5, container: HTMLElement) {
       const points = generateWave(voice, yCenter, time);
       drawWave(points, voice.color, 150);
 
-      // Layer label
       p.fill(...voice.color, 60);
       p.noStroke();
       p.textFont('JetBrains Mono, monospace');
@@ -113,8 +106,8 @@ export default function counterpointSketch(p: p5, container: HTMLElement) {
       p.text(voice.label, 10, yCenter - layerHeight * 0.4);
     });
 
-    // Counterpoint split on the bottom layer (~every 15s worth of frames)
-    const splitInterval = 450; // ~15s at 30fps
+    // Counterpoint split
+    const splitInterval = 450;
     if (p.frameCount - lastSplitTime > splitInterval) {
       lastSplitTime = p.frameCount;
       const depth = Math.max(1, recursiveDepth() + 1);
@@ -130,7 +123,7 @@ export default function counterpointSketch(p: p5, container: HTMLElement) {
       }
     }
 
-    // Draw counterpoint voices (fade over time since split)
+    // Draw counterpoint voices
     const splitAge = (p.frameCount - lastSplitTime) / splitInterval;
     if (counterpointVoices.length > 0) {
       const fadeStart = 0.6;
@@ -149,39 +142,42 @@ export default function counterpointSketch(p: p5, container: HTMLElement) {
     // Draw event pulses
     eventPulses = eventPulses.filter((ep) => ep.alpha > 0);
     eventPulses.forEach((ep) => {
-      // Vertical pulse line propagating through all layers
       p.stroke(...PALETTE.accent, ep.alpha);
       p.strokeWeight(1);
       p.line(ep.x, 0, ep.x, p.height);
 
-      // Ripple circles at each layer intersection
       layers.forEach((_, i) => {
         const yCenter = layerHeight * (i + 0.5);
         p.noFill();
         p.stroke(...PALETTE.accent, ep.alpha * 0.5);
-        p.circle(ep.x, yCenter, (p.frameCount - ep.time) * 2);
+        const rippleSize = Math.min((p.frameCount - ep.time) * 2, 80);
+        p.circle(ep.x, yCenter, rippleSize);
       });
 
       ep.alpha -= 3;
     });
 
-    // Interference zones: where waves overlap, draw subtle highlight
-    const interferenceY = layerHeight;
+    // Interference zones
     p.noStroke();
     p.fill(...PALETTE.accent, 5 + Math.sin(time * 2) * 3);
-    p.rect(0, interferenceY - 10, p.width, 20);
+    p.rect(0, layerHeight - 10, p.width, 20);
     p.fill(...PALETTE.accent, 5 + Math.sin(time * 2 + 1) * 3);
-    p.rect(0, interferenceY * 2 - 10, p.width, 20);
+    p.rect(0, layerHeight * 2 - 10, p.width, 20);
   };
 
-  p.mousePressed = function () {
+  function handleClick() {
     if (p.mouseX < 0 || p.mouseX > p.width || p.mouseY < 0 || p.mouseY > p.height) return;
-
     eventPulses.push({
       x: p.mouseX,
       time: p.frameCount,
       alpha: 200,
     });
+  }
+
+  p.mousePressed = handleClick;
+  p.touchStarted = function () {
+    handleClick();
+    return false;
   };
 
   p.windowResized = function () {

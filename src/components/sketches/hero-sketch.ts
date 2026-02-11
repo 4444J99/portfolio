@@ -5,6 +5,7 @@ const ORGAN_NAMES = [
   'Theoria', 'Poiesis', 'Ergon', 'Taxis',
   'Logos', 'Koinonia', 'Kerygma', 'Meta',
 ];
+const MAX_PARTICLES = 80;
 
 interface Organ {
   baseX: number;
@@ -13,11 +14,10 @@ interface Organ {
   phase: number;
   speed: number;
   labelAlpha: number;
-  labelDir: number;
 }
 
 interface Particle {
-  pos: number; // 0-1 along filament
+  pos: number;
   speed: number;
   from: number;
   to: number;
@@ -31,10 +31,8 @@ export default function heroSketch(p: p5, container: HTMLElement) {
   const isMobile = () => container.clientWidth < 768;
 
   p.setup = function () {
-    const canvas = p.createCanvas(container.clientWidth, container.clientHeight);
-    canvas.style('display', 'block');
+    p.createCanvas(container.clientWidth, container.clientHeight);
     p.frameRate(30);
-
     initOrgans();
     initFilaments();
   };
@@ -54,19 +52,17 @@ export default function heroSketch(p: p5, container: HTMLElement) {
         phase: (p.TWO_PI / 8) * i,
         speed: 0.008 + Math.random() * 0.004,
         labelAlpha: 0,
-        labelDir: 1,
       });
     }
   }
 
   function initFilaments() {
     filaments = [];
-    // Connect adjacent organs + some cross-connections
     for (let i = 0; i < 8; i++) {
       filaments.push([i, (i + 1) % 8]);
       if (i < 4) filaments.push([i, i + 4]);
     }
-    // Seed initial particles
+    particles = [];
     const count = isMobile() ? 20 : 40;
     for (let i = 0; i < count; i++) {
       const f = filaments[Math.floor(Math.random() * filaments.length)];
@@ -101,7 +97,6 @@ export default function heroSketch(p: p5, container: HTMLElement) {
       p.strokeWeight(1);
       p.noFill();
 
-      // Curved filament
       const cpx = (ax + bx) / 2 + Math.sin(time * 0.5) * 15;
       const cpy = (ay + by) / 2 + Math.cos(time * 0.5) * 15;
       p.bezier(ax, ay, cpx, cpy - 20, cpx, cpy + 20, bx, by);
@@ -125,13 +120,19 @@ export default function heroSketch(p: p5, container: HTMLElement) {
       p.circle(x, y, 3);
 
       pt.pos += pt.speed;
-      if (pt.pos > 1) {
-        pt.pos = 0;
+      if (pt.pos > 1 || pt.pos < 0) {
+        pt.pos = pt.speed > 0 ? 0 : 1;
         const f = filaments[Math.floor(Math.random() * filaments.length)];
         pt.from = f[0];
         pt.to = f[1];
+        pt.speed = Math.abs(pt.speed);
       }
     });
+
+    // Cap particles
+    if (particles.length > MAX_PARTICLES) {
+      particles = particles.slice(-MAX_PARTICLES);
+    }
 
     // Draw organs
     organs.forEach((organ, i) => {
@@ -139,7 +140,6 @@ export default function heroSketch(p: p5, container: HTMLElement) {
       const ox = organ.baseX + Math.sin(time + organ.phase) * 3;
       const oy = organ.baseY + Math.cos(time + organ.phase) * 3;
 
-      // Mouse proximity effect
       let proximity = 0;
       if (mouseInCanvas) {
         const d = p.dist(mx, my, ox, oy);
@@ -165,9 +165,8 @@ export default function heroSketch(p: p5, container: HTMLElement) {
       p.fill(...PALETTE.text, 60 + proximity * 80);
       p.circle(ox, oy, r * 0.4);
 
-      // Label: fade based on proximity or slow cycle
+      // Label
       let targetAlpha = proximity > 0.3 ? 200 : 0;
-      // Slow cycle: each organ label fades in/out
       const cycleAlpha = Math.sin(time * 0.3 + organ.phase * 2) * 0.5 + 0.5;
       if (proximity < 0.3) {
         targetAlpha = cycleAlpha > 0.8 ? (cycleAlpha - 0.8) * 5 * 140 : 0;
@@ -186,20 +185,19 @@ export default function heroSketch(p: p5, container: HTMLElement) {
     });
 
     // Center label
-    p.fill(...PALETTE.muted, 40 + Math.sin(time * 0.5) * 20);
+    const centerPulse = Math.sin(time * 0.5) * 0.5 + 0.5;
+    p.fill(...PALETTE.muted, 30 + centerPulse * 30);
     p.noStroke();
     p.textAlign(p.CENTER, p.CENTER);
     p.textSize(isMobile() ? 10 : 12);
     p.textFont('JetBrains Mono, monospace');
-    const centerPulse = Math.sin(time * 0.5) * 0.5 + 0.5;
-    p.fill(...PALETTE.muted, 30 + centerPulse * 30);
     p.text('ORGANVM', p.width / 2, p.height / 2);
   };
 
-  p.mousePressed = function () {
+  function handleClick() {
     if (p.mouseX < 0 || p.mouseX > p.width || p.mouseY < 0 || p.mouseY > p.height) return;
 
-    // Find nearest organ and send pulse
+    // Find nearest organ
     let nearest = 0;
     let nearestDist = Infinity;
     organs.forEach((organ, i) => {
@@ -210,13 +208,12 @@ export default function heroSketch(p: p5, container: HTMLElement) {
       }
     });
 
-    // Spawn burst of particles from nearest organ
+    // Spawn burst of particles from nearest organ along connected filaments
+    const connected = filaments.filter(([from, to]) => from === nearest || to === nearest);
     const count = isMobile() ? 6 : 12;
     for (let i = 0; i < count; i++) {
-      const outgoing = filaments.filter(([from]) => from === nearest || filaments.filter(([_, to]) => to === nearest));
-      const f = filaments.filter(([from, to]) => from === nearest || to === nearest);
-      if (f.length > 0) {
-        const fil = f[Math.floor(Math.random() * f.length)];
+      if (connected.length > 0) {
+        const fil = connected[Math.floor(Math.random() * connected.length)];
         particles.push({
           pos: fil[0] === nearest ? 0 : 1,
           speed: fil[0] === nearest ? 0.01 + Math.random() * 0.01 : -(0.01 + Math.random() * 0.01),
@@ -226,6 +223,12 @@ export default function heroSketch(p: p5, container: HTMLElement) {
         });
       }
     }
+  }
+
+  p.mousePressed = handleClick;
+  p.touchStarted = function () {
+    handleClick();
+    return false; // prevent default
   };
 
   p.windowResized = function () {
