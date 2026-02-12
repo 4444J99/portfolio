@@ -5,31 +5,146 @@ import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
 ---
 
-<Layout title="Agentic Titan — 4444j" description="A polymorphic, model-agnostic multi-agent orchestration framework with nine topology patterns and 1,312 tests.">
+<Layout title="Agentic Titan — Anthony James Padavano" description="A polymorphic, model-agnostic multi-agent orchestration framework with nine topology patterns, 22 agent archetypes, and 1,095+ tests.">
   <Header />
   <main>
     <ProjectDetail
       title="Agentic Titan"
       tagline="Multi-agent orchestration from laptop to production"
-      tags={['Orchestration', 'AI']}
+      tags={['Orchestration', 'AI', 'Python']}
       repo="https://github.com/organvm-iv-taxis/agentic-titan"
     >
-      <h2>The Idea</h2>
+      <h2>Problem</h2>
       <p>
-        Multi-agent AI systems face a scaling problem: frameworks that work for two agents on a laptop collapse when you need 100+ agents with safety constraints, topology awareness, and production-grade observability. Agentic Titan is a polymorphic, model-agnostic orchestration framework that provides nine topology patterns, 22 agent archetypes, and the safety infrastructure to run them responsibly — from local development to Firecracker microVMs.
+        Multi-agent AI systems face a scaling problem: frameworks that work for two agents on a laptop collapse when you need 100+ agents with safety constraints, topology awareness, and production-grade observability. Most existing frameworks are either too opinionated (locked to one LLM provider, one communication pattern) or too thin (no safety layer, no topology abstractions, no way to reason about agent interactions at scale).
+      </p>
+      <p>
+        The eight-organ system needed an orchestration framework that could handle diverse workloads — from simple pipeline chains to complex mesh networks — while maintaining safety invariants and supporting any LLM backend. Nothing on the market fit all three requirements simultaneously.
       </p>
 
-      <h2>How It Works</h2>
+      <h2>Approach</h2>
       <p>
-        The framework is <strong>Python 3.11+</strong> with 1,312 passing tests. Nine topology patterns (pipeline, fan-out, fan-in, mesh, hierarchical, ring, star, tree, custom) define how agents communicate. 22 agent archetypes provide pre-configured behavioral profiles. The safety layer includes sandboxed execution, resource limits, output validation, and audit logging. Model-agnostic design means agents can use any LLM backend (Anthropic, OpenAI, Ollama, custom) through a unified interface. Production infrastructure includes Prometheus metrics, structured logging, health checks, and graceful degradation under load.
+        Build a polymorphic, model-agnostic framework that separates <strong>topology</strong> (how agents communicate) from <strong>archetype</strong> (what agents do) from <strong>safety</strong> (what agents can't do). This three-axis design means you can independently swap topologies, archetypes, and safety policies without rewriting orchestration logic.
       </p>
 
-      <h2>Why It Matters</h2>
+      <h2>Architecture</h2>
+      <pre class="architecture-diagram"><code>┌─────────────────────────────────────────────┐
+│              Agentic Titan Core              │
+├──────────┬──────────────┬───────────────────┤
+│ Topology │  Archetypes  │    Safety Layer    │
+│ Engine   │  (22 types)  │                   │
+├──────────┤              ├───────────────────┤
+│Pipeline  │ Researcher   │ Sandboxed exec    │
+│Fan-out   │ Synthesizer  │ Resource limits   │
+│Fan-in    │ Critic       │ Output validation │
+│Mesh      │ Orchestrator │ Audit logging     │
+│Hierarchy │ Specialist   │ Kill switches     │
+│Ring      │ Guardian     │ Rate limiting     │
+│Star      │ ... +16 more │ Circuit breakers  │
+│Tree      │              │                   │
+│Custom    │              │                   │
+├──────────┴──────────────┴───────────────────┤
+│         Model-Agnostic Interface            │
+│   Anthropic · OpenAI · Ollama · Custom      │
+├─────────────────────────────────────────────┤
+│         Production Infrastructure           │
+│ Prometheus · Structured Logs · Health Checks│
+└─────────────────────────────────────────────┘</code></pre>
+
+      <h2>Nine Topology Patterns</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Topology</th><th>Pattern</th><th>Use Case</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Pipeline</strong></td><td>A → B → C</td><td>Sequential processing chains</td></tr>
+            <tr><td><strong>Fan-out</strong></td><td>A → [B, C, D]</td><td>Parallel task distribution</td></tr>
+            <tr><td><strong>Fan-in</strong></td><td>[B, C, D] → A</td><td>Result aggregation</td></tr>
+            <tr><td><strong>Mesh</strong></td><td>All ↔ All</td><td>Collaborative problem-solving</td></tr>
+            <tr><td><strong>Hierarchical</strong></td><td>Manager → Workers</td><td>Delegated orchestration</td></tr>
+            <tr><td><strong>Ring</strong></td><td>A → B → C → A</td><td>Iterative refinement</td></tr>
+            <tr><td><strong>Star</strong></td><td>Hub ↔ Spokes</td><td>Centralized coordination</td></tr>
+            <tr><td><strong>Tree</strong></td><td>Root → Branches → Leaves</td><td>Divide-and-conquer</td></tr>
+            <tr><td><strong>Custom</strong></td><td>User-defined graph</td><td>Domain-specific patterns</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Implementation</h2>
       <p>
-        This is ORGAN-IV's flagship — the orchestration organ's answer to "how do you coordinate autonomous agents at scale?" The nine topology patterns aren't academic exercises; they encode real deployment patterns discovered while building the broader eight-organ system. The framework is consumed downstream by ORGAN-III products (the Hunter Protocol in <em>in-midst-my-life</em>, the verification pipeline in <em>The Actual News</em>) and provides the governance patterns that ORGAN-IV applies across the entire system. 1,312 tests at production-hardened status means this isn't a prototype — it's infrastructure.
+        Built in <strong>Python 3.11+</strong> across 18 development phases. The framework provides a unified interface where you define agents by archetype, connect them via topology, wrap them in safety policies, and deploy. Agent archetypes carry behavioral profiles (communication style, decision patterns, error handling strategies) that combine with topology constraints to produce emergent system behavior.
       </p>
+      <p>
+        The safety layer is non-optional: every agent runs in a sandboxed context with configurable resource limits, output validation, and audit logging. Kill switches allow immediate agent termination. Circuit breakers prevent cascade failures in mesh and ring topologies.
+      </p>
+
+      <h2>Results</h2>
+      <p>
+        1,095+ tests across the full test suite with production-hardened status. The framework is consumed downstream by ORGAN-III products: the Hunter Protocol in <em>in-midst-my-life</em> uses hierarchical topology for resume analysis, and the verification pipeline in <em>The Actual News</em> uses fan-out topology for parallel source checking. The governance patterns designed here (topology-as-constraint, safety-by-default) inform how ORGAN-IV manages the broader eight-organ system.
+      </p>
+
+      <h2>Tradeoffs & Lessons</h2>
+      <ul>
+        <li><strong>Topology abstraction vs. performance</strong> — The topology engine adds a routing layer that introduces latency (~2ms per hop). For latency-critical pipelines, direct agent-to-agent calls are faster. The tradeoff is worth it for complex topologies where reasoning about message flow matters more than raw speed.</li>
+        <li><strong>22 archetypes — too many?</strong> — Started with 6, grew to 22 as real use cases demanded finer behavioral distinctions. Some archetypes could be consolidated. The decision to keep them separate prioritizes clarity over minimalism.</li>
+        <li><strong>Model-agnostic tax</strong> — Supporting every LLM backend means maintaining adapter code for each. The unified interface hides provider differences but the adapters need updating when APIs change. Worth it for avoiding vendor lock-in.</li>
+        <li><strong>Safety overhead</strong> — Mandatory safety layer adds 5-10% overhead. This is intentional — unsafe agent systems are worse than slow ones.</li>
+      </ul>
+
+      <h2>By the Numbers</h2>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">1,095+</div>
+          <div class="stat-label">Tests</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">9</div>
+          <div class="stat-label">Topologies</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">22</div>
+          <div class="stat-label">Agent Archetypes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">18</div>
+          <div class="stat-label">Dev Phases</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4</div>
+          <div class="stat-label">LLM Backends</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">PROD</div>
+          <div class="stat-label">Status</div>
+        </div>
+      </div>
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .architecture-diagram {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .architecture-diagram code {
+    background: none;
+    padding: 0;
+  }
+</style>

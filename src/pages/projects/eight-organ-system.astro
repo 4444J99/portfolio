@@ -88,6 +88,43 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
         The choice of eight organs (not seven, not ten) is a design decision. The Greek naming scheme is an aesthetic decision. The no-back-edges rule creates dramatic tension. The promotion state machine creates narrative arcs for each project. This isn't an engineer who also makes art, or an artist who codes on the side — the governance model, the registry schema, the dependency graph, <em>these are the work</em>.
       </p>
 
+      <h2>Architecture Flow</h2>
+      <pre class="architecture-diagram"><code>┌──────────┐    ┌──────────┐    ┌──────────┐
+│ I Theoria│───▶│II Poiesis│───▶│III Ergon │
+│ Theory   │    │ Art      │    │ Commerce │
+└──────────┘    └──────────┘    └──────────┘
+      │                               │
+      ▼                               ▼
+┌──────────┐    ┌──────────┐    ┌──────────┐
+│ IV Taxis │◀───│ V Logos  │◀───│VI Koino- │
+│Governance│    │ Essays   │    │  nia     │
+└──────────┘    └──────────┘    └──────────┘
+      │                               ▲
+      ▼                               │
+┌──────────┐    ┌──────────┐          │
+│VII Keryg-│───▶│  META    │──────────┘
+│   ma     │    │ Umbrella │
+└──────────┘    └──────────┘
+
+No back-edges: theory → art → commerce only.
+Meta oversees all. 31 edges, 0 violations.</code></pre>
+
+      <h2>Results</h2>
+      <p>
+        The system launched on 2026-02-11 with 9/9 launch criteria met. All 8 organs are operational. 228 validation checks pass across the Platinum validation suite — covering CI workflow presence, CHANGELOG files, architectural decision records, badge rows, and implementation status fields for every repo. POSSE distribution is live (Mastodon + Discord). Jekyll/GitHub Pages publishes 10 meta-system essays (~40K words) with an Atom RSS feed.
+      </p>
+      <p>
+        65 repositories carry CI workflows. 130 architectural decision records document key design choices. Every repo has a CHANGELOG and documentation tier assignment (7 flagship, 57 standard, 5 archive, 8 infrastructure).
+      </p>
+
+      <h2>Tradeoffs & Lessons</h2>
+      <ul>
+        <li><strong>Documentation volume vs. maintenance burden</strong> — ~320K words is powerful as proof-of-work, but each README is a liability if the underlying repo changes. The registry-as-source-of-truth pattern helps: stats flow from the registry, not from hand-editing.</li>
+        <li><strong>Strict dependency rules vs. convenience</strong> — The no-back-edges constraint is the system's best design decision <em>and</em> its most annoying one. It forced clean interfaces but also meant rewriting code that wanted to "just import" from a downstream organ.</li>
+        <li><strong>AI-conductor workflow</strong> — ~320K words were produced using a human-AI co-creation model: AI generates volume, human directs and refines. This is honest and documented. The risk is perception ("AI wrote your portfolio"). The mitigation is transparency: every essay in ORGAN-V explains the process.</li>
+        <li><strong>Naming scheme lock-in</strong> — Greek ontological naming (Theoria, Poiesis, Ergon) is distinctive but means renaming requires 40+ file edits. This was worth the tradeoff for identity coherence.</li>
+      </ul>
+
       <h2>By the Numbers</h2>
       <div class="stat-grid">
         <div class="stat">
@@ -107,12 +144,12 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
           <div class="stat-label">Dependencies</div>
         </div>
         <div class="stat">
-          <div class="stat-value">0</div>
-          <div class="stat-label">Back-Edges</div>
+          <div class="stat-value">228</div>
+          <div class="stat-label">Validation Checks</div>
         </div>
         <div class="stat">
-          <div class="stat-value">5</div>
-          <div class="stat-label">CI/CD Workflows</div>
+          <div class="stat-value">65</div>
+          <div class="stat-label">CI Workflows</div>
         </div>
       </div>
 
@@ -129,5 +166,22 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
   .table-wrap {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .architecture-diagram {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .architecture-diagram code {
+    background: none;
+    padding: 0;
   }
 </style>
