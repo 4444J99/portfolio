@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
-<Layout title="Resume — 4444j" description="Creative technologist building autonomous creative systems. Resume and CV.">
+<Layout title="Resume — Anthony James Padavano" description="Creative technologist building autonomous creative systems. Resume and CV.">
   <Header />
   <main>
     <article class="resume">
@@ -24,6 +24,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <span class="resume__sep" aria-hidden="true">/</span>
             <a href={base}>Portfolio</a>
           </div>
+          <a class="resume__download" href={`${base}resume/Anthony_James_Padavano_CV.pdf`} download>
+            Download PDF
+          </a>
         </header>
 
         <hr />
@@ -280,12 +283,31 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     align-items: center;
     gap: var(--space-sm);
     flex-wrap: wrap;
+    margin-bottom: var(--space-md);
   }
 
   .resume__contact a {
     font-size: 0.85rem;
     color: var(--text-secondary);
     transition: color var(--transition-fast);
+  }
+
+  .resume__download {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .resume__download:hover {
+    background: var(--accent);
+    color: var(--bg);
   }
 
   .resume__contact a:hover {
@@ -402,7 +424,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     }
 
     :global(.header),
-    :global(.footer) {
+    :global(.footer),
+    .resume__download {
       display: none;
     }
 

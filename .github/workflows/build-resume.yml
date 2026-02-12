@@ -1,0 +1,50 @@
+name: Build Resume PDF
+
+on:
+  push:
+    paths:
+      - 'resume/Anthony_James_Padavano_CV.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install RenderCV
+        run: pip install "rendercv[full]"
+
+      - name: Render resume
+        run: rendercv render resume/Anthony_James_Padavano_CV.yaml --output-folder-name resume/rendercv_output
+
+      - name: Copy PDF to public for Astro deployment
+        run: |
+          mkdir -p public/resume
+          cp resume/rendercv_output/Anthony_James_Padavano_CV.pdf public/resume/Anthony_James_Padavano_CV.pdf
+
+      - name: Create GitHub Release with PDF
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: resume-${{ github.sha }}
+          name: Resume — ${{ github.event.head_commit.timestamp }}
+          files: resume/rendercv_output/Anthony_James_Padavano_CV.pdf
+          body: |
+            Auto-generated resume PDF from `resume/Anthony_James_Padavano_CV.yaml`.
+
+            Download: [Anthony_James_Padavano_CV.pdf](https://github.com/4444J99/portfolio/releases/latest/download/Anthony_James_Padavano_CV.pdf)
+
+      - name: Commit PDF to public/ for site deployment
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f public/resume/Anthony_James_Padavano_CV.pdf
+          git diff --cached --quiet || git commit -m "chore: update rendered resume PDF [skip ci]"
+          git push

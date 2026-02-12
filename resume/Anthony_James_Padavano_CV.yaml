@@ -1,0 +1,117 @@
+cv:
+  name: Anthony James Padavano
+  headline: Creative Technologist
+  location: New York City
+  email:
+    - padavano.anthony@gmail.com
+  website:
+    - https://4444j99.github.io/portfolio/
+  social_networks:
+    - network: GitHub
+      username: 4444j99
+  sections:
+    summary:
+      - "Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 81 repositories across 8 GitHub organizations with ~320K words of public documentation. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer."
+    skills:
+      - label: Languages
+        details: Python, TypeScript, JavaScript, Go, Rust, Bash, SQL
+      - label: Frameworks
+        details: Node.js, Astro, React, Next.js, FastAPI, Express
+      - label: AI / ML
+        details: LLM orchestration, multi-agent systems, prompt engineering, RAG pipelines
+      - label: Infrastructure
+        details: GitHub Actions, CI/CD, Docker, PostgreSQL, Git
+      - label: Creative
+        details: p5.js, generative art, audio synthesis, interactive installations
+      - label: Governance
+        details: Registry design, dependency validation, state machines, documentation systems
+    selected projects:
+      - name: The Eight-Organ System
+        date: "2024 — Present"
+        highlights:
+          - Designed orchestration architecture coordinating theory, art, commerce, community, and marketing as a single governed system
+          - Built machine-readable registry, automated dependency validation (31 edges, zero back-edge violations), and promotion state machine
+          - "Authored ~320K words of public documentation; 5 GitHub Actions workflows for autonomous governance"
+      - name: Recursive Engine (RE:GE)
+        date: "2024 — Present"
+        highlights:
+          - "Implemented 21 organ handlers translating epistemological frameworks into executable code with a ritual syntax DSL"
+          - "1,254 tests, 85% coverage; myths, identities, and recursive structures as first-class computational objects"
+      - name: Agentic Titan
+        date: "2024 — Present"
+        highlights:
+          - "Polymorphic agent swarm architecture across 6 self-organizing topologies with 22 agent archetypes"
+          - "1,095+ tests across 18 implementation phases"
+      - name: AI-Conductor Model
+        date: "2024 — Present"
+        highlights:
+          - "Developed the workflow producing ~320K words: AI generates volume, human directs and refines"
+          - "Includes quality gates, template compliance validation, and automated link checking across 81 repos"
+      - name: Generative Music System
+        date: "2024 — Present"
+        highlights:
+          - "Translates symbolic narrative events into live generative music — recursion as counterpoint, identity transformations as harmonic movement"
+    experience:
+      - company: Independent
+        position: Creative Technologist
+        start_date: 2021
+        location: New York City
+        highlights:
+          - Designed and launched the eight-organ orchestration system coordinating 81 repositories across 8 GitHub organizations with automated dependency validation and ~320K words of documentation
+          - "Built recursive-engine (1,254 tests, 85% coverage) — a symbolic operating system translating epistemological frameworks into executable Python"
+          - Developed generative art and music systems, interactive installations, and AI-conductor workflow for human-AI co-creation
+      - company: Miami Dade College Foundation
+        position: Digital Marketing Manager
+        start_date: 2023
+        end_date: 2024
+        location: Miami, FL
+        highlights:
+          - Designed and executed digital campaigns increasing donor engagement by 32% and surpassing fundraising goals
+          - "Rebuilt foundation website — 38% traffic growth, 22% improvement in donation conversions"
+          - Produced multimedia storytelling content driving 28% increase in click-through rates
+      - company: AJP Media Arts
+        position: Multimedia Specialist
+        start_date: 2011
+        location: New York City
+        highlights:
+          - Produced video, audio, and visual campaigns achieving 17.5M+ views and driving $2M in client fundraising and revenue
+          - Integrated SEO and paid media strategies achieving 290% ROI for key campaigns
+          - Launched and managed client websites with 42% engagement increase and 30% speed improvement
+      - company: "Miami Dade College, FAU, Nova Southeastern, Keiser, and others"
+        position: Instructor
+        start_date: 2015
+        location: South Florida
+        highlights:
+          - Designed and delivered 100+ composition courses to 2,000+ students with 85% above-average grade achievement
+          - "Applied UX principles to create accessible course materials — 92% student approval rating"
+      - company: Majestic Design
+        position: Project Manager
+        start_date: 2007
+        end_date: 2018
+        location: New York City
+        highlights:
+          - "Led 50 commercial and residential construction projects from concept to completion — 90% on-time and within budget"
+          - "Collaborated with marketing teams on 3D renderings and video walkthroughs, securing 25% increase in repeat business"
+    education:
+      - institution: Florida Atlantic University
+        area: Creative Writing
+        degree: M.F.A.
+        start_date: 2015
+        end_date: 2018
+      - institution: CUNY College of Staten Island
+        area: English Literature
+        degree: B.A.
+        start_date: 2010
+        end_date: 2014
+    certifications:
+      - label: "Full-Stack Developer — Meta"
+        details: "2023 — 2024"
+      - label: "UX Design — Google"
+        details: "2022 — 2023"
+      - label: "Digital Marketing & E-commerce — Google"
+        details: "2022 — 2023"
+      - label: "Project Management — Google"
+        details: "2022 — 2023"
+
+design:
+  theme: classic
