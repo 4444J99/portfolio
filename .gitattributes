@@ -1,0 +1,8 @@
+# Override global LFS tracking — this repo's images are small enough for regular git
+*.png filter= diff= merge= -text
+*.jpg filter= diff= merge= -text
+*.jpeg filter= diff= merge= -text
+*.gif filter= diff= merge= -text
+*.svg filter= diff= merge= -text
+*.ico filter= diff= merge= -text
+*.webp filter= diff= merge= -text
