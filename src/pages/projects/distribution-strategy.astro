@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="Distribution Strategy — 4444j" description="POSSE-first content distribution across the eight-organ system — audience segmentation, channel strategy, and why distribution deserves its own organ.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="Distribution Strategy"
+      tagline="POSSE-first content distribution across the eight-organ system"
+      tags={['Marketing', 'Distribution']}
+      repo="https://github.com/organvm-vii-kerygma/distribution-strategy"
+    >
+      <h2>The Distribution Problem</h2>
+      <p>
+        You can build 81 repositories with 339,000 words of documentation and it means nothing if nobody encounters the work. Most creative technologists treat distribution as an afterthought — a Twitter thread after the project ships. ORGAN VII (Kerygma) treats distribution as a first-class architectural concern, with its own organ, its own governance rules, and its own strategy documents. The insight: distribution isn't promotion. It's the translation layer between what you built and the audiences who need to understand it differently.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        The distribution strategy follows the <strong>POSSE principle</strong> (Publish on your Own Site, Syndicate Everywhere): all content originates in the organ system's own repositories and gets syndicated outward through defined channels. This preserves canonical URLs, prevents platform lock-in, and ensures the system's own documentation is always the authoritative version.
+      </p>
+      <p>
+        <strong>Audience segmentation</strong> drives channel strategy. The same project looks different to different audiences:
+      </p>
+      <ul>
+        <li><strong>Grant reviewers</strong> see sustained creative practice, institutional thinking, and execution velocity</li>
+        <li><strong>Hiring managers</strong> see technical depth, system design skill, and production-quality documentation</li>
+        <li><strong>Fellow practitioners</strong> see methodology, tooling choices, and honest post-mortems</li>
+        <li><strong>Academic audiences</strong> see theoretical frameworks, epistemological commitments, and citation-ready descriptions</li>
+      </ul>
+      <p>
+        Each channel (Mastodon, Discord, newsletter, GitHub Pages) carries content adapted for its native audience — not just cross-posted but genuinely re-framed. The distribution organ ensures that adaptation happens systematically, not ad hoc.
+      </p>
+
+      <h2>Why Distribution Is an Organ</h2>
+      <p>
+        Making distribution a separate organ — not a feature of marketing, not a task in a project board — forces the system to take it seriously. It gets its own governance, its own quality standards, its own documentation. It means distribution strategy is reviewed with the same rigor as dependency validation or documentation standards. The eight-organ model's core principle applies: different modes of work need protection from each other. Distribution that serves commerce corrupts the academic channel. Distribution that serves grants ignores practitioners. Having its own organ means distribution can serve each audience authentically without being captured by any single goal.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

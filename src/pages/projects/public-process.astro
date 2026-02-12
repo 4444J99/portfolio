@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="Public Process — 4444j" description="21 essays on building creative infrastructure in public — transparency as design choice, process documentation as portfolio evidence.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="Public Process"
+      tagline="21 essays on building creative infrastructure in public"
+      tags={['Essays', 'Transparency']}
+      repo="https://github.com/organvm-v-logos/public-process"
+      liveUrl="https://organvm-v-logos.github.io/public-process/"
+    >
+      <h2>Building in Public</h2>
+      <p>
+        Most portfolios show finished work. This one shows how the work got made — and treats the showing as part of the work itself. ORGAN V (Logos) is the public process organ: the part of the eight-organ system dedicated to transparency, reflection, and building in public. Every major decision, sprint, and architectural choice is documented not as an afterthought but as a deliberate practice. The essays aren't marketing. They're evidence — of methodology, velocity, and the willingness to show your reasoning before you know if it will work.
+      </p>
+
+      <h2>The Essays</h2>
+      <p>
+        21 published essays totaling ~88,000 words, deployed as a Jekyll site on GitHub Pages. The collection spans the full lifecycle of the eight-organ system:
+      </p>
+      <ul>
+        <li><strong>Architectural essays</strong> — why eight organs, how dependency rules create creative tension, the ontological naming scheme</li>
+        <li><strong>Sprint narratives</strong> — real-time accounts of Bronze, Silver, Gold, Gap-Fill, Platinum, and subsequent sprints with concrete metrics</li>
+        <li><strong>Methodology essays</strong> — the AI-conductor model, specification-driven development, token economics of human-AI co-creation</li>
+        <li><strong>Reflective essays</strong> — what went wrong, what surprised us, what we'd do differently with hindsight</li>
+      </ul>
+      <p>
+        Each essay is 3,000&ndash;5,000 words, written for an audience of grant reviewers, hiring managers, and fellow practitioners who want to understand not just what was built but <em>how decisions were made under uncertainty</em>.
+      </p>
+
+      <h2>Why This Matters</h2>
+      <p>
+        For grant applications: the essays provide timestamped evidence of sustained creative practice, architectural thinking, and execution velocity — 81 repositories deployed in under a week, documented in real time. For hiring managers: they demonstrate communication skill, technical depth, and the ability to explain complex systems to non-specialist audiences. For fellow practitioners: they offer a reusable model for building-in-public that goes beyond "here's my tweet thread" to structured, long-form process documentation. The public process is the proof that the system isn't a one-time effort — it's a sustained practice with documented methodology and honest reflection.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>

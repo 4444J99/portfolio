@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+---
+
+<Layout title="Orchestration Hub — 4444j" description="The central nervous system of eight GitHub organizations — a machine-readable registry, validation scripts, and governance rules coordinating 81 repositories.">
+  <Header />
+  <main>
+    <ProjectDetail
+      title="Orchestration Hub"
+      tagline="The central nervous system of eight GitHub organizations"
+      tags={['Governance', 'Systems']}
+      repo="https://github.com/organvm-iv-taxis/orchestration-start-here"
+    >
+      <h2>The Hub</h2>
+      <p>
+        Every system with 81 repositories needs a single place that answers "what exists, what's its status, and who owns it?" The Orchestration Hub is ORGAN-IV's answer: a machine-readable JSON registry (<code>registry-v2.json</code>) that serves as the single source of truth for the entire eight-organ system. Every repository entry carries its current status, documentation tier, dependency declarations, promotion state, and portfolio relevance score. The registry isn't documentation <em>about</em> the system — it <em>is</em> the system's self-knowledge.
+      </p>
+
+      <h2>How It Works</h2>
+      <p>
+        Five validation scripts run against the registry on every change, checking structural integrity, dependency graph acyclicity, documentation completeness, and constitutional compliance. The governance rules enforce the system's most important constraint: <strong>no back-edges</strong> in the dependency graph. Theory feeds art feeds commerce (I&rarr;II&rarr;III), and that flow is validated automatically across all 31 dependency edges. A promotion state machine (<code>LOCAL &rarr; CANDIDATE &rarr; PUBLIC_PROCESS &rarr; GRADUATED &rarr; ARCHIVED</code>) prevents premature claims — a project earns its status through documented criteria, not self-declaration.
+      </p>
+
+      <h2>Why a Registry Matters</h2>
+      <p>
+        Most multi-repo systems rely on tribal knowledge: someone remembers which repo does what, which ones are active, which ones were experiments. That breaks at scale and it breaks when you onboard new contributors — human or AI. A machine-readable registry enables automation (CI/CD workflows query it), enables auditing (monthly health checks generate reports from it), and enables honest portfolio presentation (the portfolio site reads from the same source of truth as the governance scripts). The registry is what makes the eight-organ system governable rather than merely large. It's the difference between 81 repositories and a system.
+      </p>
+
+    </ProjectDetail>
+  </main>
+  <Footer />
+</Layout>
