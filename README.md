@@ -1,43 +1,46 @@
-# Astro Starter Kit: Minimal
+# Portfolio — Anthony James Padavano
 
-```sh
-npm create astro@latest -- --template minimal
+[![Live Site](https://img.shields.io/badge/Live-4444j99.github.io/portfolio-c9a84c?style=flat)](https://4444j99.github.io/portfolio/)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+Personal portfolio site showcasing 16 project case studies, an interactive p5.js generative hero, and an embedded resume — organized around an [eight-organ creative system](https://github.com/meta-organvm) spanning 78 repositories and 8 GitHub organizations.
+
+**Live:** [4444j99.github.io/portfolio](https://4444j99.github.io/portfolio/)
+
+![Portfolio Preview](public/images/portfolio-preview.png)
+
+## Tech Stack
+
+- **Framework:** [Astro](https://astro.build/) — static site generation with zero JS by default
+- **Interactive:** [p5.js](https://p5js.org/) — generative art hero visualization
+- **Typography:** Inter + JetBrains Mono via Google Fonts
+- **Deployment:** GitHub Pages via GitHub Actions
+- **Theme:** Dark (`#0a0a0b`) with gold accent (`#c9a84c`)
+
+## Structure
+
+```
+src/
+├── components/       # Header, Footer, ProjectCard, SketchContainer
+├── layouts/          # Base Layout with SEO/Schema.org
+├── pages/
+│   ├── index.astro   # Landing — organ-grouped project grid
+│   ├── about.astro   # Professional bio + artist statement
+│   ├── resume.astro  # Full resume with print CSS
+│   └── projects/     # 16 individual project pages
+├── scripts/          # p5.js sketch files
+└── styles/           # Global CSS
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Local Development
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm install
+npm run dev          # http://localhost:4321/portfolio/
+npm run build        # Build to ./dist/
+npm run preview      # Preview production build
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## License
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+[MIT](LICENSE)
