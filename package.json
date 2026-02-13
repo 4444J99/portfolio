@@ -4,12 +4,14 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "generate-data": "python3 ../ingesting-organ-document-structure/scripts/praxis-portfolio-generate.py --output-dir src/data && cp ../ingesting-organ-document-structure/system-metrics.json src/data/",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "astro": "^5.17.1",
+    "d3": "7.9.0",
     "mermaid": "11.12.2",
     "p5": "2.2.1"
   },

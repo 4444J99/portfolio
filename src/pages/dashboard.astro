@@ -1,0 +1,363 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+import metrics from '../data/system-metrics.json';
+import landing from '../data/landing.json';
+
+const organColors: Record<string, string> = {
+  'ORGAN-I': '#7c9bf5',
+  'ORGAN-II': '#e87c7c',
+  'ORGAN-III': '#7ce8a6',
+  'ORGAN-IV': '#c9a84c',
+  'ORGAN-V': '#c97ce8',
+  'ORGAN-VI': '#7ce8e8',
+  'ORGAN-VII': '#e8c87c',
+  'META-ORGANVM': '#a0a0a0',
+};
+---
+
+<Layout title="Dashboard — System Metrics" description="Live metrics for the ORGANVM eight-organ creative-institutional system.">
+  <Header />
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1 class="page-title">System Dashboard</h1>
+        <p class="page-sub">Live metrics from {metrics.registry.total_repos} repositories across {metrics.registry.total_organs} organs.</p>
+
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">{metrics.registry.total_repos}</div>
+            <div class="stat-label">Repositories</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">{metrics.registry.implementation_status.PRODUCTION}</div>
+            <div class="stat-label">Production</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">{metrics.essays.total}</div>
+            <div class="stat-label">Essays</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">{metrics.registry.ci_coverage}</div>
+            <div class="stat-label">CI Workflows</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">{landing.metrics.sprints_completed}</div>
+            <div class="stat-label">Sprints</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section__heading">Organ Status</h2>
+        <div class="organ-grid">
+          {Object.entries(metrics.registry.organs).map(([key, organ]: [string, any]) => (
+            <div class="organ-card">
+              <div class="organ-card__header">
+                <span class="organ-card__dot" style={`background: ${organColors[key] || '#888'}`}></span>
+                <span class="organ-card__key">{key}</span>
+                <span class="organ-card__name">{organ.name}</span>
+              </div>
+              <div class="organ-card__stats">
+                <span class="organ-card__repos">{organ.total_repos} repos</span>
+                <span class="organ-card__ci">{organ.ci_coverage} CI</span>
+              </div>
+              <div class="organ-card__status">
+                {organ.status}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section__heading">Sprint Timeline</h2>
+        <div class="timeline">
+          {metrics.sprint_history.map((sprint: any, i: number) => (
+            <div class="timeline__entry">
+              <div class="timeline__marker">
+                <span class="timeline__number">{i + 1}</span>
+              </div>
+              <div class="timeline__content">
+                <div class="timeline__header">
+                  <span class="timeline__name">{sprint.name}</span>
+                  <span class="timeline__date">{sprint.date}</span>
+                </div>
+                <p class="timeline__focus">{sprint.focus} — {sprint.deliverables}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section__heading">Flagship Vivification</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Repository</th>
+                <th>Org</th>
+                <th>Classification</th>
+                <th>Code Files</th>
+                <th>Tests</th>
+              </tr>
+            </thead>
+            <tbody>
+              {metrics.flagship_vivification.repos.map((repo: any) => (
+                <tr>
+                  <td>
+                    <a href={`https://github.com/${repo.org}/${repo.repo}`} target="_blank" rel="noopener">
+                      {repo.repo}
+                    </a>
+                  </td>
+                  <td>{repo.org}</td>
+                  <td>
+                    <span class={`tag tag--${repo.classification.toLowerCase()}`}>
+                      {repo.classification}
+                    </span>
+                  </td>
+                  <td>{repo.code_files}</td>
+                  <td>{repo.test_files}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="table-summary">
+          {metrics.flagship_vivification.classifications.SUBSTANTIAL} SUBSTANTIAL,
+          {metrics.flagship_vivification.classifications.PARTIAL} PARTIAL,
+          {metrics.flagship_vivification.classifications.MINIMAL} MINIMAL
+          — {metrics.flagship_vivification.total_audited} flagships audited
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section__heading">PRAXIS Targets</h2>
+        <div class="targets-grid">
+          {Object.entries(metrics.praxis_targets).map(([key, target]: [string, any]) => (
+            <div class="target-card">
+              <div class="target-card__label">{key.replace(/_/g, ' ')}</div>
+              <div class="target-card__values">
+                <span class="target-card__current">{target.current}</span>
+                <span class="target-card__separator">/</span>
+                <span class="target-card__goal">{target.target}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-title {
+    margin-bottom: var(--space-sm);
+  }
+
+  .page-sub {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .section__heading {
+    margin-bottom: var(--space-xl);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .organ-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .organ-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    transition: border-color var(--transition-fast);
+  }
+
+  .organ-card:hover {
+    border-color: var(--border-hover);
+  }
+
+  .organ-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .organ-card__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .organ-card__key {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .organ-card__name {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .organ-card__stats {
+    display: flex;
+    gap: var(--space-md);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .organ-card__status {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .timeline__entry {
+    display: flex;
+    gap: var(--space-lg);
+    align-items: flex-start;
+  }
+
+  .timeline__marker {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .timeline__number {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .timeline__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .timeline__header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xs);
+  }
+
+  .timeline__name {
+    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+
+  .timeline__date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .timeline__focus {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .table-summary {
+    margin-top: var(--space-md);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .tag--substantial { background: rgba(124, 232, 166, 0.15); color: #7ce8a6; }
+  .tag--partial { background: rgba(201, 168, 76, 0.15); color: #c9a84c; }
+  .tag--minimal { background: rgba(232, 124, 124, 0.15); color: #e87c7c; }
+
+  .targets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .target-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    text-align: center;
+  }
+
+  .target-card__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .target-card__values {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+
+  .target-card__current {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .target-card__separator {
+    color: var(--text-muted);
+  }
+
+  .target-card__goal {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .organ-grid {
+      grid-template-columns: 1fr;
+    }
+    .targets-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
