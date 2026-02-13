@@ -1,0 +1,22 @@
+---
+interface Props {
+  caption: string;
+  chart: string;
+}
+
+const { caption, chart } = Astro.props;
+---
+
+<div class="mermaid-container">
+  <div class="mermaid" data-chart={chart}>
+    {chart}
+  </div>
+  <div class="mermaid-caption">{caption}</div>
+  <noscript>
+    <pre class="mermaid-fallback"><code>{chart}</code></pre>
+  </noscript>
+</div>
+
+<script>
+  import '../academic/mermaid-loader';
+</script>

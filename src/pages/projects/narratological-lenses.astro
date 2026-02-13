@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Narratological Algorithmic Lenses — 4444j" description="A monorepo for formalized narrative analysis tools — Python core, CLI, FastAPI service, and React frontend.">
@@ -14,25 +19,277 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
       tags={['Theory', 'Narrative']}
       repo="https://github.com/organvm-i-theoria/narratological-algorithmic-lenses"
     >
-      <h2>The Idea</h2>
+      <h2>The Problem: Narrative Theory Without Computational Infrastructure</h2>
       <p>
-        Narrative analysis has always been a humanistic practice — close reading, interpretive argument, scholarly intuition. This project asks: what if the analytical frameworks themselves (Propp's morphology, Greimas's actantial model, Genette's focalization) could be encoded as executable algorithms? Not as metaphors for code, but as actual Python libraries with typed models, diagnostic outputs, and testable assertions.
+        Narrative analysis has operated for a century on frameworks that are structurally precise but computationally inert. Vladimir Propp demonstrated in 1928 that Russian wondertales could be decomposed into thirty-one sequential functions — a formal grammar of plot — yet his morphology remained a paper artifact, executed only by human readers marking up texts by hand.<Cite id={1} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1928} /> Gerard Genette's taxonomy of narrative discourse — distinguishing order, duration, frequency, mood, and voice — provided an analytical apparatus of extraordinary precision, yet it too remained confined to close reading, applicable only at the pace of a single scholar working through a single text.<Cite id={2} author="Genette, Gerard" title="Narrative Discourse: An Essay in Method" source="Cornell University Press" year={1972} /> This project asks what happens when these frameworks stop being interpretive vocabularies and become executable algorithms: typed Python models with diagnostic outputs, confidence scores, and testable assertions. The goal is not to automate literary criticism but to give narrative theory the same computational infrastructure that other formal disciplines — linguistics, logic, mathematics — have long taken for granted.
       </p>
 
-      <h2>How It Works</h2>
+      <MermaidDiagram
+        caption="Monorepo architecture — four packages sharing a common core library, each exposing a different interface to the same analytical engine"
+        chart={`graph TD
+    CORE[narratological-core<br/>Python Library] --> CLI[narratological-cli<br/>Typer CLI]
+    CORE --> API[narratological-api<br/>FastAPI Service]
+    CORE --> FE[narratological-frontend<br/>React + Vite]
+    API --> FE
+    SPECS[specs/<br/>Primary Sources &amp; Templates] --> CORE
+    CORE --> DIAG[Typed Diagnostic Output]
+    CLI --> DIAG
+    API --> DIAG`}
+      />
+
+      <h2>Analytical Frameworks as Algorithms</h2>
       <p>
-        The project is a monorepo spanning four packages: a <strong>Python core library</strong> (models, algorithms, diagnostics), a <strong>Typer CLI</strong> for terminal-based analysis, a <strong>FastAPI service</strong> for programmatic access, and a <strong>React + Vite frontend</strong> for interactive exploration. Source material — chat transcripts, primary texts, structured JSON exports — lives in a <code>specs/</code> directory organized by research stage (primary sources, completed studies, templates, open drafts).
-      </p>
-      <p>
-        The core library bundles a unified compendium of narratological algorithms as structured JSON, with a loader that resolves packaged resources first and falls back to repository paths for local development. Analysis runs against any text input and produces typed diagnostic output — not just "this is a hero's journey" but precisely which morphological functions were detected, at what confidence, with what structural relations.
+        The core intellectual challenge is translating humanistic frameworks into computational primitives without flattening the interpretive richness that makes them valuable. Propp's morphology provides the clearest entry point: his thirty-one functions (Absentation, Interdiction, Violation, Reconnaissance, and so on) form an ordered sequence with defined transition rules — essentially a finite state machine for plot.<Cite id={1} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1928} /> Algirdas Julien Greimas's actantial model abstracts further, reducing any narrative to six actantial roles (Subject, Object, Sender, Receiver, Helper, Opponent) organized into three axes of desire, communication, and power — a structural semantics that applies across genres and media.<Cite id={3} author="Greimas, Algirdas Julien" title="Structural Semantics: An Attempt at a Method" source="University of Nebraska Press" year={1966} /> Roland Barthes's distinction between five narrative codes — hermeneutic, proairetic, semantic, symbolic, and cultural — provides yet another decomposition, one that foregrounds the reader's experience of meaning-construction rather than the text's internal grammar.<Cite id={4} author="Barthes, Roland" title="S/Z: An Essay" source="Hill and Wang" year={1970} /> Each framework becomes a separate analysis module in the core library, with its own typed models, detection heuristics, and output schemas — but all sharing a common interface contract that allows frameworks to be composed, compared, and cross-referenced.
       </p>
 
-      <h2>Why It Matters</h2>
+      <CodeStructure lang="python" caption="Typed models for actantial analysis — Greimas's six roles encoded as a dataclass with confidence scoring and structural relation tracking" filename="narratological_core/models/actantial.py">
+{`from dataclasses import dataclass, field
+from enum import Enum
+from typing import Optional
+
+
+class ActantialRole(Enum):
+    SUBJECT = "subject"
+    OBJECT = "object"
+    SENDER = "sender"
+    RECEIVER = "receiver"
+    HELPER = "helper"
+    OPPONENT = "opponent"
+
+
+class ActantialAxis(Enum):
+    DESIRE = "desire"        # Subject <-> Object
+    COMMUNICATION = "communication"  # Sender <-> Receiver
+    POWER = "power"          # Helper <-> Opponent
+
+
+@dataclass
+class ActantDetection:
+    """A detected actantial role assignment."""
+    entity: str
+    role: ActantialRole
+    axis: ActantialAxis
+    confidence: float  # 0.0 to 1.0
+    evidence: list[str] = field(default_factory=list)
+    structural_relations: dict[str, str] = field(default_factory=dict)
+
+
+@dataclass
+class ActantialDiagnostic:
+    """Complete actantial analysis of a narrative segment."""
+    detections: list[ActantDetection]
+    axis_completeness: dict[ActantialAxis, float]
+    unresolved_entities: list[str]
+    framework_version: str = "greimas-1966"
+    overall_confidence: float = 0.0
+
+    def validate(self) -> list[str]:
+        """Return structural violations — e.g., axis with Subject but no Object."""
+        violations = []
+        roles_by_axis = {axis: [] for axis in ActantialAxis}
+        for d in self.detections:
+            roles_by_axis[d.axis].append(d.role)
+        if ActantialRole.SUBJECT in roles_by_axis[ActantialAxis.DESIRE] \\
+                and ActantialRole.OBJECT not in roles_by_axis[ActantialAxis.DESIRE]:
+            violations.append("Desire axis: Subject without Object")
+        return violations`}
+      </CodeStructure>
+
+      <h2>Four-Package Architecture</h2>
       <p>
-        This isn't about replacing literary critics with algorithms. It's about giving narrative theory the same computational infrastructure that other formal disciplines take for granted — testable hypotheses, reproducible analyses, and composable tools. When a narratological claim is encoded as a function with assertions, disagreements become debuggable. The project bridges ORGAN-I's theoretical foundations with the kind of tooling that makes theory usable downstream in generative art (ORGAN-II) and product design (ORGAN-III).
+        The monorepo is structured as four distinct packages, each serving a different consumer while sharing the same analytical core. This separation follows the ports-and-adapters pattern: the core library contains all domain logic — models, algorithms, diagnostics, the unified compendium of narratological definitions — while the CLI, API, and frontend are adapters that expose that logic through different interfaces.<Cite id={5} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The Python core bundles a unified compendium of narratological algorithms as structured JSON, with a loader that resolves packaged resources first and falls back to repository paths for local development. The CLI (built on Typer) enables terminal-based analysis for researchers who work in scripts and pipelines. The FastAPI service provides programmatic access for downstream systems — ORGAN-II's generative art tools, ORGAN-III's product prototypes — that need to call narratological analysis as a microservice. The React frontend enables interactive exploration, letting users select frameworks, adjust confidence thresholds, and visually inspect structural mappings.<Cite id={6} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Source material — chat transcripts, primary texts, structured JSON exports — lives in a <code>specs/</code> directory organized by research stage: primary sources, completed studies, templates, and open drafts.
       </p>
+
+      <Figure alt="Package comparison table showing four packages with their technologies and purposes" caption="Four-package architecture — each package exposes the same analytical engine through a different interface modality" number={1}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Technology</th>
+                <th>Purpose</th>
+                <th>Interface Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>narratological-core</code></td>
+                <td>Python, Pydantic, dataclasses</td>
+                <td>Domain models, algorithms, diagnostics, compendium loader</td>
+                <td>Library (import)</td>
+              </tr>
+              <tr>
+                <td><code>narratological-cli</code></td>
+                <td>Typer, Rich</td>
+                <td>Terminal-based analysis for researchers and scripted pipelines</td>
+                <td>Command-line</td>
+              </tr>
+              <tr>
+                <td><code>narratological-api</code></td>
+                <td>FastAPI, Uvicorn</td>
+                <td>Programmatic access for downstream systems and microservice calls</td>
+                <td>REST API</td>
+              </tr>
+              <tr>
+                <td><code>narratological-frontend</code></td>
+                <td>React, Vite, TypeScript</td>
+                <td>Interactive exploration with visual framework selection and threshold tuning</td>
+                <td>Web UI</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Diagnostic Output: Beyond Classification</h2>
+      <p>
+        The system's output is not a label but a diagnostic — a structured report that tells the analyst not just <em>what</em> was detected but <em>how confident</em> the detection is, <em>what evidence</em> supports it, and <em>what structural relations</em> connect it to other detections. When the engine runs a Proppian analysis, it does not simply say "this is a hero's journey." It reports precisely which morphological functions were detected, at what confidence level, with what ordering violations (if any), and which functions are expected but absent.<Cite id={7} author="Moretti, Franco" title="Distant Reading" source="Verso Books" year={2013} /> Moretti's argument for "distant reading" — analyzing literature not through close attention to individual texts but through computational aggregation of patterns across thousands — requires exactly this kind of structured, machine-readable output. The diagnostic model enables composability: an actantial analysis can be cross-referenced with a Proppian analysis to identify where Greimas's Subject maps onto Propp's Hero function, revealing structural homologies that close reading might miss.<Cite id={8} author="Jockers, Matthew L." title="Macroanalysis: Digital Methods and Literary History" source="University of Illinois Press" year={2013} /> Jockers's macroanalytic method depends on the ability to aggregate and compare structured outputs across corpora — the diagnostic format is designed to feed precisely this kind of computational literary scholarship.
+      </p>
+
+      <MermaidDiagram
+        caption="Analysis pipeline — from raw text input through framework selection, detection, confidence scoring, and structural mapping to typed diagnostic output"
+        chart={`graph LR
+    INPUT[Text Input] --> SELECT[Framework Selection]
+    SELECT --> PROPP[Proppian Analysis]
+    SELECT --> GREIM[Actantial Analysis]
+    SELECT --> GENET[Focalization Analysis]
+    SELECT --> BARTH[Code Analysis]
+    PROPP --> DETECT[Detection Engine]
+    GREIM --> DETECT
+    GENET --> DETECT
+    BARTH --> DETECT
+    DETECT --> CONF[Confidence Scoring]
+    CONF --> STRUCT[Structural Mapping]
+    STRUCT --> CROSS[Cross-Framework Relations]
+    CROSS --> DIAG[Typed Diagnostic Output]`}
+      />
+
+      <h2>Composable Frameworks and Cross-Reference</h2>
+      <p>
+        The most powerful analytical results emerge not from applying a single framework but from composing multiple frameworks against the same text and examining where their outputs converge, diverge, or complement each other. A Proppian analysis detects sequential plot functions; an actantial analysis detects role assignments on axes of desire, communication, and power; a Genettean analysis detects focalization shifts and temporal ordering. When all three run against the same narrative segment, the diagnostic engine can map Propp's "Hero" function onto Greimas's Subject role and Genette's internal focalization, revealing that a protagonist's agency is simultaneously a plot function, a structural position, and a perspective anchor.<Cite id={2} author="Genette, Gerard" title="Narrative Discourse: An Essay in Method" source="Cornell University Press" year={1972} /> This compositional approach reflects a design principle borrowed from software architecture: each framework is a module with a stable interface, and the system's value grows combinatorially as modules are composed rather than linearly as they are added.<Cite id={5} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> Cross-referencing also surfaces disagreements — cases where frameworks assign contradictory structural roles to the same entity — and these disagreements are diagnostically valuable, pointing to genuine ambiguities in the narrative rather than analytical errors.
+      </p>
+
+      <CodeStructure lang="python" caption="Cross-framework composition — running multiple analyses against the same text and mapping structural correspondences" filename="narratological_core/compose.py">
+{`from narratological_core.frameworks import (
+    ProppianAnalyzer,
+    ActantialAnalyzer,
+    FocalizationAnalyzer,
+)
+from narratological_core.models.cross_reference import CorrespondenceMap
+
+
+def compose_analysis(
+    text: str,
+    frameworks: list[str] | None = None,
+    confidence_threshold: float = 0.5,
+) -> CorrespondenceMap:
+    """Run multiple frameworks and map structural correspondences."""
+    analyzers = {
+        "propp": ProppianAnalyzer(),
+        "actantial": ActantialAnalyzer(),
+        "focalization": FocalizationAnalyzer(),
+    }
+    selected = frameworks or list(analyzers.keys())
+    results = {
+        name: analyzers[name].analyze(text, threshold=confidence_threshold)
+        for name in selected
+        if name in analyzers
+    }
+
+    # Build correspondence map across framework outputs
+    correspondence = CorrespondenceMap(framework_results=results)
+    correspondence.map_entity_roles()    # Propp Hero <-> Greimas Subject
+    correspondence.map_perspectives()    # Genette focalization <-> role agency
+    correspondence.detect_conflicts()    # Contradictory role assignments
+    return correspondence`}
+      </CodeStructure>
+
+      <h2>The Specs Directory: Research as First-Class Data</h2>
+      <p>
+        The monorepo treats source material with the same architectural rigor as code. The <code>specs/</code> directory is organized by research stage — primary sources, completed studies, templates, and open drafts — creating a clear lifecycle for analytical work. Primary sources include chat transcripts, literary texts, and structured JSON exports from other systems. Completed studies are finalized analyses with frozen diagnostic outputs, serving as regression baselines: if a code change alters the diagnostic output for a completed study, the test suite catches it.<Cite id={7} author="Moretti, Franco" title="Distant Reading" source="Verso Books" year={2013} /> Templates provide scaffolding for new analyses, encoding best practices about which frameworks to apply in which order and what confidence thresholds to use for different genres. Open drafts are work-in-progress analyses that have not yet been validated. This organization means that the repository is not just a codebase but a research archive — the analytical history is versioned alongside the analytical tools, making every study reproducible and every methodological change traceable.<Cite id={8} author="Jockers, Matthew L." title="Macroanalysis: Digital Methods and Literary History" source="University of Illinois Press" year={2013} />
+      </p>
+
+      <MermaidDiagram
+        caption="Research lifecycle in the specs directory — source material progresses through stages from primary sources to completed studies"
+        chart={`graph TD
+    PS[Primary Sources<br/>Texts, Transcripts, JSON] --> OD[Open Drafts<br/>Work-in-Progress Analyses]
+    TPL[Templates<br/>Framework &amp; Threshold Presets] --> OD
+    OD --> |validation &amp; review| CS[Completed Studies<br/>Frozen Diagnostics]
+    CS --> |regression baselines| TEST[Test Suite]
+    TEST --> |output stability| CORE[Core Library Changes]
+    CORE --> |re-analyze| OD`}
+      />
+
+      <h2>Bridge to Generative Work</h2>
+      <p>
+        The narratological lenses project occupies a specific position within the eight-organ system: it is ORGAN-I (Theoria) infrastructure that enables work in ORGAN-II (Poiesis) and ORGAN-III (Ergon). When narrative theory is encoded as executable algorithms with typed outputs, those outputs become inputs for generative systems. A Proppian analysis that identifies the "Villainy" and "Lack" functions at specific text positions can drive a generative music system to shift harmonic mode at those structural inflection points. An actantial analysis that maps Subject-Object-Opponent relations can inform the spatial layout of an interactive visualization, positioning entities according to their structural roles.<Cite id={9} author="Murray, Janet H." title="Hamlet on the Holodeck: The Future of Narrative in Cyberspace" source="MIT Press" year={1997} /> Murray's vision of the computer as a medium for procedural, participatory, spatial, and encyclopedic storytelling requires exactly this kind of machine-readable narrative intelligence — not stories generated by algorithms, but analytical structures that algorithms can consume and transform. The lenses project makes theory operational: it turns ORGAN-I's scholarly frameworks into API endpoints that ORGAN-II's art tools and ORGAN-III's product prototypes can call.<Cite id={10} author="Manovich, Lev" title="Software Takes Command" source="Bloomsbury Academic" year={2013} /> Manovich's thesis that software has become the engine of cultural production implies that the boundary between analysis and generation is permeable — the same typed models that describe a narrative's structure can be used to synthesize new structures that satisfy the same constraints.
+      </p>
+
+      <Figure alt="Project statistics for Narratological Algorithmic Lenses" caption="System metrics — a four-package monorepo encoding multiple narratological frameworks as composable, testable Python algorithms" number={2}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Packages</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4+</div>
+            <div class="stat-label">Frameworks Encoded</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">specs/</div>
+            <div class="stat-label">Research Archive</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">Typed</div>
+            <div class="stat-label">Diagnostic Output</div>
+          </div>
+        </div>
+      </Figure>
+
+      <h2>Why This Approach Matters</h2>
+      <p>
+        The digital humanities have produced remarkable tools for corpus analysis — topic modeling, sentiment analysis, named entity recognition — but these tools largely bypass the rich structural vocabularies that narratologists have spent a century developing. Propp's functions, Greimas's actants, Genette's focalization categories, and Barthes's codes represent decades of careful theoretical work about how stories actually organize meaning, yet computational literary studies have largely ignored them in favor of statistical methods borrowed from natural language processing.<Cite id={4} author="Barthes, Roland" title="S/Z: An Essay" source="Hill and Wang" year={1970} /> This project fills that gap by encoding narratological frameworks as first-class computational objects — not approximations or metaphors, but faithful implementations with typed models, validation logic, and confidence scoring. The result is a system where disagreements between frameworks become debuggable, where analytical claims are testable assertions, and where the entire history of narrative theory becomes a composable toolkit rather than a bibliography.<Cite id={3} author="Greimas, Algirdas Julien" title="Structural Semantics: An Attempt at a Method" source="University of Nebraska Press" year={1966} /> When a narratological claim is encoded as a function with assertions, scholarly debate gains a new modality: not just argument and counter-argument, but test case and counter-example.
+      </p>
+
+      <References entries={[
+        { id: 1, author: "Propp, Vladimir", title: "Morphology of the Folktale", source: "University of Texas Press", year: 1928 },
+        { id: 2, author: "Genette, Gerard", title: "Narrative Discourse: An Essay in Method", source: "Cornell University Press", year: 1972 },
+        { id: 3, author: "Greimas, Algirdas Julien", title: "Structural Semantics: An Attempt at a Method", source: "University of Nebraska Press", year: 1966 },
+        { id: 4, author: "Barthes, Roland", title: "S/Z: An Essay", source: "Hill and Wang", year: 1970 },
+        { id: 5, author: "Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides", title: "Design Patterns: Elements of Reusable Object-Oriented Software", source: "Addison-Wesley", year: 1994 },
+        { id: 6, author: "Fowler, Martin", title: "Patterns of Enterprise Application Architecture", source: "Addison-Wesley", year: 2002 },
+        { id: 7, author: "Moretti, Franco", title: "Distant Reading", source: "Verso Books", year: 2013 },
+        { id: 8, author: "Jockers, Matthew L.", title: "Macroanalysis: Digital Methods and Literary History", source: "University of Illinois Press", year: 2013 },
+        { id: 9, author: "Murray, Janet H.", title: "Hamlet on the Holodeck: The Future of Narrative in Cyberspace", source: "MIT Press", year: 1997 },
+        { id: 10, author: "Manovich, Lev", title: "Software Takes Command", source: "Bloomsbury Academic", year: 2013 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .table-wrap th,
+  .table-wrap td {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border, #ddd);
+    text-align: left;
+  }
+  .table-wrap th {
+    background: var(--surface-alt, #f5f5f5);
+    font-weight: 600;
+  }
+  .table-wrap code {
+    font-size: 0.85em;
+  }
+</style>

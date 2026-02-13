@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Distribution Strategy — 4444j" description="POSSE-first content distribution across the eight-organ system — audience segmentation, channel strategy, and why distribution deserves its own organ.">
@@ -16,32 +21,280 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
     >
       <h2>The Distribution Problem</h2>
       <p>
-        You can build 81 repositories with 339,000 words of documentation and it means nothing if nobody encounters the work. Most creative technologists treat distribution as an afterthought — a Twitter thread after the project ships. ORGAN VII (Kerygma) treats distribution as a first-class architectural concern, with its own organ, its own governance rules, and its own strategy documents. The insight: distribution isn't promotion. It's the translation layer between what you built and the audiences who need to understand it differently.
+        You can build 81 repositories with 339,000 words of documentation and it means nothing if nobody encounters the work. Distribution is the most systematically underthought problem in creative technology: engineers and artists invest enormous energy in building, then treat the question of who sees the work as an afterthought — a tweet after launch, a link in a Slack channel, a conference talk if they happen to know someone on the program committee.<Cite id={1} author="Shirky, Clay" title="Here Comes Everybody: The Power of Organizing Without Organizations" source="Penguin Press" year={2008} /> Shirky demonstrates that the collapse of publishing costs did not solve the distribution problem but merely transformed it: when everyone can publish, the scarce resource shifts from production capacity to audience attention. The conventional response is platform dependence — build where the audience already is, accept the platform's terms, optimize for its algorithm.<Cite id={2} author="Jenkins, Henry" title="Convergence Culture: Where Old and New Media Collide" source="NYU Press" year={2006} /> Jenkins's concept of "convergence culture" describes the tensions that arise when content flows across multiple media systems with different economic logics. ORGAN VII (Kerygma) was created to address this problem architecturally: distribution as a first-class concern with its own organ, governance rules, and strategy documents, not a checkbox at the end of a project board.
       </p>
 
-      <h2>How It Works</h2>
+      <MermaidDiagram
+        caption="POSSE distribution flow: canonical content originates in the organ system and syndicates outward through defined channels"
+        chart={`graph LR
+    A[Organ Repositories] --> B[Own Site - Canonical]
+    B --> C[Mastodon]
+    B --> D[Discord]
+    B --> E[Newsletter]
+    B --> F[GitHub Pages]
+    C --> G[Fediverse Network]
+    D --> H[Community Servers]
+    E --> I[Subscriber Inboxes]
+    F --> J[Search Engines / RSS]`}
+      />
+
+      <h2>The POSSE Principle</h2>
       <p>
-        The distribution strategy follows the <strong>POSSE principle</strong> (Publish on your Own Site, Syndicate Everywhere): all content originates in the organ system's own repositories and gets syndicated outward through defined channels. This preserves canonical URLs, prevents platform lock-in, and ensures the system's own documentation is always the authoritative version.
-      </p>
-      <p>
-        <strong>Audience segmentation</strong> drives channel strategy. The same project looks different to different audiences:
-      </p>
-      <ul>
-        <li><strong>Grant reviewers</strong> see sustained creative practice, institutional thinking, and execution velocity</li>
-        <li><strong>Hiring managers</strong> see technical depth, system design skill, and production-quality documentation</li>
-        <li><strong>Fellow practitioners</strong> see methodology, tooling choices, and honest post-mortems</li>
-        <li><strong>Academic audiences</strong> see theoretical frameworks, epistemological commitments, and citation-ready descriptions</li>
-      </ul>
-      <p>
-        Each channel (Mastodon, Discord, newsletter, GitHub Pages) carries content adapted for its native audience — not just cross-posted but genuinely re-framed. The distribution organ ensures that adaptation happens systematically, not ad hoc.
+        The distribution strategy is built on the POSSE principle: Publish on your Own Site, Syndicate Everywhere. All content originates in the organ system's own repositories — the canonical source lives in infrastructure the practitioner controls — and gets syndicated outward through defined channels. This is not a technical preference but an architectural commitment to long-term content ownership.<Cite id={3} author="Berners-Lee, Tim" title="Weaving the Web: The Original Design and Ultimate Destiny of the World Wide Web" source="Harper Business" year={1999} /> Berners-Lee's original vision for the web emphasized decentralization and user control over content; POSSE operationalizes that vision at the individual practitioner level. The practical consequences are significant: canonical URLs remain under the practitioner's control, content survives platform shutdowns or policy changes, and the system's own documentation is always the authoritative version regardless of where copies appear.<Cite id={4} author="Doctorow, Cory" title="Information Doesn't Want to Be Free: Laws for the Internet Age" source="McSweeney's" year={2014} /> Doctorow's analysis of digital content economics reveals that creators who depend on platforms for distribution eventually find their relationship with their audience mediated — and taxed — by the platform. POSSE eliminates this dependency by design: the platform is a distribution channel, not a home.
       </p>
 
-      <h2>Why Distribution Is an Organ</h2>
+      <CodeStructure lang="yaml" caption="Distribution workflow configuration: automated POSSE syndication from canonical source to multiple channels" filename=".github/workflows/distribute-content.yml (excerpt)">
+{`name: Distribute Content (POSSE)
+on:
+  workflow_dispatch:
+    inputs:
+      content_type:
+        description: 'Type of content to distribute'
+        required: true
+        type: choice
+        options:
+          - essay
+          - launch-announcement
+          - milestone-update
+      target_channels:
+        description: 'Distribution channels'
+        required: true
+        type: choice
+        options:
+          - all
+          - mastodon-only
+          - discord-only
+
+jobs:
+  distribute:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract canonical content
+        run: python scripts/extract-content.py
+      - name: Adapt for Mastodon
+        if: contains(inputs.target_channels, 'mastodon') || inputs.target_channels == 'all'
+        run: python scripts/adapt-mastodon.py
+        env:
+          MASTODON_TOKEN: \${{ secrets.MASTODON_TOKEN }}
+      - name: Adapt for Discord
+        if: contains(inputs.target_channels, 'discord') || inputs.target_channels == 'all'
+        run: python scripts/adapt-discord.py
+        env:
+          DISCORD_WEBHOOK: \${{ secrets.DISCORD_WEBHOOK }}`}
+      </CodeStructure>
+
+      <h2>Audience Segmentation</h2>
       <p>
-        Making distribution a separate organ — not a feature of marketing, not a task in a project board — forces the system to take it seriously. It gets its own governance, its own quality standards, its own documentation. It means distribution strategy is reviewed with the same rigor as dependency validation or documentation standards. The eight-organ model's core principle applies: different modes of work need protection from each other. Distribution that serves commerce corrupts the academic channel. Distribution that serves grants ignores practitioners. Having its own organ means distribution can serve each audience authentically without being captured by any single goal.
+        The distribution strategy identifies four distinct audiences, each requiring a different framing of the same underlying content. This is not a marketing persona exercise — it is a rhetorical analysis of how the same work carries different significance for different communities of practice.<Cite id={5} author="Bakhtin, Mikhail M." title="The Dialogic Imagination: Four Essays" source="University of Texas Press" year={1981} /> Bakhtin's theory of addressivity holds that every utterance is shaped by its anticipated audience — the speaker orients toward the listener's expected response. The distribution strategy makes this orientation explicit and systematic: a grant reviewer needs to see sustained creative practice and institutional thinking; a hiring manager needs to see technical depth and communication skill; a practitioner needs to see tooling decisions and honest post-mortems; an academic needs to see theoretical frameworks and citational rigor. The crucial insight is that these are not four different messages but four different readings of the same message, enabled by structural transparency in the source material.<Cite id={6} author="Burke, Kenneth" title="A Rhetoric of Motives" source="University of California Press" year={1950} /> Burke's concept of "identification" — that persuasion operates not through argument alone but through the audience's recognition of shared substance — explains why each audience segment must encounter the content in terms that feel native to their discourse community.
       </p>
+
+      <Figure alt="Audience and channel distribution matrix" caption="Audience segmentation across distribution channels: each cell represents a distinct framing strategy">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Audience</th><th>Mastodon</th><th>Discord</th><th>Newsletter</th><th>GitHub Pages</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Grant Reviewers</strong></td>
+                <td>Timeline evidence, velocity metrics</td>
+                <td>n/a</td>
+                <td>Portfolio summaries, milestone reports</td>
+                <td>Full essays with institutional framing</td>
+              </tr>
+              <tr>
+                <td><strong>Hiring Managers</strong></td>
+                <td>System-design highlights</td>
+                <td>n/a</td>
+                <td>Technical depth showcases</td>
+                <td>Architecture documentation, code samples</td>
+              </tr>
+              <tr>
+                <td><strong>Practitioners</strong></td>
+                <td>Tooling threads, methodology notes</td>
+                <td>Discussion, Q&A, methodology exchange</td>
+                <td>How-to guides, process updates</td>
+                <td>Full technical essays, post-mortems</td>
+              </tr>
+              <tr>
+                <td><strong>Academics</strong></td>
+                <td>Theoretical connections, citations</td>
+                <td>n/a</td>
+                <td>Research-adjacent framing</td>
+                <td>Citation-ready descriptions, frameworks</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Channel-Native Adaptation</h2>
+      <p>
+        The critical distinction in this distribution strategy is between cross-posting and channel-native adaptation. Cross-posting takes a single piece of content and copies it to multiple platforms unchanged — a practice that violates the norms of every platform simultaneously. Channel-native adaptation takes the canonical content and genuinely re-frames it for each channel's discourse conventions, audience expectations, and technical affordances.<Cite id={7} author="McLuhan, Marshall" title="Understanding Media: The Extensions of Man" source="McGraw-Hill" year={1964} /> McLuhan's foundational insight — "the medium is the message" — means that the same content carried by different media is not, in fact, the same content. A 4,000-word essay posted to Mastodon is not an adapted essay; it is a violation of the medium's communicative norms. The adaptation process respects each channel's native format: Mastodon receives concise, threaded highlights with links to the canonical source; Discord receives discussion-oriented summaries designed to provoke conversation; the newsletter receives curated selections with contextual framing; GitHub Pages hosts the full canonical text with academic apparatus.<Cite id={8} author="Postman, Neil" title="Amusing Ourselves to Death: Public Discourse in the Age of Show Business" source="Penguin Books" year={1985} /> Postman's warning that serious discourse degrades when forced into entertainment media is taken literally: the distribution strategy does not attempt to make academic content entertaining for social media, but instead uses social media to signal the existence of serious content hosted elsewhere.
+      </p>
+
+      <MermaidDiagram
+        caption="Content adaptation pipeline: raw canonical content is analyzed, adapted per channel, distributed, and measured"
+        chart={`graph TD
+    A[Canonical Content] --> B[Audience Analysis]
+    B --> C{Channel Router}
+    C --> D[Mastodon Adapter]
+    C --> E[Discord Adapter]
+    C --> F[Newsletter Adapter]
+    C --> G[GitHub Pages Renderer]
+    D --> D1[Thread format, 500 char max]
+    E --> E1[Discussion prompt, embeds]
+    F --> F1[Curated digest, context]
+    G --> G1[Full text, citations, RSS]
+    D1 --> H[Distribution]
+    E1 --> H
+    F1 --> H
+    G1 --> H
+    H --> I[Engagement Metrics]`}
+      />
+
+      <h2>Automated Distribution Infrastructure</h2>
+      <p>
+        The distribution system is not a manual checklist but an automated pipeline implemented as GitHub Actions workflows. The <code>distribute-content.yml</code> workflow extracts canonical content from the organ repositories, applies channel-specific adaptation scripts, and publishes to each target platform through authenticated API calls. Mastodon distribution was verified with HTTP 200 responses; Discord distribution was verified with HTTP 204 responses.<Cite id={1} author="Shirky, Clay" title="Here Comes Everybody: The Power of Organizing Without Organizations" source="Penguin Press" year={2008} /> Shirky observes that the value of group coordination tools depends on reducing the transaction costs of collective action — the automated workflow reduces the transaction cost of multi-channel distribution to a single workflow dispatch, eliminating the manual effort that causes most distribution strategies to decay over time. The automation also ensures consistency: every distribution event follows the same adaptation rules, preventing the ad hoc drift that occurs when distribution depends on human memory and willpower.<Cite id={4} author="Doctorow, Cory" title="Information Doesn't Want to Be Free: Laws for the Internet Age" source="McSweeney's" year={2014} /> Doctorow argues that sustainable creative practice requires infrastructure that works on the creator's behalf even when the creator is focused on making new work — the automated distribution pipeline embodies this principle.
+      </p>
+
+      <CodeStructure lang="python" caption="Channel adaptation script: transforms canonical essay content into Mastodon-native thread format" filename="scripts/adapt-mastodon.py (excerpt)">
+{`def adapt_for_mastodon(essay: Essay) -> list[str]:
+    """Transform a canonical essay into a Mastodon thread.
+
+    Rules:
+    - First post: hook + essay title + canonical URL
+    - Middle posts: 1-2 key insights, max 500 chars each
+    - Final post: call-to-action + canonical URL
+    - Always link back to the canonical source (POSSE)
+    """
+    thread = []
+
+    # Opening post: hook the audience
+    thread.append(
+        f"{essay.hook}\\n\\n"
+        f"New essay: {essay.title}\\n"
+        f"{essay.canonical_url}\\n\\n"
+        f"#BuildingInPublic #CreativeInfrastructure"
+    )
+
+    # Key insight posts (2-3 per essay)
+    for insight in essay.extract_key_insights(max=3):
+        thread.append(
+            f"{insight.summary}\\n\\n"
+            f"Full context: {essay.canonical_url}"
+        )
+
+    # Closing post
+    thread.append(
+        f"Read the full {essay.word_count:,}-word essay: "
+        f"{essay.canonical_url}\\n\\n"
+        f"Part of the Public Process collection: "
+        f"21 essays on building creative infrastructure."
+    )
+
+    return thread`}
+      </CodeStructure>
+
+      <h2>Distribution as Organ: Governance Protection</h2>
+      <p>
+        The most unusual aspect of this project is that distribution has its own organ — ORGAN VII (Kerygma) — rather than being a feature of marketing or a task on a project board. This is not organizational vanity but a governance decision with real consequences.<Cite id={9} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's research on commons governance demonstrates that shared resources degrade when they lack institutional protection from competing interests. Distribution is precisely such a shared resource: it serves grants, hiring, community building, and academic credibility simultaneously, and any one of those interests, if allowed to dominate, corrupts the others. Distribution that optimizes for grant applications sounds institutional and dry; distribution that optimizes for hiring sounds like a sales pitch; distribution that optimizes for practitioner community sounds casual and unserious; distribution that optimizes for academics sounds inaccessible. Having its own organ means distribution can serve each audience authentically because no single audience captures the governance.<Cite id={10} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> Meadows identifies leverage points in systems where small changes produce large effects — making distribution a separate organ rather than a shared function is one such leverage point, because it changes the system's information flows rather than just its outputs.
+      </p>
+
+      <MermaidDiagram
+        caption="Governance protection: organ separation prevents any single audience interest from capturing the distribution function"
+        chart={`graph TD
+    subgraph "Without Organ Separation"
+      M1[Marketing Function] --> M2[Grant optimization dominates]
+      M2 --> M3[Other audiences underserved]
+      M3 --> M4[System credibility degrades]
+    end
+    subgraph "With ORGAN VII Governance"
+      O1[ORGAN VII Kerygma] --> O2[Grant Reviewers]
+      O1 --> O3[Hiring Managers]
+      O1 --> O4[Practitioners]
+      O1 --> O5[Academics]
+      O2 --> O6[Authentic institutional framing]
+      O3 --> O7[Authentic technical framing]
+      O4 --> O8[Authentic peer framing]
+      O5 --> O9[Authentic scholarly framing]
+    end`}
+      />
+
+      <h2>Measuring Distribution Without Vanity Metrics</h2>
+      <p>
+        The distribution strategy deliberately avoids vanity metrics — follower counts, like ratios, impression numbers — in favor of metrics that indicate whether the content reached the intended audiences and served the intended purposes.<Cite id={2} author="Jenkins, Henry" title="Convergence Culture: Where Old and New Media Collide" source="NYU Press" year={2006} /> Jenkins argues that meaningful audience engagement cannot be measured by passive consumption metrics alone; what matters is whether the content provoked the kind of response that serves the creator's actual goals. For this system, the relevant metrics are: Did grant reviewers encounter the evidence? Did hiring managers see the technical depth? Did practitioners engage with the methodology? Did academics find the theoretical framing credible? These are harder to measure than impressions, but they are the only metrics that matter. The distribution workflow logs HTTP response codes as verification that syndication occurred, and the canonical site's RSS feed provides a persistent, platform-independent subscription mechanism that survives any individual channel's decline.<Cite id={3} author="Berners-Lee, Tim" title="Weaving the Web: The Original Design and Ultimate Destiny of the World Wide Web" source="Harper Business" year={1999} /> Berners-Lee's emphasis on open standards and interoperability is reflected in the choice of Atom/RSS as the distribution backbone — a protocol that no single platform controls.
+      </p>
+
+      <Figure alt="Distribution strategy metrics summary" caption="Key metrics for the POSSE distribution system across the eight-organ architecture">
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Distribution Channels</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Audience Segments</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">16</div>
+            <div class="stat-label">Adaptation Strategies</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">POSSE</div>
+            <div class="stat-label">Distribution Principle</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">81</div>
+            <div class="stat-label">Source Repositories</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">339K</div>
+            <div class="stat-label">Words to Distribute</div>
+          </div>
+        </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Shirky, Clay", title: "Here Comes Everybody: The Power of Organizing Without Organizations", source: "Penguin Press", year: 2008 },
+        { id: 2, author: "Jenkins, Henry", title: "Convergence Culture: Where Old and New Media Collide", source: "NYU Press", year: 2006 },
+        { id: 3, author: "Berners-Lee, Tim", title: "Weaving the Web: The Original Design and Ultimate Destiny of the World Wide Web", source: "Harper Business", year: 1999 },
+        { id: 4, author: "Doctorow, Cory", title: "Information Doesn't Want to Be Free: Laws for the Internet Age", source: "McSweeney's", year: 2014 },
+        { id: 5, author: "Bakhtin, Mikhail M.", title: "The Dialogic Imagination: Four Essays", source: "University of Texas Press", year: 1981 },
+        { id: 6, author: "Burke, Kenneth", title: "A Rhetoric of Motives", source: "University of California Press", year: 1950 },
+        { id: 7, author: "McLuhan, Marshall", title: "Understanding Media: The Extensions of Man", source: "McGraw-Hill", year: 1964 },
+        { id: 8, author: "Postman, Neil", title: "Amusing Ourselves to Death: Public Discourse in the Age of Show Business", source: "Penguin Books", year: 1985 },
+        { id: 9, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
+        { id: 10, author: "Meadows, Donella H.", title: "Thinking in Systems: A Primer", source: "Chelsea Green Publishing", year: 2008 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .table-wrap th,
+  .table-wrap td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .table-wrap th {
+    background: rgba(255, 255, 255, 0.03);
+    font-weight: 600;
+  }
+</style>

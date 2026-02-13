@@ -1,0 +1,31 @@
+---
+interface RefEntry {
+  id: number;
+  author: string;
+  title: string;
+  source: string;
+  year: string | number;
+  url?: string;
+}
+
+interface Props {
+  entries: RefEntry[];
+}
+
+const { entries } = Astro.props;
+const sorted = [...entries].sort((a, b) => a.id - b.id);
+---
+
+<section class="references" aria-label="References">
+  <h2>References</h2>
+  <ol>
+    {sorted.map((entry) => (
+      <li id={`ref-${entry.id}`}>
+        {entry.author}. <em>{entry.title}</em>. {entry.source}, {entry.year}.
+        {entry.url && (
+          <a href={entry.url} target="_blank" rel="noopener noreferrer">{entry.url}</a>
+        )}
+      </li>
+    ))}
+  </ol>
+</section>

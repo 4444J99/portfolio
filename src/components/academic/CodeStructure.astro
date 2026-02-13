@@ -1,0 +1,15 @@
+---
+interface Props {
+  lang: string;
+  caption: string;
+  filename?: string;
+}
+
+const { lang, caption, filename } = Astro.props;
+---
+
+<div class="code-structure">
+  {filename && <div class="code-structure__filename">{filename}</div>}
+  <pre><code class={`language-${lang}`}><slot /></code></pre>
+  <div class="code-structure__caption">{caption}</div>
+</div>

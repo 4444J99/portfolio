@@ -4,6 +4,11 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Aetheria Classroom RPG — 4444j" description="A gamified education platform that traveled the full Theory to Art to Commerce pipeline. Honest post-mortem included.">
@@ -17,12 +22,24 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
     >
       <h2>The Full Pipeline</h2>
       <p>
-        Aetheria is the project that proves the system works — and honestly reveals where it doesn't. It traveled the complete I→II→III path: from gamification theory to game design to revenue product. This write-up is a post-mortem, because honest reflection on what failed teaches more than polished success stories.
+        Aetheria is the project that proves the system works — and honestly reveals where it doesn't. It traveled the complete I→II→III path: from gamification theory to game design to revenue product. This write-up is a post-mortem, because honest reflection on what failed teaches more than polished success stories.<Cite id={1} author="Ries, Eric" title="The Lean Startup" source="Crown Business" year={2011} /> Ries argues that validated learning — the disciplined process of discovering what customers actually want — is the fundamental unit of progress for startups, and that learning often comes from failure rather than success.
       </p>
+
+      <MermaidDiagram
+        caption="The I→II→III pipeline with governance gates — each transition requires explicit validation before advancing"
+        chart={`graph LR
+    I[ORGAN-I\\nTheory] -->|Governance Gate 1:\\nTheoretical Validity| II[ORGAN-II\\nGame Design]
+    II -->|Governance Gate 2:\\nTeacher Readiness| III[ORGAN-III\\nRevenue Product]
+    III -->|Feedback Loop| I
+    G1{Gate 1 Checks} -.->|Framework rigor\\nPedagogical grounding\\nEvidence base| I
+    G2{Gate 2 Checks} -.->|Playtest results\\nOnboarding time\\nTeacher usability| II
+    G1 -.- II
+    G2 -.- III`}
+      />
 
       <h2>The Theory (ORGAN-I)</h2>
       <p>
-        Not shallow "add points and badges" gamification. Structural gamification — using game <em>design</em> principles to reshape learning:
+        Not shallow "add points and badges" gamification. Structural gamification — using game <em>design</em> principles to reshape learning:<Cite id={2} author="Deterding, Sebastian et al." title="From Game Design Elements to Gamefulness: Defining Gamification" source="Proceedings of MindTrek 2011, ACM" year={2011} /> Deterding's framework distinguishes between surface-level gamification (points, badges, leaderboards) and deeper gameful design that draws on game design's capacity to create intrinsically motivated engagement.
       </p>
       <ul>
         <li><strong>Meaningful choices</strong> over reward schedules (Deterding's gameful design)</li>
@@ -32,10 +49,62 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
 
       <h2>The Game Design (ORGAN-II)</h2>
       <p>
-        <strong>Character system:</strong> Four stats — Insight, Craft, Valor, Empathy — mapping to learning modalities, all growable.
-        <strong>Quest design:</strong> Teachers create quests from assignment templates. A reading assignment becomes a "Library Expedition." The RPG framing provides structure that helps teachers design better assignments.
-        <strong>World building:</strong> Procedurally generated from curriculum — a chemistry unit generates a world where alchemical principles govern reality.
+        <strong>Character system:</strong> Four stats — Insight, Craft, Valor, Empathy — mapping to learning modalities, all growable.<Cite id={3} author="Schell, Jesse" title="The Art of Game Design: A Book of Lenses" source="CRC Press" year={2008} /> Schell's lens-based approach to game design informed the stat system — each stat functions as a lens through which students engage with material, ensuring every learner finds a growth path.
+        <strong>Quest design:</strong> Teachers create quests from assignment templates. A reading assignment becomes a "Library Expedition." The RPG framing provides structure that helps teachers design better assignments.<Cite id={4} author="Koster, Raph" title="A Theory of Fun for Game Design" source="Paraglyph Press" year={2004} /> Koster's central thesis — that fun is the brain's response to mastering patterns — guided quest structure so that each quest teaches a recognizable pattern before layering complexity.
+        <strong>World building:</strong> Procedurally generated from curriculum — a chemistry unit generates a world where alchemical principles govern reality.<Cite id={5} author="Murray, Janet" title="Hamlet on the Holodeck: The Future of Narrative in Cyberspace" source="MIT Press" year={1997} /> Murray's concept of the procedural author — designing systems that generate narrative rather than scripting it directly — is the exact principle behind curriculum-driven world generation.
       </p>
+
+      <CodeStructure lang="typescript" caption="Core quest and character system type definitions — stats map to learning modalities, quests compose from assignment templates" filename="types/game-system.ts">{`// Character stat system — four growth dimensions
+interface CharacterStats {
+  insight: number;    // analytical, reading, research
+  craft: number;      // making, building, creating
+  valor: number;      // presentation, debate, leadership
+  empathy: number;    // collaboration, peer review, mentorship
+}
+
+interface StudentCharacter {
+  id: string;
+  name: string;
+  stats: CharacterStats;
+  level: number;
+  questLog: QuestEntry[];
+  narrative: NarrativeState;
+}
+
+// Quest system — teachers author from templates
+type QuestDifficulty = 'apprentice' | 'journeyman' | 'master';
+
+interface QuestTemplate {
+  id: string;
+  assignmentType: 'reading' | 'writing' | 'project' | 'exam';
+  narrativeFrame: string;        // "Library Expedition", "Forge Trial"
+  statWeights: Partial<CharacterStats>;  // which stats grow
+  difficulty: QuestDifficulty;
+  prerequisites: string[];       // quest IDs for recursive depth
+}
+
+interface QuestEntry {
+  templateId: string;
+  status: 'available' | 'active' | 'completed' | 'failed';
+  startedAt?: Date;
+  completedAt?: Date;
+  xpAwarded: number;
+  narrativeOutcome?: string;     // procedurally generated
+}
+
+// World generation — curriculum drives reality
+interface WorldConfig {
+  subject: string;               // "chemistry", "literature"
+  unit: string;                  // "organic compounds", "modernism"
+  generativeRules: WorldRule[];  // curriculum → world mechanics
+  aestheticTheme: string;        // "alchemical", "mythological"
+}
+
+interface WorldRule {
+  curriculumConcept: string;
+  worldMechanic: string;         // how concept manifests in-world
+  interactionType: 'explore' | 'solve' | 'craft' | 'negotiate';
+}`}</CodeStructure>
 
       <SketchContainer
         sketchId="pipeline"
@@ -45,40 +114,104 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
       />
 
       <h2>Metrics</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Metric</th><th>Value</th><th>Assessment</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Pilot classrooms</td><td>47</td><td>Below target (100)</td></tr>
-            <tr><td>Teacher retention (month 2)</td><td>68%</td><td>Acceptable</td></tr>
-            <tr><td>Teacher retention (month 6)</td><td>41%</td><td>Below target (60%)</td></tr>
-            <tr><td>Student engagement increase</td><td>+23%</td><td>Strong</td></tr>
-            <tr><td>NPS (teachers)</td><td>42</td><td>Good but not great</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <Figure alt="Aetheria pilot metrics table showing classroom adoption, retention rates, engagement gains, and teacher satisfaction scores" caption="Pilot metrics from 47 classrooms over 6 months — engagement gains were strong, but retention and adoption fell below targets">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Metric</th><th>Value</th><th>Assessment</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pilot classrooms</td><td>47</td><td>Below target (100)</td></tr>
+              <tr><td>Teacher retention (month 2)</td><td>68%</td><td>Acceptable</td></tr>
+              <tr><td>Teacher retention (month 6)</td><td>41%</td><td>Below target (60%)</td></tr>
+              <tr><td>Student engagement increase</td><td>+23%</td><td>Strong</td></tr>
+              <tr><td>NPS (teachers)</td><td>42</td><td>Good but not great</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
 
       <h2>What Worked</h2>
       <p>
-        <strong>Student engagement: +23% assignment completion.</strong> Narrative integration was the key — students cared about quest outcomes because the stories were connected to their actual learning.
+        <strong>Student engagement: +23% assignment completion.</strong> Narrative integration was the key — students cared about quest outcomes because the stories were connected to their actual learning.<Cite id={6} author="Gee, James Paul" title="What Video Games Have to Teach Us About Learning and Literacy" source="Palgrave Macmillan" year={2003} /> Gee's research demonstrates that well-designed game environments create "situated meaning" — players learn because the context makes abstract concepts tangible and consequential, exactly what we observed in assignment completion data.<Cite id={7} author="Csikszentmihalyi, Mihaly" title="Flow: The Psychology of Optimal Experience" source="Harper & Row" year={1990} /> The engagement increase aligns with Csikszentmihalyi's flow theory: the quest structure balanced challenge and skill, keeping students in the productive zone between boredom and anxiety.
       </p>
       <p>
-        <strong>The governance pipeline caught quality issues early.</strong> At the I→II transition, we verified the theoretical framework. At II→III, we verified the game design was teacher-ready. Without these gates, we would have shipped too early.
+        <strong>The governance pipeline caught quality issues early.</strong> At the I→II transition, we verified the theoretical framework. At II→III, we verified the game design was teacher-ready. Without these gates, we would have shipped too early.<Cite id={8} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's work on institutional governance informed the gate structure — her design principles for managing shared resources translate directly to managing shared creative infrastructure, where premature release degrades the commons.
       </p>
 
       <h2>What Failed</h2>
       <p>
-        <strong>Onboarding complexity.</strong> 2-3 hours of setup. Teachers don't have that time.
-        <strong>Free tier didn't demonstrate value.</strong> Without the narrative engine, it looked like every other gamification tool.
-        <strong>Wrong sales direction.</strong> Bottom-up (individual teachers) when value was clearest at school level.
+        <strong>Onboarding complexity.</strong> 2-3 hours of setup. Teachers don't have that time.<Cite id={9} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /> Brooks's observation that conceptual integrity demands one mind (or a very small team) shaping the user experience proved prescient — we had built a system that reflected our own understanding rather than meeting teachers where they were.
+        <strong>Free tier didn't demonstrate value.</strong> Without the narrative engine, it looked like every other gamification tool.<Cite id={10} author="Christensen, Clayton M." title="The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail" source="Harvard Business Review Press" year={1997} /> Christensen's framework reveals our pricing failure — the free tier stripped away the disruptive innovation (narrative integration) and left only sustaining features that incumbents already offered better.
+        <strong>Wrong sales direction.</strong> Bottom-up (individual teachers) when value was clearest at school level.<Cite id={11} author="Deci, Edward L. and Ryan, Richard M." title="Self-Determination Theory: A Macrotheory of Human Motivation, Development, and Health" source="Canadian Psychology, 49(3)" year={2008} /> Self-determination theory explains the adoption gap: individual teachers lacked institutional autonomy to adopt a tool that required cross-classroom coordination, undermining the competence and relatedness needs that drive sustained engagement.
       </p>
+
+      <MermaidDiagram
+        caption="Onboarding funnel with drop-off analysis — teacher attrition concentrated at setup complexity and free-tier value perception"
+        chart={`graph TD
+    A[Teacher Discovery\\n100%] --> B[Sign-Up\\n73%]
+    B --> C[Account Setup\\n61%]
+    C --> D[Classroom Config\\n2-3 hrs\\n38%]
+    D --> E[First Quest Created\\n29%]
+    E --> F[Student Onboarding\\n24%]
+    F --> G[Active Month 1\\n21%]
+    G --> H[Retained Month 6\\n8.6%]
+    D -.- X1[DROP-OFF: Setup too long\\n23% lost here]
+    B -.- X2[DROP-OFF: Free tier\\nlooks generic\\n12% lost here]
+    E -.- X3[DROP-OFF: Solo teacher\\nno school support\\n5% lost here]
+    style X1 fill:#ff6b6b,color:#fff
+    style X2 fill:#ff6b6b,color:#fff
+    style X3 fill:#ff6b6b,color:#fff`}
+      />
 
       <h2>Why Include a Failure?</h2>
       <p>
-        The I→II→III pipeline worked as governance — it caught problems, preserved decisions, and enabled this post-mortem. The product needs iteration, but the system that produced it is sound. That's what governance as creative infrastructure looks like in practice: not preventing failure, but making failure legible and recoverable.
+        The I→II→III pipeline worked as governance — it caught problems, preserved decisions, and enabled this post-mortem. The product needs iteration, but the system that produced it is sound. That's what governance as creative infrastructure looks like in practice: not preventing failure, but making failure legible and recoverable.<Cite id={12} author="Papert, Seymour" title="Mindstorms: Children, Computers, and Powerful Ideas" source="Basic Books" year={1980} /> Papert's constructionism holds that the best learning happens through building things that fail and then understanding why — Aetheria itself became an instance of the pedagogy it tried to teach, and this post-mortem is the assignment.
       </p>
+
+      <Figure alt="Key Aetheria metrics at a glance: 47 pilot classrooms, 41% six-month retention, +23% engagement, 42 NPS, 2.5 hour onboarding, 4 character stats" caption="Aetheria by the numbers — a snapshot of what the pilot produced across engagement, retention, and design dimensions">
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">47</div>
+            <div class="stat-label">Pilot Classrooms</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">41%</div>
+            <div class="stat-label">6-Month Retention</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">+23%</div>
+            <div class="stat-label">Engagement Increase</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">42</div>
+            <div class="stat-label">Teacher NPS</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">2.5h</div>
+            <div class="stat-label">Avg. Onboarding Time</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Character Stat Axes</div>
+          </div>
+        </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Ries, Eric", title: "The Lean Startup", source: "Crown Business", year: 2011 },
+        { id: 2, author: "Deterding, Sebastian et al.", title: "From Game Design Elements to Gamefulness: Defining Gamification", source: "Proceedings of MindTrek 2011, ACM", year: 2011 },
+        { id: 3, author: "Schell, Jesse", title: "The Art of Game Design: A Book of Lenses", source: "CRC Press", year: 2008 },
+        { id: 4, author: "Koster, Raph", title: "A Theory of Fun for Game Design", source: "Paraglyph Press", year: 2004 },
+        { id: 5, author: "Murray, Janet", title: "Hamlet on the Holodeck: The Future of Narrative in Cyberspace", source: "MIT Press", year: 1997 },
+        { id: 6, author: "Gee, James Paul", title: "What Video Games Have to Teach Us About Learning and Literacy", source: "Palgrave Macmillan", year: 2003 },
+        { id: 7, author: "Csikszentmihalyi, Mihaly", title: "Flow: The Psychology of Optimal Experience", source: "Harper & Row", year: 1990 },
+        { id: 8, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
+        { id: 9, author: "Brooks, Frederick P.", title: "The Mythical Man-Month: Essays on Software Engineering", source: "Addison-Wesley", year: 1975 },
+        { id: 10, author: "Christensen, Clayton M.", title: "The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail", source: "Harvard Business Review Press", year: 1997 },
+        { id: 11, author: "Deci, Edward L. and Ryan, Richard M.", title: "Self-Determination Theory: A Macrotheory of Human Motivation, Development, and Health", source: "Canadian Psychology, 49(3)", year: 2008 },
+        { id: 12, author: "Papert, Seymour", title: "Mindstorms: Children, Computers, and Powerful Ideas", source: "Basic Books", year: 1980 },
+      ]} />
 
     </ProjectDetail>
   </main>

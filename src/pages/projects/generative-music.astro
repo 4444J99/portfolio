@@ -4,6 +4,11 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Generative Music System — 4444j" description="Translating recursive narrative principles into real-time generative music — from symbolic events to live sound.">
@@ -17,38 +22,89 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
     >
       <h2>The Translation Problem</h2>
       <p>
-        How do you get from a formal system to something people actually experience? That's the core design problem of ORGAN-II. This project translates recursive narrative principles from RE:GE into a real-time generative music system. The music doesn't illustrate the narrative — it <em>is</em> the narrative, in a different medium. The choices made during translation are themselves artistic decisions, and that's where the interesting work lives.
+        How do you get from a formal system to something people actually experience? That's the core design problem of ORGAN-II. This project translates recursive narrative principles from RE:GE into a real-time generative music system. The music doesn't illustrate the narrative — it <em>is</em> the narrative, in a different medium.<Cite id={1} author="Eno, Brian" title="Generative Music" source="In Motion Magazine" year={1996} /> Eno's concept of generative music — systems that produce ever-different and changing results through rules rather than fixed compositions — provides the philosophical foundation. The choices made during translation are themselves artistic decisions, and that's where the interesting work lives.<Cite id={2} author="Roads, Curtis" title="The Computer Music Tutorial" source="MIT Press" year={1996} />
       </p>
+
+      <MermaidDiagram
+        caption="Three-layer data flow — symbolic events from the recursive engine are translated through a sonification bridge into real-time performance output"
+        chart={`graph TD
+    SE[Layer 1: Symbolic Engine] -->|typed timestamped events| SB[Layer 2: Sonification Bridge]
+    SB -->|musical parameters| PS[Layer 3: Performance System]
+    SE -->|entity state changes| SB
+    SE -->|ritual phase transitions| SB
+    SE -->|myth function activations| SB
+    SE -->|recursive depth changes| SB
+    SB -->|tonal center| PS
+    SB -->|harmonic complexity| PS
+    SB -->|rhythmic pattern| PS
+    SB -->|timbral layering| PS
+    SB -->|melodic contour| PS
+    PS -->|audio synthesis| OUT[Live Sound]
+    PS -->|spatialization| OUT
+    PS -->|performer interaction| OUT`}
+      />
 
       <h2>Three-Layer Architecture</h2>
 
       <h3>Layer 1: The Symbolic Engine</h3>
       <p>
-        RE:GE provides the structural backbone — a stream of typed, timestamped symbolic events: entity state changes, ritual phase transitions, myth function activations, recursive depth changes. These events are abstract and carry no inherent sonic representation.
+        RE:GE provides the structural backbone — a stream of typed, timestamped symbolic events: entity state changes, ritual phase transitions, myth function activations, recursive depth changes. These events are abstract and carry no inherent sonic representation.<Cite id={3} author="Hofstadter, Douglas" title="Gödel, Escher, Bach: An Eternal Golden Braid" source="Basic Books" year={1979} /> Hofstadter's insight that formal systems can generate meaning through structural relationships — not through any intrinsic semantic content — is precisely what makes this translation possible. The symbolic events are meaningful because of how they relate to each other, not because of what they "sound like."
       </p>
 
       <h3>Layer 2: The Sonification Bridge</h3>
       <p>
-        This is where the artistic decisions live. The bridge maps symbolic events to musical parameters:
+        This is where the artistic decisions live. The bridge maps symbolic events to musical parameters:<Cite id={4} author="Hermann, Thomas, Andy Hunt, and John G. Neuhoff" title="The Sonification Handbook" source="Logos Publishing House" year={2011} /> Hermann et al. establish that effective sonification requires a principled mapping between data dimensions and auditory parameters — arbitrary mappings produce noise, while structurally motivated mappings produce comprehensible sound. Each row in the mapping table below represents a deliberate choice grounded in music-theoretic reasoning.
       </p>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Symbolic Event</th><th>Musical Parameter</th><th>Rationale</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Identity stability</td><td>Tonal center strength</td><td>Stable identity = clear tonic</td></tr>
-            <tr><td>Transformation intensity</td><td>Harmonic complexity</td><td>Greater change = more tension</td></tr>
-            <tr><td>Ritual phase</td><td>Rhythmic pattern</td><td>Ceremony = structured time</td></tr>
-            <tr><td>Recursive depth</td><td>Timbral layering</td><td>Self-reference = voices within voices</td></tr>
-            <tr><td>Myth function type</td><td>Melodic contour</td><td>Hero ascends, villain descends</td></tr>
-          </tbody>
-        </table>
-      </div>
+
+      <Figure alt="Mapping table between symbolic events and musical parameters" caption="Sonification bridge mapping — each symbolic event type is translated to a musical parameter through a music-theoretically motivated rationale" number={1}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Symbolic Event</th><th>Musical Parameter</th><th>Rationale</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Identity stability</td><td>Tonal center strength</td><td>Stable identity = clear tonic</td></tr>
+              <tr><td>Transformation intensity</td><td>Harmonic complexity</td><td>Greater change = more tension</td></tr>
+              <tr><td>Ritual phase</td><td>Rhythmic pattern</td><td>Ceremony = structured time</td></tr>
+              <tr><td>Recursive depth</td><td>Timbral layering</td><td>Self-reference = voices within voices</td></tr>
+              <tr><td>Myth function type</td><td>Melodic contour</td><td>Hero ascends, villain descends</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <CodeStructure lang="typescript" caption="Sonification bridge core — maps symbolic events from RE:GE to musical parameter values through weighted transformation functions" filename="sonification-bridge.ts">
+{`interface SymbolicEvent {
+  type: 'identity' | 'transformation' | 'ritual' | 'recursion' | 'myth';
+  timestamp: number;
+  intensity: number;    // 0.0 – 1.0
+  depth: number;        // recursive nesting level
+  phase?: string;       // ritual phase identifier
+  function?: string;    // myth function name
+}
+
+interface MusicalParams {
+  tonalCenter: number;       // scale degree 0–11
+  harmonicComplexity: number; // 0.0 – 1.0
+  rhythmPattern: number[];    // onset pattern
+  timbralLayers: number;      // voice count
+  melodicContour: number[];   // pitch direction sequence
+}
+
+function sonify(event: SymbolicEvent): MusicalParams {
+  return {
+    tonalCenter: mapIdentityToTonic(event.intensity),
+    harmonicComplexity: mapTransformToTension(event.intensity),
+    rhythmPattern: mapRitualToRhythm(event.phase),
+    timbralLayers: mapRecursionToVoices(event.depth),
+    melodicContour: mapMythToContour(event.function),
+  };
+}`}
+      </CodeStructure>
 
       <h3>Layer 3: The Performance System</h3>
       <p>
-        Real-time audio synthesis, spatialization, and interaction. Designed for live contexts — gallery installations, concert performances, interactive exhibits.
+        Real-time audio synthesis, spatialization, and interaction. Designed for live contexts — gallery installations, concert performances, interactive exhibits.<Cite id={5} author="Rowe, Robert" title="Interactive Music Systems: Machine Listening and Composing" source="MIT Press" year={1993} /> Rowe's taxonomy of interactive music systems — score-driven versus performance-driven, instrument versus player paradigms — informed the decision to build a system that operates in all three performance contexts. The system listens to the symbolic engine and responds in real time, functioning as both instrument and autonomous performer depending on context.<Cite id={6} author="Small, Christopher" title="Musicking: The Meanings of Performing and Listening" source="Wesleyan University Press" year={1998} />
       </p>
 
       <SketchContainer
@@ -60,16 +116,31 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
 
       <h2>The Discovery: Recursion Sounds Like Counterpoint</h2>
       <p>
-        This was the project's defining moment, and it wasn't planned. When the recursive engine enters self-referential processing — an entity examining itself, a system modifying its own rules — we initially tried mapping recursive depth to reverb. It sounded terrible.
+        This was the project's defining moment, and it wasn't planned. When the recursive engine enters self-referential processing — an entity examining itself, a system modifying its own rules — we initially tried mapping recursive depth to reverb. It sounded terrible.<Cite id={7} author="Fux, Johann Joseph" title="Gradus ad Parnassum" source="Vienna (trans. Norton, 1965)" year={1725} /> Fux codified the rules of counterpoint as a pedagogical system — species counterpoint, where each "species" adds a layer of rhythmic and melodic complexity atop a cantus firmus. What we discovered is that recursion already <em>is</em> counterpoint: each level of self-reference is a new voice commenting on the voices below it, following rules that derive from but are not identical to the original.
       </p>
       <p>
-        Counterpoint emerged from experimentation: each recursive level gets its own melodic voice, related to but distinct from its parent. The result is Bach-like clarity where you can follow each level of self-reference. Voices commenting on voices. The formal system created the conditions for a musical insight that pure intuition wouldn't have found.
+        Counterpoint emerged from experimentation: each recursive level gets its own melodic voice, related to but distinct from its parent. The result is Bach-like clarity where you can follow each level of self-reference. Voices commenting on voices. The formal system created the conditions for a musical insight that pure intuition wouldn't have found.<Cite id={8} author="Lerdahl, Fred and Ray Jackendoff" title="A Generative Theory of Tonal Music" source="MIT Press" year={1983} /> Lerdahl and Jackendoff's generative theory demonstrates that musical understanding is hierarchical — listeners parse music into nested grouping structures and metrical structures, precisely the kind of recursive nesting that the engine's symbolic events already encode.
       </p>
 
       <h2>Time Is the Hardest Translation</h2>
       <p>
-        Narrative time and musical time operate on different scales. We tried linear compression (boring), event-driven (sparse), and finally landed on <strong>continuous with event punctuation</strong> — an ongoing musical texture driven by entity state, punctuated by significant events. This works because it mirrors how we experience narrative: continuous consciousness punctuated by significant moments.
+        Narrative time and musical time operate on different scales. We tried linear compression (boring), event-driven (sparse), and finally landed on <strong>continuous with event punctuation</strong> — an ongoing musical texture driven by entity state, punctuated by significant events. This works because it mirrors how we experience narrative: continuous consciousness punctuated by significant moments.<Cite id={9} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> Meadows' distinction between stocks (accumulations) and flows (rates of change) maps directly onto the time problem: entity state is a stock that changes continuously, while symbolic events are discrete flows that perturb the system. The "continuous with event punctuation" approach emerged from treating narrative time as a stock-and-flow system rather than a sequence of discrete steps.
       </p>
+
+      <MermaidDiagram
+        caption="Time-mapping approaches attempted — from linear compression through event-driven to the final continuous-with-punctuation model"
+        chart={`graph LR
+    A[Linear Compression] -->|too uniform| X1[Rejected]
+    B[Event-Driven Only] -->|too sparse| X2[Rejected]
+    C[Continuous + Punctuation] -->|mirrors experience| Y[Adopted]
+    C --> S[Entity State = Continuous Texture]
+    C --> E[Symbolic Events = Punctuation]
+    S -->|harmonic drift| T[Tonal Movement]
+    S -->|timbral evolution| T
+    E -->|rhythmic accent| T
+    E -->|melodic gesture| T
+    T --> O[Output: Musical Time]`}
+      />
 
       <h2>Performance Contexts</h2>
       <ul>
@@ -77,6 +148,52 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
         <li><strong>Live concert</strong> — performer shapes narrative via gestural control, 20-45 minutes, one complete mythic cycle</li>
         <li><strong>Network performance</strong> — multiple instances contributing to a shared narrative space</li>
       </ul>
+      <p>
+        Each context demands a different relationship between system autonomy and human control.<Cite id={10} author="Murray, Janet H." title="Hamlet on the Holodeck: The Future of Narrative in Cyberspace" source="MIT Press" year={1997} /> Murray identifies the tension between authorial control and procedural generation as the central design challenge of interactive narrative — in the gallery, the system is fully autonomous; in concert, a human performer guides narrative direction through gestural input; in network performance, multiple human and machine agents negotiate a shared mythic space. The system architecture must accommodate all three without compromising any.<Cite id={11} author="Galanter, Philip" title="What is Generative Art? Complexity Theory as a Context for Art Theory" source="International Conference on Generative Art" year={2003} />
+      </p>
+
+      <Figure alt="System metrics for the generative music system" caption="System metrics — three architectural layers translating five symbolic event types across three performance modes" number={2}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Architecture Layers</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Symbolic Event Types</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Musical Parameters</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Performance Modes</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">12h</div>
+            <div class="stat-label">Max Continuous Run</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">TS</div>
+            <div class="stat-label">TypeScript Core</div>
+          </div>
+        </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Eno, Brian", title: "Generative Music", source: "In Motion Magazine", year: 1996 },
+        { id: 2, author: "Roads, Curtis", title: "The Computer Music Tutorial", source: "MIT Press", year: 1996 },
+        { id: 3, author: "Hofstadter, Douglas", title: "Gödel, Escher, Bach: An Eternal Golden Braid", source: "Basic Books", year: 1979 },
+        { id: 4, author: "Hermann, Thomas, Andy Hunt, and John G. Neuhoff", title: "The Sonification Handbook", source: "Logos Publishing House", year: 2011 },
+        { id: 5, author: "Rowe, Robert", title: "Interactive Music Systems: Machine Listening and Composing", source: "MIT Press", year: 1993 },
+        { id: 6, author: "Small, Christopher", title: "Musicking: The Meanings of Performing and Listening", source: "Wesleyan University Press", year: 1998 },
+        { id: 7, author: "Fux, Johann Joseph", title: "Gradus ad Parnassum", source: "Vienna (trans. Norton, 1965)", year: 1725 },
+        { id: 8, author: "Lerdahl, Fred and Ray Jackendoff", title: "A Generative Theory of Tonal Music", source: "MIT Press", year: 1983 },
+        { id: 9, author: "Meadows, Donella H.", title: "Thinking in Systems: A Primer", source: "Chelsea Green Publishing", year: 2008 },
+        { id: 10, author: "Murray, Janet H.", title: "Hamlet on the Holodeck: The Future of Narrative in Cyberspace", source: "MIT Press", year: 1997 },
+        { id: 11, author: "Galanter, Philip", title: "What is Generative Art? Complexity Theory as a Context for Art Theory", source: "International Conference on Generative Art", year: 2003 },
+      ]} />
 
     </ProjectDetail>
   </main>

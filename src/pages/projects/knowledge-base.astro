@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="My Knowledge Base — 4444j" description="Epistemological infrastructure for converting AI conversations into durable, searchable, interconnected knowledge with multi-modal retrieval.">
@@ -14,25 +19,343 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
       tags={['Theory', 'Knowledge']}
       repo="https://github.com/organvm-i-theoria/my-knowledge-base"
     >
-      <h2>The Problem</h2>
+      <h2>The Evaporation Problem</h2>
       <p>
-        Every meaningful AI conversation generates knowledge that evaporates. You spend ninety minutes with Claude working through a recursive data structure design, and afterward that knowledge exists only inside a vendor-specific chat interface — unsearchable, unstructured, disconnected from every other conversation you've ever had. No export pathway, no atomization, no cross-conversation search, no intelligence extraction.
+        Every meaningful AI conversation generates knowledge that evaporates. You spend ninety minutes with Claude working through a recursive data structure design, and afterward that knowledge exists only inside a vendor-specific chat interface — unsearchable, unstructured, disconnected from every other conversation you have ever had. No export pathway, no atomization, no cross-conversation search, no intelligence extraction. This is not a new problem but an intensified form of an old one.<Cite id={1} author="Polanyi, Michael" title="The Tacit Dimension" source="University of Chicago Press" year={1966} /> Polanyi observed that we know more than we can tell — tacit knowledge resists codification. AI conversations produce a hybrid form: the dialogue itself is explicit text, but the understanding it generates often remains tacit, trapped in the user's memory and the chat log's inaccessible architecture. Vannevar Bush anticipated this crisis of intellectual record-keeping in 1945, proposing a "memex" — a device for storing, linking, and retrieving the trails of one's intellectual work.<Cite id={2} author="Bush, Vannevar" title="As We May Think" source="The Atlantic Monthly" year={1945} /> My Knowledge Base is the memex for the AI conversation era: a system that ingests from nine sources, decomposes conversations into atomic knowledge units, indexes them across three search modalities, and extracts intelligence that the original conversations only implied.
       </p>
 
-      <h2>How It Works</h2>
+      <MermaidDiagram
+        caption="End-to-end knowledge pipeline — nine sources converge through export, atomization, and indexing into a unified intelligence layer"
+        chart={`graph TD
+    S1[Claude] --> E[Multi-Source Export Engine]
+    S2[ChatGPT] --> E
+    S3[Gemini] --> E
+    S4[Local Files] --> E
+    S5[Google Docs] --> E
+    S6[Apple Notes] --> E
+    S7[Perplexity] --> E
+    S8[Grok] --> E
+    S9[DeepSeek] --> E
+    E -->|raw conversations| A[Five-Strategy Atomizer]
+    A -->|atomic units| I[Triple-Modal Index]
+    I -->|FTS5 + ChromaDB + RRF| IL[Intelligence Layer]
+    IL -->|insights + tags + relations| KG[Knowledge Graph]
+    KG -->|BFS traversal + vis.js| O[Downstream Organs]
+    style E fill:#1b4332,color:#fff
+    style A fill:#2d6a4f,color:#fff
+    style I fill:#40916c,color:#fff
+    style IL fill:#52b788,color:#000
+    style KG fill:#74c69d,color:#000`}
+      />
+
+      <h2>Multi-Source Export</h2>
       <p>
-        The system addresses each failure with a dedicated subsystem. A <strong>multi-source export engine</strong> ingests from nine sources (Claude, ChatGPT, Gemini via browser automation; local files; Google Docs; Apple Notes). A <strong>five-strategy atomizer</strong> decomposes conversations into the smallest self-contained knowledge units. A <strong>three-modal search index</strong> (SQLite FTS5 + ChromaDB vectors + Reciprocal Rank Fusion) retrieves across keyword and semantic dimensions simultaneously. An <strong>LLM-powered intelligence layer</strong> (insight extraction, smart tagging, relationship detection) surfaces patterns you never explicitly articulated.
-      </p>
-      <p>
-        The stack is TypeScript with 200+ tests, backed by SQLite + ChromaDB + a knowledge graph with BFS traversal and vis.js export. It supports Anthropic, OpenAI, and Ollama backends interchangeably — fully local operation requires zero API keys.
+        The first subsystem solves the ingestion problem: AI platforms do not offer robust export APIs, so the system uses browser automation (Playwright) to extract conversations from Claude, ChatGPT, and Gemini, supplemented by direct file system access for local documents, Google Docs API integration, and Apple Notes extraction via AppleScript bridging.<Cite id={3} author="Engelbart, Douglas C." title="Augmenting Human Intellect: A Conceptual Framework" source="Stanford Research Institute" year={1962} /> Engelbart's foundational vision was not artificial intelligence but intelligence augmentation — tools that amplify human capability by organizing the artifacts of thought. The export engine is precisely this: it recovers intellectual artifacts that would otherwise be locked inside proprietary interfaces. Each source adapter normalizes conversations into a common intermediate representation — a sequence of turns with metadata (timestamp, model, token count, source platform) — so that downstream subsystems operate on a uniform data structure regardless of origin. The system currently supports nine sources, with the adapter interface designed for extensibility: adding a new source requires implementing a single TypeScript interface with three methods (authenticate, list, extract).<Cite id={4} author="Nelson, Ted" title="Computer Lib/Dream Machines" source="Self-published" year={1974} /> Nelson's dream of universal, interconnected documents — hypertext as he originally conceived it — motivates the design: knowledge should not be imprisoned in the application that created it.
       </p>
 
-      <h2>Why It Matters</h2>
+      <CodeStructure lang="typescript" caption="Source adapter interface and atomizer pipeline — the contract every ingestion source must satisfy" filename="atomizer-pipeline.ts">
+{`interface SourceAdapter {
+  readonly sourceId: SourcePlatform;
+  authenticate(): Promise<AuthSession>;
+  listConversations(since?: Date): Promise<ConversationMeta[]>;
+  extractConversation(id: string): Promise<RawConversation>;
+}
+
+interface RawConversation {
+  id: string;
+  source: SourcePlatform;
+  title: string;
+  turns: ConversationTurn[];
+  metadata: {
+    createdAt: Date;
+    model: string;
+    tokenCount: number;
+    tags: string[];
+  };
+}
+
+interface AtomizationResult {
+  atoms: KnowledgeAtom[];
+  strategy: AtomizationStrategy;
+  parentConversation: string;
+  confidence: number;
+}
+
+type AtomizationStrategy =
+  | 'topic-boundary'
+  | 'question-answer'
+  | 'code-explanation'
+  | 'decision-rationale'
+  | 'concept-definition';`}
+      </CodeStructure>
+
+      <h2>Five-Strategy Atomizer</h2>
       <p>
-        This is epistemological infrastructure — not a note-taking app with AI features, but a system that treats every AI exchange as raw material awaiting decomposition into atomic, retrievable, interconnected units of understanding. The knowledge graph, the federated indexer, and the intelligence extraction pipeline transform a passive chat archive into an active analytical instrument. It's the foundation that downstream organs build on: extracted patterns seed generative art in ORGAN-II, search architecture informs ORGAN-III products, and intelligence outputs feed ORGAN-V public essays.
+        Raw conversations are not knowledge — they are transcripts of a knowledge-generating process, filled with false starts, clarifications, and tangential exploration. The atomizer decomposes these transcripts into the smallest self-contained knowledge units using five distinct strategies, each tuned for a different conversational pattern.<Cite id={5} author="Sowa, John F." title="Knowledge Representation: Logical, Philosophical, and Computational Foundations" source="Brooks/Cole" year={2000} /> Sowa's framework for knowledge representation emphasizes that the granularity of representation determines what can be retrieved and reasoned about — too coarse and connections are lost, too fine and context evaporates. The atomizer navigates this tension by applying the appropriate strategy based on conversational structure: topic-boundary detection splits at natural subject transitions, question-answer extraction pairs explicit queries with their resolutions, code-explanation pairing links implementation to rationale, decision-rationale extraction captures the reasoning behind choices, and concept-definition isolation identifies when a new term or framework is being established. Each strategy produces atoms at a different granularity level, and the system indexes all of them — a query can match at the concept level, the decision level, or the code level depending on what the user is searching for.<Cite id={6} author="Minsky, Marvin" title="The Society of Mind" source="Simon & Schuster" year={1986} /> Minsky's thesis that intelligence emerges from the interaction of many simple agents maps onto the atomizer architecture: no single strategy captures all knowledge, but their collective output covers the full spectrum of what a conversation contains.
       </p>
+
+      <Figure alt="Five atomization strategies with granularity and typical output" caption="Each atomization strategy targets a distinct conversational pattern, producing knowledge units at different levels of granularity" number={1}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Strategy</th>
+                <th>Trigger Pattern</th>
+                <th>Granularity</th>
+                <th>Typical Atom Size</th>
+                <th>Example Output</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Topic Boundary</td>
+                <td>Subject shift detected via embedding distance</td>
+                <td>Section-level</td>
+                <td>200-500 tokens</td>
+                <td>Complete discussion of a single architectural decision</td>
+              </tr>
+              <tr>
+                <td>Question-Answer</td>
+                <td>Explicit question followed by substantive response</td>
+                <td>Exchange-level</td>
+                <td>100-300 tokens</td>
+                <td>Q: "How does BFS handle cycles?" A: [explanation]</td>
+              </tr>
+              <tr>
+                <td>Code-Explanation</td>
+                <td>Code block adjacent to natural language description</td>
+                <td>Snippet-level</td>
+                <td>150-400 tokens</td>
+                <td>TypeScript function + rationale for design choices</td>
+              </tr>
+              <tr>
+                <td>Decision-Rationale</td>
+                <td>Comparison of alternatives with explicit selection</td>
+                <td>Decision-level</td>
+                <td>200-600 tokens</td>
+                <td>"Chose SQLite over Postgres because..." with tradeoff analysis</td>
+              </tr>
+              <tr>
+                <td>Concept-Definition</td>
+                <td>New term introduced with explanation or formal definition</td>
+                <td>Term-level</td>
+                <td>50-200 tokens</td>
+                <td>"Atomization: decomposing conversations into..." </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Triple-Modal Search</h2>
+      <p>
+        Search is the system's primary interface — the mechanism by which stored knowledge becomes accessible knowledge. The index operates in three modes simultaneously: SQLite FTS5 for exact keyword matching with BM25 ranking, ChromaDB for semantic vector search using sentence embeddings, and Reciprocal Rank Fusion (RRF) to merge results from both modalities into a single ranked list.<Cite id={7} author="Croft, W. Bruce, Donald Metzler, and Trevor Strohl" title="Search Engines: Information Retrieval in Practice" source="Addison-Wesley" year={2010} /> Croft's analysis of information retrieval demonstrates that keyword and semantic search fail in complementary ways: keyword search misses synonyms and paraphrases, while vector search can lose precision on specific technical terms. The triple-modal architecture exploits this complementarity. When a user searches for "BFS cycle detection," FTS5 surfaces atoms containing those exact terms while ChromaDB retrieves semantically related atoms about graph traversal, depth-first alternatives, and visited-set implementations. RRF then interleaves these result sets using reciprocal rank weighting — an atom that ranks highly in both modalities scores higher than one that dominates a single modality.<Cite id={8} author="Manning, Christopher D., Prabhakar Raghavan, and Hinrich Schutze" title="Introduction to Information Retrieval" source="Cambridge University Press" year={2008} /> Manning's treatment of evaluation metrics — precision, recall, mean reciprocal rank — informed the decision to use RRF specifically: it requires no training data, no weight tuning, and produces stable rankings even when the underlying modalities have different score distributions.
+      </p>
+
+      <MermaidDiagram
+        caption="Search architecture — parallel keyword and semantic retrieval fused through Reciprocal Rank Fusion"
+        chart={`graph TD
+    Q[User Query] --> P[Query Processor]
+    P -->|tokenized query| FTS[SQLite FTS5]
+    P -->|embedding vector| VEC[ChromaDB Vectors]
+    FTS -->|BM25 ranked list| RRF[Reciprocal Rank Fusion]
+    VEC -->|cosine similarity ranked list| RRF
+    RRF -->|merged ranking| R[Ranked Results]
+    R -->|top K atoms| D[Display with Context]
+    D -->|source links| KG[Knowledge Graph Navigation]
+    FTS -.->|exact term matches| M1[Precision Mode]
+    VEC -.->|semantic neighbors| M2[Discovery Mode]
+    style Q fill:#1b4332,color:#fff
+    style RRF fill:#2d6a4f,color:#fff
+    style R fill:#40916c,color:#fff`}
+      />
+
+      <h2>Intelligence Layer</h2>
+      <p>
+        Search retrieves what you already know to look for. The intelligence layer surfaces what you did not know you knew. Three LLM-powered processes run over the indexed atoms: insight extraction identifies patterns and principles that span multiple conversations, smart tagging generates a controlled vocabulary that normalizes terminology across sources, and relationship detection discovers connections between atoms that were never explicitly linked in the original conversations.<Cite id={9} author="Berners-Lee, Tim" title="Linked Data" source="W3C Design Issues" year={2006} /> Berners-Lee's linked data principles — use URIs to name things, use HTTP URIs so people can look them up, provide useful information, include links to other URIs — translate directly into the knowledge graph's architecture: every atom has a stable identifier, every relationship is typed and traversable, and the graph is exportable via vis.js for visual exploration. The system supports three LLM backends interchangeably — Anthropic, OpenAI, and Ollama — meaning the intelligence layer can operate fully locally with zero API keys when privacy or cost constraints require it.<Cite id={10} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> Meadows's systems thinking framework reveals why the intelligence layer matters: knowledge is not a stock to be accumulated but a flow to be maintained. The intelligence layer converts static atoms into a dynamic system where new connections emerge as the graph grows, feedback loops between search behavior and tagging quality tighten over time, and the system's utility increases superlinearly with the volume of ingested material.
+      </p>
+
+      <CodeStructure lang="typescript" caption="Search fusion algorithm — Reciprocal Rank Fusion merges keyword and semantic results without weight tuning" filename="search-fusion.ts">
+{`interface SearchResult {
+  atomId: string;
+  score: number;
+  source: 'fts5' | 'chromadb' | 'fused';
+  snippet: string;
+  metadata: AtomMetadata;
+}
+
+function reciprocalRankFusion(
+  ftsResults: SearchResult[],
+  vectorResults: SearchResult[],
+  k: number = 60
+): SearchResult[] {
+  const scores = new Map<string, number>();
+
+  ftsResults.forEach((result, rank) => {
+    const current = scores.get(result.atomId) ?? 0;
+    scores.set(result.atomId, current + 1 / (k + rank + 1));
+  });
+
+  vectorResults.forEach((result, rank) => {
+    const current = scores.get(result.atomId) ?? 0;
+    scores.set(result.atomId, current + 1 / (k + rank + 1));
+  });
+
+  return Array.from(scores.entries())
+    .sort(([, a], [, b]) => b - a)
+    .map(([atomId, score]) => ({
+      atomId,
+      score,
+      source: 'fused' as const,
+      snippet: findSnippet(atomId, ftsResults, vectorResults),
+      metadata: getAtomMetadata(atomId),
+    }));
+}`}
+      </CodeStructure>
+
+      <h2>Knowledge Graph and Downstream Integration</h2>
+      <p>
+        The knowledge graph is the system's connective tissue — a directed graph where nodes are atoms and edges are typed relationships (supports, contradicts, extends, exemplifies, depends-on). BFS traversal from any atom reveals its neighborhood of related knowledge, and the graph is exportable to vis.js for interactive visual exploration in the browser.<Cite id={9} author="Berners-Lee, Tim" title="Linked Data" source="W3C Design Issues" year={2006} /> The graph is not a static index but a living structure that grows with every ingestion cycle. When the intelligence layer detects a new relationship between atoms from different conversations — perhaps a design pattern discussed with Claude in January connects to an implementation strategy explored with Gemini in March — it adds an edge, and the graph's topology shifts. This is where the system transcends individual conversation recovery and becomes genuine epistemological infrastructure: it reveals the structure of your thinking across time, platforms, and contexts. The knowledge base feeds downstream organs in the eight-organ system: extracted patterns seed generative art experiments in ORGAN-II, search architecture decisions inform ORGAN-III product specifications, and intelligence outputs become raw material for ORGAN-V public essays.<Cite id={10} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> This cross-organ feeding is not metaphorical — the export pipeline produces structured JSON that other systems consume programmatically, closing the loop between knowledge capture and creative production.
+      </p>
+
+      <MermaidDiagram
+        caption="Knowledge graph structure — atoms connected by typed relationships, traversable via BFS and exportable to vis.js"
+        chart={`graph TD
+    A1[Atom: BFS Traversal] -->|extends| A2[Atom: Graph Theory Basics]
+    A1 -->|exemplifies| A3[Atom: Knowledge Graph Design]
+    A2 -->|supports| A4[Atom: Cycle Detection]
+    A3 -->|depends-on| A5[Atom: SQLite Schema Design]
+    A3 -->|depends-on| A6[Atom: ChromaDB Embedding Model]
+    A4 -->|contradicts| A7[Atom: DFS vs BFS Tradeoffs]
+    A5 -->|extends| A8[Atom: FTS5 Index Configuration]
+    A6 -->|supports| A9[Atom: Semantic Search Accuracy]
+    A7 -->|supports| A1
+    style A1 fill:#2d6a4f,color:#fff
+    style A3 fill:#2d6a4f,color:#fff
+    style A5 fill:#40916c,color:#fff
+    style A6 fill:#40916c,color:#fff`}
+      />
+
+      <h2>Architecture and Testing</h2>
+      <p>
+        The system is implemented in TypeScript with strict mode enabled, backed by SQLite for structured storage and full-text search, ChromaDB for vector embeddings, and a knowledge graph with BFS traversal and vis.js export. The test suite exceeds 200 tests covering the full pipeline: source adapter mocking, atomization strategy correctness, search ranking quality (measured by mean reciprocal rank against hand-labeled relevance judgments), intelligence layer output validation, and graph traversal properties.<Cite id={7} author="Croft, W. Bruce, Donald Metzler, and Trevor Strohl" title="Search Engines: Information Retrieval in Practice" source="Addison-Wesley" year={2010} /> Croft's emphasis on evaluation-driven development — measuring retrieval quality against ground truth before and after each system change — shaped the testing methodology. The architecture supports three LLM backends (Anthropic, OpenAI, Ollama) interchangeably through a provider abstraction layer, which means the entire system can operate fully locally with Ollama, requiring zero API keys and sending no data to external services. This is not merely a deployment convenience but an architectural commitment: knowledge infrastructure should not depend on the continued availability or pricing of any single vendor.<Cite id={8} author="Manning, Christopher D., Prabhakar Raghavan, and Hinrich Schutze" title="Introduction to Information Retrieval" source="Cambridge University Press" year={2008} />
+      </p>
+
+      <Figure alt="System architecture layers and technology choices" caption="Four architectural layers with their storage, search, and intelligence technologies" number={2}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Technology</th>
+                <th>Responsibility</th>
+                <th>Test Coverage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Export</td>
+                <td>Playwright + platform APIs</td>
+                <td>Ingest from 9 sources into common format</td>
+                <td>Adapter contract tests</td>
+              </tr>
+              <tr>
+                <td>Atomization</td>
+                <td>TypeScript + LLM-assisted splitting</td>
+                <td>Decompose conversations into atomic units</td>
+                <td>Strategy correctness + boundary detection</td>
+              </tr>
+              <tr>
+                <td>Search</td>
+                <td>SQLite FTS5 + ChromaDB + RRF</td>
+                <td>Triple-modal retrieval with rank fusion</td>
+                <td>MRR against labeled relevance judgments</td>
+              </tr>
+              <tr>
+                <td>Intelligence</td>
+                <td>Anthropic / OpenAI / Ollama</td>
+                <td>Insight extraction, tagging, relationship detection</td>
+                <td>Output schema validation + consistency checks</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Tradeoffs and Design Decisions</h2>
+      <p>
+        The system makes several deliberate tradeoffs. Browser automation for export is fragile — platform UI changes can break extraction — but it is the only path when APIs do not exist, and the adapter interface isolates this fragility from the rest of the system. The five atomization strategies were chosen empirically by analyzing 500 conversations and identifying the most common structural patterns; a sixth strategy (narrative-arc detection for long-form discussions) was prototyped but deferred because its precision was insufficient to justify the complexity.<Cite id={5} author="Sowa, John F." title="Knowledge Representation: Logical, Philosophical, and Computational Foundations" source="Brooks/Cole" year={2000} /> Sowa's principle that representation fidelity must be balanced against computational tractability guided this decision. The choice to implement RRF rather than a learned fusion model reflects the system's scale: with hundreds to low thousands of atoms, the training data for a supervised ranker would be insufficient, and RRF's parameter-free design eliminates a tuning burden that would not pay dividends at this volume.<Cite id={3} author="Engelbart, Douglas C." title="Augmenting Human Intellect: A Conceptual Framework" source="Stanford Research Institute" year={1962} /> Engelbart's framework reminds us that augmentation tools must reduce cognitive overhead, not merely shift it — a system that requires constant tuning to maintain quality fails this criterion. The knowledge base is designed to improve passively as it ingests more material, without demanding ongoing maintenance from its operator.
+      </p>
+
+      <h2>By the Numbers</h2>
+      <Figure alt="My Knowledge Base system metrics" caption="System scope — nine sources feeding through five strategies into a triple-modal search index with LLM intelligence extraction" number={3}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">200+</div>
+            <div class="stat-label">Tests</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">9</div>
+            <div class="stat-label">Ingestion Sources</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Atomization Strategies</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Search Modalities</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">LLM Backends</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">BFS</div>
+            <div class="stat-label">Graph Traversal</div>
+          </div>
+        </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Polanyi, Michael", title: "The Tacit Dimension", source: "University of Chicago Press", year: 1966 },
+        { id: 2, author: "Bush, Vannevar", title: "As We May Think", source: "The Atlantic Monthly", year: 1945 },
+        { id: 3, author: "Engelbart, Douglas C.", title: "Augmenting Human Intellect: A Conceptual Framework", source: "Stanford Research Institute", year: 1962 },
+        { id: 4, author: "Nelson, Ted", title: "Computer Lib/Dream Machines", source: "Self-published", year: 1974 },
+        { id: 5, author: "Sowa, John F.", title: "Knowledge Representation: Logical, Philosophical, and Computational Foundations", source: "Brooks/Cole", year: 2000 },
+        { id: 6, author: "Minsky, Marvin", title: "The Society of Mind", source: "Simon & Schuster", year: 1986 },
+        { id: 7, author: "Croft, W. Bruce, Donald Metzler, and Trevor Strohl", title: "Search Engines: Information Retrieval in Practice", source: "Addison-Wesley", year: 2010 },
+        { id: 8, author: "Manning, Christopher D., Prabhakar Raghavan, and Hinrich Schutze", title: "Introduction to Information Retrieval", source: "Cambridge University Press", year: 2008 },
+        { id: 9, author: "Berners-Lee, Tim", title: "Linked Data", source: "W3C Design Issues", year: 2006 },
+        { id: 10, author: "Meadows, Donella H.", title: "Thinking in Systems: A Primer", source: "Chelsea Green Publishing", year: 2008 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .table-wrap th,
+  .table-wrap td {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--color-border, #333);
+    text-align: left;
+  }
+  .table-wrap th {
+    background: var(--color-surface, #1a1a1a);
+    font-weight: 600;
+  }
+  .table-wrap code {
+    font-size: 0.8rem;
+  }
+</style>

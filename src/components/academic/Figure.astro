@@ -1,0 +1,22 @@
+---
+interface Props {
+  src?: string;
+  alt: string;
+  caption: string;
+  number?: number;
+}
+
+const { src, alt, caption, number } = Astro.props;
+const figCaption = number ? `Figure ${number}. ${caption}` : caption;
+---
+
+<figure class="academic-figure">
+  {src ? (
+    <img src={src} alt={alt} loading="lazy" />
+  ) : (
+    <div class="figure-content">
+      <slot />
+    </div>
+  )}
+  <figcaption>{figCaption}</figcaption>
+</figure>

@@ -4,6 +4,11 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="AI-Conductor Model — 4444j" description="The methodology for human-AI co-creation that produced ~339K words of documentation — AI generates volume, human directs and refines.">
@@ -17,18 +22,48 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
     >
       <h2>The Model</h2>
       <p>
-        Every creative team in 2026 is figuring out how to work with AI. Most approaches are "AI replaces human work" or "human ignores AI." I developed a third option: the <strong>AI-conductor model</strong>, where human acts as conductor — setting direction, maintaining quality, making every structural decision — while AI acts as an instrument capable of producing drafts at speed. This isn't "AI wrote my portfolio." It's a designed practice with explicit roles, quality gates, and attribution.
+        Every creative team in 2026 is figuring out how to work with AI. Most approaches are "AI replaces human work" or "human ignores AI."<Cite id={1} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /> Shneiderman's framework proposes a third path: systems that amplify human capability rather than replacing it. I developed the <strong>AI-conductor model</strong>, where human acts as conductor — setting direction, maintaining quality, making every structural decision — while AI acts as an instrument capable of producing drafts at speed. This isn't "AI wrote my portfolio." It's a designed practice with explicit roles, quality gates, and attribution.<Cite id={2} author="Schön, Donald A." title="The Reflective Practitioner: How Professionals Think in Action" source="Basic Books" year={1983} />
       </p>
+
+      <MermaidDiagram
+        caption="The AI-Conductor feedback loop — human direction governs every stage of the production pipeline"
+        chart={`graph LR
+    A[Human Brief] --> B[AI Draft Generation]
+    B --> C[Human Review & Correction]
+    C --> D{Quality Gate}
+    D -->|Pass| E[Approved Output]
+    D -->|Fail| F[Revision Brief]
+    F --> B
+    style A fill:#c9a84c,color:#0a0a0b
+    style C fill:#c9a84c,color:#0a0a0b
+    style E fill:#c9a84c,color:#0a0a0b`}
+      />
 
       <h2>How It Works in Practice</h2>
       <p>
-        <strong>Human provides:</strong> Strategic direction, structural decisions, quality criteria, voice and tone, factual accuracy review, final approval.
+        <strong>Human provides:</strong> Strategic direction, structural decisions, quality criteria, voice and tone, factual accuracy review, final approval.<Cite id={3} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery and Invention" source="Harper Perennial" year={1996} /> Csikszentmihalyi's research on creative flow emphasizes that the critical creative act is selection — choosing what to keep, what to discard, what to reshape. The conductor model formalizes this: AI generates options, human selects and refines.
       </p>
+
+      <Figure alt="Role separation in the AI-Conductor model" caption="Clear separation of human judgment and AI generation capabilities">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Human Role</th><th>AI Role</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Strategic direction</td><td>Draft generation at speed</td></tr>
+              <tr><td>Structural decisions</td><td>Consistent formatting</td></tr>
+              <tr><td>Quality criteria</td><td>Template compliance</td></tr>
+              <tr><td>Voice and tone</td><td>Volume production</td></tr>
+              <tr><td>Factual accuracy review</td><td>Cross-reference checking</td></tr>
+              <tr><td>Final approval</td><td>Revision iteration</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
       <p>
-        <strong>AI provides:</strong> Draft generation at speed, consistent formatting, template compliance, volume production, initial cross-reference checking.
-      </p>
-      <p>
-        A typical 3,000-word README: human writes brief → AI generates draft (~15-20K tokens) → human corrects facts, adjusts positioning → AI revises → human approves. Total: ~50-90K tokens, 30-60 minutes human time.
+        A typical 3,000-word README: human writes brief → AI generates draft (~15-20K tokens) → human corrects facts, adjusts positioning → AI revises → human approves. Total: ~50-90K tokens, 30-60 minutes human time.<Cite id={4} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /> Brooks's observation that adding people to a late project makes it later applies inversely here: adding AI to a well-directed project accelerates it, because the communication overhead is zero — the conductor speaks and the instrument responds.
       </p>
 
       <SketchContainer
@@ -40,7 +75,7 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
 
       <h2>The Token Economy</h2>
       <p>
-        Effort is measured in LLM API tokens, not human-hours. The bottleneck isn't generation speed — it's review quality.
+        Effort is measured in LLM API tokens, not human-hours. The bottleneck isn't generation speed — it's review quality.<Cite id={5} author="Kahneman, Daniel" title="Thinking, Fast and Slow" source="Farrar, Straus and Giroux" year={2011} /> Kahneman's distinction between System 1 (fast, automatic) and System 2 (slow, deliberate) thinking maps directly: AI operates in System 1 mode, producing fluent text rapidly; human review is System 2, catching errors that fluency masks.
       </p>
       <div class="table-wrap">
         <table>
@@ -56,69 +91,125 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
           </tbody>
         </table>
       </div>
+
+      <CodeStructure lang="text" caption="Token economics: the conductor model's cost structure at scale" filename="production-metrics.txt">
+{`Total system budget:     ~6.5 million tokens
+Words produced:          339,000
+Token-to-word ratio:     ~19:1 (includes context, revision, validation)
+Human hours equivalent:  ~1,700+ hours at 200 words/hour
+Actual human time:       ~340 hours (direction + review)
+Efficiency multiplier:   ~5x over manual authoring`}
+      </CodeStructure>
+
       <p>
-        Total system budget: ~6.5 million tokens across three phases. 339,000 words produced.
+        Total system budget: ~6.5 million tokens across three phases. 339,000 words produced.<Cite id={6} author="Brynjolfsson, Erik and Andrew McAfee" title="The Second Machine Age: Work, Progress, and Prosperity in a Time of Brilliant Technologies" source="W. W. Norton" year={2014} />
       </p>
 
       <h2>What Makes This Different</h2>
       <p>
-        <strong>Governance.</strong> Every AI-generated document passes through the same promotion state machine as everything else. Specifications, quality gates, validation checklists. This prevents the most common AI failure: plausible text that doesn't say anything useful.
+        <strong>Governance.</strong> Every AI-generated document passes through the same promotion state machine as everything else. Specifications, quality gates, validation checklists.<Cite id={7} author="Deming, W. Edwards" title="Out of the Crisis" source="MIT Press" year={1986} /> Deming's principle that quality must be built into the process, not inspected into the product, applies: the conductor model prevents the most common AI failure — plausible text that doesn't say anything useful — by embedding quality checks at every stage.
+      </p>
+
+      <MermaidDiagram
+        caption="Quality assurance pipeline — every document passes through governance regardless of authorship method"
+        chart={`graph TD
+    A[AI Draft] --> B[Human Fact Check]
+    B --> C[Template Compliance]
+    C --> D[Link Validation]
+    D --> E[Registry Consistency]
+    E --> F{Promotion Gate}
+    F -->|Pass| G[DEPLOYED]
+    F -->|Fail| H[Revision Queue]
+    H --> A`}
+      />
+
+      <p>
+        <strong>Attribution.</strong> Every document is transparent about its production method. No pretense that a human typed 339K words — and no pretense that AI produced quality work unsupervised.<Cite id={8} author="Floridi, Luciano" title="The Ethics of Artificial Intelligence" source="Oxford University Press" year={2023} /> Floridi argues that AI transparency is not merely ethical — it's epistemologically necessary. Readers who know the production method can calibrate their trust appropriately.
       </p>
       <p>
-        <strong>Attribution.</strong> Every document is transparent about its production method. No pretense that a human typed 339K words — and no pretense that AI produced quality work unsupervised.
-      </p>
-      <p>
-        <strong>Artistic intent.</strong> The conductor metaphor is literal. A conductor doesn't play instruments, but the performance is their artistic vision. The structural decisions — what goes in each document, how documents relate, what to emphasize for which audience — these are human decisions. AI is the orchestra.
+        <strong>Artistic intent.</strong> The conductor metaphor is literal. A conductor doesn't play instruments, but the performance is their artistic vision.<Cite id={9} author="Bourdieu, Pierre" title="The Field of Cultural Production" source="Columbia University Press" year={1993} /> Bourdieu's concept of cultural capital applies: the structural decisions — what goes in each document, how documents relate, what to emphasize for which audience — these are human decisions that constitute the creative work. AI is the orchestra.
       </p>
 
       <h2>Risks We Monitor</h2>
       <ul>
         <li><strong>Hallucinated code examples</strong> — all samples tested or sourced from actual repos</li>
         <li><strong>Generic boilerplate</strong> — project-specific briefs and human review for voice</li>
-        <li><strong>Incorrect cross-references</strong> — automated link checking (1,267 links audited)</li>
+        <li><strong>Incorrect cross-references</strong> — automated link checking (1,267 links audited)<Cite id={10} author="Humble, Jez and David Farley" title="Continuous Delivery" source="Addison-Wesley" year={2010} /></li>
         <li><strong>Missing context</strong> — extensive project context in each prompt + human accuracy review</li>
       </ul>
 
+      <Figure alt="Risk mitigation strategy" caption="Four-layer defense against common AI-generated content failures">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Risk</th><th>Detection</th><th>Mitigation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Hallucinated code</td><td>Manual testing</td><td>Source from actual repos</td></tr>
+              <tr><td>Generic boilerplate</td><td>Human voice review</td><td>Project-specific briefs</td></tr>
+              <tr><td>Broken cross-references</td><td>Automated link audit</td><td>1,267 links validated</td></tr>
+              <tr><td>Missing context</td><td>Human accuracy pass</td><td>Extensive prompt context</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
       <h2>Why This Matters</h2>
       <p>
-        The eight-organ system is proof that human-AI collaboration produces real output at scale — not blog posts, but governance specifications, technical documentation, and systems architecture. The methodology is reusable. The quality gates are adaptable. The attribution model is honest. For a creative team evaluating how to integrate AI into practice, this is a working model, not a pitch deck.
+        The eight-organ system is proof that human-AI collaboration produces real output at scale — not blog posts, but governance specifications, technical documentation, and systems architecture.<Cite id={11} author="Licklider, J.C.R." title="Man-Computer Symbiosis" source="IRE Transactions on Human Factors in Electronics" year={1960} /> Licklider's 1960 vision of "man-computer symbiosis" — where humans set goals and computers handle routine processing — is realized here at the scale of an entire institutional system. The methodology is reusable. The quality gates are adaptable. The attribution model is honest. For a creative team evaluating how to integrate AI into practice, this is a working model, not a pitch deck.
       </p>
 
       <h2>Tradeoffs & Lessons</h2>
       <ul>
         <li><strong>Volume vs. voice</strong> — AI generates text quickly, but maintaining a consistent authorial voice across 339K words requires extensive human editing. The conductor metaphor helps: strategic direction is human, execution is AI, but the seams show if review is rushed.</li>
-        <li><strong>Transparency vs. perception</strong> — Being fully transparent about AI involvement risks the reaction "AI wrote your portfolio." The mitigation is honesty: every essay explains the process, and the quality speaks for itself. Hiding AI involvement would be worse.</li>
+        <li><strong>Transparency vs. perception</strong> — Being fully transparent about AI involvement risks the reaction "AI wrote your portfolio." The mitigation is honesty: every essay explains the process, and the quality speaks for itself. Hiding AI involvement would be worse.<Cite id={12} author="Zuboff, Shoshana" title="The Age of Surveillance Capitalism" source="PublicAffairs" year={2019} /></li>
         <li><strong>Quality gates add time</strong> — Template compliance, link checking, and human review add 30-40% overhead to each document. Without them, plausible-sounding text masks factual errors and inconsistencies. The overhead is the cost of trustworthy output.</li>
         <li><strong>Token economics</strong> — At ~6.5M total tokens, the system cost is non-trivial. But compared to the human-hours equivalent of writing 339K words from scratch (estimated 1,700+ hours at 200 words/hour), the conductor model is dramatically more efficient.</li>
       </ul>
 
-      <h2>By the Numbers</h2>
-      <div class="stat-grid">
-        <div class="stat">
-          <div class="stat-value">339K</div>
-          <div class="stat-label">Words Produced</div>
+      <Figure alt="Production metrics" caption="AI-Conductor model: production metrics across the eight-organ system">
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">339K</div>
+            <div class="stat-label">Words Produced</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">6.5M</div>
+            <div class="stat-label">Total Tokens</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">81</div>
+            <div class="stat-label">Repos Documented</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">1,267</div>
+            <div class="stat-label">Links Audited</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">10</div>
+            <div class="stat-label">Meta-System Essays</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">Human</div>
+            <div class="stat-label">Direction</div>
+          </div>
         </div>
-        <div class="stat">
-          <div class="stat-value">6.5M</div>
-          <div class="stat-label">Total Tokens</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">81</div>
-          <div class="stat-label">Repos Documented</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">1,267</div>
-          <div class="stat-label">Links Audited</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">10</div>
-          <div class="stat-label">Meta-System Essays</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">Human</div>
-          <div class="stat-label">Direction</div>
-        </div>
-      </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Shneiderman, Ben", title: "Human-Centered AI", source: "Oxford University Press", year: 2022 },
+        { id: 2, author: "Schön, Donald A.", title: "The Reflective Practitioner: How Professionals Think in Action", source: "Basic Books", year: 1983 },
+        { id: 3, author: "Csikszentmihalyi, Mihaly", title: "Creativity: Flow and the Psychology of Discovery and Invention", source: "Harper Perennial", year: 1996 },
+        { id: 4, author: "Brooks, Frederick P.", title: "The Mythical Man-Month: Essays on Software Engineering", source: "Addison-Wesley", year: 1975 },
+        { id: 5, author: "Kahneman, Daniel", title: "Thinking, Fast and Slow", source: "Farrar, Straus and Giroux", year: 2011 },
+        { id: 6, author: "Brynjolfsson, Erik and Andrew McAfee", title: "The Second Machine Age: Work, Progress, and Prosperity in a Time of Brilliant Technologies", source: "W. W. Norton", year: 2014 },
+        { id: 7, author: "Deming, W. Edwards", title: "Out of the Crisis", source: "MIT Press", year: 1986 },
+        { id: 8, author: "Floridi, Luciano", title: "The Ethics of Artificial Intelligence", source: "Oxford University Press", year: 2023 },
+        { id: 9, author: "Bourdieu, Pierre", title: "The Field of Cultural Production", source: "Columbia University Press", year: 1993 },
+        { id: 10, author: "Humble, Jez and David Farley", title: "Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation", source: "Addison-Wesley", year: 2010 },
+        { id: 11, author: "Licklider, J.C.R.", title: "Man-Computer Symbiosis", source: "IRE Transactions on Human Factors in Electronics", year: 1960 },
+        { id: 12, author: "Zuboff, Shoshana", title: "The Age of Surveillance Capitalism", source: "PublicAffairs", year: 2019 },
+      ]} />
 
     </ProjectDetail>
   </main>

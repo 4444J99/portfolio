@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Metasystem Master — 4444j" description="A real-time audience-participatory performance engine where collective input shapes live art through weighted consensus algorithms.">
@@ -16,16 +21,43 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
     >
       <h2>The Problem</h2>
       <p>
-        Live performance has always been a negotiation between performers and audiences — but the feedback channels are coarse. An audience member can clap or not clap. They cannot communicate "I want the texture to thin out while the harmonic tension increases." Existing tools for interactive performance are either too simple (binary voting, applause meters) or too complex (custom Max/MSP patches that take months per piece). There's nothing in between: a general-purpose engine that works across genres while remaining configurable enough for each.
+        Live performance has always been a negotiation between performers and audiences — but the feedback channels are coarse. An audience member can clap or not clap. They cannot communicate "I want the texture to thin out while the harmonic tension increases." Existing tools for interactive performance are either too simple (binary voting, applause meters) or too complex (custom Max/MSP patches that take months per piece).<Cite id={1} author="Machover, Tod" title="Hyperinstruments: A Progress Report" source="MIT Media Lab" year={1992} /> There's nothing in between: a general-purpose engine that works across genres while remaining configurable enough for each. The challenge of designing spectator experiences that move beyond passive consumption has been well documented in HCI research, yet few systems bridge the gap between audience agency and artistic coherence.<Cite id={5} author="Reeves, Stuart et al." title="Designing the Spectator Experience" source="CHI" year={2005} />
       </p>
 
       <h2>The Design Decision</h2>
       <p>
-        The critical insight: the audience is a <strong>co-performer operating a collective instrument</strong>, not a data source. And the performer is never subordinate to the crowd. Three override modes (<code>absolute</code>, <code>blend</code>, <code>lock</code>) give the performer graduated control — they can fully override a parameter, blend their intent with the audience's at any ratio, or lock it entirely. The resulting performances are negotiated in real time, at sub-second latency, across every parameter the performer exposes.
+        The critical insight: the audience is a <strong>co-performer operating a collective instrument</strong>, not a data source.<Cite id={2} author="Weinberg, Gil" title="Interconnected Musical Networks" source="MIT Press" year={2005} /> And the performer is never subordinate to the crowd. Three override modes (<code>absolute</code>, <code>blend</code>, <code>lock</code>) give the performer graduated control — they can fully override a parameter, blend their intent with the audience's at any ratio, or lock it entirely. This approach reflects the principle that human-centered systems must keep humans in command of consequential decisions, even when the system aggregates collective intelligence.<Cite id={3} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /> The resulting performances are negotiated in real time, at sub-second latency, across every parameter the performer exposes.
       </p>
 
+      <MermaidDiagram
+        caption="Data flow through the Omni-Dromenon Engine: audience input is aggregated through weighted consensus, checked against performer overrides, and distributed to all output channels."
+        chart={`graph TD
+  A[Audience Phones] -->|WebSocket /audience| B[Parameter Bus]
+  B --> C[Spatial Weighting]
+  B --> D[Temporal Weighting]
+  B --> E[Cluster Detection]
+  C --> F[Consensus Engine]
+  D --> F
+  E --> F
+  F --> G[Outlier Rejection]
+  G --> H[Exponential Smoothing]
+  H --> I{Performer Override?}
+  I -->|absolute| J[Performer Value Only]
+  I -->|blend| K[Weighted Mix]
+  I -->|lock| L[Locked Parameter]
+  I -->|none| M[Consensus Value]
+  J --> N[Output Bus]
+  K --> N
+  L --> N
+  M --> N
+  N --> O[Audience UI]
+  N --> P[Performer Dashboard]
+  N --> Q[OSC Bridge → Audio]`}
+      />
+
       <h2>Architecture</h2>
-      <pre class="architecture-diagram"><code>┌──────────────────────────────────────────────┐
+      <Figure alt="System architecture diagram showing NGINX reverse proxy, core engine, performance SDK, and audio synthesis bridge" caption="System architecture of the Omni-Dromenon Engine, showing the three-tier design: reverse proxy, core engine with consensus processing, and frontend/audio output layers." number={1}>
+        <pre class="architecture-diagram"><code>┌──────────────────────────────────────────────┐
 │           NGINX REVERSE PROXY                │
 ├──────────────────────────────────────────────┤
 │                                              │
@@ -61,10 +93,14 @@ Phone → WebSocket /audience → Parameter Bus
 → Outlier rejection → Smoothing
 → Performer override check
 → Audience UI + Performer Dashboard + OSC</code></pre>
+      </Figure>
+      <p>
+        The architecture reflects distributed systems principles where message-passing between isolated namespaces ensures fault tolerance: a misbehaving audience client cannot affect the performer channel, and vice versa.<Cite id={10} author="Tanenbaum, Andrew S." title="Distributed Systems: Principles and Paradigms" source="Pearson" year={2007} /> The Redis adapter enables horizontal scaling across multiple Node.js processes, a necessity for production-ready deployment under real audience load.<Cite id={9} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2018} />
+      </p>
 
       <h2>The Consensus Algorithm</h2>
       <p>
-        Audience inputs are batched, never processed individually. The consensus loop runs every 50ms, computing weighted averages across three axes that must sum to ~1.0:
+        Audience inputs are batched, never processed individually. The consensus loop runs every 50ms, computing weighted averages across three axes that must sum to ~1.0. This approach draws on research into social creativity, where collective input must be structured to avoid both tyranny-of-the-majority and cacophony.<Cite id={4} author="Fischer, Gerhard" title="Social Creativity: Turning Barriers into Opportunities for Design" source="ACM" year={2004} />
       </p>
       <div class="table-wrap">
         <table>
@@ -81,54 +117,119 @@ Phone → WebSocket /audience → Parameter Bus
         </table>
       </div>
       <p>
-        <strong>Spatial weighting</strong> uses exponential decay from the stage — closer audience members have more influence, reflecting the qualitative difference of proximity. <strong>Temporal weighting</strong> ensures the system responds to the audience's current state (5s decay window), not their historical average. <strong>Consensus weighting</strong> detects clusters: converging inputs amplify each other, producing decisive group movements rather than perpetual averages.
+        <strong>Spatial weighting</strong> uses exponential decay from the stage — closer audience members have more influence, reflecting the qualitative difference of proximity. <strong>Temporal weighting</strong> ensures the system responds to the audience's current state (5s decay window), not their historical average. <strong>Consensus weighting</strong> detects clusters: converging inputs amplify each other, producing decisive group movements rather than perpetual averages. The cluster detection mechanism resonates with Csikszentmihalyi's observations on how group flow states emerge when individual contributions align toward a shared creative target.<Cite id={7} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery" source="Harper Perennial" year={1996} />
       </p>
+
+      <CodeStructure lang="typescript" caption="Core consensus loop: batched audience inputs are weighted across spatial, temporal, and cluster axes, with outlier rejection and performer override applied before output." filename="consensus-engine.ts">
+{`interface ConsensusConfig {
+  spatial: number;   // proximity weight
+  temporal: number;  // recency weight
+  cluster: number;   // convergence weight
+  outlierThreshold: number; // z-score cutoff
+  smoothingFactor: number;  // EMA alpha
+}
+
+function computeConsensus(
+  batch: AudienceInput[],
+  config: ConsensusConfig,
+  performerOverrides: Map<string, Override>
+): ParameterState {
+  // 1. Weight each input by proximity to stage
+  const spatialWeighted = batch.map(input =>
+    applyExponentialDecay(input, input.distance, config.spatial)
+  );
+
+  // 2. Apply temporal decay (5s window)
+  const temporalWeighted = spatialWeighted.map(input =>
+    applyTemporalDecay(input, Date.now(), config.temporal)
+  );
+
+  // 3. Detect clusters via DBSCAN, amplify convergence
+  const clusters = detectClusters(temporalWeighted);
+  const clusterWeighted = amplifyConvergence(
+    temporalWeighted, clusters, config.cluster
+  );
+
+  // 4. Reject outliers beyond z-score threshold
+  const filtered = rejectOutliers(
+    clusterWeighted, config.outlierThreshold
+  );
+
+  // 5. Compute weighted average per parameter
+  const consensus = weightedAverage(filtered);
+
+  // 6. Exponential smoothing to prevent jitter
+  const smoothed = exponentialSmooth(
+    consensus, previousState, config.smoothingFactor
+  );
+
+  // 7. Apply performer overrides
+  return applyOverrides(smoothed, performerOverrides);
+}`}
+      </CodeStructure>
 
       <h2>Implementation</h2>
       <p>
-        Built as a <strong>pnpm monorepo</strong> (TypeScript + Python) with five packages: core-engine (Express + Socket.io + Redis), performance-sdk (React 18 + Vite), audio-synthesis-bridge (OSC + WebAudio), documentation, and example applications. The core engine handles two strictly separated Socket.io namespaces — <code>/audience</code> for many concurrent clients (target: 1,000+) and <code>/performer</code> for authenticated controllers. Z-score outlier rejection (threshold: 2.5 SD) and exponential smoothing (factor: 0.3) prevent individual inputs from dominating.
+        Built as a <strong>pnpm monorepo</strong> (TypeScript + Python) with five packages: core-engine (Express + Socket.io + Redis), performance-sdk (React 18 + Vite), audio-synthesis-bridge (OSC + WebAudio), documentation, and example applications. The frontend SDK leverages patterns from the Processing community's tradition of making creative coding accessible through well-designed abstractions.<Cite id={8} author="Reas, Casey and Ben Fry" title="Processing: A Programming Handbook" source="MIT Press" year={2007} /> The core engine handles two strictly separated Socket.io namespaces — <code>/audience</code> for many concurrent clients (target: 1,000+) and <code>/performer</code> for authenticated controllers. Z-score outlier rejection (threshold: 2.5 SD) and exponential smoothing (factor: 0.3) prevent individual inputs from dominating.
       </p>
 
       <h2>Why This Is Art</h2>
       <p>
-        The consensus algorithms aren't backstage plumbing — they're the medium. Who gets weighted more? What happens when the crowd and the performer disagree? These are <em>artistic</em> questions answered by system design. The engine consumes theoretical foundations from ORGAN-I (recursive-engine's identity models inform how performers and audience maintain coherence across transformations) and produces a framework that could become a commercial product in ORGAN-III. This is ORGAN-II at its most ambitious: art that treats its own governance as part of the aesthetic.
+        The consensus algorithms aren't backstage plumbing — they're the medium. Who gets weighted more? What happens when the crowd and the performer disagree? These are <em>artistic</em> questions answered by system design. This positions the engine within the lineage of generative art, where the system's rules constitute the artwork itself.<Cite id={6} author="Galanter, Philip" title="What Is Generative Art?" source="Digital Creativity" year={2003} /> The engine consumes theoretical foundations from ORGAN-I (recursive-engine's identity models inform how performers and audience maintain coherence across transformations) and produces a framework that could become a commercial product in ORGAN-III. Bourriaud's concept of relational aesthetics — art defined by the human relations it produces rather than the objects it creates — finds its most literal technical expression here: the engine's entire purpose is to structure the relationship between performer and audience.<Cite id={12} author="Bourriaud, Nicolas" title="Relational Aesthetics" source="Les Presses du R\u00e9el" year={2002} /> This is ORGAN-II at its most ambitious: art that treats its own governance as part of the aesthetic.
       </p>
 
       <h2>Tradeoffs & Lessons</h2>
       <ul>
         <li><strong>Generality vs. genre-specific optimization</strong> — A general-purpose engine across ballet, electronic music, theatre, and installation means no genre gets perfectly tailored behavior. The preset system mitigates this, but custom Max/MSP patches will always outperform a generalized solution for a single piece. The tradeoff is worth it for rapid deployment across genres.</li>
-        <li><strong>Performer override as compositional tool</strong> — Initially designed as a safety valve, performer override became the most interesting artistic element. The creative tension between crowd desire and performer resistance produces dynamics impossible in either autocratic or purely democratic systems.</li>
+        <li><strong>Performer override as compositional tool</strong> — Initially designed as a safety valve, performer override became the most interesting artistic element. The creative tension between crowd desire and performer resistance produces dynamics impossible in either autocratic or purely democratic systems. Bishop's analysis of participatory art's political dimensions — who holds power, who concedes it, and under what conditions — proved unexpectedly relevant to the override system's design.<Cite id={11} author="Bishop, Claire" title="Artificial Hells: Participatory Art and the Politics of Spectatorship" source="Verso" year={2012} /></li>
         <li><strong>Monorepo complexity</strong> — Five packages in a pnpm workspace means more build configuration, more dependency management, more CI complexity. The alternative (five separate repos) would be worse for a system where packages share types and build in lockstep.</li>
         <li><strong>WebSocket at scale</strong> — Targeting 1,000+ concurrent audience connections pushes Socket.io's single-process limits. Redis adapter handles horizontal scaling but adds operational complexity.</li>
       </ul>
 
       <h2>By the Numbers</h2>
-      <div class="stat-grid">
-        <div class="stat">
-          <div class="stat-value">5</div>
-          <div class="stat-label">Packages</div>
+      <Figure alt="Key metrics for the Omni-Dromenon Engine" caption="Summary statistics for the Omni-Dromenon Engine, reflecting the scope and performance targets of the system." number={2}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Packages</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Weighting Axes</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Genre Presets</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">50ms</div>
+            <div class="stat-label">Consensus Loop</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">1K+</div>
+            <div class="stat-label">Target Audience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">TS+Py</div>
+            <div class="stat-label">Hybrid Stack</div>
+          </div>
         </div>
-        <div class="stat">
-          <div class="stat-value">3</div>
-          <div class="stat-label">Weighting Axes</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">5</div>
-          <div class="stat-label">Genre Presets</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">50ms</div>
-          <div class="stat-label">Consensus Loop</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">1K+</div>
-          <div class="stat-label">Target Audience</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">TS+Py</div>
-          <div class="stat-label">Hybrid Stack</div>
-        </div>
-      </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Machover, Tod", title: "Hyperinstruments: A Progress Report", source: "MIT Media Lab", year: 1992 },
+        { id: 2, author: "Weinberg, Gil", title: "Interconnected Musical Networks", source: "MIT Press", year: 2005 },
+        { id: 3, author: "Shneiderman, Ben", title: "Human-Centered AI", source: "Oxford University Press", year: 2022 },
+        { id: 4, author: "Fischer, Gerhard", title: "Social Creativity: Turning Barriers into Opportunities for Design", source: "ACM", year: 2004 },
+        { id: 5, author: "Reeves, Stuart et al.", title: "Designing the Spectator Experience", source: "CHI", year: 2005 },
+        { id: 6, author: "Galanter, Philip", title: "What Is Generative Art?", source: "Digital Creativity", year: 2003 },
+        { id: 7, author: "Csikszentmihalyi, Mihaly", title: "Creativity: Flow and the Psychology of Discovery", source: "Harper Perennial", year: 1996 },
+        { id: 8, author: "Reas, Casey and Ben Fry", title: "Processing: A Programming Handbook", source: "MIT Press", year: 2007 },
+        { id: 9, author: "Nygard, Michael T.", title: "Release It! Design and Deploy Production-Ready Software", source: "Pragmatic Bookshelf", year: 2018 },
+        { id: 10, author: "Tanenbaum, Andrew S.", title: "Distributed Systems: Principles and Paradigms", source: "Pearson", year: 2007 },
+        { id: 11, author: "Bishop, Claire", title: "Artificial Hells: Participatory Art and the Politics of Spectatorship", source: "Verso", year: 2012 },
+        { id: 12, author: "Bourriaud, Nicolas", title: "Relational Aesthetics", source: "Les Presses du R\u00e9el", year: 2002 }
+      ]} />
 
     </ProjectDetail>
   </main>

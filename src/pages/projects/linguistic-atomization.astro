@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Linguistic Atomization Framework — 4444j" description="A computational rhetoric platform decomposing text into hierarchical atomic units across 46 canonical works in 15+ languages.">
@@ -14,22 +19,402 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
       tags={['Theory', 'Language']}
       repo="https://github.com/organvm-i-theoria/linguistic-atomization-framework"
     >
-      <h2>The Idea</h2>
+      <h2>The Problem: Rhetoric Without Instruments</h2>
       <p>
-        Rhetoric and stylistics have always operated at the level of the essay, the paragraph, the vague notion of "voice." This project asks what happens when you systematically decompose text into hierarchical atomic units — from morphemes through clauses through rhetorical moves — and apply six configurable analysis modules at every level of granularity. The result is a computational rhetoric platform, not an NLP pipeline: the analysis preserves the humanistic categories (tropes, figures, argumentative strategies) while making them countable, comparable, and visualizable.
+        For twenty-four centuries, the study of rhetoric has operated with essentially the same analytical toolkit: close reading, taxonomic classification, and argumentative intuition.<Cite id={1} author="Aristotle" title="Rhetoric" source="Oxford University Press (trans. Kennedy, 2007)" year={-350} /> Aristotle's tripartite framework — ethos, pathos, logos — remains the dominant analytical lens, not because it is complete but because no systematic alternative has emerged that preserves humanistic categories while enabling computational precision. The digital humanities have produced powerful tools for text analysis, but they overwhelmingly target semantic content: what a text means (topic modeling, sentiment analysis, named entity recognition) rather than what a text does — how its syntactic structures produce rhythmic effects, how its figurative language distributes across argumentative architecture, how its rhetorical moves sequence to produce persuasion.<Cite id={2} author="Burke, Kenneth" title="A Rhetoric of Motives" source="University of California Press" year={1950} /> Burke's dramatistic framework — his insistence that language is fundamentally a mode of action, not merely representation — provides the theoretical mandate for this project. The Linguistic Atomization Framework treats texts not as containers of meaning but as machines that produce effects, and it decomposes those machines into their smallest operational parts.
       </p>
 
-      <h2>How It Works</h2>
+      <MermaidDiagram
+        caption="The atomization pipeline: raw text is hierarchically decomposed from surface form through morphological, syntactic, and rhetorical layers, with each level carrying annotations from applicable analysis modules"
+        chart={`graph TD
+    RT[Raw Text] --> M[Morpheme Layer]
+    M --> W[Word Layer]
+    W --> CL[Clause Layer]
+    CL --> S[Sentence Layer]
+    S --> P[Paragraph Layer]
+    P --> RM[Rhetorical Move Layer]
+    RM --> AR[Argument Structure]
+    AR --> WA[Whole-Work Architecture]
+    M -.->|annotations| AM[Analysis Modules]
+    W -.->|annotations| AM
+    CL -.->|annotations| AM
+    S -.->|annotations| AM
+    P -.->|annotations| AM
+    RM -.->|annotations| AM
+    AM --> O[Integrated Output]
+    style RT fill:#f9f,stroke:#333
+    style AM fill:#9ff,stroke:#333
+    style O fill:#ff9,stroke:#333`}
+      />
+
+      <h2>Corpus and Scale</h2>
       <p>
-        The framework processes a corpus of <strong>46 canonical works spanning 15+ languages and 12 literary traditions</strong>. Six analysis modules run at configurable granularity levels, producing interactive HTML visualizations alongside structured data exports. The core is Python 3.10+ with 142 tests, generating both analytical reports and explorable browser-based views of the atomized texts. Each work is decomposed into a hierarchy of linguistic units, and each unit carries annotations from every applicable analysis module.
+        The framework operates on a curated corpus of <strong>46 canonical works spanning 15+ languages and 12 distinct literary-rhetorical traditions</strong>. This is not a convenience sample — it is a deliberate attempt to test every analytical claim against genuine linguistic diversity.<Cite id={3} author="Curtius, Ernst Robert" title="European Literature and the Latin Middle Ages" source="Princeton University Press (trans. Trask)" year={1948} /> Curtius demonstrated that the rhetorical traditions of Europe form a continuous chain from antiquity through the Middle Ages to modernity, with topoi (commonplaces) serving as the connective tissue. The corpus extends this genealogy beyond Europe: Sanskrit rhetoric (the alamkara tradition), classical Arabic (balagha), Chinese parallel prose (pianwen), and Japanese zuihitsu all have independent theoretical frameworks for analyzing how texts produce effects. By including works from each tradition alongside its theoretical apparatus, the framework can test whether analytical categories developed for Greek oratory generalize to Heian-period Japanese prose — and where they do not, the failures are as informative as the successes.<Cite id={4} author="Auerbach, Erich" title="Mimesis: The Representation of Reality in Western Literature" source="Princeton University Press (trans. Trask)" year={1946} /> Auerbach's method of anchoring broad historical claims in microscopic textual analysis — his famous comparison of Homer and Genesis in the opening chapter — is the direct methodological ancestor of this framework's approach: every macro-level claim about rhetorical pattern must be grounded in atomized, verifiable textual evidence.
       </p>
 
-      <h2>Why It Matters</h2>
+      <Figure alt="Corpus diversity across traditions" caption="Representative corpus diversity — 12 traditions, 15+ languages, spanning from 8th century BCE oral poetry to 20th century experimental fiction" number={1}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tradition</th>
+                <th>Language(s)</th>
+                <th>Representative Work</th>
+                <th>Period</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Greek Classical</td>
+                <td>Ancient Greek</td>
+                <td>Aristotle, <em>Rhetoric</em></td>
+                <td>4th c. BCE</td>
+              </tr>
+              <tr>
+                <td>Roman Oratory</td>
+                <td>Latin</td>
+                <td>Cicero, <em>De Oratore</em></td>
+                <td>1st c. BCE</td>
+              </tr>
+              <tr>
+                <td>Sanskrit Poetics</td>
+                <td>Sanskrit</td>
+                <td>Bharata, <em>Natyashastra</em></td>
+                <td>2nd c. BCE</td>
+              </tr>
+              <tr>
+                <td>Arabic Rhetoric</td>
+                <td>Classical Arabic</td>
+                <td>Al-Jurjani, <em>Dala'il al-I'jaz</em></td>
+                <td>11th c. CE</td>
+              </tr>
+              <tr>
+                <td>Medieval European</td>
+                <td>Latin, Old French</td>
+                <td>Dante, <em>De Vulgari Eloquentia</em></td>
+                <td>14th c. CE</td>
+              </tr>
+              <tr>
+                <td>Chinese Parallel Prose</td>
+                <td>Classical Chinese</td>
+                <td>Liu Xie, <em>Wenxin Diaolong</em></td>
+                <td>5th c. CE</td>
+              </tr>
+              <tr>
+                <td>Japanese Zuihitsu</td>
+                <td>Classical Japanese</td>
+                <td>Sei Shonagon, <em>The Pillow Book</em></td>
+                <td>11th c. CE</td>
+              </tr>
+              <tr>
+                <td>Renaissance Humanism</td>
+                <td>Italian, Latin</td>
+                <td>Erasmus, <em>De Copia</em></td>
+                <td>16th c. CE</td>
+              </tr>
+              <tr>
+                <td>Enlightenment</td>
+                <td>English, French</td>
+                <td>Blair, <em>Lectures on Rhetoric</em></td>
+                <td>18th c. CE</td>
+              </tr>
+              <tr>
+                <td>Russian Formalism</td>
+                <td>Russian</td>
+                <td>Shklovsky, <em>Art as Device</em></td>
+                <td>20th c. CE</td>
+              </tr>
+              <tr>
+                <td>Structuralism</td>
+                <td>French</td>
+                <td>Genette, <em>Narrative Discourse</em></td>
+                <td>20th c. CE</td>
+              </tr>
+              <tr>
+                <td>Latin American Boom</td>
+                <td>Spanish</td>
+                <td>Borges, <em>Ficciones</em></td>
+                <td>20th c. CE</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Six Analysis Modules</h2>
       <p>
-        Most computational linguistics focuses on what text <em>means</em> (sentiment, topic, intent). This project focuses on what text <em>does</em> — how rhetorical structures produce effects, how syntactic choices create rhythm, how figurative language distributes across a work's architecture. The multilingual corpus (Homer to Borges, Sanskrit to Japanese) means every analytical claim is tested against genuine linguistic diversity, not just English prose. This is ORGAN-I theory that directly enables ORGAN-II generative work: you can't generate compelling text without understanding how compelling text is constructed.
+        The framework applies six configurable analysis modules, each operating at every level of the atomization hierarchy — from morpheme to whole-work architecture. The modules are: <strong>Figurative Language</strong> (tropes, schemes, and their distribution patterns), <strong>Rhythmic Structure</strong> (prosodic analysis, clause length variation, periodic vs. loose sentence construction), <strong>Argumentative Topology</strong> (enthymeme detection, topos mapping, warrant analysis), <strong>Narrative Mechanics</strong> (focalization, temporality, voice), <strong>Lexical Stratification</strong> (register analysis, etymological layering, code-switching patterns), and <strong>Pragmatic Force</strong> (speech act classification, implicature, illocutionary sequencing).<Cite id={5} author="Genette, Gerard" title="Narrative Discourse: An Essay in Method" source="Cornell University Press (trans. Lewin)" year={1972} /> Genette's taxonomy of narrative functions — order, duration, frequency, mood, voice — structures the Narrative Mechanics module, providing a formal vocabulary for phenomena that close readers intuit but rarely formalize. Each module can operate at any granularity level: the Figurative Language module can identify a metaphor within a single clause or trace the distribution of metaphorical clusters across an entire work's argumentative architecture.<Cite id={6} author="Jakobson, Roman" title="Linguistics and Poetics" source="MIT Press (in Style in Language, ed. Sebeok)" year={1960} /> Jakobson's six functions of language — referential, emotive, conative, phatic, metalingual, poetic — inform the Pragmatic Force module, ensuring that the framework captures not just what a text says but what it does to its reader at each level of structure.
       </p>
+
+      <CodeStructure lang="python" caption="Hierarchical decomposition engine — each text is atomized into nested layers, with analysis modules attached at every granularity level" filename="lingframe/core/decompose.py">
+{`from dataclasses import dataclass, field
+from typing import Protocol, Sequence
+from enum import Enum
+
+class GranularityLevel(Enum):
+    MORPHEME = "morpheme"
+    WORD = "word"
+    CLAUSE = "clause"
+    SENTENCE = "sentence"
+    PARAGRAPH = "paragraph"
+    RHETORICAL_MOVE = "rhetorical_move"
+    ARGUMENT = "argument"
+    WHOLE_WORK = "whole_work"
+
+class AnalysisModule(Protocol):
+    """Each module implements this protocol at every granularity level."""
+    name: str
+    def analyze(self, unit: "LinguisticUnit") -> "ModuleResult": ...
+    def supported_levels(self) -> set[GranularityLevel]: ...
+
+@dataclass
+class LinguisticUnit:
+    text: str
+    level: GranularityLevel
+    children: list["LinguisticUnit"] = field(default_factory=list)
+    annotations: dict[str, "ModuleResult"] = field(default_factory=dict)
+    source_work: str = ""
+    position: tuple[int, int] = (0, 0)  # start, end offsets
+
+    def decompose(self, target: GranularityLevel) -> list["LinguisticUnit"]:
+        """Recursively decompose to target granularity."""
+        if self.level == target:
+            return [self]
+        return [
+            sub_unit
+            for child in self.children
+            for sub_unit in child.decompose(target)
+        ]
+
+    def annotate(self, modules: Sequence[AnalysisModule]) -> None:
+        """Apply all applicable modules, then recurse to children."""
+        for module in modules:
+            if self.level in module.supported_levels():
+                self.annotations[module.name] = module.analyze(self)
+        for child in self.children:
+            child.annotate(modules)`}
+      </CodeStructure>
+
+      <h2>Visualization and Output</h2>
+      <p>
+        Raw analysis data is only as useful as its representation. The framework generates two classes of output: <strong>interactive HTML visualizations</strong> for exploratory analysis and <strong>structured data exports</strong> (JSON, CSV, TEI-XML) for downstream computational work. The HTML views allow a reader to navigate the atomization hierarchy — clicking a rhetorical move zooms into its constituent sentences, then clauses, then morphemes — with annotations from each analysis module overlaid as color-coded layers. Heat maps show where figurative density clusters; timeline views trace argumentative structure; side-by-side comparisons align parallel passages across translations.<Cite id={7} author="Moretti, Franco" title="Distant Reading" source="Verso Books" year={2013} /> Moretti's distant reading methodology — the deliberate refusal to close-read in favor of quantitative pattern detection across large corpora — informs the aggregate views, where individual works dissolve into tradition-level patterns: How does metaphor density in Greek oratory compare to Arabic balagha? Does periodic sentence structure correlate with argumentative complexity across languages? The structured exports feed these questions into statistical analysis, while the interactive views keep the individual text visible and navigable.<Cite id={8} author="Manovich, Lev" title="Cultural Analytics" source="MIT Press" year={2020} /> Manovich's cultural analytics framework — treating cultural artifacts as data while preserving their individuality — provides the design philosophy: every visualization maintains a path from aggregate pattern back to specific textual evidence.
+      </p>
+
+      <MermaidDiagram
+        caption="Module composition architecture — raw text enters the decomposition engine, then all six analysis modules process the atomized hierarchy in parallel, producing an integrated analysis report with both interactive and structured outputs"
+        chart={`graph TD
+    T[Raw Text Input] --> DE[Decomposition Engine]
+    DE --> H[Atomized Hierarchy]
+    H --> FL[Figurative Language]
+    H --> RS[Rhythmic Structure]
+    H --> AT[Argumentative Topology]
+    H --> NM[Narrative Mechanics]
+    H --> LS[Lexical Stratification]
+    H --> PF[Pragmatic Force]
+    FL --> INT[Integration Layer]
+    RS --> INT
+    AT --> INT
+    NM --> INT
+    LS --> INT
+    PF --> INT
+    INT --> IV[Interactive HTML Views]
+    INT --> SD[Structured Data Export]
+    INT --> CR[Cross-Work Comparison]
+    IV --> EX[Exploratory Analysis]
+    SD --> CA[Computational Analysis]
+    CR --> TP[Tradition-Level Patterns]
+    style T fill:#f9f,stroke:#333
+    style INT fill:#9ff,stroke:#333
+    style EX fill:#ff9,stroke:#333
+    style CA fill:#ff9,stroke:#333
+    style TP fill:#ff9,stroke:#333`}
+      />
+
+      <h2>Cross-Tradition Analysis</h2>
+      <p>
+        The most theoretically significant capability of the framework is cross-tradition comparison. Because every work is decomposed using the same hierarchical structure and annotated by the same six modules, it becomes possible to ask questions that have never been systematically addressable: Does the distribution of figurative language in Cicero's periodic oratory resemble the parallel structures of Liu Xie's pianwen prose? Are the argumentative topologies of the Natyashastra commensurable with Aristotle's enthymematic reasoning? These are not idle exercises in comparative rhetoric — they test whether the analytical categories we inherited from the Greco-Roman tradition are genuinely universal or culturally specific artifacts.<Cite id={3} author="Curtius, Ernst Robert" title="European Literature and the Latin Middle Ages" source="Princeton University Press (trans. Trask)" year={1948} /> Curtius traced the survival of classical topoi through medieval Latin into the modern European vernaculars, but his method could not extend beyond the Latin-Christian tradition. The Linguistic Atomization Framework operationalizes a version of his genealogical method that crosses civilizational boundaries, using formal decomposition rather than philological intuition to detect structural homologies.<Cite id={4} author="Auerbach, Erich" title="Mimesis: The Representation of Reality in Western Literature" source="Princeton University Press (trans. Trask)" year={1946} /> Auerbach demonstrated that a single passage, analyzed with sufficient care, can reveal an entire civilization's relationship to reality. The framework preserves this depth while extending its reach: not one passage from one tradition but every passage from twelve.
+      </p>
+
+      <Figure alt="Module coverage across granularity levels" caption="Analysis module coverage — each module operates at specific granularity levels, ensuring comprehensive annotation from morpheme to whole-work architecture" number={2}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Module</th>
+                <th>Morpheme</th>
+                <th>Word</th>
+                <th>Clause</th>
+                <th>Sentence</th>
+                <th>Paragraph</th>
+                <th>Rhet. Move</th>
+                <th>Whole Work</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Figurative Language</td>
+                <td></td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+              </tr>
+              <tr>
+                <td>Rhythmic Structure</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td></td>
+                <td>*</td>
+              </tr>
+              <tr>
+                <td>Argumentative Topology</td>
+                <td></td>
+                <td></td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+              </tr>
+              <tr>
+                <td>Narrative Mechanics</td>
+                <td></td>
+                <td></td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+              </tr>
+              <tr>
+                <td>Lexical Stratification</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td></td>
+                <td></td>
+                <td>*</td>
+              </tr>
+              <tr>
+                <td>Pragmatic Force</td>
+                <td></td>
+                <td></td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+                <td>*</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Connection to ORGAN-II: From Analysis to Generation</h2>
+      <p>
+        The Linguistic Atomization Framework exists within ORGAN-I (Theoria) — the theoretical foundation of the eight-organ system. Its purpose is not merely scholarly: it directly enables the generative work of ORGAN-II (Poiesis). You cannot generate compelling text — whether procedural poetry, data-driven narrative, or interactive fiction — without understanding how compelling text is constructed at every level of granularity.<Cite id={9} author="Reas, Casey and Ben Fry" title="Processing: A Programming Handbook for Visual Designers" source="MIT Press" year={2007} /> Reas and Fry's Processing project demonstrated that creative coding requires a deep understanding of the formal principles underlying visual art — color theory, composition, gestalt perception — before generative algorithms can produce aesthetically meaningful output. The Linguistic Atomization Framework provides the equivalent foundation for text: a formal inventory of rhetorical devices, rhythmic patterns, argumentative structures, and narrative mechanics that generative systems can draw upon as compositional primitives.<Cite id={10} author="Galanter, Philip" title="What is Generative Art? Complexity Theory as a Context for Art Theory" source="International Conference on Generative Art" year={2003} /> Galanter's definition of generative art — a practice where the artist creates a system that in turn creates the artwork — maps directly onto the relationship between ORGAN-I and ORGAN-II. The atomization framework is the knowledge base; the generative systems are the creative agents that query it. Without atomization, generation is blind pattern-matching. With it, generation becomes informed composition.
+      </p>
+
+      <MermaidDiagram
+        caption="The ORGAN-I to ORGAN-II pipeline — atomized rhetorical knowledge feeds generative systems, enabling composition that is structurally informed rather than statistically derived"
+        chart={`graph LR
+    subgraph "ORGAN-I: Theoria"
+      AF[Atomization Framework] --> RK[Rhetorical Knowledge Base]
+      RK --> FI[Formal Inventory]
+      FI --> CP[Compositional Primitives]
+    end
+    subgraph "ORGAN-II: Poiesis"
+      CP --> GE[Generative Engines]
+      GE --> PP[Procedural Poetry]
+      GE --> DN[Data-Driven Narrative]
+      GE --> IF[Interactive Fiction]
+      GE --> VA[Visual-Audio Synthesis]
+    end
+    AF -.->|cross-tradition patterns| GE
+    PP -.->|feedback| AF
+    DN -.->|feedback| AF`}
+      />
+
+      <h2>Testing Rhetoric Computationally</h2>
+      <p>
+        The test suite contains <strong>142 tests</strong> organized across three categories: decomposition correctness (does the hierarchical structure preserve source text fidelity?), module agreement (do independent modules produce consistent annotations on shared units?), and cross-tradition validation (do analytical categories produce meaningful results outside their tradition of origin?).<Cite id={5} author="Genette, Gerard" title="Narrative Discourse: An Essay in Method" source="Cornell University Press (trans. Lewin)" year={1972} /> Genette's own methodology — rigorously testing narratological categories against texts that should resist them — provides the testing philosophy. The most informative tests are the ones that fail: when the Argumentative Topology module, designed primarily around Aristotelian enthymeme structure, encounters a passage from the Natyashastra that uses a fundamentally different reasoning framework, that failure illuminates the limits of the analytical category rather than a bug in the code.<Cite id={6} author="Jakobson, Roman" title="Linguistics and Poetics" source="MIT Press (in Style in Language, ed. Sebeok)" year={1960} /> Jakobson's structural method — isolating the poetic function by contrasting it with the other five functions of language — informs the module agreement tests: if the Figurative Language and Pragmatic Force modules both annotate the same clause, their annotations should be complementary (describing different aspects of the same phenomenon) rather than contradictory.
+      </p>
+
+      <h2>By the Numbers</h2>
+      <Figure alt="Project statistics for Linguistic Atomization Framework" caption="LingFrame system metrics — a computational rhetoric platform processing 46 canonical works through six analysis modules across 12 literary traditions" number={3}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">46</div>
+            <div class="stat-label">Canonical Works</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">15+</div>
+            <div class="stat-label">Languages</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">6</div>
+            <div class="stat-label">Analysis Modules</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">142</div>
+            <div class="stat-label">Tests</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">12</div>
+            <div class="stat-label">Literary Traditions</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">Python</div>
+            <div class="stat-label">3.10+</div>
+          </div>
+        </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Aristotle", title: "Rhetoric", source: "Oxford University Press (trans. Kennedy, 2007)", year: "350 BCE" },
+        { id: 2, author: "Burke, Kenneth", title: "A Rhetoric of Motives", source: "University of California Press", year: 1950 },
+        { id: 3, author: "Curtius, Ernst Robert", title: "European Literature and the Latin Middle Ages", source: "Princeton University Press (trans. Trask)", year: 1948 },
+        { id: 4, author: "Auerbach, Erich", title: "Mimesis: The Representation of Reality in Western Literature", source: "Princeton University Press (trans. Trask)", year: 1946 },
+        { id: 5, author: "Genette, Gerard", title: "Narrative Discourse: An Essay in Method", source: "Cornell University Press (trans. Lewin)", year: 1972 },
+        { id: 6, author: "Jakobson, Roman", title: "Linguistics and Poetics", source: "MIT Press (in Style in Language, ed. Sebeok)", year: 1960 },
+        { id: 7, author: "Moretti, Franco", title: "Distant Reading", source: "Verso Books", year: 2013 },
+        { id: 8, author: "Manovich, Lev", title: "Cultural Analytics", source: "MIT Press", year: 2020 },
+        { id: 9, author: "Reas, Casey and Ben Fry", title: "Processing: A Programming Handbook for Visual Designers", source: "MIT Press", year: 2007 },
+        { id: 10, author: "Galanter, Philip", title: "What is Generative Art? Complexity Theory as a Context for Art Theory", source: "International Conference on Generative Art", year: 2003 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .table-wrap th,
+  .table-wrap td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border, #333);
+    text-align: left;
+  }
+  .table-wrap th {
+    background: var(--color-surface, #1a1a1a);
+    font-weight: 600;
+  }
+  .table-wrap tr:nth-child(even) td {
+    background: var(--color-surface, #1a1a1a);
+  }
+</style>

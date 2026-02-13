@@ -4,6 +4,11 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="The Eight-Organ System — 4444j" description="An orchestration system coordinating 81 repositories across 8 GitHub organizations, treating governance as creative infrastructure.">
@@ -17,7 +22,7 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
     >
       <h2>The Insight</h2>
       <p>
-        I started from a conviction: the way you organize creative work <em>is</em> creative work. Most technologists treat governance as overhead — project boards, CI/CD, dependency rules. I wanted to find out what happens when you give those decisions the same care as the art they coordinate. The result surprised me: the governance model became the most interesting artifact in the system.
+        I started from a conviction: the way you organize creative work <em>is</em> creative work. Most technologists treat governance as overhead — project boards, CI/CD, dependency rules.<Cite id={1} author="Conway, Melvin E." title="How Do Committees Invent?" source="Datamation" year={1968} /> Conway's Law observes that system structure mirrors organizational structure; this project inverts that insight — the organizational structure was designed as an aesthetic artifact. I wanted to find out what happens when you give those decisions the same care as the art they coordinate. The result surprised me: the governance model became the most interesting artifact in the system.<Cite id={2} author="Schön, Donald A." title="The Reflective Practitioner: How Professionals Think in Action" source="Basic Books" year={1983} />
       </p>
 
       <SketchContainer
@@ -29,7 +34,7 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
 
       <h2>How It Works</h2>
       <p>
-        Eight GitHub organizations, each representing a distinct organ with a Greek ontological suffix:
+        Eight GitHub organizations, each representing a distinct organ with a Greek ontological suffix.<Cite id={3} author="Alexander, Christopher" title="A Pattern Language: Towns, Buildings, Construction" source="Oxford University Press" year={1977} /> Alexander's "pattern language" proposes that environments are shaped by named, interrelating patterns — here, each organ is a named pattern governing a domain of creative practice. The naming is not decorative: Greek ontological terms encode the organ's epistemological function.<Cite id={4} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} />
       </p>
 
       <div class="table-wrap">
@@ -52,44 +57,51 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
 
       <h2>The Registry</h2>
       <p>
-        A machine-readable JSON registry (<code>registry-v2.json</code>) serves as the single source of truth for all 81 repositories. Every repo entry carries status, dependencies, documentation tier, and promotion state. Automated scripts validate the registry against the live state of every repo — checking CI/CD, documentation, dependency integrity, and constitutional compliance.
+        A machine-readable JSON registry (<code>registry-v2.json</code>) serves as the single source of truth for all 81 repositories.<Cite id={5} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's principle of a "single authoritative data source" applies here at the organizational level — every repo entry carries status, dependencies, documentation tier, and promotion state. Automated scripts validate the registry against the live state of every repo, checking CI/CD, documentation, dependency integrity, and constitutional compliance.<Cite id={6} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation" source="Addison-Wesley" year={2010} />
       </p>
+
+      <CodeStructure lang="json" caption="Registry entry structure — each of 81 repos carries this metadata" filename="registry-v2.json (excerpt)">
+{`{
+  "recursive-engine": {
+    "organ": "I",
+    "status": "ACTIVE",
+    "tier": "flagship",
+    "promotion_status": "GRADUATED",
+    "implementation_status": "PRODUCTION",
+    "dependencies": ["organvm-i-theoria/myth-engine"],
+    "portfolio_relevance": "CRITICAL"
+  }
+}`}
+      </CodeStructure>
 
       <h2>The State Machine</h2>
       <p>
-        Work moves through a formal promotion pipeline:
+        Work moves through a formal promotion pipeline.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The State pattern from the Gang of Four formalizes how an object alters its behavior when its internal state changes — here, repositories are the objects, and each promotion level unlocks new capabilities and expectations.
       </p>
+
+      <MermaidDiagram
+        caption="Repository promotion state machine — each transition has documented criteria and automated validation"
+        chart={`stateDiagram-v2
+    [*] --> LOCAL
+    LOCAL --> CANDIDATE : passes initial review
+    CANDIDATE --> PUBLIC_PROCESS : documentation complete
+    PUBLIC_PROCESS --> GRADUATED : validation suite passes
+    GRADUATED --> ARCHIVED : lifecycle complete
+    CANDIDATE --> LOCAL : fails review
+    PUBLIC_PROCESS --> CANDIDATE : documentation gaps`}
+      />
+
       <p>
-        <code>LOCAL → CANDIDATE → PUBLIC_PROCESS → GRADUATED → ARCHIVED</code>
-      </p>
-      <p>
-        Each transition has documented criteria and automated validation. The state machine prevents premature claims and ensures quality at each stage — a project can't call itself "art" until it produces interesting output.
+        Each transition has documented criteria and automated validation. The state machine prevents premature claims and ensures quality at each stage — a project can't call itself "art" until it produces interesting output.<Cite id={8} author="McConnell, Steve" title="Code Complete: A Practical Handbook of Software Construction" source="Microsoft Press" year={2004} />
       </p>
 
       <h2>The Dependency Rule</h2>
       <p>
-        The most important constraint, and the one that generated the most creative tension: <strong>no back-edges</strong>. Theory feeds art feeds commerce — I→II→III — and that flow is enforced automatically. ORGAN-III cannot depend on ORGAN-II for maintenance. This forced clean API boundaries and created genuine stakes: theory must commit to art without knowing if it will become commerce. 31 dependency edges, zero circular dependencies, validated on every change.
+        The most important constraint, and the one that generated the most creative tension: <strong>no back-edges</strong>. Theory feeds art feeds commerce — I→II→III — and that flow is enforced automatically.<Cite id={9} author="Martin, Robert C." title="Clean Architecture: A Craftsman's Guide to Software Structure and Design" source="Prentice Hall" year={2017} /> Martin's Dependency Rule — that source code dependencies must point only inward — is applied here at the organizational level. This forced clean API boundaries and created genuine stakes: theory must commit to art without knowing if it will become commerce. 31 dependency edges, zero circular dependencies, validated on every change.<Cite id={10} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} />
       </p>
 
-      <h2>Automation</h2>
-      <p>
-        Five GitHub Actions workflows govern the system autonomously:
-      </p>
-      <ul>
-        <li><strong>validate-dependencies</strong> — checks the dependency graph on every registry change</li>
-        <li><strong>monthly-organ-audit</strong> — full system health check with Markdown report + JSON metrics</li>
-        <li><strong>promote-repo</strong> — handles state machine transitions with pre/post validation</li>
-        <li><strong>publish-process</strong> — syncs ORGAN-V content to public channels</li>
-        <li><strong>distribute-content</strong> — POSSE distribution to Mastodon, Discord, newsletter</li>
-      </ul>
-
-      <h2>Why This Is Art</h2>
-      <p>
-        The choice of eight organs (not seven, not ten) is a design decision. The Greek naming scheme is an aesthetic decision. The no-back-edges rule creates dramatic tension. The promotion state machine creates narrative arcs for each project. This isn't an engineer who also makes art, or an artist who codes on the side — the governance model, the registry schema, the dependency graph, <em>these are the work</em>.
-      </p>
-
-      <h2>Architecture Flow</h2>
-      <pre class="architecture-diagram"><code>┌──────────┐    ┌──────────┐    ┌──────────┐
+      <Figure alt="Organ dependency flow diagram" caption="Enforced dependency direction: theory feeds art feeds commerce. No back-edges permitted.">
+        <pre class="architecture-diagram"><code>{`┌──────────┐    ┌──────────┐    ┌──────────┐
 │ I Theoria│───▶│II Poiesis│───▶│III Ergon │
 │ Theory   │    │ Art      │    │ Commerce │
 └──────────┘    └──────────┘    └──────────┘
@@ -107,51 +119,114 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
 └──────────┘    └──────────┘
 
 No back-edges: theory → art → commerce only.
-Meta oversees all. 31 edges, 0 violations.</code></pre>
+Meta oversees all. 31 edges, 0 violations.`}</code></pre>
+      </Figure>
+
+      <h2>Automation</h2>
+      <p>
+        Five GitHub Actions workflows govern the system autonomously, embodying the principle that governance should be executable rather than advisory.<Cite id={11} author="Scott, James C." title="Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed" source="Yale University Press" year={1998} /> Scott warns against "high modernist" schemes that impose legibility from above without local knowledge — these workflows encode both top-down rules and bottom-up validation.
+      </p>
+      <ul>
+        <li><strong>validate-dependencies</strong> — checks the dependency graph on every registry change</li>
+        <li><strong>monthly-organ-audit</strong> — full system health check with Markdown report + JSON metrics</li>
+        <li><strong>promote-repo</strong> — handles state machine transitions with pre/post validation</li>
+        <li><strong>publish-process</strong> — syncs ORGAN-V content to public channels</li>
+        <li><strong>distribute-content</strong> — POSSE distribution to Mastodon, Discord, newsletter</li>
+      </ul>
+
+      <CodeStructure lang="yaml" caption="Dependency validation workflow — runs on every registry change, blocks merges on violations" filename=".github/workflows/validate-dependencies.yml">
+{`on:
+  push:
+    paths: ['registry-v2.json']
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/validate-deps.py
+        # Checks: cycle detection, transitive depth,
+        # back-edge blocking across 31 edges`}
+      </CodeStructure>
+
+      <h2>Why This Is Art</h2>
+      <p>
+        The choice of eight organs (not seven, not ten) is a design decision. The Greek naming scheme is an aesthetic decision. The no-back-edges rule creates dramatic tension.<Cite id={12} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery and Invention" source="Harper Perennial" year={1996} /> Csikszentmihalyi's framework situates creativity at the intersection of domain, field, and individual — this system is simultaneously the domain (the eight-organ architecture), the field (the governance rules that evaluate work), and the individual practice (the daily decisions about what to build). The promotion state machine creates narrative arcs for each project. This isn't an engineer who also makes art, or an artist who codes on the side — the governance model, the registry schema, the dependency graph, <em>these are the work</em>.
+      </p>
+
+      <SketchContainer
+        sketchId="network-graph"
+        height="350px"
+        mobileHeight="250px"
+        ariaLabel="Network graph visualization showing the eight organs as interconnected nodes with dependency edges between them."
+        data-nodes="Theoria,Poiesis,Ergon,Taxis,Logos,Koinonia,Kerygma,Meta"
+        data-edges="0-1;1-2;0-3;4-3;5-4;6-7;7-5"
+      />
 
       <h2>Results</h2>
       <p>
-        The system launched on 2026-02-11 with 9/9 launch criteria met. All 8 organs are operational. 228 validation checks pass across the Platinum validation suite — covering CI workflow presence, CHANGELOG files, architectural decision records, badge rows, and implementation status fields for every repo. POSSE distribution is live (Mastodon + Discord). Jekyll/GitHub Pages publishes 10 meta-system essays (~40K words) with an Atom RSS feed.
+        The system launched on 2026-02-11 with 9/9 launch criteria met. All 8 organs are operational.<Cite id={13} author="Deming, W. Edwards" title="Out of the Crisis" source="MIT Press" year={1986} /> Deming's quality management principles — measure, validate, improve — are embedded in the monthly audit cycle. 228 validation checks pass across the Platinum validation suite, covering CI workflow presence, CHANGELOG files, architectural decision records, badge rows, and implementation status fields for every repo. POSSE distribution is live (Mastodon + Discord). Jekyll/GitHub Pages publishes 10 meta-system essays (~40K words) with an Atom RSS feed.
       </p>
+
+      <Figure alt="Validation results summary" caption="Platinum validation suite: 228/228 checks passing across all 8 organs">
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">81</div>
+            <div class="stat-label">Repositories</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Organizations</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">339K</div>
+            <div class="stat-label">Words</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">31</div>
+            <div class="stat-label">Dependencies</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">228</div>
+            <div class="stat-label">Validation Checks</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">70+</div>
+            <div class="stat-label">CI Workflows</div>
+          </div>
+        </div>
+      </Figure>
+
       <p>
-        65 repositories carry CI workflows. 130 architectural decision records document key design choices. Every repo has a CHANGELOG and documentation tier assignment (7 flagship, 57 standard, 5 archive, 8 infrastructure).
+        65 repositories carry CI workflows. 130 architectural decision records document key design choices. Every repo has a CHANGELOG and documentation tier assignment (7 flagship, 57 standard, 5 archive, 8 infrastructure).<Cite id={14} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2018} />
       </p>
 
       <h2>Tradeoffs & Lessons</h2>
       <ul>
-        <li><strong>Documentation volume vs. maintenance burden</strong> — ~339K words is powerful as proof-of-work, but each README is a liability if the underlying repo changes. The registry-as-source-of-truth pattern helps: stats flow from the registry, not from hand-editing.</li>
+        <li><strong>Documentation volume vs. maintenance burden</strong> — ~339K words is powerful as proof-of-work, but each README is a liability if the underlying repo changes. The registry-as-source-of-truth pattern helps: stats flow from the registry, not from hand-editing.<Cite id={15} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /></li>
         <li><strong>Strict dependency rules vs. convenience</strong> — The no-back-edges constraint is the system's best design decision <em>and</em> its most annoying one. It forced clean interfaces but also meant rewriting code that wanted to "just import" from a downstream organ.</li>
-        <li><strong>AI-conductor workflow</strong> — ~339K words were produced using a human-AI co-creation model: AI generates volume, human directs and refines. This is honest and documented. The risk is perception ("AI wrote your portfolio"). The mitigation is transparency: every essay in ORGAN-V explains the process.</li>
+        <li><strong>AI-conductor workflow</strong> — ~339K words were produced using a human-AI co-creation model: AI generates volume, human directs and refines. This is honest and documented. The risk is perception ("AI wrote your portfolio"). The mitigation is transparency: every essay in ORGAN-V explains the process.<Cite id={16} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /></li>
         <li><strong>Naming scheme lock-in</strong> — Greek ontological naming (Theoria, Poiesis, Ergon) is distinctive but means renaming requires 40+ file edits. This was worth the tradeoff for identity coherence.</li>
       </ul>
 
-      <h2>By the Numbers</h2>
-      <div class="stat-grid">
-        <div class="stat">
-          <div class="stat-value">81</div>
-          <div class="stat-label">Repositories</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">8</div>
-          <div class="stat-label">Organizations</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">339K</div>
-          <div class="stat-label">Words</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">31</div>
-          <div class="stat-label">Dependencies</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">228</div>
-          <div class="stat-label">Validation Checks</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">70+</div>
-          <div class="stat-label">CI Workflows</div>
-        </div>
-      </div>
+      <References entries={[
+        { id: 1, author: "Conway, Melvin E.", title: "How Do Committees Invent?", source: "Datamation", year: 1968, url: "https://www.melconway.com/Home/Committees_Paper.html" },
+        { id: 2, author: "Schön, Donald A.", title: "The Reflective Practitioner: How Professionals Think in Action", source: "Basic Books", year: 1983 },
+        { id: 3, author: "Alexander, Christopher", title: "A Pattern Language: Towns, Buildings, Construction", source: "Oxford University Press", year: 1977 },
+        { id: 4, author: "Meadows, Donella H.", title: "Thinking in Systems: A Primer", source: "Chelsea Green Publishing", year: 2008 },
+        { id: 5, author: "Fowler, Martin", title: "Patterns of Enterprise Application Architecture", source: "Addison-Wesley", year: 2002 },
+        { id: 6, author: "Humble, Jez and David Farley", title: "Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation", source: "Addison-Wesley", year: 2010 },
+        { id: 7, author: "Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides", title: "Design Patterns: Elements of Reusable Object-Oriented Software", source: "Addison-Wesley", year: 1994 },
+        { id: 8, author: "McConnell, Steve", title: "Code Complete: A Practical Handbook of Software Construction", source: "Microsoft Press", year: 2004 },
+        { id: 9, author: "Martin, Robert C.", title: "Clean Architecture: A Craftsman's Guide to Software Structure and Design", source: "Prentice Hall", year: 2017 },
+        { id: 10, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
+        { id: 11, author: "Scott, James C.", title: "Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed", source: "Yale University Press", year: 1998 },
+        { id: 12, author: "Csikszentmihalyi, Mihaly", title: "Creativity: Flow and the Psychology of Discovery and Invention", source: "Harper Perennial", year: 1996 },
+        { id: 13, author: "Deming, W. Edwards", title: "Out of the Crisis", source: "MIT Press", year: 1986 },
+        { id: 14, author: "Nygard, Michael T.", title: "Release It! Design and Deploy Production-Ready Software", source: "Pragmatic Bookshelf", year: 2018 },
+        { id: 15, author: "Brooks, Frederick P.", title: "The Mythical Man-Month: Essays on Software Engineering", source: "Addison-Wesley", year: 1975 },
+        { id: 16, author: "Shneiderman, Ben", title: "Human-Centered AI", source: "Oxford University Press", year: 2022 },
+      ]} />
 
     </ProjectDetail>
   </main>
@@ -175,7 +250,7 @@ Meta oversees all. 31 edges, 0 violations.</code></pre>
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: var(--space-lg);
-    margin: var(--space-lg) 0;
+    margin: 0;
     font-size: 0.8rem;
     line-height: 1.4;
   }

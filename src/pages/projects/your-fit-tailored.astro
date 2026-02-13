@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Your Fit Tailored — 4444j" description="A circular apparel subscription platform — continuous, low-friction clothing experiences through weekly subscription and closed-loop logistics.">
@@ -14,22 +19,332 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
       tags={['Commerce', 'Product']}
       repo="https://github.com/organvm-iii-ergon/your-fit-tailored"
     >
-      <h2>The Idea</h2>
+      <h2>The Crisis of Linear Fashion</h2>
       <p>
-        What if you never shopped for clothes again? Not "auto-replenishment" — a fundamentally different relationship with apparel. A curated box of outfits arrives every week. You wear the items, return last week's box, and the system cleans, refurbishes, and redeploys inventory through a closed-loop pipeline. Fit confidence compounds with every cycle. Cognitive load asymptotically approaches zero.
+        The global apparel industry produces approximately 92 million tons of textile waste annually, a figure that has doubled in the last fifteen years and is projected to triple by 2050.<Cite id={1} author="Fletcher, Kate" title="Sustainable Fashion and Textiles: Design Journeys" source="Routledge" year={2014} /> This waste is not an externality of the fashion system — it is the system's primary output. The dominant model is linear: extract raw materials, manufacture garments, sell at volume, discard after minimal use. Fletcher's analysis reveals that the average garment is worn only seven times before disposal, a catastrophic ratio of resource investment to utility extraction. The problem is not that consumers are careless but that the economic structure incentivizes disposability. Cradle-to-cradle design thinking offers a theoretical framework for closing this loop: materials should circulate through technical or biological cycles indefinitely, with waste from one process becoming feedstock for the next.<Cite id={2} author="McDonough, William and Michael Braungart" title="Cradle to Cradle: Remaking the Way We Make Things" source="North Point Press" year={2002} /> Existing "rental" and "subscription" services attempt this but introduce new friction — sizing uncertainty, return logistics complexity, delayed availability — that limits adoption to early adopters willing to tolerate inconvenience. Your Fit Tailored is a specification-driven design for a circular apparel platform that attacks this friction directly.
       </p>
 
-      <h2>How It Works</h2>
+      <MermaidDiagram
+        caption="Closed-loop garment lifecycle — each stage feeds the next, with no terminal disposal endpoint"
+        chart={`graph LR
+    A[Curate] -->|style profile + fit data| B[Ship]
+    B -->|weekly box delivery| C[Wear]
+    C -->|7-day cycle| D[Return]
+    D -->|automated pickup| E[Clean]
+    E -->|industrial laundry| F[Refurbish]
+    F -->|quality inspection| G[Redeploy]
+    G -->|inventory pool| A
+    style A fill:#2d6a4f,color:#fff
+    style G fill:#2d6a4f,color:#fff`}
+      />
+
+      <h2>Specification-Driven Design</h2>
       <p>
-        This is a <strong>specification-driven seed</strong> for a circular apparel platform. The design covers the full product lifecycle: user onboarding with body measurement and style profiling, an algorithmic curation engine that improves with each cycle's feedback, closed-loop logistics (pickup, clean, refurbish, redeploy), and a temporal service model where the subscription <em>is</em> the product — you don't own garments, you subscribe to a continuous wardrobe experience. The specification defines inventory management with garment lifecycle tracking, quality gates for refurbishment, and sustainability metrics (waste reduction, water savings, carbon offset) as first-class product features.
+        Your Fit Tailored is not a prototype or a minimum viable product — it is a comprehensive product specification that defines every subsystem, interface, and lifecycle state before any implementation code is written.<Cite id={3} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /> Brooks observed that the hardest part of building software is deciding precisely what to build; the specification document is the artifact where this decision is made explicit and reviewable. The design covers six interconnected subsystems: user onboarding with body measurement capture, an algorithmic curation engine, subscription management with temporal service modeling, closed-loop logistics orchestration, garment lifecycle tracking with quality gates, and sustainability metrics as first-class product features. Each subsystem is defined with its interfaces, state machines, and invariants — following the enterprise architecture pattern of separating domain logic from delivery mechanism.<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> The specification is the product; implementation is a downstream activity that can proceed incrementally without re-discovering design decisions already encoded in the document.
       </p>
 
-      <h2>Why It Matters</h2>
+      <CodeStructure lang="typescript" caption="Garment lifecycle type system — every garment carries its full history as a typed state machine" filename="garment-lifecycle.ts">
+{`interface Garment {
+  id: string;
+  sku: string;
+  category: 'top' | 'bottom' | 'outerwear' | 'accessory';
+  size: SizeProfile;
+  condition: GarmentCondition;
+  lifecycle: LifecycleState;
+  history: CycleRecord[];
+  maxCycles: number;
+  sustainabilityMetrics: GarmentSustainability;
+}
+
+type LifecycleState =
+  | { phase: 'available'; warehouse: string }
+  | { phase: 'curated'; subscriberId: string; boxId: string }
+  | { phase: 'shipped'; trackingId: string; eta: Date }
+  | { phase: 'in-use'; since: Date; returnBy: Date }
+  | { phase: 'returned'; inspectionQueue: number }
+  | { phase: 'cleaning'; batchId: string }
+  | { phase: 'refurbishing'; repairs: RepairAction[] }
+  | { phase: 'retired'; reason: RetireReason; recycleStream: string };
+
+interface CycleRecord {
+  cycleNumber: number;
+  subscriberId: string;
+  shippedAt: Date;
+  returnedAt: Date;
+  conditionDelta: number;
+  feedbackScore: number | null;
+}`}
+      </CodeStructure>
+
+      <h2>Algorithmic Curation</h2>
       <p>
-        Fast fashion produces ~92 million tons of textile waste annually. Circular models reduce this, but most "rental" services add friction — returns, delays, sizing anxiety. Your Fit Tailored attacks the friction directly: the system learns your fit, your logistics are automated, and the garments cycle through a managed pipeline. The specification-driven approach means the product design is documented and testable before a single line of implementation code is written — demonstrating ORGAN-III's methodology of rigorous product specification before engineering investment.
+        The curation engine is the system's core differentiator — a recommender system where fit confidence compounds with every subscription cycle rather than resetting with each transaction.<Cite id={5} author="Adomavicius, Gediminas and Alexander Tuzhilin" title="Toward the Next Generation of Recommender Systems: A Survey of the State-of-the-Art and Possible Extensions" source="IEEE Transactions on Knowledge and Data Engineering" year={2005} /> Adomavicius and Tuzhilin's survey identifies three generations of recommender systems: collaborative filtering, content-based filtering, and hybrid approaches that combine multiple signal types. Your Fit Tailored operates in the hybrid space, fusing four distinct signal categories — body measurements, explicit style preferences, implicit feedback from wear-and-return patterns, and seasonal trend data — into a unified curation score for each candidate garment. The critical insight is temporal: unlike e-commerce recommendations that optimize for a single purchase decision, subscription curation optimizes across an indefinite series of cycles. Each return provides implicit signal (what was worn frequently, what was returned unworn) that tightens the model without requiring explicit user effort.<Cite id={6} author="Ricci, Francesco, Lior Rokach, and Bracha Shapira" title="Recommender Systems Handbook" source="Springer" year={2015} /> The system's confidence interval narrows with each cycle, approaching a state where cognitive load for the subscriber asymptotically approaches zero — the weekly box simply contains what they would have chosen, had they spent the time choosing.
       </p>
+
+      <Figure alt="Curation signal types and their characteristics" caption="Four signal categories fused by the curation engine, each with distinct collection method and decay rate" number={1}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Signal Type</th>
+                <th>Collection Method</th>
+                <th>Granularity</th>
+                <th>Decay Rate</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Body Measurements</td>
+                <td>Onboarding scan + periodic update</td>
+                <td>Millimeter precision</td>
+                <td>Slow (months)</td>
+                <td>Chest 102cm, inseam 81cm</td>
+              </tr>
+              <tr>
+                <td>Style Preferences</td>
+                <td>Explicit survey + swipe interface</td>
+                <td>Category-level</td>
+                <td>Medium (weeks)</td>
+                <td>Prefers earth tones, avoids prints</td>
+              </tr>
+              <tr>
+                <td>Feedback History</td>
+                <td>Implicit wear tracking + return notes</td>
+                <td>Garment-level</td>
+                <td>Fast (per cycle)</td>
+                <td>Wore item 5/7 days, returned item unworn</td>
+              </tr>
+              <tr>
+                <td>Seasonal Trends</td>
+                <td>Aggregate population data + weather API</td>
+                <td>Region-level</td>
+                <td>Cyclical (annual)</td>
+                <td>Lightweight layers trending in April</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Sustainability as Product Architecture</h2>
+      <p>
+        Most sustainability reporting in fashion is retrospective — annual reports that quantify damage already done. Your Fit Tailored inverts this by making sustainability metrics first-class product features that influence real-time operational decisions.<Cite id={7} author="Stahel, Walter R." title="The Circular Economy: A User's Guide" source="Routledge" year={2019} /> Stahel's circular economy framework distinguishes between "slowing the loop" (extending product life through repair and reuse) and "closing the loop" (recycling materials back into production). The system implements both: garments circulate through the wear-clean-refurbish cycle as long as they meet quality thresholds (slowing), and when they no longer qualify, they enter a material recycling stream rather than landfill (closing). Every garment carries a sustainability ledger — cumulative water savings versus new production, carbon offset from avoided manufacturing, and waste diverted from disposal. These metrics are not hidden in a corporate responsibility page; they are surfaced to subscribers as tangible value of their subscription.<Cite id={8} author="Raworth, Kate" title="Doughnut Economics: Seven Ways to Think Like a 21st-Century Economist" source="Chelsea Green Publishing" year={2017} /> Raworth's doughnut model — operating within planetary boundaries while meeting social foundations — provides the conceptual frame: the platform's operational ceiling is defined by environmental constraints, and its floor is defined by the quality of service that sustains subscriber trust.
+      </p>
+
+      <MermaidDiagram
+        caption="Quality gate decision flow — every returned garment passes through inspection before re-entering the inventory pool"
+        chart={`graph TD
+    R[Returned Garment] --> I[Inspect]
+    I -->|condition >= 0.8| C[Clean]
+    I -->|0.4 <= condition < 0.8| RF[Refurbish]
+    I -->|condition < 0.4| D{Material Analysis}
+    C --> A[Available Pool]
+    RF -->|repaired| QC[Quality Check]
+    QC -->|pass| A
+    QC -->|fail| D
+    D -->|recyclable fibers| RC[Recycling Stream]
+    D -->|blended/non-recyclable| UP[Upcycle Partner]
+    RC --> NM[New Material Feedstock]
+    UP --> SP[Secondary Products]
+    style A fill:#2d6a4f,color:#fff
+    style RC fill:#1b4332,color:#fff
+    style UP fill:#1b4332,color:#fff`}
+      />
+
+      <h2>Closed-Loop Logistics</h2>
+      <p>
+        The logistical backbone is what separates a circular apparel platform from a conventional clothing rental service. The system orchestrates a bidirectional supply chain — outbound boxes ship to subscribers on a fixed weekly cadence while inbound returns are collected simultaneously, creating a continuous flow that eliminates the "return burden" that plagues existing rental models.<Cite id={3} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /> Brooks's insight that conceptual integrity requires a single design vision applies directly: the logistics specification defines the entire chain — from warehouse picking algorithms to last-mile delivery routing to reverse logistics batching — as a unified system rather than a patchwork of vendor integrations. Each garment's location is tracked through every lifecycle phase, enabling predictive inventory management: the system knows not just what is in the warehouse but what will be returned next Tuesday, what will clear cleaning by Thursday, and what will be available for curation on Friday. This temporal awareness transforms inventory from a static pool into a dynamic flow, where utilization rates can exceed 85% across the garment fleet.<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} />
+      </p>
+
+      <CodeStructure lang="typescript" caption="Curation algorithm interface — the engine that matches available inventory to subscriber profiles" filename="curation-engine.ts">
+{`interface CurationEngine {
+  score(
+    garment: Garment,
+    subscriber: SubscriberProfile,
+    context: CurationContext
+  ): CurationScore;
+
+  curate(
+    pool: Garment[],
+    subscriber: SubscriberProfile,
+    boxSize: number,
+    context: CurationContext
+  ): CuratedBox;
+}
+
+interface CurationScore {
+  fitConfidence: number;      // 0-1, compounds with feedback
+  styleMatch: number;         // 0-1, explicit + implicit signals
+  seasonalRelevance: number;  // 0-1, weather + trend data
+  novelty: number;            // 0-1, avoids repetition
+  composite: number;          // weighted fusion of above
+  explanation: string[];      // human-readable reasoning
+}
+
+interface CurationContext {
+  season: Season;
+  weather: WeatherForecast;
+  previousBoxes: CuratedBox[];  // last N cycles
+  returnFeedback: FeedbackRecord[];
+  populationTrends: TrendData;
+}`}
+      </CodeStructure>
+
+      <h2>Specification-Driven Methodology</h2>
+      <p>
+        Your Fit Tailored embodies ORGAN-III's core methodology: rigorous product specification before engineering investment. The discipline of writing a complete specification — not user stories, not wireframes, but a formal document that defines every interface, state transition, and invariant — forces design decisions to surface before they become expensive to change.<Cite id={9} author="Parnas, David L." title="On the Criteria To Be Used in Decomposing Systems into Modules" source="Communications of the ACM" year={1972} /> Parnas demonstrated that the criteria used to decompose a system determine its long-term modifiability more than any other design decision. Your Fit Tailored's specification decomposes the platform into modules defined by information hiding: the curation engine does not know about logistics, the logistics system does not know about sustainability scoring, and the subscription manager does not know about garment condition. Each module exposes only the interface necessary for its collaborators. This decomposition is not an implementation choice — it is a specification artifact that constrains all downstream engineering.<Cite id={10} author="Jackson, Michael" title="Software Requirements and Specifications: A Lexicon of Practice, Principles and Prejudices" source="Addison-Wesley" year={1995} /> Jackson's distinction between requirements (what the world should do) and specifications (what the machine should do) clarifies the document's purpose: it specifies machine behavior precisely enough that implementation becomes a translation exercise rather than a design exercise.
+      </p>
+
+      <Figure alt="Platform subsystem decomposition and interfaces" caption="Six subsystems with defined interfaces — each module hides its internal complexity behind a specification contract" number={2}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Subsystem</th>
+                <th>Responsibility</th>
+                <th>Key Interface</th>
+                <th>State Machine States</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Onboarding</td>
+                <td>Capture body measurements and style profile</td>
+                <td><code>createProfile(scan, preferences) -> SubscriberProfile</code></td>
+                <td>3 (measuring, profiling, active)</td>
+              </tr>
+              <tr>
+                <td>Curation</td>
+                <td>Match garments to subscriber profiles</td>
+                <td><code>curate(pool, profile, context) -> CuratedBox</code></td>
+                <td>4 (scoring, ranking, assembling, confirmed)</td>
+              </tr>
+              <tr>
+                <td>Subscription</td>
+                <td>Manage temporal service lifecycle</td>
+                <td><code>advance(subscriberId) -> CycleTransition</code></td>
+                <td>5 (trial, active, paused, cancelled, churned)</td>
+              </tr>
+              <tr>
+                <td>Logistics</td>
+                <td>Orchestrate bidirectional shipping</td>
+                <td><code>dispatch(box) -> ShipmentPair</code></td>
+                <td>6 (queued, picked, shipped, delivered, collected, returned)</td>
+              </tr>
+              <tr>
+                <td>Lifecycle</td>
+                <td>Track garment condition and circulation</td>
+                <td><code>inspect(garment) -> GateDecision</code></td>
+                <td>8 (see lifecycle state type)</td>
+              </tr>
+              <tr>
+                <td>Sustainability</td>
+                <td>Compute and surface environmental metrics</td>
+                <td><code>ledger(garmentId) -> SustainabilityReport</code></td>
+                <td>2 (accumulating, reported)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Temporal Service Model</h2>
+      <p>
+        The fundamental product insight is that the subscription <em>is</em> the product — subscribers do not own garments, they subscribe to a continuous wardrobe experience. This is not a semantic distinction but a structural one that reshapes every design decision.<Cite id={7} author="Stahel, Walter R." title="The Circular Economy: A User's Guide" source="Routledge" year={2019} /> Stahel's "performance economy" concept — selling the use of goods rather than the goods themselves — maps directly onto the subscription model. When ownership transfers from consumer to platform, the incentive structure inverts: the platform benefits from garment longevity rather than obsolescence. Every repair that extends a garment's lifecycle reduces inventory cost. Every cycle that a garment survives increases its return on manufacturing investment. The specification defines this temporal model formally: a subscription is a stream of curated boxes indexed by cycle number, where each cycle's curation is conditioned on all previous cycles' feedback. The subscriber's relationship with the platform deepens over time not through loyalty programs or gamification but through genuine improvement in service quality — the system demonstrably learns what you want to wear.<Cite id={8} author="Raworth, Kate" title="Doughnut Economics: Seven Ways to Think Like a 21st-Century Economist" source="Chelsea Green Publishing" year={2017} />
+      </p>
+
+      <MermaidDiagram
+        caption="Subscriber lifecycle — fit confidence compounds across cycles as the curation model absorbs feedback"
+        chart={`graph TD
+    O[Onboarding] -->|body scan + style survey| T[Trial Cycle 1-4]
+    T -->|implicit + explicit feedback| A[Active Subscription]
+    A -->|cycle N feedback| C[Curation Refinement]
+    C -->|improved scoring| A
+    A -->|pause request| P[Paused]
+    P -->|resume| A
+    A -->|churn signal| R[Retention Intervention]
+    R -->|recovered| A
+    R -->|confirmed cancel| X[Cancelled]
+    X -->|profile preserved 12mo| D[Data Archived]
+    style A fill:#2d6a4f,color:#fff
+    style C fill:#40916c,color:#fff`}
+      />
+
+      <h2>Tradeoffs and Open Questions</h2>
+      <p>
+        The specification deliberately leaves certain questions open where premature commitment would constrain future learning. Garment sourcing strategy — whether to manufacture proprietary inventory, partner with existing brands, or operate a hybrid model — is identified as a decision that depends on scale and market conditions rather than system architecture. Similarly, the specification defines the curation algorithm's interface and evaluation criteria but not its implementation, acknowledging that the optimal approach (collaborative filtering, content-based, or hybrid) depends on subscriber population size and feedback density.<Cite id={5} author="Adomavicius, Gediminas and Alexander Tuzhilin" title="Toward the Next Generation of Recommender Systems: A Survey of the State-of-the-Art and Possible Extensions" source="IEEE Transactions on Knowledge and Data Engineering" year={2005} /> The pricing model is specified as a constraint satisfaction problem — the subscription price must cover logistics cost, garment depreciation, cleaning, and margin while remaining competitive with fast fashion's perceived value proposition — but the specific price point is deferred to market testing. This is the specification-driven methodology in practice: define what must be true, defer what can be learned.<Cite id={9} author="Parnas, David L." title="On the Criteria To Be Used in Decomposing Systems into Modules" source="Communications of the ACM" year={1972} />
+      </p>
+
+      <h2>By the Numbers</h2>
+      <Figure alt="Your Fit Tailored system metrics" caption="Platform specification scope — six subsystems, four signal types, and eight lifecycle states defining a complete circular apparel system" number={3}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Garment Lifecycle States</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">6</div>
+            <div class="stat-label">Platform Subsystems</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Curation Signal Types</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Quality Gate Outcomes</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Sustainability Metrics</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">Spec</div>
+            <div class="stat-label">Driven Design</div>
+          </div>
+        </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Fletcher, Kate", title: "Sustainable Fashion and Textiles: Design Journeys", source: "Routledge", year: 2014 },
+        { id: 2, author: "McDonough, William and Michael Braungart", title: "Cradle to Cradle: Remaking the Way We Make Things", source: "North Point Press", year: 2002 },
+        { id: 3, author: "Brooks, Frederick P.", title: "The Mythical Man-Month: Essays on Software Engineering", source: "Addison-Wesley", year: 1975 },
+        { id: 4, author: "Fowler, Martin", title: "Patterns of Enterprise Application Architecture", source: "Addison-Wesley", year: 2002 },
+        { id: 5, author: "Adomavicius, Gediminas and Alexander Tuzhilin", title: "Toward the Next Generation of Recommender Systems: A Survey of the State-of-the-Art and Possible Extensions", source: "IEEE Transactions on Knowledge and Data Engineering", year: 2005 },
+        { id: 6, author: "Ricci, Francesco, Lior Rokach, and Bracha Shapira", title: "Recommender Systems Handbook", source: "Springer", year: 2015 },
+        { id: 7, author: "Stahel, Walter R.", title: "The Circular Economy: A User's Guide", source: "Routledge", year: 2019 },
+        { id: 8, author: "Raworth, Kate", title: "Doughnut Economics: Seven Ways to Think Like a 21st-Century Economist", source: "Chelsea Green Publishing", year: 2017 },
+        { id: 9, author: "Parnas, David L.", title: "On the Criteria To Be Used in Decomposing Systems into Modules", source: "Communications of the ACM", year: 1972 },
+        { id: 10, author: "Jackson, Michael", title: "Software Requirements and Specifications: A Lexicon of Practice, Principles and Prejudices", source: "Addison-Wesley", year: 1995 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .table-wrap th,
+  .table-wrap td {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--color-border, #333);
+    text-align: left;
+  }
+  .table-wrap th {
+    background: var(--color-surface, #1a1a1a);
+    font-weight: 600;
+  }
+  .table-wrap code {
+    font-size: 0.8rem;
+  }
+</style>

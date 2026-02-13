@@ -1,0 +1,21 @@
+---
+interface Props {
+  id: number;
+  author: string;
+  title: string;
+  source: string;
+  year: string | number;
+  url?: string;
+}
+
+const { id, author, title, source, year, url } = Astro.props;
+---
+
+<sup class="cite"
+  data-ref-id={id}
+  data-ref-author={author}
+  data-ref-title={title}
+  data-ref-source={source}
+  data-ref-year={String(year)}
+  data-ref-url={url || ''}
+><a href={`#ref-${id}`}>[{id}]</a></sup>

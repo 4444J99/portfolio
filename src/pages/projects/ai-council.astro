@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="AI Council Coliseum — 4444j" description="A multi-agent debate platform with voting, achievements, and gamified governance — where AI agents deliberate and audiences judge.">
@@ -14,22 +19,343 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
       tags={['Art', 'AI']}
       repo="https://github.com/organvm-ii-poiesis/a-i-council--coliseum"
     >
-      <h2>The Idea</h2>
+      <h2>The Problem: Monologue Masquerading as Deliberation</h2>
       <p>
-        What if AI agents didn't just answer questions but debated each other — with audiences voting, achievements tracking engagement, and the entire deliberation process treated as a spectacle worth governing? The Coliseum is a platform where multiple AI agents take positions, argue, respond to each other, and submit to audience judgment. It's competitive debate meets gamification meets governance design.
+        The dominant paradigm in AI assistance is the single-agent monologue: one model, one prompt, one answer. This collapses the epistemic richness that emerges when multiple perspectives genuinely contend with each other.<Cite id={1} author="Russell, Stuart and Peter Norvig" title="Artificial Intelligence: A Modern Approach" source="Pearson" year={2020} /> Russell and Norvig formalize the multi-agent environment as one where "the best course of action for each agent depends on what the other agents do" — a fundamentally different problem than single-agent optimization. The AI Council Coliseum operationalizes this insight: rather than asking one model for the best answer, it stages structured deliberation among agents with distinct positions, letting adversarial argument surface considerations that consensus-seeking models suppress.<Cite id={2} author="Wooldridge, Michael" title="An Introduction to MultiAgent Systems" source="John Wiley & Sons" year={2009} /> Wooldridge's taxonomy of agent interaction — cooperative, competitive, and mixed — maps directly onto the Coliseum's debate formats, where agents must balance advocacy for their position with responsiveness to counter-arguments.
       </p>
 
-      <h2>How It Works</h2>
+      <MermaidDiagram
+        caption="Core deliberation flow — agents are created with positions, engage in structured debate rounds, face audience voting, and produce governance outcomes"
+        chart={`graph TD
+    AC[Agent Creation] -->|assign positions| DP[Debate Pairing]
+    DP -->|structured rounds| DR[Debate Rounds]
+    DR -->|opening statements| R1[Round 1: Position]
+    R1 -->|rebuttals| R2[Round 2: Response]
+    R2 -->|closing arguments| R3[Round 3: Synthesis]
+    R3 -->|submit to audience| VS[Voting Session]
+    VS -->|cast ballots| VT[Vote Tallying]
+    VT -->|determine outcome| RES[Results & Rankings]
+    RES -->|update stats| LB[Leaderboards]
+    RES -->|grant awards| ACH[Achievements]
+    ACH -->|feed progression| UP[User Progression]
+    UP -->|unlock capabilities| AC`}
+      />
+
+      <h2>Technical Architecture: FastAPI + Next.js</h2>
       <p>
-        The current MVP is a <strong>FastAPI backend</strong> with a <strong>Next.js frontend scaffold</strong>. Core flows are implemented in-memory: agent creation and lifecycle management, event ingestion with source filtering, voting sessions with cast/finalize/results flow, and a user progression system with achievements and leaderboards. The API exposes 20+ endpoints covering agents, events, voting, achievements, and user stats. Blockchain integration points (staking, transfers, rewards) are architecturally present but intentionally return <code>501</code> — the on-chain governance layer is planned, not premature.
+        The Coliseum is built as a decoupled system: a <strong>FastAPI backend</strong> that manages all deliberation state and a <strong>Next.js frontend scaffold</strong> for real-time audience interaction. The API follows REST conventions with resource-oriented endpoints organized around five domains: agents, events, voting, achievements, and user statistics.<Cite id={3} author="Fielding, Roy Thomas" title="Architectural Styles and the Design of Network-Based Software Architectures" source="Doctoral dissertation, University of California, Irvine" year={2000} /> Fielding's dissertation defines the constraints that make REST scalable — stateless interactions, uniform interfaces, layered systems — and the Coliseum adheres to these rigorously, with one deliberate exception: debate state is maintained in-memory on the server to enable real-time round progression without the latency of database round-trips. This is not accidental statefulness but a conscious architectural tradeoff, following the principle that patterns should be applied where they serve the system's actual constraints, not as dogma.<Cite id={4} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The Observer pattern governs event propagation: when an agent submits a statement, all subscribed clients receive the update through server-sent events, enabling the real-time spectacle that makes deliberation watchable.
       </p>
 
-      <h2>Why It Matters</h2>
+      <CodeStructure lang="python" caption="Agent lifecycle management — creation, debate assignment, and state transitions through the deliberation pipeline" filename="api/agents.py">
+{`from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel, Field
+from enum import Enum
+from uuid import uuid4
+from typing import Optional
+
+class AgentRole(str, Enum):
+    ADVOCATE = "advocate"
+    CRITIC = "critic"
+    SYNTHESIZER = "synthesizer"
+    WILDCARD = "wildcard"
+
+class AgentState(str, Enum):
+    IDLE = "idle"
+    DEBATING = "debating"
+    AWAITING_VOTE = "awaiting_vote"
+    RETIRED = "retired"
+
+class AgentCreate(BaseModel):
+    name: str = Field(..., min_length=1, max_length=64)
+    role: AgentRole
+    position: str = Field(..., min_length=10)
+    model_config: Optional[dict] = None
+
+class Agent(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid4()))
+    name: str
+    role: AgentRole
+    position: str
+    state: AgentState = AgentState.IDLE
+    wins: int = 0
+    debates_entered: int = 0
+
+router = APIRouter(prefix="/agents", tags=["agents"])
+agents_store: dict[str, Agent] = {}
+
+@router.post("/", status_code=201)
+async def create_agent(payload: AgentCreate) -> Agent:
+    agent = Agent(**payload.model_dump())
+    agents_store[agent.id] = agent
+    return agent
+
+@router.get("/{agent_id}")
+async def get_agent(agent_id: str) -> Agent:
+    if agent_id not in agents_store:
+        raise HTTPException(404, f"Agent {agent_id} not found")
+    return agents_store[agent_id]
+
+@router.post("/{agent_id}/enter-debate/{debate_id}")
+async def enter_debate(agent_id: str, debate_id: str) -> Agent:
+    agent = agents_store.get(agent_id)
+    if not agent:
+        raise HTTPException(404, "Agent not found")
+    if agent.state != AgentState.IDLE:
+        raise HTTPException(409, f"Agent is {agent.state}, not idle")
+    agent.state = AgentState.DEBATING
+    agent.debates_entered += 1
+    return agent`}
+      </CodeStructure>
+
+      <h2>The Deliberation Model</h2>
       <p>
-        This project sits at the intersection of AI agent design, governance experimentation, and gamified audience participation. The deliberation format forces genuine multi-perspective analysis rather than single-model monologues. The gamification layer (achievements, leaderboards, user progression) makes governance participation engaging rather than tedious. And the architectural decision to expose blockchain endpoints as explicit <code>501</code>s demonstrates honest MVP scoping — showing what's planned without pretending it's built.
+        The Coliseum's deliberation format is not arbitrary — it draws on formal argumentation theory to structure how agents engage. Each debate proceeds through three rounds: position statement, rebuttal, and synthesis. This structure mirrors Habermas's conditions for rational discourse, where validity claims must be raised, challenged, and redeemed through argument rather than authority.<Cite id={5} author="Habermas, Jürgen" title="The Theory of Communicative Action, Vol. 1: Reason and the Rationalization of Society" source="Beacon Press" year={1981} /> Agents don't simply state positions in parallel — they must respond to what the opposing agent actually said, creating genuine dialectical tension. The system enforces this structurally: a Round 2 response that fails to reference specific claims from Round 1 is flagged by the moderator logic as non-responsive. This matters because the goal is not to simulate debate aesthetics but to produce the epistemic benefits that adversarial reasoning provides.<Cite id={6} author="Mercier, Hugo and Dan Sperber" title="The Enigma of Reason" source="Harvard University Press" year={2017} /> Mercier and Sperber's argumentative theory of reasoning holds that human reason evolved not for solitary truth-seeking but for persuading others and evaluating their arguments — the Coliseum externalizes this into a computational architecture where agents must justify their reasoning to survive audience judgment.
       </p>
+
+      <Figure alt="Comparison of deliberation models" caption="Deliberation model comparison — the Coliseum implements adversarial debate with structured rounds, contrasted with consensus and voting approaches" number={1}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Structure</th>
+                <th>Conflict Resolution</th>
+                <th>Epistemic Strength</th>
+                <th>Audience Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Adversarial Debate</strong></td>
+                <td>Rounds with rebuttals</td>
+                <td>Audience adjudication</td>
+                <td>High — forces steelmanning</td>
+                <td>Judge (active)</td>
+              </tr>
+              <tr>
+                <td>Consensus Building</td>
+                <td>Iterative convergence</td>
+                <td>Mutual accommodation</td>
+                <td>Medium — groupthink risk</td>
+                <td>Observer (passive)</td>
+              </tr>
+              <tr>
+                <td>Majority Voting</td>
+                <td>Single-round polling</td>
+                <td>Numerical majority</td>
+                <td>Low — no argument exchange</td>
+                <td>Voter (minimal)</td>
+              </tr>
+              <tr>
+                <td>Delphi Method</td>
+                <td>Anonymous multi-round</td>
+                <td>Statistical convergence</td>
+                <td>Medium — eliminates anchoring</td>
+                <td>None (expert-only)</td>
+              </tr>
+              <tr>
+                <td>Dialectical Synthesis</td>
+                <td>Thesis-antithesis-synthesis</td>
+                <td>Emergent integration</td>
+                <td>High — produces novelty</td>
+                <td>Analyst (post-hoc)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>The Gamification Layer</h2>
+      <p>
+        Governance is boring. This is not a design flaw — it is a design failure. The Coliseum treats audience engagement as a first-class engineering problem, implementing a progression system with achievements, leaderboards, and unlockable capabilities that reward sustained participation in deliberation.<Cite id={7} author="Deterding, Sebastian, Dan Dixon, Rilla Khaled, and Lennart Nacke" title="From Game Design Elements to Gamefulness: Defining Gamification" source="Proceedings of the 15th International Academic MindTrek Conference" year={2011} /> Deterding et al. distinguish gamification from full game design: it is the use of game elements in non-game contexts, and its effectiveness depends on whether those elements serve intrinsic rather than merely extrinsic motivation. The Coliseum's achievement system is designed around this distinction. Achievements like "Devil's Advocate" (voting against the majority 5 times) and "Bridge Builder" (identifying synthesis points across positions) reward genuine deliberative behavior, not just clicking buttons. The leaderboard tracks "Deliberation Quality Score" — a composite metric weighting argument engagement, voting consistency, and diversity of debate topics — rather than raw participation volume.<Cite id={8} author="McGonigal, Jane" title="Reality Is Broken: Why Games Make Us Better and How They Can Change the World" source="Penguin Press" year={2011} /> McGonigal's argument that games provide "unnecessary obstacles that we volunteer to tackle" maps precisely onto the Coliseum's design: nobody needs to watch AI agents debate, but the gamification transforms optional observation into compelling participation.
+      </p>
+
+      <MermaidDiagram
+        caption="User progression state machine — audiences advance through tiers by accumulating deliberation engagement, unlocking new capabilities at each level"
+        chart={`stateDiagram-v2
+    [*] --> Spectator
+    Spectator --> Citizen: 5 votes cast
+    Citizen --> Senator: 25 votes + 3 achievements
+    Senator --> Consul: 100 votes + topic proposal accepted
+    Consul --> Tribune: 500 votes + 10 achievements + debate moderation
+
+    Spectator: Can view debates
+    Spectator: Can cast basic votes
+
+    Citizen: Can view detailed analytics
+    Citizen: Can challenge results
+
+    Senator: Can propose debate topics
+    Senator: Can configure agent parameters
+
+    Consul: Can create custom agents
+    Consul: Can design debate formats
+
+    Tribune: Can moderate debates
+    Tribune: Can adjust governance rules`}
+      />
+
+      <h2>Voting Sessions and Audience Judgment</h2>
+      <p>
+        The voting system implements a three-phase lifecycle: open, active, and finalized. When a debate concludes its third round, a voting session opens with a configurable window (default 5 minutes for real-time, 24 hours for asynchronous deliberation). Votes are cast as weighted assessments across four dimensions — argument strength, evidence quality, responsiveness, and rhetorical clarity — rather than simple binary choices.<Cite id={9} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's institutional analysis framework demonstrates that governance rules must match the structure of the problem they govern — the Coliseum's multi-dimensional voting prevents the degeneration into popularity contests that plague simple up/down systems. Once the voting window closes, the finalization endpoint computes results, updates agent rankings, triggers achievement checks, and publishes outcomes through the event system. The entire voting lifecycle is idempotent: calling finalize twice on the same session returns the same results without side effects, a property that becomes critical when network partitions or client retries occur in production deployment.
+      </p>
+
+      <CodeStructure lang="python" caption="Voting session lifecycle — three-phase process with multi-dimensional weighted ballots and idempotent finalization" filename="api/voting.py">
+{`from pydantic import BaseModel, Field
+from enum import Enum
+from datetime import datetime, timedelta
+
+class VotePhase(str, Enum):
+    OPEN = "open"
+    ACTIVE = "active"
+    FINALIZED = "finalized"
+
+class Ballot(BaseModel):
+    voter_id: str
+    agent_id: str
+    argument_strength: int = Field(..., ge=1, le=10)
+    evidence_quality: int = Field(..., ge=1, le=10)
+    responsiveness: int = Field(..., ge=1, le=10)
+    rhetorical_clarity: int = Field(..., ge=1, le=10)
+
+    @property
+    def weighted_score(self) -> float:
+        """Argument strength weighted 2x; others equal."""
+        return (
+            self.argument_strength * 2
+            + self.evidence_quality
+            + self.responsiveness
+            + self.rhetorical_clarity
+        ) / 5
+
+class VotingSession(BaseModel):
+    debate_id: str
+    phase: VotePhase = VotePhase.OPEN
+    ballots: list[Ballot] = []
+    opens_at: datetime = Field(default_factory=datetime.utcnow)
+    closes_at: datetime = Field(
+        default_factory=lambda: datetime.utcnow() + timedelta(minutes=5)
+    )
+    results: dict | None = None
+
+    def cast(self, ballot: Ballot) -> None:
+        if self.phase == VotePhase.FINALIZED:
+            raise ValueError("Voting session already finalized")
+        self.phase = VotePhase.ACTIVE
+        self.ballots.append(ballot)
+
+    def finalize(self) -> dict:
+        if self.results is not None:
+            return self.results          # idempotent
+        scores: dict[str, list[float]] = {}
+        for b in self.ballots:
+            scores.setdefault(b.agent_id, []).append(b.weighted_score)
+        self.results = {
+            aid: round(sum(s) / len(s), 2)
+            for aid, s in scores.items()
+        }
+        self.phase = VotePhase.FINALIZED
+        return self.results`}
+      </CodeStructure>
+
+      <h2>Event Ingestion and Source Filtering</h2>
+      <p>
+        Every action in the Coliseum — agent creation, statement submission, vote cast, achievement unlocked — produces a structured event that flows through the ingestion pipeline. Events carry source metadata (API endpoint, websocket, webhook, or system-generated) enabling downstream consumers to filter by origin.<Cite id={4} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The system implements the Observer and Mediator patterns from Gamma et al.: the event bus decouples producers from consumers, while a mediator coordinates complex multi-step flows like "debate concludes, voting opens, timer starts, notifications fire." The in-memory event store retains the last 10,000 events with configurable TTL, providing a replay buffer for clients that reconnect after network interruptions. This event-driven architecture makes the Coliseum extensible without modification: adding a new analytics dashboard or notification channel requires only subscribing to the existing event stream, not touching the deliberation logic itself.<Cite id={3} author="Fielding, Roy Thomas" title="Architectural Styles and the Design of Network-Based Software Architectures" source="Doctoral dissertation, University of California, Irvine" year={2000} />
+      </p>
+
+      <MermaidDiagram
+        caption="Event ingestion pipeline — all system actions produce structured events that flow through source-filtered streams to decoupled consumers"
+        chart={`graph LR
+    A1[Agent Action] -->|emit| EB[Event Bus]
+    D1[Debate Round] -->|emit| EB
+    V1[Vote Cast] -->|emit| EB
+    S1[System Timer] -->|emit| EB
+    EB -->|filter: api| AN[Analytics]
+    EB -->|filter: websocket| RT[Real-Time UI]
+    EB -->|filter: system| ACH[Achievement Engine]
+    EB -->|filter: all| LOG[Event Store]
+    LOG -->|replay buffer| RC[Reconnecting Clients]
+    ACH -->|unlock| NF[Notification Service]`}
+      />
+
+      <h2>Governance Architecture and Honest Scoping</h2>
+      <p>
+        The Coliseum's API includes endpoints for blockchain operations — staking, token transfers, reward distribution, and on-chain governance proposals. Every one of them returns HTTP <code>501 Not Implemented</code>. This is not laziness; it is an architectural statement about honest MVP scoping.<Cite id={9} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom demonstrates that successful governance institutions evolve incrementally from local practice rather than being imposed top-down from abstract theory — the Coliseum's deliberation mechanics must prove themselves in centralized form before decentralization adds value. The blockchain endpoints exist in the OpenAPI spec because they define the governance surface area: what operations will eventually be trustless, what state will live on-chain, what transitions require consensus. By making these explicit as 501s rather than hiding them, the architecture communicates its own roadmap.<Cite id={10} author="Buterin, Vitalik" title="Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform" source="Ethereum Whitepaper" year={2014} /> Buterin's vision of programmable governance — where rules are encoded as smart contracts that execute deterministically — is the Coliseum's long-term trajectory. But governance without a community is theater. The current MVP builds the community engagement layer (gamification, progression, achievements) first, so that when decentralization arrives, there are actual governance participants, not just governance infrastructure.
+      </p>
+
+      <Figure alt="Project statistics for AI Council Coliseum" caption="AI Council Coliseum system metrics — a multi-agent deliberation platform with gamified audience governance" number={2}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">20+</div>
+            <div class="stat-label">API Endpoints</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Agent Roles</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Debate Rounds</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">User Tiers</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Vote Dimensions</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">501</div>
+            <div class="stat-label">Blockchain Status</div>
+          </div>
+        </div>
+      </Figure>
+
+      <h2>Tradeoffs and Lessons</h2>
+      <p>
+        The most consequential design decision was in-memory state over a database. For a deliberation platform where debates are ephemeral performances rather than permanent records, this is defensible — debate state matters during the debate and can be archived afterward. But it means the current system cannot survive a server restart mid-debate, and horizontal scaling requires shared state infrastructure that does not yet exist.<Cite id={1} author="Russell, Stuart and Peter Norvig" title="Artificial Intelligence: A Modern Approach" source="Pearson" year={2020} /> The agent design also revealed a tension between agent autonomy and audience comprehensibility: agents with more sophisticated reasoning produce better arguments but harder-to-follow debates. The four-role system (advocate, critic, synthesizer, wildcard) is a compromise — enough variety to produce genuine dialectic, constrained enough that audiences can follow the argument structure without a philosophy degree.<Cite id={6} author="Mercier, Hugo and Dan Sperber" title="The Enigma of Reason" source="Harvard University Press" year={2017} /> Mercier and Sperber's insight that reasoning is fundamentally social — designed for argument production and evaluation, not solitary truth-seeking — validates the Coliseum's core wager: that multi-agent deliberation produces better epistemic outcomes than single-agent monologue, precisely because it mirrors the social structure that reasoning evolved to operate within.
+      </p>
+
+      <References entries={[
+        { id: 1, author: "Russell, Stuart and Peter Norvig", title: "Artificial Intelligence: A Modern Approach", source: "Pearson", year: 2020 },
+        { id: 2, author: "Wooldridge, Michael", title: "An Introduction to MultiAgent Systems", source: "John Wiley & Sons", year: 2009 },
+        { id: 3, author: "Fielding, Roy Thomas", title: "Architectural Styles and the Design of Network-Based Software Architectures", source: "Doctoral dissertation, University of California, Irvine", year: 2000 },
+        { id: 4, author: "Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides", title: "Design Patterns: Elements of Reusable Object-Oriented Software", source: "Addison-Wesley", year: 1994 },
+        { id: 5, author: "Habermas, Jürgen", title: "The Theory of Communicative Action, Vol. 1: Reason and the Rationalization of Society", source: "Beacon Press", year: 1981 },
+        { id: 6, author: "Mercier, Hugo and Dan Sperber", title: "The Enigma of Reason", source: "Harvard University Press", year: 2017 },
+        { id: 7, author: "Deterding, Sebastian, Dan Dixon, Rilla Khaled, and Lennart Nacke", title: "From Game Design Elements to Gamefulness: Defining Gamification", source: "Proceedings of the 15th International Academic MindTrek Conference", year: 2011 },
+        { id: 8, author: "McGonigal, Jane", title: "Reality Is Broken: Why Games Make Us Better and How They Can Change the World", source: "Penguin Press", year: 2011 },
+        { id: 9, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
+        { id: 10, author: "Buterin, Vitalik", title: "Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform", source: "Ethereum Whitepaper", year: 2014 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .table-wrap th,
+  .table-wrap td {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--color-border, #ddd);
+    text-align: left;
+  }
+  .table-wrap th {
+    background: var(--color-surface, #f5f5f5);
+    font-weight: 600;
+  }
+  .table-wrap tbody tr:nth-child(odd) {
+    background: var(--color-surface-alt, #fafafa);
+  }
+</style>

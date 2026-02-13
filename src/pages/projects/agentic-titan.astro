@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Agentic Titan — Anthony James Padavano" description="A polymorphic, model-agnostic multi-agent orchestration framework with nine topology patterns, 22 agent archetypes, and 1,095+ tests.">
@@ -16,19 +21,41 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
     >
       <h2>Problem</h2>
       <p>
-        Multi-agent AI systems face a scaling problem: frameworks that work for two agents on a laptop collapse when you need 100+ agents with safety constraints, topology awareness, and production-grade observability. Most existing frameworks are either too opinionated (locked to one LLM provider, one communication pattern) or too thin (no safety layer, no topology abstractions, no way to reason about agent interactions at scale).
+        Multi-agent AI systems face a scaling problem: frameworks that work for two agents on a laptop collapse when you need 100+ agents with safety constraints, topology awareness, and production-grade observability.<Cite id={1} author="Russell, Stuart and Peter Norvig" title="Artificial Intelligence: A Modern Approach" source="Pearson" year={2020} /> Russell and Norvig's comprehensive treatment of intelligent agents defines the theoretical foundation, but most existing frameworks implement only the simplest case: single-agent loops with tool access. They are either too opinionated (locked to one LLM provider, one communication pattern) or too thin (no safety layer, no topology abstractions, no way to reason about agent interactions at scale).<Cite id={2} author="Wooldridge, Michael" title="An Introduction to MultiAgent Systems" source="Wiley" year={2009} />
       </p>
       <p>
-        The eight-organ system needed an orchestration framework that could handle diverse workloads — from simple pipeline chains to complex mesh networks — while maintaining safety invariants and supporting any LLM backend. Nothing on the market fit all three requirements simultaneously.
+        The eight-organ system needed an orchestration framework that could handle diverse workloads — from simple pipeline chains to complex mesh networks — while maintaining safety invariants and supporting any LLM backend. Wooldridge's formalization of multi-agent coordination protocols identified the core challenge: agents must negotiate communication, delegation, and conflict resolution through shared protocols rather than ad hoc messaging.<Cite id={3} author="Minsky, Marvin" title="The Society of Mind" source="Simon & Schuster" year={1986} /> Minsky's "society of mind" thesis — that intelligence emerges from the interaction of many simple agents — provided the philosophical grounding. Nothing on the market fit all three requirements simultaneously.
       </p>
 
       <h2>Approach</h2>
       <p>
-        Build a polymorphic, model-agnostic framework that separates <strong>topology</strong> (how agents communicate) from <strong>archetype</strong> (what agents do) from <strong>safety</strong> (what agents can't do). This three-axis design means you can independently swap topologies, archetypes, and safety policies without rewriting orchestration logic.
+        Build a polymorphic, model-agnostic framework that separates <strong>topology</strong> (how agents communicate) from <strong>archetype</strong> (what agents do) from <strong>safety</strong> (what agents can't do).<Cite id={4} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> This three-axis design draws directly from the Gang of Four's principle of separating interface from implementation — here applied at the system level rather than the class level. You can independently swap topologies, archetypes, and safety policies without rewriting orchestration logic.<Cite id={5} author="Martin, Robert C." title="Clean Architecture: A Craftsman's Guide to Software Structure and Design" source="Prentice Hall" year={2017} /> Martin's Dependency Rule — that source code dependencies must point inward toward policies, not outward toward mechanisms — governs the layering: safety wraps archetype wraps topology, and no inner layer knows about the outer ones.
       </p>
 
+      <MermaidDiagram
+        caption="Topology selection decision flow — choosing the right communication pattern based on workload characteristics"
+        chart={`flowchart TD
+    A[New Agent Workload] --> B{Sequential?}
+    B -->|Yes| C[Pipeline]
+    B -->|No| D{Parallel tasks?}
+    D -->|Fan out| E[Fan-out]
+    D -->|Aggregate| F[Fan-in]
+    D -->|Both| G{Central coordinator?}
+    G -->|Yes| H[Star]
+    G -->|No| I{All-to-all?}
+    I -->|Yes| J[Mesh]
+    I -->|No| K{Hierarchical?}
+    K -->|Yes| L[Hierarchical]
+    K -->|No| M{Iterative?}
+    M -->|Yes| N[Ring]
+    M -->|No| O{Divide-conquer?}
+    O -->|Yes| P[Tree]
+    O -->|No| Q[Custom]`}
+      />
+
       <h2>Architecture</h2>
-      <pre class="architecture-diagram"><code>┌─────────────────────────────────────────────┐
+      <Figure alt="Agentic Titan three-axis architecture diagram showing topology engine, archetypes, and safety layer" caption="Three-axis architecture: topology, archetype, and safety are independently composable layers atop a model-agnostic interface.">
+        <pre class="architecture-diagram"><code>{`┌─────────────────────────────────────────────┐
 │              Agentic Titan Core              │
 ├──────────┬──────────────┬───────────────────┤
 │ Topology │  Archetypes  │    Safety Layer    │
@@ -49,9 +76,13 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
 ├─────────────────────────────────────────────┤
 │         Production Infrastructure           │
 │ Prometheus · Structured Logs · Health Checks│
-└─────────────────────────────────────────────┘</code></pre>
+└─────────────────────────────────────────────┘`}</code></pre>
+      </Figure>
 
       <h2>Nine Topology Patterns</h2>
+      <p>
+        Each topology encodes a different communication contract between agents.<Cite id={7} author="Tanenbaum, Andrew S. and Maarten van Steen" title="Distributed Systems: Principles and Paradigms" source="Pearson" year={2007} /> Tanenbaum and van Steen's classification of distributed system architectures — centralized, decentralized, and hybrid — maps directly onto these nine patterns. The topology engine enforces routing rules at the framework level so agents cannot violate their communication contracts.<Cite id={11} author="Hewitt, Carl" title="Actor Model of Computation" source="arXiv" year={2010} />
+      </p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -71,59 +102,119 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
         </table>
       </div>
 
+      <CodeStructure lang="python" caption="Agent definition example — archetype carries behavioral profile, topology is declared separately" filename="agents.py">
+{`from agentic_titan import Agent, Topology, SafetyPolicy
+
+# Define agents by archetype
+researcher = Agent(
+    archetype="researcher",
+    model="anthropic/claude-sonnet",
+    config={
+        "communication_style": "structured",
+        "decision_pattern": "evidence_weighted",
+        "error_strategy": "retry_with_backoff",
+    }
+)
+
+critic = Agent(
+    archetype="critic",
+    model="openai/gpt-4",
+    config={
+        "communication_style": "adversarial",
+        "decision_pattern": "falsification",
+        "error_strategy": "escalate",
+    }
+)
+
+# Connect via topology — agents don't know about each other
+pipeline = Topology.pipeline([researcher, critic])
+
+# Wrap in safety — mandatory, non-optional
+policy = SafetyPolicy(
+    sandbox=True,
+    resource_limits={"max_tokens": 4096, "timeout_s": 30},
+    output_validation=True,
+    audit_logging=True,
+)
+
+# Deploy
+result = pipeline.run(task="Analyze dataset", safety=policy)`}
+      </CodeStructure>
+
       <h2>Implementation</h2>
       <p>
-        Built in <strong>Python 3.11+</strong> across 18 development phases. The framework provides a unified interface where you define agents by archetype, connect them via topology, wrap them in safety policies, and deploy. Agent archetypes carry behavioral profiles (communication style, decision patterns, error handling strategies) that combine with topology constraints to produce emergent system behavior.
+        Built in <strong>Python 3.11+</strong> across 18 development phases.<Cite id={9} author="McConnell, Steve" title="Code Complete" source="Microsoft Press" year={2004} /> McConnell's emphasis on construction quality — naming conventions, defensive programming, self-documenting code — shaped the implementation discipline across all 18 phases. The framework provides a unified interface where you define agents by archetype, connect them via topology, wrap them in safety policies, and deploy. Agent archetypes carry behavioral profiles (communication style, decision patterns, error handling strategies) that combine with topology constraints to produce emergent system behavior.<Cite id={12} author="Shoham, Yoav and Kevin Leyton-Brown" title="Multiagent Systems: Algorithmic, Game-Theoretic, and Logical Foundations" source="Cambridge University Press" year={2008} /> Shoham and Leyton-Brown's formalization of agent interaction protocols — including mechanism design and social choice theory — informed how archetypes negotiate when their behavioral profiles conflict within a shared topology.
       </p>
       <p>
-        The safety layer is non-optional: every agent runs in a sandboxed context with configurable resource limits, output validation, and audit logging. Kill switches allow immediate agent termination. Circuit breakers prevent cascade failures in mesh and ring topologies.
+        The safety layer is non-optional: every agent runs in a sandboxed context with configurable resource limits, output validation, and audit logging.<Cite id={8} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2018} /> Nygard's stability patterns — circuit breakers, bulkheads, timeouts — are implemented as first-class safety primitives rather than afterthoughts. Kill switches allow immediate agent termination. Circuit breakers prevent cascade failures in mesh and ring topologies. Every safety violation is logged with full context: which agent, which topology, which policy was breached, and what the agent attempted to do.
       </p>
 
       <h2>Results</h2>
       <p>
-        1,095+ tests across the full test suite with production-hardened status. The framework is consumed downstream by ORGAN-III products: the Hunter Protocol in <em>in-midst-my-life</em> uses hierarchical topology for resume analysis, and the verification pipeline in <em>The Actual News</em> uses fan-out topology for parallel source checking. The governance patterns designed here (topology-as-constraint, safety-by-default) inform how ORGAN-IV manages the broader eight-organ system.
+        1,095+ tests across the full test suite with production-hardened status.<Cite id={6} author="Fowler, Martin" title="Refactoring: Improving the Design of Existing Code" source="Addison-Wesley" year={2018} /> Fowler's discipline of continuous refactoring — improving internal structure without changing external behavior — kept the test suite stable across 18 development phases while the architecture evolved underneath. The framework is consumed downstream by ORGAN-III products: the Hunter Protocol in <em>in-midst-my-life</em> uses hierarchical topology for resume analysis, and the verification pipeline in <em>The Actual News</em> uses fan-out topology for parallel source checking. The governance patterns designed here (topology-as-constraint, safety-by-default) inform how ORGAN-IV manages the broader eight-organ system.
       </p>
 
       <h2>Tradeoffs & Lessons</h2>
       <ul>
-        <li><strong>Topology abstraction vs. performance</strong> — The topology engine adds a routing layer that introduces latency (~2ms per hop). For latency-critical pipelines, direct agent-to-agent calls are faster. The tradeoff is worth it for complex topologies where reasoning about message flow matters more than raw speed.</li>
-        <li><strong>22 archetypes — too many?</strong> — Started with 6, grew to 22 as real use cases demanded finer behavioral distinctions. Some archetypes could be consolidated. The decision to keep them separate prioritizes clarity over minimalism.</li>
-        <li><strong>Model-agnostic tax</strong> — Supporting every LLM backend means maintaining adapter code for each. The unified interface hides provider differences but the adapters need updating when APIs change. Worth it for avoiding vendor lock-in.</li>
-        <li><strong>Safety overhead</strong> — Mandatory safety layer adds 5-10% overhead. This is intentional — unsafe agent systems are worse than slow ones.</li>
+        <li><strong>Topology abstraction vs. performance</strong> — The topology engine adds a routing layer that introduces latency (~2ms per hop). For latency-critical pipelines, direct agent-to-agent calls are faster. The tradeoff is worth it for complex topologies where reasoning about message flow matters more than raw speed.<Cite id={10} author="Brooks, Frederick P." title="The Mythical Man-Month" source="Addison-Wesley" year={1975} /> Brooks observed that conceptual integrity is the most important consideration in system design — the topology abstraction preserves conceptual integrity at the cost of raw throughput.</li>
+        <li><strong>22 archetypes — too many?</strong> — Started with 6, grew to 22 as real use cases demanded finer behavioral distinctions. Some archetypes could be consolidated. The decision to keep them separate prioritizes clarity over minimalism.<Cite id={5} author="Martin, Robert C." title="Clean Architecture: A Craftsman's Guide to Software Structure and Design" source="Prentice Hall" year={2017} /></li>
+        <li><strong>Model-agnostic tax</strong> — Supporting every LLM backend means maintaining adapter code for each. The unified interface hides provider differences but the adapters need updating when APIs change. Worth it for avoiding vendor lock-in.<Cite id={4} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The Adapter pattern from the Gang of Four formalizes exactly this tradeoff: indirection cost vs. decoupling benefit.</li>
+        <li><strong>Safety overhead</strong> — Mandatory safety layer adds 5-10% overhead. This is intentional — unsafe agent systems are worse than slow ones.<Cite id={8} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2018} /> Nygard's principle that production-ready software must defend itself from its own components applies doubly to autonomous agent systems.</li>
       </ul>
 
       <h2>By the Numbers</h2>
-      <div class="stat-grid">
-        <div class="stat">
-          <div class="stat-value">1,095+</div>
-          <div class="stat-label">Tests</div>
+      <Figure alt="Agentic Titan project metrics summary" caption="Key metrics across 18 development phases, 9 topologies, and 4 LLM backends">
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">1,095+</div>
+            <div class="stat-label">Tests</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">9</div>
+            <div class="stat-label">Topologies</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">22</div>
+            <div class="stat-label">Agent Archetypes</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">18</div>
+            <div class="stat-label">Dev Phases</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">LLM Backends</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">PROD</div>
+            <div class="stat-label">Status</div>
+          </div>
         </div>
-        <div class="stat">
-          <div class="stat-value">9</div>
-          <div class="stat-label">Topologies</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">22</div>
-          <div class="stat-label">Agent Archetypes</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">18</div>
-          <div class="stat-label">Dev Phases</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">4</div>
-          <div class="stat-label">LLM Backends</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">PROD</div>
-          <div class="stat-label">Status</div>
-        </div>
-      </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Russell, Stuart and Peter Norvig", title: "Artificial Intelligence: A Modern Approach", source: "Pearson", year: 2020 },
+        { id: 2, author: "Wooldridge, Michael", title: "An Introduction to MultiAgent Systems", source: "Wiley", year: 2009 },
+        { id: 3, author: "Minsky, Marvin", title: "The Society of Mind", source: "Simon & Schuster", year: 1986 },
+        { id: 4, author: "Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides", title: "Design Patterns: Elements of Reusable Object-Oriented Software", source: "Addison-Wesley", year: 1994 },
+        { id: 5, author: "Martin, Robert C.", title: "Clean Architecture: A Craftsman's Guide to Software Structure and Design", source: "Prentice Hall", year: 2017 },
+        { id: 6, author: "Fowler, Martin", title: "Refactoring: Improving the Design of Existing Code", source: "Addison-Wesley", year: 2018 },
+        { id: 7, author: "Tanenbaum, Andrew S. and Maarten van Steen", title: "Distributed Systems: Principles and Paradigms", source: "Pearson", year: 2007 },
+        { id: 8, author: "Nygard, Michael T.", title: "Release It! Design and Deploy Production-Ready Software", source: "Pragmatic Bookshelf", year: 2018 },
+        { id: 9, author: "McConnell, Steve", title: "Code Complete", source: "Microsoft Press", year: 2004 },
+        { id: 10, author: "Brooks, Frederick P.", title: "The Mythical Man-Month", source: "Addison-Wesley", year: 1975 },
+        { id: 11, author: "Hewitt, Carl", title: "Actor Model of Computation", source: "arXiv", year: 2010 },
+        { id: 12, author: "Shoham, Yoav and Kevin Leyton-Brown", title: "Multiagent Systems: Algorithmic, Game-Theoretic, and Logical Foundations", source: "Cambridge University Press", year: 2008 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<script>
+  import '../../components/sketches/sketch-loader';
+</script>
 
 <style>
   .table-wrap {
@@ -138,7 +229,7 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: var(--space-lg);
-    margin: var(--space-lg) 0;
+    margin: 0;
     font-size: 0.8rem;
     line-height: 1.4;
   }

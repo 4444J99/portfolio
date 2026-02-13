@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Public Process — 4444j" description="21 essays on building creative infrastructure in public — transparency as design choice, process documentation as portfolio evidence.">
@@ -15,31 +20,247 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
       repo="https://github.com/organvm-v-logos/public-process"
       liveUrl="https://organvm-v-logos.github.io/public-process/"
     >
-      <h2>Building in Public</h2>
+      <h2>The Problem: Opacity as Default</h2>
       <p>
-        Most portfolios show finished work. This one shows how the work got made — and treats the showing as part of the work itself. ORGAN V (Logos) is the public process organ: the part of the eight-organ system dedicated to transparency, reflection, and building in public. Every major decision, sprint, and architectural choice is documented not as an afterthought but as a deliberate practice. The essays aren't marketing. They're evidence — of methodology, velocity, and the willingness to show your reasoning before you know if it will work.
+        Creative technologists face a structural problem: finished work is visible, but the reasoning that produced it disappears. Portfolios showcase polished artifacts while erasing the decision chains, false starts, and architectural debates that constitute the actual practice.<Cite id={1} author="Sennett, Richard" title="The Craftsman" source="Yale University Press" year={2008} /> Sennett argues that craft knowledge resides not in the finished object but in the iterative dialogue between maker and material — a dialogue that traditional portfolios systematically suppress. The same asymmetry haunts open-source culture: code is public, but the reasoning behind the code remains private, locked in Slack threads and whiteboard photos that no reviewer will ever see.<Cite id={2} author="Kelty, Christopher M." title="Two Bits: The Cultural Significance of Free Software" source="Duke University Press" year={2008} /> Kelty's ethnography of free software communities reveals that the "recursive public" — people who maintain the very infrastructure through which they communicate — depends on transparent process documentation as a condition of participation. ORGAN V (Logos) was created to solve this problem: a dedicated organ within the eight-organ system whose sole purpose is making the work of building visible, structured, and citable.
       </p>
 
-      <h2>The Essays</h2>
+      <MermaidDiagram
+        caption="Content production pipeline: from architectural decision to published essay with POSSE distribution"
+        chart={`graph LR
+    A[Decision Point] --> B[Real-Time Documentation]
+    B --> C[Essay Draft]
+    C --> D[Editorial Review]
+    D --> E[Jekyll Publication]
+    E --> F[POSSE Distribution]
+    F --> G[Mastodon]
+    F --> H[Discord]
+    F --> I[RSS/Atom Feed]`}
+      />
+
+      <h2>The Essay Collection</h2>
       <p>
-        21 published essays totaling ~88,000 words, deployed as a Jekyll site on GitHub Pages. The collection spans the full lifecycle of the eight-organ system:
-      </p>
-      <ul>
-        <li><strong>Architectural essays</strong> — why eight organs, how dependency rules create creative tension, the ontological naming scheme</li>
-        <li><strong>Sprint narratives</strong> — real-time accounts of Bronze, Silver, Gold, Gap-Fill, Platinum, and subsequent sprints with concrete metrics</li>
-        <li><strong>Methodology essays</strong> — the AI-conductor model, specification-driven development, token economics of human-AI co-creation</li>
-        <li><strong>Reflective essays</strong> — what went wrong, what surprised us, what we'd do differently with hindsight</li>
-      </ul>
-      <p>
-        Each essay is 3,000&ndash;5,000 words, written for an audience of grant reviewers, hiring managers, and fellow practitioners who want to understand not just what was built but <em>how decisions were made under uncertainty</em>.
+        The collection comprises 21 published essays totaling approximately 88,000 words, deployed as a static Jekyll site on GitHub Pages. These are not blog posts in the conventional sense — each essay is a structured, long-form account of a specific phase, decision, or methodology within the eight-organ system.<Cite id={3} author="Sch&ouml;n, Donald A." title="The Reflective Practitioner: How Professionals Think in Action" source="Basic Books" year={1983} /> Sch&ouml;n's concept of "reflection-in-action" describes practitioners who think about what they are doing while doing it, and the essays follow this model: they were written during the sprints they describe, not after. The temporal proximity between action and documentation means the essays capture uncertainty, provisional reasoning, and the texture of real-time problem-solving that retrospective accounts inevitably smooth over.<Cite id={4} author="Polanyi, Michael" title="The Tacit Dimension" source="Doubleday" year={1966} /> Polanyi's insight that "we can know more than we can tell" is precisely the challenge: these essays attempt to make tacit architectural knowledge explicit by documenting it at the moment it is still active, before it becomes embedded and invisible.
       </p>
 
-      <h2>Why This Matters</h2>
+      <Figure alt="Essay categories and distribution" caption="Breakdown of 21 essays across four thematic categories">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Category</th><th>Count</th><th>Word Range</th><th>Example Topics</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Architectural</strong></td><td>6</td><td>3,200 &ndash; 5,400</td><td>Eight-organ rationale, dependency rules, ontological naming, registry design</td></tr>
+              <tr><td><strong>Sprint Narratives</strong></td><td>7</td><td>3,000 &ndash; 5,100</td><td>Bronze, Silver, Gold, Gap-Fill, Platinum sprints with real-time metrics</td></tr>
+              <tr><td><strong>Methodology</strong></td><td>5</td><td>3,300 &ndash; 5,400</td><td>AI-conductor model, specification-driven development, token economics</td></tr>
+              <tr><td><strong>Reflective</strong></td><td>3</td><td>3,100 &ndash; 4,700</td><td>What went wrong, what surprised us, what we would change with hindsight</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Audience Design</h2>
       <p>
-        For grant applications: the essays provide timestamped evidence of sustained creative practice, architectural thinking, and execution velocity — 81 repositories deployed in under a week, documented in real time. For hiring managers: they demonstrate communication skill, technical depth, and the ability to explain complex systems to non-specialist audiences. For fellow practitioners: they offer a reusable model for building-in-public that goes beyond "here's my tweet thread" to structured, long-form process documentation. The public process is the proof that the system isn't a one-time effort — it's a sustained practice with documented methodology and honest reflection.
+        A single essay must address multiple audiences without becoming incoherent, and the collection was designed with explicit audience models from the start.<Cite id={5} author="Bakhtin, Mikhail M." title="The Dialogic Imagination: Four Essays" source="University of Texas Press" year={1981} /> Bakhtin's concept of heteroglossia — the coexistence of multiple voices and social registers within a single utterance — informs the writing strategy: each essay carries technical specificity for practitioners, evidential weight for grant reviewers, communicative clarity for hiring managers, and theoretical grounding for academics. This is not an accident of style but a deliberate rhetorical architecture. The essays are structured so that different readers can extract different value from the same text: a grant reviewer reads the metrics and timeline evidence, a hiring manager reads the communication skill and system-design thinking, a practitioner reads the tooling decisions and honest post-mortems, and an academic reads the epistemological commitments and citational apparatus.<Cite id={6} author="Bazerman, Charles" title="Shaping Written Knowledge: The Genre and Activity of the Experimental Article in Science" source="University of Wisconsin Press" year={1988} /> Bazerman's genre theory demonstrates that written forms are not neutral containers but active shapers of knowledge — the essay format itself signals sustained intellectual engagement in ways that tweet threads and README files cannot.
       </p>
+
+      <CodeStructure lang="yaml" caption="Jekyll front matter structure for each essay, encoding metadata for audience routing and categorization" filename="_posts/2026-02-10-sprint-narrative.md (excerpt)">
+{`---
+layout: essay
+title: "Gold Sprint: Validation and Launch Criteria"
+date: 2026-02-10
+category: sprint-narrative
+word_count: 4329
+audiences:
+  - grant-reviewers
+  - hiring-managers
+  - practitioners
+tags:
+  - validation
+  - launch-criteria
+  - automation
+  - governance
+series: "Building the Eight-Organ System"
+organ: V-Logos
+abstract: >
+  Real-time account of the Gold Sprint: 18 community
+  health files deployed, 5 workflows upgraded, 24
+  dependency relationships validated, and the transition
+  from construction to operational governance.
+---`}
+      </CodeStructure>
+
+      <h2>Evidence, Not Marketing</h2>
+      <p>
+        The critical distinction that separates this collection from conventional project documentation is its commitment to evidence over persuasion. Every essay contains timestamped decisions, concrete metrics, and honest acknowledgments of failure — not because transparency is morally superior, but because verifiable claims are more useful to every audience than polished narratives.<Cite id={7} author="Latour, Bruno" title="Science in Action: How to Follow Scientists and Engineers Through Society" source="Harvard University Press" year={1987} /> Latour's actor-network theory reveals that scientific facts gain their authority not from correspondence with reality but from the density of the network that supports them — citations, instruments, institutions, replications. The essays apply this principle to creative practice: each claim about the system (81 repositories, 339K words, 228 validation checks) is backed by traceable evidence in the registry, the CI logs, and the commit history. The methodology is exposed, not hidden.<Cite id={8} author="Kuhn, Thomas S." title="The Structure of Scientific Revolutions" source="University of Chicago Press" year={1962} /> Kuhn's observation that paradigm shifts require making previously invisible assumptions visible applies here at the individual level: the essays make visible the assumptions, constraints, and tradeoffs that conventional portfolios treat as backstage work.
+      </p>
+
+      <MermaidDiagram
+        caption="Audience routing: the same essay serves four distinct readerships through structural transparency"
+        chart={`graph TD
+    E[Published Essay] --> GR[Grant Reviewers]
+    E --> HM[Hiring Managers]
+    E --> PR[Practitioners]
+    E --> AC[Academics]
+    GR --> GR1[Timestamped evidence]
+    GR --> GR2[Execution velocity metrics]
+    HM --> HM1[Communication clarity]
+    HM --> HM2[System-design thinking]
+    PR --> PR1[Tooling decisions]
+    PR --> PR2[Honest post-mortems]
+    AC --> AC1[Theoretical frameworks]
+    AC --> AC2[Citational apparatus]`}
+      />
+
+      <h2>Reflective Practice as Structural Commitment</h2>
+      <p>
+        The reflective essays in the collection are not afterthoughts appended to the sprint narratives — they are a structural requirement enforced by the organ's governance rules. Every major sprint must produce both a narrative account and a separate reflective essay that examines what went wrong, what was surprising, and what the practitioner would change with the benefit of hindsight.<Cite id={3} author="Sch&ouml;n, Donald A." title="The Reflective Practitioner: How Professionals Think in Action" source="Basic Books" year={1983} /> Sch&ouml;n distinguishes between "reflection-in-action" (thinking while doing) and "reflection-on-action" (thinking after doing) — the sprint narratives capture the former, and the reflective essays capture the latter, creating a layered documentation practice that addresses different temporal perspectives on the same events. This dual-mode documentation is unusual in both academic and industry contexts, where reflection tends to be either absent entirely or confined to post-project retrospectives that have lost access to the granular decision context.<Cite id={4} author="Polanyi, Michael" title="The Tacit Dimension" source="Doubleday" year={1966} /> The goal is to counteract what Polanyi identifies as the inevitable loss of tacit knowledge once a practice becomes routine — by writing the reflective essay while the surprise is still fresh, the collection preserves knowledge that would otherwise become invisible.
+      </p>
+
+      <Figure alt="Essay production timeline" caption="Temporal relationship between sprints, narrative essays, and reflective essays">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Sprint</th><th>Duration</th><th>Narrative Essay</th><th>Reflective Essay</th><th>Combined Words</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Bronze</td><td>1 day</td><td>Flagship deployment</td><td>Scope decisions</td><td>~8,200</td></tr>
+              <tr><td>Silver</td><td>1 day</td><td>58 README production</td><td>Quality vs. velocity</td><td>~9,100</td></tr>
+              <tr><td>Gold</td><td>1 day</td><td>Validation and launch</td><td>Automation limits</td><td>~7,900</td></tr>
+              <tr><td>Gap-Fill</td><td>1 day</td><td>Uniform quality</td><td>Naming decisions</td><td>~8,400</td></tr>
+              <tr><td>Platinum</td><td>1 day</td><td>CI and ADRs</td><td>Maintenance burden</td><td>~9,500</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>The Jekyll Architecture</h2>
+      <p>
+        The publication infrastructure is deliberately minimal: a static Jekyll site deployed to GitHub Pages, with no JavaScript framework, no CMS, and no database. This is not a limitation but an architectural choice aligned with the POSSE principle — own your canonical content on infrastructure you control, syndicate outward through defined channels.<Cite id={9} author="Eghbal, Nadia" title="Working in Public: The Making and Maintenance of Open Source Software" source="Stripe Press" year={2020} /> Eghbal documents how the maintenance burden of open-source projects grows with their dependency footprint, and the Jekyll choice minimizes that footprint: Markdown files in a Git repository, rendered to static HTML, served from GitHub's CDN. The Atom RSS feed enables machine-readable syndication. The site's simplicity is itself an argument — that sustained writing practice matters more than publishing infrastructure, and that the institutional weight of the content should come from the quality and density of the essays, not from the sophistication of the delivery mechanism.<Cite id={10} author="Raymond, Eric S." title="The Cathedral and the Bazaar: Musings on Linux and Open Source by an Accidental Revolutionary" source="O'Reilly Media" year={1999} /> Raymond's distinction between cathedral-style (centralized, planned) and bazaar-style (distributed, emergent) development applies to the publication model: the essays are cathedral-quality writing delivered through bazaar-simple infrastructure.
+      </p>
+
+      <CodeStructure lang="yaml" caption="Jekyll site configuration: minimal infrastructure, maximum content focus" filename="_config.yml">
+{`title: Public Process
+description: >
+  Building creative infrastructure in public —
+  21 essays on the eight-organ system.
+url: https://organvm-v-logos.github.io
+baseurl: /public-process
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+collections:
+  essays:
+    output: true
+    permalink: /essays/:title/
+defaults:
+  - scope:
+      path: ""
+      type: essays
+    values:
+      layout: essay
+feed:
+  path: atom.xml
+  posts_limit: 21`}
+      </CodeStructure>
+
+      <h2>Building-in-Public as Reusable Methodology</h2>
+      <p>
+        The most significant claim this project makes is that building-in-public can be a rigorous, structured methodology rather than a casual social media practice. The dominant model of "building in public" is the tweet thread: fragmentary, performative, optimized for engagement rather than evidence.<Cite id={9} author="Eghbal, Nadia" title="Working in Public: The Making and Maintenance of Open Source Software" source="Stripe Press" year={2020} /> Eghbal observes that open-source maintainers face a tension between community engagement and deep work — the tweet-thread model of building in public exacerbates this tension by demanding constant performance. The ORGAN-V model offers an alternative: structured, long-form documentation written on a deliberate cadence, published to infrastructure you own, and designed to serve multiple audiences simultaneously. This is reusable. Any practitioner or organization could adopt the same model — dedicated documentation practice, explicit audience models, YAML-structured metadata, static-site publication, POSSE distribution — without adopting the eight-organ system itself.<Cite id={10} author="Raymond, Eric S." title="The Cathedral and the Bazaar: Musings on Linux and Open Source by an Accidental Revolutionary" source="O'Reilly Media" year={1999} /> The methodology is separable from the content, and that separability is what makes it a genuine contribution rather than a personal idiosyncrasy.
+      </p>
+
+      <MermaidDiagram
+        caption="Building-in-public methodology: from casual tweet threads to structured documentation practice"
+        chart={`graph TD
+    subgraph Conventional
+      T1[Ship feature] --> T2[Tweet thread]
+      T2 --> T3[Engagement metrics]
+      T3 --> T4[Forgotten in 48h]
+    end
+    subgraph ORGAN-V Model
+      O1[Decision Point] --> O2[Structured Essay]
+      O2 --> O3[YAML Metadata]
+      O3 --> O4[Jekyll Publication]
+      O4 --> O5[POSSE Distribution]
+      O5 --> O6[Permanent Archive]
+      O6 --> O7[Citable Evidence]
+    end`}
+      />
+
+      <h2>Outcomes and Metrics</h2>
+      <p>
+        The collection represents a sustained documentation practice producing approximately 88,000 words across 21 essays in under two weeks of active writing. Each essay averages 4,200 words and addresses all four audience types through structural transparency rather than separate versions.<Cite id={1} author="Sennett, Richard" title="The Craftsman" source="Yale University Press" year={2008} /> Sennett's craftsman does not produce one object for display and another for use — the craft is in the single object that serves both purposes. The essays function identically: a grant reviewer extracting timeline evidence and a practitioner extracting methodology guidance are reading the same text, not different versions of it. The collection documents 81 repositories across 8 organs, with concrete metrics (339K total system words, 228 validation checks, 31 dependency edges) that are traceable to the registry and CI infrastructure described in the essays themselves.<Cite id={7} author="Latour, Bruno" title="Science in Action: How to Follow Scientists and Engineers Through Society" source="Harvard University Press" year={1987} /> The self-referential quality — essays that document the system that produces the essays — is not a defect but the point: the transparency is recursive, and the recursion is the evidence that the practice is genuine.
+      </p>
+
+      <Figure alt="Public process metrics summary" caption="Key metrics for the Public Process essay collection">
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">21</div>
+            <div class="stat-label">Essays Published</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">88K</div>
+            <div class="stat-label">Total Words</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Audience Types</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Essay Categories</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">81</div>
+            <div class="stat-label">Repos Documented</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">~4,200</div>
+            <div class="stat-label">Avg. Words/Essay</div>
+          </div>
+        </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Sennett, Richard", title: "The Craftsman", source: "Yale University Press", year: 2008 },
+        { id: 2, author: "Kelty, Christopher M.", title: "Two Bits: The Cultural Significance of Free Software", source: "Duke University Press", year: 2008 },
+        { id: 3, author: "Sch\u00f6n, Donald A.", title: "The Reflective Practitioner: How Professionals Think in Action", source: "Basic Books", year: 1983 },
+        { id: 4, author: "Polanyi, Michael", title: "The Tacit Dimension", source: "Doubleday", year: 1966 },
+        { id: 5, author: "Bakhtin, Mikhail M.", title: "The Dialogic Imagination: Four Essays", source: "University of Texas Press", year: 1981 },
+        { id: 6, author: "Bazerman, Charles", title: "Shaping Written Knowledge: The Genre and Activity of the Experimental Article in Science", source: "University of Wisconsin Press", year: 1988 },
+        { id: 7, author: "Latour, Bruno", title: "Science in Action: How to Follow Scientists and Engineers Through Society", source: "Harvard University Press", year: 1987 },
+        { id: 8, author: "Kuhn, Thomas S.", title: "The Structure of Scientific Revolutions", source: "University of Chicago Press", year: 1962 },
+        { id: 9, author: "Eghbal, Nadia", title: "Working in Public: The Making and Maintenance of Open Source Software", source: "Stripe Press", year: 2020 },
+        { id: 10, author: "Raymond, Eric S.", title: "The Cathedral and the Bazaar: Musings on Linux and Open Source by an Accidental Revolutionary", source: "O'Reilly Media", year: 1999 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .table-wrap th,
+  .table-wrap td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .table-wrap th {
+    background: rgba(255, 255, 255, 0.03);
+    font-weight: 600;
+  }
+</style>

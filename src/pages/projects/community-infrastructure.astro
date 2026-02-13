@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Community Infrastructure — 4444j" description="Intellectual salons and structured reading groups as institutional practice — ORGAN VI's approach to community as creative infrastructure.">
@@ -13,27 +18,274 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
       tagline="Intellectual salons and structured reading groups as institutional practice"
       tags={['Community', 'Education']}
     >
-      <h2>The Community Organ</h2>
+      <h2>The Problem: Creative Systems Without Relational Substrate</h2>
       <p>
-        Most creative systems treat community as an audience — people who consume the work. ORGAN VI (Koinonia) treats community as infrastructure: the relational substrate that makes sustained creative work possible. The community organ doesn't produce content; it produces the conditions under which content-producers flourish. This is the organ that prevents the eight-organ system from becoming a solitary monument — it's the part that connects to other minds.
+        Most creative systems treat community as an afterthought — an audience that consumes finished work, a mailing list that receives announcements, a comment section that provides reactions. This is a category error. Etienne Wenger's research on communities of practice demonstrates that sustained creative and intellectual work depends on shared repertoires of meaning — negotiated vocabularies, joint enterprises, mutual engagement — that cannot be manufactured by a single practitioner working in isolation.<Cite id={1} author="Wenger, Etienne" title="Communities of Practice: Learning, Meaning, and Identity" source="Cambridge University Press" year={1998} /> Robert Putnam's diagnosis of declining social capital in American civic life reveals the structural consequence of treating community as optional infrastructure: without the relational substrate of regular, structured interaction, institutions lose the feedback loops that keep them responsive and the shared knowledge that keeps them coherent.<Cite id={2} author="Putnam, Robert D." title="Bowling Alone: The Collapse and Revival of American Community" source="Simon & Schuster" year={2000} /> ORGAN VI (Koinonia) exists to address this gap within the eight-organ system. It is the organ that does not produce content but produces the conditions under which content-producers flourish — the relational infrastructure that prevents a creative system from becoming a solitary monument.
       </p>
 
-      <h2>Salon Archive</h2>
+      <MermaidDiagram
+        caption="Community organ as relational substrate — salons and reading groups generate distinct but interconnected forms of institutional knowledge"
+        chart={`graph TD
+    SAL[Intellectual Salons] --> FL[Feedback Loops<br/>External Perspectives on System]
+    RG[Reading Groups] --> SF[Shared Foundations<br/>Common Theoretical Vocabulary]
+    FL --> IM[Institutional Memory<br/>Archived Discussions &amp; Decisions]
+    SF --> IM
+    IM --> SAL
+    IM --> RG
+    SAL --> CROSS[Cross-Pollination<br/>Between Organs]
+    RG --> ARCH[Architectural Decisions<br/>Theory into Practice]
+    CROSS --> SYSTEM[Eight-Organ System]
+    ARCH --> SYSTEM`}
+      />
+
+      <h2>The Salon Model</h2>
       <p>
-        The salon archive is a curated collection of facilitated intellectual conversations — structured dialogues on topics spanning epistemology, systems design, generative art, and institutional governance. Each salon has a theme, invited participants, a facilitator's guide, and a post-session synthesis. The format draws on the historical tradition of intellectual salons (Gertrude Stein's Paris gatherings, the Vienna Circle) adapted for distributed, asynchronous participation. Salons are invitation-only and the archive is maintained privately to protect participant candor.
+        The salon format draws on a tradition that stretches from the seventeenth-century French literary salons through Gertrude Stein's Paris gatherings and the Vienna Circle's philosophical seminars to contemporary models of structured intellectual dialogue. Jurgen Habermas's concept of the public sphere — a domain of social life where private individuals come together to engage in critical debate about matters of general interest — provides the theoretical foundation for treating salons not as social events but as epistemic infrastructure.<Cite id={3} author="Habermas, Jurgen" title="The Structural Transformation of the Public Sphere" source="MIT Press" year={1962} /> Each salon has a theme, invited participants with complementary expertise, a facilitator's guide that structures the conversation through progressive phases (grounding, exploration, tension, synthesis), and a post-session synthesis document that distills insights into actionable observations. The format is designed to function as what Ray Oldenburg calls a "third place" — neither the formal setting of professional work nor the private sphere of domestic life, but a space where ideas can be tested in dialogue without the pressure of publication or the informality of casual conversation.<Cite id={4} author="Oldenburg, Ray" title="The Great Good Place: Cafes, Coffee Shops, Bookstores, Bars, Hair Salons, and Other Hangouts at the Heart of a Community" source="Paragon House" year={1989} /> Salons are invitation-only, and the archive is maintained privately to protect participant candor — the intellectual value of the format depends on people feeling free to think out loud, to be wrong, to revise positions in real time.
       </p>
+
+      <Figure alt="Salon structure elements and their purposes" caption="Salon anatomy — each element serves a specific function in the epistemic infrastructure of structured dialogue" number={1}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>Purpose</th>
+                <th>Format</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Theme</td>
+                <td>Frame the intellectual territory and constrain productive divergence</td>
+                <td>1-2 sentence provocation with suggested readings</td>
+              </tr>
+              <tr>
+                <td>Participants</td>
+                <td>Ensure complementary expertise and productive disagreement</td>
+                <td>3-7 invitees with distinct disciplinary perspectives</td>
+              </tr>
+              <tr>
+                <td>Facilitator Guide</td>
+                <td>Structure dialogue through progressive phases without controlling content</td>
+                <td>Timed phases: grounding (15m), exploration (30m), tension (20m), synthesis (15m)</td>
+              </tr>
+              <tr>
+                <td>Synthesis Document</td>
+                <td>Distill insights into reusable observations and trace connections to system</td>
+                <td>1-2 page summary with tagged connections to organ decisions</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
 
       <h2>Reading Group Curriculum</h2>
       <p>
-        The reading group curriculum provides structured pathways through the intellectual foundations of the eight-organ system. Each curriculum maps a 6&ndash;12 week arc through primary texts, connecting theoretical frameworks (Bateson's cybernetics, Luhmann's systems theory, Haraway's situated knowledges) to concrete implementation decisions in the organ system. The reading groups aren't book clubs — they're collaborative sense-making sessions where participants trace how abstract theory becomes architectural choice.
+        The reading group curriculum provides structured pathways through the intellectual foundations that inform the eight-organ system's architecture. Each curriculum maps a six-to-twelve week arc through primary texts, connecting theoretical frameworks to concrete implementation decisions. Gregory Bateson's cybernetic epistemology — his insistence that the basic unit of information is "a difference which makes a difference" and that mind is not a substance but a pattern of organization — directly informs how the organ system handles feedback loops, recursive self-reference, and the relationship between structure and process.<Cite id={5} author="Bateson, Gregory" title="Steps to an Ecology of Mind" source="University of Chicago Press" year={1972} /> Niklas Luhmann's theory of social systems as autopoietic, self-referential communication networks provides the theoretical justification for treating each organ as a functionally differentiated subsystem that maintains its own boundaries while remaining structurally coupled to the others.<Cite id={6} author="Luhmann, Niklas" title="Social Systems" source="Stanford University Press" year={1984} /> The reading groups are not book clubs — they are collaborative sense-making sessions where participants trace how abstract theory becomes architectural choice, following the path from a concept in Bateson or Luhmann to a specific design decision in the organ system's registry, governance rules, or dependency graph.
       </p>
 
-      <h2>Why Community Infrastructure Matters</h2>
+      <CodeStructure lang="yaml" caption="Reading group curriculum definition — a structured 8-week arc connecting Bateson's cybernetics to organ system architecture" filename="curricula/cybernetic-foundations.yml">
+{`curriculum:
+  title: "Cybernetic Foundations of the Organ System"
+  duration_weeks: 8
+  theoretical_tradition: "cybernetics"
+  connection_to_system: "feedback loops, recursive architecture, self-reference"
+
+  weeks:
+    - week: 1
+      text: "Bateson, Steps to an Ecology of Mind, Part III"
+      focus: "Information as difference — what counts as a signal in a system"
+      discussion_prompts:
+        - "Where does the organ system detect differences that make a difference?"
+        - "How does the registry encode information vs. mere data?"
+
+    - week: 2
+      text: "Bateson, Steps to an Ecology of Mind, Part V"
+      focus: "The cybernetics of self — recursive loops and logical typing"
+      discussion_prompts:
+        - "How does ORGAN-I (theory) refer to itself without paradox?"
+        - "Map Bateson's logical types onto the organ dependency graph"
+
+    - week: 3
+      text: "Luhmann, Social Systems, Ch. 1-2"
+      focus: "Autopoiesis — systems that produce the components of which they consist"
+      discussion_prompts:
+        - "Is each organ autopoietic? What would that require?"
+        - "Where does structural coupling happen between organs?"
+
+    - week: 4
+      text: "Luhmann, Social Systems, Ch. 8-9"
+      focus: "Functional differentiation and system/environment boundaries"
+      discussion_prompts:
+        - "Each organ has a boundary — what is inside vs. outside?"
+        - "How do promotion state machines enforce functional differentiation?"
+
+    - week: 5-6
+      text: "Haraway, Situated Knowledges (1988 essay)"
+      focus: "Partial perspective as epistemic virtue — objectivity as positioned"
+      discussion_prompts:
+        - "Each organ sees the system from its own position — is this a bug or feature?"
+        - "How does ORGAN-V (public process) handle the partiality of its own account?"
+
+    - week: 7-8
+      text: "Cross-referencing session — no new reading"
+      focus: "Synthesis: mapping theoretical concepts to architectural decisions"
+      discussion_prompts:
+        - "Produce a correspondence table: concept → organ system implementation"
+        - "Identify three places where theory changed an implementation decision"`}
+      </CodeStructure>
+
+      <h2>Intellectual Foundations</h2>
       <p>
-        The eight-organ system can be read as a solo practitioner's portfolio, and it works at that level. But the community organ represents an ambition beyond individual craft: building the relational infrastructure for a creative institution. Salons create feedback loops between the system's theory and external perspectives. Reading groups train collaborators in the system's intellectual foundations. Together, they transform a portfolio into a practice — something that can survive beyond a single person's attention span. Community infrastructure is the organ that makes the system reproducible.
+        The community organ draws on three distinct but convergent intellectual traditions. Bateson's cybernetics provides the epistemological ground: his concept of the "ecology of mind" — that mental processes are not located inside individual skulls but distributed across systems of interaction — justifies treating community not as an add-on to individual creative work but as the medium in which creative cognition actually occurs.<Cite id={5} author="Bateson, Gregory" title="Steps to an Ecology of Mind" source="University of Chicago Press" year={1972} /> Luhmann's systems theory provides the structural model: his account of how social systems maintain themselves through communication, reduce complexity through selective attention, and evolve through variation-selection-retention cycles maps directly onto how salons and reading groups function as self-organizing epistemic systems.<Cite id={6} author="Luhmann, Niklas" title="Social Systems" source="Stanford University Press" year={1984} /> Donna Haraway's concept of "situated knowledges" — her argument that all knowledge is produced from particular positions and that objectivity consists not in a view from nowhere but in the responsible acknowledgment of partiality — provides the ethical framework for a community practice that values diverse perspectives not as decoration but as epistemic necessity.<Cite id={7} author="Haraway, Donna" title="Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective" source="Feminist Studies 14(3)" year={1988} /> Richard Sennett's work on cooperation — the skills and rituals through which people coordinate across difference — provides the practical complement, offering concrete guidance on how dialogical exchange, active listening, and the management of disagreement can be cultivated as institutional practices rather than left to individual temperament.<Cite id={8} author="Sennett, Richard" title="Together: The Rituals, Pleasures and Politics of Cooperation" source="Yale University Press" year={2012} />
       </p>
+
+      <MermaidDiagram
+        caption="Theory-to-practice pipeline — abstract theoretical frameworks become architectural decisions through the mediating infrastructure of community discussion"
+        chart={`graph LR
+    THEORY[Abstract Theory<br/>Bateson, Luhmann, Haraway] --> RG[Reading Group<br/>Structured Engagement]
+    RG --> DISC[Discussion<br/>Collaborative Sense-Making]
+    DISC --> INSIGHT[Insight<br/>Theory-Architecture Mapping]
+    INSIGHT --> ADR[Architectural Decision<br/>Documented Rationale]
+    ADR --> IMPL[Implementation<br/>Organ System Code &amp; Config]
+    IMPL --> REFLECT[Reflection<br/>Did Theory Predict Practice?]
+    REFLECT --> THEORY`}
+      />
+
+      <h2>Community as Institutional Memory</h2>
+      <p>
+        One of the less obvious functions of community infrastructure is the creation and maintenance of institutional memory — the accumulated knowledge of why decisions were made, what alternatives were considered, and what principles guided choices. In a solo practitioner's portfolio, institutional memory is personal memory, which is fragile, selective, and inaccessible to collaborators. The salon archive and reading group notes create a distributed, searchable record of the intellectual reasoning behind the system's architecture.<Cite id={9} author="Lave, Jean and Etienne Wenger" title="Situated Learning: Legitimate Peripheral Participation" source="Cambridge University Press" year={1991} /> Lave and Wenger's concept of "legitimate peripheral participation" describes how newcomers to a community of practice learn not by being taught rules but by gradually engaging with the community's accumulated practices, stories, and artifacts. The salon archive and curriculum records serve exactly this function: they are the artifacts through which a future collaborator can trace the reasoning that connects Bateson's cybernetic epistemology to the organ system's recursive dependency graph, or Luhmann's functional differentiation to the registry's organ-level boundaries. Without this infrastructure, the eight-organ system would be legible only to its creator — a system that cannot explain itself cannot survive beyond a single person's attention.<Cite id={10} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's research on how communities successfully govern shared resources over long time horizons reveals that durable institutions require not just rules but shared narratives about why those rules exist — exactly what the community organ is designed to produce and preserve.
+      </p>
+
+      <Figure alt="Theory-to-architecture correspondence table" caption="Mapping intellectual foundations to concrete system decisions — how salon and reading group discussions produce traceable architectural rationale" number={2}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Theoretical Concept</th>
+                <th>Source</th>
+                <th>System Implementation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Autopoiesis (self-producing systems)</td>
+                <td>Luhmann</td>
+                <td>Each organ maintains its own registry section, README, and health checks</td>
+              </tr>
+              <tr>
+                <td>Difference that makes a difference</td>
+                <td>Bateson</td>
+                <td>Promotion state machine: only meaningful state changes trigger workflows</td>
+              </tr>
+              <tr>
+                <td>Situated knowledges</td>
+                <td>Haraway</td>
+                <td>Each organ's profile README describes the system from its own perspective</td>
+              </tr>
+              <tr>
+                <td>Legitimate peripheral participation</td>
+                <td>Lave &amp; Wenger</td>
+                <td>CONTRIBUTING.md files and community health docs as onboarding paths</td>
+              </tr>
+              <tr>
+                <td>Governing the commons</td>
+                <td>Ostrom</td>
+                <td>Governance rules, dependency validation, and cross-organ audit workflows</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>From Salon to System: Feedback Mechanisms</h2>
+      <p>
+        The community organ is not a passive archive — it is an active feedback mechanism that shapes how the other seven organs develop. When a salon discussion surfaces a tension between two architectural principles (for example, the tension between organ autonomy and cross-organ dependency), that tension is documented as an observation in the synthesis, tagged with the relevant organs, and fed back into the system's governance process. Reading group discussions that reveal gaps between theoretical intention and actual implementation generate action items that propagate to the appropriate organ's issue tracker.<Cite id={8} author="Sennett, Richard" title="Together: The Rituals, Pleasures and Politics of Cooperation" source="Yale University Press" year={2012} /> Sennett's distinction between "dialogic" conversation — where participants actively listen and respond to what others actually said — and "dialectic" conversation — where participants argue toward a predetermined conclusion — informs the facilitation approach: salons are designed to be dialogic, allowing genuine surprise and the possibility that a discussion will change the facilitator's mind about a system decision. This is not decorative process. Multiple architectural decisions in the organ system — including the introduction of the meta-organvm umbrella organization and the decision to treat community health files as cross-organ rather than per-repo concerns — originated in salon discussions that revealed blind spots invisible from inside the system.<Cite id={3} author="Habermas, Jurgen" title="The Structural Transformation of the Public Sphere" source="MIT Press" year={1962} />
+      </p>
+
+      <MermaidDiagram
+        caption="Feedback loop between community infrastructure and the eight-organ system — discussions generate observations that feed back into governance and architecture"
+        chart={`graph TD
+    SALON[Salon Discussion] --> SYNTH[Synthesis Document<br/>Tagged Observations]
+    RG[Reading Group Session] --> NOTES[Session Notes<br/>Theory-Practice Gaps]
+    SYNTH --> TAG[Tag by Organ<br/>I through VII + Meta]
+    NOTES --> ACTION[Action Items<br/>Implementation Gaps]
+    TAG --> GOV[Governance Process<br/>Decision Review]
+    ACTION --> ISSUES[Organ Issue Trackers]
+    GOV --> CHANGE[System Change<br/>Registry, Config, Code]
+    ISSUES --> CHANGE
+    CHANGE --> REFLECT[Next Salon/RG Reflection]
+    REFLECT --> SALON
+    REFLECT --> RG`}
+      />
+
+      <h2>From Portfolio to Practice</h2>
+      <p>
+        The eight-organ system can be read as a solo practitioner's portfolio, and it functions at that level. But the community organ represents a specific ambition beyond individual craft: building the relational infrastructure for a creative institution that can survive beyond a single person's attention span. Lave and Wenger's research on situated learning demonstrates that knowledge which exists only in one person's head is not institutional knowledge — it becomes institutional only when it is embodied in practices, artifacts, and relationships that others can participate in.<Cite id={9} author="Lave, Jean and Etienne Wenger" title="Situated Learning: Legitimate Peripheral Participation" source="Cambridge University Press" year={1991} /> The salon archive, the reading group curricula, the synthesis documents, and the theory-to-architecture correspondence tables are all artifacts designed to make the system's intellectual foundations accessible to people who were not present at its creation. Ostrom's research on long-lived commons institutions reveals a common pattern: communities that successfully govern shared resources over generations invest heavily in creating and maintaining shared narratives about why their rules exist, how decisions were made, and what principles guide future choices.<Cite id={10} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> The community organ is this investment for the eight-organ system. It transforms a portfolio into a practice — something with enough relational and documentary infrastructure to be continued, modified, and governed by people beyond its original architect.
+      </p>
+
+      <Figure alt="Community infrastructure statistics" caption="Community organ metrics — the relational infrastructure that makes the eight-organ system reproducible and governable beyond a single practitioner" number={3}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">6+</div>
+            <div class="stat-label">Salon Topics</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Reading Group Arcs</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Theoretical Traditions</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Discussion Formats</div>
+          </div>
+        </div>
+      </Figure>
+
+      <h2>Why Community Infrastructure Cannot Be Deferred</h2>
+      <p>
+        There is a persistent temptation in systems design to treat community as a phase-two concern — build the system first, add the people later. Wenger's research on communities of practice reveals why this approach fails: the shared repertoires of meaning that make collaboration possible are not something you can bolt on after the technical architecture is complete. They must be cultivated alongside the system, growing with it, so that the community's understanding evolves in tandem with the system's complexity.<Cite id={1} author="Wenger, Etienne" title="Communities of Practice: Learning, Meaning, and Identity" source="Cambridge University Press" year={1998} /> ORGAN VI exists from the beginning of the eight-organ system, not as an afterthought but as a co-equal organ, because the intellectual foundations of the system — the Batesonian cybernetics, the Luhmannian systems theory, the Harawayan situated knowledges — are not decorative citations but load-bearing architectural decisions that require ongoing community engagement to remain alive and responsive to new challenges.<Cite id={7} author="Haraway, Donna" title="Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective" source="Feminist Studies 14(3)" year={1988} /> Community infrastructure is not the last organ to be built; it is the organ that ensures all the others remain buildable.
+      </p>
+
+      <References entries={[
+        { id: 1, author: "Wenger, Etienne", title: "Communities of Practice: Learning, Meaning, and Identity", source: "Cambridge University Press", year: 1998 },
+        { id: 2, author: "Putnam, Robert D.", title: "Bowling Alone: The Collapse and Revival of American Community", source: "Simon & Schuster", year: 2000 },
+        { id: 3, author: "Habermas, Jurgen", title: "The Structural Transformation of the Public Sphere", source: "MIT Press", year: 1962 },
+        { id: 4, author: "Oldenburg, Ray", title: "The Great Good Place: Cafes, Coffee Shops, Bookstores, Bars, Hair Salons, and Other Hangouts at the Heart of a Community", source: "Paragon House", year: 1989 },
+        { id: 5, author: "Bateson, Gregory", title: "Steps to an Ecology of Mind", source: "University of Chicago Press", year: 1972 },
+        { id: 6, author: "Luhmann, Niklas", title: "Social Systems", source: "Stanford University Press", year: 1984 },
+        { id: 7, author: "Haraway, Donna", title: "Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective", source: "Feminist Studies 14(3)", year: 1988 },
+        { id: 8, author: "Sennett, Richard", title: "Together: The Rituals, Pleasures and Politics of Cooperation", source: "Yale University Press", year: 2012 },
+        { id: 9, author: "Lave, Jean and Etienne Wenger", title: "Situated Learning: Legitimate Peripheral Participation", source: "Cambridge University Press", year: 1991 },
+        { id: 10, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .table-wrap th,
+  .table-wrap td {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border, #ddd);
+    text-align: left;
+  }
+  .table-wrap th {
+    background: var(--surface-alt, #f5f5f5);
+    font-weight: 600;
+  }
+</style>

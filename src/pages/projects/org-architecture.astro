@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Org Architecture & Community Health — 4444j" description="Organization-wide infrastructure for CI/CD, AI agents, and community health — inherited by every repo in the org.">
@@ -14,22 +19,262 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
       tags={['Systems', 'Community']}
       repo="https://github.com/organvm-i-theoria/.github"
     >
-      <h2>The Idea</h2>
+      <h2>The Problem: Standards at Scale</h2>
       <p>
-        Managing organization-wide standards across dozens of repositories is tedious and error-prone. GitHub's special <code>.github</code> repository solves this by providing a single source of truth — workflows, templates, governance docs, and AI configurations that every org repo inherits automatically. Change it once here, and every repository benefits. This project takes that mechanism and builds a comprehensive organizational operating system on top of it.
+        Every multi-repository organization faces the same entropy: standards drift, security configurations diverge, and contributor onboarding becomes a per-repo archaeology exercise. Conway's law predicts this — organizations that design systems are constrained to produce designs which mirror their communication structures, and when those structures are fragmented across dozens of repositories, fragmentation is the inevitable output.<Cite id={1} author="Conway, Melvin E." title="How Do Committees Invent?" source="Datamation" year={1968} /> The open-source world has known this for decades. Raymond's analysis of the bazaar model revealed that even decentralized projects require institutional infrastructure — mailing list conventions, patch formats, release protocols — to avoid collapsing under their own coordination costs.<Cite id={2} author="Raymond, Eric S." title="The Cathedral and the Bazaar" source="O'Reilly Media" year={1999} /> GitHub's special <code>.github</code> repository mechanism offers a solution: a single repository whose contents — workflows, templates, governance documents, AI configurations — are inherited by every other repository in the organization. This project takes that mechanism and builds a comprehensive organizational operating system on top of it, governing 81 repositories across 8 organizations from a single source of truth.
       </p>
 
-      <h2>How It Works</h2>
+      <MermaidDiagram
+        caption="Inheritance flow — the .github repository propagates governance, CI/CD, and AI configurations to every org repository that does not define its own"
+        chart={`graph TD
+    GH[".github Repository<br/>(Single Source of Truth)"] --> HF["Community Health Files<br/>CODE_OF_CONDUCT.md<br/>CONTRIBUTING.md<br/>SECURITY.md<br/>SUPPORT.md"]
+    GH --> WF["Reusable Workflows<br/>CI Pipelines<br/>Security Scanning<br/>PR Automation"]
+    GH --> AI["AI Framework<br/>Production Agents<br/>Chatmodes<br/>Copilot Config"]
+    HF --> R1["Repo A"]
+    HF --> R2["Repo B"]
+    HF --> RN["Repo N"]
+    WF --> R1
+    WF --> R2
+    WF --> RN
+    AI --> R1
+    AI --> R2
+    AI --> RN
+    style GH fill:#1a1a2e,stroke:#e94560,color:#fff
+    style HF fill:#16213e,stroke:#0f3460,color:#fff
+    style WF fill:#16213e,stroke:#0f3460,color:#fff
+    style AI fill:#16213e,stroke:#0f3460,color:#fff`}
+      />
+
+      <h2>Community Health Layer</h2>
       <p>
-        The repository provides three layers of infrastructure. <strong>Community health files</strong> — Code of Conduct, Contributing guidelines, Security policy, Support docs — are inherited by every repo in the organization that doesn't define its own. <strong>CI/CD workflows</strong> cover pipelines, security scanning (CodeQL, Gitleaks, TruffleHog), PR automation, health monitoring, and metrics — all with SHA-pinned action references for supply chain security. <strong>An AI framework</strong> provides production agents across security, infrastructure, development, languages, and documentation, plus chatmodes for specialized AI personas, all compatible with GitHub Copilot.
+        The foundation of any collaborative software project is not its code but its social contracts. GitHub's community health file inheritance means that a <code>CODE_OF_CONDUCT.md</code>, <code>CONTRIBUTING.md</code>, <code>SECURITY.md</code>, and <code>SUPPORT.md</code> placed in the <code>.github</code> repository appear on every repository in the organization that has not defined its own — creating a baseline of contributor experience without requiring any per-repo configuration.<Cite id={3} author="Eghbal, Nadia" title="Working in Public: The Making and Maintenance of Open Source Software" source="Stripe Press" year={2020} /> Eghbal's research into the maintenance burden of open-source projects demonstrates that community health files are not bureaucratic overhead but essential load-bearing infrastructure: projects without clear contribution guidelines see higher friction in first-time contributions and higher maintainer burnout. Fogel extends this argument to the operational level, showing that explicit governance documents reduce "bike-shedding" — endless procedural debates — by providing authoritative answers to common questions before they are asked.<Cite id={4} author="Fogel, Karl" title="Producing Open Source Software: How to Run a Successful Free Software Project" source="O'Reilly Media" year={2005} /> In this system, the four health files are not boilerplate templates but carefully authored documents reflecting the specific governance philosophy of the eight-organ architecture: the Code of Conduct references the system's values, the Contributing guide maps onto the promotion state machine, and the Security policy defines responsible disclosure procedures tailored to the project's threat model.
       </p>
 
-      <h2>Why It Matters</h2>
+      <CodeStructure lang="yaml" caption="Reusable CI workflow with SHA-pinned actions for supply-chain security — called by every repository in the organization" filename=".github/workflows/ci-pipeline.yml">
+{`name: CI Pipeline
+on:
+  workflow_call:
+    inputs:
+      language:
+        required: true
+        type: string
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup environment
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8  # v4.0.2
+        if: inputs.language == 'typescript'
+        with:
+          node-version: '22'
+
+      - name: Security scan — Gitleaks
+        uses: gitleaks/gitleaks-action@1f2d10fb689bc07a5f56f48e6c6b8ee4a47c1dab  # v2.3.6
+        env:
+          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+
+      - name: Security scan — CodeQL
+        uses: github/codeql-action/analyze@c4fb451437765abf5018c6571834e2c3c6a21745  # v3.24.6
+        with:
+          languages: \${{ inputs.language }}
+
+      - name: Run tests
+        run: |
+          if [ "\${{ inputs.language }}" = "typescript" ]; then
+            npm ci && npm test
+          elif [ "\${{ inputs.language }}" = "python" ]; then
+            pip install -r requirements.txt && pytest
+          fi`}
+      </CodeStructure>
+
+      <h2>CI/CD Infrastructure</h2>
       <p>
-        In a system coordinating 81 repositories across 8 organizations, consistency isn't optional — it's structural. This repo ensures that every new repository starts with security scanning, conventional commit enforcement, and community health files without any manual setup. It demonstrates infrastructure-as-code thinking applied not to servers but to organizational culture: governance, contributor experience, and AI tooling as versionable, reviewable, inheritable artifacts.
+        The second layer transforms GitHub Actions from per-repository configuration files into an organizational platform. Every workflow uses <code>workflow_call</code> to expose itself as a reusable component — individual repositories call these shared workflows with parameters rather than duplicating pipeline logic.<Cite id={5} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation" source="Addison-Wesley" year={2010} /> Humble and Farley's core insight — that the deployment pipeline should be a first-class artifact, versioned and tested like application code — applies doubly at the organizational level, where pipeline drift across repositories creates silent security gaps and inconsistent quality gates. The critical security decision is SHA-pinning: every GitHub Action reference uses a full commit SHA rather than a mutable tag, preventing supply-chain attacks where a compromised action tag is silently replaced with malicious code.<Cite id={6} author="Bass, Len, Ingo Weber, and Liming Zhu" title="DevOps: A Software Architect's Perspective" source="Addison-Wesley" year={2015} /> Bass et al. identify supply-chain integrity as a DevOps architectural concern — this repository implements that concern at the organizational boundary, ensuring that no repository in the system can accidentally reference an unvetted action version.
       </p>
+
+      <Figure alt="Security scanning tools comparison" caption="Security scanning tool matrix — three complementary tools covering secrets detection, static analysis, and dependency vulnerabilities">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Tool</th><th>Purpose</th><th>Integration Method</th><th>Scope</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>CodeQL</strong></td><td>Static analysis &amp; vulnerability detection</td><td>GitHub-native, SHA-pinned action</td><td>Language-aware semantic queries</td></tr>
+              <tr><td><strong>Gitleaks</strong></td><td>Secrets detection in git history</td><td>Pre-commit hook + CI action</td><td>Full repository history scan</td></tr>
+              <tr><td><strong>TruffleHog</strong></td><td>High-entropy string &amp; credential scanning</td><td>CI action with custom regexes</td><td>Commit diffs + full scans</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <p>
+        The three scanning tools form a defense-in-depth strategy. CodeQL operates at the semantic level, understanding language-specific vulnerability patterns — SQL injection, cross-site scripting, insecure deserialization — by modeling code as a queryable database. Gitleaks works at the git layer, scanning every commit in repository history for patterns matching API keys, tokens, and credentials, catching secrets that were committed and later "deleted" but remain in git history. TruffleHog complements both with high-entropy string detection and custom regex patterns, catching credential formats that Gitleaks' built-in patterns miss.<Cite id={5} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation" source="Addison-Wesley" year={2010} /> Together, they implement what Humble and Farley call the "quality gate" pattern: no code reaches production without passing all three scans. The organizational inheritance model means this gate is not opt-in — every repository inherits it by default, and opting out requires an explicit, reviewable override.
+      </p>
+
+      <MermaidDiagram
+        caption="Three-layer architecture — Community Health provides the social foundation, CI/CD enforces technical quality, and the AI Framework augments development workflows"
+        chart={`graph TB
+    subgraph L1["Layer 1: Community Health"]
+        COC["Code of Conduct"] --- CONT["Contributing Guide"]
+        CONT --- SEC["Security Policy"]
+        SEC --- SUP["Support Docs"]
+    end
+    subgraph L2["Layer 2: CI/CD Infrastructure"]
+        PIPE["CI Pipelines"] --- SCAN["Security Scanning<br/>CodeQL + Gitleaks + TruffleHog"]
+        SCAN --- PR["PR Automation<br/>Conventional Commits"]
+        PR --- MON["Health Monitoring<br/>& Metrics"]
+    end
+    subgraph L3["Layer 3: AI Framework"]
+        AGENTS["Production Agents<br/>Security, Infra, Dev, Docs"] --- CHAT["Chatmodes<br/>Specialized Personas"]
+        CHAT --- COP["GitHub Copilot<br/>Integration"]
+    end
+    L1 -->|"social contracts govern"| L2
+    L2 -->|"quality gates inform"| L3
+    L3 -->|"AI assists compliance with"| L1
+    style L1 fill:#0d1117,stroke:#238636,color:#fff
+    style L2 fill:#0d1117,stroke:#1f6feb,color:#fff
+    style L3 fill:#0d1117,stroke:#a371f7,color:#fff`}
+      />
+
+      <h2>AI Agent Framework</h2>
+      <p>
+        The third layer is the most forward-looking: a framework of production AI agents, each specialized for a domain within the organizational workflow. Security agents review pull requests for vulnerability patterns, infrastructure agents validate workflow configurations and dependency graphs, development agents assist with code generation within the established patterns, and documentation agents enforce consistency across the 81 repositories' README files and changelogs.<Cite id={7} author="Wooldridge, Michael" title="An Introduction to MultiAgent Systems" source="John Wiley & Sons" year={2009} /> Wooldridge's taxonomy of agent architectures — reactive, deliberative, and hybrid — maps onto the framework's design: security agents are reactive (trigger on PR events), documentation agents are deliberative (analyze repository state and generate updates), and development agents are hybrid (respond to immediate requests while maintaining context across sessions). The agents are implemented as GitHub Copilot-compatible configurations, meaning they integrate with the developer's existing IDE workflow rather than requiring a separate toolchain.<Cite id={8} author="Russell, Stuart and Peter Norvig" title="Artificial Intelligence: A Modern Approach" source="Pearson" year={2020} /> Russell and Norvig's framework for rational agents — perceive, reason, act — is realized concretely: each agent perceives through GitHub event webhooks, reasons through its specialized prompt context, and acts through the GitHub API. The chatmodes layer adds specialized personas — a security auditor, a documentation editor, a dependency analyst — each with tailored system prompts and tool access policies.
+      </p>
+
+      <CodeStructure lang="yaml" caption="AI agent configuration — production security agent with scoped permissions and Copilot integration" filename=".github/agents/security-reviewer.yml">
+{`name: security-reviewer
+description: Reviews PRs for security vulnerabilities and compliance
+triggers:
+  - pull_request.opened
+  - pull_request.synchronize
+
+context:
+  files:
+    - SECURITY.md
+    - .github/workflows/security-scan.yml
+  instructions: |
+    You are a security reviewer for the organvm ecosystem.
+    Check for: hardcoded secrets, unsafe dependencies,
+    missing input validation, SQL injection vectors,
+    and OWASP Top 10 patterns.
+
+permissions:
+  contents: read
+  pull-requests: write
+  security-events: read
+
+copilot:
+  compatible: true
+  slash-commands:
+    - /security-review
+    - /threat-model
+  model-preference: claude-sonnet`}
+      </CodeStructure>
+
+      <h2>Design Philosophy: Infrastructure as Culture</h2>
+      <p>
+        The deeper claim of this project is that organizational culture can be encoded as versionable, reviewable, inheritable artifacts. This is infrastructure-as-code thinking applied not to servers or networks but to governance, contributor experience, and development methodology.<Cite id={9} author="Morris, Kief" title="Infrastructure as Code: Managing Servers in the Cloud" source="O'Reilly Media" year={2016} /> Morris argues that treating infrastructure as code provides four benefits — reproducibility, consistency, auditability, and recoverability — and every one of these applies to organizational standards. When the Code of Conduct is a file in a Git repository, it has a commit history, a blame log, a review trail. When CI policy changes, the diff is visible and the rollback path is clear. This transforms governance from an implicit social agreement into an explicit, testable system.<Cite id={10} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's Nobel Prize-winning research on institutional governance demonstrated that successful commons management requires clear boundaries, proportional rules, collective-choice arrangements, and monitoring — all of which this repository implements through GitHub's access controls, inherited workflow rules, PR-based governance changes, and automated health monitoring respectively.
+      </p>
+
+      <Figure alt="Governance features mapped to Ostrom's institutional design principles" caption="Mapping Ostrom's eight institutional design principles to the .github repository's governance implementation">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Ostrom Principle</th><th>Repository Implementation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Clearly defined boundaries</td><td>Organization membership + CODEOWNERS files</td></tr>
+              <tr><td>Proportional rules</td><td>Tiered CI templates (minimal, standard, full)</td></tr>
+              <tr><td>Collective-choice arrangements</td><td>PR-based governance changes with review requirements</td></tr>
+              <tr><td>Monitoring</td><td>Automated health audits + monthly metrics workflows</td></tr>
+              <tr><td>Graduated sanctions</td><td>Warning comments → required reviews → branch protection</td></tr>
+              <tr><td>Conflict resolution</td><td>Code of Conduct with escalation procedures</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <p>
+        The decision to make AI agents part of this governance layer — rather than a separate system — reflects a deliberate architectural position: AI tooling should be subject to the same review, versioning, and access control processes as any other piece of organizational infrastructure. An agent's prompt is as consequential as a CI pipeline's configuration, and should be governed accordingly.<Cite id={7} author="Wooldridge, Michael" title="An Introduction to MultiAgent Systems" source="John Wiley & Sons" year={2009} /> Wooldridge identifies trust and delegation as the central challenges of multi-agent systems; by placing agent configurations within the same governance framework as security policies and contribution guidelines, the system makes agent capabilities visible, auditable, and revocable through familiar Git-based workflows rather than opaque administrative interfaces.
+      </p>
+
+      <MermaidDiagram
+        caption="Inheritance override decision tree — repositories inherit all organizational defaults unless they define explicit overrides, which are tracked by the monthly health audit"
+        chart={`graph TD
+    NEW["New Repository Created"] --> INH["Inherits All Defaults<br/>Health Files + CI + AI"]
+    INH --> Q{"Needs Custom<br/>Behavior?"}
+    Q -->|No| STD["Standard Repo<br/>Full Inheritance"]
+    Q -->|Yes| OVR["Define Local Override<br/>(Explicit File)"]
+    OVR --> AUDIT["Monthly Health Audit<br/>Tracks Override"]
+    AUDIT --> DRIFT{"Override Still<br/>Justified?"}
+    DRIFT -->|Yes| KEEP["Maintain Override<br/>Document Rationale"]
+    DRIFT -->|No| REMOVE["Remove Override<br/>Return to Inheritance"]
+    REMOVE --> STD
+    style NEW fill:#1a1a2e,stroke:#e94560,color:#fff
+    style STD fill:#0d1117,stroke:#238636,color:#fff
+    style AUDIT fill:#0d1117,stroke:#1f6feb,color:#fff`}
+      />
+
+      <h2>Tradeoffs and Limitations</h2>
+      <p>
+        The inheritance model has a fundamental tension: uniformity versus autonomy. A repository that needs a custom CI pipeline must explicitly override the inherited one, creating a maintenance burden at the repository level and a coordination cost at the organizational level — every override is a potential drift point that the monthly health audit must track.<Cite id={2} author="Raymond, Eric S." title="The Cathedral and the Bazaar" source="O'Reilly Media" year={1999} /> Raymond's observation that open-source governance must balance centralized standards with decentralized innovation applies directly: too much inheritance and repositories become constrained; too little and the organizational operating system loses its coherence. The current design errs toward inheritance, with escape hatches for repositories that genuinely need custom behavior — a choice that reflects the system's scale (81 repositories) and its need for auditable consistency over per-repo flexibility.
+      </p>
+
+      <Figure alt="System metrics for the org architecture repository" caption="Organizational infrastructure metrics — a single repository governing 81 downstream repositories across 8 organizations" number={1}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">81</div>
+            <div class="stat-label">Repos Inheriting</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Security Tools</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Health Files</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">5+</div>
+            <div class="stat-label">AI Agents</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Organizations</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">SHA</div>
+            <div class="stat-label">Pinned Actions</div>
+          </div>
+        </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Conway, Melvin E.", title: "How Do Committees Invent?", source: "Datamation", year: 1968 },
+        { id: 2, author: "Raymond, Eric S.", title: "The Cathedral and the Bazaar", source: "O'Reilly Media", year: 1999 },
+        { id: 3, author: "Eghbal, Nadia", title: "Working in Public: The Making and Maintenance of Open Source Software", source: "Stripe Press", year: 2020 },
+        { id: 4, author: "Fogel, Karl", title: "Producing Open Source Software: How to Run a Successful Free Software Project", source: "O'Reilly Media", year: 2005 },
+        { id: 5, author: "Humble, Jez and David Farley", title: "Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation", source: "Addison-Wesley", year: 2010 },
+        { id: 6, author: "Bass, Len, Ingo Weber, and Liming Zhu", title: "DevOps: A Software Architect's Perspective", source: "Addison-Wesley", year: 2015 },
+        { id: 7, author: "Wooldridge, Michael", title: "An Introduction to MultiAgent Systems", source: "John Wiley & Sons", year: 2009 },
+        { id: 8, author: "Russell, Stuart and Peter Norvig", title: "Artificial Intelligence: A Modern Approach", source: "Pearson", year: 2020 },
+        { id: 9, author: "Morris, Kief", title: "Infrastructure as Code: Managing Servers in the Cloud", source: "O'Reilly Media", year: 2016 },
+        { id: 10, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+</style>

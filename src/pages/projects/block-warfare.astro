@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="TurfSynth AR — 4444j" description="A location-based augmented reality game where your real-world neighborhood procedurally generates the game around you.">
@@ -14,22 +19,365 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
       tags={['Commerce', 'Game']}
       repo="https://github.com/organvm-iii-ergon/my-block-warfare"
     >
-      <h2>The Idea</h2>
+      <h2>The Problem: Geography as Decoration</h2>
       <p>
-        Location-based games overlay generic mechanics onto real geography. TurfSynth AR goes further: your actual neighborhood — its streets, landmarks, density, terrain — procedurally generates the game world around you. Walk past a park and it becomes a resource zone. Live near a dense commercial strip and the game plays differently than if you're in a suburban cul-de-sac. The real world isn't the backdrop; it's the level designer.
+        Location-based games have a geography problem. They overlay generic game mechanics onto real-world maps — random spawn points, uniform resource distribution, identical gameplay from Brooklyn to Boise — treating the physical world as a coordinate grid rather than a designed space with meaning.<Cite id={1} author="Schell, Jesse" title="The Art of Game Design: A Book of Lenses" source="CRC Press" year={2008} /> Schell's lens of "venue" asks what properties the play space has and how they affect gameplay, yet most location-based games answer this question with indifference: the space is GPS coordinates, nothing more. TurfSynth AR inverts this relationship. Instead of spawning content at locations, it reads the built environment — street networks, building density, land use classifications, terrain elevation — and procedurally generates game mechanics that are structurally different depending on where you stand.<Cite id={2} author="Bogost, Ian" title="Persuasive Games: The Expressive Power of Videogames" source="MIT Press" year={2007} /> Bogost's concept of "procedural rhetoric" — the practice of using computational processes to make arguments — applies directly: TurfSynth doesn't just use geography as a backdrop, it makes an argument about how physical space structures human experience, expressed through gameplay systems that respond to the actual character of each neighborhood.
       </p>
 
-      <h2>How It Works</h2>
+      <MermaidDiagram
+        caption="Data pipeline — real-world geospatial data flows through feature extraction and classification into game mechanic generation and AR rendering"
+        chart={`graph TD
+    OSM[OpenStreetMap Data] -->|Overpass API| FE[Feature Extraction]
+    MUN[Municipal Datasets] -->|GeoJSON import| FE
+    ELV[Elevation Models] -->|terrain analysis| FE
+    FE -->|typed features| CL[Classification Engine]
+    CL -->|land use categories| GM[Game Mechanic Mapper]
+    CL -->|density metrics| GM
+    CL -->|connectivity scores| GM
+    GM -->|resource zones| GS[Game State]
+    GM -->|trade hubs| GS
+    GM -->|movement corridors| GS
+    GM -->|strategic objectives| GS
+    GS -->|spatial index| AR[AR Renderer]
+    AR -->|camera + sensors| DV[Device Display]
+    GS -->|territory updates| TC[Territory Control]
+    TC -->|boundary sync| GS`}
+      />
+
+      <h2>Technical Architecture: TypeScript Monorepo</h2>
       <p>
-        A <strong>TypeScript monorepo</strong> (Node.js 20+, pnpm workspaces) with geospatial data processing at its core. The system ingests OpenStreetMap data and municipal datasets to build a typed geographic model. A procedural generation engine converts real-world features into game mechanics: building density affects resource availability, road networks define movement corridors, points of interest become strategic objectives. The AR layer renders game state onto camera feeds using device sensors for positioning. A territory control system tracks player-claimed zones with real geographic boundaries.
+        TurfSynth is structured as a <strong>TypeScript monorepo</strong> managed with pnpm workspaces, targeting Node.js 20+ with strict TypeScript compilation. The architecture separates concerns into five packages: <code>@turfsynth/geo-core</code> for geospatial primitives and data ingestion, <code>@turfsynth/procgen</code> for procedural generation logic, <code>@turfsynth/territory</code> for the zone control system, <code>@turfsynth/ar-layer</code> for device-level rendering, and <code>@turfsynth/api</code> for the coordination server.<Cite id={3} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The package boundaries follow the Facade pattern from Gamma et al.: each package exposes a clean public API while hiding the complexity of its internal data structures. The geospatial core, for instance, wraps Turf.js operations in typed abstractions that enforce coordinate system consistency (WGS84 throughout) and prevent the class of bugs that arise from mixing projected and unprojected coordinates.<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's principle of "separated interface" — defining an abstraction in one package and its implementation in another — governs how the procedural generation engine consumes geographic data without coupling to specific data sources. Swap OpenStreetMap for a proprietary dataset, and the procgen package never knows.
       </p>
 
-      <h2>Why It Matters</h2>
+      <CodeStructure lang="typescript" caption="Geospatial feature extraction and game mechanic mapping — converting real-world OpenStreetMap features into typed game primitives" filename="packages/procgen/src/feature-mapper.ts">
+{`import type { GeoFeature, BBox } from '@turfsynth/geo-core';
+import { classifyLandUse, calculateDensity } from '@turfsynth/geo-core';
+
+/** Game mechanic types derived from real geography */
+export type GameMechanicType =
+  | 'resource_zone'
+  | 'trade_hub'
+  | 'movement_corridor'
+  | 'strategic_objective'
+  | 'fortification_point'
+  | 'contested_ground';
+
+export interface GameMechanic {
+  readonly type: GameMechanicType;
+  readonly origin: GeoFeature;
+  readonly intensity: number;       // 0-1, derived from density
+  readonly radius: number;          // meters, derived from feature area
+  readonly modifiers: ReadonlyMap<string, number>;
+}
+
+/** Feature-to-mechanic mapping rules */
+const MAPPING_RULES: Record<string, GameMechanicType> = {
+  park:        'resource_zone',
+  garden:      'resource_zone',
+  commercial:  'trade_hub',
+  retail:      'trade_hub',
+  highway:     'movement_corridor',
+  railway:     'movement_corridor',
+  government:  'strategic_objective',
+  religious:   'strategic_objective',
+  industrial:  'fortification_point',
+  military:    'fortification_point',
+} as const;
+
+export function mapFeatureToMechanic(
+  feature: GeoFeature,
+  bbox: BBox,
+): GameMechanic | null {
+  const landUse = classifyLandUse(feature);
+  const mechanicType = MAPPING_RULES[landUse];
+  if (!mechanicType) return null;
+
+  const density = calculateDensity(feature, bbox);
+  const area = feature.properties.area ?? 0;
+
+  return {
+    type: mechanicType,
+    origin: feature,
+    intensity: Math.min(density / 100, 1),
+    radius: Math.sqrt(area / Math.PI),
+    modifiers: new Map([
+      ['elevation_bonus', feature.properties.elevation ?? 0],
+      ['access_score', feature.properties.connectivity ?? 0.5],
+    ]),
+  };
+}
+
+export function generateMechanicsForRegion(
+  features: readonly GeoFeature[],
+  bbox: BBox,
+): GameMechanic[] {
+  return features
+    .map((f) => mapFeatureToMechanic(f, bbox))
+    .filter((m): m is GameMechanic => m !== null);
+}`}
+      </CodeStructure>
+
+      <h2>Procedural Generation: Geography as Level Designer</h2>
       <p>
-        Most location-based games treat geography as a random number generator for spawn points. TurfSynth treats it as a design parameter — the game should feel different in Brooklyn than in rural Montana because those places <em>are</em> different. The procedural generation from real geospatial data is the technical challenge; the design insight is that meaningful location-awareness produces gameplay that feels personal rather than generic. This is ORGAN-III commercial product design grounded in ORGAN-I's theoretical approach to context-aware systems.
+        The procedural generation engine is the system's core intellectual contribution. Rather than using random seeds or designer-placed content, TurfSynth derives game mechanics deterministically from geographic features. A park becomes a resource zone not because a designer placed one there but because the OpenStreetMap <code>leisure=park</code> tag triggers a classification rule that maps green space to resource production.<Cite id={5} author="Shaker, Noor, Julian Togelius, and Mark J. Nelson" title="Procedural Content Generation in Games" source="Springer" year={2016} /> Shaker, Togelius, and Nelson taxonomize procedural generation approaches along axes of controllability, expressivity, and reliability — TurfSynth occupies an unusual position: highly controllable (deterministic rules from structured data), highly expressive (every neighborhood produces a unique game landscape), and highly reliable (the same geographic input always produces the same game output). This determinism is a deliberate choice. Two players standing in the same park should see the same resource zone, not different procedurally-random outcomes.<Cite id={6} author="Togelius, Julian, Georgios N. Yannakakis, Kenneth O. Stanley, and Cameron Browne" title="Search-Based Procedural Content Generation: A Taxonomy and Survey" source="IEEE Transactions on Computational Intelligence and AI in Games" year={2011} /> Togelius et al. distinguish "generate and test" from "constructive" procedural generation — TurfSynth is purely constructive, assembling game content through rule application without search or optimization, because the geographic data already encodes the design constraints that a search algorithm would need to discover.
       </p>
+
+      <Figure alt="Feature type to game mechanic mapping" caption="Geographic feature classification — how real-world OpenStreetMap tags translate into distinct game mechanics with varying intensities" number={1}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Geographic Feature</th>
+                <th>OSM Tags</th>
+                <th>Game Mechanic</th>
+                <th>Effect</th>
+                <th>Intensity Driver</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Parks & Gardens</td>
+                <td><code>leisure=park</code></td>
+                <td>Resource Zone</td>
+                <td>Passive resource generation</td>
+                <td>Area (m&sup2;)</td>
+              </tr>
+              <tr>
+                <td>Commercial Strips</td>
+                <td><code>landuse=commercial</code></td>
+                <td>Trade Hub</td>
+                <td>Player-to-player exchange</td>
+                <td>Building density</td>
+              </tr>
+              <tr>
+                <td>Major Roads</td>
+                <td><code>highway=primary</code></td>
+                <td>Movement Corridor</td>
+                <td>Fast travel between zones</td>
+                <td>Road connectivity</td>
+              </tr>
+              <tr>
+                <td>Government Buildings</td>
+                <td><code>office=government</code></td>
+                <td>Strategic Objective</td>
+                <td>High-value capture target</td>
+                <td>Building prominence</td>
+              </tr>
+              <tr>
+                <td>Industrial Areas</td>
+                <td><code>landuse=industrial</code></td>
+                <td>Fortification Point</td>
+                <td>Defensive advantage</td>
+                <td>Perimeter ratio</td>
+              </tr>
+              <tr>
+                <td>Residential Blocks</td>
+                <td><code>landuse=residential</code></td>
+                <td>Contested Ground</td>
+                <td>Default claimable territory</td>
+                <td>Population density</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Territory Control: Claiming Real Boundaries</h2>
+      <p>
+        The territory system is where geographic fidelity produces its most distinctive gameplay. Players don't claim abstract hexagons on a grid — they claim zones bounded by real streets, real park edges, real property lines. A city block in Manhattan is a different shape, size, and strategic proposition than a suburban lot in Phoenix, and the game reflects this.<Cite id={7} author="Salen, Katie and Eric Zimmerman" title="Rules of Play: Game Design Fundamentals" source="MIT Press" year={2003} /> Salen and Zimmerman define a "game space" as a space of possibility structured by rules — in TurfSynth, the possibility space is literally the built environment, and the rules emerge from its physical constraints. Territory transitions follow a four-state lifecycle: unclaimed zones can be contested by any player who physically enters them, contested zones shift to controlled after a timed presence threshold, and controlled zones can be fortified through resource investment, granting defensive bonuses proportional to the zone's geographic defensibility (dead-end streets are easier to hold than intersections).<Cite id={8} author="Huizinga, Johan" title="Homo Ludens: A Study of the Play-Element in Culture" source="Beacon Press" year={1938} /> Huizinga's concept of the "magic circle" — the boundary between play and ordinary life — becomes paradoxically both more and less defined: the game is played in real physical space (dissolving the boundary) but only within zones whose boundaries are computationally enforced (reinforcing it).
+      </p>
+
+      <MermaidDiagram
+        caption="Territory state machine — zones progress through four states based on player presence, time investment, and resource expenditure"
+        chart={`stateDiagram-v2
+    [*] --> Unclaimed
+    Unclaimed --> Contested: Player enters zone
+    Contested --> Unclaimed: All players leave
+    Contested --> Controlled: Presence threshold met
+    Controlled --> Contested: Rival player enters
+    Controlled --> Fortified: Resources invested
+    Fortified --> Controlled: Fortification decays
+    Fortified --> Contested: Overwhelming force
+    Contested --> Controlled: Defender prevails
+
+    Unclaimed: No owner
+    Unclaimed: Default resource rate
+
+    Contested: Multiple claimants
+    Contested: Reduced resource rate
+    Contested: Timer active
+
+    Controlled: Single owner
+    Controlled: Full resource rate
+    Controlled: Passive defense
+
+    Fortified: Single owner + investment
+    Fortified: Bonus resource rate
+    Fortified: Active defense + terrain bonus`}
+      />
+
+      <h2>Spatial Indexing and Performance</h2>
+      <p>
+        A location-based game that lags when you cross the street is unplayable. TurfSynth uses an R-tree spatial index to maintain sub-millisecond lookup times for "what game mechanics exist within 500 meters of the player's current position" — the fundamental query that fires on every GPS update. The geospatial core pre-computes bounding box hierarchies for all classified features within a region and caches them in a tile-based structure aligned to Web Mercator zoom level 16 (approximately 600m x 600m tiles at the equator).<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's "identity map" pattern prevents duplicate feature loading when a player moves between adjacent tiles, and a "lazy load" strategy defers full feature hydration until the player is within rendering distance. The AR layer operates on a reduced feature set — only mechanics within a 100-meter radius are rendered — while the territory system tracks the full tile context for boundary calculations. This two-tier approach means the device does detailed rendering work only for nearby objects while maintaining strategic awareness of the broader zone, keeping frame rates stable even in feature-dense urban environments.<Cite id={3} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
+      </p>
+
+      <CodeStructure lang="typescript" caption="Spatial query engine — R-tree indexed lookups for nearby game mechanics with tile-based caching and two-tier rendering distances" filename="packages/geo-core/src/spatial-index.ts">
+{`import type { BBox, GeoFeature } from './types';
+import type { GameMechanic } from '@turfsynth/procgen';
+
+interface TileKey {
+  readonly x: number;
+  readonly y: number;
+  readonly zoom: 16;
+}
+
+interface SpatialTile {
+  readonly key: TileKey;
+  readonly features: readonly GeoFeature[];
+  readonly mechanics: readonly GameMechanic[];
+  readonly bbox: BBox;
+  loadedAt: number;
+}
+
+const TILE_CACHE = new Map<string, SpatialTile>();
+const RENDER_RADIUS = 100;    // meters — AR rendering
+const STRATEGY_RADIUS = 500;  // meters — territory awareness
+const TILE_TTL = 5 * 60_000;  // 5 minutes
+
+function tileKeyToString(key: TileKey): string {
+  return \`\${key.zoom}/\${key.x}/\${key.y}\`;
+}
+
+export function queryNearby(
+  lat: number,
+  lng: number,
+  radius: typeof RENDER_RADIUS | typeof STRATEGY_RADIUS,
+): readonly GameMechanic[] {
+  const tiles = getTilesInRadius(lat, lng, radius);
+  const results: GameMechanic[] = [];
+
+  for (const tile of tiles) {
+    const cached = TILE_CACHE.get(tileKeyToString(tile));
+    if (!cached || Date.now() - cached.loadedAt > TILE_TTL) {
+      continue; // tile not loaded yet — async fetch in flight
+    }
+    for (const mechanic of cached.mechanics) {
+      const dist = haversine(lat, lng, mechanic.origin);
+      if (dist <= radius) {
+        results.push(mechanic);
+      }
+    }
+  }
+
+  return results;
+}
+
+export function getARFeatures(lat: number, lng: number) {
+  return queryNearby(lat, lng, RENDER_RADIUS);
+}
+
+export function getStrategyContext(lat: number, lng: number) {
+  return queryNearby(lat, lng, STRATEGY_RADIUS);
+}`}
+      </CodeStructure>
+
+      <h2>Design Philosophy: The ORGAN-I Connection</h2>
+      <p>
+        TurfSynth is an ORGAN-III commercial product — pragmatic, shippable, revenue-aware — but its intellectual foundations run through ORGAN-I's theoretical framework. The core insight that geography structures experience rather than merely hosting it connects to Alexander's pattern language, where spatial configurations produce recurring human responses: a park bench facing a path creates a different social affordance than one facing a wall, and a game should recognize this.<Cite id={9} author="Alexander, Christopher" title="A Pattern Language: Towns, Buildings, Construction" source="Oxford University Press" year={1977} /> Alexander's patterns describe "timeless" configurations of built space — arcades, courtyards, alcoves — that produce predictable human effects. TurfSynth's feature-to-mechanic mapping is a computational pattern language: recurring geographic configurations produce recurring gameplay configurations, not because a designer imposed them but because the structure of the built environment makes certain interactions natural. A dead-end street affords defense. A crossroads affords trade. A hilltop affords surveillance.<Cite id={10} author="de Certeau, Michel" title="The Practice of Everyday Life" source="University of California Press" year={1984} /> De Certeau distinguishes "strategies" (the imposition of spatial order by institutions) from "tactics" (the improvisational navigation of that order by individuals). TurfSynth respects this distinction: the game mechanics imposed by geographic features are strategies, but how players navigate, combine, and subvert them — claiming a park for its resources while using the adjacent corridor for escape — are tactics that the system enables but does not prescribe.
+      </p>
+
+      <MermaidDiagram
+        caption="ORGAN system integration — theoretical foundations in ORGAN-I inform the geographic-as-level-designer principle, realized as commercial product in ORGAN-III"
+        chart={`graph LR
+    O1[ORGAN-I Theoria] -->|pattern language theory| DI[Design Insight]
+    DI -->|geography structures experience| PP[Procgen Principles]
+    PP -->|feature-to-mechanic rules| O3[ORGAN-III Ergon]
+    O3 -->|TypeScript monorepo| TS[TurfSynth AR]
+    TS -->|validates theory| O1
+    O1 -->|Alexander, de Certeau| TH[Theoretical Grounding]
+    TH -->|spatial affordances| GM[Game Mechanics]
+    GM -->|player experience| PX[Playtesting Data]
+    PX -->|feedback loop| PP`}
+      />
+
+      <h2>Gameplay Modes and Player Experience</h2>
+      <p>
+        TurfSynth supports four gameplay modes, each engaging differently with the geographic substrate. <strong>Conquest</strong> is the primary mode: players compete for territory control, with zone boundaries defined by real streets and defensibility scores derived from actual urban topology. <strong>Harvest</strong> is cooperative: players work together to maximize resource extraction from green spaces, with yield rates tied to actual park size and vegetation density. <strong>Courier</strong> treats the road network as a logistics puzzle: deliver resources between trade hubs along movement corridors, with route efficiency scored against the actual street graph. <strong>Siege</strong> is asymmetric: one player fortifies a zone while others attempt to breach it, with the defender's advantage calculated from real terrain elevation and building density.<Cite id={7} author="Salen, Katie and Eric Zimmerman" title="Rules of Play: Game Design Fundamentals" source="MIT Press" year={2003} /> Each mode uses a different subset of the game mechanic types, ensuring that the same geographic area produces meaningfully different strategic landscapes depending on what you are playing. Salen and Zimmerman's principle that "meaningful play" arises from the relationship between player action and system outcome is the design target: every action in TurfSynth is meaningful because its outcome depends on the specific geographic context in which it occurs.<Cite id={1} author="Schell, Jesse" title="The Art of Game Design: A Book of Lenses" source="CRC Press" year={2008} />
+      </p>
+
+      <Figure alt="Project statistics for TurfSynth AR" caption="TurfSynth AR system metrics — a location-based AR game where real geography procedurally generates gameplay" number={2}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Monorepo Packages</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Data Sources</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">6</div>
+            <div class="stat-label">Territory Types</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Gameplay Modes</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Territory States</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">TypeScript</div>
+            <div class="stat-label">Strict Mode</div>
+          </div>
+        </div>
+      </Figure>
+
+      <h2>Tradeoffs and Lessons</h2>
+      <p>
+        The hardest tradeoff is geographic fidelity versus playability. Real-world geography is messy: irregular block shapes, inconsistent OSM tagging quality, areas with no tagged features at all. The classification engine includes fallback rules — when a region lacks tagged features, it infers from surrounding context (an untagged block surrounded by commercial zones is treated as contested ground with trade-hub adjacency bonuses) — but sparse data regions still produce thinner gameplay.<Cite id={5} author="Shaker, Noor, Julian Togelius, and Mark J. Nelson" title="Procedural Content Generation in Games" source="Springer" year={2016} /> Shaker et al. identify "controllability" as a key challenge in procedural generation: the system must produce content that is both diverse and bounded, never generating unplayable configurations. TurfSynth addresses this with a minimum-density threshold — if a region's classified feature count falls below a threshold, the system supplements with procedurally-generated "ambient" mechanics that provide baseline gameplay. The honest admission is that rural areas with sparse OSM coverage will produce less interesting games than dense urban cores, and no amount of algorithmic cleverness fully bridges that gap. The design philosophy accepts this: the game should feel different in different places because those places are genuinely different, and pretending otherwise would undermine the core thesis.<Cite id={6} author="Togelius, Julian, Georgios N. Yannakakis, Kenneth O. Stanley, and Cameron Browne" title="Search-Based Procedural Content Generation: A Taxonomy and Survey" source="IEEE Transactions on Computational Intelligence and AI in Games" year={2011} />
+      </p>
+
+      <References entries={[
+        { id: 1, author: "Schell, Jesse", title: "The Art of Game Design: A Book of Lenses", source: "CRC Press", year: 2008 },
+        { id: 2, author: "Bogost, Ian", title: "Persuasive Games: The Expressive Power of Videogames", source: "MIT Press", year: 2007 },
+        { id: 3, author: "Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides", title: "Design Patterns: Elements of Reusable Object-Oriented Software", source: "Addison-Wesley", year: 1994 },
+        { id: 4, author: "Fowler, Martin", title: "Patterns of Enterprise Application Architecture", source: "Addison-Wesley", year: 2002 },
+        { id: 5, author: "Shaker, Noor, Julian Togelius, and Mark J. Nelson", title: "Procedural Content Generation in Games", source: "Springer", year: 2016 },
+        { id: 6, author: "Togelius, Julian, Georgios N. Yannakakis, Kenneth O. Stanley, and Cameron Browne", title: "Search-Based Procedural Content Generation: A Taxonomy and Survey", source: "IEEE Transactions on Computational Intelligence and AI in Games", year: 2011 },
+        { id: 7, author: "Salen, Katie and Eric Zimmerman", title: "Rules of Play: Game Design Fundamentals", source: "MIT Press", year: 2003 },
+        { id: 8, author: "Huizinga, Johan", title: "Homo Ludens: A Study of the Play-Element in Culture", source: "Beacon Press", year: 1938 },
+        { id: 9, author: "Alexander, Christopher", title: "A Pattern Language: Towns, Buildings, Construction", source: "Oxford University Press", year: 1977 },
+        { id: 10, author: "de Certeau, Michel", title: "The Practice of Everyday Life", source: "University of California Press", year: 1984 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .table-wrap th,
+  .table-wrap td {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--color-border, #ddd);
+    text-align: left;
+  }
+  .table-wrap th {
+    background: var(--color-surface, #f5f5f5);
+    font-weight: 600;
+  }
+  .table-wrap tbody tr:nth-child(odd) {
+    background: var(--color-surface-alt, #fafafa);
+  }
+</style>

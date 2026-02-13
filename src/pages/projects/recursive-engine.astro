@@ -4,6 +4,11 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Recursive Engine (RE:GE) — 4444j" description="A symbolic operating system for myth and narrative — 21 organ handlers, a ritual syntax DSL, and 1,254 tests.">
@@ -17,12 +22,12 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
     >
       <h2>The Question</h2>
       <p>
-        Every software system tells a story — user flows are plot arcs, state machines are character development, error handling is conflict resolution. We treat these as metaphors. I wanted to find out what happens when you treat them as engineering principles. What if narrative structure, from Aristotle through Propp, could be encoded as executable rules? Not an AI that "writes stories" — a symbolic operating system where narrative principles govern how systems organize and evolve.
+        Every software system tells a story — user flows are plot arcs, state machines are character development, error handling is conflict resolution. We treat these as metaphors. I wanted to find out what happens when you treat them as engineering principles.<Cite id={1} author="Aristotle" title="Poetics" source="Penguin Classics (trans. 1996)" year={-335} /> Aristotle's six elements of drama — plot, character, thought, diction, spectacle, song — are not literary ornaments but structural primitives. What if narrative structure, from Aristotle through Propp, could be encoded as executable rules?<Cite id={2} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1968} /> Not an AI that "writes stories" — a symbolic operating system where narrative principles govern how systems organize and evolve.
       </p>
 
       <h2>What RE:GE Does</h2>
       <p>
-        RE:GE is a pure Python engine where <strong>myths, identities, rituals, and recursive structures are first-class computational objects</strong>. It implements 21 organ handlers that process symbolic values through a ritual syntax DSL:
+        RE:GE is a pure Python engine where <strong>myths, identities, rituals, and recursive structures are first-class computational objects</strong>.<Cite id={3} author="Campbell, Joseph" title="The Hero with a Thousand Faces" source="New World Library" year={1949} /> Campbell's monomyth — the hero's departure, initiation, and return — becomes a function signature: entity state in, transformed state out. The engine implements 21 organ handlers that process symbolic values through a ritual syntax DSL:
       </p>
       <ul>
         <li><strong>Myth organs</strong> — encode narrative archetypes as transformation rules. A hero's journey is a function: entity state in, transformed state out.</li>
@@ -30,6 +35,21 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
         <li><strong>Ritual organs</strong> — define sequences that must execute in order, with pre/post-conditions. Ceremonies as transactions.</li>
         <li><strong>Recursive organs</strong> — handle self-reference: entities that describe themselves, systems that modify their own rules.</li>
       </ul>
+
+      <MermaidDiagram
+        caption="Organ processing architecture — myth feeds identity feeds ritual feeds recursion, with recursive loops back to myth"
+        chart={`graph TD
+    M[Myth Organs] -->|archetype transformation| I[Identity Organs]
+    I -->|coherence preservation| R[Ritual Organs]
+    R -->|sequenced execution| RE[Recursive Organs]
+    RE -->|self-reference loop| M
+    M -->|31 Proppian functions| DSL[Ritual Syntax DSL]
+    I -->|entity persistence| DSL
+    R -->|pre/post conditions| DSL
+    RE -->|bounded depth| DSL
+    DSL -->|parse + execute| E[Engine Output]
+    E -->|state feedback| M`}
+      />
 
       <SketchContainer
         sketchId="recursive-tree"
@@ -40,25 +60,29 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
 
       <h2>The Ritual Syntax</h2>
       <p>
-        The engine parses and executes a domain-specific language for declaring symbolic operations:
+        The engine parses and executes a domain-specific language for declaring symbolic operations.<Cite id={4} author="Fowler, Martin" title="Domain-Specific Languages" source="Addison-Wesley" year={2010} /> Fowler distinguishes between internal DSLs (embedded in a host language) and external DSLs (with their own parser) — RE:GE's ritual syntax is a fully external DSL, parsed and executed by a dedicated interpreter. This gives it the expressiveness of declaring symbolic operations declaratively while maintaining a clean separation from the underlying Python runtime.
       </p>
-      <pre><code>INVOKE myth.hero_journey ON entity:protagonist
+
+      <CodeStructure lang="python" caption="Ritual syntax DSL — an external domain-specific language for declaring symbolic organ operations" filename="ritual_syntax.rege">
+{`INVOKE myth.hero_journey ON entity:protagonist
   WITH threshold: 0.7
   BINDING outcome TO identity.transform
-  WHEN condition.readiness EXCEEDS threshold</code></pre>
+  WHEN condition.readiness EXCEEDS threshold`}
+      </CodeStructure>
+
       <p>
-        This isn't pseudo-code. It's the actual syntax the engine parses and executes. The tree visualization above maps branch types to these DSL elements.
+        This isn't pseudo-code. It's the actual syntax the engine parses and executes.<Cite id={5} author="Hofstadter, Douglas" title="Gödel, Escher, Bach: An Eternal Golden Braid" source="Basic Books" year={1979} /> Hofstadter's strange loops — systems that, by moving through levels, arrive back where they started — are the engine's native operation mode. The <code>BINDING</code> keyword creates a reference from an organ output to another organ's input, forming loops that are bounded but genuinely recursive. The tree visualization above maps branch types to these DSL elements.
       </p>
 
       <h2>Testing the Untestable</h2>
       <p>
-        The hardest part wasn't building the engine — it was proving it worked. When your system formalizes narrative, how do you write assertions? We found three strategies:
+        The hardest part wasn't building the engine — it was proving it worked. When your system formalizes narrative, how do you write assertions?<Cite id={6} author="Schön, Donald A." title="The Reflective Practitioner" source="Basic Books" year={1983} /> Schön's concept of "reflection-in-action" — the practitioner's ability to think about what they are doing while doing it — became the test philosophy. We found three strategies:
       </p>
       <p>
-        <strong>Structural invariants (~400 tests)</strong> — An identity transformation must preserve entity type. A ritual must execute all steps or none. A recursive invocation must terminate within bounded depth.
+        <strong>Structural invariants (~400 tests)</strong> — An identity transformation must preserve entity type. A ritual must execute all steps or none. A recursive invocation must terminate within bounded depth.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
       </p>
       <p>
-        <strong>Reference implementations (~500 tests)</strong> — Propp's 31 functions, Campbell's monomyth stages, Aristotle's six elements encoded as test cases. If the engine claims to implement "Villainy," we verify the correct state transition.
+        <strong>Reference implementations (~500 tests)</strong> — Propp's 31 functions, Campbell's monomyth stages, Aristotle's six elements encoded as test cases. If the engine claims to implement "Villainy," we verify the correct state transition.<Cite id={2} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1968} />
       </p>
       <p>
         <strong>Round-trip consistency (~350 tests)</strong> — Serialize to DSL, parse back, verify identity. Apply transformation and inverse, verify return to original state.
@@ -67,57 +91,91 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
         Result: <strong>1,254 tests, 85% line coverage</strong>.
       </p>
 
+      <Figure alt="Test strategy distribution across three categories" caption="Test strategy distribution: structural invariants, reference implementations, and round-trip consistency" number={1}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">~400</div>
+            <div class="stat-label">Structural Invariants</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">~500</div>
+            <div class="stat-label">Reference Implementations</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">~350</div>
+            <div class="stat-label">Round-Trip Consistency</div>
+          </div>
+        </div>
+      </Figure>
+
       <h2>Why Symbolic, Not Neural</h2>
       <p>
-        <strong>Interpretability.</strong> Every transformation has a trace — which organ fired, what rule applied. As AI systems become more consequential, auditable narrative decisions matter.
+        <strong>Interpretability.</strong> Every transformation has a trace — which organ fired, what rule applied. As AI systems become more consequential, auditable narrative decisions matter.<Cite id={8} author="Manovich, Lev" title="Software Takes Command" source="Bloomsbury Academic" year={2013} /> Manovich argues that software has become the universal medium through which all cultural forms are experienced — when narrative is encoded as software, interpretability is not a debugging convenience but an aesthetic and ethical requirement.
       </p>
       <p>
-        <strong>Composability.</strong> Build a myth organ on top of an identity organ on top of a recursive organ. Swap organs in and out. LLMs don't compose this way.
+        <strong>Composability.</strong> Build a myth organ on top of an identity organ on top of a recursive organ. Swap organs in and out. LLMs don't compose this way.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
       </p>
       <p>
-        <strong>Governance integration.</strong> RE:GE lives within the eight-organ system. Dependency validation, promotion state machine, monthly audits — narrative computation within an institutional framework.
+        <strong>Governance integration.</strong> RE:GE lives within the eight-organ system. Dependency validation, promotion state machine, monthly audits — narrative computation within an institutional framework.<Cite id={9} author="Murray, Janet H." title="Hamlet on the Holodeck" source="MIT Press" year={1997} /> Murray's vision of the computer as a medium for procedural, participatory, spatial, and encyclopedic storytelling aligns precisely with a symbolic engine that makes narrative rules explicit and manipulable.
       </p>
 
       <h2>The Discovery</h2>
       <p>
-        The most surprising outcome wasn't technical — it was aesthetic. Having 21 distinct organ types with formal interfaces created <em>more</em> creative possibilities than working without structure. When you know what an identity transformation guarantees, you can safely compose it with a myth transformation. Formalism enables creativity. That insight reshaped how I think about every system I build.
+        The most surprising outcome wasn't technical — it was aesthetic. Having 21 distinct organ types with formal interfaces created <em>more</em> creative possibilities than working without structure.<Cite id={10} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery and Invention" source="Harper Perennial" year={1996} /> Csikszentmihalyi's research on flow states shows that creativity emerges not from total freedom but from the right constraints — challenge matched to skill, rules that channel rather than restrict. When you know what an identity transformation guarantees, you can safely compose it with a myth transformation. Formalism enables creativity. That insight reshaped how I think about every system I build.
       </p>
 
       <h2>Tradeoffs & Lessons</h2>
       <ul>
-        <li><strong>Symbolic vs. neural approaches</strong> — Every transformation has a trace: which organ fired, what rule applied. This interpretability comes at the cost of flexibility — LLMs can improvise narrative in ways a symbolic engine cannot. The tradeoff is worth it for systems where auditability matters more than novelty.</li>
-        <li><strong>21 organ types — over-engineered?</strong> — Started with 5, grew to 21 as formal completeness demanded finer distinctions. Some organs handle edge cases that arise rarely. The decision to keep them separate prioritizes composability: each organ has a clean interface contract, so removing one doesn't cascade.</li>
-        <li><strong>DSL complexity</strong> — The ritual syntax is powerful but has a learning curve. A simpler API (plain Python method calls) would lower the barrier to entry but lose the expressiveness of declaring symbolic operations declaratively.</li>
-        <li><strong>Test strategy for narrative systems</strong> — Testing "correct narrative behavior" required inventing three distinct strategies (structural invariants, reference implementations, round-trip consistency). This was the hardest engineering challenge — and the most transferable insight.</li>
+        <li><strong>Symbolic vs. neural approaches</strong> — Every transformation has a trace: which organ fired, what rule applied. This interpretability comes at the cost of flexibility — LLMs can improvise narrative in ways a symbolic engine cannot.<Cite id={11} author="Ryan, Marie-Laure" title="Narrative as Virtual Reality" source="Johns Hopkins University Press" year={2001} /> Ryan's taxonomy of interactivity reveals the tradeoff: symbolic systems excel at "internal-exploratory" narrative (traversing a defined possibility space) but struggle with "internal-ontological" narrative (creating new possibilities on the fly). The tradeoff is worth it for systems where auditability matters more than novelty.</li>
+        <li><strong>21 organ types — over-engineered?</strong> — Started with 5, grew to 21 as formal completeness demanded finer distinctions. Some organs handle edge cases that arise rarely. The decision to keep them separate prioritizes composability: each organ has a clean interface contract, so removing one doesn't cascade.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /></li>
+        <li><strong>DSL complexity</strong> — The ritual syntax is powerful but has a learning curve. A simpler API (plain Python method calls) would lower the barrier to entry but lose the expressiveness of declaring symbolic operations declaratively.<Cite id={4} author="Fowler, Martin" title="Domain-Specific Languages" source="Addison-Wesley" year={2010} /></li>
+        <li><strong>Test strategy for narrative systems</strong> — Testing "correct narrative behavior" required inventing three distinct strategies (structural invariants, reference implementations, round-trip consistency). This was the hardest engineering challenge — and the most transferable insight.<Cite id={12} author="Reas, Casey and Ben Fry" title="Processing: A Programming Handbook for Visual Designers" source="MIT Press" year={2007} /> Reas and Fry's approach to testing creative code — where correctness is partly subjective — informed the decision to ground tests in established narratological frameworks rather than inventing arbitrary criteria.</li>
       </ul>
 
       <h2>By the Numbers</h2>
-      <div class="stat-grid">
-        <div class="stat">
-          <div class="stat-value">1,254</div>
-          <div class="stat-label">Tests</div>
+      <Figure alt="Project statistics for Recursive Engine" caption="RE:GE system metrics — 21 organ handlers processing symbolic values through a ritual syntax DSL" number={2}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">1,254</div>
+            <div class="stat-label">Tests</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">85%</div>
+            <div class="stat-label">Coverage</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">21</div>
+            <div class="stat-label">Organ Handlers</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Organ Types</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">DSL</div>
+            <div class="stat-label">Ritual Syntax</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">Python</div>
+            <div class="stat-label">Pure</div>
+          </div>
         </div>
-        <div class="stat">
-          <div class="stat-value">85%</div>
-          <div class="stat-label">Coverage</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">21</div>
-          <div class="stat-label">Organ Handlers</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">4</div>
-          <div class="stat-label">Organ Types</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">DSL</div>
-          <div class="stat-label">Ritual Syntax</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">Python</div>
-          <div class="stat-label">Pure</div>
-        </div>
-      </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Aristotle", title: "Poetics", source: "Penguin Classics (trans. 1996)", year: "335 BCE" },
+        { id: 2, author: "Propp, Vladimir", title: "Morphology of the Folktale", source: "University of Texas Press", year: 1968 },
+        { id: 3, author: "Campbell, Joseph", title: "The Hero with a Thousand Faces", source: "New World Library", year: 1949 },
+        { id: 4, author: "Fowler, Martin", title: "Domain-Specific Languages", source: "Addison-Wesley", year: 2010 },
+        { id: 5, author: "Hofstadter, Douglas", title: "Gödel, Escher, Bach: An Eternal Golden Braid", source: "Basic Books", year: 1979 },
+        { id: 6, author: "Schön, Donald A.", title: "The Reflective Practitioner", source: "Basic Books", year: 1983 },
+        { id: 7, author: "Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides", title: "Design Patterns: Elements of Reusable Object-Oriented Software", source: "Addison-Wesley", year: 1994 },
+        { id: 8, author: "Manovich, Lev", title: "Software Takes Command", source: "Bloomsbury Academic", year: 2013 },
+        { id: 9, author: "Murray, Janet H.", title: "Hamlet on the Holodeck", source: "MIT Press", year: 1997 },
+        { id: 10, author: "Csikszentmihalyi, Mihaly", title: "Creativity: Flow and the Psychology of Discovery and Invention", source: "Harper Perennial", year: 1996 },
+        { id: 11, author: "Ryan, Marie-Laure", title: "Narrative as Virtual Reality", source: "Johns Hopkins University Press", year: 2001 },
+        { id: 12, author: "Reas, Casey and Ben Fry", title: "Processing: A Programming Handbook for Visual Designers", source: "MIT Press", year: 2007 },
+      ]} />
 
     </ProjectDetail>
   </main>

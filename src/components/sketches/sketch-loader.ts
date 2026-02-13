@@ -7,6 +7,10 @@ const sketchModules: Record<string, () => Promise<{ default: (p: p5, container: 
   'counterpoint': () => import('./counterpoint-sketch'),
   'pipeline': () => import('./pipeline-sketch'),
   'token-stream': () => import('./token-stream-sketch'),
+  'network-graph': () => import('./network-graph-sketch'),
+  'flow-diagram': () => import('./flow-diagram-sketch'),
+  'data-bars': () => import('./data-bars-sketch'),
+  'particle-field': () => import('./particle-field-sketch'),
 };
 
 const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');

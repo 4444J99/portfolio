@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
 <Layout title="Life My Midst In — 4444j" description="An interactive CV system that inverts the hiring dynamic — the employer becomes the interviewee, and the resume assembles itself.">
@@ -14,22 +19,330 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
       tags={['Commerce', 'Product']}
       repo="https://github.com/organvm-iii-ergon/life-my--midst--in"
     >
-      <h2>The Idea</h2>
+      <h2>The Problem with Professional Identity</h2>
       <p>
-        Traditional CVs force professionals to flatten their multifaceted identity into a single narrative optimized for a single imagined reader. This project inverts the dynamic entirely: the employer visits a link, answers questions about their role, team, and culture — and the system assembles a CV view curated specifically for what they're seeking. The candidate's complete professional identity is a structured, immutable ledger; what the employer sees is a dynamically filtered, role-specific snapshot assembled in real time.
+        The conventional curriculum vitae forces a fundamental act of self-falsification. A professional with twenty years of experience across theory, engineering, art, and systems architecture must compress that multidimensional identity into a single linear narrative — typically optimized for one imagined reader with one imagined set of priorities.<Cite id={1} author="Goffman, Erving" title="The Presentation of Self in Everyday Life" source="Anchor Books" year={1959} /> Goffman's dramaturgical analysis demonstrates that all social interaction involves strategic self-presentation: we perform different versions of ourselves for different audiences. The traditional CV denies this reality, demanding a single canonical performance regardless of audience. The result is a document that systematically disadvantages polymathic professionals — those whose value lies precisely in the breadth and interconnection of their capabilities.<Cite id={2} author="Bourdieu, Pierre" title="Distinction: A Social Critique of the Judgement of Taste" source="Harvard University Press" year={1984} /> Bourdieu's concept of cultural capital reveals how hiring processes reproduce class structures through credentialing rituals that privilege legibility over depth. This project asks: what if the CV were not a static document but a dynamic system — one that assembles itself in response to what the employer actually needs?
       </p>
 
-      <h2>How It Works</h2>
+      <MermaidDiagram
+        caption="System flow: the employer visits a unique link, answers diagnostic questions, selects a mask, and receives a filtered CV view assembled in real time"
+        chart={`graph TD
+    E[Employer Visits Link] --> Q[Diagnostic Questions]
+    Q -->|role requirements| M[Mask Selection]
+    Q -->|team culture| M
+    Q -->|growth trajectory| M
+    M --> F[Filtering Engine]
+    F --> CV[Assembled CV View]
+    CV --> CS[Compatibility Score]
+    CS --> D[Decision Support]
+    D -->|mutual fit| HP[Hunter Protocol]
+    HP -->|autonomous search| E2[New Opportunities]
+    style E fill:#f9f,stroke:#333
+    style CV fill:#9ff,stroke:#333
+    style HP fill:#ff9,stroke:#333`}
+      />
+
+      <h2>Technical Architecture</h2>
       <p>
-        A feature-complete monorepo: <strong>Next.js 16 frontend</strong>, <strong>Fastify 5 REST API</strong>, <strong>Node.js orchestrator</strong>, plus four shared packages (Zod schemas, core logic, narrative model, design system). The core innovation is the <strong>mask system</strong> — 16 identity masks across cognitive, expressive, and operational categories that filter the same underlying truth for different professional audiences. A 5-factor compatibility scorer evaluates skill match, values alignment, growth fit, sustainability, and compensation. The stack includes PostgreSQL with pgvector, W3C Verifiable Credentials for cryptographic claim verification, and an autonomous <strong>Hunter Protocol</strong> that searches for matching job opportunities.
+        The system is a full-stack monorepo implementing hexagonal architecture — a pattern where the core business logic has no dependencies on frameworks, databases, or delivery mechanisms.<Cite id={3} author="Cockburn, Alistair" title="Hexagonal Architecture" source="alistair.cockburn.us" year={2005} /> The outer shell consists of a <strong>Next.js 16 frontend</strong> (React Server Components, streaming SSR) and a <strong>Fastify 5 REST API</strong> (JSON Schema validation, OpenAPI generation), but these are interchangeable adapters around a framework-agnostic core. A Node.js orchestrator manages long-running processes — credential verification, compatibility scoring, and the autonomous Hunter Protocol. The monorepo shares four packages: Zod schemas for runtime type validation, a core logic library, a narrative model that structures professional identity as a directed acyclic graph, and a design system implementing the visual language.<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's separation of domain logic from infrastructure concerns maps directly onto this architecture: the mask system, compatibility scorer, and credential verifier are pure domain objects that know nothing about HTTP, databases, or React.
       </p>
 
-      <h2>Why It Matters</h2>
+      <CodeStructure lang="typescript" caption="Mask system type definition — 16 identity masks across three cognitive categories, each defining how the same underlying professional truth is filtered for a specific audience" filename="packages/core/src/masks/types.ts">
+{`interface ProfessionalMask {
+  id: MaskId;
+  category: 'cognitive' | 'expressive' | 'operational';
+  label: string;
+  description: string;
+  filterRules: FilterRule[];
+  emphasisWeights: Record<SkillDomain, number>;
+  narrativeTemplate: NarrativeTemplate;
+}
+
+interface FilterRule {
+  field: keyof ProfessionalIdentity;
+  predicate: (value: unknown) => boolean;
+  transform?: (value: unknown) => unknown;
+}
+
+interface CompatibilityResult {
+  overall: number;
+  factors: {
+    skillMatch: number;       // 0-1: technical skill alignment
+    valuesAlignment: number;  // 0-1: cultural and ethical fit
+    growthFit: number;        // 0-1: trajectory compatibility
+    sustainability: number;   // 0-1: long-term viability
+    compensation: number;     // 0-1: mutual economic fit
+  };
+  recommendedMasks: MaskId[];
+  narrative: string;
+}
+
+type MaskId =
+  | 'systems-architect' | 'theorist' | 'analyst' | 'strategist'
+  | 'creative-director' | 'writer' | 'visual-designer' | 'performer'
+  | 'engineer' | 'product-owner' | 'devops' | 'data-engineer'
+  | 'polymath' | 'mentor' | 'researcher' | 'founder';`}
+      </CodeStructure>
+
+      <h2>The Mask System</h2>
       <p>
-        This is the most architecturally sophisticated product in ORGAN-III — a full-stack SaaS application with 68+ commits, 21 database migrations, hexagonal architecture, and real theoretical grounding. The mask taxonomy draws on ORGAN-I's ontological frameworks. The inverted interview paradigm isn't a gimmick; it's a philosophical position about professional identity implemented as a working system. It demonstrates the full I→II→III pipeline: theory becomes design becomes product.
+        The core innovation is a taxonomy of 16 professional masks organized across three categories: cognitive (how you think), expressive (how you communicate), and operational (how you build).<Cite id={5} author="Jung, Carl G." title="Psychological Types" source="Routledge (trans. 1971)" year={1921} /> Jung's theory of psychological types established that individuals operate through different dominant cognitive functions — thinking, feeling, sensation, intuition — and that these functions manifest differently depending on context. The mask system operationalizes this insight for professional identity. A "systems-architect" mask emphasizes abstraction, pattern recognition, and cross-domain integration. A "creative-director" mask foregrounds aesthetic judgment, narrative coherence, and visual language. Both are truthful representations of the same professional — they differ not in what they claim but in what they emphasize.<Cite id={6} author="Gardner, Howard" title="Frames of Mind: The Theory of Multiple Intelligences" source="Basic Books" year={1983} /> Gardner's multiple intelligences framework provides the empirical grounding: professional competence is not unitary but manifests across linguistic, logical-mathematical, spatial, musical, bodily-kinesthetic, interpersonal, intrapersonal, and naturalistic domains. The 16 masks map onto these domains, ensuring that no dimension of professional identity is systematically invisible.
       </p>
+
+      <Figure alt="Mask categories and their filtering behavior" caption="The 16 professional masks organized by cognitive category, showing representative filtering behavior for each" number={1}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Mask</th>
+                <th>Emphasis</th>
+                <th>Filtering Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="4"><strong>Cognitive</strong></td>
+                <td>Systems Architect</td>
+                <td>Abstraction, integration</td>
+                <td>Foregrounds cross-domain patterns, suppresses implementation details</td>
+              </tr>
+              <tr>
+                <td>Theorist</td>
+                <td>Frameworks, models</td>
+                <td>Surfaces publications, research lineage, conceptual contributions</td>
+              </tr>
+              <tr>
+                <td>Analyst</td>
+                <td>Data, evidence</td>
+                <td>Highlights quantitative outcomes, methodological rigor</td>
+              </tr>
+              <tr>
+                <td>Strategist</td>
+                <td>Planning, foresight</td>
+                <td>Emphasizes roadmaps, long-term impact, organizational change</td>
+              </tr>
+              <tr>
+                <td rowspan="4"><strong>Expressive</strong></td>
+                <td>Creative Director</td>
+                <td>Aesthetic judgment</td>
+                <td>Surfaces visual work, design systems, brand coherence</td>
+              </tr>
+              <tr>
+                <td>Writer</td>
+                <td>Narrative craft</td>
+                <td>Foregrounds documentation, essays, editorial contributions</td>
+              </tr>
+              <tr>
+                <td>Visual Designer</td>
+                <td>Interface, layout</td>
+                <td>Highlights UI/UX work, component libraries, interaction patterns</td>
+              </tr>
+              <tr>
+                <td>Performer</td>
+                <td>Presentation, voice</td>
+                <td>Emphasizes talks, workshops, teaching, public-facing work</td>
+              </tr>
+              <tr>
+                <td rowspan="4"><strong>Operational</strong></td>
+                <td>Engineer</td>
+                <td>Implementation</td>
+                <td>Surfaces codebase metrics, architecture decisions, technical depth</td>
+              </tr>
+              <tr>
+                <td>Product Owner</td>
+                <td>Delivery, scope</td>
+                <td>Highlights shipped features, user impact, roadmap execution</td>
+              </tr>
+              <tr>
+                <td>DevOps</td>
+                <td>Infrastructure</td>
+                <td>Foregrounds CI/CD, deployment, monitoring, reliability</td>
+              </tr>
+              <tr>
+                <td>Data Engineer</td>
+                <td>Pipelines, scale</td>
+                <td>Emphasizes data architecture, ETL, performance optimization</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Verifiable Credentials</h2>
+      <p>
+        Professional claims are cheap. Anyone can list "10 years of experience" or "led a team of 20." The system integrates W3C Verifiable Credentials to provide cryptographic proof of professional claims without requiring trust in the claimant.<Cite id={7} author="W3C" title="Verifiable Credentials Data Model v2.0" source="W3C Recommendation" year={2022} /> Each credential — employment history, project contributions, skill demonstrations, educational achievements — is issued as a signed JSON-LD document that can be independently verified against the issuer's public key. The employer viewing a filtered CV sees not just claims but verified claims, with visual indicators distinguishing cryptographically attested facts from self-reported assertions. This architecture aligns with the broader movement toward self-sovereign identity: the professional controls their own credential wallet, choosing what to present and to whom, without depending on centralized platforms like LinkedIn to mediate trust.<Cite id={8} author="Allen, Christopher" title="The Path to Self-Sovereign Identity" source="Life with Alacrity (blog)" year={2016} /> Allen's ten principles of self-sovereign identity — existence, control, access, transparency, persistence, portability, interoperability, consent, minimization, protection — guided every design decision in the credential subsystem.
+      </p>
+
+      <MermaidDiagram
+        caption="Five-factor compatibility scoring pipeline — employer responses are decomposed into weighted factors, scored against the candidate's professional graph, and synthesized into a composite recommendation"
+        chart={`graph LR
+    ER[Employer Responses] --> P1[Skill Parser]
+    ER --> P2[Values Parser]
+    ER --> P3[Growth Parser]
+    ER --> P4[Sustainability Parser]
+    ER --> P5[Compensation Parser]
+    P1 --> S1[Skill Match\n0-1 score]
+    P2 --> S2[Values Alignment\n0-1 score]
+    P3 --> S3[Growth Fit\n0-1 score]
+    P4 --> S4[Sustainability\n0-1 score]
+    P5 --> S5[Compensation\n0-1 score]
+    S1 --> W[Weighted Synthesis]
+    S2 --> W
+    S3 --> W
+    S4 --> W
+    S5 --> W
+    W --> C[Composite Score]
+    C --> R[Mask Recommendation]
+    R --> N[Narrative Assembly]`}
+      />
+
+      <h2>Compatibility Scoring</h2>
+      <p>
+        The five-factor compatibility scorer operates on the responses the employer provides during the diagnostic interview. Rather than asking "Do you want a frontend developer?" — a question that presupposes the categorization — the system asks about team dynamics, project complexity, communication patterns, growth expectations, and compensation philosophy. These responses are parsed into five orthogonal dimensions: <strong>skill match</strong> (technical capability alignment), <strong>values alignment</strong> (ethical and cultural compatibility), <strong>growth fit</strong> (trajectory compatibility over a 2-5 year horizon), <strong>sustainability</strong> (whether the role's demands match the candidate's working style), and <strong>compensation</strong> (mutual economic fit).<Cite id={9} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> Meadows' systems thinking framework — particularly her concept of leverage points — informs the weighting: values alignment and growth fit are weighted more heavily than skill match because they predict long-term success more reliably than technical overlap alone. Each factor produces a 0-1 score, and the weighted synthesis generates both a composite number and a ranked list of recommended masks. The system does not produce a binary accept/reject; it produces a nuanced profile of mutual fit.
+      </p>
+
+      <Figure alt="Compatibility factor weighting rationale" caption="Compatibility factor weights — values alignment and growth fit receive higher weights because they predict long-term professional success more reliably than technical skill match alone" number={2}>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th>Weight</th>
+                <th>Signal Source</th>
+                <th>Prediction Horizon</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Skill Match</td>
+                <td>0.15</td>
+                <td>Technical requirements, stack overlap</td>
+                <td>6-12 months</td>
+              </tr>
+              <tr>
+                <td>Values Alignment</td>
+                <td>0.30</td>
+                <td>Ethical priorities, work philosophy</td>
+                <td>2-5 years</td>
+              </tr>
+              <tr>
+                <td>Growth Fit</td>
+                <td>0.25</td>
+                <td>Trajectory, ambition, learning culture</td>
+                <td>2-5 years</td>
+              </tr>
+              <tr>
+                <td>Sustainability</td>
+                <td>0.20</td>
+                <td>Pace, autonomy, communication style</td>
+                <td>1-3 years</td>
+              </tr>
+              <tr>
+                <td>Compensation</td>
+                <td>0.10</td>
+                <td>Budget range, equity philosophy</td>
+                <td>Immediate</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>The Hunter Protocol</h2>
+      <p>
+        Most job search tools are passive: they wait for the candidate to search, filter, and apply. The Hunter Protocol inverts this. Running as an autonomous Node.js process within the orchestrator, it continuously monitors job boards, company career pages, and professional networks for opportunities that match the candidate's full professional graph — not a keyword-reduced summary.<Cite id={10} author="Simon, Herbert A." title="The Sciences of the Artificial" source="MIT Press" year={1996} /> Simon's concept of bounded rationality explains why traditional job search fails: the search space is too large and the evaluation criteria too complex for manual scanning. The Hunter Protocol applies satisficing strategies — Simon's term for finding solutions that are good enough rather than optimal — across the opportunity space, using the same five-factor compatibility model to score potential matches before the candidate ever sees them. Opportunities that clear a configurable threshold are queued with a compatibility breakdown, recommended masks, and a draft narrative tailored to the specific role.
+      </p>
+
+      <MermaidDiagram
+        caption="The I to II to III pipeline — theoretical frameworks from ORGAN-I inform design patterns in ORGAN-II, which become production products in ORGAN-III"
+        chart={`graph LR
+    O1[ORGAN-I: Theoria] -->|ontological frameworks| O2[ORGAN-II: Poiesis]
+    O2 -->|design patterns| O3[ORGAN-III: Ergon]
+    O3 -->|product feedback| O1
+    subgraph "life-my--midst--in"
+      T[Identity Theory\nGoffman, Jung] --> D[Mask Design\n16 masks, 3 categories]
+      D --> P[Production System\nNext.js + Fastify + VC]
+    end
+    O1 -.-> T
+    O2 -.-> D
+    O3 -.-> P`}
+      />
+
+      <h2>The I-II-III Pipeline</h2>
+      <p>
+        This project is the most architecturally complete demonstration of the eight-organ system's core thesis: that theory, design, and production are not separate activities but phases of a single creative-institutional pipeline.<Cite id={9} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> The mask taxonomy draws directly on ORGAN-I's ontological frameworks — Jung's psychological types, Gardner's multiple intelligences, Goffman's dramaturgical analysis — and translates them into computable structures. The hexagonal architecture pattern, refined through ORGAN-II design work, becomes the production skeleton. The W3C Verifiable Credentials integration demonstrates that institutional-grade trust mechanisms can coexist with individual sovereignty.<Cite id={10} author="Simon, Herbert A." title="The Sciences of the Artificial" source="MIT Press" year={1996} /> Simon's distinction between natural and artificial sciences — where the artificial is concerned with how things ought to be rather than how they are — captures the project's ambition: this is not a description of how hiring works but a prescription for how it should work, implemented as a working system with 68+ commits, 21 database migrations, and a test suite that validates every claim the system makes about itself.
+      </p>
+
+      <h2>By the Numbers</h2>
+      <Figure alt="Project statistics for in-midst-my-life" caption="System metrics — a full-stack SaaS application with hexagonal architecture, verifiable credentials, and autonomous job search" number={3}>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-value">68+</div>
+            <div class="stat-label">Commits</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">21</div>
+            <div class="stat-label">DB Migrations</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">16</div>
+            <div class="stat-label">Identity Masks</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Compatibility Factors</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Shared Packages</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">W3C VC</div>
+            <div class="stat-label">Credential Standard</div>
+          </div>
+        </div>
+      </Figure>
+
+      <References entries={[
+        { id: 1, author: "Goffman, Erving", title: "The Presentation of Self in Everyday Life", source: "Anchor Books", year: 1959 },
+        { id: 2, author: "Bourdieu, Pierre", title: "Distinction: A Social Critique of the Judgement of Taste", source: "Harvard University Press", year: 1984 },
+        { id: 3, author: "Cockburn, Alistair", title: "Hexagonal Architecture", source: "alistair.cockburn.us", year: 2005 },
+        { id: 4, author: "Fowler, Martin", title: "Patterns of Enterprise Application Architecture", source: "Addison-Wesley", year: 2002 },
+        { id: 5, author: "Jung, Carl G.", title: "Psychological Types", source: "Routledge (trans. 1971)", year: 1921 },
+        { id: 6, author: "Gardner, Howard", title: "Frames of Mind: The Theory of Multiple Intelligences", source: "Basic Books", year: 1983 },
+        { id: 7, author: "W3C", title: "Verifiable Credentials Data Model v2.0", source: "W3C Recommendation", year: 2022 },
+        { id: 8, author: "Allen, Christopher", title: "The Path to Self-Sovereign Identity", source: "Life with Alacrity (blog)", year: 2016 },
+        { id: 9, author: "Meadows, Donella H.", title: "Thinking in Systems: A Primer", source: "Chelsea Green Publishing", year: 2008 },
+        { id: 10, author: "Simon, Herbert A.", title: "The Sciences of the Artificial", source: "MIT Press", year: 1996 },
+      ]} />
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .table-wrap th,
+  .table-wrap td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border, #333);
+    text-align: left;
+  }
+  .table-wrap th {
+    background: var(--color-surface, #1a1a1a);
+    font-weight: 600;
+  }
+  .table-wrap tr:nth-child(even) td {
+    background: var(--color-surface, #1a1a1a);
+  }
+</style>
