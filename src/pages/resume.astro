@@ -24,9 +24,17 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <span class="resume__sep" aria-hidden="true">/</span>
             <a href={base}>Portfolio</a>
           </div>
-          <a class="resume__download" href={`${base}resume/Anthony_James_Padavano_CV.pdf`} download>
-            Download PDF
-          </a>
+          <div class="resume__downloads">
+            <a class="resume__download" href={`${base}resume/Anthony_James_Padavano_CV.pdf`} download>
+              Creative Technologist PDF
+            </a>
+            <a class="resume__download resume__download--alt" href={`${base}resume/Anthony_James_Padavano_Multimedia.pdf`} download>
+              Multimedia Specialist PDF
+            </a>
+            <a class="resume__download resume__download--alt" href={`${base}resume/Anthony_James_Padavano_CV.docx`} download>
+              DOCX (ATS-friendly)
+            </a>
+          </div>
         </header>
 
         <hr />
@@ -34,7 +42,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <section class="resume__section prose">
           <h2>Summary</h2>
           <p>
-            Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 81 repositories across 8 GitHub organizations with ~339K words of public documentation. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer.
+            Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 81 repositories across 8 GitHub organizations with ~339K words of public documentation. Achieved +17.5M views and raised $2M across nonprofit and commercial projects. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer.
           </p>
         </section>
 
@@ -95,6 +103,17 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
               </div>
             </div>
             <div class="resume__skill-group">
+              <h3>Marketing</h3>
+              <div class="resume__tags">
+                <span class="tag">Storytelling</span>
+                <span class="tag">Content creation</span>
+                <span class="tag">Social media</span>
+                <span class="tag">SEO</span>
+                <span class="tag">Performance analytics</span>
+                <span class="tag">UI/UX design</span>
+              </div>
+            </div>
+            <div class="resume__skill-group">
               <h3>Governance</h3>
               <div class="resume__tags">
                 <span class="tag">Registry design</span>
@@ -131,6 +150,15 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           </div>
 
           <div class="resume__project">
+            <h3><a href={`${base}projects/agentic-titan/`}>Agentic Titan</a></h3>
+            <p class="resume__project-sub">Multi-agent orchestration — 9 topologies, 22 archetypes</p>
+            <ul>
+              <li>Polymorphic agent swarm architecture across 9 self-organizing topologies with 22 agent archetypes</li>
+              <li>1,095+ tests across 18 implementation phases; model-agnostic (Anthropic, OpenAI, Ollama)</li>
+            </ul>
+          </div>
+
+          <div class="resume__project">
             <h3><a href={`${base}projects/ai-conductor/`}>AI-Conductor Model</a></h3>
             <p class="resume__project-sub">Human-AI co-creation methodology</p>
             <ul>
@@ -140,18 +168,18 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           </div>
 
           <div class="resume__project">
-            <h3><a href={`${base}projects/generative-music/`}>Generative Music System</a></h3>
-            <p class="resume__project-sub">Recursive theory to real-time sound</p>
+            <h3>Forward Funders — Marketing Overhaul</h3>
+            <p class="resume__project-sub">Cold-calling to digital marketing — 328% ROI</p>
             <ul>
-              <li>Translates symbolic narrative events into live generative music — recursion as counterpoint, identity transformations as harmonic movement</li>
+              <li>Transitioned client from in-person cold-calling to fully digital marketing; designed social media and Google Ads campaigns achieving 328% ROI</li>
             </ul>
           </div>
 
           <div class="resume__project">
-            <h3><a href={`${base}projects/aetheria-rpg/`}>Aetheria Classroom RPG</a></h3>
-            <p class="resume__project-sub">Educational RPG — Theory to Art to Commerce pipeline</p>
+            <h3>Boca Ballet Theatre — Digital Transformation</h3>
+            <p class="resume__project-sub">Nonprofit survival during COVID-19</p>
             <ul>
-              <li>Traveled the full I&#8594;II&#8594;III pipeline from pedagogical theory to game design to revenue product; includes honest post-mortem</li>
+              <li>Rebuilt website and social media channels during COVID-19; ad campaigns drove funding and enabled remote performances</li>
             </ul>
           </div>
         </section>
@@ -178,25 +206,33 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
               <li>Designed and executed digital campaigns increasing donor engagement by 32% and surpassing fundraising goals</li>
               <li>Rebuilt foundation website — 38% traffic growth, 22% improvement in donation conversions</li>
               <li>Produced multimedia storytelling content driving 28% increase in click-through rates</li>
+              <li>Developed social media strategy boosting engagement rates across platforms by 23%</li>
+              <li>Trained team members on advanced analytics tools — 20% efficiency boost in reporting</li>
             </ul>
           </div>
 
           <div class="resume__entry">
             <h3>Multimedia Specialist</h3>
             <p class="resume__date">2011 — Present &middot; AJP Media Arts</p>
+            <p class="resume__clients">Arts in Boca, Boca Ballet Theatre, Cardboard Movie Company, Forward Funding, Flux Media, Lockbox Capital, Luxury Elevates, MindFinity, Nintendard, South Florida Luxury Real Estate, Spartan Permits, StrategicLever, Swamp Ape Review, Transcend Cosmetics, UltiTool Media</p>
             <ul>
               <li>Produced video, audio, and visual campaigns achieving 17.5M+ views and driving $2M in client fundraising and revenue</li>
               <li>Integrated SEO and paid media strategies achieving 290% ROI for key campaigns</li>
               <li>Launched and managed client websites with 42% engagement increase and 30% speed improvement</li>
+              <li>Conducted A/B testing and performance analysis — 27% engagement boost across client portfolios</li>
+              <li>Delivered intuitive UI/UX designs — 26% satisfaction increase, 35% retention improvement</li>
             </ul>
           </div>
 
           <div class="resume__entry">
             <h3>Instructor</h3>
-            <p class="resume__date">2015 — Present &middot; Miami Dade College, FAU, Nova Southeastern, Keiser, and others</p>
+            <p class="resume__date">2015 — Present &middot; Miami Dade College, FAU, Nova Southeastern, Keiser, Young Harris, Tarrant County CC, Broward College, Palm Beach State</p>
             <ul>
               <li>Designed and delivered 100+ composition courses to 2,000+ students with 85% above-average grade achievement</li>
               <li>Applied UX principles to create accessible course materials — 92% student approval rating</li>
+              <li>Managed course lifecycle from concept to completion — 97% completion rate</li>
+              <li>Enhanced lectures with multimedia tools — 22% increase in engagement</li>
+              <li>Refined teaching methods using performance analytics — 24% improvement in student retention</li>
             </ul>
           </div>
 
@@ -206,6 +242,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <ul>
               <li>Led 50 commercial and residential construction projects from concept to completion — 90% on-time and within budget</li>
               <li>Collaborated with marketing teams on 3D renderings and video walkthroughs, securing 25% increase in repeat business</li>
+              <li>Built and maintained strong stakeholder relationships — 88% satisfaction rate</li>
+              <li>Implemented risk mitigation strategies reducing project delays by 15%; 93% met or exceeded standards</li>
             </ul>
           </div>
         </section>
@@ -292,6 +330,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     transition: color var(--transition-fast);
   }
 
+  .resume__downloads {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
   .resume__download {
     display: inline-block;
     font-family: var(--font-mono);
@@ -307,6 +352,16 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
   .resume__download:hover {
     background: var(--accent);
+    color: var(--bg);
+  }
+
+  .resume__download--alt {
+    border-color: var(--text-muted);
+    color: var(--text-secondary);
+  }
+
+  .resume__download--alt:hover {
+    background: var(--text-muted);
     color: var(--bg);
   }
 
@@ -382,6 +437,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     margin-bottom: var(--space-sm);
   }
 
+  .resume__clients {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: var(--space-sm);
+  }
+
   .resume__links {
     list-style: none;
     padding: 0;
@@ -425,7 +487,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
     :global(.header),
     :global(.footer),
-    .resume__download {
+    .resume__downloads {
       display: none;
     }
 
@@ -493,6 +555,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       color: #666;
     }
 
+    .resume__clients {
+      color: #666;
+    }
+
     .resume__links li {
       color: #333;
     }
@@ -509,8 +575,20 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       color: #666;
     }
 
+    .resume__entry,
+    .resume__project {
+      page-break-inside: avoid;
+    }
+
+    .resume__section {
+      page-break-inside: avoid;
+    }
+
     @page {
+      size: letter;
       margin: 1cm;
+      orphans: 3;
+      widows: 3;
     }
   }
 </style>

@@ -83,6 +83,42 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
         The most surprising outcome wasn't technical — it was aesthetic. Having 21 distinct organ types with formal interfaces created <em>more</em> creative possibilities than working without structure. When you know what an identity transformation guarantees, you can safely compose it with a myth transformation. Formalism enables creativity. That insight reshaped how I think about every system I build.
       </p>
 
+      <h2>Tradeoffs & Lessons</h2>
+      <ul>
+        <li><strong>Symbolic vs. neural approaches</strong> — Every transformation has a trace: which organ fired, what rule applied. This interpretability comes at the cost of flexibility — LLMs can improvise narrative in ways a symbolic engine cannot. The tradeoff is worth it for systems where auditability matters more than novelty.</li>
+        <li><strong>21 organ types — over-engineered?</strong> — Started with 5, grew to 21 as formal completeness demanded finer distinctions. Some organs handle edge cases that arise rarely. The decision to keep them separate prioritizes composability: each organ has a clean interface contract, so removing one doesn't cascade.</li>
+        <li><strong>DSL complexity</strong> — The ritual syntax is powerful but has a learning curve. A simpler API (plain Python method calls) would lower the barrier to entry but lose the expressiveness of declaring symbolic operations declaratively.</li>
+        <li><strong>Test strategy for narrative systems</strong> — Testing "correct narrative behavior" required inventing three distinct strategies (structural invariants, reference implementations, round-trip consistency). This was the hardest engineering challenge — and the most transferable insight.</li>
+      </ul>
+
+      <h2>By the Numbers</h2>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">1,254</div>
+          <div class="stat-label">Tests</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">85%</div>
+          <div class="stat-label">Coverage</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">21</div>
+          <div class="stat-label">Organ Handlers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4</div>
+          <div class="stat-label">Organ Types</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">DSL</div>
+          <div class="stat-label">Ritual Syntax</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Python</div>
+          <div class="stat-label">Pure</div>
+        </div>
+      </div>
+
     </ProjectDetail>
   </main>
   <Footer />

@@ -28,6 +28,9 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
     <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/portfolio/favicon.ico" />
 
+    <!-- Identity verification -->
+    <link rel="me" href="https://github.com/4444j99" />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
@@ -69,7 +72,56 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
           "https://github.com/organvm-iii-ergon",
           "https://github.com/organvm-iv-taxis",
           "https://github.com/organvm-v-logos"
-        ]
+        ],
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "Florida Atlantic University",
+            "url": "https://www.fau.edu"
+          },
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "CUNY College of Staten Island",
+            "url": "https://www.csi.cuny.edu"
+          }
+        ],
+        "knowsAbout": [
+          "Python", "TypeScript", "JavaScript", "Go", "Rust",
+          "systems architecture", "generative art", "multi-agent AI systems",
+          "LLM orchestration", "governance design", "digital marketing",
+          "creative technology", "audio synthesis", "interactive installations"
+        ],
+        "hasCredential": [
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "professional certification",
+            "name": "Full-Stack Developer",
+            "recognizedBy": { "@type": "Organization", "name": "Meta" }
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "professional certification",
+            "name": "UX Design",
+            "recognizedBy": { "@type": "Organization", "name": "Google" }
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "professional certification",
+            "name": "Digital Marketing & E-commerce",
+            "recognizedBy": { "@type": "Organization", "name": "Google" }
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "professional certification",
+            "name": "Project Management",
+            "recognizedBy": { "@type": "Organization", "name": "Google" }
+          }
+        ],
+        "memberOf": {
+          "@type": "Organization",
+          "name": "meta-organvm",
+          "url": "https://github.com/meta-organvm"
+        }
       }
     })} />
 

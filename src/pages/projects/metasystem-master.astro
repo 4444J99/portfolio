@@ -11,25 +11,150 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
     <ProjectDetail
       title="Omni-Dromenon Engine (Metasystem Master)"
       tagline="Collective audience input shaping live art in real time"
-      tags={['Art', 'Architecture']}
+      tags={['Art', 'TypeScript', 'Python', 'Architecture']}
       repo="https://github.com/organvm-ii-poiesis/metasystem-master"
     >
-      <h2>The Idea</h2>
+      <h2>The Problem</h2>
       <p>
-        What if a live performance weren't scripted by a single director but shaped in real time by collective audience input — while performers retained expressive override authority? The Omni-Dromenon Engine is a real-time audience-participatory performance system where weighted consensus algorithms transform crowd decisions into artistic direction. It's not "Twitch Plays" chaos. It's structured collaboration with governance.
+        Live performance has always been a negotiation between performers and audiences — but the feedback channels are coarse. An audience member can clap or not clap. They cannot communicate "I want the texture to thin out while the harmonic tension increases." Existing tools for interactive performance are either too simple (binary voting, applause meters) or too complex (custom Max/MSP patches that take months per piece). There's nothing in between: a general-purpose engine that works across genres while remaining configurable enough for each.
       </p>
 
-      <h2>How It Works</h2>
+      <h2>The Design Decision</h2>
       <p>
-        The engine is a TypeScript + Python hybrid system built as a pnpm monorepo. Audience members submit inputs through a web interface; a consensus module aggregates and weights those inputs according to configurable trust and participation metrics. Performers see the collective direction but can override it — the override is itself a recorded artistic decision. The system handles real-time WebSocket communication, state synchronization across participants, and a performance timeline that captures every decision (audience and performer) as an auditable event log.
+        The critical insight: the audience is a <strong>co-performer operating a collective instrument</strong>, not a data source. And the performer is never subordinate to the crowd. Three override modes (<code>absolute</code>, <code>blend</code>, <code>lock</code>) give the performer graduated control — they can fully override a parameter, blend their intent with the audience's at any ratio, or lock it entirely. The resulting performances are negotiated in real time, at sub-second latency, across every parameter the performer exposes.
       </p>
 
-      <h2>Why It Matters</h2>
+      <h2>Architecture</h2>
+      <pre class="architecture-diagram"><code>┌──────────────────────────────────────────────┐
+│           NGINX REVERSE PROXY                │
+├──────────────────────────────────────────────┤
+│                                              │
+│  ┌──────────────────────────────────┐        │
+│  │     CORE ENGINE (Port 3000)      │        │
+│  │  Express + Socket.io             │  Redis │
+│  │  ┌──────────┐ ┌──────────────┐  │◄──7    │
+│  │  │ REST API │ │ WebSocket    │  │        │
+│  │  │          │ │ /audience ns │  │ Chroma │
+│  │  │          │ │ /performer ns│  │◄──DB   │
+│  │  └────┬─────┘ └──────┬──────┘  │        │
+│  │       └───────┬───────┘         │        │
+│  │         Parameter Bus           │        │
+│  │         Consensus Engine        │        │
+│  │         OSC Bridge              │        │
+│  └──────────────────────────────────┘        │
+│                                              │
+│  ┌──────────────────────────────────┐        │
+│  │     PERFORMANCE SDK (Port 3001)  │        │
+│  │  React 18 + Vite                 │        │
+│  │  Audience UI  ·  Performer Dash  │        │
+│  └──────────────────────────────────┘        │
+│                                              │
+│  ┌──────────────────────────────────┐        │
+│  │     AUDIO SYNTHESIS BRIDGE       │        │
+│  │  OSC Server + WebAudio Engine    │        │
+│  └──────────────────────────────────┘        │
+└──────────────────────────────────────────────┘
+
+Data flow:
+Phone → WebSocket /audience → Parameter Bus
+→ Consensus (spatial × temporal × cluster)
+→ Outlier rejection → Smoothing
+→ Performer override check
+→ Audience UI + Performer Dashboard + OSC</code></pre>
+
+      <h2>The Consensus Algorithm</h2>
       <p>
-        This is ORGAN-II at its most ambitious — art that treats its own governance as part of the aesthetic. The consensus algorithms aren't backstage plumbing; they're the medium. Who gets weighted more? What happens when the crowd and the performer disagree? These are artistic questions answered by system design. The engine consumes theoretical foundations from ORGAN-I (the recursive-engine's identity models inform how performers and audience maintain coherence across transformations) and produces a framework that could become a commercial product in ORGAN-III.
+        Audience inputs are batched, never processed individually. The consensus loop runs every 50ms, computing weighted averages across three axes that must sum to ~1.0:
       </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Genre Preset</th><th>Spatial</th><th>Temporal</th><th>Consensus</th><th>Rationale</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Electronic Music</td><td>0.3</td><td>0.5</td><td>0.2</td><td>Rhythmic immediacy</td></tr>
+            <tr><td>Ballet</td><td>0.5</td><td>0.2</td><td>0.3</td><td>Spatial proximity to dancer</td></tr>
+            <tr><td>Opera</td><td>0.2</td><td>0.3</td><td>0.5</td><td>Collective dramatic coherence</td></tr>
+            <tr><td>Installation</td><td>0.7</td><td>0.1</td><td>0.2</td><td>Location is almost everything</td></tr>
+            <tr><td>Theatre</td><td>0.4</td><td>0.3</td><td>0.3</td><td>Balanced narrative needs</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <strong>Spatial weighting</strong> uses exponential decay from the stage — closer audience members have more influence, reflecting the qualitative difference of proximity. <strong>Temporal weighting</strong> ensures the system responds to the audience's current state (5s decay window), not their historical average. <strong>Consensus weighting</strong> detects clusters: converging inputs amplify each other, producing decisive group movements rather than perpetual averages.
+      </p>
+
+      <h2>Implementation</h2>
+      <p>
+        Built as a <strong>pnpm monorepo</strong> (TypeScript + Python) with five packages: core-engine (Express + Socket.io + Redis), performance-sdk (React 18 + Vite), audio-synthesis-bridge (OSC + WebAudio), documentation, and example applications. The core engine handles two strictly separated Socket.io namespaces — <code>/audience</code> for many concurrent clients (target: 1,000+) and <code>/performer</code> for authenticated controllers. Z-score outlier rejection (threshold: 2.5 SD) and exponential smoothing (factor: 0.3) prevent individual inputs from dominating.
+      </p>
+
+      <h2>Why This Is Art</h2>
+      <p>
+        The consensus algorithms aren't backstage plumbing — they're the medium. Who gets weighted more? What happens when the crowd and the performer disagree? These are <em>artistic</em> questions answered by system design. The engine consumes theoretical foundations from ORGAN-I (recursive-engine's identity models inform how performers and audience maintain coherence across transformations) and produces a framework that could become a commercial product in ORGAN-III. This is ORGAN-II at its most ambitious: art that treats its own governance as part of the aesthetic.
+      </p>
+
+      <h2>Tradeoffs & Lessons</h2>
+      <ul>
+        <li><strong>Generality vs. genre-specific optimization</strong> — A general-purpose engine across ballet, electronic music, theatre, and installation means no genre gets perfectly tailored behavior. The preset system mitigates this, but custom Max/MSP patches will always outperform a generalized solution for a single piece. The tradeoff is worth it for rapid deployment across genres.</li>
+        <li><strong>Performer override as compositional tool</strong> — Initially designed as a safety valve, performer override became the most interesting artistic element. The creative tension between crowd desire and performer resistance produces dynamics impossible in either autocratic or purely democratic systems.</li>
+        <li><strong>Monorepo complexity</strong> — Five packages in a pnpm workspace means more build configuration, more dependency management, more CI complexity. The alternative (five separate repos) would be worse for a system where packages share types and build in lockstep.</li>
+        <li><strong>WebSocket at scale</strong> — Targeting 1,000+ concurrent audience connections pushes Socket.io's single-process limits. Redis adapter handles horizontal scaling but adds operational complexity.</li>
+      </ul>
+
+      <h2>By the Numbers</h2>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Packages</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Weighting Axes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Genre Presets</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">50ms</div>
+          <div class="stat-label">Consensus Loop</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1K+</div>
+          <div class="stat-label">Target Audience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">TS+Py</div>
+          <div class="stat-label">Hybrid Stack</div>
+        </div>
+      </div>
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .architecture-diagram {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .architecture-diagram code {
+    background: none;
+    padding: 0;
+  }
+</style>

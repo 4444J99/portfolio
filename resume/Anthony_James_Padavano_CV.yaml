@@ -11,7 +11,7 @@ cv:
       username: 4444j99
   sections:
     summary:
-      - "Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 81 repositories across 8 GitHub organizations with ~339K words of public documentation. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer."
+      - "Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 81 repositories across 8 GitHub organizations with ~339K words of public documentation. Achieved +17.5M views and raised $2M across nonprofit and commercial projects. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer."
     skills:
       - label: Languages
         details: Python, TypeScript, JavaScript, Go, Rust, Bash, SQL
@@ -23,6 +23,8 @@ cv:
         details: GitHub Actions, CI/CD, Docker, PostgreSQL, Git
       - label: Creative
         details: p5.js, generative art, audio synthesis, interactive installations
+      - label: Marketing
+        details: Storytelling, content creation, social media management, SEO optimization, performance analytics, UI/UX design
       - label: Governance
         details: Registry design, dependency validation, state machines, documentation systems
     selected projects:
@@ -40,17 +42,21 @@ cv:
       - name: Agentic Titan
         date: "2024 — Present"
         highlights:
-          - "Polymorphic agent swarm architecture across 6 self-organizing topologies with 22 agent archetypes"
-          - "1,095+ tests across 18 implementation phases"
+          - "Polymorphic agent swarm architecture across 9 self-organizing topologies with 22 agent archetypes"
+          - "1,095+ tests across 18 implementation phases; model-agnostic (Anthropic, OpenAI, Ollama)"
       - name: AI-Conductor Model
         date: "2024 — Present"
         highlights:
           - "Developed the workflow producing ~339K words: AI generates volume, human directs and refines"
           - "Includes quality gates, template compliance validation, and automated link checking across 81 repos"
-      - name: Generative Music System
-        date: "2024 — Present"
+      - name: Forward Funders Marketing Overhaul
+        date: "2020"
         highlights:
-          - "Translates symbolic narrative events into live generative music — recursion as counterpoint, identity transformations as harmonic movement"
+          - "Transitioned client from in-person cold-calling to fully digital marketing; designed social media and Google Ads campaigns achieving 328% ROI"
+      - name: Boca Ballet Theatre Digital Transformation
+        date: "2020"
+        highlights:
+          - "Rebuilt website and social media channels during COVID-19; ad campaigns drove funding and enabled remote performances, keeping doors open"
     experience:
       - company: Independent
         position: Creative Technologist
@@ -69,21 +75,29 @@ cv:
           - Designed and executed digital campaigns increasing donor engagement by 32% and surpassing fundraising goals
           - "Rebuilt foundation website — 38% traffic growth, 22% improvement in donation conversions"
           - Produced multimedia storytelling content driving 28% increase in click-through rates
+          - "Developed social media strategy boosting engagement rates across platforms by 23%"
+          - "Trained team members on advanced analytics tools, leading to 20% efficiency boost in reporting"
       - company: AJP Media Arts
         position: Multimedia Specialist
         start_date: 2011
         location: New York City
         highlights:
-          - Produced video, audio, and visual campaigns achieving 17.5M+ views and driving $2M in client fundraising and revenue
+          - "Produced video, audio, and visual campaigns achieving 17.5M+ views and driving $2M in client fundraising and revenue"
           - Integrated SEO and paid media strategies achieving 290% ROI for key campaigns
           - Launched and managed client websites with 42% engagement increase and 30% speed improvement
-      - company: "Miami Dade College, FAU, Nova Southeastern, Keiser, and others"
+          - "Conducted A/B testing and performance analysis to optimize campaigns, achieving 27% engagement boost"
+          - "Delivered intuitive UI/UX designs for client platforms — 26% satisfaction increase, 35% retention improvement"
+        additional_info: "Clients: Arts in Boca, Boca Ballet Theatre, Cardboard Movie Company, Forward Funding, Flux Media, Lockbox Capital, Luxury Elevates, MindFinity, Nintendard, South Florida Luxury Real Estate, Spartan Permits, StrategicLever, Swamp Ape Review, Transcend Cosmetics, UltiTool Media"
+      - company: "Miami Dade College, FAU, Nova Southeastern, Keiser, Young Harris College, Tarrant County Community College, Broward College, Palm Beach State College"
         position: Instructor
         start_date: 2015
         location: South Florida
         highlights:
           - Designed and delivered 100+ composition courses to 2,000+ students with 85% above-average grade achievement
           - "Applied UX principles to create accessible course materials — 92% student approval rating"
+          - "Managed course lifecycle from concept to completion, achieving 97% course completion rate"
+          - "Enhanced lectures with multimedia tools, driving 22% increase in engagement"
+          - "Refined teaching methods using performance analytics — 24% improvement in student retention"
       - company: Majestic Design
         position: Project Manager
         start_date: 2007
@@ -92,6 +106,8 @@ cv:
         highlights:
           - "Led 50 commercial and residential construction projects from concept to completion — 90% on-time and within budget"
           - "Collaborated with marketing teams on 3D renderings and video walkthroughs, securing 25% increase in repeat business"
+          - "Built and maintained strong client and subcontractor relationships — 88% satisfaction rate"
+          - "Implemented risk mitigation strategies reducing project delays by 15%; 93% of projects met or exceeded standards"
     education:
       - institution: Florida Atlantic University
         area: Creative Writing

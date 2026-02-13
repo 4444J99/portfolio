@@ -11,25 +11,149 @@ import ProjectDetail from '../../components/ProjectDetail.astro';
     <ProjectDetail
       title="Orchestration Hub"
       tagline="The central nervous system of eight GitHub organizations"
-      tags={['Governance', 'Systems']}
+      tags={['Governance', 'Python', 'Systems']}
       repo="https://github.com/organvm-iv-taxis/orchestration-start-here"
     >
-      <h2>The Hub</h2>
+      <h2>The Problem</h2>
       <p>
-        Every system with 81 repositories needs a single place that answers "what exists, what's its status, and who owns it?" The Orchestration Hub is ORGAN-IV's answer: a machine-readable JSON registry (<code>registry-v2.json</code>) that serves as the single source of truth for the entire eight-organ system. Every repository entry carries its current status, documentation tier, dependency declarations, promotion state, and portfolio relevance score. The registry isn't documentation <em>about</em> the system — it <em>is</em> the system's self-knowledge.
+        Every system with 81 repositories needs a single place that answers "what exists, what's its status, and who owns it?" Most multi-repo systems rely on tribal knowledge: someone remembers which repo does what, which ones are active, which ones were experiments. That breaks at scale. It breaks when you onboard new contributors — human or AI. And it breaks when you need to answer a simple question: <em>is this system healthy?</em>
       </p>
 
-      <h2>How It Works</h2>
+      <h2>The Solution</h2>
       <p>
-        Five validation scripts run against the registry on every change, checking structural integrity, dependency graph acyclicity, documentation completeness, and constitutional compliance. The governance rules enforce the system's most important constraint: <strong>no back-edges</strong> in the dependency graph. Theory feeds art feeds commerce (I&rarr;II&rarr;III), and that flow is validated automatically across all 31 dependency edges. A promotion state machine (<code>LOCAL &rarr; CANDIDATE &rarr; PUBLIC_PROCESS &rarr; GRADUATED &rarr; ARCHIVED</code>) prevents premature claims — a project earns its status through documented criteria, not self-declaration.
+        A machine-readable JSON registry (<code>registry-v2.json</code>) that serves as the single source of truth for the entire eight-organ system. Every repository entry carries its current status, documentation tier, dependency declarations, promotion state, implementation status, and portfolio relevance score. The registry isn't documentation <em>about</em> the system — it <em>is</em> the system's self-knowledge. When the registry and reality disagree, either the registry must be updated or reality must be fixed. This is Article I of the system constitution.
       </p>
+
+      <h2>Architecture</h2>
+      <pre class="architecture-diagram"><code>            ┌──────────────────────────────┐
+            │   orchestration-start-here    │
+            │                              │
+            │  registry-v2.json            │
+            │  governance-rules.json       │
+            │  5 workflows · 3 scripts     │
+            └──────────┬───────────────────┘
+                       │
+          ┌────────────┼────────────────┐
+          │            │                │
+ ┌────────▼──────┐ ┌──▼──────────┐ ┌───▼──────────┐
+ │   ORGAN-I     │ │  ORGAN-II   │ │  ORGAN-III   │
+ │   Theory      │─▶  Art        │─▶  Commerce    │
+ │   18 repos    │ │  22 repos   │ │  21 repos    │
+ └───────────────┘ └─────────────┘ └──────────────┘
+          │            │                │
+ ┌────────▼──────┐ ┌──▼──────────┐ ┌───▼──────────┐
+ │   ORGAN-V     │ │  ORGAN-VI   │ │  ORGAN-VII   │
+ │   Process     │ │  Community  │ │  Marketing   │
+ └───────────────┘ └─────────────┘ └──────────────┘
+                       │
+            ┌──────────▼───────────────────┐
+            │       meta-organvm           │
+            │       (Umbrella Org)         │
+            └──────────────────────────────┘
+
+Flow enforced: I → II → III (no back-edges)
+Hub validates all 31 dependency edges.</code></pre>
+
+      <h2>The Registry Schema</h2>
+      <p>
+        Each of the 80 entries in the registry carries structured metadata:
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Field</th><th>Type</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>status</code></td><td>enum</td><td>ACTIVE, ARCHIVED, PLANNED</td></tr>
+            <tr><td><code>tier</code></td><td>enum</td><td>flagship, standard, stub, archive, infrastructure</td></tr>
+            <tr><td><code>dependencies</code></td><td>array</td><td>Cross-organ dependency declarations</td></tr>
+            <tr><td><code>promotion_status</code></td><td>enum</td><td>LOCAL → CANDIDATE → PUBLIC_PROCESS → GRADUATED → ARCHIVED</td></tr>
+            <tr><td><code>implementation_status</code></td><td>enum</td><td>PRODUCTION, PROTOTYPE, SKELETON, DESIGN_ONLY</td></tr>
+            <tr><td><code>portfolio_relevance</code></td><td>enum</td><td>CRITICAL, HIGH, MEDIUM, LOW, INTERNAL</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Governance as Code</h2>
+      <p>
+        The governance model is codified in <code>governance-rules.json</code> — a machine-readable constitution with six articles and four amendments. Governance is not advisory; it is enforced by automated workflows. The most important constraint: <strong>no back-edges</strong> in the dependency graph. Theory feeds art feeds commerce (I→II→III), validated automatically across all 31 dependency edges. A promotion state machine (<code>LOCAL → CANDIDATE → PUBLIC_PROCESS → GRADUATED → ARCHIVED</code>) prevents premature claims — a project earns its status through documented criteria.
+      </p>
+
+      <h2>Five Automation Workflows</h2>
+      <ul>
+        <li><strong>validate-dependencies</strong> — Checks the dependency graph on every registry change. Cycle detection, transitive depth analysis, back-edge blocking.</li>
+        <li><strong>monthly-organ-audit</strong> — Full system health check with Markdown report + JSON metrics. Creates a GitHub Issue with findings.</li>
+        <li><strong>promote-repo</strong> — Handles state machine transitions with pre/post validation against governance rules.</li>
+        <li><strong>publish-process</strong> — Syncs ORGAN-V content to public channels. README extraction + essay scaffolding.</li>
+        <li><strong>distribute-content</strong> — POSSE distribution to Mastodon and Discord. Verified live (HTTP 200 + 204).</li>
+      </ul>
 
       <h2>Why a Registry Matters</h2>
       <p>
-        Most multi-repo systems rely on tribal knowledge: someone remembers which repo does what, which ones are active, which ones were experiments. That breaks at scale and it breaks when you onboard new contributors — human or AI. A machine-readable registry enables automation (CI/CD workflows query it), enables auditing (monthly health checks generate reports from it), and enables honest portfolio presentation (the portfolio site reads from the same source of truth as the governance scripts). The registry is what makes the eight-organ system governable rather than merely large. It's the difference between 81 repositories and a system.
+        A machine-readable registry enables automation (CI/CD workflows query it), auditing (monthly health checks generate reports from it), and honest portfolio presentation (the portfolio site reads from the same source of truth as the governance scripts). The registry is what makes the eight-organ system <em>governable</em> rather than merely large. It's the difference between 81 repositories and a <em>system</em>.
       </p>
+
+      <h2>Tradeoffs & Lessons</h2>
+      <ul>
+        <li><strong>Single file vs. distributed config</strong> — Keeping the entire registry in one JSON file means every change touches one file and every query is a local read. The alternative (per-repo config files aggregated at build time) would be more distributed but harder to validate atomically. At 80 entries the single-file approach works; at 500 it might not.</li>
+        <li><strong>Strict governance vs. velocity</strong> — The no-back-edges rule and promotion state machine add friction to every cross-organ change. This is intentional: the friction prevents the most common failure mode of multi-repo systems (tangled dependencies that nobody can reason about). But it slows rapid prototyping across organ boundaries.</li>
+        <li><strong>Monthly audit cadence</strong> — Monthly is frequent enough to catch drift but infrequent enough to be actionable. Weekly would create audit fatigue; quarterly would let too much drift accumulate.</li>
+        <li><strong>Constitution as code</strong> — Writing governance rules as JSON rather than prose forces precision but loses nuance. Article V ("Portfolio-Quality Documentation") requires human judgment that can't be reduced to a JSON field. The compromise: automated checks for measurable criteria, manual review gates for qualitative ones.</li>
+      </ul>
+
+      <h2>By the Numbers</h2>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">80</div>
+          <div class="stat-label">Registry Entries</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">31</div>
+          <div class="stat-label">Dependencies</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Workflows</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">6+4</div>
+          <div class="stat-label">Articles + Amendments</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">228</div>
+          <div class="stat-label">Validation Checks</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Circular Deps</div>
+        </div>
+      </div>
 
     </ProjectDetail>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .architecture-diagram {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .architecture-diagram code {
+    background: none;
+    padding: 0;
+  }
+</style>

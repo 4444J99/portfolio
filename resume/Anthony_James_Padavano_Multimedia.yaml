@@ -1,0 +1,125 @@
+cv:
+  name: Anthony James Padavano
+  headline: Multimedia Specialist
+  location: New York City
+  email:
+    - padavano.anthony@gmail.com
+  website:
+    - https://4444j99.github.io/portfolio/
+  social_networks:
+    - network: GitHub
+      username: 4444j99
+  sections:
+    summary:
+      - "Creative Multimedia Specialist with 10+ years of experience in viral multimedia storytelling, marketing strategy, and content lifecycle management. Achieved +17.5M views and raised $2M across nonprofit and commercial projects. Skilled in cross-platform strategies, UI/UX design, and campaign optimization, driving audience growth by 35% and ROI by 325%. Proven leader in team collaboration and data-driven performance enhancements, delivering innovative solutions that combine creativity and measurable results."
+    skills:
+      - label: Storytelling & Content
+        details: Storytelling, content creation, video production, audio production, visual campaigns, content lifecycle management
+      - label: Digital Marketing
+        details: Campaign strategy, social media management, SEO optimization, Google Ads, paid media, email marketing
+      - label: Design & UX
+        details: UI/UX design, WordPress, custom HTML/CSS, responsive design, accessibility, wireframing
+      - label: Analytics
+        details: Performance analytics, A/B testing, conversion optimization, Google Analytics, reporting dashboards
+      - label: Technical
+        details: Python, TypeScript, JavaScript, Node.js, React, Astro, GitHub Actions, CI/CD
+      - label: Project Management
+        details: Cross-functional team leadership, stakeholder management, Agile/Scrum, resource allocation
+    selected projects:
+      - name: Forward Funders — Scalable Marketing Overhaul
+        date: "2020"
+        highlights:
+          - "Transitioned client from in-person cold-calling to fully digital marketing approach"
+          - "Designed and executed social media and Google Ads campaigns achieving 328% ROI; drove consistent lead generation and scalable growth"
+      - name: Boca Ballet Theatre — Nonprofit Digital Transformation
+        date: "2020"
+        highlights:
+          - "Rebuilt website and social media channels during COVID-19; managed ad campaigns driving funding and enabling remote performances"
+          - "Significantly boosted community engagement and donor contributions during critical period"
+      - name: "MET4MORFOSES — Multilingual Digital Storytelling"
+        date: "2022"
+        highlights:
+          - "Produced interactive multilingual digital content exploring Western and Eastern cultural narratives"
+          - "Integrated UI/UX design and cross-platform strategies to engage diverse audiences"
+      - name: Amp Lab Media — Innovative Media Studies
+        date: "2019 — Present"
+        highlights:
+          - "Directed and produced video content for nonprofit YouTube channel featuring Object Lesson series"
+          - "Managed full content lifecycle; optimized for audience engagement, increasing reach by 42%"
+      - name: The Eight-Organ System
+        date: "2024 — Present"
+        highlights:
+          - "Designed and documented orchestration architecture across 81 repos, 8 orgs, ~339K words — demonstrating content lifecycle management at scale"
+    experience:
+      - company: Miami Dade College Foundation
+        position: Digital Marketing Manager
+        start_date: 2023
+        end_date: 2024
+        location: Miami, FL
+        highlights:
+          - Designed and executed targeted digital marketing campaigns, increasing donor engagement by 32% and surpassing fundraising goals
+          - Produced multimedia storytelling content including videos and social media posts, driving 28% increase in click-through rates
+          - "Rebuilt and optimized foundation website — 38% traffic growth, 22% improvement in donation conversions"
+          - "Developed social media strategy boosting engagement rates across platforms by 23%"
+          - "Trained team members on advanced analytics tools, leading to 20% efficiency boost in reporting"
+      - company: AJP Media Arts
+        position: Multimedia Specialist
+        start_date: 2011
+        location: New York City
+        highlights:
+          - "Produced engaging video, audio, and visual campaigns achieving 17.5M+ views and driving $2M in client fundraising and revenue"
+          - "Developed innovative marketing strategies integrating SEO and paid media — 290% ROI for key campaigns"
+          - "Launched and managed client websites using WordPress and custom HTML/CSS — 42% engagement increase, 30% speed improvement"
+          - "Conducted A/B testing and performance analysis to optimize campaigns — 27% engagement boost across client portfolios"
+          - "Delivered intuitive UI/UX designs for client platforms — 26% satisfaction increase, 35% retention improvement"
+        additional_info: "Clients: Arts in Boca, Boca Ballet Theatre, Cardboard Movie Company, Forward Funding, Flux Media, Lockbox Capital, Luxury Elevates, MindFinity, Nintendard, South Florida Luxury Real Estate, Spartan Permits, StrategicLever, Swamp Ape Review, Transcend Cosmetics, UltiTool Media"
+      - company: "Miami Dade College, FAU, Nova Southeastern, Keiser, Young Harris College, Tarrant County Community College, Broward College, Palm Beach State College"
+        position: Instructor
+        start_date: 2015
+        location: South Florida
+        highlights:
+          - "Designed and delivered 100+ composition courses to 2,000+ students — 85% above-average grade achievement"
+          - "Applied UX principles to create accessible course materials — 92% student approval rating"
+          - "Enhanced lectures with multimedia tools, driving 22% increase in engagement"
+          - "Managed course lifecycle from concept to completion — 97% completion rate"
+          - "Refined teaching methods using performance analytics — 24% improvement in student retention"
+      - company: Independent
+        position: Creative Technologist
+        start_date: 2021
+        location: New York City
+        highlights:
+          - "Designed and launched eight-organ orchestration system coordinating 81 repos across 8 GitHub organizations with ~339K words of documentation"
+          - "Built generative art and music systems, interactive installations, and AI-conductor workflow for human-AI co-creation"
+      - company: Majestic Design
+        position: Project Manager
+        start_date: 2007
+        end_date: 2018
+        location: New York City
+        highlights:
+          - "Led 50 commercial and residential construction projects from concept to completion — 90% on-time, within budget"
+          - "Produced project visualizations and promotional materials including 3D renderings and video walkthroughs — 25% increase in repeat business"
+          - "Built and maintained strong stakeholder relationships — 88% satisfaction rate"
+          - "Implemented risk mitigation strategies reducing project delays by 15%; 93% of projects met or exceeded standards"
+    education:
+      - institution: Florida Atlantic University
+        area: Creative Writing
+        degree: M.F.A.
+        start_date: 2015
+        end_date: 2018
+      - institution: CUNY College of Staten Island
+        area: English Literature
+        degree: B.A.
+        start_date: 2010
+        end_date: 2014
+    certifications:
+      - label: "Full-Stack Developer — Meta"
+        details: "2023 — 2024"
+      - label: "UX Design — Google"
+        details: "2022 — 2023"
+      - label: "Digital Marketing & E-commerce — Google"
+        details: "2022 — 2023"
+      - label: "Project Management — Google"
+        details: "2022 — 2023"
+
+design:
+  theme: classic
