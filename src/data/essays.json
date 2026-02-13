@@ -1,0 +1,232 @@
+{
+  "total": 28,
+  "essays": [
+    {
+      "path": "_posts/2026-02-22-the-convergence.md",
+      "filename": "2026-02-22-the-convergence.md",
+      "date": "2026-02-22",
+      "slug": "the-convergence",
+      "title": "The Convergence",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/22/the-convergence/"
+    },
+    {
+      "path": "_posts/2026-02-21-dependency-graph.md",
+      "filename": "2026-02-21-dependency-graph.md",
+      "date": "2026-02-21",
+      "slug": "dependency-graph",
+      "title": "Dependency Graph",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/21/dependency-graph/"
+    },
+    {
+      "path": "_posts/2026-02-20-archive-paradox.md",
+      "filename": "2026-02-20-archive-paradox.md",
+      "date": "2026-02-20",
+      "slug": "archive-paradox",
+      "title": "Archive Paradox",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/20/archive-paradox/"
+    },
+    {
+      "path": "_posts/2026-02-19-provenance-as-practice.md",
+      "filename": "2026-02-19-provenance-as-practice.md",
+      "date": "2026-02-19",
+      "slug": "provenance-as-practice",
+      "title": "Provenance As Practice",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/19/provenance-as-practice/"
+    },
+    {
+      "path": "_posts/2026-02-18-seed-contracts.md",
+      "filename": "2026-02-18-seed-contracts.md",
+      "date": "2026-02-18",
+      "slug": "seed-contracts",
+      "title": "Seed Contracts",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/18/seed-contracts/"
+    },
+    {
+      "path": "_posts/2026-02-17-aesthetic-nervous-system.md",
+      "filename": "2026-02-17-aesthetic-nervous-system.md",
+      "date": "2026-02-17",
+      "slug": "aesthetic-nervous-system",
+      "title": "Aesthetic Nervous System",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/17/aesthetic-nervous-system/"
+    },
+    {
+      "path": "_posts/2026-02-16-bootstrap-to-scale.md",
+      "filename": "2026-02-16-bootstrap-to-scale.md",
+      "date": "2026-02-16",
+      "slug": "bootstrap-to-scale",
+      "title": "Bootstrap To Scale",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/16/bootstrap-to-scale/"
+    },
+    {
+      "path": "_posts/2026-02-15-deploying-the-portfolio.md",
+      "filename": "2026-02-15-deploying-the-portfolio.md",
+      "date": "2026-02-15",
+      "slug": "deploying-the-portfolio",
+      "title": "Deploying The Portfolio",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/15/deploying-the-portfolio/"
+    },
+    {
+      "path": "_posts/2026-02-14-the-promotion-pipeline.md",
+      "filename": "2026-02-14-the-promotion-pipeline.md",
+      "date": "2026-02-14",
+      "slug": "the-promotion-pipeline",
+      "title": "The Promotion Pipeline",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/14/the-promotion-pipeline/"
+    },
+    {
+      "path": "_posts/2026-02-13-registry-driven-development.md",
+      "filename": "2026-02-13-registry-driven-development.md",
+      "date": "2026-02-13",
+      "slug": "registry-driven-development",
+      "title": "Registry Driven Development",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/registry-driven-development/"
+    },
+    {
+      "path": "_posts/2026-02-13-why-ai-function-calling-needs-ontological-grounding.md",
+      "filename": "2026-02-13-why-ai-function-calling-needs-ontological-grounding.md",
+      "date": "2026-02-13",
+      "slug": "why-ai-function-calling-needs-ontological-grounding",
+      "title": "Why Ai Function Calling Needs Ontological Grounding",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/why-ai-function-calling-needs-ontological-grounding/"
+    },
+    {
+      "path": "_posts/2026-02-12-the-parallel-launch.md",
+      "filename": "2026-02-12-the-parallel-launch.md",
+      "date": "2026-02-12",
+      "slug": "the-parallel-launch",
+      "title": "The Parallel Launch",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/12/the-parallel-launch/"
+    },
+    {
+      "path": "_posts/2026-02-11-aetheria-rpg-post-mortem.md",
+      "filename": "2026-02-11-aetheria-rpg-post-mortem.md",
+      "date": "2026-02-11",
+      "slug": "aetheria-rpg-post-mortem",
+      "title": "Aetheria Rpg Post Mortem",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/11/aetheria-rpg-post-mortem/"
+    },
+    {
+      "path": "_posts/2026-02-11-ai-conductor-methodology.md",
+      "filename": "2026-02-11-ai-conductor-methodology.md",
+      "date": "2026-02-11",
+      "slug": "ai-conductor-methodology",
+      "title": "Ai Conductor Methodology",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/11/ai-conductor-methodology/"
+    },
+    {
+      "path": "_posts/2026-02-11-bronze-to-platinum.md",
+      "filename": "2026-02-11-bronze-to-platinum.md",
+      "date": "2026-02-11",
+      "slug": "bronze-to-platinum",
+      "title": "Bronze To Platinum",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/11/bronze-to-platinum/"
+    },
+    {
+      "path": "_posts/2026-02-11-choreographic-interface.md",
+      "filename": "2026-02-11-choreographic-interface.md",
+      "date": "2026-02-11",
+      "slug": "choreographic-interface",
+      "title": "Choreographic Interface",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/11/choreographic-interface/"
+    },
+    {
+      "path": "_posts/2026-02-11-coaching-platform-metrics.md",
+      "filename": "2026-02-11-coaching-platform-metrics.md",
+      "date": "2026-02-11",
+      "slug": "coaching-platform-metrics",
+      "title": "Coaching Platform Metrics",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/11/coaching-platform-metrics/"
+    },
+    {
+      "path": "_posts/2026-02-11-documentation-implementation-gap.md",
+      "filename": "2026-02-11-documentation-implementation-gap.md",
+      "date": "2026-02-11",
+      "slug": "documentation-implementation-gap",
+      "title": "Documentation Implementation Gap",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/11/documentation-implementation-gap/"
+    },
+    {
+      "path": "_posts/2026-02-11-epistemic-tuning-explained.md",
+      "filename": "2026-02-11-epistemic-tuning-explained.md",
+      "date": "2026-02-11",
+      "slug": "epistemic-tuning-explained",
+      "title": "Epistemic Tuning Explained",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/11/epistemic-tuning-explained/"
+    },
+    {
+      "path": "_posts/2026-02-11-generative-music-case-study.md",
+      "filename": "2026-02-11-generative-music-case-study.md",
+      "date": "2026-02-11",
+      "slug": "generative-music-case-study",
+      "title": "Generative Music Case Study",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/11/generative-music-case-study/"
+    },
+    {
+      "path": "_posts/2026-02-11-recursive-engines-at-scale.md",
+      "filename": "2026-02-11-recursive-engines-at-scale.md",
+      "date": "2026-02-11",
+      "slug": "recursive-engines-at-scale",
+      "title": "Recursive Engines At Scale",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/11/recursive-engines-at-scale/"
+    },
+    {
+      "path": "_posts/2026-02-11-testing-the-meta-system.md",
+      "filename": "2026-02-11-testing-the-meta-system.md",
+      "date": "2026-02-11",
+      "slug": "testing-the-meta-system",
+      "title": "Testing The Meta System",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/11/testing-the-meta-system/"
+    },
+    {
+      "path": "_posts/2026-02-11-uniform-quality-at-scale.md",
+      "filename": "2026-02-11-uniform-quality-at-scale.md",
+      "date": "2026-02-11",
+      "slug": "uniform-quality-at-scale",
+      "title": "Uniform Quality At Scale",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/11/uniform-quality-at-scale/"
+    },
+    {
+      "path": "_posts/2026-02-10-building-in-public.md",
+      "filename": "2026-02-10-building-in-public.md",
+      "date": "2026-02-10",
+      "slug": "building-in-public",
+      "title": "Building In Public",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/10/building-in-public/"
+    },
+    {
+      "path": "_posts/2026-02-10-five-years-autonomous-creative.md",
+      "filename": "2026-02-10-five-years-autonomous-creative.md",
+      "date": "2026-02-10",
+      "slug": "five-years-autonomous-creative",
+      "title": "Five Years Autonomous Creative",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/10/five-years-autonomous-creative/"
+    },
+    {
+      "path": "_posts/2026-02-10-governance-as-creative-practice.md",
+      "filename": "2026-02-10-governance-as-creative-practice.md",
+      "date": "2026-02-10",
+      "slug": "governance-as-creative-practice",
+      "title": "Governance As Creative Practice",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/10/governance-as-creative-practice/"
+    },
+    {
+      "path": "_posts/2026-02-10-how-we-orchestrate-eight-organs.md",
+      "filename": "2026-02-10-how-we-orchestrate-eight-organs.md",
+      "date": "2026-02-10",
+      "slug": "how-we-orchestrate-eight-organs",
+      "title": "How We Orchestrate Eight Organs",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/10/how-we-orchestrate-eight-organs/"
+    },
+    {
+      "path": "_posts/2026-02-10-meta-system-as-portfolio-asset.md",
+      "filename": "2026-02-10-meta-system-as-portfolio-asset.md",
+      "date": "2026-02-10",
+      "slug": "meta-system-as-portfolio-asset",
+      "title": "Meta System As Portfolio Asset",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/10/meta-system-as-portfolio-asset/"
+    }
+  ],
+  "feed_url": "https://organvm-v-logos.github.io/public-process/feed.xml",
+  "site_url": "https://organvm-v-logos.github.io/public-process/",
+  "generated": "2026-02-13T23:49:58.137946+00:00"
+}

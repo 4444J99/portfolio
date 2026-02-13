@@ -1,0 +1,140 @@
+{
+  "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
+  "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
+  "metrics": {
+    "total_repos": 89,
+    "production_repos": 82,
+    "archived_repos": 7,
+    "dependency_edges": 33,
+    "ci_workflows": 77,
+    "operational_organs": 8,
+    "sprints_completed": 10
+  },
+  "organs": [
+    {
+      "key": "ORGAN-I",
+      "name": "Theory",
+      "greek": "Theoria",
+      "org": "organvm-i-theoria",
+      "repo_count": 19,
+      "status": "OPERATIONAL",
+      "description": "Epistemological frameworks, recursive engines, ontological systems, conceptual research"
+    },
+    {
+      "key": "ORGAN-II",
+      "name": "Art",
+      "greek": "Poiesis",
+      "org": "organvm-ii-poiesis",
+      "repo_count": 26,
+      "status": "OPERATIONAL",
+      "description": "Generative art, interactive systems, performance frameworks, experiential work"
+    },
+    {
+      "key": "ORGAN-III",
+      "name": "Commerce",
+      "greek": "Ergon",
+      "org": "organvm-iii-ergon",
+      "repo_count": 24,
+      "status": "OPERATIONAL",
+      "description": "Revenue-generating products, deployed systems, customer-facing tools, B2B/B2C applications"
+    },
+    {
+      "key": "ORGAN-IV",
+      "name": "Orchestration",
+      "greek": "Taxis",
+      "org": "organvm-iv-taxis",
+      "repo_count": 7,
+      "status": "OPERATIONAL",
+      "description": "Cross-organ routing, governance, promotion automation, system coordination, dependency management"
+    },
+    {
+      "key": "ORGAN-V",
+      "name": "Public Process",
+      "greek": "Logos",
+      "org": "organvm-v-logos",
+      "repo_count": 2,
+      "status": "OPERATIONAL",
+      "description": "Essays, marginalia, process documentation, building in public, RSS/newsletter, audience engagement"
+    },
+    {
+      "key": "ORGAN-VI",
+      "name": "Community",
+      "greek": "Koinonia",
+      "org": "organvm-vi-koinonia",
+      "repo_count": 4,
+      "status": "OPERATIONAL",
+      "description": "Community infrastructure, member management, governance, forums, shared resources, collaborative spaces"
+    },
+    {
+      "key": "ORGAN-VII",
+      "name": "Marketing",
+      "greek": "Kerygma",
+      "org": "organvm-vii-kerygma",
+      "repo_count": 4,
+      "status": "OPERATIONAL",
+      "description": "Content distribution, social amplification, audience building, POSSE automation, release coordination, press/announcement strategy"
+    },
+    {
+      "key": "META-ORGANVM",
+      "name": "META-ORGANVM",
+      "greek": "META-ORGANVM",
+      "org": "",
+      "repo_count": 3,
+      "status": "OPERATIONAL",
+      "description": "Umbrella organization coordinating all 7 organ orgs. System-wide governance, cross-organ visibility, and institutional identity."
+    }
+  ],
+  "sprint_history": [
+    {
+      "name": "IGNITION",
+      "date": "2026-02-09",
+      "summary": "Org architecture \u2014 8 GitHub orgs"
+    },
+    {
+      "name": "PROPULSION",
+      "date": "2026-02-10",
+      "summary": "Bronze/Silver/Gold documentation sprints"
+    },
+    {
+      "name": "ASCENSION",
+      "date": "2026-02-10",
+      "summary": "Micro-validation and integration"
+    },
+    {
+      "name": "EXODUS",
+      "date": "2026-02-11",
+      "summary": "System launch \u2014 all 8 organs OPERATIONAL"
+    },
+    {
+      "name": "PERFECTION",
+      "date": "2026-02-11",
+      "summary": "Gap-fill \u2014 11 repos, 14 promotions"
+    },
+    {
+      "name": "AUTONOMY",
+      "date": "2026-02-12",
+      "summary": "seed.yaml contracts, agents, workflows"
+    },
+    {
+      "name": "GENESIS",
+      "date": "2026-02-12",
+      "summary": "7 new repos from local materials"
+    },
+    {
+      "name": "ALCHEMIA",
+      "date": "2026-02-12",
+      "summary": "2,012 files inventoried, taste.yaml cascading"
+    },
+    {
+      "name": "CONVERGENCE",
+      "date": "2026-02-13",
+      "summary": "82 PRODUCTION, 7 ARCHIVED, zero gaps"
+    },
+    {
+      "name": "PRAXIS",
+      "date": "2026-02-13",
+      "summary": "External impact \u2014 portfolio, distribution, revenue"
+    }
+  ],
+  "generated": "2026-02-13T23:49:57.851806+00:00"
+}

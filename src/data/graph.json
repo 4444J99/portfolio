@@ -1,0 +1,777 @@
+{
+  "nodes": [
+    {
+      "id": "organvm-i-theoria/recursive-engine--generative-entity",
+      "name": "recursive-engine--generative-entity",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "flagship",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/organon-noumenon--ontogenetic-morphe",
+      "name": "organon-noumenon--ontogenetic-morphe",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/auto-revision-epistemic-engine",
+      "name": "auto-revision-epistemic-engine",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/narratological-algorithmic-lenses",
+      "name": "narratological-algorithmic-lenses",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/call-function--ontological",
+      "name": "call-function--ontological",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/sema-metra--alchemica-mundi",
+      "name": "sema-metra--alchemica-mundi",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/system-governance-framework",
+      "name": "system-governance-framework",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/cognitive-archaelogy-tribunal",
+      "name": "cognitive-archaelogy-tribunal",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/a-recursive-root",
+      "name": "a-recursive-root",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/radix-recursiva-solve-coagula-redi",
+      "name": "radix-recursiva-solve-coagula-redi",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/.github",
+      "name": ".github",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "infrastructure",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/nexus--babel-alexandria-",
+      "name": "nexus--babel-alexandria-",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/reverse-engine-recursive-run",
+      "name": "reverse-engine-recursive-run",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/4-ivi374-F0Rivi4",
+      "name": "4-ivi374-F0Rivi4",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/cog-init-1-0-",
+      "name": "cog-init-1-0-",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/collective-persona-operations",
+      "name": "collective-persona-operations",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/linguistic-atomization-framework",
+      "name": "linguistic-atomization-framework",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/my-knowledge-base",
+      "name": "my-knowledge-base",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-i-theoria/scalable-lore-expert",
+      "name": "scalable-lore-expert",
+      "organ": "ORGAN-I",
+      "organ_name": "Theory",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/example-generative-music",
+      "name": "example-generative-music",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/metasystem-master",
+      "name": "metasystem-master",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "flagship",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/example-choreographic-interface",
+      "name": "example-choreographic-interface",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/showcase-portfolio",
+      "name": "showcase-portfolio",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/archive-past-works",
+      "name": "archive-past-works",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/case-studies-methodology",
+      "name": "case-studies-methodology",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/learning-resources",
+      "name": "learning-resources",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/example-interactive-installation",
+      "name": "example-interactive-installation",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/example-ai-collaboration",
+      "name": "example-ai-collaboration",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/a-mavs-olevm",
+      "name": "a-mavs-olevm",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "flagship",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/a-i-council--coliseum",
+      "name": "a-i-council--coliseum",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/.github",
+      "name": ".github",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "infrastructure",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/artist-toolkit-and-templates",
+      "name": "artist-toolkit-and-templates",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/client-sdk",
+      "name": "client-sdk",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/academic-publication",
+      "name": "academic-publication",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/example-theatre-dialogue",
+      "name": "example-theatre-dialogue",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/audio-synthesis-bridge",
+      "name": "audio-synthesis-bridge",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/art-from--auto-revision-epistemic-engine",
+      "name": "art-from--auto-revision-epistemic-engine",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/art-from--narratological-algorithmic-lenses",
+      "name": "art-from--narratological-algorithmic-lenses",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/life-betterment-simulation",
+      "name": "life-betterment-simulation",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/universal-waveform-explorer",
+      "name": "universal-waveform-explorer",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-ii-poiesis/shared-remembrance-gateway",
+      "name": "shared-remembrance-gateway",
+      "organ": "ORGAN-II",
+      "organ_name": "Art",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/classroom-rpg-aetheria",
+      "name": "classroom-rpg-aetheria",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/gamified-coach-interface",
+      "name": "gamified-coach-interface",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/trade-perpetual-future",
+      "name": "trade-perpetual-future",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/fetch-familiar-friends",
+      "name": "fetch-familiar-friends",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/sovereign-ecosystem--real-estate-luxury",
+      "name": "sovereign-ecosystem--real-estate-luxury",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/public-record-data-scrapper",
+      "name": "public-record-data-scrapper",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "flagship",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/search-local--happy-hour",
+      "name": "search-local--happy-hour",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/multi-camera--livestream--framework",
+      "name": "multi-camera--livestream--framework",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/universal-mail--automation",
+      "name": "universal-mail--automation",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/mirror-mirror",
+      "name": "mirror-mirror",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/the-invisible-ledger",
+      "name": "the-invisible-ledger",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/tab-bookmark-manager",
+      "name": "tab-bookmark-manager",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/a-i-chat--exporter",
+      "name": "a-i-chat--exporter",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/.github",
+      "name": ".github",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "infrastructure",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/the-actual-news",
+      "name": "the-actual-news",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/your-fit-tailored",
+      "name": "your-fit-tailored",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/my-block-warfare",
+      "name": "my-block-warfare",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/life-my--midst--in",
+      "name": "life-my--midst--in",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/my--father-mother",
+      "name": "my--father-mother",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/commerce--meta",
+      "name": "commerce--meta",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/card-trade-social",
+      "name": "card-trade-social",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iii-ergon/hokage-chess",
+      "name": "hokage-chess",
+      "organ": "ORGAN-III",
+      "organ_name": "Commerce",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iv-taxis/orchestration-start-here",
+      "name": "orchestration-start-here",
+      "organ": "ORGAN-IV",
+      "organ_name": "Orchestration",
+      "tier": "flagship",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iv-taxis/petasum-super-petasum",
+      "name": "petasum-super-petasum",
+      "organ": "ORGAN-IV",
+      "organ_name": "Orchestration",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iv-taxis/universal-node-network",
+      "name": "universal-node-network",
+      "organ": "ORGAN-IV",
+      "organ_name": "Orchestration",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iv-taxis/.github",
+      "name": ".github",
+      "organ": "ORGAN-IV",
+      "organ_name": "Orchestration",
+      "tier": "infrastructure",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iv-taxis/agentic-titan",
+      "name": "agentic-titan",
+      "organ": "ORGAN-IV",
+      "organ_name": "Orchestration",
+      "tier": "flagship",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iv-taxis/agent--claude-smith",
+      "name": "agent--claude-smith",
+      "organ": "ORGAN-IV",
+      "organ_name": "Orchestration",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-iv-taxis/a-i--skills",
+      "name": "a-i--skills",
+      "organ": "ORGAN-IV",
+      "organ_name": "Orchestration",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-v-logos/public-process",
+      "name": "public-process",
+      "organ": "ORGAN-V",
+      "organ_name": "Public Process",
+      "tier": "flagship",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-v-logos/.github",
+      "name": ".github",
+      "organ": "ORGAN-V",
+      "organ_name": "Public Process",
+      "tier": "infrastructure",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-vi-koinonia/salon-archive",
+      "name": "salon-archive",
+      "organ": "ORGAN-VI",
+      "organ_name": "Community",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-vi-koinonia/reading-group-curriculum",
+      "name": "reading-group-curriculum",
+      "organ": "ORGAN-VI",
+      "organ_name": "Community",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-vi-koinonia/.github",
+      "name": ".github",
+      "organ": "ORGAN-VI",
+      "organ_name": "Community",
+      "tier": "infrastructure",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-vi-koinonia/adaptive-personal-syllabus",
+      "name": "adaptive-personal-syllabus",
+      "organ": "ORGAN-VI",
+      "organ_name": "Community",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-vii-kerygma/social-automation",
+      "name": "social-automation",
+      "organ": "ORGAN-VII",
+      "organ_name": "Marketing",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-vii-kerygma/distribution-strategy",
+      "name": "distribution-strategy",
+      "organ": "ORGAN-VII",
+      "organ_name": "Marketing",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "organvm-vii-kerygma/.github",
+      "name": ".github",
+      "organ": "ORGAN-VII",
+      "organ_name": "Marketing",
+      "tier": "infrastructure",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "meta-organvm/.github",
+      "name": ".github",
+      "organ": "META-ORGANVM",
+      "organ_name": "META-ORGANVM",
+      "tier": "infrastructure",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "meta-organvm/organvm-corpvs-testamentvm",
+      "name": "organvm-corpvs-testamentvm",
+      "organ": "META-ORGANVM",
+      "organ_name": "META-ORGANVM",
+      "tier": "flagship",
+      "status": "PRODUCTION"
+    },
+    {
+      "id": "meta-organvm/alchemia-ingestvm",
+      "name": "alchemia-ingestvm",
+      "organ": "META-ORGANVM",
+      "organ_name": "META-ORGANVM",
+      "tier": "standard",
+      "status": "PRODUCTION"
+    }
+  ],
+  "edges": [
+    {
+      "source": "organvm-i-theoria/call-function--ontological",
+      "target": "organvm-i-theoria/organon-noumenon--ontogenetic-morphe"
+    },
+    {
+      "source": "organvm-i-theoria/sema-metra--alchemica-mundi",
+      "target": "organvm-i-theoria/a-recursive-root"
+    },
+    {
+      "source": "organvm-i-theoria/cognitive-archaelogy-tribunal",
+      "target": "organvm-i-theoria/recursive-engine--generative-entity"
+    },
+    {
+      "source": "organvm-i-theoria/radix-recursiva-solve-coagula-redi",
+      "target": "organvm-i-theoria/a-recursive-root"
+    },
+    {
+      "source": "organvm-i-theoria/nexus--babel-alexandria-",
+      "target": "organvm-i-theoria/linguistic-atomization-framework"
+    },
+    {
+      "source": "organvm-i-theoria/reverse-engine-recursive-run",
+      "target": "organvm-i-theoria/recursive-engine--generative-entity"
+    },
+    {
+      "source": "organvm-i-theoria/my-knowledge-base",
+      "target": "organvm-i-theoria/linguistic-atomization-framework"
+    },
+    {
+      "source": "organvm-ii-poiesis/example-generative-music",
+      "target": "organvm-ii-poiesis/metasystem-master"
+    },
+    {
+      "source": "organvm-ii-poiesis/metasystem-master",
+      "target": "organvm-i-theoria/recursive-engine--generative-entity"
+    },
+    {
+      "source": "organvm-ii-poiesis/example-choreographic-interface",
+      "target": "organvm-ii-poiesis/metasystem-master"
+    },
+    {
+      "source": "organvm-ii-poiesis/example-interactive-installation",
+      "target": "organvm-ii-poiesis/metasystem-master"
+    },
+    {
+      "source": "organvm-ii-poiesis/a-i-council--coliseum",
+      "target": "organvm-ii-poiesis/metasystem-master"
+    },
+    {
+      "source": "organvm-ii-poiesis/client-sdk",
+      "target": "organvm-ii-poiesis/metasystem-master"
+    },
+    {
+      "source": "organvm-ii-poiesis/example-theatre-dialogue",
+      "target": "organvm-ii-poiesis/metasystem-master"
+    },
+    {
+      "source": "organvm-ii-poiesis/audio-synthesis-bridge",
+      "target": "organvm-ii-poiesis/metasystem-master"
+    },
+    {
+      "source": "organvm-ii-poiesis/art-from--auto-revision-epistemic-engine",
+      "target": "organvm-i-theoria/auto-revision-epistemic-engine"
+    },
+    {
+      "source": "organvm-ii-poiesis/art-from--narratological-algorithmic-lenses",
+      "target": "organvm-i-theoria/narratological-algorithmic-lenses"
+    },
+    {
+      "source": "organvm-iii-ergon/classroom-rpg-aetheria",
+      "target": "organvm-iii-ergon/gamified-coach-interface"
+    },
+    {
+      "source": "organvm-iii-ergon/tab-bookmark-manager",
+      "target": "organvm-i-theoria/my-knowledge-base"
+    },
+    {
+      "source": "organvm-iii-ergon/my--father-mother",
+      "target": "organvm-i-theoria/my-knowledge-base"
+    },
+    {
+      "source": "organvm-iv-taxis/petasum-super-petasum",
+      "target": "organvm-i-theoria/system-governance-framework"
+    },
+    {
+      "source": "organvm-iv-taxis/agentic-titan",
+      "target": "organvm-i-theoria/recursive-engine--generative-entity"
+    },
+    {
+      "source": "organvm-iv-taxis/agent--claude-smith",
+      "target": "organvm-iv-taxis/agentic-titan"
+    },
+    {
+      "source": "organvm-iv-taxis/a-i--skills",
+      "target": "organvm-iv-taxis/agent--claude-smith"
+    },
+    {
+      "source": "organvm-v-logos/public-process",
+      "target": "organvm-i-theoria/recursive-engine--generative-entity"
+    },
+    {
+      "source": "organvm-v-logos/public-process",
+      "target": "organvm-ii-poiesis/metasystem-master"
+    },
+    {
+      "source": "organvm-v-logos/public-process",
+      "target": "organvm-iii-ergon/public-record-data-scrapper"
+    },
+    {
+      "source": "organvm-v-logos/public-process",
+      "target": "organvm-iv-taxis/agentic-titan"
+    }
+  ],
+  "total_nodes": 82,
+  "total_edges": 28,
+  "generated": "2026-02-13T23:49:58.138927+00:00"
+}
