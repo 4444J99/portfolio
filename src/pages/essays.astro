@@ -3,12 +3,16 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
+import SketchContainer from '../components/sketches/SketchContainer.astro';
 import essayData from '../data/essays.json';
 ---
 
 <Layout title="Essays — Public Process" description="28 essays on building an eight-organ creative-institutional system in public.">
   <Header />
   <main>
+    <div class="sketch-accent">
+      <SketchContainer sketchId="token-stream" height="250px" mobileHeight="180px" ariaLabel="Animated token stream representing text and language flow" />
+    </div>
     <section class="section">
       <div class="container">
         <h1 class="page-title">Public Process Essays</h1>
@@ -92,5 +96,12 @@ import essayData from '../data/essays.json';
       flex-direction: column;
       gap: var(--space-xs);
     }
+  }
+  .sketch-accent {
+    margin-bottom: var(--space-xl);
+    padding: 0 var(--space-lg);
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
