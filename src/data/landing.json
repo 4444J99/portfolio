@@ -2,13 +2,13 @@
   "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
-    "total_repos": 89,
-    "production_repos": 82,
+    "total_repos": 91,
+    "active_repos": 82,
     "archived_repos": 7,
-    "dependency_edges": 33,
+    "dependency_edges": 31,
     "ci_workflows": 77,
     "operational_organs": 8,
-    "sprints_completed": 10
+    "sprints_completed": 13
   },
   "organs": [
     {
@@ -25,7 +25,7 @@
       "name": "Art",
       "greek": "Poiesis",
       "org": "organvm-ii-poiesis",
-      "repo_count": 26,
+      "repo_count": 28,
       "status": "OPERATIONAL",
       "description": "Generative art, interactive systems, performance frameworks, experiential work"
     },
@@ -128,13 +128,28 @@
     {
       "name": "CONVERGENCE",
       "date": "2026-02-13",
-      "summary": "82 PRODUCTION, 7 ARCHIVED, zero gaps"
+      "summary": "82 ACTIVE, 7 ARCHIVED, zero gaps"
     },
     {
       "name": "PRAXIS",
       "date": "2026-02-13",
       "summary": "External impact \u2014 portfolio, distribution, revenue"
+    },
+    {
+      "name": "VERITAS",
+      "date": "2026-02-13",
+      "summary": "Credibility hardening \u2014 PRODUCTION\u2192ACTIVE, revenue split, essay dates"
+    },
+    {
+      "name": "MANIFESTATIO",
+      "date": "2026-02-14",
+      "summary": "Re-audit (7x more code), 3 CI fixes, engagement baseline"
+    },
+    {
+      "name": "ILLUSTRATIO",
+      "date": "2026-02-14",
+      "summary": "Portfolio polish \u2014 CMYK design, p5.js animations, LLM consultation"
     }
   ],
-  "generated": "2026-02-13T23:49:57.851806+00:00"
+  "generated": "2026-02-14T20:12:00.706166+00:00"
 }
