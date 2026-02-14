@@ -1,17 +1,18 @@
 {
-  "generated": "2026-02-13T23:14:19.928235+00:00",
-  "sprint": "PRAXIS",
+  "generated": "2026-02-14T21:00:00.000000+00:00",
+  "sprint": "ILLUSTRATIO",
   "system": {
     "name": "ORGANVM",
     "launch_date": "2026-02-11",
-    "project_status": "PRAXIS SPRINT IN PROGRESS 2026-02-13. Portfolio site scaffolded (Astro), 6 PRAXIS scripts deployed, 5 application packages generated, system-metrics.json dashboard live, flagship audit complete (4 SUBSTANTIAL, 2 PARTIAL, 2 need vivification). All CONVERGENCE invariants maintained: 82 PRODUCTION, 7 ARCHIVED, 89 registry entries, 28 essays (~111K words), ~386K+ total words. Previous sprints: IGNITION, PROPULSION, ASCENSION, EXODUS, PERFECTION, AUTONOMY, GENESIS, ALCHEMIA, CONVERGENCE."
+    "project_status": "MANIFESTATIO SPRINT 2026-02-14. Re-audit reveals 7x more code than previously measured (3,586 code files, 736 test files across 76 active repos). Corrected: 38 repos with 10+ code files (was 6), 56 repos with test directories (was 4). 3 CI failures diagnosed and fixed. E2G action items closed (Q1, Q4 resolved; M2 superseded by corrected audit; M4 reclassified P3). 82 ACTIVE, 2 DESIGN_ONLY, 7 ARCHIVED, 91 registry entries, 29 essays, ~386K+ total words. Previous sprints: IGNITION, PROPULSION, ASCENSION, EXODUS, PERFECTION, AUTONOMY, GENESIS, ALCHEMIA, CONVERGENCE, PRAXIS, VERITAS."
   },
   "registry": {
-    "total_repos": 89,
+    "total_repos": 91,
     "total_organs": 8,
     "operational_organs": 8,
     "implementation_status": {
-      "PRODUCTION": 82,
+      "ACTIVE": 82,
+      "DESIGN_ONLY": 2,
       "ARCHIVED": 7
     },
     "tier_distribution": {
@@ -27,14 +28,14 @@
       "ARCHIVED": 7
     },
     "ci_coverage": 77,
-    "dependency_edges": 33,
+    "dependency_edges": 31,
     "organs": {
       "ORGAN-I": {
         "name": "Theory",
         "status": "OPERATIONAL",
         "total_repos": 19,
         "implementation_status": {
-          "PRODUCTION": 19
+          "ACTIVE": 19
         },
         "tier_distribution": {
           "flagship": 1,
@@ -49,7 +50,7 @@
         "total_repos": 26,
         "implementation_status": {
           "ARCHIVED": 4,
-          "PRODUCTION": 22
+          "ACTIVE": 22
         },
         "tier_distribution": {
           "archive": 4,
@@ -64,8 +65,8 @@
         "status": "OPERATIONAL",
         "total_repos": 24,
         "implementation_status": {
-          "PRODUCTION": 22,
-          "ARCHIVED": 2
+          "ARCHIVED": 2,
+          "ACTIVE": 22
         },
         "tier_distribution": {
           "standard": 20,
@@ -80,7 +81,7 @@
         "status": "OPERATIONAL",
         "total_repos": 7,
         "implementation_status": {
-          "PRODUCTION": 7
+          "ACTIVE": 7
         },
         "tier_distribution": {
           "flagship": 2,
@@ -94,7 +95,7 @@
         "status": "OPERATIONAL",
         "total_repos": 2,
         "implementation_status": {
-          "PRODUCTION": 2
+          "ACTIVE": 2
         },
         "tier_distribution": {
           "flagship": 1,
@@ -107,7 +108,7 @@
         "status": "OPERATIONAL",
         "total_repos": 4,
         "implementation_status": {
-          "PRODUCTION": 4
+          "ACTIVE": 4
         },
         "tier_distribution": {
           "standard": 3,
@@ -121,7 +122,7 @@
         "total_repos": 4,
         "implementation_status": {
           "ARCHIVED": 1,
-          "PRODUCTION": 3
+          "ACTIVE": 3
         },
         "tier_distribution": {
           "archive": 1,
@@ -135,7 +136,7 @@
         "status": "OPERATIONAL",
         "total_repos": 3,
         "implementation_status": {
-          "PRODUCTION": 3
+          "ACTIVE": 3
         },
         "tier_distribution": {
           "infrastructure": 1,
@@ -151,7 +152,7 @@
     "note": "CI status check skipped (--skip-ci)"
   },
   "essays": {
-    "total": 28,
+    "total": 29,
     "timeline": [
       {
         "date": "2026-02-10",
@@ -230,49 +231,54 @@
         "slug": "why-ai-function-calling-needs-ontological-grounding"
       },
       {
-        "date": "2026-02-14",
+        "date": "2026-02-13",
         "slug": "the-promotion-pipeline"
       },
       {
-        "date": "2026-02-15",
+        "date": "2026-02-13",
         "slug": "deploying-the-portfolio"
       },
       {
-        "date": "2026-02-16",
+        "date": "2026-02-13",
         "slug": "bootstrap-to-scale"
       },
       {
-        "date": "2026-02-17",
+        "date": "2026-02-13",
         "slug": "aesthetic-nervous-system"
       },
       {
-        "date": "2026-02-18",
+        "date": "2026-02-13",
         "slug": "seed-contracts"
       },
       {
-        "date": "2026-02-19",
+        "date": "2026-02-13",
         "slug": "provenance-as-practice"
       },
       {
-        "date": "2026-02-20",
+        "date": "2026-02-13",
         "slug": "archive-paradox"
       },
       {
-        "date": "2026-02-21",
+        "date": "2026-02-13",
         "slug": "dependency-graph"
       },
       {
-        "date": "2026-02-22",
+        "date": "2026-02-13",
         "slug": "the-convergence"
+      },
+      {
+        "date": "2026-02-13",
+        "slug": "how-this-was-built"
       }
     ]
   },
   "flagship_vivification": {
-    "audit_date": "2026-02-13T22:00:24.364367+00:00",
+    "audit_date": "2026-02-14T18:39:00.000000+00:00",
+    "note": "MANIFESTATIO Sprint corrected audit. Previous PRAXIS audit undercounted due to: (1) agentic-titan misclassified as TypeScript (actually Python), (2) code files under docs/ directories counted as docs, (3) .ci/ scripts excluded by dotfile filter.",
     "classifications": {
-      "SUBSTANTIAL": 4,
+      "SUBSTANTIAL": 5,
       "PARTIAL": 2,
-      "MINIMAL": 2,
+      "MINIMAL": 1,
       "SKELETON": 0,
       "ERROR": 0
     },
@@ -282,21 +288,21 @@
         "repo": "recursive-engine--generative-entity",
         "org": "organvm-i-theoria",
         "classification": "SUBSTANTIAL",
-        "code_files": 59,
+        "code_files": 60,
         "test_files": 34
       },
       {
         "repo": "auto-revision-epistemic-engine",
         "org": "organvm-i-theoria",
         "classification": "PARTIAL",
-        "code_files": 20,
+        "code_files": 23,
         "test_files": 3
       },
       {
         "repo": "metasystem-master",
         "org": "organvm-ii-poiesis",
         "classification": "SUBSTANTIAL",
-        "code_files": 28,
+        "code_files": 62,
         "test_files": 12
       },
       {
@@ -323,9 +329,9 @@
       {
         "repo": "agentic-titan",
         "org": "organvm-iv-taxis",
-        "classification": "MINIMAL",
-        "code_files": 2,
-        "test_files": 0
+        "classification": "SUBSTANTIAL",
+        "code_files": 219,
+        "test_files": 93
       },
       {
         "repo": "public-process",
@@ -335,6 +341,25 @@
         "test_files": 0
       }
     ]
+  },
+  "code_substance": {
+    "audit_date": "2026-02-14T18:39:58.092848+00:00",
+    "sprint": "MANIFESTATIO",
+    "total_repos_audited": 76,
+    "classifications": {
+      "SUBSTANTIAL": 19,
+      "PARTIAL": 28,
+      "MINIMAL": 25,
+      "SKELETON": 4
+    },
+    "repos_with_10_plus_code_files": 38,
+    "repos_with_test_directories": 56,
+    "total_code_files": 3586,
+    "total_test_files": 736,
+    "ci_passing": 58,
+    "ci_failing": 13,
+    "ci_none": 0,
+    "correction_note": "Previous PRAXIS audit reported 6 repos with code and 4 with tests. MANIFESTATIO re-audit with fixed classification logic found 38 repos with 10+ code files and 56 with test directories. The 'code substance gap' identified in E2G review was a measurement error."
   },
   "sprint_history": [
     {
@@ -389,13 +414,31 @@
       "name": "CONVERGENCE",
       "date": "2026-02-13",
       "focus": "Coherence",
-      "deliverables": "82 PRODUCTION, zero gaps"
+      "deliverables": "82 ACTIVE, zero gaps"
     },
     {
       "name": "PRAXIS",
       "date": "2026-02-13",
       "focus": "Impact",
       "deliverables": "Portfolio, distribution, revenue"
+    },
+    {
+      "name": "VERITAS",
+      "date": "2026-02-13",
+      "focus": "Credibility",
+      "deliverables": "PRODUCTION→ACTIVE, revenue split, essay dates, honesty essay"
+    },
+    {
+      "name": "MANIFESTATIO",
+      "date": "2026-02-14",
+      "focus": "Outward-facing",
+      "deliverables": "Re-audit (3,586 code files, 38 repos with 10+ code), 3 CI fixes, E2G items closed, workflow validation, application prep, engagement baseline"
+    },
+    {
+      "name": "ILLUSTRATIO",
+      "date": "2026-02-14",
+      "focus": "Portfolio polish",
+      "deliverables": "Billing fix (14 cron workflows disabled), portfolio data regeneration, CMYK design system, p5.js on every page, LLM consultation page"
     }
   ],
   "praxis_targets": {
@@ -405,7 +448,8 @@
     },
     "flagship_repos_with_code": {
       "target": "30+",
-      "current": "6"
+      "current": "38 (MANIFESTATIO corrected — was 6)",
+      "met": true
     },
     "distribution_channels": {
       "target": "4+",
@@ -413,7 +457,9 @@
     },
     "applications_submitted": {
       "target": "3-5",
-      "current": "0"
+      "current": "0",
+      "next_deadline": "Knight Foundation — 2026-06-20",
+      "note": "Processing Foundation cycle closed. Next target: Knight Foundation Arts + Technology (deadline June 20, 2026)"
     },
     "community_events": {
       "target": "Salon launched",
@@ -425,7 +471,69 @@
     },
     "real_test_suites": {
       "target": "30+",
-      "current": "4"
+      "current": "56 (MANIFESTATIO corrected — was 4)",
+      "met": true
+    }
+  },
+  "engagement_baseline": {
+    "snapshot_date": "2026-02-14",
+    "sprint": "MANIFESTATIO",
+    "note": "First engagement measurement. Clone numbers likely inflated by system's own CI workflows (11 autonomous workflows clone repos for validation, audit, graph-building). Page views are the more honest external engagement signal.",
+    "top_repos": {
+      "public-process": {
+        "stars": 0,
+        "forks": 0,
+        "views_14d": 1,
+        "unique_visitors_14d": 1,
+        "clones_14d": 608,
+        "unique_cloners_14d": 243
+      },
+      "recursive-engine--generative-entity": {
+        "stars": 1,
+        "forks": 0,
+        "views_14d": 6,
+        "unique_visitors_14d": 6,
+        "clones_14d": 902,
+        "unique_cloners_14d": 230
+      },
+      "orchestration-start-here": {
+        "stars": 0,
+        "forks": 0,
+        "views_14d": 0,
+        "unique_visitors_14d": 0,
+        "clones_14d": 365,
+        "unique_cloners_14d": 163
+      },
+      "metasystem-master": {
+        "stars": 0,
+        "forks": 0,
+        "views_14d": 6,
+        "unique_visitors_14d": 2,
+        "clones_14d": 1516,
+        "unique_cloners_14d": 306
+      },
+      "agentic-titan": {
+        "stars": 1,
+        "forks": 0,
+        "views_14d": 11,
+        "unique_visitors_14d": 5,
+        "clones_14d": 873,
+        "unique_cloners_14d": 149
+      }
+    },
+    "totals": {
+      "total_stars": 2,
+      "total_forks": 0,
+      "total_views_14d": 24,
+      "total_unique_visitors_14d": 14,
+      "total_clones_14d": 4264,
+      "total_unique_cloners_14d": 1091
+    },
+    "discussions_enabled": {
+      "salon-archive": true
+    },
+    "analytics": {
+      "public_process_jekyll": "GoatCounter config in _config.yml but commented out. Account organvm.goatcounter.com returns 400 — needs signup at goatcounter.com/signup first. Then uncomment goatcounter_url in _config.yml."
     }
   }
 }
