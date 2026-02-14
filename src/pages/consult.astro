@@ -1,0 +1,407 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SketchContainer from '../components/sketches/SketchContainer.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<Layout title="Consult — How Can We Work Together?" description="Describe your challenge and discover which ORGANVM capabilities apply to your needs.">
+  <Header />
+  <main>
+    <div class="sketch-accent">
+      <SketchContainer sketchId="organ-system" height="300px" mobileHeight="200px" ariaLabel="Interactive organ system visualization highlighting relevant capabilities" />
+    </div>
+
+    <section class="consult-section">
+      <div class="container container--narrow">
+        <h1 class="consult-title">How Can We Work Together?</h1>
+        <p class="consult-intro">
+          Describe your business challenge, creative project, or technical need below.
+          An AI analysis will map your requirements to capabilities across the eight-organ system.
+        </p>
+
+        <form id="consult-form" class="consult-form">
+          <div class="form-group">
+            <label for="industry" class="form-label">Industry / Domain <span class="optional">(optional)</span></label>
+            <select id="industry" class="form-select">
+              <option value="">— Select —</option>
+              <option value="education">Education & EdTech</option>
+              <option value="arts">Arts & Culture</option>
+              <option value="saas">SaaS & B2B Software</option>
+              <option value="media">Media & Publishing</option>
+              <option value="nonprofit">Nonprofit & Social Impact</option>
+              <option value="research">Research & Academia</option>
+              <option value="gaming">Gaming & Interactive</option>
+              <option value="finance">Finance & Data</option>
+              <option value="healthcare">Healthcare & Wellness</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="challenge" class="form-label">Your Challenge</label>
+            <textarea
+              id="challenge"
+              class="form-textarea"
+              rows="6"
+              placeholder="e.g., We need a multi-agent orchestration system for our content pipeline, or We're looking for generative art installations for our gallery space, or We want to build a gamified learning platform..."
+              required
+            ></textarea>
+            <p class="form-hint">Be as specific as you'd like — the more detail, the better the analysis.</p>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn-submit">
+            <span class="btn-text">Generate Analysis</span>
+            <span class="btn-loading" aria-hidden="true">Analyzing...</span>
+          </button>
+        </form>
+
+        <div id="response-area" class="response-area" hidden>
+          <h2 class="response-heading">Capability Analysis</h2>
+          <div id="response-content" class="response-content prose"></div>
+          <button id="reset-btn" class="btn-reset">Start Over</button>
+        </div>
+
+        <div id="error-area" class="error-area" hidden>
+          <p class="error-text">Something went wrong. Please try again or <a href="mailto:antoniopadavano99@gmail.com">contact directly</a>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline src="https://js.puter.com/v2/"></script>
+
+<script>
+  const SYSTEM_PROMPT = `You are the ORGANVM Capability Advisor. You help prospective collaborators, clients, and partners understand how the eight-organ creative-institutional system can address their specific needs.
+
+THE EIGHT-ORGAN SYSTEM:
+
+ORGAN I — THEORIA (Theory & Epistemology)
+Capabilities: Recursive symbolic engines, ontological frameworks, epistemological infrastructure, computational narrative analysis, linguistic atomization, knowledge graph construction.
+Flagship: RE:GE — a symbolic operating system for myth, identity, and recursive structures (1,254 tests, 85% coverage, pure Python).
+Key repos: auto-revision-epistemic-engine, call-function--ontological, organon-noumenon, system-governance-framework.
+
+ORGAN II — POIESIS (Art & Creative Production)
+Capabilities: Real-time audience-participatory performance systems, generative music, interactive installations, AI-human collaborative art, modular synthesis, creative portfolio sites.
+Flagship: metasystem-master (Omni-Dromenon Engine) — canonical monorepo for real-time performance with 12 consolidated modules.
+Key repos: universal-waveform-explorer (3D web synth), showcase-portfolio, case-studies-methodology.
+
+ORGAN III — ERGON (Commerce & Products)
+Capabilities: SaaS platforms, B2B data aggregation, gamified learning systems, social matching platforms, subscription services, inverted-interview hiring systems.
+Flagship: public-record-data-scrapper — 50-state UCC records aggregation, live Vercel deployment, tiered B2B subscriptions, 2,055 tests.
+Key repos: classroom-rpg-aetheria, gamified-coach-interface, fetch-familiar-friends, life-my--midst--in.
+
+ORGAN IV — TAXIS (Orchestration & Governance)
+Capabilities: Multi-agent AI orchestration, registry-driven development, dependency graph enforcement, promotion state machines, automated audits, cross-org workflow coordination.
+Flagship: agentic-titan — polymorphic agent swarm with 9 topologies, 22 archetypes, 1,095+ tests.
+Key repos: orchestration-start-here (central nervous system), registry-v2.json (single source of truth for 91 repos).
+
+ORGAN V — LOGOS (Public Process & Narrative)
+Capabilities: Long-form technical writing, sprint narratives, methodology documentation, RSS-syndicated essays, building-in-public practice.
+Output: 29 essays (~111K words) documenting architectural decisions, honest post-mortems, and creative methodology.
+
+ORGAN VI — KOINONIA (Community)
+Capabilities: Facilitated salons, reading group curricula, adaptive personal syllabi, community-driven sense-making sessions.
+
+ORGAN VII — KERYGMA (Marketing & Distribution)
+Capabilities: POSSE distribution strategy, audience segmentation, channel-specific content adaptation, newsletter integration.
+
+META-ORGANVM (Infrastructure)
+Capabilities: Cross-org governance, CI/CD workflows (82+), community health files, system-wide documentation (~386K words), Astro portfolio site.
+
+RESPONSE FORMAT:
+1. Start with a brief acknowledgment of the user's challenge.
+2. For each relevant organ (typically 2-4), create a section with the organ name as heading.
+3. Under each organ, explain specifically how its capabilities address the stated challenge.
+4. End with a "Recommended Next Steps" section suggesting concrete actions.
+5. Use markdown formatting. Be specific, not generic — reference actual repos and capabilities.
+6. Keep the total response concise (300-500 words).`;
+
+  const form = document.getElementById('consult-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const responseArea = document.getElementById('response-area');
+  const responseContent = document.getElementById('response-content');
+  const errorArea = document.getElementById('error-area');
+  const resetBtn = document.getElementById('reset-btn');
+  const challengeInput = document.getElementById('challenge');
+  const industrySelect = document.getElementById('industry');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const challenge = challengeInput.value.trim();
+    if (!challenge) return;
+
+    const industry = industrySelect.value;
+    const userMessage = industry
+      ? `Industry: ${industry}\n\nChallenge: ${challenge}`
+      : challenge;
+
+    // UI state: loading
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+    responseArea.hidden = true;
+    errorArea.hidden = true;
+
+    try {
+      const response = await puter.ai.chat(userMessage, {
+        system: SYSTEM_PROMPT,
+        model: 'claude-3-5-sonnet'
+      });
+
+      const text = typeof response === 'string' ? response : response?.message?.content || response?.text || JSON.stringify(response);
+
+      // Simple markdown-to-HTML conversion
+      let html = text
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^## (.+)$/gm, '<h2 class="organ-heading">$1</h2>')
+        .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/\`(.+?)\`/g, '<code>$1</code>')
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        .replace(/(<li>.*<\/li>\n?)+/g, (match) => '<ul>' + match + '</ul>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>');
+      html = '<p>' + html + '</p>';
+      html = html.replace(/<p><h/g, '<h').replace(/<\/h([1-3])><\/p>/g, '</h$1>');
+      html = html.replace(/<p><ul>/g, '<ul>').replace(/<\/ul><\/p>/g, '</ul>');
+
+      responseContent.innerHTML = html;
+      responseArea.hidden = false;
+      responseArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (err) {
+      console.error('Puter AI error:', err);
+      errorArea.hidden = false;
+    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+    }
+  });
+
+  resetBtn.addEventListener('click', () => {
+    responseArea.hidden = true;
+    errorArea.hidden = true;
+    challengeInput.value = '';
+    industrySelect.value = '';
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
+
+<style>
+  .sketch-accent {
+    margin-bottom: var(--space-xl);
+    padding: 0 var(--space-lg);
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .consult-section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .consult-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: var(--space-md);
+    color: var(--accent-cyan, var(--accent));
+  }
+
+  .consult-intro {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+    max-width: 600px;
+  }
+
+  .consult-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .form-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+  }
+
+  .optional {
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .form-select,
+  .form-textarea {
+    background: var(--bg-secondary, #16161a);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+
+  .form-select:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: var(--accent-cyan, var(--accent));
+    box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.15);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+
+  .form-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .btn-submit {
+    align-self: flex-start;
+    background: var(--accent-yellow, #FFD600);
+    color: #0a0a0b;
+    border: none;
+    border-radius: 6px;
+    padding: var(--space-sm) var(--space-xl);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .btn-submit:hover:not(:disabled) {
+    background: var(--accent-cyan, var(--accent));
+    color: #0a0a0b;
+    transform: translateY(-1px);
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.7;
+    cursor: wait;
+  }
+
+  .btn-submit .btn-loading {
+    display: none;
+  }
+
+  .btn-submit.loading .btn-text {
+    display: none;
+  }
+
+  .btn-submit.loading .btn-loading {
+    display: inline;
+  }
+
+  .response-area {
+    margin-top: var(--space-2xl);
+    padding: var(--space-xl);
+    background: var(--bg-secondary, #16161a);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .response-heading {
+    font-size: 1.3rem;
+    color: var(--accent-cyan, var(--accent));
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .response-content :global(h2.organ-heading) {
+    color: var(--accent-magenta, #E91E63);
+    font-size: 1.1rem;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .response-content :global(h3) {
+    color: var(--accent-yellow, #FFD600);
+    font-size: 1rem;
+    margin-top: var(--space-md);
+  }
+
+  .response-content :global(code) {
+    background: rgba(0, 188, 212, 0.1);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--accent-cyan, var(--accent));
+  }
+
+  .response-content :global(ul) {
+    padding-left: var(--space-lg);
+    margin: var(--space-sm) 0;
+  }
+
+  .response-content :global(li) {
+    margin-bottom: var(--space-xs);
+    line-height: 1.6;
+  }
+
+  .response-content :global(strong) {
+    color: var(--text-primary);
+  }
+
+  .btn-reset {
+    margin-top: var(--space-lg);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: var(--space-xs) var(--space-lg);
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-reset:hover {
+    border-color: var(--accent-cyan, var(--accent));
+    color: var(--accent-cyan, var(--accent));
+  }
+
+  .error-area {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    background: rgba(233, 30, 99, 0.1);
+    border: 1px solid var(--accent-magenta, #E91E63);
+    border-radius: 6px;
+  }
+
+  .error-text {
+    color: var(--accent-magenta, #E91E63);
+    margin: 0;
+  }
+
+  .error-text a {
+    color: var(--accent-cyan, var(--accent));
+  }
+
+  @media (max-width: 768px) {
+    .btn-submit {
+      align-self: stretch;
+    }
+  }
+</style>
