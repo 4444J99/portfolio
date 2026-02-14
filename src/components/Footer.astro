@@ -56,4 +56,18 @@ const year = new Date().getFullYear();
     font-size: 0.8rem;
     color: var(--text-muted);
   }
+
+  @media (max-width: 768px) {
+    .footer__inner {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+      text-align: center;
+    }
+
+    .footer__links {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
 </style>
