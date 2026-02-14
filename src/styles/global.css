@@ -25,15 +25,18 @@
   --text-secondary: #a09e9b;
   --text-muted: #8a8884;
 
-  --accent: #c9a84c;
-  --accent-hover: #dab85c;
-  --accent-muted: rgba(201, 168, 76, 0.15);
+  --accent: #00BCD4;
+  --accent-hover: #E91E63;
+  --accent-muted: rgba(0, 188, 212, 0.15);
+  --accent-cyan: #00BCD4;
+  --accent-magenta: #E91E63;
+  --accent-yellow: #FFD600;
 
   --code-bg: #1a1a1f;
 
   /* Typography */
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
 
   /* Spacing */
