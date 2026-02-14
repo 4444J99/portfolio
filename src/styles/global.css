@@ -260,6 +260,11 @@ img {
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
+  :root {
+    --space-3xl: 2.5rem;
+    --space-4xl: 3.5rem;
+  }
+
   .project-grid {
     grid-template-columns: 1fr;
   }
