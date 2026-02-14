@@ -10,7 +10,7 @@
       "description": "RE:GE \u2014 A symbolic operating system for myth, identity, ritual, and recursive systems. 21 organ handlers, ritual syntax DSL, workflow orchestration, external bridges (Obsidian/Git/Max-MSP).",
       "portfolio_relevance": "CRITICAL - Definitive ORGAN-I expression; 1,254 tests, 85% coverage, pure Python",
       "tier": "flagship",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-python.yml",
       "dependencies": [],
       "promotion_status": "PUBLIC_PROCESS"
@@ -24,7 +24,7 @@
       "description": "Self-governing orchestration framework with 8 phases, 4 human review gates, BLAKE3 audit chain, and ethical axiom enforcement",
       "portfolio_relevance": "CRITICAL - Evidence of autonomous system design",
       "tier": "standard",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-python.yml",
       "dependencies": [],
       "promotion_status": "CANDIDATE"
@@ -38,7 +38,7 @@
       "description": "Ontological function-calling framework \u2014 12-concept philosophical architecture for grounded AI tool use via Heideggerian Dasein, Aristotelian four causes, and Peircean semiotics",
       "portfolio_relevance": "CRITICAL - AI/ontology intersection",
       "tier": "standard",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-python.yml",
       "dependencies": [
         "organvm-i-theoria/organon-noumenon--ontogenetic-morphe"
@@ -54,7 +54,7 @@
       "description": "Multi-organ governance rules and promotion criteria",
       "portfolio_relevance": "CRITICAL - Orchestration foundation",
       "tier": "standard",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-python.yml",
       "dependencies": [],
       "promotion_status": "LOCAL"
@@ -68,7 +68,7 @@
       "description": "Omni-Dromenon Engine \u2014 canonical monorepo for ORGAN-II. Real-time performance system consolidating 12 repos: core-engine, performance-sdk, client-sdk, audio-synthesis-bridge, orchestrate CLI, 4 examples, extensive docs.",
       "portfolio_relevance": "CRITICAL - Definitive ORGAN-II expression; canonical monorepo, performance system architecture",
       "tier": "flagship",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-mixed.yml",
       "dependencies": [
         "organvm-i-theoria/recursive-engine--generative-entity"
@@ -84,7 +84,7 @@
       "description": "Living portfolio aggregating all ORGAN-II generative art, interactive installations, and AI-human collaborative works",
       "portfolio_relevance": "CRITICAL - Aggregates art work for visibility",
       "tier": "standard",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-python.yml",
       "dependencies": [],
       "promotion_status": "LOCAL"
@@ -98,7 +98,7 @@
       "description": "Structured case studies documenting creative methodology \u2014 process documentation, comparative analysis, and grant-ready excerpts",
       "portfolio_relevance": "CRITICAL - Evidence of systemic artistic practice",
       "tier": "standard",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-python.yml",
       "dependencies": [],
       "promotion_status": "LOCAL"
@@ -112,7 +112,7 @@
       "description": "Personal artistic portfolio site (etceter4.com) \u2014 living temple of art, sound, and words",
       "portfolio_relevance": "HIGH - Flagship artistic portfolio",
       "tier": "flagship",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-typescript.yml",
       "dependencies": [],
       "promotion_status": "PUBLIC_PROCESS"
@@ -126,7 +126,7 @@
       "description": "Aether Canvas \u2014 web-based 3D modular synthesizer reframing sound design as exploration of universal vibrations via WebGL and Web Audio API",
       "portfolio_relevance": "CRITICAL - Demonstrates generative art and audio synthesis",
       "tier": "standard",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-typescript.yml",
       "dependencies": [],
       "promotion_status": "LOCAL"
@@ -140,7 +140,7 @@
       "description": "Educational RPG system for classroom engagement",
       "portfolio_relevance": "CRITICAL - Revenue proof point",
       "tier": "standard",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-typescript.yml",
       "dependencies": [
         "organvm-iii-ergon/gamified-coach-interface"
@@ -156,7 +156,7 @@
       "description": "Gamified coaching system with progress tracking",
       "portfolio_relevance": "CRITICAL - Revenue proof point",
       "tier": "standard",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-typescript.yml",
       "dependencies": [],
       "promotion_status": "LOCAL"
@@ -170,7 +170,7 @@
       "description": "Social matching and community platform",
       "portfolio_relevance": "CRITICAL - Consumer product",
       "tier": "standard",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-typescript.yml",
       "dependencies": [],
       "promotion_status": "LOCAL"
@@ -184,7 +184,7 @@
       "description": "50-state UCC public records aggregation platform. Live Vercel deployment, tiered B2B subscriptions, Terraform AWS infrastructure, 60+ collection agents, 2,055 tests.",
       "portfolio_relevance": "CRITICAL - Strongest revenue proof in ORGAN-III; live deployment with paying subscribers",
       "tier": "flagship",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-typescript.yml",
       "dependencies": [],
       "promotion_status": "PUBLIC_PROCESS"
@@ -198,7 +198,7 @@
       "description": "Inverted Interview CV platform \u2014 employer-as-interviewee identity operating system with 16 masks and W3C Verifiable Credentials",
       "portfolio_relevance": "CRITICAL - Novel hiring paradigm product",
       "tier": "standard",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-typescript.yml",
       "dependencies": [],
       "promotion_status": "LOCAL"
@@ -212,7 +212,7 @@
       "description": "Central orchestration hub: registry, governance rules, 5 workflows, 3 Python scripts. The central nervous system of the eight-organ system.",
       "portfolio_relevance": "CRITICAL - Core system documentation for all funding applications",
       "tier": "flagship",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-python.yml",
       "dependencies": [],
       "promotion_status": "PUBLIC_PROCESS"
@@ -226,7 +226,7 @@
       "description": "Polymorphic Agent Swarm Architecture: model-agnostic, self-organizing multi-agent system with 6 topologies, 1,095+ tests (adversarial, chaos, e2e, integration, performance, MCP, Ray), 18 completed phases.",
       "portfolio_relevance": "CRITICAL - Definitive ORGAN-IV expression; demonstrates production-grade multi-agent orchestration",
       "tier": "flagship",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-python.yml",
       "dependencies": [
         "organvm-i-theoria/recursive-engine--generative-entity"
@@ -242,7 +242,7 @@
       "description": "Essays, case studies, methodology documentation, RSS feed, newsletter integration",
       "portfolio_relevance": "CRITICAL - Primary narrative layer describing all 8 organs + meta-system",
       "tier": "flagship",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-minimal.yml",
       "dependencies": [
         "organvm-i-theoria/recursive-engine--generative-entity",
@@ -261,7 +261,7 @@
       "description": "Organization profile and community health files for meta-organvm",
       "portfolio_relevance": "CRITICAL - System-wide identity and entry point",
       "tier": "infrastructure",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": null,
       "dependencies": [],
       "promotion_status": "LOCAL"
@@ -275,11 +275,11 @@
       "description": "The authoritative planning and governance corpus for the eight-organ creative-institutional system. 81 repos, ~339K words, 8 organizations, 21 essays.",
       "portfolio_relevance": "CRITICAL - The meta-system planning record; demonstrates architectural reasoning, AI-conductor methodology, and systemic execution",
       "tier": "flagship",
-      "implementation_status": "PRODUCTION",
+      "implementation_status": "ACTIVE",
       "ci_workflow": "ci-python.yml",
       "dependencies": [],
       "promotion_status": "PUBLIC_PROCESS"
     }
   ],
-  "generated": "2026-02-13T23:49:57.852202+00:00"
+  "generated": "2026-02-14T20:12:00.706682+00:00"
 }
