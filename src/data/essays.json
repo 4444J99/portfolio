@@ -1,77 +1,61 @@
 {
-  "total": 28,
+  "total": 29,
   "essays": [
     {
-      "path": "_posts/2026-02-22-the-convergence.md",
-      "filename": "2026-02-22-the-convergence.md",
-      "date": "2026-02-22",
-      "slug": "the-convergence",
-      "title": "The Convergence",
-      "url": "https://organvm-v-logos.github.io/public-process/2026/02/22/the-convergence/"
-    },
-    {
-      "path": "_posts/2026-02-21-dependency-graph.md",
-      "filename": "2026-02-21-dependency-graph.md",
-      "date": "2026-02-21",
-      "slug": "dependency-graph",
-      "title": "Dependency Graph",
-      "url": "https://organvm-v-logos.github.io/public-process/2026/02/21/dependency-graph/"
-    },
-    {
-      "path": "_posts/2026-02-20-archive-paradox.md",
-      "filename": "2026-02-20-archive-paradox.md",
-      "date": "2026-02-20",
-      "slug": "archive-paradox",
-      "title": "Archive Paradox",
-      "url": "https://organvm-v-logos.github.io/public-process/2026/02/20/archive-paradox/"
-    },
-    {
-      "path": "_posts/2026-02-19-provenance-as-practice.md",
-      "filename": "2026-02-19-provenance-as-practice.md",
-      "date": "2026-02-19",
-      "slug": "provenance-as-practice",
-      "title": "Provenance As Practice",
-      "url": "https://organvm-v-logos.github.io/public-process/2026/02/19/provenance-as-practice/"
-    },
-    {
-      "path": "_posts/2026-02-18-seed-contracts.md",
-      "filename": "2026-02-18-seed-contracts.md",
-      "date": "2026-02-18",
-      "slug": "seed-contracts",
-      "title": "Seed Contracts",
-      "url": "https://organvm-v-logos.github.io/public-process/2026/02/18/seed-contracts/"
-    },
-    {
-      "path": "_posts/2026-02-17-aesthetic-nervous-system.md",
-      "filename": "2026-02-17-aesthetic-nervous-system.md",
-      "date": "2026-02-17",
+      "path": "_posts/2026-02-13-aesthetic-nervous-system.md",
+      "filename": "2026-02-13-aesthetic-nervous-system.md",
+      "date": "2026-02-13",
       "slug": "aesthetic-nervous-system",
       "title": "Aesthetic Nervous System",
-      "url": "https://organvm-v-logos.github.io/public-process/2026/02/17/aesthetic-nervous-system/"
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/aesthetic-nervous-system/"
     },
     {
-      "path": "_posts/2026-02-16-bootstrap-to-scale.md",
-      "filename": "2026-02-16-bootstrap-to-scale.md",
-      "date": "2026-02-16",
+      "path": "_posts/2026-02-13-archive-paradox.md",
+      "filename": "2026-02-13-archive-paradox.md",
+      "date": "2026-02-13",
+      "slug": "archive-paradox",
+      "title": "Archive Paradox",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/archive-paradox/"
+    },
+    {
+      "path": "_posts/2026-02-13-bootstrap-to-scale.md",
+      "filename": "2026-02-13-bootstrap-to-scale.md",
+      "date": "2026-02-13",
       "slug": "bootstrap-to-scale",
       "title": "Bootstrap To Scale",
-      "url": "https://organvm-v-logos.github.io/public-process/2026/02/16/bootstrap-to-scale/"
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/bootstrap-to-scale/"
     },
     {
-      "path": "_posts/2026-02-15-deploying-the-portfolio.md",
-      "filename": "2026-02-15-deploying-the-portfolio.md",
-      "date": "2026-02-15",
+      "path": "_posts/2026-02-13-dependency-graph.md",
+      "filename": "2026-02-13-dependency-graph.md",
+      "date": "2026-02-13",
+      "slug": "dependency-graph",
+      "title": "Dependency Graph",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/dependency-graph/"
+    },
+    {
+      "path": "_posts/2026-02-13-deploying-the-portfolio.md",
+      "filename": "2026-02-13-deploying-the-portfolio.md",
+      "date": "2026-02-13",
       "slug": "deploying-the-portfolio",
       "title": "Deploying The Portfolio",
-      "url": "https://organvm-v-logos.github.io/public-process/2026/02/15/deploying-the-portfolio/"
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/deploying-the-portfolio/"
     },
     {
-      "path": "_posts/2026-02-14-the-promotion-pipeline.md",
-      "filename": "2026-02-14-the-promotion-pipeline.md",
-      "date": "2026-02-14",
-      "slug": "the-promotion-pipeline",
-      "title": "The Promotion Pipeline",
-      "url": "https://organvm-v-logos.github.io/public-process/2026/02/14/the-promotion-pipeline/"
+      "path": "_posts/2026-02-13-how-this-was-built.md",
+      "filename": "2026-02-13-how-this-was-built.md",
+      "date": "2026-02-13",
+      "slug": "how-this-was-built",
+      "title": "How This Was Built",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/how-this-was-built/"
+    },
+    {
+      "path": "_posts/2026-02-13-provenance-as-practice.md",
+      "filename": "2026-02-13-provenance-as-practice.md",
+      "date": "2026-02-13",
+      "slug": "provenance-as-practice",
+      "title": "Provenance As Practice",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/provenance-as-practice/"
     },
     {
       "path": "_posts/2026-02-13-registry-driven-development.md",
@@ -80,6 +64,30 @@
       "slug": "registry-driven-development",
       "title": "Registry Driven Development",
       "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/registry-driven-development/"
+    },
+    {
+      "path": "_posts/2026-02-13-seed-contracts.md",
+      "filename": "2026-02-13-seed-contracts.md",
+      "date": "2026-02-13",
+      "slug": "seed-contracts",
+      "title": "Seed Contracts",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/seed-contracts/"
+    },
+    {
+      "path": "_posts/2026-02-13-the-convergence.md",
+      "filename": "2026-02-13-the-convergence.md",
+      "date": "2026-02-13",
+      "slug": "the-convergence",
+      "title": "The Convergence",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/the-convergence/"
+    },
+    {
+      "path": "_posts/2026-02-13-the-promotion-pipeline.md",
+      "filename": "2026-02-13-the-promotion-pipeline.md",
+      "date": "2026-02-13",
+      "slug": "the-promotion-pipeline",
+      "title": "The Promotion Pipeline",
+      "url": "https://organvm-v-logos.github.io/public-process/2026/02/13/the-promotion-pipeline/"
     },
     {
       "path": "_posts/2026-02-13-why-ai-function-calling-needs-ontological-grounding.md",
@@ -228,5 +236,5 @@
   ],
   "feed_url": "https://organvm-v-logos.github.io/public-process/feed.xml",
   "site_url": "https://organvm-v-logos.github.io/public-process/",
-  "generated": "2026-02-13T23:49:58.137946+00:00"
+  "generated": "2026-02-14T20:12:00.982586+00:00"
 }
