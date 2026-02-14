@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SketchContainer from '../components/sketches/SketchContainer.astro';
 
 const communityRepos = [
   {
@@ -31,6 +32,9 @@ const communityRepos = [
 <Layout title="Community — ORGAN-VI Koinonia" description="Community infrastructure: salons, reading groups, and adaptive learning — participate via GitHub Discussions.">
   <Header />
   <main>
+    <div class="sketch-accent">
+      <SketchContainer sketchId="counterpoint" height="300px" mobileHeight="200px" ariaLabel="Animated counterpoint visualization representing dialogue and harmony" />
+    </div>
     <section class="section">
       <div class="container">
         <h1 class="page-title">Community Infrastructure</h1>
@@ -201,5 +205,12 @@ const communityRepos = [
     .format-grid {
       grid-template-columns: 1fr;
     }
+  }
+  .sketch-accent {
+    margin-bottom: var(--space-xl);
+    padding: 0 var(--space-lg);
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
