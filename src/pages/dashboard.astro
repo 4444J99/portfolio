@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SketchContainer from '../components/sketches/SketchContainer.astro';
 
 import metrics from '../data/system-metrics.json';
 import landing from '../data/landing.json';
@@ -21,6 +22,9 @@ const organColors: Record<string, string> = {
 <Layout title="Dashboard — System Metrics" description="Live metrics for the ORGANVM eight-organ creative-institutional system.">
   <Header />
   <main>
+    <div class="sketch-accent">
+      <SketchContainer sketchId="data-bars" height="200px" mobileHeight="150px" ariaLabel="Animated data bar visualization representing system metrics" />
+    </div>
     <section class="section">
       <div class="container">
         <h1 class="page-title">System Dashboard</h1>
@@ -359,5 +363,12 @@ const organColors: Record<string, string> = {
     .targets-grid {
       grid-template-columns: repeat(2, 1fr);
     }
+  }
+  .sketch-accent {
+    margin-bottom: var(--space-xl);
+    padding: 0 var(--space-lg);
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
