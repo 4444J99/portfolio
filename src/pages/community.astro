@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const communityRepos = [
+  {
+    name: 'Salon Archive',
+    repo: 'organvm-vi-koinonia/salon-archive',
+    description: 'Structured archive of interdisciplinary salon conversations spanning philosophy, technology, aesthetics, and systems thinking. Each session follows a facilitated format: provocation, structured dialogue, synthesis.',
+    discussionUrl: 'https://github.com/organvm-vi-koinonia/salon-archive/discussions',
+    tags: ['salons', 'interdisciplinary', 'facilitated dialogue'],
+  },
+  {
+    name: 'Reading Group Curriculum',
+    repo: 'organvm-vi-koinonia/reading-group-curriculum',
+    description: 'Curated reading sequences organized by theme — recursion, governance, generative systems, institutional design. Each curriculum includes primary texts, discussion questions, and synthesis prompts.',
+    discussionUrl: 'https://github.com/organvm-vi-koinonia/reading-group-curriculum/discussions',
+    tags: ['reading groups', 'curriculum', 'structured inquiry'],
+  },
+  {
+    name: 'Adaptive Personal Syllabus',
+    repo: 'organvm-vi-koinonia/adaptive-personal-syllabus',
+    description: 'Self-directed learning framework that adapts to individual pace and interest. Tracks reading progress, generates connections between texts, and suggests next readings based on completed material.',
+    discussionUrl: 'https://github.com/organvm-vi-koinonia/adaptive-personal-syllabus/discussions',
+    tags: ['self-directed', 'adaptive learning', 'personal curriculum'],
+  },
+];
+---
+
+<Layout title="Community — ORGAN-VI Koinonia" description="Community infrastructure: salons, reading groups, and adaptive learning — participate via GitHub Discussions.">
+  <Header />
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1 class="page-title">Community Infrastructure</h1>
+        <p class="page-sub">
+          ORGAN-VI (Koinonia) provides the communal layer — salons for interdisciplinary conversation,
+          reading groups for structured inquiry, and adaptive curricula for self-directed learning.
+          All community spaces use GitHub Discussions for open participation.
+        </p>
+
+        <div class="community-grid">
+          {communityRepos.map(repo => (
+            <div class="community-card">
+              <h3 class="community-card__name">{repo.name}</h3>
+              <p class="community-card__desc">{repo.description}</p>
+              <div class="community-card__tags">
+                {repo.tags.map(tag => (
+                  <span class="community-card__tag">{tag}</span>
+                ))}
+              </div>
+              <div class="community-card__links">
+                <a href={repo.discussionUrl} target="_blank" rel="noopener" class="community-card__discuss-link">
+                  Join Discussion
+                </a>
+                <a href={`https://github.com/${repo.repo}`} target="_blank" rel="noopener">
+                  GitHub
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="community-formats">
+          <h2 class="formats-heading">Participation Formats</h2>
+          <div class="format-grid">
+            <div class="format-item">
+              <h4>Salons</h4>
+              <p>Facilitated interdisciplinary conversations following a three-phase format: provocation (15 min), structured dialogue (45 min), and collective synthesis (15 min). Sessions are archived with key insights and emergent questions.</p>
+            </div>
+            <div class="format-item">
+              <h4>Reading Groups</h4>
+              <p>Thematic reading sequences with discussion questions and synthesis prompts. Each curriculum spans 4-8 weeks and connects texts across disciplines — philosophy, systems theory, aesthetics, institutional design.</p>
+            </div>
+            <div class="format-item">
+              <h4>Adaptive Learning</h4>
+              <p>Self-paced curriculum that tracks your reading, surfaces connections between completed texts, and suggests next readings based on your interests and the system's knowledge graph.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-title {
+    margin-bottom: var(--space-sm);
+  }
+
+  .page-sub {
+    margin-bottom: var(--space-2xl);
+    max-width: 42em;
+  }
+
+  .community-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .community-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    transition: border-color var(--transition-fast);
+  }
+
+  .community-card:hover {
+    border-color: var(--text-muted);
+  }
+
+  .community-card__name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .community-card__desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .community-card__tags {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+  }
+
+  .community-card__tag {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.15em 0.5em;
+    text-transform: lowercase;
+  }
+
+  .community-card__links {
+    display: flex;
+    gap: var(--space-md);
+    font-size: 0.85rem;
+    padding-top: var(--space-xs);
+    border-top: 1px solid var(--border);
+  }
+
+  .community-card__links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .community-card__links a:hover {
+    color: var(--text-primary);
+  }
+
+  .community-card__discuss-link {
+    color: var(--accent) !important;
+    font-weight: 500;
+  }
+
+  .community-formats {
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-2xl);
+  }
+
+  .formats-heading {
+    font-size: 1.3rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .format-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .format-item h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+  }
+
+  .format-item p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 768px) {
+    .community-grid,
+    .format-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
