@@ -8,7 +8,7 @@ const products = [
     name: 'Gamified Coach Interface',
     repo: 'organvm-iii-ergon/gamified-coach-interface',
     type: 'SaaS',
-    revenue: 'active',
+    revenue_model: 'premium', revenue_status: 'pre-revenue',
     description: 'Holographic 3D fitness coaching visualization built with Three.js and Vite. Interactive orbital node system for strategy mapping and progress tracking.',
     demo: 'https://organvm-iii-ergon.github.io/gamified-coach-interface/',
     featured: true,
@@ -17,77 +17,77 @@ const products = [
     name: 'Public Record Data Scrapper',
     repo: 'organvm-iii-ergon/public-record-data-scrapper',
     type: 'B2B',
-    revenue: 'active',
+    revenue_model: 'premium', revenue_status: 'pre-revenue',
     description: 'Automated public records aggregation and analysis platform for business intelligence and compliance workflows.',
   },
   {
     name: 'Trade Perpetual Future',
     repo: 'organvm-iii-ergon/trade-perpetual-future',
     type: 'B2B',
-    revenue: 'active',
+    revenue_model: 'premium', revenue_status: 'pre-revenue',
     description: 'Perpetual futures trading interface with real-time analytics, position management, and strategy backtesting.',
   },
   {
     name: 'Sovereign Ecosystem — Real Estate Luxury',
     repo: 'organvm-iii-ergon/sovereign-ecosystem--real-estate-luxury',
     type: 'B2B2C',
-    revenue: 'active',
+    revenue_model: 'premium', revenue_status: 'pre-revenue',
     description: 'Luxury real estate marketplace with sovereign identity integration and multi-party transaction orchestration.',
   },
   {
     name: 'Universal Mail Automation',
     repo: 'organvm-iii-ergon/universal-mail--automation',
     type: 'B2B',
-    revenue: 'active',
+    revenue_model: 'premium', revenue_status: 'pre-revenue',
     description: 'Cross-platform mail automation engine with template management, scheduling, and deliverability analytics.',
   },
   {
     name: 'Search Local — Happy Hour',
     repo: 'organvm-iii-ergon/search-local--happy-hour',
     type: 'B2C',
-    revenue: 'active',
+    revenue_model: 'premium', revenue_status: 'pre-revenue',
     description: 'Location-aware discovery platform for local dining and nightlife with real-time deal aggregation.',
   },
   {
     name: 'Fetch Familiar Friends',
     repo: 'organvm-iii-ergon/fetch-familiar-friends',
     type: 'B2C',
-    revenue: 'active',
+    revenue_model: 'premium', revenue_status: 'pre-revenue',
     description: 'Social pet adoption and community platform connecting shelters with potential adopters.',
   },
   {
     name: 'Multi-Camera Livestream Framework',
     repo: 'organvm-iii-ergon/multi-camera--livestream--framework',
     type: 'B2B2C',
-    revenue: 'active',
+    revenue_model: 'premium', revenue_status: 'pre-revenue',
     description: 'Multi-source livestream orchestration with scene switching, overlays, and audience interaction tools.',
   },
   {
     name: 'Tab Bookmark Manager',
     repo: 'organvm-iii-ergon/tab-bookmark-manager',
     type: 'SaaS',
-    revenue: 'freemium',
+    revenue_model: 'freemium', revenue_status: 'pre-revenue',
     description: 'Browser extension for intelligent tab organization, session management, and cross-device bookmark sync.',
   },
   {
     name: 'The Actual News',
     repo: 'organvm-iii-ergon/the-actual-news',
     type: 'B2C',
-    revenue: 'subscription',
+    revenue_model: 'subscription', revenue_status: 'pre-revenue',
     description: 'Curated news aggregation with source transparency scoring and bias-aware presentation.',
   },
   {
     name: 'Your Fit Tailored',
     repo: 'organvm-iii-ergon/your-fit-tailored',
     type: 'B2C',
-    revenue: 'subscription',
+    revenue_model: 'subscription', revenue_status: 'pre-revenue',
     description: 'Personalized fitness program generator with adaptive progression and wearable device integration.',
   },
   {
     name: 'Classroom RPG Aetheria',
     repo: 'organvm-iii-ergon/classroom-rpg-aetheria',
     type: 'SaaS',
-    revenue: 'active',
+    revenue_model: 'premium', revenue_status: 'pre-revenue',
     description: 'Gamified classroom management RPG where student engagement drives character progression and world-building.',
   },
 ];
@@ -124,7 +124,7 @@ const typeBadgeColors: Record<string, string> = {
               </div>
               <p class="product-card__desc">{p.description}</p>
               <div class="product-card__meta">
-                <span class="product-card__revenue">Revenue: {p.revenue}</span>
+                <span class="product-card__revenue">{p.revenue_model} &middot; {p.revenue_status}</span>
               </div>
               <div class="product-card__links">
                 <a href={`https://github.com/${p.repo}`} target="_blank" rel="noopener">GitHub</a>
