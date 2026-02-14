@@ -444,7 +444,8 @@
   "praxis_targets": {
     "portfolio_site": {
       "target": "Live",
-      "current": "In development"
+      "current": "Live at 4444j99.github.io/portfolio/ — Jost+CMYK redesign, p5.js on all pages, LLM consult page",
+      "met": true
     },
     "flagship_repos_with_code": {
       "target": "30+",
