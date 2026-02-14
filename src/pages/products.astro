@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SketchContainer from '../components/sketches/SketchContainer.astro';
 
 const products = [
   {
@@ -103,6 +104,9 @@ const typeBadgeColors: Record<string, string> = {
 <Layout title="Products — Revenue Channels" description="ORGAN-III commerce products: SaaS, B2B, B2C, and B2B2C revenue channels across 15 deployed applications.">
   <Header />
   <main>
+    <div class="sketch-accent">
+      <SketchContainer sketchId="pipeline" height="250px" mobileHeight="180px" ariaLabel="Animated pipeline visualization representing commerce flow" />
+    </div>
     <section class="section">
       <div class="container">
         <h1 class="page-title">Products & Revenue Channels</h1>
@@ -258,5 +262,12 @@ const typeBadgeColors: Record<string, string> = {
     .product-grid {
       grid-template-columns: 1fr;
     }
+  }
+  .sketch-accent {
+    margin-bottom: var(--space-xl);
+    padding: 0 var(--space-lg);
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
