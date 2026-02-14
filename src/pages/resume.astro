@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SketchContainer from '../components/sketches/SketchContainer.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
@@ -9,6 +10,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 <Layout title="Resume — Anthony James Padavano" description="Creative technologist building autonomous creative systems. Resume and CV.">
   <Header />
   <main>
+    <div class="sketch-accent print-hide">
+      <SketchContainer sketchId="flow-diagram" height="200px" mobileHeight="150px" ariaLabel="Animated flow diagram representing career progression" />
+    </div>
     <article class="resume">
       <div class="container container--narrow">
 
@@ -478,6 +482,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
   /* --- Print Styles --- */
   @media print {
+    .print-hide,
+    .sketch-container {
+      display: none !important;
+    }
+
     :global(body) {
       background: white;
       color: #111;
@@ -590,5 +599,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       orphans: 3;
       widows: 3;
     }
+  }
+  .sketch-accent {
+    margin-bottom: var(--space-xl);
+    padding: 0 var(--space-lg);
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
