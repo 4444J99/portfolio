@@ -43,12 +43,18 @@ export default function heroSketch(p: p5, container: HTMLElement) {
     const cy = p.height / 2;
     const ringRadius = Math.min(p.width, p.height) * 0.3;
 
+    const countsStr = container.dataset.repoCounts;
+    const counts = countsStr ? countsStr.split(',').map(Number) : [];
+    const maxCount = counts.length > 0 ? Math.max(...counts) : 1;
+    const baseRadius = isMobile() ? 18 : 28;
+
     for (let i = 0; i < 8; i++) {
       const angle = (p.TWO_PI / 8) * i - p.HALF_PI;
+      const scale = counts.length > 0 ? 0.6 + 0.4 * ((counts[i] || 1) / maxCount) : 1;
       organs.push({
         baseX: cx + Math.cos(angle) * ringRadius,
         baseY: cy + Math.sin(angle) * ringRadius,
-        radius: isMobile() ? 18 : 28,
+        radius: baseRadius * scale,
         phase: (p.TWO_PI / 8) * i,
         speed: 0.008 + Math.random() * 0.004,
         labelAlpha: 0,

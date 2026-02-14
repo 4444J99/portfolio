@@ -4,9 +4,13 @@ interface Props {
   height?: string;
   mobileHeight?: string;
   ariaLabel: string;
+  [key: string]: any;
 }
 
-const { sketchId, height = '500px', mobileHeight = '350px', ariaLabel } = Astro.props;
+const { sketchId, height = '500px', mobileHeight = '350px', ariaLabel, ...rest } = Astro.props;
+const dataAttrs = Object.fromEntries(
+  Object.entries(rest).filter(([k]) => k.startsWith('data-'))
+);
 ---
 
 <div
@@ -17,6 +21,7 @@ const { sketchId, height = '500px', mobileHeight = '350px', ariaLabel } = Astro.
   role="img"
   aria-label={ariaLabel}
   tabindex="0"
+  {...dataAttrs}
 >
   <noscript>
     <p class="sketch-fallback">{ariaLabel}</p>

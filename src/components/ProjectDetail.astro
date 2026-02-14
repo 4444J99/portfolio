@@ -29,7 +29,7 @@ const { title, tagline, tags, repo, liveUrl } = Astro.props;
     )}
   </header>
   <div class="sketch-accent">
-    <SketchContainer sketchId="recursive-tree" height="250px" mobileHeight="180px" ariaLabel="Animated recursive tree visualization representing project structure" />
+    <SketchContainer sketchId="recursive-tree" height="250px" mobileHeight="180px" ariaLabel="Animated recursive tree visualization representing project structure" data-tags={tags.join(',')} />
   </div>
   <div class="project__body prose">
     <slot />

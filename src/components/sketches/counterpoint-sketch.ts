@@ -17,11 +17,23 @@ interface Voice {
 export default function counterpointSketch(p: p5, container: HTMLElement) {
   const isMobile = () => container.clientWidth < 768;
 
-  const layers: Voice[] = [
-    { phase: 0, amplitude: 0.2, frequency: 0.03, color: [201, 168, 76], label: 'Symbolic Engine' },
-    { phase: 0.5, amplitude: 0.15, frequency: 0.02, color: [120, 180, 200], label: 'Sonification Bridge' },
-    { phase: 1.0, amplitude: 0.25, frequency: 0.015, color: [180, 140, 200], label: 'Performance System' },
+  const defaultLabels = ['Symbolic Engine', 'Sonification Bridge', 'Performance System'];
+  const voicesStr = container.dataset.voices;
+  const voiceLabels = voicesStr ? voicesStr.split(',').map((s) => s.trim()) : defaultLabels;
+
+  const voiceColors: RGB[] = [
+    [201, 168, 76],
+    [120, 180, 200],
+    [180, 140, 200],
   ];
+
+  const layers: Voice[] = voiceLabels.map((label, i) => ({
+    phase: i * 0.5,
+    amplitude: 0.15 + (i % 2) * 0.1,
+    frequency: 0.03 - i * 0.005,
+    color: voiceColors[i % voiceColors.length],
+    label,
+  }));
 
   let counterpointVoices: Voice[] = [];
   let lastSplitTime = 0;
@@ -51,12 +63,16 @@ export default function counterpointSketch(p: p5, container: HTMLElement) {
       const ts = t * timeScale();
 
       let yOff: number;
-      if (voice.label === 'Symbolic Engine') {
+      const voiceIdx = layers.indexOf(voice);
+      if (voiceIdx % 3 === 0) {
+        // Quantized wave (stepped)
         const raw = Math.sin(x * voice.frequency + ts + voice.phase);
         yOff = Math.round(raw * 4) / 4 * voice.amplitude * p.height;
-      } else if (voice.label === 'Sonification Bridge') {
+      } else if (voiceIdx % 3 === 1) {
+        // Smooth sine wave
         yOff = Math.sin(x * voice.frequency + ts + voice.phase) * voice.amplitude * p.height;
       } else {
+        // Complex harmonic wave
         yOff = (
           Math.sin(x * voice.frequency + ts + voice.phase) * 0.5 +
           Math.sin(x * voice.frequency * 2.3 + ts * 1.5 + voice.phase) * 0.3 +
@@ -90,9 +106,9 @@ export default function counterpointSketch(p: p5, container: HTMLElement) {
     p.background(...PALETTE.bg);
     time += 0.02;
 
-    const layerHeight = p.height / 3;
+    const layerHeight = p.height / layers.length;
 
-    // Draw three main layers
+    // Draw main layers
     layers.forEach((voice, i) => {
       const yCenter = layerHeight * (i + 0.5);
       const points = generateWave(voice, yCenter, time);

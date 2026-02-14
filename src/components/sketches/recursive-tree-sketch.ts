@@ -1,7 +1,7 @@
 import type p5 from 'p5';
 import { PALETTE, type RGB } from './palette';
 
-const DSL_FRAGMENTS = [
+const DEFAULT_FRAGMENTS = [
   'INVOKE myth.hero_journey',
   'BINDING outcome TO identity',
   'WHEN readiness EXCEEDS threshold',
@@ -23,6 +23,9 @@ interface Branch {
 }
 
 export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
+  const tagsStr = container.dataset.tags;
+  const DSL_FRAGMENTS = tagsStr ? tagsStr.split(',').map((s) => s.trim()) : DEFAULT_FRAGMENTS;
+
   let branches: Branch[] = [];
   let flashText = '';
   let flashAlpha = 0;

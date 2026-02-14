@@ -1,15 +1,16 @@
 import type p5 from 'p5';
 import { PALETTE } from './palette';
 
-const ORGANS = [
-  { name: 'I Theoria', x: 0.12, y: 0.5, repos: 18 },
-  { name: 'II Poiesis', x: 0.28, y: 0.25, repos: 27 },
-  { name: 'III Ergon', x: 0.44, y: 0.5, repos: 21 },
-  { name: 'IV Taxis', x: 0.56, y: 0.25, repos: 9 },
-  { name: 'V Logos', x: 0.68, y: 0.5, repos: 2 },
-  { name: 'VI Koinonia', x: 0.78, y: 0.25, repos: 3 },
-  { name: 'VII Kerygma', x: 0.88, y: 0.5, repos: 4 },
-  { name: 'VIII Meta', x: 0.5, y: 0.82, repos: 2 },
+const DEFAULT_COUNTS = [18, 27, 21, 9, 2, 3, 4, 2];
+const ORGAN_LAYOUT = [
+  { name: 'I Theoria', x: 0.12, y: 0.5 },
+  { name: 'II Poiesis', x: 0.28, y: 0.25 },
+  { name: 'III Ergon', x: 0.44, y: 0.5 },
+  { name: 'IV Taxis', x: 0.56, y: 0.25 },
+  { name: 'V Logos', x: 0.68, y: 0.5 },
+  { name: 'VI Koinonia', x: 0.78, y: 0.25 },
+  { name: 'VII Kerygma', x: 0.88, y: 0.5 },
+  { name: 'VIII Meta', x: 0.5, y: 0.82 },
 ];
 
 const EDGES: [number, number][] = [
@@ -34,6 +35,10 @@ interface FlowParticle {
 }
 
 export default function organSystemSketch(p: p5, container: HTMLElement) {
+  const countsStr = container.dataset.repoCounts;
+  const counts = countsStr ? countsStr.split(',').map(Number) : DEFAULT_COUNTS;
+  const ORGANS = ORGAN_LAYOUT.map((o, i) => ({ ...o, repos: counts[i] || DEFAULT_COUNTS[i] }));
+
   let repoParticles: RepoParticle[] = [];
   let flowParticles: FlowParticle[] = [];
   let hoveredOrgan = -1;

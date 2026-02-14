@@ -99,13 +99,16 @@ const typeBadgeColors: Record<string, string> = {
   B2C: '#16a34a',
   B2B2C: '#ca8a04',
 };
+
+const typeGroups: Record<string, number> = { SaaS: 0, B2B: 0, B2C: 0, B2B2C: 0 };
+products.forEach((p: any) => { if (typeGroups[p.type] !== undefined) typeGroups[p.type]++; });
 ---
 
 <Layout title="Products — Revenue Channels" description="ORGAN-III commerce products: SaaS, B2B, B2C, and B2B2C revenue channels across 15 deployed applications.">
   <Header />
   <main>
     <div class="sketch-accent">
-      <SketchContainer sketchId="pipeline" height="250px" mobileHeight="180px" ariaLabel="Animated pipeline visualization representing commerce flow" />
+      <SketchContainer sketchId="pipeline" height="250px" mobileHeight="180px" ariaLabel="Animated pipeline visualization representing commerce flow" data-chambers={Object.keys(typeGroups).join(',')} data-counts={Object.values(typeGroups).join(',')} />
     </div>
     <section class="section">
       <div class="container">

@@ -33,7 +33,7 @@ const communityRepos = [
   <Header />
   <main>
     <div class="sketch-accent">
-      <SketchContainer sketchId="counterpoint" height="300px" mobileHeight="200px" ariaLabel="Animated counterpoint visualization representing dialogue and harmony" />
+      <SketchContainer sketchId="counterpoint" height="300px" mobileHeight="200px" ariaLabel="Animated counterpoint visualization representing dialogue and harmony" data-voices={communityRepos.map(r => r.name).join(',')} />
     </div>
     <section class="section">
       <div class="container">

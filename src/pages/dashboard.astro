@@ -7,6 +7,9 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
 import metrics from '../data/system-metrics.json';
 import landing from '../data/landing.json';
 
+const organNames = Object.keys(metrics.registry.organs);
+const repoCounts = Object.values(metrics.registry.organs).map((o: any) => o.total_repos);
+
 const organColors: Record<string, string> = {
   'ORGAN-I': '#7c9bf5',
   'ORGAN-II': '#e87c7c',
@@ -23,7 +26,7 @@ const organColors: Record<string, string> = {
   <Header />
   <main>
     <div class="sketch-accent">
-      <SketchContainer sketchId="data-bars" height="200px" mobileHeight="150px" ariaLabel="Animated data bar visualization representing system metrics" />
+      <SketchContainer sketchId="data-bars" height="200px" mobileHeight="150px" ariaLabel="Animated data bar visualization representing system metrics" data-values={repoCounts.join(',')} data-labels={organNames.join(',')} />
     </div>
     <section class="section">
       <div class="container">

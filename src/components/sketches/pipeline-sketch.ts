@@ -1,7 +1,7 @@
 import type p5 from 'p5';
 import { PALETTE } from './palette';
 
-const CHAMBERS = [
+let CHAMBERS = [
   { label: 'Theory', x: 0.15, successRate: 0.85 },
   { label: 'Art', x: 0.5, successRate: 0.78 },
   { label: 'Commerce', x: 0.85, successRate: 0.65 },
@@ -46,7 +46,23 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
   p.setup = function () {
     p.createCanvas(container.clientWidth, container.clientHeight);
     p.frameRate(30);
+    parseData();
   };
+
+  function parseData() {
+    const chambersStr = container.dataset.chambers;
+    const countsStr = container.dataset.counts;
+    if (chambersStr) {
+      const labels = chambersStr.split(',').map((s) => s.trim());
+      const counts = countsStr ? countsStr.split(',').map(Number) : labels.map(() => 1);
+      const total = counts.reduce((a, b) => a + b, 0) || 1;
+      CHAMBERS = labels.map((label, i) => ({
+        label,
+        x: (i + 0.5) / labels.length,
+        successRate: 0.5 + 0.4 * (counts[i] / total),
+      }));
+    }
+  }
 
   function chamberX(i: number): number {
     return CHAMBERS[i].x * p.width;

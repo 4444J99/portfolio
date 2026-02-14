@@ -5,13 +5,15 @@ import Footer from '../components/Footer.astro';
 
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import essayData from '../data/essays.json';
+
+const essayTitles = (essayData as any).essays.slice(0, 12).map((e: any) => e.title);
 ---
 
 <Layout title="Essays — Public Process" description="28 essays on building an eight-organ creative-institutional system in public.">
   <Header />
   <main>
     <div class="sketch-accent">
-      <SketchContainer sketchId="token-stream" height="250px" mobileHeight="180px" ariaLabel="Animated token stream representing text and language flow" />
+      <SketchContainer sketchId="token-stream" height="250px" mobileHeight="180px" ariaLabel="Animated token stream representing text and language flow" data-tokens={essayTitles.join('|')} />
     </div>
     <section class="section">
       <div class="container">

@@ -17,6 +17,11 @@ export default function particleFieldSketch(p: p5, container: HTMLElement) {
   const isMobile = () => container.clientWidth < 768;
 
   function getDensity(): number {
+    const countStr = container.dataset.count;
+    if (countStr) {
+      const count = parseInt(countStr, 10);
+      if (!isNaN(count)) return isMobile() ? Math.min(count, 80) : Math.min(count, 200);
+    }
     const d = container.dataset.density;
     if (d === 'high') return isMobile() ? 60 : 120;
     if (d === 'low') return isMobile() ? 15 : 30;

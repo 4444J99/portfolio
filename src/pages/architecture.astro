@@ -6,6 +6,14 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
 
 import graphData from '../data/graph.json';
 
+const organNodes = [...new Set((graphData as any).nodes.map((n: any) => n.organ))];
+const organEdges = (graphData as any).edges.map((e: any) => {
+  const srcOrgan = (graphData as any).nodes.find((n: any) => n.id === e.source)?.organ;
+  const tgtOrgan = (graphData as any).nodes.find((n: any) => n.id === e.target)?.organ;
+  return `${organNodes.indexOf(srcOrgan)}-${organNodes.indexOf(tgtOrgan)}`;
+}).filter((e: string) => { const [a, b] = e.split('-'); return a !== b; });
+const uniqueEdges = [...new Set(organEdges)] as string[];
+
 const organColors: Record<string, string> = {
   'ORGAN-I': '#7c9bf5',
   'ORGAN-II': '#e87c7c',
@@ -22,7 +30,7 @@ const organColors: Record<string, string> = {
   <Header />
   <main>
     <div class="sketch-accent">
-      <SketchContainer sketchId="network-graph" height="250px" mobileHeight="180px" ariaLabel="Animated network graph showing interconnected system nodes" />
+      <SketchContainer sketchId="network-graph" height="250px" mobileHeight="180px" ariaLabel="Animated network graph showing interconnected system nodes" data-nodes={organNodes.join(',')} data-edges={uniqueEdges.join(';')} />
     </div>
     <section class="section">
       <div class="container">

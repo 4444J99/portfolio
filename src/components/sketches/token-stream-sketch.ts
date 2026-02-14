@@ -17,6 +17,7 @@ interface Token {
   height: number;
   verified: boolean | null;
   alpha: number;
+  labelIdx: number;
 }
 
 export default function tokenStreamSketch(p: p5, container: HTMLElement) {
@@ -25,11 +26,14 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
   let spawnTimer = 0;
   let selectedInfo: { verified: boolean; alpha: number } | null = null;
   let zoomPhase = -1;
+  let tokenLabels: string[] = [];
   const isMobile = () => container.clientWidth < 768;
 
   p.setup = function () {
     p.createCanvas(container.clientWidth, container.clientHeight);
     p.frameRate(30);
+    const tokensStr = container.dataset.tokens;
+    tokenLabels = tokensStr ? tokensStr.split('|').map((s) => s.trim()) : [];
   };
 
   function phaseX(i: number): number {
@@ -112,10 +116,11 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
         y: p.lerp(top + 5, bottom - 5, Math.random()),
         vx: 0.8 + Math.random() * 0.6,
         phase: 0,
-        width: isMobile() ? 6 : 10,
+        width: tokenLabels.length > 0 ? (isMobile() ? 30 : 50) : (isMobile() ? 6 : 10),
         height: isMobile() ? 4 : 6,
         verified: null,
         alpha: 200,
+        labelIdx: tokenLabels.length > 0 ? tokenCounter % tokenLabels.length : -1,
       });
       tokenCounter++;
     }
@@ -166,6 +171,15 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
       p.noStroke();
       p.fill(r, g, b, token.alpha * 0.8);
       p.rect(token.x, token.y, token.width, token.height, 1);
+
+      // Draw essay title label on token if available
+      if (token.labelIdx >= 0 && tokenLabels[token.labelIdx] && !isMobile()) {
+        p.fill(r, g, b, token.alpha * 0.6);
+        p.textFont('JetBrains Mono, monospace');
+        p.textSize(5);
+        p.textAlign(p.LEFT, p.CENTER);
+        p.text(tokenLabels[token.labelIdx].substring(0, 18), token.x + 2, token.y + token.height / 2);
+      }
     });
 
     // Running counter
