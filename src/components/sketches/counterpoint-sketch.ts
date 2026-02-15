@@ -103,7 +103,7 @@ export default function counterpointSketch(p: p5, container: HTMLElement) {
   }
 
   p.draw = function () {
-    p.background(...PALETTE.bg);
+    p.clear();
     time += 0.02;
 
     const layerHeight = p.height / layers.length;
