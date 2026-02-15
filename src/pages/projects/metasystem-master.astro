@@ -8,6 +8,7 @@ import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="Metasystem Master — 4444j" description="A real-time audience-participatory performance engine where collective input shapes live art through weighted consensus algorithms.">
@@ -20,6 +21,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       repo="https://github.com/organvm-ii-poiesis/metasystem-master"
     >
       <h2>The Problem</h2>
+<SketchContainer sketchId="kaleidoscope" height="250px" mobileHeight="180px" ariaLabel="Kaleidoscopic system visualization" />
+
       <p>
         Live performance has always been a negotiation between performers and audiences — but the feedback channels are coarse. An audience member can clap or not clap. They cannot communicate "I want the texture to thin out while the harmonic tension increases." Existing tools for interactive performance are either too simple (binary voting, applause meters) or too complex (custom Max/MSP patches that take months per piece).<Cite id={1} author="Machover, Tod" title="Hyperinstruments: A Progress Report" source="MIT Media Lab" year={1992} /> There's nothing in between: a general-purpose engine that works across genres while remaining configurable enough for each. The challenge of designing spectator experiences that move beyond passive consumption has been well documented in HCI research, yet few systems bridge the gap between audience agency and artistic coherence.<Cite id={5} author="Reeves, Stuart et al." title="Designing the Spectator Experience" source="CHI" year={2005} />
       </p>
