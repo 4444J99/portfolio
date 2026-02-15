@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE } from './palette';
+import { PALETTE, getTextColor } from './palette';
 
 const PHASES = [
   { label: 'Context', x: 0.08, width: 0.18 },
@@ -60,7 +60,7 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
   }
 
   p.draw = function () {
-    p.background(...PALETTE.bg);
+    p.clear();
     const time = p.frameCount * 0.02;
 
     // Detect zoom phase from mouse X
@@ -92,7 +92,7 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
       p.line(px, top, px + pw, top);
       p.line(px, bottom, px + pw, bottom);
 
-      p.fill(...PALETTE.text, isZoomed ? 180 : 60);
+      p.fill(...getTextColor(), isZoomed ? 180 : 60);
       p.noStroke();
       p.textFont('JetBrains Mono, monospace');
       p.textSize(isMobile() ? 8 : 10);
