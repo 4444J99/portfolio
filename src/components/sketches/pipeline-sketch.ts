@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE } from './palette';
+import { PALETTE, getTextColor } from './palette';
 
 let CHAMBERS = [
   { label: 'Theory', x: 0.15, successRate: 0.85 },
@@ -78,7 +78,7 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
   }
 
   p.draw = function () {
-    p.background(...PALETTE.bg);
+    p.clear();
     const cw = chamberWidth();
     const chamberTop = p.height * 0.15;
     const chamberBottom = p.height * 0.65;
@@ -123,12 +123,12 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
 
       // Gap at bottom
       const gapWidth = cw * 0.3 * (1 - strictness() * 0.5);
-      p.fill(...PALETTE.bg);
-      p.noStroke();
+      p.erase();
       p.rect(cx - gapWidth / 2, chamberBottom - 2, gapWidth, 6);
+      p.noErase();
 
       // Label
-      p.fill(...PALETTE.text, isHovered ? 220 : 100);
+      p.fill(...getTextColor(), isHovered ? 220 : 100);
       p.noStroke();
       p.textFont('JetBrains Mono, monospace');
       p.textSize(isMobile() ? 9 : 11);
@@ -238,7 +238,7 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
 
     // Show selected sediment reason
     if (selectedSediment && selectedSediment.alpha > 0) {
-      p.fill(...PALETTE.text, selectedSediment.alpha * 2);
+      p.fill(...getTextColor(), selectedSediment.alpha * 2);
       p.noStroke();
       p.textFont('JetBrains Mono, monospace');
       p.textSize(isMobile() ? 9 : 11);
