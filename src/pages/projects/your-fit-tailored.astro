@@ -8,6 +8,7 @@ import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="Your Fit Tailored — 4444j" description="A circular apparel subscription platform — continuous, low-friction clothing experiences through weekly subscription and closed-loop logistics.">
@@ -20,6 +21,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       repo="https://github.com/organvm-iii-ergon/your-fit-tailored"
     >
       <h2>The Crisis of Linear Fashion</h2>
+<SketchContainer sketchId="weave" height="250px" mobileHeight="180px" ariaLabel="Interlocking thread weave pattern" />
+
       <p>
         The global apparel industry produces approximately 92 million tons of textile waste annually, a figure that has doubled in the last fifteen years and is projected to triple by 2050.<Cite id={1} author="Fletcher, Kate" title="Sustainable Fashion and Textiles: Design Journeys" source="Routledge" year={2014} /> This waste is not an externality of the fashion system — it is the system's primary output. The dominant model is linear: extract raw materials, manufacture garments, sell at volume, discard after minimal use. Fletcher's analysis reveals that the average garment is worn only seven times before disposal, a catastrophic ratio of resource investment to utility extraction. The problem is not that consumers are careless but that the economic structure incentivizes disposability. Cradle-to-cradle design thinking offers a theoretical framework for closing this loop: materials should circulate through technical or biological cycles indefinitely, with waste from one process becoming feedstock for the next.<Cite id={2} author="McDonough, William and Michael Braungart" title="Cradle to Cradle: Remaking the Way We Make Things" source="North Point Press" year={2002} /> Existing "rental" and "subscription" services attempt this but introduce new friction — sizing uncertainty, return logistics complexity, delayed availability — that limits adoption to early adopters willing to tolerate inconvenience. Your Fit Tailored is a specification-driven design for a circular apparel platform that attacks this friction directly.
       </p>
