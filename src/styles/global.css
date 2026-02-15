@@ -1,6 +1,6 @@
 /* ========================================
    Portfolio — Global Styles
-   "In Colour" theme — drifting spectrum gradient
+   "In Colour" theme — dynamic p5.js spectrum
    ======================================== */
 
 /* --- Reset & Base --- */
@@ -13,7 +13,7 @@
 }
 
 :root {
-  /* Colors — transparent base, gradient via ::before */
+  /* Colors — transparent base, gradient via p5 canvas */
   --bg-primary: transparent;
   --bg-secondary: rgba(255,255,255,0.1);
   --bg-card: rgba(255,255,255,0.12);
@@ -65,7 +65,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #111;
+  background: #0a0a0b;
 }
 
 body {
@@ -77,29 +77,29 @@ body {
   transition: text-shadow 0.5s ease;
 }
 
-/* --- Lo-fi spiral spectrum (Jamie XX "In Colour" seashell) --- */
-body::before {
-  content: '';
+/* --- Dynamic p5.js background --- */
+#bg-canvas {
   position: fixed;
-  inset: -50%;
+  inset: 0;
   z-index: -1;
-  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAD0ElEQVR42r2a3VHEMAyEVcu1kFpogRbSQlqgBVqghWuBh6skBHLj2LKkXTkXZvRIjv0sOdGfyNf3r32sT3v73u0mn7u9y73YXT5qW+V9wOpfqH+8/Mei4SlpV/grcv6zabPlLputD5FePZSuNd2EMp+kx+AZBKq3dXsql9YImB5Du6IotBikD5uc9CVpHAbPIAn1ge4HsoAEuQLEUq8+kp7VDWEcDMxQA6TVt4L2ywQNY4wxROpD6b3EZ1C2BkgcVyQYlHp98Ei6KTowmwQxGHe6AKTU+7pnZDaG6wqHwXACUA+kW1rLi+K4ajaJxhhj0ACsekdxYBbGOEMBINUb0rW+1TWXZFKJjXkfgBMy6s0gWRNmYCAG6IRx9bWyknt5ZmK0riAZtBM8AEN9L71VWV52tbkkPEPshPPqTd0RCWLIOWFEvSW9zumVRRh+pdIzKCd0ABn1nm5VsnkkLIPlBB1F7PFzRY9nKQbmJnQASfVUqckXK7QTjChSxz+m3q6SLQwyy9dOCKIIHD9ST5X2PEP8OjKjaOz47bLhhktHkNg8GZwoCgBSxw+KngXUXO431Yui+Bp08WMcP1APS2Tmdd5FkXcNXADm+PnE286Tg9c5DaAet+KHOX6ibDAYulMMAPQ95gDa+Mkcv1ciN6H8fwBt/MDjtxPvKhguB4gvQAHQx4/Tp/8HCC/AARB/v5tCbIov8QveQgyAvgCL8wGp7s/+4PHHF30HAgU2QHsBgvuzPdg8cv5LbIbfJQDV5anzpUtyoXGABwWgUu7XZ6OXhpBZaro1zVg9QH6GiUvsfgRxgX+qIjv3Foof7zGMFgus60FNHH7I3O9AfA383hEztyO7EhQAk0qAShq2GU8258aTObKV1JMMdUj9zlwynU60IuPOO9+jBr1RBGBHkeMEPyeNxjZu9cOMOUBFbxXEsROIKc6E5zT8kOZlNTGeo03spCzVyHhNVwJVxtTwmFffA0AnmLlNaiBLDb2zjTAHIOkEYpqP1w5uQ+o3kc6rkG3OgQ5XD8Ptr+DNlQPgRHc6t9GSkc6qPwA8BiuxAV1efofLkZ5Qv4nMJTap1agAhtiiI0dSmRkZ2goc2Aekpji2+gKQmlIm1wNJS+wudiNNCVJ8hoEf+MXzv0h6OFQWutcZzVv5kSs7hKVH4pLp1+J5vVkBe3JZ6WHZIMme83xm7QBsIUTSnbJBA1BJcrj1wSx+kKsgXNEjYOYFF57i1RtGcUZ6vxoleG4HN59Sy0+JdShqsUuo2SO5e8avn4GFtJlfD5TE/BTsXM5pGG4lMC7ZfgAhuMaGK8uvPwAAAABJRU5ErkJggg==") center / cover no-repeat;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-  animation: color-drift 55s linear infinite;
+  overflow: hidden;
+  pointer-events: none;
   transition: filter 0.5s ease;
 }
 
-@keyframes color-drift {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+#bg-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 /* --- S/B/E gradient modes --- */
 
 /* S = Subtle: pastels + dark text + white halo */
-body[data-bg-mode="subtle"]::before {
+body[data-bg-mode="subtle"] #bg-canvas {
   filter: saturate(0.35) brightness(1.4);
 }
 body[data-bg-mode="subtle"] {
@@ -115,9 +115,6 @@ body[data-bg-mode="subtle"] {
 }
 
 /* B = Bold: full saturation + white text + black halo */
-body[data-bg-mode="bold"]::before {
-  /* no filter — full album colors */
-}
 body[data-bg-mode="bold"] {
   --text-primary: #FFFFFF;
   --text-secondary: rgba(255,255,255,0.85);
@@ -126,7 +123,7 @@ body[data-bg-mode="bold"] {
 }
 
 /* E = Extreme: oversaturated neon + white text + heavy black halo */
-body[data-bg-mode="extreme"]::before {
+body[data-bg-mode="extreme"] #bg-canvas {
   filter: saturate(1.6) contrast(1.15);
 }
 body[data-bg-mode="extreme"] {
@@ -399,7 +396,7 @@ img {
 
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
-  body::before, body, a, .sketch-container canvas {
+  #bg-canvas canvas, body, a, .sketch-container canvas {
     animation: none !important;
   }
 }
