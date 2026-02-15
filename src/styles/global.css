@@ -1,6 +1,6 @@
 /* ========================================
    Portfolio — Global Styles
-   "In Colour" theme — rotating spectrum gradient
+   "In Colour" theme — drifting spectrum gradient
    ======================================== */
 
 /* --- Reset & Base --- */
@@ -10,12 +10,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-@property --gradient-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
 }
 
 :root {
@@ -82,26 +76,37 @@ body {
   transition: text-shadow 0.5s ease;
 }
 
-/* --- Rotating conic gradient background --- */
+/* --- Drifting rectangular gradient background --- */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: conic-gradient(
-    from var(--gradient-angle) at 50% 120%,
+  background: linear-gradient(
+    180deg,
     #FFE100, #FF8800, #FF2200, #FF0066,
     #CC0099, #6600CC, #2200AA, #0055DD,
     #0099FF, #00BBDD, #009977, #009933,
-    #88CC00, #FFE100
+    #88CC00, #FFE100, #FF8800, #FF2200,
+    #FF0066, #CC0099, #6600CC, #2200AA,
+    #0055DD, #0099FF, #00BBDD, #009977
   );
-  animation: color-rotate 45s linear infinite;
+  background-size: 100% 500%;
+  animation: color-drift 55s ease-in-out infinite;
   transition: filter 0.5s ease;
 }
 
-@keyframes color-rotate {
-  from { --gradient-angle: 0deg; }
-  to { --gradient-angle: 360deg; }
+@keyframes color-drift {
+  0%   { background-position: 50% 0%; }
+  12%  { background-position: 50% 38%; }
+  24%  { background-position: 50% 12%; }
+  36%  { background-position: 50% 65%; }
+  48%  { background-position: 50% 28%; }
+  60%  { background-position: 50% 82%; }
+  72%  { background-position: 50% 45%; }
+  84%  { background-position: 50% 70%; }
+  92%  { background-position: 50% 18%; }
+  100% { background-position: 50% 0%; }
 }
 
 /* --- S/B/E gradient modes --- */
@@ -155,6 +160,9 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: clamp(2rem, 5vw, 3rem);
   letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.85);
+  text-shadow: 0 0 15px rgba(255,255,255,0.35), 0 0 40px rgba(255,255,255,0.15);
 }
 
 h2 {
