@@ -8,6 +8,7 @@ import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="Life My Midst In — 4444j" description="An interactive CV system that inverts the hiring dynamic — the employer becomes the interviewee, and the resume assembles itself.">
@@ -20,6 +21,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       repo="https://github.com/organvm-iii-ergon/life-my--midst--in"
     >
       <h2>The Problem with Professional Identity</h2>
+<SketchContainer sketchId="orbits" height="250px" mobileHeight="180px" ariaLabel="Orbital social dynamics" />
+
       <p>
         The conventional curriculum vitae forces a fundamental act of self-falsification. A professional with twenty years of experience across theory, engineering, art, and systems architecture must compress that multidimensional identity into a single linear narrative — typically optimized for one imagined reader with one imagined set of priorities.<Cite id={1} author="Goffman, Erving" title="The Presentation of Self in Everyday Life" source="Anchor Books" year={1959} /> Goffman's dramaturgical analysis demonstrates that all social interaction involves strategic self-presentation: we perform different versions of ourselves for different audiences. The traditional CV denies this reality, demanding a single canonical performance regardless of audience. The result is a document that systematically disadvantages polymathic professionals — those whose value lies precisely in the breadth and interconnection of their capabilities.<Cite id={2} author="Bourdieu, Pierre" title="Distinction: A Social Critique of the Judgement of Taste" source="Harvard University Press" year={1984} /> Bourdieu's concept of cultural capital reveals how hiring processes reproduce class structures through credentialing rituals that privilege legibility over depth. This project asks: what if the CV were not a static document but a dynamic system — one that assembles itself in response to what the employer actually needs?
       </p>
