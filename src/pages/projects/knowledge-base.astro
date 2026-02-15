@@ -8,6 +8,7 @@ import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="My Knowledge Base — 4444j" description="Epistemological infrastructure for converting AI conversations into durable, searchable, interconnected knowledge with multi-modal retrieval.">
@@ -20,6 +21,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       repo="https://github.com/organvm-i-theoria/my-knowledge-base"
     >
       <h2>The Evaporation Problem</h2>
+<SketchContainer sketchId="spiral" height="250px" mobileHeight="180px" ariaLabel="Golden spiral knowledge growth" />
+
       <p>
         Every meaningful AI conversation generates knowledge that evaporates. You spend ninety minutes with Claude working through a recursive data structure design, and afterward that knowledge exists only inside a vendor-specific chat interface — unsearchable, unstructured, disconnected from every other conversation you have ever had. No export pathway, no atomization, no cross-conversation search, no intelligence extraction. This is not a new problem but an intensified form of an old one.<Cite id={1} author="Polanyi, Michael" title="The Tacit Dimension" source="University of Chicago Press" year={1966} /> Polanyi observed that we know more than we can tell — tacit knowledge resists codification. AI conversations produce a hybrid form: the dialogue itself is explicit text, but the understanding it generates often remains tacit, trapped in the user's memory and the chat log's inaccessible architecture. Vannevar Bush anticipated this crisis of intellectual record-keeping in 1945, proposing a "memex" — a device for storing, linking, and retrieving the trails of one's intellectual work.<Cite id={2} author="Bush, Vannevar" title="As We May Think" source="The Atlantic Monthly" year={1945} /> My Knowledge Base is the memex for the AI conversation era: a system that ingests from nine sources, decomposes conversations into atomic knowledge units, indexes them across three search modalities, and extracts intelligence that the original conversations only implied.
       </p>
