@@ -84,11 +84,36 @@ body[data-bg-mode="subtle"] {
 }
 
 body[data-bg-mode="bold"] {
-  background-image: linear-gradient(135deg, #0a0a0b 0%, #252530 25%, #454555 50%, #252530 75%, #0a0a0b 100%);
+  background-image: linear-gradient(135deg, #0a0a0b 0%, #202030 25%, #353545 50%, #202030 75%, #0a0a0b 100%);
 }
 
 body[data-bg-mode="extreme"] {
-  background-image: linear-gradient(135deg, #0a0a0b 0%, #555566 25%, #888899 50%, #555566 75%, #0a0a0b 100%);
+  background-image: linear-gradient(135deg, #0a0a0b 0%, #303048 25%, #454560 50%, #303048 75%, #0a0a0b 100%);
+}
+
+/* --- Text contrast overrides for lighter gradient peaks --- */
+body[data-bg-mode="bold"],
+body[data-bg-mode="extreme"] {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+body[data-bg-mode="bold"] h1,
+body[data-bg-mode="bold"] h2,
+body[data-bg-mode="bold"] h3,
+body[data-bg-mode="extreme"] h1,
+body[data-bg-mode="extreme"] h2,
+body[data-bg-mode="extreme"] h3 {
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+}
+
+body[data-bg-mode="bold"] {
+  --text-secondary: #b5b3b0;
+  --text-muted: #9a9894;
+}
+
+body[data-bg-mode="extreme"] {
+  --text-secondary: #cccac7;
+  --text-muted: #b0aeaa;
 }
 
 @keyframes bg-shift {
@@ -101,9 +126,9 @@ body[data-bg-mode="extreme"] {
 
 @keyframes cmyk-text-shift {
   0%   { --text-secondary: #a09e9b; }
-  25%  { --text-secondary: #80d8e4; }
-  50%  { --text-secondary: #e88aab; }
-  75%  { --text-secondary: #e8d280; }
+  25%  { --text-secondary: #90e8f4; }
+  50%  { --text-secondary: #f09abb; }
+  75%  { --text-secondary: #f0e090; }
   100% { --text-secondary: #a09e9b; }
 }
 
