@@ -14,7 +14,14 @@ const year = new Date().getFullYear();
       <span class="footer__sep" aria-hidden="true">/</span>
       <a href="mailto:padavano.anthony@gmail.com">Contact</a>
     </div>
-    <p class="footer__copy">&copy; {year} Anthony James Padavano · Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a></p>
+    <div class="footer__right">
+      <div class="bg-mode-switch" aria-label="Background intensity">
+        <button data-mode="subtle" class="bg-mode-btn" title="Subtle">S</button>
+        <button data-mode="bold" class="bg-mode-btn" title="Bold">B</button>
+        <button data-mode="extreme" class="bg-mode-btn" title="Extreme">E</button>
+      </div>
+      <p class="footer__copy">&copy; {year} Anthony James Padavano · Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a></p>
+    </div>
   </div>
 </footer>
 
@@ -52,10 +59,38 @@ const year = new Date().getFullYear();
     font-size: 0.8rem;
   }
 
+  .footer__right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
   .footer__copy {
     font-size: 0.8rem;
     color: var(--text-muted);
   }
+
+  .bg-mode-switch {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .bg-mode-btn {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .bg-mode-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+  .bg-mode-btn--active { background: var(--accent-cyan); color: var(--bg-primary); border-color: var(--accent-cyan); }
 
   @media (max-width: 768px) {
     .footer__inner {
@@ -69,5 +104,27 @@ const year = new Date().getFullYear();
       flex-wrap: wrap;
       justify-content: center;
     }
+
+    .footer__right {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
   }
 </style>
+
+<script is:inline>
+  (function() {
+    var savedMode = localStorage.getItem('bg-mode') || 'subtle';
+    document.body.dataset.bgMode = savedMode;
+    document.querySelectorAll('.bg-mode-btn').forEach(function(btn) {
+      if (btn.dataset.mode === savedMode) btn.classList.add('bg-mode-btn--active');
+      btn.addEventListener('click', function() {
+        var mode = btn.dataset.mode;
+        document.body.dataset.bgMode = mode;
+        localStorage.setItem('bg-mode', mode);
+        document.querySelectorAll('.bg-mode-btn').forEach(function(b) { b.classList.remove('bg-mode-btn--active'); });
+        btn.classList.add('bg-mode-btn--active');
+      });
+    });
+  })();
+</script>
