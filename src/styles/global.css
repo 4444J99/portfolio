@@ -65,6 +65,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #111;
 }
 
 body {
@@ -76,34 +77,40 @@ body {
   transition: text-shadow 0.5s ease;
 }
 
-/* --- 3×5 SVG swatch grid — zoomed in, wandering camera --- */
+/* --- 3×5 SVG swatch grid — deep zoom, wandering, soft-pixel edges --- */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='5' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23FFE100'/%3E%3Crect x='1' y='0' width='1' height='1' fill='%23FF8800'/%3E%3Crect x='2' y='0' width='1' height='1' fill='%23FF2200'/%3E%3Crect x='0' y='1' width='1' height='1' fill='%23FF0066'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23CC0099'/%3E%3Crect x='2' y='1' width='1' height='1' fill='%236600CC'/%3E%3Crect x='0' y='2' width='1' height='1' fill='%232200AA'/%3E%3Crect x='1' y='2' width='1' height='1' fill='%230055DD'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%230099FF'/%3E%3Crect x='0' y='3' width='1' height='1' fill='%2300BBDD'/%3E%3Crect x='1' y='3' width='1' height='1' fill='%23009977'/%3E%3Crect x='2' y='3' width='1' height='1' fill='%23009933'/%3E%3Crect x='0' y='4' width='1' height='1' fill='%2388CC00'/%3E%3Crect x='1' y='4' width='1' height='1' fill='%23FFE100'/%3E%3Crect x='2' y='4' width='1' height='1' fill='%23FF8800'/%3E%3C/svg%3E");
-  background-size: 300% 500%;
-  background-repeat: no-repeat;
-  animation: swatch-wander 90s ease-in-out infinite;
+  background-size: 600% 1000%;
+  background-repeat: repeat;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: blur(40px);
+  animation: swatch-wander 120s ease-in-out infinite;
   transition: filter 0.5s ease;
 }
 
 @keyframes swatch-wander {
   0%    { background-position: 0% 0%; }
-  7%    { background-position: 50% 12%; }
-  14%   { background-position: 100% 25%; }
-  21%   { background-position: 75% 50%; }
-  28%   { background-position: 25% 75%; }
-  35%   { background-position: 0% 37%; }
-  42%   { background-position: 100% 62%; }
-  49%   { background-position: 50% 100%; }
-  56%   { background-position: 0% 50%; }
-  63%   { background-position: 100% 0%; }
-  70%   { background-position: 50% 50%; }
-  77%   { background-position: 25% 87%; }
-  84%   { background-position: 75% 25%; }
-  91%   { background-position: 100% 75%; }
+  6%    { background-position: 40% 15%; }
+  13%   { background-position: 80% 5%; }
+  19%   { background-position: 60% 35%; }
+  25%   { background-position: 20% 55%; }
+  31%   { background-position: 70% 70%; }
+  38%   { background-position: 10% 40%; }
+  44%   { background-position: 90% 20%; }
+  50%   { background-position: 30% 80%; }
+  56%   { background-position: 75% 50%; }
+  63%   { background-position: 5% 65%; }
+  69%   { background-position: 55% 90%; }
+  75%   { background-position: 85% 30%; }
+  81%   { background-position: 15% 10%; }
+  88%   { background-position: 65% 60%; }
+  94%   { background-position: 35% 45%; }
   100%  { background-position: 0% 0%; }
 }
 
@@ -111,7 +118,7 @@ body::before {
 
 /* S = Subtle: pastels + dark text + white halo */
 body[data-bg-mode="subtle"]::before {
-  filter: saturate(0.35) brightness(1.4);
+  filter: saturate(0.35) brightness(1.4) blur(40px);
 }
 body[data-bg-mode="subtle"] {
   --text-primary: #111111;
@@ -127,7 +134,7 @@ body[data-bg-mode="subtle"] {
 
 /* B = Bold: full saturation + white text + black halo */
 body[data-bg-mode="bold"]::before {
-  /* no filter — full album colors */
+  filter: blur(40px);
 }
 body[data-bg-mode="bold"] {
   --text-primary: #FFFFFF;
@@ -138,7 +145,7 @@ body[data-bg-mode="bold"] {
 
 /* E = Extreme: oversaturated neon + white text + heavy black halo */
 body[data-bg-mode="extreme"]::before {
-  filter: saturate(1.6) contrast(1.15);
+  filter: saturate(1.6) contrast(1.15) blur(40px);
 }
 body[data-bg-mode="extreme"] {
   --text-primary: #FFFFFF;
