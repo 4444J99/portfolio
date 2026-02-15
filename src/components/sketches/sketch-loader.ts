@@ -32,6 +32,8 @@ const sketchModules: Record<string, () => Promise<{ default: (p: p5, container: 
   'typewriter': () => import('./typewriter-sketch'),
   'ticker': () => import('./ticker-sketch'),
   'weave': () => import('./weave-sketch'),
+  // Background (always-on)
+  'background': () => import('./background-sketch'),
 };
 
 const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -140,8 +142,52 @@ function observeSketches() {
   });
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', observeSketches);
-} else {
+function initBackground() {
+  const bg = document.getElementById('bg-canvas');
+  if (!bg || initialized.has(bg)) return;
+  initialized.add(bg);
+
+  const loader = sketchModules['background'];
+  if (!loader) return;
+
+  Promise.all([
+    import('p5'),
+    loader(),
+  ]).then(([p5Module, sketchModule]) => {
+    const P5 = p5Module.default;
+    const sketchFn = sketchModule.default;
+
+    new P5((p: p5) => {
+      sketchFn(p, bg);
+
+      if (prefersReducedMotion && p.draw) {
+        const originalDraw = p.draw.bind(p);
+        let warmupFrames = 60;
+        p.draw = function () {
+          originalDraw();
+          warmupFrames--;
+          if (warmupFrames <= 0) {
+            p.noLoop();
+          }
+        };
+      }
+    }, bg);
+  });
+}
+
+function init() {
+  // Background: eager init via requestIdleCallback to avoid blocking LCP
+  if ('requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(() => initBackground(), { timeout: 1500 });
+  } else {
+    setTimeout(initBackground, 200);
+  }
+  // Content sketches: lazy via IntersectionObserver
   observeSketches();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
 }
