@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE } from './palette';
+import { PALETTE, getTextColor } from './palette';
 
 interface Bar {
   label: string;
@@ -36,7 +36,7 @@ export default function dataBarsSketch(p: p5, container: HTMLElement) {
   };
 
   p.draw = function () {
-    p.background(...PALETTE.bg);
+    p.clear();
     if (bars.length === 0) return;
 
     const margin = isMobile() ? 30 : 50;
@@ -99,7 +99,7 @@ export default function dataBarsSketch(p: p5, container: HTMLElement) {
 
       // Label
       p.noStroke();
-      p.fill(...PALETTE.text, isHovered ? 200 : 100);
+      p.fill(...getTextColor(), isHovered ? 200 : 100);
       p.textFont('JetBrains Mono, monospace');
       p.textSize(isMobile() ? 7 : 9);
       p.textAlign(p.CENTER, p.TOP);
