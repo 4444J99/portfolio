@@ -8,6 +8,7 @@ import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="Org Architecture & Community Health — 4444j" description="Organization-wide infrastructure for CI/CD, AI agents, and community health — inherited by every repo in the org.">
@@ -20,6 +21,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       repo="https://github.com/organvm-i-theoria/.github"
     >
       <h2>The Problem: Standards at Scale</h2>
+<SketchContainer sketchId="hierarchy" height="250px" mobileHeight="180px" ariaLabel="Self-building organization tree" />
+
       <p>
         Every multi-repository organization faces the same entropy: standards drift, security configurations diverge, and contributor onboarding becomes a per-repo archaeology exercise. Conway's law predicts this — organizations that design systems are constrained to produce designs which mirror their communication structures, and when those structures are fragmented across dozens of repositories, fragmentation is the inevitable output.<Cite id={1} author="Conway, Melvin E." title="How Do Committees Invent?" source="Datamation" year={1968} /> The open-source world has known this for decades. Raymond's analysis of the bazaar model revealed that even decentralized projects require institutional infrastructure — mailing list conventions, patch formats, release protocols — to avoid collapsing under their own coordination costs.<Cite id={2} author="Raymond, Eric S." title="The Cathedral and the Bazaar" source="O'Reilly Media" year={1999} /> GitHub's special <code>.github</code> repository mechanism offers a solution: a single repository whose contents — workflows, templates, governance documents, AI configurations — are inherited by every other repository in the organization. This project takes that mechanism and builds a comprehensive organizational operating system on top of it, governing 81 repositories across 8 organizations from a single source of truth.
       </p>
