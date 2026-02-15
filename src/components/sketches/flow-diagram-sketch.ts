@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE } from './palette';
+import { PALETTE, getTextColor } from './palette';
 
 interface Stage {
   label: string;
@@ -51,7 +51,7 @@ export default function flowDiagramSketch(p: p5, container: HTMLElement) {
   };
 
   p.draw = function () {
-    p.background(...PALETTE.bg);
+    p.clear();
     if (stages.length === 0) return;
 
     // Detect hover
@@ -94,7 +94,7 @@ export default function flowDiagramSketch(p: p5, container: HTMLElement) {
 
       // Label
       p.noStroke();
-      p.fill(...PALETTE.text, isHovered ? 240 : 160);
+      p.fill(...getTextColor(), isHovered ? 240 : 160);
       p.textFont('JetBrains Mono, monospace');
       p.textSize(isMobile() ? 8 : 10);
       p.textAlign(p.CENTER, p.CENTER);
