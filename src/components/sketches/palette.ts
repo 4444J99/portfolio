@@ -9,4 +9,7 @@ export const PALETTE = {
   muted: [107, 105, 102] as RGB,
   border: [42, 42, 48] as RGB,
   card: [22, 22, 26] as RGB,
+  white: [232, 230, 227] as RGB,
+  purple: [156, 39, 176] as RGB,
+  green: [0, 230, 118] as RGB,
 };
