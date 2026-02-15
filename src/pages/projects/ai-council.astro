@@ -8,6 +8,7 @@ import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="AI Council Coliseum — 4444j" description="A multi-agent debate platform with voting, achievements, and gamified governance — where AI agents deliberate and audiences judge.">
@@ -20,6 +21,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       repo="https://github.com/organvm-ii-poiesis/a-i-council--coliseum"
     >
       <h2>The Problem: Monologue Masquerading as Deliberation</h2>
+<SketchContainer sketchId="deliberation" height="250px" mobileHeight="180px" ariaLabel="Converging deliberation vectors" />
+
       <p>
         The dominant paradigm in AI assistance is the single-agent monologue: one model, one prompt, one answer. This collapses the epistemic richness that emerges when multiple perspectives genuinely contend with each other.<Cite id={1} author="Russell, Stuart and Peter Norvig" title="Artificial Intelligence: A Modern Approach" source="Pearson" year={2020} /> Russell and Norvig formalize the multi-agent environment as one where "the best course of action for each agent depends on what the other agents do" — a fundamentally different problem than single-agent optimization. The AI Council Coliseum operationalizes this insight: rather than asking one model for the best answer, it stages structured deliberation among agents with distinct positions, letting adversarial argument surface considerations that consensus-seeking models suppress.<Cite id={2} author="Wooldridge, Michael" title="An Introduction to MultiAgent Systems" source="John Wiley & Sons" year={2009} /> Wooldridge's taxonomy of agent interaction — cooperative, competitive, and mixed — maps directly onto the Coliseum's debate formats, where agents must balance advocacy for their position with responsiveness to counter-arguments.
       </p>
