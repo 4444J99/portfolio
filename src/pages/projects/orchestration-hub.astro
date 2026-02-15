@@ -8,6 +8,7 @@ import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="Orchestration Hub — 4444j" description="The central nervous system of eight GitHub organizations — a machine-readable registry, validation scripts, and governance rules coordinating 81 repositories.">
@@ -20,6 +21,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       repo="https://github.com/organvm-iv-taxis/orchestration-start-here"
     >
       <h2>The Problem</h2>
+<SketchContainer sketchId="routing" height="250px" mobileHeight="180px" ariaLabel="Message routing between nodes" />
+
       <p>
         Every system with 81 repositories needs a single place that answers "what exists, what's its status, and who owns it?"<Cite id={1} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> Meadows identifies information flows as the most powerful leverage points in complex systems — when participants can see the system's state, they make better decisions. Most multi-repo systems rely on tribal knowledge: someone remembers which repo does what, which ones are active, which ones were experiments. That breaks at scale. It breaks when you onboard new contributors — human or AI. And it breaks when you need to answer a simple question: <em>is this system healthy?</em><Cite id={2} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} />
       </p>
