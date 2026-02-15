@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE } from './palette';
+import { PALETTE, getTextColor } from './palette';
 
 interface Particle {
   x: number;
@@ -82,7 +82,7 @@ export default function particleFieldSketch(p: p5, container: HTMLElement) {
   };
 
   p.draw = function () {
-    p.background(...PALETTE.bg);
+    p.clear();
     const behavior = getBehavior();
     const targetCount = getDensity();
 
@@ -132,7 +132,7 @@ export default function particleFieldSketch(p: p5, container: HTMLElement) {
       if (useAccent) {
         p.fill(...PALETTE.accent, pt.alpha * 0.6);
       } else {
-        p.fill(...PALETTE.text, pt.alpha * 0.4);
+        p.fill(...getTextColor(), pt.alpha * 0.4);
       }
       p.circle(pt.x, pt.y, pt.size);
     });
