@@ -8,6 +8,7 @@ import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="TurfSynth AR — 4444j" description="A location-based augmented reality game where your real-world neighborhood procedurally generates the game around you.">
@@ -20,6 +21,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       repo="https://github.com/organvm-iii-ergon/my-block-warfare"
     >
       <h2>The Problem: Geography as Decoration</h2>
+<SketchContainer sketchId="blocks" height="250px" mobileHeight="180px" ariaLabel="Falling block game visualization" />
+
       <p>
         Location-based games have a geography problem. They overlay generic game mechanics onto real-world maps — random spawn points, uniform resource distribution, identical gameplay from Brooklyn to Boise — treating the physical world as a coordinate grid rather than a designed space with meaning.<Cite id={1} author="Schell, Jesse" title="The Art of Game Design: A Book of Lenses" source="CRC Press" year={2008} /> Schell's lens of "venue" asks what properties the play space has and how they affect gameplay, yet most location-based games answer this question with indifference: the space is GPS coordinates, nothing more. TurfSynth AR inverts this relationship. Instead of spawning content at locations, it reads the built environment — street networks, building density, land use classifications, terrain elevation — and procedurally generates game mechanics that are structurally different depending on where you stand.<Cite id={2} author="Bogost, Ian" title="Persuasive Games: The Expressive Power of Videogames" source="MIT Press" year={2007} /> Bogost's concept of "procedural rhetoric" — the practice of using computational processes to make arguments — applies directly: TurfSynth doesn't just use geography as a backdrop, it makes an argument about how physical space structures human experience, expressed through gameplay systems that respond to the actual character of each neighborhood.
       </p>
