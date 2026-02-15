@@ -77,37 +77,26 @@ body {
   transition: text-shadow 0.5s ease;
 }
 
-/* --- Drifting spectrum gradient background --- */
+/* --- Rotating spectrum fan (Jamie XX "In Colour") --- */
 body::before {
   content: '';
   position: fixed;
-  inset: 0;
+  inset: -25%;
   z-index: -1;
-  background: linear-gradient(
-    180deg,
+  background: conic-gradient(
+    from 0deg at 50% 50%,
     #FFE100, #FF8800, #FF2200, #FF0066,
     #CC0099, #6600CC, #2200AA, #0055DD,
     #0099FF, #00BBDD, #009977, #009933,
-    #88CC00, #FFE100, #FF8800, #FF2200,
-    #FF0066, #CC0099, #6600CC, #2200AA,
-    #0055DD, #0099FF, #00BBDD, #009977
+    #88CC00, #FFE100
   );
-  background-size: 100% 500%;
-  animation: color-drift 55s ease-in-out infinite;
+  animation: color-drift 55s linear infinite;
   transition: filter 0.5s ease;
 }
 
 @keyframes color-drift {
-  0%   { background-position: 50% 0%; }
-  12%  { background-position: 50% 38%; }
-  24%  { background-position: 50% 12%; }
-  36%  { background-position: 50% 65%; }
-  48%  { background-position: 50% 28%; }
-  60%  { background-position: 50% 82%; }
-  72%  { background-position: 50% 45%; }
-  84%  { background-position: 50% 70%; }
-  92%  { background-position: 50% 18%; }
-  100% { background-position: 50% 0%; }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 /* --- S/B/E gradient modes --- */
