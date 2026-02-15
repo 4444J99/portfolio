@@ -17,7 +17,7 @@ const navItems = [
 <header class="header">
   <div class="container header__inner">
     <a href={base} class="header__logo">
-      <span class="header__name">4444j99</span>
+      <span class="header__name"><span class="c-cyan">4</span><span class="c-magenta">4</span><span class="c-yellow">4</span><span class="c-white">4</span><span class="c-cyan">j</span><span class="c-cyan">9</span><span class="c-magenta">9</span></span>
     </a>
     <button
       class="header__toggle"
@@ -83,6 +83,11 @@ const navItems = [
     color: var(--text-primary);
     letter-spacing: -0.01em;
   }
+
+  .c-cyan    { color: var(--accent-cyan); }
+  .c-magenta { color: var(--accent-magenta); }
+  .c-yellow  { color: var(--accent-yellow); }
+  .c-white   { color: var(--text-primary); }
 
   .header__toggle {
     display: none;
