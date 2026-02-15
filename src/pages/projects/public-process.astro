@@ -8,6 +8,7 @@ import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="Public Process — 4444j" description="21 essays on building creative infrastructure in public — transparency as design choice, process documentation as portfolio evidence.">
@@ -21,6 +22,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       liveUrl="https://organvm-v-logos.github.io/public-process/"
     >
       <h2>The Problem: Opacity as Default</h2>
+<SketchContainer sketchId="typewriter" height="250px" mobileHeight="180px" ariaLabel="Writing process visualization" />
+
       <p>
         Creative technologists face a structural problem: finished work is visible, but the reasoning that produced it disappears. Portfolios showcase polished artifacts while erasing the decision chains, false starts, and architectural debates that constitute the actual practice.<Cite id={1} author="Sennett, Richard" title="The Craftsman" source="Yale University Press" year={2008} /> Sennett argues that craft knowledge resides not in the finished object but in the iterative dialogue between maker and material — a dialogue that traditional portfolios systematically suppress. The same asymmetry haunts open-source culture: code is public, but the reasoning behind the code remains private, locked in Slack threads and whiteboard photos that no reviewer will ever see.<Cite id={2} author="Kelty, Christopher M." title="Two Bits: The Cultural Significance of Free Software" source="Duke University Press" year={2008} /> Kelty's ethnography of free software communities reveals that the "recursive public" — people who maintain the very infrastructure through which they communicate — depends on transparent process documentation as a condition of participation. ORGAN V (Logos) was created to solve this problem: a dedicated organ within the eight-organ system whose sole purpose is making the work of building visible, structured, and citable.
       </p>
