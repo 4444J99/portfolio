@@ -65,7 +65,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  background: #111;
 }
 
 body {
@@ -77,19 +77,16 @@ body {
   transition: text-shadow 0.5s ease;
 }
 
-/* --- Rotating spectrum fan (Jamie XX "In Colour") --- */
+/* --- Lo-fi spiral spectrum (Jamie XX "In Colour" seashell) --- */
 body::before {
   content: '';
   position: fixed;
-  inset: -25%;
+  inset: -50%;
   z-index: -1;
-  background: conic-gradient(
-    from 0deg at 50% 50%,
-    #FFE100, #FF8800, #FF2200, #FF0066,
-    #CC0099, #6600CC, #2200AA, #0055DD,
-    #0099FF, #00BBDD, #009977, #009933,
-    #88CC00, #FFE100
-  );
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAD0ElEQVR42r2a3VHEMAyEVcu1kFpogRbSQlqgBVqghWuBh6skBHLj2LKkXTkXZvRIjv0sOdGfyNf3r32sT3v73u0mn7u9y73YXT5qW+V9wOpfqH+8/Mei4SlpV/grcv6zabPlLputD5FePZSuNd2EMp+kx+AZBKq3dXsql9YImB5Du6IotBikD5uc9CVpHAbPIAn1ge4HsoAEuQLEUq8+kp7VDWEcDMxQA6TVt4L2ywQNY4wxROpD6b3EZ1C2BkgcVyQYlHp98Ei6KTowmwQxGHe6AKTU+7pnZDaG6wqHwXACUA+kW1rLi+K4ajaJxhhj0ACsekdxYBbGOEMBINUb0rW+1TWXZFKJjXkfgBMy6s0gWRNmYCAG6IRx9bWyknt5ZmK0riAZtBM8AEN9L71VWV52tbkkPEPshPPqTd0RCWLIOWFEvSW9zumVRRh+pdIzKCd0ABn1nm5VsnkkLIPlBB1F7PFzRY9nKQbmJnQASfVUqckXK7QTjChSxz+m3q6SLQwyy9dOCKIIHD9ST5X2PEP8OjKjaOz47bLhhktHkNg8GZwoCgBSxw+KngXUXO431Yui+Bp08WMcP1APS2Tmdd5FkXcNXADm+PnE286Tg9c5DaAet+KHOX6ibDAYulMMAPQ95gDa+Mkcv1ciN6H8fwBt/MDjtxPvKhguB4gvQAHQx4/Tp/8HCC/AARB/v5tCbIov8QveQgyAvgCL8wGp7s/+4PHHF30HAgU2QHsBgvuzPdg8cv5LbIbfJQDV5anzpUtyoXGABwWgUu7XZ6OXhpBZaro1zVg9QH6GiUvsfgRxgX+qIjv3Foof7zGMFgus60FNHH7I3O9AfA383hEztyO7EhQAk0qAShq2GU8258aTObKV1JMMdUj9zlwynU60IuPOO9+jBr1RBGBHkeMEPyeNxjZu9cOMOUBFbxXEsROIKc6E5zT8kOZlNTGeo03spCzVyHhNVwJVxtTwmFffA0AnmLlNaiBLDb2zjTAHIOkEYpqP1w5uQ+o3kc6rkG3OgQ5XD8Ptr+DNlQPgRHc6t9GSkc6qPwA8BiuxAV1efofLkZ5Qv4nMJTap1agAhtiiI0dSmRkZ2goc2Aekpji2+gKQmlIm1wNJS+wudiNNCVJ8hoEf+MXzv0h6OFQWutcZzVv5kSs7hKVH4pLp1+J5vVkBe3JZ6WHZIMme83xm7QBsIUTSnbJBA1BJcrj1wSx+kKsgXNEjYOYFF57i1RtGcUZ6vxoleG4HN59Sy0+JdShqsUuo2SO5e8avn4GFtJlfD5TE/BTsXM5pGG4lMC7ZfgAhuMaGK8uvPwAAAABJRU5ErkJggg==") center / cover no-repeat;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
   animation: color-drift 55s linear infinite;
   transition: filter 0.5s ease;
 }
