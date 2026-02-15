@@ -150,7 +150,7 @@ RESPONSE FORMAT:
     try {
       const response = await puter.ai.chat(userMessage, {
         system: SYSTEM_PROMPT,
-        model: 'claude-3-5-sonnet'
+        model: 'claude-sonnet-4-5'
       });
 
       const text = typeof response === 'string' ? response : response?.message?.content || response?.text || JSON.stringify(response);
