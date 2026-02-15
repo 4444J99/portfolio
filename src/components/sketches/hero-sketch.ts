@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE } from './palette';
+import { PALETTE, getTextColor } from './palette';
 
 const ORGAN_NAMES = [
   'Theoria', 'Poiesis', 'Ergon', 'Taxis',
@@ -83,7 +83,7 @@ export default function heroSketch(p: p5, container: HTMLElement) {
   }
 
   p.draw = function () {
-    p.background(...PALETTE.bg);
+    p.clear();
 
     const time = p.frameCount * 0.02;
     const mx = p.mouseX;
@@ -168,7 +168,7 @@ export default function heroSketch(p: p5, container: HTMLElement) {
       p.circle(ox, oy, r);
 
       // Bright center
-      p.fill(...PALETTE.text, 60 + proximity * 80);
+      p.fill(...getTextColor(), 60 + proximity * 80);
       p.circle(ox, oy, r * 0.4);
 
       // Label
@@ -181,7 +181,7 @@ export default function heroSketch(p: p5, container: HTMLElement) {
       organ.labelAlpha = p.lerp(organ.labelAlpha, targetAlpha, 0.08);
 
       if (organ.labelAlpha > 5) {
-        p.fill(...PALETTE.text, organ.labelAlpha);
+        p.fill(...getTextColor(), organ.labelAlpha);
         p.noStroke();
         p.textAlign(p.CENTER, p.CENTER);
         p.textSize(isMobile() ? 9 : 11);
