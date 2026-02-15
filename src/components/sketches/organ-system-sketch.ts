@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE } from './palette';
+import { PALETTE, getTextColor } from './palette';
 
 const DEFAULT_COUNTS = [18, 27, 21, 9, 2, 3, 4, 2];
 const ORGAN_LAYOUT = [
@@ -83,7 +83,7 @@ export default function organSystemSketch(p: p5, container: HTMLElement) {
   }
 
   p.draw = function () {
-    p.background(...PALETTE.bg);
+    p.clear();
     const time = p.frameCount * 0.02;
     const nodeRadius = isMobile() ? 22 : 32;
 
@@ -176,11 +176,11 @@ export default function organSystemSketch(p: p5, container: HTMLElement) {
       p.circle(ox, oy, r * 3);
       p.fill(...PALETTE.accent, isHovered ? 120 : 50);
       p.circle(ox, oy, r);
-      p.fill(...PALETTE.text, isHovered ? 100 : 40);
+      p.fill(...getTextColor(), isHovered ? 100 : 40);
       p.circle(ox, oy, r * 0.4);
 
       if (isHovered) {
-        p.fill(...PALETTE.text, 220);
+        p.fill(...getTextColor(), 220);
         p.noStroke();
         p.textAlign(p.CENTER, p.CENTER);
         p.textSize(isMobile() ? 9 : 11);
