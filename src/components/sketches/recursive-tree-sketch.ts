@@ -159,7 +159,7 @@ export default function recursiveTreeSketch(p: p5, container: HTMLElement) {
   }
 
   p.draw = function () {
-    p.background(...PALETTE.bg);
+    p.clear();
     time = p.frameCount * 0.02;
 
     branches.forEach(growAll);
