@@ -8,6 +8,7 @@ import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
 ---
 
 <Layout title="Narratological Algorithmic Lenses — 4444j" description="A monorepo for formalized narrative analysis tools — Python core, CLI, FastAPI service, and React frontend.">
@@ -20,6 +21,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       repo="https://github.com/organvm-i-theoria/narratological-algorithmic-lenses"
     >
       <h2>The Problem: Narrative Theory Without Computational Infrastructure</h2>
+<SketchContainer sketchId="lenses" height="250px" mobileHeight="180px" ariaLabel="Overlapping narrative lens refraction" />
+
       <p>
         Narrative analysis has operated for a century on frameworks that are structurally precise but computationally inert. Vladimir Propp demonstrated in 1928 that Russian wondertales could be decomposed into thirty-one sequential functions — a formal grammar of plot — yet his morphology remained a paper artifact, executed only by human readers marking up texts by hand.<Cite id={1} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1928} /> Gerard Genette's taxonomy of narrative discourse — distinguishing order, duration, frequency, mood, and voice — provided an analytical apparatus of extraordinary precision, yet it too remained confined to close reading, applicable only at the pace of a single scholar working through a single text.<Cite id={2} author="Genette, Gerard" title="Narrative Discourse: An Essay in Method" source="Cornell University Press" year={1972} /> This project asks what happens when these frameworks stop being interpretive vocabularies and become executable algorithms: typed Python models with diagnostic outputs, confidence scores, and testable assertions. The goal is not to automate literary criticism but to give narrative theory the same computational infrastructure that other formal disciplines — linguistics, logic, mathematics — have long taken for granted.
       </p>
