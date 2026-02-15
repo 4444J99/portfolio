@@ -1,6 +1,7 @@
 import type p5 from 'p5';
 
 const sketchModules: Record<string, () => Promise<{ default: (p: p5, container: HTMLElement) => void }>> = {
+  // Existing (10)
   'hero': () => import('./hero-sketch'),
   'organ-system': () => import('./organ-system-sketch'),
   'recursive-tree': () => import('./recursive-tree-sketch'),
@@ -11,6 +12,26 @@ const sketchModules: Record<string, () => Promise<{ default: (p: p5, container: 
   'flow-diagram': () => import('./flow-diagram-sketch'),
   'data-bars': () => import('./data-bars-sketch'),
   'particle-field': () => import('./particle-field-sketch'),
+  // New (19)
+  'terrain': () => import('./terrain-sketch'),
+  'conductor': () => import('./conductor-sketch'),
+  'octagon': () => import('./octagon-sketch'),
+  'waveform': () => import('./waveform-sketch'),
+  'swarm': () => import('./swarm-sketch'),
+  'deliberation': () => import('./deliberation-sketch'),
+  'blocks': () => import('./blocks-sketch'),
+  'constellation': () => import('./constellation-sketch'),
+  'scatter': () => import('./scatter-sketch'),
+  'spiral': () => import('./spiral-sketch'),
+  'orbits': () => import('./orbits-sketch'),
+  'atoms': () => import('./atoms-sketch'),
+  'kaleidoscope': () => import('./kaleidoscope-sketch'),
+  'lenses': () => import('./lenses-sketch'),
+  'routing': () => import('./routing-sketch'),
+  'hierarchy': () => import('./hierarchy-sketch'),
+  'typewriter': () => import('./typewriter-sketch'),
+  'ticker': () => import('./ticker-sketch'),
+  'weave': () => import('./weave-sketch'),
 };
 
 const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
