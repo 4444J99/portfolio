@@ -25,13 +25,24 @@ jobs:
         run: pip install "rendercv[full]"
 
       - name: Render Creative Technologist resume
-        run: rendercv render resume/Anthony_James_Padavano_CV.yaml --output-folder-name resume/rendercv_output
+        run: |
+          mkdir -p resume/rendercv_output
+          rendercv render resume/Anthony_James_Padavano_CV.yaml \
+            --pdf-path resume/rendercv_output/Anthony_James_Padavano_CV.pdf \
+            -md resume/rendercv_output/Anthony_James_Padavano_CV.md
 
       - name: Render Multimedia Specialist resume
-        run: rendercv render resume/Anthony_James_Padavano_Multimedia.yaml --output-folder-name resume/rendercv_output_multimedia
+        run: |
+          mkdir -p resume/rendercv_output_multimedia
+          rendercv render resume/Anthony_James_Padavano_Multimedia.yaml \
+            --pdf-path resume/rendercv_output_multimedia/Anthony_James_Padavano_Multimedia.pdf
 
       - name: Render Developer resume
-        run: rendercv render resume/Anthony_James_Padavano_Developer.yaml --output-folder-name resume/rendercv_output_developer
+        run: |
+          mkdir -p resume/rendercv_output_developer
+          rendercv render resume/Anthony_James_Padavano_Developer.yaml \
+            --pdf-path resume/rendercv_output_developer/Anthony_James_Padavano_Developer.pdf \
+            -md resume/rendercv_output_developer/Anthony_James_Padavano_Developer.md
 
       - name: Install pandoc
         run: sudo apt-get install -y pandoc
