@@ -11,10 +11,17 @@ const chartModules: Record<string, () => Promise<{ default: ChartInit }>> = {
 };
 
 const initialized = new Set<HTMLElement>();
+const visible = new Set<HTMLElement>();
+const stale = new Set<HTMLElement>();
+
+let intersectionObserver: IntersectionObserver | null = null;
+let mutationObserver: MutationObserver | null = null;
+let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 
 function initChart(container: HTMLElement) {
   if (initialized.has(container)) return;
   initialized.add(container);
+  stale.delete(container);
 
   const chartId = container.dataset.chart;
   if (!chartId || !chartModules[chartId]) return;
@@ -29,46 +36,75 @@ function initChart(container: HTMLElement) {
   });
 }
 
+function removeChart(container: HTMLElement) {
+  const svg = container.querySelector('svg');
+  if (svg) svg.remove();
+  container.querySelectorAll('.chart-tooltip').forEach((t) => t.remove());
+  initialized.delete(container);
+}
+
 function observeCharts() {
   const containers = document.querySelectorAll<HTMLElement>('[data-chart]');
 
   if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
+    intersectionObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const el = entry.target as HTMLElement;
           if (entry.isIntersecting) {
-            initChart(entry.target as HTMLElement);
-            observer.unobserve(entry.target);
+            visible.add(el);
+            if (stale.has(el)) {
+              removeChart(el);
+              initChart(el);
+            } else {
+              initChart(el);
+            }
+          } else {
+            visible.delete(el);
           }
         });
       },
       { rootMargin: '200px' }
     );
-    containers.forEach((c) => observer.observe(c));
+    containers.forEach((c) => intersectionObserver!.observe(c));
   } else {
     containers.forEach(initChart);
   }
 }
 
-// Re-render charts when S/B/E mode changes
+// Re-render charts when S/B/E mode changes (debounced)
 function watchModeChanges() {
-  const observer = new MutationObserver(() => {
-    initialized.forEach((container) => {
-      const svg = container.querySelector('svg');
-      if (svg) {
-        // Remove old chart and re-init
-        svg.remove();
-        container.querySelectorAll('.chart-tooltip').forEach(t => t.remove());
-        initialized.delete(container);
-        initChart(container);
-      }
-    });
+  mutationObserver = new MutationObserver(() => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      initialized.forEach((container) => {
+        if (visible.has(container)) {
+          removeChart(container);
+          initChart(container);
+        } else {
+          stale.add(container);
+        }
+      });
+    }, 300);
   });
 
-  observer.observe(document.body, {
+  mutationObserver.observe(document.body, {
     attributes: true,
     attributeFilter: ['data-bg-mode'],
   });
+}
+
+/** Clean up all charts, observers, and state. Call before DOM replacement (View Transitions). */
+export function teardown() {
+  clearTimeout(debounceTimer);
+  initialized.forEach(removeChart);
+  initialized.clear();
+  visible.clear();
+  stale.clear();
+  intersectionObserver?.disconnect();
+  intersectionObserver = null;
+  mutationObserver?.disconnect();
+  mutationObserver = null;
 }
 
 function init() {

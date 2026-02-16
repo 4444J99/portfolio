@@ -77,6 +77,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 <script is:inline src="https://js.puter.com/v2/" defer></script>
 
 <script>
+  declare const puter: { ai: { chat(message: string, options: { system: string; model: string }): Promise<string | { message?: { content?: string }; text?: string }> } };
+
   const SYSTEM_PROMPT = `You are the ORGANVM Capability Advisor. You help prospective collaborators, clients, and partners understand how the eight-organ creative-institutional system can address their specific needs.
 
 THE EIGHT-ORGAN SYSTEM:
@@ -122,17 +124,17 @@ RESPONSE FORMAT:
 5. Use markdown formatting. Be specific, not generic — reference actual repos and capabilities.
 6. Keep the total response concise (300-500 words).`;
 
-  const form = document.getElementById('consult-form');
-  const submitBtn = document.getElementById('submit-btn');
-  const responseArea = document.getElementById('response-area');
-  const responseContent = document.getElementById('response-content');
-  const errorArea = document.getElementById('error-area');
-  const resetBtn = document.getElementById('reset-btn');
-  const challengeInput = document.getElementById('challenge');
-  const industrySelect = document.getElementById('industry');
+  const form = document.getElementById('consult-form')!;
+  const submitBtn = document.getElementById('submit-btn')! as HTMLButtonElement;
+  const responseArea = document.getElementById('response-area')!;
+  const responseContent = document.getElementById('response-content')!;
+  const errorArea = document.getElementById('error-area')!;
+  const resetBtn = document.getElementById('reset-btn')!;
+  const challengeInput = document.getElementById('challenge')! as HTMLTextAreaElement;
+  const industrySelect = document.getElementById('industry')! as HTMLSelectElement;
 
   // Check for Puter API availability with timeout
-  function waitForPuter(timeout) {
+  function waitForPuter(timeout: number): Promise<boolean> {
     return new Promise((resolve) => {
       if (typeof puter !== 'undefined' && puter.ai) { resolve(true); return; }
       const start = Date.now();
@@ -176,7 +178,7 @@ RESPONSE FORMAT:
       // Escape HTML entities before markdown conversion to prevent XSS.
       // This ensures no raw HTML from the AI response survives — only the
       // structural tags we explicitly create via regex below are in the output.
-      function escapeHtml(str) {
+      function escapeHtml(str: string): string {
         return str
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
@@ -187,15 +189,15 @@ RESPONSE FORMAT:
 
       // Allowlist of tags we produce — strip anything else as defense-in-depth
       const ALLOWED_TAGS = ['h1','h2','h3','p','strong','em','code','ul','li','br'];
-      const ALLOWED_ATTRS = {'h2': ['class']};
-      function sanitizeHtml(html) {
-        return html.replace(/<\/?([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>/g, (tag, name, attrs) => {
+      const ALLOWED_ATTRS: Record<string, string[]> = {'h2': ['class']};
+      function sanitizeHtml(html: string): string {
+        return html.replace(/<\/?([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>/g, (tag: string, name: string, attrs: string) => {
           const lowerName = name.toLowerCase();
           if (!ALLOWED_TAGS.includes(lowerName)) return '';
           if (tag.startsWith('</')) return '</' + lowerName + '>';
           const allowedAttrs = ALLOWED_ATTRS[lowerName] || [];
           const safeAttrs = (attrs.match(/\s[\w-]+="[^"]*"/g) || [])
-            .filter(a => allowedAttrs.some(al => a.trimStart().startsWith(al + '=')));
+            .filter((a: string) => allowedAttrs.some((al: string) => a.trimStart().startsWith(al + '=')));
           return '<' + lowerName + safeAttrs.join('') + '>';
         });
       }

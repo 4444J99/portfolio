@@ -9,10 +9,13 @@ interface Props {
 const { chartId, data, ariaLabel, height = '300px' } = Astro.props;
 ---
 
-<div class="chart-container" data-chart={chartId} role="img" aria-label={ariaLabel} style={`min-height: ${height}; position: relative;`}>
+<div class="chart-container" data-chart={chartId} role="img" aria-label={ariaLabel} tabindex="0" style={`min-height: ${height}; position: relative;`}>
   {data && (
     <script type="application/json" set:html={JSON.stringify(data)} />
   )}
+  <noscript>
+    <p class="chart-fallback">{ariaLabel}</p>
+  </noscript>
 </div>
 
 <style>
@@ -31,5 +34,12 @@ const { chartId, data, ariaLabel, height = '300px' } = Astro.props;
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  .chart-fallback {
+    padding: var(--space-xl);
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
   }
 </style>
