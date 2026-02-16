@@ -24,7 +24,7 @@ const organColors: Record<string, string> = {
 
 <Layout title="Dashboard — System Metrics" description="Live metrics for the ORGANVM eight-organ creative-institutional system.">
   <Header />
-  <main>
+  <main id="main-content">
     <div class="sketch-accent">
       <SketchContainer sketchId="data-bars" height="200px" mobileHeight="150px" ariaLabel="Animated data bar visualization representing system metrics" data-values={repoCounts.join(',')} data-labels={organNames.join(',')} />
     </div>

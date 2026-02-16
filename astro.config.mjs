@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://4444j99.github.io',
   base: '/portfolio',
+  prefetch: true,
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/404'),

@@ -11,7 +11,7 @@ const essayTitles = (essayData as any).essays.slice(0, 12).map((e: any) => e.tit
 
 <Layout title="Essays — Public Process" description="28 essays on building an eight-organ creative-institutional system in public.">
   <Header />
-  <main>
+  <main id="main-content">
     <div class="sketch-accent">
       <SketchContainer sketchId="token-stream" height="250px" mobileHeight="180px" ariaLabel="Animated token stream representing text and language flow" data-tokens={essayTitles.join('|')} />
     </div>

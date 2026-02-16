@@ -28,7 +28,7 @@ const organColors: Record<string, string> = {
 
 <Layout title="Architecture — Dependency Graph" description="Interactive dependency graph of the ORGANVM eight-organ system.">
   <Header />
-  <main>
+  <main id="main-content">
     <div class="sketch-accent">
       <SketchContainer sketchId="network-graph" height="250px" mobileHeight="180px" ariaLabel="Animated network graph showing interconnected system nodes" data-nodes={organNodes.join(',')} data-edges={uniqueEdges.join(';')} />
     </div>
