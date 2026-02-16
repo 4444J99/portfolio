@@ -9,8 +9,9 @@ const products = [
     name: 'Gamified Coach Interface',
     repo: 'organvm-iii-ergon/gamified-coach-interface',
     type: 'SaaS',
-    revenue_model: 'premium', revenue_status: 'pre-revenue',
+    status: 'Production-Ready',
     description: 'Holographic 3D fitness coaching visualization built with Three.js and Vite. Interactive orbital node system for strategy mapping and progress tracking.',
+    stack: ['Three.js', 'Vite', 'TypeScript'],
     demo: 'https://organvm-iii-ergon.github.io/gamified-coach-interface/',
     featured: true,
   },
@@ -18,78 +19,89 @@ const products = [
     name: 'Public Record Data Scrapper',
     repo: 'organvm-iii-ergon/public-record-data-scrapper',
     type: 'B2B',
-    revenue_model: 'premium', revenue_status: 'pre-revenue',
-    description: 'Automated public records aggregation and analysis platform for business intelligence and compliance workflows.',
+    status: 'Production-Ready',
+    description: 'Automated public records aggregation and analysis platform. React 19 frontend, Express API, PostgreSQL, Tauri desktop app (Rust), Terraform AWS infrastructure. 2,055 tests.',
+    stack: ['React', 'Express', 'PostgreSQL', 'Rust/Tauri', 'Terraform', 'Docker'],
   },
   {
     name: 'Trade Perpetual Future',
     repo: 'organvm-iii-ergon/trade-perpetual-future',
     type: 'B2B',
-    revenue_model: 'premium', revenue_status: 'pre-revenue',
-    description: 'Perpetual futures trading interface with real-time analytics, position management, and strategy backtesting.',
+    status: 'In Development',
+    description: 'Perpetual futures trading interface with React 19, Solana/Drift Protocol integration, and real-time analytics. 53 Vitest tests, Cloudflare Pages deployment.',
+    stack: ['Python', 'React', 'Solana', 'Vitest', 'Cloudflare'],
   },
   {
     name: 'Sovereign Ecosystem — Real Estate Luxury',
     repo: 'organvm-iii-ergon/sovereign-ecosystem--real-estate-luxury',
     type: 'B2B2C',
-    revenue_model: 'premium', revenue_status: 'pre-revenue',
-    description: 'Luxury real estate marketplace with sovereign identity integration and multi-party transaction orchestration.',
+    status: 'Prototype',
+    description: 'Luxury real estate marketplace with React frontend, Tailwind CSS, and multi-party transaction orchestration.',
+    stack: ['TypeScript', 'React', 'Tailwind'],
   },
   {
     name: 'Universal Mail Automation',
     repo: 'organvm-iii-ergon/universal-mail--automation',
     type: 'B2B',
-    revenue_model: 'premium', revenue_status: 'pre-revenue',
-    description: 'Cross-platform mail automation engine with template management, scheduling, and deliverability analytics.',
+    status: 'Prototype',
+    description: 'Cross-platform mail automation engine with Python backend, AppleScript macOS integration, and scheduling.',
+    stack: ['Python', 'AppleScript', 'Shell'],
   },
   {
     name: 'Search Local — Happy Hour',
     repo: 'organvm-iii-ergon/search-local--happy-hour',
     type: 'B2C',
-    revenue_model: 'premium', revenue_status: 'pre-revenue',
-    description: 'Location-aware discovery platform for local dining and nightlife with real-time deal aggregation.',
+    status: 'Prototype',
+    description: 'Location-aware discovery platform for local dining and nightlife. React frontend with Tailwind CSS.',
+    stack: ['TypeScript', 'React', 'Tailwind'],
   },
   {
     name: 'Fetch Familiar Friends',
     repo: 'organvm-iii-ergon/fetch-familiar-friends',
     type: 'B2C',
-    revenue_model: 'premium', revenue_status: 'pre-revenue',
-    description: 'Social pet adoption and community platform connecting shelters with potential adopters.',
+    status: 'In Development',
+    description: 'Social pet adoption and community platform. JavaScript frontend, PostgreSQL database with PLpgSQL schemas.',
+    stack: ['JavaScript', 'PostgreSQL', 'React'],
   },
   {
     name: 'Multi-Camera Livestream Framework',
     repo: 'organvm-iii-ergon/multi-camera--livestream--framework',
     type: 'B2B2C',
-    revenue_model: 'premium', revenue_status: 'pre-revenue',
-    description: 'Multi-source livestream orchestration with scene switching, overlays, and audience interaction tools.',
+    status: 'Production-Ready',
+    description: 'Multi-source 4K livestream orchestration with Dante audio networking, scene switching, and audience interaction.',
+    stack: ['Shell', 'FFmpeg', 'Dante'],
   },
   {
     name: 'Tab Bookmark Manager',
     repo: 'organvm-iii-ergon/tab-bookmark-manager',
     type: 'SaaS',
-    revenue_model: 'freemium', revenue_status: 'pre-revenue',
-    description: 'Browser extension for intelligent tab organization, session management, and cross-device bookmark sync.',
+    status: 'In Development',
+    description: 'Browser extension with Python ML backend, PostgreSQL, Redis, Puppeteer scraping, and Docker deployment.',
+    stack: ['JavaScript', 'Python', 'PostgreSQL', 'Redis', 'Docker'],
   },
   {
     name: 'The Actual News',
     repo: 'organvm-iii-ergon/the-actual-news',
     type: 'B2C',
-    revenue_model: 'subscription', revenue_status: 'pre-revenue',
-    description: 'Curated news aggregation with source transparency scoring and bias-aware presentation.',
+    status: 'In Development',
+    description: 'Verifiable news platform with Express microservices architecture (4 services), Docker Compose orchestration, and source transparency scoring.',
+    stack: ['Express', 'Docker', 'TypeScript'],
   },
   {
     name: 'Your Fit Tailored',
     repo: 'organvm-iii-ergon/your-fit-tailored',
     type: 'B2C',
-    revenue_model: 'subscription', revenue_status: 'pre-revenue',
-    description: 'Personalized fitness program generator with adaptive progression and wearable device integration.',
+    status: 'Prototype',
+    description: 'Circular apparel platform seed with personalized fit algorithms and subscription-based delivery.',
+    stack: ['JavaScript'],
   },
   {
     name: 'Classroom RPG Aetheria',
     repo: 'organvm-iii-ergon/classroom-rpg-aetheria',
     type: 'SaaS',
-    revenue_model: 'premium', revenue_status: 'pre-revenue',
-    description: 'Gamified classroom management RPG where student engagement drives character progression and world-building.',
+    status: 'In Development',
+    description: 'Gamified classroom management RPG. Next.js + React frontend, Python backend. 192 code files, 16 test files.',
+    stack: ['Next.js', 'React', 'Python', 'Tailwind'],
   },
 ];
 
@@ -100,11 +112,17 @@ const typeBadgeColors: Record<string, string> = {
   B2B2C: '#ca8a04',
 };
 
+const statusColors: Record<string, string> = {
+  'Production-Ready': '#4CAF50',
+  'In Development': '#FF9800',
+  'Prototype': '#9E9E9E',
+};
+
 const typeGroups: Record<string, number> = { SaaS: 0, B2B: 0, B2C: 0, B2B2C: 0 };
 products.forEach((p: any) => { if (typeGroups[p.type] !== undefined) typeGroups[p.type]++; });
 ---
 
-<Layout title="Products — Revenue Channels" description="ORGAN-III commerce products: SaaS, B2B, B2C, and B2B2C revenue channels across 15 deployed applications.">
+<Layout title="Products & Platforms" description="ORGAN-III commerce products: SaaS, B2B, B2C, and B2B2C platforms across 12 applications in various stages of development.">
   <Header />
   <main>
     <div class="sketch-accent">
@@ -112,11 +130,11 @@ products.forEach((p: any) => { if (typeGroups[p.type] !== undefined) typeGroups[
     </div>
     <section class="section">
       <div class="container">
-        <h1 class="page-title">Products & Revenue Channels</h1>
+        <h1 class="page-title">Products & Platforms</h1>
         <p class="page-sub">
-          ORGAN-III (Ergon) houses {products.length} revenue-generating products spanning SaaS platforms,
+          {products.length} products spanning SaaS platforms,
           B2B tools, B2C consumer applications, and hybrid B2B2C marketplaces.
-          Infrastructure deployed — products available for demonstration and pilot programs.
+          Each product lists its current development status and technology stack.
         </p>
 
         <div class="product-grid">
@@ -131,7 +149,8 @@ products.forEach((p: any) => { if (typeGroups[p.type] !== undefined) typeGroups[
               </div>
               <p class="product-card__desc">{p.description}</p>
               <div class="product-card__meta">
-                <span class="product-card__revenue">{p.revenue_model} &middot; {p.revenue_status}</span>
+                <span class="product-card__status-badge" style={`--status-color: ${statusColors[p.status] || '#888'}`}>{p.status}</span>
+                {p.stack && <span class="product-card__stack">{p.stack.join(' · ')}</span>}
               </div>
               <div class="product-card__links">
                 <a href={`https://github.com/${p.repo}`} target="_blank" rel="noopener">GitHub</a>
@@ -229,9 +248,29 @@ products.forEach((p: any) => { if (typeGroups[p.type] !== undefined) typeGroups[
   }
 
   .product-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
     font-size: 0.78rem;
     color: var(--text-muted);
     font-family: var(--font-mono);
+  }
+
+  .product-card__status-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.15em 0.5em;
+    border-radius: 3px;
+    border: 1px solid var(--status-color);
+    color: var(--status-color);
+  }
+
+  .product-card__stack {
+    font-size: 0.72rem;
+    color: var(--text-muted);
   }
 
   .product-card__links {

@@ -35,6 +35,18 @@ const organColors: Record<string, string> = {
 
         <div class="stat-grid">
           <div class="stat">
+            <div class="stat-value">{metrics.code_substance.total_code_files.toLocaleString()}</div>
+            <div class="stat-label">Code Files</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">{metrics.code_substance.total_test_files}</div>
+            <div class="stat-label">Test Files</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">{metrics.code_substance.ci_passing}</div>
+            <div class="stat-label">Passing CI Workflows</div>
+          </div>
+          <div class="stat">
             <div class="stat-value">{metrics.registry.total_repos}</div>
             <div class="stat-label">Repositories</div>
           </div>
@@ -46,13 +58,14 @@ const organColors: Record<string, string> = {
             <div class="stat-value">{metrics.essays.total}</div>
             <div class="stat-label">Essays</div>
           </div>
-          <div class="stat">
-            <div class="stat-value">{metrics.registry.ci_coverage}</div>
-            <div class="stat-label">CI Workflows</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{landing.metrics.sprints_completed}</div>
-            <div class="stat-label">Sprints</div>
+        </div>
+
+        <div class="stack-badges">
+          <h3 class="stack-badges__heading">Verified Technology Stack</h3>
+          <div class="stack-badges__grid">
+            {['Python', 'TypeScript', 'React', 'Next.js', 'FastAPI', 'Express', 'Fastify', 'Docker', 'Terraform', 'PostgreSQL', 'Redis', 'Rust', 'Astro', 'p5.js', 'D3.js', 'Solana/Anchor'].map(tech => (
+              <span class="stack-badge">{tech}</span>
+            ))}
           </div>
         </div>
       </div>
@@ -185,6 +198,44 @@ const organColors: Record<string, string> = {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-muted);
+  }
+
+  .stack-badges {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--border);
+  }
+
+  .stack-badges__heading {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .stack-badges__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .stack-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.3em 0.7em;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .stack-badge:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
   .organ-grid {

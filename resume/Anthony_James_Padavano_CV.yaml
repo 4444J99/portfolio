@@ -11,18 +11,20 @@ cv:
       username: 4444j99
   sections:
     summary:
-      - "Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 91 repositories across 8 GitHub organizations with ~386K words of public documentation. Achieved +17.5M views and raised $2M across nonprofit and commercial projects. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer."
+      - "Creative technologist and artist-engineer with 10+ years across multimedia production, systems design, and AI development. Ships production infrastructure — 3,586 code files, 736 test files, 58 passing CI workflows across 91 repositories and 8 GitHub organizations with ~386K words of public documentation. Achieved +17.5M views and helped raise $2M across 15 client campaigns (2011–2024). MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer."
     skills:
       - label: Languages
-        details: Python, TypeScript, JavaScript, Go, Rust, Bash, SQL
+        details: Python, TypeScript, JavaScript, Rust, Bash, SQL
       - label: Frameworks
-        details: Node.js, Astro, React, Next.js, FastAPI, Express
+        details: Node.js, Astro, React, Next.js, FastAPI, Fastify, Express, p5.js, D3.js
       - label: AI / ML
-        details: LLM orchestration, multi-agent systems, prompt engineering, RAG pipelines
+        details: "LLM orchestration, multi-agent systems (1,095+ tests), prompt engineering, vector search (ChromaDB), model-agnostic (Anthropic/OpenAI/Ollama)"
       - label: Infrastructure
-        details: GitHub Actions, CI/CD, Docker, PostgreSQL, Git
+        details: "GitHub Actions (58 CI workflows), Docker, Terraform (AWS), PostgreSQL, Redis, Git"
+      - label: "Testing & Quality"
+        details: "pytest, Vitest, Jest, TDD — 736 test files across 56 repos, 4,000+ automated tests"
       - label: Creative
-        details: p5.js, generative art, audio synthesis, interactive installations
+        details: "p5.js (32 generative sketches), D3.js, generative art, audio synthesis, interactive installations"
       - label: Marketing
         details: Storytelling, content creation, social media management, SEO optimization, performance analytics, UI/UX design
       - label: Governance
@@ -42,8 +44,8 @@ cv:
       - name: Agentic Titan
         date: "2024 — Present"
         highlights:
-          - "Polymorphic agent swarm architecture across 9 self-organizing topologies with 22 agent archetypes"
-          - "1,095+ tests across 18 implementation phases; model-agnostic (Anthropic, OpenAI, Ollama)"
+          - "Polymorphic agent swarm architecture across 9 self-organizing topologies with 22 agent archetypes; FastAPI dashboard"
+          - "1,095+ tests across 18 implementation phases; model-agnostic (Anthropic, OpenAI, Ollama); Redis, Celery, Ray Serve"
       - name: AI-Conductor Model
         date: "2024 — Present"
         highlights:
@@ -82,7 +84,7 @@ cv:
         start_date: 2011
         location: New York City
         highlights:
-          - "Produced video, audio, and visual campaigns achieving 17.5M+ views and driving $2M in client fundraising and revenue"
+          - "Produced video, audio, and visual campaigns achieving 17.5M+ views and contributing to $2M in client fundraising and revenue across 15 clients (2011–2024)"
           - Integrated SEO and paid media strategies achieving 290% ROI for key campaigns
           - Launched and managed client websites with 42% engagement increase and 30% speed improvement
           - "Conducted A/B testing and performance analysis to optimize campaigns, achieving 27% engagement boost"

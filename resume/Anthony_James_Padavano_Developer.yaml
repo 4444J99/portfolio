@@ -1,0 +1,103 @@
+cv:
+  name: Anthony James Padavano
+  headline: "Python Developer — AI Systems & Automation"
+  location: New York City
+  email:
+    - padavano.anthony@gmail.com
+  website:
+    - https://4444j99.github.io/portfolio/
+  social_networks:
+    - network: GitHub
+      username: 4444j99
+  sections:
+    summary:
+      - "Python developer and AI systems engineer with a testing-first discipline — 4,000+ automated tests, 736 test files, 58 passing CI workflows across 91 repositories. Built a model-agnostic multi-agent framework (1,095+ tests, 9 topologies, FastAPI dashboard) and production infrastructure with Docker, Terraform (AWS), and PostgreSQL. Meta Full-Stack Developer certified. Previous experience as Digital Marketing Manager at Miami Dade College Foundation."
+    skills:
+      - label: Languages
+        details: Python, TypeScript, JavaScript, Rust, Bash, SQL
+      - label: Backend
+        details: FastAPI, Fastify, Express, PostgreSQL, Redis
+      - label: Frontend
+        details: React, Next.js, Astro, Tailwind CSS
+      - label: AI / ML
+        details: "Multi-agent systems, LLM orchestration, vector search (ChromaDB), model-agnostic (Anthropic/OpenAI/Ollama)"
+      - label: Infrastructure
+        details: "Docker, Terraform (AWS), GitHub Actions (58 CI workflows), Vercel, CI/CD"
+      - label: Testing
+        details: "pytest, Vitest, Jest, TDD — 4,000+ automated tests, 736 test files, 58 passing CI workflows"
+      - label: "Desktop & Blockchain"
+        details: "Tauri (Rust), Solana/Anchor smart contracts"
+    selected projects:
+      - name: Agentic Titan
+        date: "2024 — Present"
+        highlights:
+          - "Model-agnostic multi-agent framework — 9 topology patterns, 22 agent archetypes, FastAPI dashboard, Redis task queuing, Celery workers, Ray Serve deployment"
+          - "1,095+ tests across 18 implementation phases; production safety infrastructure with circuit breakers, rate limiting, and graceful degradation"
+      - name: Public Record Data Scrapper
+        date: "2024 — Present"
+        highlights:
+          - "Full-stack data platform — React 19 frontend, Express API, PostgreSQL, 2,055 automated tests"
+          - "Tauri desktop app (Rust), Terraform AWS infrastructure (RDS, ElastiCache, S3, CloudWatch), Vercel deployment"
+      - name: "Life My Midst In"
+        date: "2024 — Present"
+        highlights:
+          - "Next.js 16 + React 19 frontend, Fastify 5 backend, Docker orchestration (4 Dockerfiles, PostgreSQL + Redis compose)"
+          - "W3C Verifiable Credentials integration; Railway, Render, and Vercel deployment configs"
+      - name: Recursive Engine (RE:GE)
+        date: "2024 — Present"
+        highlights:
+          - "Pure Python symbolic engine — 21 handlers, ritual syntax DSL, 1,254 tests, 85% coverage"
+      - name: "The Actual News"
+        date: "2024 — Present"
+        highlights:
+          - "Express microservices architecture (4 services), Docker Compose orchestration, content-addressed evidence graphs"
+    experience:
+      - company: Independent
+        position: AI Systems Developer
+        start_date: 2021
+        location: New York City
+        highlights:
+          - "Built model-agnostic multi-agent framework with 1,095+ tests, 9 topologies, FastAPI dashboard, and production deployment configs (Docker, Redis, Celery, Ray Serve)"
+          - "Developed pure Python symbolic engine (1,254 tests, 85% coverage) with a custom DSL"
+          - "Shipped 91 repositories with 58 passing CI workflows, 736 test files, and 3,586 code files across a coordinated multi-org architecture"
+          - "Built full-stack applications with React, Next.js, FastAPI, Express, Fastify, PostgreSQL, Redis, and Docker"
+      - company: Miami Dade College Foundation
+        position: Digital Marketing Manager
+        start_date: 2023
+        end_date: 2024
+        location: Miami, FL
+        highlights:
+          - Designed and executed digital campaigns increasing donor engagement by 32% and surpassing fundraising goals
+          - "Rebuilt foundation website — 38% traffic growth, 22% improvement in donation conversions"
+          - "Trained team members on advanced analytics tools, leading to 20% efficiency boost in reporting"
+      - company: AJP Media Arts
+        position: Multimedia Specialist & Developer
+        start_date: 2011
+        location: New York City
+        highlights:
+          - "Built and managed 15 client websites with custom development — 42% engagement increase, 30% speed improvement"
+          - "Integrated SEO and paid media strategies achieving 290% ROI for key campaigns"
+          - "Conducted A/B testing and performance analysis to optimize campaigns — 27% engagement boost"
+    education:
+      - institution: Florida Atlantic University
+        area: Creative Writing
+        degree: M.F.A.
+        start_date: 2015
+        end_date: 2018
+      - institution: CUNY College of Staten Island
+        area: English Literature
+        degree: B.A.
+        start_date: 2010
+        end_date: 2014
+    certifications:
+      - label: "Full-Stack Developer — Meta"
+        details: "2023 — 2024"
+      - label: "UX Design — Google"
+        details: "2022 — 2023"
+      - label: "Digital Marketing & E-commerce — Google"
+        details: "2022 — 2023"
+      - label: "Project Management — Google"
+        details: "2022 — 2023"
+
+design:
+  theme: classic

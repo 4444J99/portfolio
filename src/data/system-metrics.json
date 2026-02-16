@@ -466,9 +466,9 @@
       "target": "Salon launched",
       "current": "0"
     },
-    "revenue_products": {
-      "target": "2-3",
-      "current": "0"
+    "production_ready_products": {
+      "target": "3-5",
+      "current": "3 (Coach Interface, Public Record Scrapper, Livestream Framework)"
     },
     "real_test_suites": {
       "target": "30+",

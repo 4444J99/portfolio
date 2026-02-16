@@ -255,9 +255,23 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
     <section class="hero">
       <div class="container hero__split">
         <div class="hero__text">
-          <p class="hero__label">Creative Technologist</p>
-          <h1 class="hero__title">Full-stack engineer and creative technologist building AI-powered systems, generative art, and production infrastructure.</h1>
-          <p class="hero__sub">Coordinating theory, generative art, commerce, and community across an eight-organ infrastructure — 91 repositories, 8 organizations, ~386K words of public documentation.</p>
+          <div class="view-toggle" role="radiogroup" aria-label="Presentation mode">
+            <button class="view-toggle__btn view-toggle__btn--active" data-view="engineering" role="radio" aria-checked="true">Engineering</button>
+            <button class="view-toggle__btn" data-view="creative" role="radio" aria-checked="false">Creative Practice</button>
+          </div>
+
+          <div class="hero__view" data-hero-view="engineering">
+            <p class="hero__label">Full-Stack Engineer</p>
+            <h1 class="hero__title">Python and TypeScript developer building AI systems, production infrastructure, and tested software.</h1>
+            <p class="hero__sub">3,586 code files, 736 test files, 58 passing CI workflows. React, Next.js, FastAPI, Docker, Terraform, PostgreSQL across 91 repositories.</p>
+          </div>
+
+          <div class="hero__view" data-hero-view="creative" style="display: none;">
+            <p class="hero__label">Creative Technologist</p>
+            <h1 class="hero__title">Artist-engineer building autonomous creative systems and treating their governance as artistic medium.</h1>
+            <p class="hero__sub">Coordinating theory, generative art, commerce, and community across an eight-organ infrastructure — 91 repositories, 8 organizations, ~386K words of public documentation.</p>
+          </div>
+
           <p class="hero__available">
             <span class="hero__available-dot" aria-hidden="true"></span>
             Open to opportunities — <a href="mailto:padavano.anthony@gmail.com">Get in touch</a>
@@ -302,7 +316,29 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
 
     <section class="section stats-section">
       <div class="container">
-        <div class="stat-grid">
+        <div class="stat-grid" data-stats-view="engineering">
+          <div class="stat">
+            <div class="stat-value">3,586</div>
+            <div class="stat-label">Code Files</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">736</div>
+            <div class="stat-label">Test Files</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">58</div>
+            <div class="stat-label">Passing CI Workflows</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">91</div>
+            <div class="stat-label">Repositories</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4,000+</div>
+            <div class="stat-label">Automated Tests</div>
+          </div>
+        </div>
+        <div class="stat-grid" data-stats-view="creative" style="display: none;">
           <div class="stat">
             <div class="stat-value">91</div>
             <div class="stat-label">Repositories</div>
@@ -320,8 +356,8 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
             <div class="stat-label">Published Essays</div>
           </div>
           <div class="stat">
-            <div class="stat-value">82+</div>
-            <div class="stat-label">CI/CD Workflows</div>
+            <div class="stat-value">32</div>
+            <div class="stat-label">Generative Sketches</div>
           </div>
         </div>
       </div>
@@ -359,6 +395,28 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
+    // View toggle
+    const viewBtns = document.querySelectorAll('.view-toggle__btn');
+    viewBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const view = btn.getAttribute('data-view');
+        viewBtns.forEach(b => {
+          b.classList.remove('view-toggle__btn--active');
+          b.setAttribute('aria-checked', 'false');
+        });
+        btn.classList.add('view-toggle__btn--active');
+        btn.setAttribute('aria-checked', 'true');
+
+        document.querySelectorAll('[data-hero-view]').forEach(el => {
+          el.style.display = el.getAttribute('data-hero-view') === view ? '' : 'none';
+        });
+        document.querySelectorAll('[data-stats-view]').forEach(el => {
+          el.style.display = el.getAttribute('data-stats-view') === view ? '' : 'none';
+        });
+      });
+    });
+
+    // Skill filter
     const chips = document.querySelectorAll('.filter-chip');
     const cards = document.querySelectorAll('.card[data-skills]');
     const groups = document.querySelectorAll('[data-organ-group]');
@@ -408,6 +466,37 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
 
   .hero__canvas {
     min-width: 0;
+  }
+
+  .view-toggle {
+    display: inline-flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: var(--space-xl);
+  }
+
+  .view-toggle__btn {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: var(--space-xs) var(--space-md);
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .view-toggle__btn:hover {
+    color: var(--text-primary);
+  }
+
+  .view-toggle__btn--active {
+    background: var(--accent-muted);
+    color: var(--accent);
   }
 
   .hero__label {

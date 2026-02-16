@@ -182,7 +182,7 @@
       "organ_name": "Commerce",
       "url": "https://github.com/organvm-iii-ergon/public-record-data-scrapper",
       "description": "50-state UCC public records aggregation platform. Live Vercel deployment, tiered B2B subscriptions, Terraform AWS infrastructure, 60+ collection agents, 2,055 tests.",
-      "portfolio_relevance": "CRITICAL - Strongest revenue proof in ORGAN-III; live deployment with paying subscribers",
+      "portfolio_relevance": "CRITICAL - Most complete product in ORGAN-III; live Vercel deployment, 2,055 tests, Terraform AWS infrastructure",
       "tier": "flagship",
       "implementation_status": "ACTIVE",
       "ci_workflow": "ci-typescript.yml",

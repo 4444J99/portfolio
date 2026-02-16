@@ -11,7 +11,7 @@ cv:
       username: 4444j99
   sections:
     summary:
-      - "Creative Multimedia Specialist with 10+ years of experience in viral multimedia storytelling, marketing strategy, and content lifecycle management. Achieved +17.5M views and raised $2M across nonprofit and commercial projects. Skilled in cross-platform strategies, UI/UX design, and campaign optimization, driving audience growth by 35% and ROI by 325%. Proven leader in team collaboration and data-driven performance enhancements, delivering innovative solutions that combine creativity and measurable results."
+      - "Creative Multimedia Specialist with 10+ years of experience in viral multimedia storytelling, marketing strategy, and content lifecycle management. Achieved +17.5M views and contributed to $2M in fundraising and revenue across 15 client campaigns (2011–2024). Skilled in cross-platform strategies, UI/UX design, and campaign optimization, driving audience growth by 35% and ROI by 325%. Proven leader in team collaboration and data-driven performance enhancements, delivering innovative solutions that combine creativity and measurable results."
     skills:
       - label: Storytelling & Content
         details: Storytelling, content creation, video production, audio production, visual campaigns, content lifecycle management
@@ -22,7 +22,7 @@ cv:
       - label: Analytics
         details: Performance analytics, A/B testing, conversion optimization, Google Analytics, reporting dashboards
       - label: Technical
-        details: Python, TypeScript, JavaScript, Node.js, React, Astro, GitHub Actions, CI/CD
+        details: Python, TypeScript, JavaScript, Node.js, React, Astro, GitHub Actions, CI/CD, Docker
       - label: Project Management
         details: Cross-functional team leadership, stakeholder management, Agile/Scrum, resource allocation
     selected projects:
@@ -67,7 +67,7 @@ cv:
         start_date: 2011
         location: New York City
         highlights:
-          - "Produced engaging video, audio, and visual campaigns achieving 17.5M+ views and driving $2M in client fundraising and revenue"
+          - "Produced engaging video, audio, and visual campaigns achieving 17.5M+ views and contributing to $2M in client fundraising and revenue across 15 clients (2011–2024)"
           - "Developed innovative marketing strategies integrating SEO and paid media — 290% ROI for key campaigns"
           - "Launched and managed client websites using WordPress and custom HTML/CSS — 42% engagement increase, 30% speed improvement"
           - "Conducted A/B testing and performance analysis to optimize campaigns — 27% engagement boost across client portfolios"
