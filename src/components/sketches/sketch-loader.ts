@@ -69,32 +69,38 @@ function initSketch(container: HTMLElement) {
     const P5 = p5Module.default;
     const sketchFn = sketchModule.default;
 
-    new P5((p: p5) => {
-      sketchFn(p, container);
+    try {
+      new P5((p: p5) => {
+        sketchFn(p, container);
 
-      // For reduced motion: render a fully-grown static frame then stop
-      if (prefersReducedMotion && p.draw) {
-        const originalDraw = p.draw.bind(p);
-        // Run draw multiple times silently to let state build up, then stop
-        let warmupFrames = 60; // simulate ~2s of animation
-        p.draw = function () {
-          originalDraw();
-          warmupFrames--;
-          if (warmupFrames <= 0) {
-            p.noLoop();
-          }
-        };
-
-        // Allow click interactions to trigger a single redraw
-        const originalMousePressed = p.mousePressed?.bind(p);
-        if (originalMousePressed) {
-          p.mousePressed = function () {
-            originalMousePressed();
-            p.redraw();
+        // For reduced motion: render a fully-grown static frame then stop
+        if (prefersReducedMotion && p.draw) {
+          const originalDraw = p.draw.bind(p);
+          // Run draw multiple times silently to let state build up, then stop
+          let warmupFrames = 60; // simulate ~2s of animation
+          p.draw = function () {
+            originalDraw();
+            warmupFrames--;
+            if (warmupFrames <= 0) {
+              p.noLoop();
+            }
           };
+
+          // Allow click interactions to trigger a single redraw
+          const originalMousePressed = p.mousePressed?.bind(p);
+          if (originalMousePressed) {
+            p.mousePressed = function () {
+              originalMousePressed();
+              p.redraw();
+            };
+          }
         }
-      }
-    }, container);
+      }, container);
+    } catch (err) {
+      console.error('[sketch]', sketchId, 'p5 constructor error:', err);
+    }
+  }).catch((err) => {
+    console.error('[sketch]', sketchId, 'load error:', err);
   });
 }
 
@@ -157,21 +163,27 @@ function initBackground() {
     const P5 = p5Module.default;
     const sketchFn = sketchModule.default;
 
-    new P5((p: p5) => {
-      sketchFn(p, bg);
+    try {
+      new P5((p: p5) => {
+        sketchFn(p, bg);
 
-      if (prefersReducedMotion && p.draw) {
-        const originalDraw = p.draw.bind(p);
-        let warmupFrames = 60;
-        p.draw = function () {
-          originalDraw();
-          warmupFrames--;
-          if (warmupFrames <= 0) {
-            p.noLoop();
-          }
-        };
-      }
-    }, bg);
+        if (prefersReducedMotion && p.draw) {
+          const originalDraw = p.draw.bind(p);
+          let warmupFrames = 60;
+          p.draw = function () {
+            originalDraw();
+            warmupFrames--;
+            if (warmupFrames <= 0) {
+              p.noLoop();
+            }
+          };
+        }
+      }, bg);
+    } catch (err) {
+      console.error('[bg-sketch] p5 constructor error:', err);
+    }
+  }).catch((err) => {
+    console.error('[bg-sketch] load error:', err);
   });
 }
 

@@ -14,17 +14,18 @@ export default function backgroundSketch(p: p5, container: HTMLElement) {
   let baseT = 0;
 
   p.setup = () => {
-    const canvas = p.createCanvas(COLS, ROWS);
-    canvas.style('width', '100%');
-    canvas.style('height', '100%');
+    p.createCanvas(container.offsetWidth || p.windowWidth, container.offsetHeight || p.windowHeight);
     p.pixelDensity(1);
     p.noSmooth();
+    p.noStroke();
     p.frameRate(24);
   };
 
   p.draw = () => {
     baseT += COLOR_SPEED;
-    p.loadPixels();
+
+    const cellW = p.width / COLS;
+    const cellH = p.height / ROWS;
 
     for (let y = 0; y < ROWS; y++) {
       for (let x = 0; x < COLS; x++) {
@@ -47,14 +48,13 @@ export default function backgroundSketch(p: p5, container: HTMLElement) {
         // Dim to 65–85% to keep colors rich, never white
         const dim = 0.65 + n * 0.2;
 
-        const px = (y * COLS + x) * 4;
-        p.pixels[px] = r * dim;
-        p.pixels[px + 1] = g * dim;
-        p.pixels[px + 2] = b * dim;
-        p.pixels[px + 3] = 255;
+        p.fill(r * dim, g * dim, b * dim);
+        p.rect(x * cellW, y * cellH, Math.ceil(cellW), Math.ceil(cellH));
       }
     }
+  };
 
-    p.updatePixels();
+  p.windowResized = () => {
+    p.resizeCanvas(container.offsetWidth || p.windowWidth, container.offsetHeight || p.windowHeight);
   };
 }
