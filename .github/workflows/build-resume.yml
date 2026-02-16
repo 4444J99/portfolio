@@ -28,21 +28,21 @@ jobs:
         run: |
           mkdir -p resume/rendercv_output
           rendercv render resume/Anthony_James_Padavano_CV.yaml \
-            --pdf-path resume/rendercv_output/Anthony_James_Padavano_CV.pdf \
-            -md resume/rendercv_output/Anthony_James_Padavano_CV.md
+            --pdf-path rendercv_output/Anthony_James_Padavano_CV.pdf \
+            -md rendercv_output/Anthony_James_Padavano_CV.md
 
       - name: Render Multimedia Specialist resume
         run: |
           mkdir -p resume/rendercv_output_multimedia
           rendercv render resume/Anthony_James_Padavano_Multimedia.yaml \
-            --pdf-path resume/rendercv_output_multimedia/Anthony_James_Padavano_Multimedia.pdf
+            --pdf-path rendercv_output_multimedia/Anthony_James_Padavano_Multimedia.pdf
 
       - name: Render Developer resume
         run: |
           mkdir -p resume/rendercv_output_developer
           rendercv render resume/Anthony_James_Padavano_Developer.yaml \
-            --pdf-path resume/rendercv_output_developer/Anthony_James_Padavano_Developer.pdf \
-            -md resume/rendercv_output_developer/Anthony_James_Padavano_Developer.md
+            --pdf-path rendercv_output_developer/Anthony_James_Padavano_Developer.pdf \
+            -md rendercv_output_developer/Anthony_James_Padavano_Developer.md
 
       - name: Install pandoc
         run: sudo apt-get install -y pandoc
