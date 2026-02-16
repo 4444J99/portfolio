@@ -6,11 +6,11 @@ const year = new Date().getFullYear();
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__links">
-      <a href="https://github.com/meta-organvm" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://github.com/meta-organvm" target="_blank" rel="me noopener noreferrer">GitHub</a>
       <span class="footer__sep" aria-hidden="true">/</span>
       <a href="https://github.com/4444j99" target="_blank" rel="me noopener noreferrer">@4444j99</a>
       <span class="footer__sep" aria-hidden="true">/</span>
-      <a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
       <span class="footer__sep" aria-hidden="true">/</span>
       <a href="mailto:padavano.anthony@gmail.com">Contact</a>
       <span class="footer__sep" aria-hidden="true">/</span>
@@ -154,8 +154,9 @@ const year = new Date().getFullYear();
         var mode = btn.dataset.mode;
         document.body.dataset.bgMode = mode;
         localStorage.setItem('bg-mode', mode);
-        document.querySelectorAll('.bg-mode-btn').forEach(function(b) { b.classList.remove('bg-mode-btn--active'); });
-        btn.classList.add('bg-mode-btn--active');
+        document.querySelectorAll('.bg-mode-btn').forEach(function(b) {
+          b.classList.toggle('bg-mode-btn--active', b.dataset.mode === mode);
+        });
       });
     });
   })();

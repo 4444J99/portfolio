@@ -7,7 +7,7 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
-<Layout title="About — Anthony James Padavano" description="Creative technologist building autonomous creative systems. Professional bio, practice statement, and contact information.">
+<Layout title="About — Anthony James Padavano" description="Creative technologist building autonomous creative systems. Professional bio, practice statement, and contact information." ogImage="https://4444j99.github.io/portfolio/og/about.png">
   <Header />
   <main id="main-content">
     <div class="sketch-accent">
@@ -21,12 +21,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <a class="sr-only u-url" href="https://4444j99.github.io/portfolio/">Portfolio</a>
         <span class="sr-only p-locality">New York City</span>
 
-        <section class="about__bio prose">
+        <section class="about__bio prose" data-reveal>
           <p>
             I'm Anthony James Padavano — a creative technologist and systems architect based in New York City. I build autonomous creative systems and treat their governance as an artistic medium.
           </p>
           <p>
-            My work sits at the intersection of software engineering, generative art, and institutional design. Over the past 10+ years I've moved across multimedia production, digital marketing, higher education, and — most recently — the design of large-scale creative infrastructure. The throughline is a belief that how you organize and govern creative work is as important as the work itself.
+            My work sits at the intersection of software engineering, generative art, and institutional design. Over the past 10+ years I've moved across multimedia production (17.5M+ views, $2M raised), digital marketing, higher education, and — most recently — the design of large-scale creative infrastructure. The throughline is a belief that how you organize and govern creative work is as important as the work itself.
           </p>
           <p>
             I hold an MFA in Creative Writing from Florida Atlantic University and a BA in English Literature from CUNY. I'm a Meta-certified Full-Stack Developer and hold Google Professional Certificates in UX Design, Digital Marketing, and Project Management. These days I spend most of my time writing Python and TypeScript, orchestrating multi-agent AI systems, and building the governance infrastructure that lets creative projects sustain themselves.
@@ -35,7 +35,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
         <hr />
 
-        <section class="about__system prose">
+        <section class="about__system prose" data-reveal>
           <h2>The Eight-Organ System</h2>
           <p>
             Most creative portfolios are flat — a list of projects with screenshots. Mine is an operating system.
