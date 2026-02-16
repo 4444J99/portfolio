@@ -7,7 +7,7 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
-<Layout title="Resume — Anthony James Padavano" description="Creative technologist building autonomous creative systems. Resume and CV." ogImage="https://4444j99.github.io/portfolio/og/resume.png">
+<Layout title="Resume — Anthony James Padavano" description="Creative technologist building autonomous creative systems. Resume and CV." >
   <Header />
   <main id="main-content">
     <div class="sketch-accent print-hide">
@@ -302,6 +302,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 <style>
   .resume {
     padding: var(--space-3xl) 0;
+    background: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .resume__header {
@@ -314,11 +317,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   }
 
   .resume__title {
-    font-family: var(--font-mono);
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--accent);
+    color: var(--accent-text);
     margin-bottom: var(--space-md);
   }
 
@@ -346,13 +348,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
   .resume__download {
     display: inline-block;
-    font-family: var(--font-mono);
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     padding: var(--space-xs) var(--space-md);
     border: 1px solid var(--accent);
-    color: var(--accent);
+    color: var(--accent-text);
     text-decoration: none;
     transition: background var(--transition-fast), color var(--transition-fast);
   }
@@ -373,7 +374,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   }
 
   .resume__contact a:hover {
-    color: var(--accent);
+    color: var(--accent-text);
   }
 
   .resume__sep {

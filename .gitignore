@@ -20,6 +20,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# Root-level screenshots (keep PNGs in subdirectories)
+/*.png
+
 # intake files (personal documents for resume ingestion)
 intake/*
 !intake/README.md

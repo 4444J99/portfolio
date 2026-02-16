@@ -32,6 +32,9 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
     <!-- Identity verification -->
     <link rel="me" href="https://github.com/4444j99" />
 
+    <!-- Analytics (Plausible — privacy-friendly, no cookies) -->
+    <script defer data-domain="4444j99.github.io" src="https://plausible.io/js/script.js"></script>
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
@@ -127,10 +130,25 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
       }
     })} />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Self-hosted fonts (no external requests) -->
+    <link rel="preload" href="/portfolio/fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/portfolio/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <style>
+      @font-face {
+        font-family: 'Jost';
+        font-style: normal;
+        font-weight: 400 700;
+        font-display: swap;
+        src: url('/portfolio/fonts/jost-latin.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        font-style: normal;
+        font-weight: 400 500;
+        font-display: swap;
+        src: url('/portfolio/fonts/jetbrains-mono-latin.woff2') format('woff2');
+      }
+    </style>
     <title>{title}</title>
   </head>
   <body data-bg-mode="subtle">

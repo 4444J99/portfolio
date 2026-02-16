@@ -4,13 +4,15 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 
+import type { GraphData, GraphNode, GraphEdge } from '../types/data';
 import graphData from '../data/graph.json';
 
-const organNodes = [...new Set((graphData as any).nodes.map((n: any) => n.organ))];
-const organEdges = (graphData as any).edges.map((e: any) => {
-  const srcOrgan = (graphData as any).nodes.find((n: any) => n.id === e.source)?.organ;
-  const tgtOrgan = (graphData as any).nodes.find((n: any) => n.id === e.target)?.organ;
-  return `${organNodes.indexOf(srcOrgan)}-${organNodes.indexOf(tgtOrgan)}`;
+const typedGraph = graphData as unknown as GraphData;
+const organNodes = [...new Set(typedGraph.nodes.map((n: GraphNode) => n.organ))];
+const organEdges = typedGraph.edges.map((e: GraphEdge) => {
+  const srcOrgan = typedGraph.nodes.find((n: GraphNode) => n.id === e.source)?.organ;
+  const tgtOrgan = typedGraph.nodes.find((n: GraphNode) => n.id === e.target)?.organ;
+  return `${organNodes.indexOf(srcOrgan!)}-${organNodes.indexOf(tgtOrgan!)}`;
 }).filter((e: string) => { const [a, b] = e.split('-'); return a !== b; });
 const uniqueEdges = [...new Set(organEdges)] as string[];
 
@@ -184,21 +186,8 @@ const organColors: Record<string, string> = {
 </script>
 
 <style>
-  .page-title {
-    margin-bottom: var(--space-sm);
-  }
-
   .page-sub {
     margin-bottom: var(--space-lg);
-  }
-
-  .section__heading {
-    margin-bottom: var(--space-xl);
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
   }
 
   .legend {

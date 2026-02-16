@@ -23,6 +23,8 @@ const { chartId, data, ariaLabel, height = '300px' } = Astro.props;
     border-radius: 8px;
     padding: var(--space-lg);
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .chart-container :global(svg) {

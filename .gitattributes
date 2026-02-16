@@ -6,3 +6,4 @@
 *.svg filter= diff= merge= -text
 *.ico filter= diff= merge= -text
 *.webp filter= diff= merge= -text
+*.woff2 filter= diff= merge= -text

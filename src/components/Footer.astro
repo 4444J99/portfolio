@@ -45,6 +45,9 @@ const year = new Date().getFullYear();
     border-top: 1px solid var(--border);
     padding: var(--space-2xl) 0;
     margin-top: var(--space-4xl);
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .footer__inner {
@@ -109,13 +112,13 @@ const year = new Date().getFullYear();
 
   .bg-mode-btn {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    width: 24px;
-    height: 24px;
+    font-size: 0.7rem;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     border: 1px solid var(--border);
     background: transparent;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     cursor: pointer;
     transition: all var(--transition-fast);
   }
@@ -146,10 +149,15 @@ const year = new Date().getFullYear();
 
 <script is:inline>
   (function() {
-    var savedMode = localStorage.getItem('bg-mode') || 'subtle';
-    document.body.dataset.bgMode = savedMode;
+    var validModes = ['subtle', 'bold', 'extreme'];
+    var urlParam = new URLSearchParams(window.location.search).get('mode');
+    var initialMode = (urlParam && validModes.indexOf(urlParam) !== -1)
+      ? urlParam
+      : localStorage.getItem('bg-mode') || 'subtle';
+    document.body.dataset.bgMode = initialMode;
+    localStorage.setItem('bg-mode', initialMode);
     document.querySelectorAll('.bg-mode-btn').forEach(function(btn) {
-      if (btn.dataset.mode === savedMode) btn.classList.add('bg-mode-btn--active');
+      if (btn.dataset.mode === initialMode) btn.classList.add('bg-mode-btn--active');
       btn.addEventListener('click', function() {
         var mode = btn.dataset.mode;
         document.body.dataset.bgMode = mode;

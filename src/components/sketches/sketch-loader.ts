@@ -48,6 +48,18 @@ function isMobile(): boolean {
 
 let resizeTimer: ReturnType<typeof setTimeout> | null = null;
 
+function showFallback(container: HTMLElement, sketchId: string) {
+  const fallback = container.querySelector('.sketch-noscript');
+  if (fallback) {
+    (fallback as HTMLElement).style.display = 'flex';
+  } else {
+    const el = document.createElement('div');
+    el.style.cssText = 'display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:0.8rem;opacity:0.6;';
+    el.textContent = `[${sketchId}]`;
+    container.appendChild(el);
+  }
+}
+
 function initSketch(container: HTMLElement) {
   if (initialized.has(container)) return;
   initialized.add(container);
@@ -98,9 +110,11 @@ function initSketch(container: HTMLElement) {
       }, container);
     } catch (err) {
       console.error('[sketch]', sketchId, 'p5 constructor error:', err);
+      showFallback(container, sketchId!);
     }
   }).catch((err) => {
     console.error('[sketch]', sketchId, 'load error:', err);
+    showFallback(container, sketchId!);
   });
 }
 
@@ -181,6 +195,7 @@ function initBackground() {
       }, bg);
     } catch (err) {
       console.error('[bg-sketch] p5 constructor error:', err);
+      // Background sketch fails silently — no visible fallback needed
     }
   }).catch((err) => {
     console.error('[bg-sketch] load error:', err);

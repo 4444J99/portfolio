@@ -42,6 +42,8 @@ const { title, tagline, description, href, tags, number, featured, skills = [], 
     border-radius: 12px;
     text-decoration: none;
     transition: background var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .card:hover {
@@ -86,7 +88,7 @@ const { title, tagline, description, href, tags, number, featured, skills = [], 
 
   .card__tagline {
     font-size: 0.9rem;
-    color: var(--accent);
+    color: var(--accent-text);
     font-style: italic;
   }
 
@@ -105,12 +107,12 @@ const { title, tagline, description, href, tags, number, featured, skills = [], 
   }
 
   .card:hover .card__cta {
-    color: var(--accent);
+    color: var(--accent-text);
   }
 
   .tag--skill {
     background: rgba(0, 188, 212, 0.1);
-    color: var(--accent);
+    color: var(--accent-text);
   }
 
   /* Dual-view visibility: engineering mode hides creative elements, vice versa */

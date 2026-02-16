@@ -37,7 +37,7 @@ const sketches = [
 ];
 ---
 
-<Layout title="Gallery — Generative Art" description="A collection of generative art sketches built with p5.js, each paired to a project in the eight-organ system." ogImage="https://4444j99.github.io/portfolio/og/gallery.png">
+<Layout title="Gallery — Generative Art" description="A collection of generative art sketches built with p5.js, each paired to a project in the eight-organ system.">
   <Header />
   <main id="main-content">
     <section class="section">
@@ -67,19 +67,7 @@ const sketches = [
   <Footer />
 </Layout>
 
-<script>
-  import '../components/sketches/sketch-loader';
-</script>
-
 <style>
-  .page-title {
-    margin-bottom: var(--space-sm);
-  }
-
-  .page-sub {
-    margin-bottom: var(--space-2xl);
-  }
-
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -96,10 +84,13 @@ const sketches = [
     align-items: baseline;
     padding: var(--space-sm) var(--space-xs);
     margin-top: var(--space-xs);
+    background: var(--bg-card);
+    border-radius: 4px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .gallery-item__label {
-    font-family: var(--font-mono);
     font-size: 0.8rem;
     font-weight: 500;
     color: var(--text-primary);

@@ -4,12 +4,14 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 import SketchContainer from '../components/sketches/SketchContainer.astro';
+import type { EssayData, Essay } from '../types/data';
 import essayData from '../data/essays.json';
 
-const essayTitles = (essayData as any).essays.slice(0, 12).map((e: any) => e.title);
+const typedEssayData = essayData as unknown as EssayData;
+const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title);
 ---
 
-<Layout title="Essays — Public Process" description="28 essays on building an eight-organ creative-institutional system in public." ogImage="https://4444j99.github.io/portfolio/og/essays.png">
+<Layout title="Essays — Public Process" description="28 essays on building an eight-organ creative-institutional system in public.">
   <Header />
   <main id="main-content">
     <div class="sketch-accent">
@@ -19,17 +21,17 @@ const essayTitles = (essayData as any).essays.slice(0, 12).map((e: any) => e.tit
       <div class="container">
         <h1 class="page-title">Public Process Essays</h1>
         <p class="page-sub">
-          {essayData.total} essays documenting architectural decisions, sprint narratives, and methodology
+          {typedEssayData.total} essays documenting architectural decisions, sprint narratives, and methodology
           — transparency as design choice, process documentation as portfolio evidence.
         </p>
         <p class="page-feed">
-          <a href={essayData.feed_url} target="_blank" rel="noopener">RSS Feed</a>
+          <a href={typedEssayData.feed_url} target="_blank" rel="noopener">RSS Feed</a>
           &middot;
-          <a href={essayData.site_url} target="_blank" rel="noopener">Full site</a>
+          <a href={typedEssayData.site_url} target="_blank" rel="noopener">Full site</a>
         </p>
 
         <div class="essay-list">
-          {essayData.essays.map((essay: any) => (
+          {typedEssayData.essays.map((essay: Essay) => (
             <a href={essay.url} target="_blank" rel="noopener" class="essay-entry">
               <time class="essay-entry__date" datetime={essay.date}>{essay.date}</time>
               <span class="essay-entry__title">{essay.title}</span>
@@ -43,10 +45,6 @@ const essayTitles = (essayData as any).essays.slice(0, 12).map((e: any) => e.tit
 </Layout>
 
 <style>
-  .page-title {
-    margin-bottom: var(--space-sm);
-  }
-
   .page-sub {
     margin-bottom: var(--space-sm);
   }
@@ -65,10 +63,13 @@ const essayTitles = (essayData as any).essays.slice(0, 12).map((e: any) => e.tit
     display: flex;
     align-items: baseline;
     gap: var(--space-lg);
-    padding: var(--space-md) 0;
+    padding: var(--space-md);
     border-bottom: 1px solid var(--border);
     text-decoration: none;
     transition: background var(--transition-fast);
+    background: var(--bg-secondary);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .essay-entry:hover {
@@ -76,7 +77,6 @@ const essayTitles = (essayData as any).essays.slice(0, 12).map((e: any) => e.tit
   }
 
   .essay-entry__date {
-    font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--text-muted);
     flex-shrink: 0;
@@ -90,7 +90,7 @@ const essayTitles = (essayData as any).essays.slice(0, 12).map((e: any) => e.tit
   }
 
   .essay-entry:hover .essay-entry__title {
-    color: var(--accent);
+    color: var(--accent-text);
   }
 
   @media (max-width: 768px) {

@@ -5,12 +5,15 @@ import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import ChartContainer from '../components/charts/ChartContainer.astro';
 
+import type { SystemMetrics, Organ, Sprint, PraxisTarget, FlagshipRepo } from '../types/data';
 import metrics from '../data/system-metrics.json';
 import graphData from '../data/graph.json';
 import landing from '../data/landing.json';
 
-const organNames = Object.keys(metrics.registry.organs);
-const repoCounts = Object.values(metrics.registry.organs).map((o: any) => o.total_repos);
+const typedMetrics = metrics as unknown as SystemMetrics;
+
+const organNames = Object.keys(typedMetrics.registry.organs);
+const repoCounts = Object.values(typedMetrics.registry.organs).map((o: Organ) => o.total_repos);
 
 const organColors: Record<string, string> = {
   'ORGAN-I': '#7c9bf5',
@@ -24,7 +27,7 @@ const organColors: Record<string, string> = {
 };
 
 const organChartData = {
-  organs: Object.entries(metrics.registry.organs).map(([key, organ]: [string, any]) => ({
+  organs: Object.entries(typedMetrics.registry.organs).map(([key, organ]: [string, Organ]) => ({
     key,
     name: organ.name,
     total_repos: organ.total_repos,
@@ -33,14 +36,14 @@ const organChartData = {
 };
 
 const classificationChartData = {
-  classifications: metrics.flagship_vivification.classifications,
-  total: metrics.flagship_vivification.total_audited,
+  classifications: typedMetrics.flagship_vivification.classifications,
+  total: typedMetrics.flagship_vivification.total_audited,
 };
 
-const sprintChartData = { sprints: metrics.sprint_history };
+const sprintChartData = { sprints: typedMetrics.sprint_history };
 
 const treemapData = {
-  organs: Object.entries(metrics.registry.organs).map(([key, organ]: [string, any]) => ({
+  organs: Object.entries(typedMetrics.registry.organs).map(([key, organ]: [string, Organ]) => ({
     key,
     name: organ.name,
     total_repos: organ.total_repos,
@@ -48,7 +51,7 @@ const treemapData = {
 };
 
 const praxisChartData = {
-  targets: Object.entries(metrics.praxis_targets).map(([key, target]: [string, any]) => ({
+  targets: Object.entries(typedMetrics.praxis_targets).map(([key, target]: [string, PraxisTarget]) => ({
     key,
     label: key.replace(/_/g, ' '),
     current: String(target.current).replace(/[^0-9.]/g, '') || '0',
@@ -57,7 +60,7 @@ const praxisChartData = {
   })),
 };
 
-const flagshipChartData = { repos: metrics.flagship_vivification.repos };
+const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
 ---
 
 <Layout title="Dashboard — System Metrics" description="Live metrics for the ORGANVM eight-organ creative-institutional system.">
@@ -69,31 +72,31 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
     <section class="section">
       <div class="container">
         <h1 class="page-title">System Dashboard</h1>
-        <p class="page-sub">Live metrics from {metrics.registry.total_repos} repositories across {metrics.registry.total_organs} organs.</p>
+        <p class="page-sub">Live metrics from {typedMetrics.registry.total_repos} repositories across {typedMetrics.registry.total_organs} organs.</p>
 
         <div class="stat-grid">
           <div class="stat">
-            <div class="stat-value">{metrics.code_substance.total_code_files.toLocaleString()}</div>
+            <div class="stat-value">{typedMetrics.code_substance.total_code_files.toLocaleString()}</div>
             <div class="stat-label">Code Files</div>
           </div>
           <div class="stat">
-            <div class="stat-value">{metrics.code_substance.total_test_files}</div>
+            <div class="stat-value">{typedMetrics.code_substance.total_test_files}</div>
             <div class="stat-label">Test Files</div>
           </div>
           <div class="stat">
-            <div class="stat-value">{metrics.code_substance.ci_passing}</div>
+            <div class="stat-value">{typedMetrics.code_substance.ci_passing}</div>
             <div class="stat-label">Passing CI Workflows</div>
           </div>
           <div class="stat">
-            <div class="stat-value">{metrics.registry.total_repos}</div>
+            <div class="stat-value">{typedMetrics.registry.total_repos}</div>
             <div class="stat-label">Repositories</div>
           </div>
           <div class="stat">
-            <div class="stat-value">{metrics.registry.implementation_status.ACTIVE}</div>
+            <div class="stat-value">{typedMetrics.registry.implementation_status.ACTIVE}</div>
             <div class="stat-label">Active</div>
           </div>
           <div class="stat">
-            <div class="stat-value">{metrics.essays.total}</div>
+            <div class="stat-value">{typedMetrics.essays.total}</div>
             <div class="stat-label">Essays</div>
           </div>
         </div>
@@ -123,7 +126,7 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
       <div class="container">
         <h2 class="section__heading">Organ Status</h2>
         <div class="organ-grid">
-          {Object.entries(metrics.registry.organs).map(([key, organ]: [string, any]) => (
+          {Object.entries(typedMetrics.registry.organs).map(([key, organ]: [string, Organ]) => (
             <div class="organ-card">
               <div class="organ-card__header">
                 <span class="organ-card__dot" style={`background: ${organColors[key] || '#888'}`}></span>
@@ -158,7 +161,7 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
         <h2 class="section__heading">Sprint Timeline</h2>
         <ChartContainer chartId="sprint-timeline" data={sprintChartData} ariaLabel="Timeline visualization of all development sprints" height="160px" />
         <div class="timeline">
-          {metrics.sprint_history.map((sprint: any, i: number) => (
+          {typedMetrics.sprint_history.map((sprint: Sprint, i: number) => (
             <div class="timeline__entry">
               <div class="timeline__marker">
                 <span class="timeline__number">{i + 1}</span>
@@ -198,7 +201,7 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
               </tr>
             </thead>
             <tbody>
-              {metrics.flagship_vivification.repos.map((repo: any) => (
+              {typedMetrics.flagship_vivification.repos.map((repo: FlagshipRepo) => (
                 <tr>
                   <td>
                     <a href={`https://github.com/${repo.org}/${repo.repo}`} target="_blank" rel="noopener">
@@ -219,10 +222,10 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
           </table>
         </div>
         <p class="table-summary">
-          {metrics.flagship_vivification.classifications.SUBSTANTIAL} SUBSTANTIAL,
-          {metrics.flagship_vivification.classifications.PARTIAL} PARTIAL,
-          {metrics.flagship_vivification.classifications.MINIMAL} MINIMAL
-          — {metrics.flagship_vivification.total_audited} flagships audited
+          {typedMetrics.flagship_vivification.classifications.SUBSTANTIAL} SUBSTANTIAL,
+          {typedMetrics.flagship_vivification.classifications.PARTIAL} PARTIAL,
+          {typedMetrics.flagship_vivification.classifications.MINIMAL} MINIMAL
+          — {typedMetrics.flagship_vivification.total_audited} flagships audited
         </p>
       </div>
     </section>
@@ -232,7 +235,7 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
         <h2 class="section__heading">PRAXIS Targets</h2>
         <ChartContainer chartId="praxis-sparklines" data={praxisChartData} ariaLabel="Progress bars showing PRAXIS target completion" height="240px" />
         <div class="targets-grid">
-          {Object.entries(metrics.praxis_targets).map(([key, target]: [string, any]) => (
+          {Object.entries(typedMetrics.praxis_targets).map(([key, target]: [string, PraxisTarget]) => (
             <div class="target-card">
               <div class="target-card__label">{key.replace(/_/g, ' ')}</div>
               <div class="target-card__values">
@@ -254,31 +257,17 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
 </script>
 
 <style>
-  .page-title {
-    margin-bottom: var(--space-sm);
-  }
-
-  .page-sub {
-    margin-bottom: var(--space-2xl);
-  }
-
-  .section__heading {
-    margin-bottom: var(--space-xl);
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-  }
-
   .stack-badges {
     margin-top: var(--space-2xl);
-    padding-top: var(--space-xl);
+    padding: var(--space-xl);
     border-top: 1px solid var(--border);
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .stack-badges__heading {
-    font-family: var(--font-mono);
     font-size: 0.8rem;
     font-weight: 500;
     text-transform: uppercase;
@@ -306,7 +295,7 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
 
   .stack-badge:hover {
     border-color: var(--accent);
-    color: var(--accent);
+    color: var(--accent-text);
   }
 
   .organ-grid {
@@ -321,6 +310,8 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
     border-radius: 8px;
     padding: var(--space-lg);
     transition: border-color var(--transition-fast);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .organ-card:hover {
@@ -342,7 +333,6 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
   }
 
   .organ-card__key {
-    font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--text-muted);
   }
@@ -361,9 +351,8 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
   }
 
   .organ-card__status {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--accent);
+    font-size: 0.75rem;
+    color: var(--accent-text);
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
@@ -378,6 +367,11 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
     display: flex;
     gap: var(--space-lg);
     align-items: flex-start;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .timeline__marker {
@@ -393,7 +387,7 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
 
   .timeline__number {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
   }
 
@@ -411,9 +405,8 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
 
   .timeline__name {
     font-weight: 600;
-    font-family: var(--font-mono);
     font-size: 0.85rem;
-    color: var(--accent);
+    color: var(--accent-text);
   }
 
   .timeline__date {
@@ -448,11 +441,12 @@ const flagshipChartData = { repos: metrics.flagship_vivification.repos };
     border-radius: 8px;
     padding: var(--space-lg);
     text-align: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .target-card__label {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-muted);
