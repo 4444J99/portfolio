@@ -172,6 +172,17 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
     document.querySelectorAll('[data-reveal]').forEach(function(el) { ro.observe(el); });
   })();
 </script>
+<script is:inline>
+  (function() {
+    var validModes = ['subtle', 'bold', 'extreme'];
+    var urlParam = new URLSearchParams(window.location.search).get('mode');
+    var initialMode = (urlParam && validModes.indexOf(urlParam) !== -1)
+      ? urlParam
+      : localStorage.getItem('bg-mode') || 'subtle';
+    document.body.dataset.bgMode = initialMode;
+    localStorage.setItem('bg-mode', initialMode);
+  })();
+</script>
 </html>
 
 <style is:global>

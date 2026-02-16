@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import metrics from '../data/system-metrics.json';
+import { organColorMap } from '../data/organ-colors';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
@@ -254,16 +255,6 @@ const categoryFilters = ['Theory', 'Art', 'Commerce', 'Orchestration', 'Essays',
 
 const featuredNumbers = new Set([2, 5, 14, 20]);
 
-const organColorMap: Record<string, string> = {
-  'ORGAN I': '#7c9bf5',
-  'ORGAN II': '#e87c7c',
-  'ORGAN III': '#7ce8a6',
-  'ORGAN IV': '#c9a84c',
-  'ORGAN V': '#c97ce8',
-  'ORGAN VI': '#7ce8e8',
-  'ORGAN VII': '#e8c87c',
-  'Meta': '#a0a0a0',
-};
 ---
 
 <Layout title="4444j — Creative Technologist">
@@ -318,15 +309,15 @@ const organColorMap: Record<string, string> = {
       <div class="container">
         <h2 class="section__heading">Projects</h2>
         <div class="filter-bar" data-filter-view="engineering" role="toolbar" aria-label="Filter projects by skill">
-          <button class="filter-chip filter-chip--active" data-filter="all">All</button>
+          <button class="filter-chip filter-chip--active" data-filter="all" aria-pressed="true">All</button>
           {skillFilters.map(skill => (
-            <button class="filter-chip" data-filter={skill}>{skill}</button>
+            <button class="filter-chip" data-filter={skill} aria-pressed="false">{skill}</button>
           ))}
         </div>
         <div class="filter-bar" data-filter-view="creative" role="toolbar" aria-label="Filter projects by category" style="display: none;">
-          <button class="filter-chip filter-chip--active" data-filter="all">All</button>
+          <button class="filter-chip filter-chip--active" data-filter="all" aria-pressed="true">All</button>
           {categoryFilters.map(cat => (
-            <button class="filter-chip" data-filter={cat}>{cat}</button>
+            <button class="filter-chip" data-filter={cat} aria-pressed="false">{cat}</button>
           ))}
         </div>
         {organGroups.map(group => (
@@ -425,10 +416,6 @@ const organColorMap: Record<string, string> = {
   <Footer />
 </Layout>
 
-<script>
-  import '../components/sketches/sketch-loader';
-</script>
-
 <script is:inline>
   document.addEventListener('DOMContentLoaded', function() {
     var main = document.getElementById('main-content');
@@ -444,10 +431,12 @@ const organColorMap: Record<string, string> = {
       // Reset all filter chips across both bars
       document.querySelectorAll('.filter-chip').forEach(function(c) {
         c.classList.remove('filter-chip--active');
+        c.setAttribute('aria-pressed', 'false');
       });
       // Set "All" active on both bars
       document.querySelectorAll('.filter-chip[data-filter="all"]').forEach(function(c) {
         c.classList.add('filter-chip--active');
+        c.setAttribute('aria-pressed', 'true');
       });
       // Show all cards
       cards.forEach(function(card) { card.style.display = ''; });
@@ -504,8 +493,10 @@ const organColorMap: Record<string, string> = {
         // Update active state within this bar
         bar.querySelectorAll('.filter-chip').forEach(function(c) {
           c.classList.remove('filter-chip--active');
+          c.setAttribute('aria-pressed', 'false');
         });
         chip.classList.add('filter-chip--active');
+        chip.setAttribute('aria-pressed', 'true');
 
         var filter = chip.getAttribute('data-filter');
         var view = getCurrentView();

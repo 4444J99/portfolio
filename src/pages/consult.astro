@@ -47,9 +47,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
               class="form-textarea"
               rows="6"
               placeholder="e.g., We need a multi-agent orchestration system for our content pipeline, or We're looking for generative art installations for our gallery space, or We want to build a gamified learning platform..."
+              aria-describedby="challenge-hint"
               required
             ></textarea>
-            <p class="form-hint">Be as specific as you'd like — the more detail, the better the analysis.</p>
+            <p id="challenge-hint" class="form-hint">Be as specific as you'd like — the more detail, the better the analysis.</p>
           </div>
 
           <button type="submit" id="submit-btn" class="btn-submit">
@@ -58,13 +59,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           </button>
         </form>
 
-        <div id="response-area" class="response-area" hidden>
+        <div id="response-area" class="response-area" aria-live="polite" hidden>
           <h2 class="response-heading">Capability Analysis</h2>
           <div id="response-content" class="response-content prose"></div>
           <button id="reset-btn" class="btn-reset">Start Over</button>
         </div>
 
-        <div id="error-area" class="error-area" hidden>
+        <div id="error-area" class="error-area" aria-live="assertive" hidden>
           <p class="error-text">The AI analysis service is temporarily unavailable. Please <a href="mailto:padavano.anthony@gmail.com">contact directly via email</a> to discuss your project needs, or try again later.</p>
         </div>
       </div>
@@ -73,7 +74,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   <Footer />
 </Layout>
 
-<script is:inline src="https://js.puter.com/v2/"></script>
+<script is:inline src="https://js.puter.com/v2/" defer></script>
 
 <script>
   const SYSTEM_PROMPT = `You are the ORGANVM Capability Advisor. You help prospective collaborators, clients, and partners understand how the eight-organ creative-institutional system can address their specific needs.

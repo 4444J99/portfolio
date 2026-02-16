@@ -6,6 +6,7 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
 
 import type { GraphData, GraphNode, GraphEdge } from '../types/data';
 import graphData from '../data/graph.json';
+import { organColors } from '../data/organ-colors';
 
 const typedGraph = graphData as unknown as GraphData;
 const organNodes = [...new Set(typedGraph.nodes.map((n: GraphNode) => n.organ))];
@@ -15,17 +16,6 @@ const organEdges = typedGraph.edges.map((e: GraphEdge) => {
   return `${organNodes.indexOf(srcOrgan!)}-${organNodes.indexOf(tgtOrgan!)}`;
 }).filter((e: string) => { const [a, b] = e.split('-'); return a !== b; });
 const uniqueEdges = [...new Set(organEdges)] as string[];
-
-const organColors: Record<string, string> = {
-  'ORGAN-I': '#7c9bf5',
-  'ORGAN-II': '#e87c7c',
-  'ORGAN-III': '#7ce8a6',
-  'ORGAN-IV': '#c9a84c',
-  'ORGAN-V': '#c97ce8',
-  'ORGAN-VI': '#7ce8e8',
-  'ORGAN-VII': '#e8c87c',
-  'META': '#a0a0a0',
-};
 ---
 
 <Layout title="Architecture — Dependency Graph" description="Interactive dependency graph of the ORGANVM eight-organ system.">
@@ -70,7 +60,7 @@ const organColors: Record<string, string> = {
               </tr>
             </thead>
             <tbody>
-              {graphData.edges.map((edge: any) => (
+              {graphData.edges.map((edge: GraphEdge) => (
                 <tr>
                   <td><code>{edge.source.split('/')[1]}</code></td>
                   <td><code>{edge.target.split('/')[1]}</code></td>

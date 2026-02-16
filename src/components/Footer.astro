@@ -31,9 +31,9 @@ const year = new Date().getFullYear();
     </nav>
     <div class="footer__right">
       <div class="bg-mode-switch" aria-label="Background intensity">
-        <button data-mode="subtle" class="bg-mode-btn" title="Subtle">S</button>
-        <button data-mode="bold" class="bg-mode-btn" title="Bold">B</button>
-        <button data-mode="extreme" class="bg-mode-btn" title="Extreme">E</button>
+        <button data-mode="subtle" class="bg-mode-btn" aria-pressed="false" title="Subtle">S</button>
+        <button data-mode="bold" class="bg-mode-btn" aria-pressed="false" title="Bold">B</button>
+        <button data-mode="extreme" class="bg-mode-btn" aria-pressed="false" title="Extreme">E</button>
       </div>
       <p class="footer__copy">&copy; {year} Anthony James Padavano · Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a></p>
     </div>
@@ -149,21 +149,19 @@ const year = new Date().getFullYear();
 
 <script is:inline>
   (function() {
-    var validModes = ['subtle', 'bold', 'extreme'];
-    var urlParam = new URLSearchParams(window.location.search).get('mode');
-    var initialMode = (urlParam && validModes.indexOf(urlParam) !== -1)
-      ? urlParam
-      : localStorage.getItem('bg-mode') || 'subtle';
-    document.body.dataset.bgMode = initialMode;
-    localStorage.setItem('bg-mode', initialMode);
+    var currentMode = document.body.dataset.bgMode || 'subtle';
     document.querySelectorAll('.bg-mode-btn').forEach(function(btn) {
-      if (btn.dataset.mode === initialMode) btn.classList.add('bg-mode-btn--active');
+      var isActive = btn.dataset.mode === currentMode;
+      if (isActive) btn.classList.add('bg-mode-btn--active');
+      btn.setAttribute('aria-pressed', String(isActive));
       btn.addEventListener('click', function() {
         var mode = btn.dataset.mode;
         document.body.dataset.bgMode = mode;
         localStorage.setItem('bg-mode', mode);
         document.querySelectorAll('.bg-mode-btn').forEach(function(b) {
-          b.classList.toggle('bg-mode-btn--active', b.dataset.mode === mode);
+          var active = b.dataset.mode === mode;
+          b.classList.toggle('bg-mode-btn--active', active);
+          b.setAttribute('aria-pressed', String(active));
         });
       });
     });

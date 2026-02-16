@@ -8,23 +8,12 @@ import ChartContainer from '../components/charts/ChartContainer.astro';
 import type { SystemMetrics, Organ, Sprint, PraxisTarget, FlagshipRepo } from '../types/data';
 import metrics from '../data/system-metrics.json';
 import graphData from '../data/graph.json';
-import landing from '../data/landing.json';
+import { organColors } from '../data/organ-colors';
 
 const typedMetrics = metrics as unknown as SystemMetrics;
 
 const organNames = Object.keys(typedMetrics.registry.organs);
 const repoCounts = Object.values(typedMetrics.registry.organs).map((o: Organ) => o.total_repos);
-
-const organColors: Record<string, string> = {
-  'ORGAN-I': '#7c9bf5',
-  'ORGAN-II': '#e87c7c',
-  'ORGAN-III': '#7ce8a6',
-  'ORGAN-IV': '#c9a84c',
-  'ORGAN-V': '#c97ce8',
-  'ORGAN-VI': '#7ce8e8',
-  'ORGAN-VII': '#e8c87c',
-  'META-ORGANVM': '#a0a0a0',
-};
 
 const organChartData = {
   organs: Object.entries(typedMetrics.registry.organs).map(([key, organ]: [string, Organ]) => ({

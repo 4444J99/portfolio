@@ -27,7 +27,7 @@ export interface Sprint {
 export interface PraxisTarget {
   current: string | number;
   target: string | number;
-  met: boolean;
+  met?: boolean;
 }
 
 export interface SystemMetrics {

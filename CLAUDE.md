@@ -44,7 +44,7 @@ All components use **TypeScript Props interfaces** in the frontmatter and **comp
 
 ### Layout
 
-Single layout: `src/layouts/Layout.astro` — handles `<head>`, SEO meta, Open Graph, Schema.org JSON-LD, and Google Fonts (Jost + JetBrains Mono).
+Single layout: `src/layouts/Layout.astro` — handles `<head>`, SEO meta, Open Graph, Schema.org JSON-LD, and self-hosted fonts (Jost + JetBrains Mono woff2 in `public/fonts/`).
 
 ### Styling
 
