@@ -45,7 +45,7 @@ const related = projectIndex
     {badges && badges.length > 0 && (
       <div class="project__badges">
         {badges.map(b => b.href
-          ? <a href={b.href} target="_blank" rel="noopener"><img src={b.src} alt={b.alt} loading="lazy" /></a>
+          ? <a href={b.href} target="_blank" rel="noopener noreferrer"><img src={b.src} alt={b.alt} loading="lazy" /></a>
           : <img src={b.src} alt={b.alt} loading="lazy" />
         )}
       </div>

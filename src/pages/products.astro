@@ -154,8 +154,8 @@ products.forEach(p => { if (typeGroups[p.type] !== undefined) typeGroups[p.type]
                 {p.stack && <span class="product-card__stack">{p.stack.join(' · ')}</span>}
               </div>
               <div class="product-card__links">
-                <a href={`https://github.com/${p.repo}`} target="_blank" rel="noopener">GitHub</a>
-                {p.demo && <a href={p.demo} target="_blank" rel="noopener" class="product-card__demo-link">Live Demo</a>}
+                <a href={`https://github.com/${p.repo}`} target="_blank" rel="noopener noreferrer">GitHub</a>
+                {p.demo && <a href={p.demo} target="_blank" rel="noopener noreferrer" class="product-card__demo-link">Live Demo</a>}
               </div>
             </div>
           ))}

@@ -18,5 +18,6 @@ export function getChartTheme() {
     bgCard: style.getPropertyValue('--bg-card').trim() || 'rgba(255,255,255,0.12)',
     strokeDark: 'rgba(0,0,0,0.3)',
     labelDark: 'rgba(0,0,0,0.7)',
+    fallback: '#888',
   };
 }

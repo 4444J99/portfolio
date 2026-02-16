@@ -41,7 +41,7 @@ export default function codeTreemap(container: HTMLElement, data: { organs: Orga
   leaves.append('rect')
     .attr('width', (d: TreemapLeaf) => d.x1 - d.x0)
     .attr('height', (d: TreemapLeaf) => d.y1 - d.y0)
-    .attr('fill', (d: TreemapLeaf) => organColors[d.data.key] || '#888')
+    .attr('fill', (d: TreemapLeaf) => organColors[d.data.key] || theme.fallback)
     .attr('opacity', 0.8)
     .attr('rx', 3)
     .style('cursor', 'pointer')

@@ -35,6 +35,10 @@
   --accent-purple: #9C27B0;
   --accent-green: #00E676;
 
+  --color-substantial: #7ce8a6;
+  --color-partial: #c9a84c;
+  --color-minimal: #e87c7c;
+
   --bg-chrome: rgba(0,0,0,0.4);
   --code-bg: rgba(0,0,0,0.2);
 

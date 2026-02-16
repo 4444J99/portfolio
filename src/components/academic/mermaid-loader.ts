@@ -26,7 +26,11 @@ function initMermaid(container: HTMLElement) {
 
     mermaid.default.render(id, chart).then(({ svg }) => {
       container.innerHTML = svg;
+    }).catch((err) => {
+      console.error('[mermaid] render error:', err);
     });
+  }).catch((err) => {
+    console.error('[mermaid] load error:', err);
   });
 }
 

@@ -43,7 +43,7 @@ export default function organBarChart(container: HTMLElement, data: { organs: Or
     .attr('y', d => y(d.total_repos))
     .attr('width', x.bandwidth())
     .attr('height', d => innerH - y(d.total_repos))
-    .attr('fill', d => organColors[d.key] || '#888')
+    .attr('fill', d => organColors[d.key] || theme.fallback)
     .attr('rx', 3)
     .style('cursor', 'pointer')
     .on('mousemove', (event, d) => {

@@ -193,7 +193,7 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
               {typedMetrics.flagship_vivification.repos.map((repo: FlagshipRepo) => (
                 <tr>
                   <td>
-                    <a href={`https://github.com/${repo.org}/${repo.repo}`} target="_blank" rel="noopener">
+                    <a href={`https://github.com/${repo.org}/${repo.repo}`} target="_blank" rel="noopener noreferrer">
                       {repo.repo}
                     </a>
                   </td>
@@ -414,9 +414,9 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
     color: var(--text-muted);
   }
 
-  .tag--substantial { background: rgba(124, 232, 166, 0.15); color: #7ce8a6; }
-  .tag--partial { background: rgba(201, 168, 76, 0.15); color: #c9a84c; }
-  .tag--minimal { background: rgba(232, 124, 124, 0.15); color: #e87c7c; }
+  .tag--substantial { background: rgba(124, 232, 166, 0.15); color: var(--color-substantial); }
+  .tag--partial { background: rgba(201, 168, 76, 0.15); color: var(--color-partial); }
+  .tag--minimal { background: rgba(232, 124, 124, 0.15); color: var(--color-minimal); }
 
   .targets-grid {
     display: grid;

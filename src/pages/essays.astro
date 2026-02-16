@@ -25,14 +25,14 @@ const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title
           — transparency as design choice, process documentation as portfolio evidence.
         </p>
         <p class="page-feed">
-          <a href={typedEssayData.feed_url} target="_blank" rel="noopener">RSS Feed</a>
+          <a href={typedEssayData.feed_url} target="_blank" rel="noopener noreferrer">RSS Feed</a>
           &middot;
-          <a href={typedEssayData.site_url} target="_blank" rel="noopener">Full site</a>
+          <a href={typedEssayData.site_url} target="_blank" rel="noopener noreferrer">Full site</a>
         </p>
 
         <div class="essay-list">
           {typedEssayData.essays.map((essay: Essay) => (
-            <a href={essay.url} target="_blank" rel="noopener" class="essay-entry">
+            <a href={essay.url} target="_blank" rel="noopener noreferrer" class="essay-entry">
               <time class="essay-entry__date" datetime={essay.date}>{essay.date}</time>
               <span class="essay-entry__title">{essay.title}</span>
             </a>

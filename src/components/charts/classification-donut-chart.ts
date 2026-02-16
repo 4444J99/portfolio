@@ -29,7 +29,7 @@ export default function classificationDonut(container: HTMLElement, data: Classi
     .data(pie(entries))
     .join('path')
     .attr('d', arc)
-    .attr('fill', d => classificationColors[d.data[0]] || '#888')
+    .attr('fill', d => classificationColors[d.data[0]] || theme.fallback)
     .attr('stroke', theme.strokeDark)
     .attr('stroke-width', 1)
     .style('cursor', 'pointer')
