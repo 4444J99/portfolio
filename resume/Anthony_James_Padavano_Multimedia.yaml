@@ -49,7 +49,7 @@ cv:
       - name: The Eight-Organ System
         date: "2024 — Present"
         highlights:
-          - "Designed and documented orchestration architecture across 81 repos, 8 orgs, ~339K words — demonstrating content lifecycle management at scale"
+          - "Designed and documented orchestration architecture across 91 repos, 8 orgs, ~386K words — demonstrating content lifecycle management at scale"
     experience:
       - company: Miami Dade College Foundation
         position: Digital Marketing Manager
@@ -88,7 +88,7 @@ cv:
         start_date: 2021
         location: New York City
         highlights:
-          - "Designed and launched eight-organ orchestration system coordinating 81 repos across 8 GitHub organizations with ~339K words of documentation"
+          - "Designed and launched eight-organ orchestration system coordinating 91 repos across 8 GitHub organizations with ~386K words of documentation"
           - "Built generative art and music systems, interactive installations, and AI-conductor workflow for human-AI co-creation"
       - company: Majestic Design
         position: Project Manager

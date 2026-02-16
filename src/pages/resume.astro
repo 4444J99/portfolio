@@ -26,6 +26,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <span class="resume__sep" aria-hidden="true">/</span>
             <a href="https://github.com/meta-organvm" target="_blank" rel="noopener noreferrer">GitHub</a>
             <span class="resume__sep" aria-hidden="true">/</span>
+            <a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <span class="resume__sep" aria-hidden="true">/</span>
             <a href={base}>Portfolio</a>
           </div>
           <div class="resume__downloads">
@@ -46,7 +48,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         <section class="resume__section prose">
           <h2>Summary</h2>
           <p>
-            Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 81 repositories across 8 GitHub organizations with ~339K words of public documentation. Achieved +17.5M views and raised $2M across nonprofit and commercial projects. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer.
+            Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 91 repositories across 8 GitHub organizations with ~386K words of public documentation. Achieved +17.5M views and raised $2M across nonprofit and commercial projects. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer.
           </p>
         </section>
 
@@ -136,11 +138,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
           <div class="resume__project">
             <h3><a href={`${base}projects/eight-organ-system/`}>The Eight-Organ System</a></h3>
-            <p class="resume__project-sub">Governance as creative infrastructure — 81 repos, 8 orgs</p>
+            <p class="resume__project-sub">Governance as creative infrastructure — 91 repos, 8 orgs</p>
             <ul>
               <li>Designed orchestration architecture coordinating theory, art, commerce, community, and marketing as a single governed system</li>
               <li>Built machine-readable registry, automated dependency validation (31 edges, zero back-edge violations), and promotion state machine</li>
-              <li>Authored ~339K words of public documentation; 5 GitHub Actions workflows for autonomous governance</li>
+              <li>Authored ~386K words of public documentation; 5 GitHub Actions workflows for autonomous governance</li>
             </ul>
           </div>
 
@@ -166,8 +168,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <h3><a href={`${base}projects/ai-conductor/`}>AI-Conductor Model</a></h3>
             <p class="resume__project-sub">Human-AI co-creation methodology</p>
             <ul>
-              <li>Developed the workflow producing ~339K words: AI generates volume, human directs and refines</li>
-              <li>Includes quality gates, template compliance validation, and automated link checking across 81 repos</li>
+              <li>Developed the workflow producing ~386K words: AI generates volume, human directs and refines</li>
+              <li>Includes quality gates, template compliance validation, and automated link checking across 91 repos</li>
             </ul>
           </div>
 
@@ -197,7 +199,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <h3>Independent Creative Technologist</h3>
             <p class="resume__date">2021 — Present</p>
             <ul>
-              <li>Designed and launched the eight-organ orchestration system coordinating 81 repositories across 8 GitHub organizations with automated dependency validation and ~339K words of documentation</li>
+              <li>Designed and launched the eight-organ orchestration system coordinating 91 repositories across 8 GitHub organizations with automated dependency validation and ~386K words of documentation</li>
               <li>Built recursive-engine (1,254 tests, 85% coverage) — a symbolic operating system translating epistemological frameworks into executable Python</li>
               <li>Developed generative art and music systems, interactive installations, and AI-conductor workflow for human-AI co-creation</li>
             </ul>
@@ -284,9 +286,10 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           <h2>Links</h2>
           <ul class="resume__links">
             <li><a href={base}>Portfolio</a> — 4444j99.github.io/portfolio</li>
+            <li><a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="noopener noreferrer">LinkedIn</a> — anthony-james-padavano</li>
             <li><a href="https://github.com/meta-organvm" target="_blank" rel="noopener noreferrer">GitHub (system)</a> — meta-organvm</li>
             <li><a href="https://github.com/4444j99" target="_blank" rel="noopener noreferrer">GitHub (personal)</a> — 4444j99</li>
-            <li><a href="mailto:hello@4444j.dev">Email</a> — hello@4444j.dev</li>
+            <li><a href="mailto:padavano.anthony@gmail.com">Email</a> — padavano.anthony@gmail.com</li>
           </ul>
         </section>
 
@@ -356,7 +359,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
   .resume__download:hover {
     background: var(--accent);
-    color: var(--bg);
+    color: var(--bg-primary);
   }
 
   .resume__download--alt {
@@ -366,7 +369,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
   .resume__download--alt:hover {
     background: var(--text-muted);
-    color: var(--bg);
+    color: var(--bg-primary);
   }
 
   .resume__contact a:hover {
@@ -599,12 +602,5 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       orphans: 3;
       widows: 3;
     }
-  }
-  .sketch-accent {
-    margin-bottom: var(--space-xl);
-    padding: 0 var(--space-lg);
-    max-width: var(--max-width);
-    margin-left: auto;
-    margin-right: auto;
   }
 </style>

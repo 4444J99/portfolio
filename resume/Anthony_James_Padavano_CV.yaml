@@ -11,7 +11,7 @@ cv:
       username: 4444j99
   sections:
     summary:
-      - "Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 81 repositories across 8 GitHub organizations with ~339K words of public documentation. Achieved +17.5M views and raised $2M across nonprofit and commercial projects. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer."
+      - "Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 91 repositories across 8 GitHub organizations with ~386K words of public documentation. Achieved +17.5M views and raised $2M across nonprofit and commercial projects. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer."
     skills:
       - label: Languages
         details: Python, TypeScript, JavaScript, Go, Rust, Bash, SQL
@@ -33,7 +33,7 @@ cv:
         highlights:
           - Designed orchestration architecture coordinating theory, art, commerce, community, and marketing as a single governed system
           - Built machine-readable registry, automated dependency validation (31 edges, zero back-edge violations), and promotion state machine
-          - "Authored ~339K words of public documentation; 5 GitHub Actions workflows for autonomous governance"
+          - "Authored ~386K words of public documentation; 5 GitHub Actions workflows for autonomous governance"
       - name: Recursive Engine (RE:GE)
         date: "2024 — Present"
         highlights:
@@ -47,8 +47,8 @@ cv:
       - name: AI-Conductor Model
         date: "2024 — Present"
         highlights:
-          - "Developed the workflow producing ~339K words: AI generates volume, human directs and refines"
-          - "Includes quality gates, template compliance validation, and automated link checking across 81 repos"
+          - "Developed the workflow producing ~386K words: AI generates volume, human directs and refines"
+          - "Includes quality gates, template compliance validation, and automated link checking across 91 repos"
       - name: Forward Funders Marketing Overhaul
         date: "2020"
         highlights:
@@ -63,7 +63,7 @@ cv:
         start_date: 2021
         location: New York City
         highlights:
-          - Designed and launched the eight-organ orchestration system coordinating 81 repositories across 8 GitHub organizations with automated dependency validation and ~339K words of documentation
+          - Designed and launched the eight-organ orchestration system coordinating 91 repositories across 8 GitHub organizations with automated dependency validation and ~386K words of documentation
           - "Built recursive-engine (1,254 tests, 85% coverage) — a symbolic operating system translating epistemological frameworks into executable Python"
           - Developed generative art and music systems, interactive installations, and AI-conductor workflow for human-AI co-creation
       - company: Miami Dade College Foundation

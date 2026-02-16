@@ -8,12 +8,27 @@ const year = new Date().getFullYear();
     <div class="footer__links">
       <a href="https://github.com/meta-organvm" target="_blank" rel="noopener noreferrer">GitHub</a>
       <span class="footer__sep" aria-hidden="true">/</span>
+      <a href="https://github.com/4444j99" target="_blank" rel="me noopener noreferrer">@4444j99</a>
+      <span class="footer__sep" aria-hidden="true">/</span>
+      <a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <span class="footer__sep" aria-hidden="true">/</span>
+      <a href="mailto:padavano.anthony@gmail.com">Contact</a>
+      <span class="footer__sep" aria-hidden="true">/</span>
       <a href={`${base}resume/`}>Resume</a>
       <span class="footer__sep" aria-hidden="true">/</span>
       <a href={`${base}about/`}>About</a>
-      <span class="footer__sep" aria-hidden="true">/</span>
-      <a href="mailto:padavano.anthony@gmail.com">Contact</a>
     </div>
+    <nav class="footer__secondary" aria-label="Secondary navigation">
+      <a href={`${base}dashboard/`}>Dashboard</a>
+      <span class="footer__sep" aria-hidden="true">/</span>
+      <a href={`${base}architecture/`}>Architecture</a>
+      <span class="footer__sep" aria-hidden="true">/</span>
+      <a href={`${base}products/`}>Products</a>
+      <span class="footer__sep" aria-hidden="true">/</span>
+      <a href={`${base}community/`}>Community</a>
+      <span class="footer__sep" aria-hidden="true">/</span>
+      <a href={`${base}consult/`}>Consult</a>
+    </nav>
     <div class="footer__right">
       <div class="bg-mode-switch" aria-label="Background intensity">
         <button data-mode="subtle" class="bg-mode-btn" title="Subtle">S</button>
@@ -59,6 +74,22 @@ const year = new Date().getFullYear();
     font-size: 0.8rem;
   }
 
+  .footer__secondary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .footer__secondary a {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .footer__secondary a:hover {
+    color: var(--text-primary);
+  }
+
   .footer__right {
     display: flex;
     align-items: center;
@@ -100,7 +131,8 @@ const year = new Date().getFullYear();
       text-align: center;
     }
 
-    .footer__links {
+    .footer__links,
+    .footer__secondary {
       flex-wrap: wrap;
       justify-content: center;
     }

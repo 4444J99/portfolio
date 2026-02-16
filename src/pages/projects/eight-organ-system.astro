@@ -11,7 +11,7 @@ import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 ---
 
-<Layout title="The Eight-Organ System — 4444j" description="An orchestration system coordinating 81 repositories across 8 GitHub organizations, treating governance as creative infrastructure.">
+<Layout title="The Eight-Organ System — 4444j" description="An orchestration system coordinating 91 repositories across 8 GitHub organizations, treating governance as creative infrastructure.">
   <Header />
   <main>
     <ProjectDetail
@@ -57,10 +57,10 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 
       <h2>The Registry</h2>
       <p>
-        A machine-readable JSON registry (<code>registry-v2.json</code>) serves as the single source of truth for all 81 repositories.<Cite id={5} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's principle of a "single authoritative data source" applies here at the organizational level — every repo entry carries status, dependencies, documentation tier, and promotion state. Automated scripts validate the registry against the live state of every repo, checking CI/CD, documentation, dependency integrity, and constitutional compliance.<Cite id={6} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation" source="Addison-Wesley" year={2010} />
+        A machine-readable JSON registry (<code>registry-v2.json</code>) serves as the single source of truth for all 91 repositories.<Cite id={5} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's principle of a "single authoritative data source" applies here at the organizational level — every repo entry carries status, dependencies, documentation tier, and promotion state. Automated scripts validate the registry against the live state of every repo, checking CI/CD, documentation, dependency integrity, and constitutional compliance.<Cite id={6} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation" source="Addison-Wesley" year={2010} />
       </p>
 
-      <CodeStructure lang="json" caption="Registry entry structure — each of 81 repos carries this metadata" filename="registry-v2.json (excerpt)">
+      <CodeStructure lang="json" caption="Registry entry structure — each of 91 repos carries this metadata" filename="registry-v2.json (excerpt)">
 {`{
   "recursive-engine": {
     "organ": "I",
@@ -178,7 +178,7 @@ jobs:
             <div class="stat-label">Organizations</div>
           </div>
           <div class="stat">
-            <div class="stat-value">339K</div>
+            <div class="stat-value">386K</div>
             <div class="stat-label">Words</div>
           </div>
           <div class="stat">
@@ -202,9 +202,9 @@ jobs:
 
       <h2>Tradeoffs & Lessons</h2>
       <ul>
-        <li><strong>Documentation volume vs. maintenance burden</strong> — ~339K words is powerful as proof-of-work, but each README is a liability if the underlying repo changes. The registry-as-source-of-truth pattern helps: stats flow from the registry, not from hand-editing.<Cite id={15} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /></li>
+        <li><strong>Documentation volume vs. maintenance burden</strong> — ~386K words is powerful as proof-of-work, but each README is a liability if the underlying repo changes. The registry-as-source-of-truth pattern helps: stats flow from the registry, not from hand-editing.<Cite id={15} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /></li>
         <li><strong>Strict dependency rules vs. convenience</strong> — The no-back-edges constraint is the system's best design decision <em>and</em> its most annoying one. It forced clean interfaces but also meant rewriting code that wanted to "just import" from a downstream organ.</li>
-        <li><strong>AI-conductor workflow</strong> — ~339K words were produced using a human-AI co-creation model: AI generates volume, human directs and refines. This is honest and documented. The risk is perception ("AI wrote your portfolio"). The mitigation is transparency: every essay in ORGAN-V explains the process.<Cite id={16} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /></li>
+        <li><strong>AI-conductor workflow</strong> — ~386K words were produced using a human-AI co-creation model: AI generates volume, human directs and refines. This is honest and documented. The risk is perception ("AI wrote your portfolio"). The mitigation is transparency: every essay in ORGAN-V explains the process.<Cite id={16} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /></li>
         <li><strong>Naming scheme lock-in</strong> — Greek ontological naming (Theoria, Poiesis, Ergon) is distinctive but means renaming requires 40+ file edits. This was worth the tradeoff for identity coherence.</li>
       </ul>
 
