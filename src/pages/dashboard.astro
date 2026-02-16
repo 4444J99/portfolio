@@ -3,8 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
+import ChartContainer from '../components/charts/ChartContainer.astro';
 
 import metrics from '../data/system-metrics.json';
+import graphData from '../data/graph.json';
 import landing from '../data/landing.json';
 
 const organNames = Object.keys(metrics.registry.organs);
@@ -20,6 +22,42 @@ const organColors: Record<string, string> = {
   'ORGAN-VII': '#e8c87c',
   'META-ORGANVM': '#a0a0a0',
 };
+
+const organChartData = {
+  organs: Object.entries(metrics.registry.organs).map(([key, organ]: [string, any]) => ({
+    key,
+    name: organ.name,
+    total_repos: organ.total_repos,
+    ci_coverage: organ.ci_coverage,
+  })),
+};
+
+const classificationChartData = {
+  classifications: metrics.flagship_vivification.classifications,
+  total: metrics.flagship_vivification.total_audited,
+};
+
+const sprintChartData = { sprints: metrics.sprint_history };
+
+const treemapData = {
+  organs: Object.entries(metrics.registry.organs).map(([key, organ]: [string, any]) => ({
+    key,
+    name: organ.name,
+    total_repos: organ.total_repos,
+  })),
+};
+
+const praxisChartData = {
+  targets: Object.entries(metrics.praxis_targets).map(([key, target]: [string, any]) => ({
+    key,
+    label: key.replace(/_/g, ' '),
+    current: String(target.current).replace(/[^0-9.]/g, '') || '0',
+    target: String(target.target).replace(/[^0-9.]/g, '') || '1',
+    met: !!target.met,
+  })),
+};
+
+const flagshipChartData = { repos: metrics.flagship_vivification.repos };
 ---
 
 <Layout title="Dashboard — System Metrics" description="Live metrics for the ORGANVM eight-organ creative-institutional system.">
@@ -73,6 +111,16 @@ const organColors: Record<string, string> = {
 
     <section class="section">
       <div class="container">
+        <h2 class="section__heading">Repositories by Organ</h2>
+        <div class="chart-pair">
+          <ChartContainer chartId="organ-bar" data={organChartData} ariaLabel="Bar chart showing repository count per organ" height="300px" />
+          <ChartContainer chartId="code-treemap" data={treemapData} ariaLabel="Treemap showing repository distribution by organ" height="300px" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
         <h2 class="section__heading">Organ Status</h2>
         <div class="organ-grid">
           {Object.entries(metrics.registry.organs).map(([key, organ]: [string, any]) => (
@@ -97,7 +145,18 @@ const organColors: Record<string, string> = {
 
     <section class="section">
       <div class="container">
+        <h2 class="section__heading">Flagship Analysis</h2>
+        <div class="chart-pair">
+          <ChartContainer chartId="classification-donut" data={classificationChartData} ariaLabel="Donut chart showing flagship classification breakdown" height="280px" />
+          <ChartContainer chartId="flagship-stacked" data={flagshipChartData} ariaLabel="Stacked bar chart showing code vs test files per flagship" height="280px" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
         <h2 class="section__heading">Sprint Timeline</h2>
+        <ChartContainer chartId="sprint-timeline" data={sprintChartData} ariaLabel="Timeline visualization of all development sprints" height="160px" />
         <div class="timeline">
           {metrics.sprint_history.map((sprint: any, i: number) => (
             <div class="timeline__entry">
@@ -114,6 +173,13 @@ const organColors: Record<string, string> = {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section__heading">Dependency Graph</h2>
+        <ChartContainer chartId="dependency-graph" data={graphData} ariaLabel="Force-directed graph showing repository dependencies" height="420px" />
       </div>
     </section>
 
@@ -164,6 +230,7 @@ const organColors: Record<string, string> = {
     <section class="section">
       <div class="container">
         <h2 class="section__heading">PRAXIS Targets</h2>
+        <ChartContainer chartId="praxis-sparklines" data={praxisChartData} ariaLabel="Progress bars showing PRAXIS target completion" height="240px" />
         <div class="targets-grid">
           {Object.entries(metrics.praxis_targets).map(([key, target]: [string, any]) => (
             <div class="target-card">
@@ -181,6 +248,10 @@ const organColors: Record<string, string> = {
   </main>
   <Footer />
 </Layout>
+
+<script>
+  import '../components/charts/chart-loader';
+</script>
 
 <style>
   .page-title {
@@ -410,7 +481,16 @@ const organColors: Record<string, string> = {
     color: var(--text-muted);
   }
 
+  .chart-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
   @media (max-width: 768px) {
+    .chart-pair {
+      grid-template-columns: 1fr;
+    }
     .organ-grid {
       grid-template-columns: 1fr;
     }

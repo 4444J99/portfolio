@@ -6,21 +6,27 @@ interface Props {
   href: string;
   tags: string[];
   number: number;
+  featured?: boolean;
+  skills?: string[];
   'data-skills'?: string;
+  'data-tags'?: string;
 }
 
-const { title, tagline, description, href, tags, number, 'data-skills': dataSkills } = Astro.props;
+const { title, tagline, description, href, tags, number, featured, skills = [], 'data-skills': dataSkills, 'data-tags': dataTags } = Astro.props;
 ---
 
-<a href={href} class="card" data-skills={dataSkills}>
+<a href={href} class:list={['card', { 'card--featured': featured }]} data-skills={dataSkills} data-tags={dataTags}>
   <div class="card__header">
     <span class="card__number">{String(number).padStart(2, '0')}</span>
-    <div class="card__tags">
+    <div class="card__tags card__tags--creative">
       {tags.map(tag => <span class="tag">{tag}</span>)}
+    </div>
+    <div class="card__tags card__tags--engineering">
+      {skills.map(s => <span class="tag tag--skill">{s}</span>)}
     </div>
   </div>
   <h3 class="card__title">{title}</h3>
-  <p class="card__tagline">{tagline}</p>
+  <p class="card__tagline card__tagline--creative">{tagline}</p>
   <p class="card__desc">{description}</p>
   <span class="card__cta">View project &rarr;</span>
 </a>
@@ -40,8 +46,17 @@ const { title, tagline, description, href, tags, number, 'data-skills': dataSkil
 
   .card:hover {
     background: var(--bg-card-hover);
-    border-color: var(--border-hover);
+    border-color: var(--organ-color, var(--border-hover));
     transform: translateY(-2px);
+  }
+
+  .card--featured {
+    grid-column: span 2;
+    border-left: 3px solid var(--organ-color, var(--accent));
+  }
+
+  .card--featured .card__title {
+    font-size: 1.4rem;
   }
 
   .card__header {
@@ -91,5 +106,20 @@ const { title, tagline, description, href, tags, number, 'data-skills': dataSkil
 
   .card:hover .card__cta {
     color: var(--accent);
+  }
+
+  .tag--skill {
+    background: rgba(0, 188, 212, 0.1);
+    color: var(--accent);
+  }
+
+  /* Dual-view visibility: engineering mode hides creative elements, vice versa */
+  :global([data-portfolio-view="engineering"]) .card__tags--creative,
+  :global([data-portfolio-view="engineering"]) .card__tagline--creative {
+    display: none;
+  }
+
+  :global([data-portfolio-view="creative"]) .card__tags--engineering {
+    display: none;
   }
 </style>

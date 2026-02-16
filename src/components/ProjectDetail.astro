@@ -1,16 +1,24 @@
 ---
 import SketchContainer from './sketches/SketchContainer.astro';
 
+interface Badge {
+  src: string;
+  alt: string;
+  href?: string;
+}
+
 interface Props {
   title: string;
   tagline: string;
   tags: string[];
   repo?: string;
   liveUrl?: string;
+  badges?: Badge[];
+  heroImage?: { src: string; alt: string };
 }
 
-const base = import.meta.env.BASE_URL.replace(/\/\?$/, '/');
-const { title, tagline, tags, repo, liveUrl } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const { title, tagline, tags, repo, liveUrl, badges, heroImage } = Astro.props;
 ---
 
 <article class="project">
@@ -21,6 +29,14 @@ const { title, tagline, tags, repo, liveUrl } = Astro.props;
     </div>
     <h1 class="project__title">{title}</h1>
     <p class="project__tagline">{tagline}</p>
+    {badges && badges.length > 0 && (
+      <div class="project__badges">
+        {badges.map(b => b.href
+          ? <a href={b.href} target="_blank" rel="noopener"><img src={b.src} alt={b.alt} loading="lazy" /></a>
+          : <img src={b.src} alt={b.alt} loading="lazy" />
+        )}
+      </div>
+    )}
     {(repo || liveUrl) && (
       <div class="project__links">
         {repo && <a href={repo} target="_blank" rel="noopener noreferrer" class="project__link">GitHub &rarr;</a>}
@@ -28,6 +44,9 @@ const { title, tagline, tags, repo, liveUrl } = Astro.props;
       </div>
     )}
   </header>
+  {heroImage && (
+    <img class="project__hero-image" src={heroImage.src} alt={heroImage.alt} loading="lazy" />
+  )}
   <div class="sketch-accent">
     <SketchContainer sketchId="recursive-tree" height="250px" mobileHeight="180px" ariaLabel="Animated recursive tree visualization representing project structure" data-tags={tags.join(',')} />
   </div>
@@ -74,6 +93,25 @@ const { title, tagline, tags, repo, liveUrl } = Astro.props;
     color: var(--accent);
     font-style: italic;
     max-width: 55ch;
+  }
+
+  .project__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .project__badges img {
+    height: 20px;
+    border-radius: 3px;
+  }
+
+  .project__hero-image {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: var(--space-xl);
   }
 
   .project__links {

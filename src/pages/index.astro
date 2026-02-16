@@ -4,8 +4,11 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
+import metrics from '../data/system-metrics.json';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const totalTests = metrics.flagship_vivification.repos.reduce((sum: number, r: { test_files: number }) => sum + r.test_files, 0) + 2800;
 
 const organGroups = [
   {
@@ -247,11 +250,25 @@ const organGroups = [
 ];
 
 const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative', 'Systems'];
+const categoryFilters = ['Theory', 'Art', 'Commerce', 'Orchestration', 'Essays', 'Community', 'Systems'];
+
+const featuredNumbers = new Set([2, 5, 14, 20]);
+
+const organColorMap: Record<string, string> = {
+  'ORGAN I': '#7c9bf5',
+  'ORGAN II': '#e87c7c',
+  'ORGAN III': '#7ce8a6',
+  'ORGAN IV': '#c9a84c',
+  'ORGAN V': '#c97ce8',
+  'ORGAN VI': '#7ce8e8',
+  'ORGAN VII': '#e8c87c',
+  'Meta': '#a0a0a0',
+};
 ---
 
 <Layout title="4444j — Creative Technologist">
   <Header />
-  <main id="main-content">
+  <main id="main-content" data-portfolio-view="engineering">
     <section class="hero">
       <div class="container hero__split">
         <div class="hero__text">
@@ -261,9 +278,9 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
           </div>
 
           <div class="hero__view" data-hero-view="engineering">
-            <p class="hero__label">Full-Stack Engineer</p>
-            <h1 class="hero__title">Python and TypeScript developer building AI systems, production infrastructure, and tested software.</h1>
-            <p class="hero__sub">3,586 code files, 736 test files, 58 passing CI workflows. React, Next.js, FastAPI, Docker, Terraform, PostgreSQL across 91 repositories.</p>
+            <p class="hero__label" data-reveal>Full-Stack Engineer</p>
+            <h1 class="hero__title" data-reveal style="animation-delay: 100ms">Python and TypeScript developer building AI systems, production infrastructure, and tested software.</h1>
+            <p class="hero__sub" data-reveal style="animation-delay: 200ms">{metrics.code_substance.total_code_files.toLocaleString()} code files, {metrics.code_substance.total_test_files} test files, {metrics.code_substance.ci_passing} passing CI workflows. React, Next.js, FastAPI, Docker, Terraform, PostgreSQL across {metrics.registry.total_repos} repositories.</p>
           </div>
 
           <div class="hero__view" data-hero-view="creative" style="display: none;">
@@ -272,7 +289,12 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
             <p class="hero__sub">Coordinating theory, generative art, commerce, and community across an eight-organ infrastructure — 91 repositories, 8 organizations, ~386K words of public documentation.</p>
           </div>
 
-          <p class="hero__available">
+          <div class="hero__credentials" data-reveal style="animation-delay: 280ms">
+            <span class="hero__credential">MFA</span>
+            <span class="hero__credential">Meta Full-Stack</span>
+            <span class="hero__credential">Google UX/PM</span>
+          </div>
+          <p class="hero__available" data-reveal style="animation-delay: 360ms">
             <span class="hero__available-dot" aria-hidden="true"></span>
             Open to opportunities — <a href="mailto:padavano.anthony@gmail.com">Get in touch</a>
           </p>
@@ -292,21 +314,32 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
     <section class="section" id="work">
       <div class="container">
         <h2 class="section__heading">Projects</h2>
-        <div class="filter-bar" role="toolbar" aria-label="Filter projects by skill">
+        <div class="filter-bar" data-filter-view="engineering" role="toolbar" aria-label="Filter projects by skill">
           <button class="filter-chip filter-chip--active" data-filter="all">All</button>
           {skillFilters.map(skill => (
             <button class="filter-chip" data-filter={skill}>{skill}</button>
           ))}
         </div>
+        <div class="filter-bar" data-filter-view="creative" role="toolbar" aria-label="Filter projects by category" style="display: none;">
+          <button class="filter-chip filter-chip--active" data-filter="all">All</button>
+          {categoryFilters.map(cat => (
+            <button class="filter-chip" data-filter={cat}>{cat}</button>
+          ))}
+        </div>
         {organGroups.map(group => (
-          <div class="organ-group" data-organ-group>
-            <h3 class="organ-group__heading">
+          <div class="organ-group" data-organ-group style={`--organ-color: ${organColorMap[group.organ]}`}>
+            <h3 class="organ-group__heading" data-reveal data-heading-view="engineering">
+              {group.domain} — {group.projects.length} project{group.projects.length !== 1 ? 's' : ''}
+            </h3>
+            <h3 class="organ-group__heading" data-reveal data-heading-view="creative" style="display: none;">
               {group.organ}{group.name && <span class="organ-group__name"> — {group.name}</span>}
               <span class="organ-group__domain">{group.domain}</span>
             </h3>
             <div class="project-grid">
-              {group.projects.map(project => (
-                <ProjectCard {...project} data-skills={project.skills.join(',')} />
+              {group.projects.map((project, i) => (
+                <div data-reveal style={`animation-delay: ${i * 60}ms`}>
+                  <ProjectCard {...project} featured={featuredNumbers.has(project.number)} data-skills={project.skills.join(',')} data-tags={project.tags.join(',')} />
+                </div>
               ))}
             </div>
           </div>
@@ -316,35 +349,35 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
 
     <section class="section stats-section">
       <div class="container">
-        <div class="stat-grid" data-stats-view="engineering">
+        <div class="stat-grid" data-stats-view="engineering" data-reveal>
           <div class="stat">
-            <div class="stat-value">3,586</div>
+            <div class="stat-value">{metrics.code_substance.total_code_files.toLocaleString()}</div>
             <div class="stat-label">Code Files</div>
           </div>
           <div class="stat">
-            <div class="stat-value">736</div>
+            <div class="stat-value">{metrics.code_substance.total_test_files}</div>
             <div class="stat-label">Test Files</div>
           </div>
           <div class="stat">
-            <div class="stat-value">58</div>
+            <div class="stat-value">{metrics.code_substance.ci_passing}</div>
             <div class="stat-label">Passing CI Workflows</div>
           </div>
           <div class="stat">
-            <div class="stat-value">91</div>
+            <div class="stat-value">{metrics.registry.total_repos}</div>
             <div class="stat-label">Repositories</div>
           </div>
           <div class="stat">
-            <div class="stat-value">4,000+</div>
+            <div class="stat-value">{totalTests.toLocaleString()}+</div>
             <div class="stat-label">Automated Tests</div>
           </div>
         </div>
         <div class="stat-grid" data-stats-view="creative" style="display: none;">
           <div class="stat">
-            <div class="stat-value">91</div>
+            <div class="stat-value">{metrics.registry.total_repos}</div>
             <div class="stat-label">Repositories</div>
           </div>
           <div class="stat">
-            <div class="stat-value">8</div>
+            <div class="stat-value">{metrics.registry.total_organs}</div>
             <div class="stat-label">Organizations</div>
           </div>
           <div class="stat">
@@ -352,7 +385,7 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
             <div class="stat-label">Words Documented</div>
           </div>
           <div class="stat">
-            <div class="stat-value">29</div>
+            <div class="stat-value">{metrics.essays.total}</div>
             <div class="stat-label">Published Essays</div>
           </div>
           <div class="stat">
@@ -374,7 +407,7 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             padavano.anthony@gmail.com
           </a>
-          <a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="noopener noreferrer" class="contact__link">
+          <a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="me noopener noreferrer" class="contact__link">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             LinkedIn
           </a>
@@ -394,53 +427,100 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
 </script>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    // View toggle
-    const viewBtns = document.querySelectorAll('.view-toggle__btn');
-    viewBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const view = btn.getAttribute('data-view');
-        viewBtns.forEach(b => {
+  document.addEventListener('DOMContentLoaded', function() {
+    var main = document.getElementById('main-content');
+    var viewBtns = document.querySelectorAll('.view-toggle__btn');
+    var cards = document.querySelectorAll('.card[data-skills]');
+    var groups = document.querySelectorAll('[data-organ-group]');
+
+    function getCurrentView() {
+      return main.dataset.portfolioView || 'engineering';
+    }
+
+    function resetFilters() {
+      // Reset all filter chips across both bars
+      document.querySelectorAll('.filter-chip').forEach(function(c) {
+        c.classList.remove('filter-chip--active');
+      });
+      // Set "All" active on both bars
+      document.querySelectorAll('.filter-chip[data-filter="all"]').forEach(function(c) {
+        c.classList.add('filter-chip--active');
+      });
+      // Show all cards
+      cards.forEach(function(card) { card.style.display = ''; });
+      groups.forEach(function(group) { group.style.display = ''; });
+    }
+
+    function switchView(view) {
+      main.dataset.portfolioView = view;
+
+      // Toggle hero views
+      document.querySelectorAll('[data-hero-view]').forEach(function(el) {
+        el.style.display = el.getAttribute('data-hero-view') === view ? '' : 'none';
+      });
+
+      // Toggle stats views
+      document.querySelectorAll('[data-stats-view]').forEach(function(el) {
+        el.style.display = el.getAttribute('data-stats-view') === view ? '' : 'none';
+      });
+
+      // Toggle filter bars
+      document.querySelectorAll('[data-filter-view]').forEach(function(el) {
+        el.style.display = el.getAttribute('data-filter-view') === view ? '' : 'none';
+      });
+
+      // Toggle organ group headings
+      document.querySelectorAll('[data-heading-view]').forEach(function(el) {
+        el.style.display = el.getAttribute('data-heading-view') === view ? '' : 'none';
+      });
+
+      // Reset filter to "All" on view switch
+      resetFilters();
+    }
+
+    // View toggle buttons
+    viewBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var view = btn.getAttribute('data-view');
+        viewBtns.forEach(function(b) {
           b.classList.remove('view-toggle__btn--active');
           b.setAttribute('aria-checked', 'false');
         });
         btn.classList.add('view-toggle__btn--active');
         btn.setAttribute('aria-checked', 'true');
-
-        document.querySelectorAll('[data-hero-view]').forEach(el => {
-          el.style.display = el.getAttribute('data-hero-view') === view ? '' : 'none';
-        });
-        document.querySelectorAll('[data-stats-view]').forEach(el => {
-          el.style.display = el.getAttribute('data-stats-view') === view ? '' : 'none';
-        });
+        switchView(view);
       });
     });
 
-    // Skill filter
-    const chips = document.querySelectorAll('.filter-chip');
-    const cards = document.querySelectorAll('.card[data-skills]');
-    const groups = document.querySelectorAll('[data-organ-group]');
+    // Filter chips — use event delegation on both filter bars
+    document.querySelectorAll('.filter-bar').forEach(function(bar) {
+      bar.addEventListener('click', function(e) {
+        var chip = e.target.closest('.filter-chip');
+        if (!chip) return;
 
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('filter-chip--active'));
+        // Update active state within this bar
+        bar.querySelectorAll('.filter-chip').forEach(function(c) {
+          c.classList.remove('filter-chip--active');
+        });
         chip.classList.add('filter-chip--active');
 
-        const filter = chip.getAttribute('data-filter');
+        var filter = chip.getAttribute('data-filter');
+        var view = getCurrentView();
+        var attr = view === 'engineering' ? 'data-skills' : 'data-tags';
 
-        cards.forEach(card => {
+        cards.forEach(function(card) {
           if (filter === 'all') {
             card.style.display = '';
           } else {
-            const skills = card.getAttribute('data-skills') || '';
-            card.style.display = skills.split(',').includes(filter) ? '' : 'none';
+            var values = card.getAttribute(attr) || '';
+            card.style.display = values.split(',').includes(filter) ? '' : 'none';
           }
         });
 
         // Hide organ groups with no visible cards
-        groups.forEach(group => {
-          const visibleCards = group.querySelectorAll('.card[data-skills]:not([style*="display: none"])');
-          group.style.display = visibleCards.length === 0 ? 'none' : '';
+        groups.forEach(function(group) {
+          var visible = group.querySelectorAll('.card:not([style*="display: none"])');
+          group.style.display = visible.length === 0 ? 'none' : '';
         });
       });
     });
@@ -517,6 +597,24 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
     font-size: 1.1rem;
     max-width: 55ch;
     line-height: 1.7;
+  }
+
+  .hero__credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .hero__credential {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2em 0.7em;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--text-secondary);
   }
 
   .hero__available {
@@ -603,10 +701,12 @@ const skillFilters = ['Python', 'TypeScript', 'AI/ML', 'Full-Stack', 'Creative',
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--accent);
+    color: var(--organ-color, var(--accent));
     margin-bottom: var(--space-lg);
     padding-bottom: var(--space-sm);
     border-bottom: 1px solid var(--border);
+    border-left: 3px solid var(--organ-color, var(--accent));
+    padding-left: var(--space-sm);
     display: flex;
     align-items: baseline;
     gap: var(--space-sm);
