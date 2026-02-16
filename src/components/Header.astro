@@ -99,7 +99,7 @@ const connectLinks = [
         </a>
       ))}
 
-      <div class="header__mode-switch" aria-label="Background intensity">
+      <div class="header__mode-switch" role="group" aria-label="Background intensity">
         <button data-mode="subtle" class="bg-mode-btn" aria-pressed="false" title="Subtle">S</button>
         <button data-mode="bold" class="bg-mode-btn" aria-pressed="false" title="Bold">B</button>
         <button data-mode="extreme" class="bg-mode-btn" aria-pressed="false" title="Extreme">E</button>
@@ -109,30 +109,66 @@ const connectLinks = [
 </header>
 
 <script is:inline>
-  // Hamburger toggle
-  document.querySelector('.header__toggle')?.addEventListener('click', function () {
-    var header = document.querySelector('.header');
-    var expanded = this.getAttribute('aria-expanded') === 'true';
-    this.setAttribute('aria-expanded', String(!expanded));
-    header.classList.toggle('header--open');
-    // Close dropdown when opening mobile menu
-    var menu = document.querySelector('.header__dropdown-menu');
-    var trigger = document.querySelector('.header__dropdown-trigger');
-    if (menu) menu.removeAttribute('data-open');
-    if (trigger) trigger.setAttribute('aria-expanded', 'false');
-  });
+  // --- Mobile menu: toggle, focus trap, scroll lock ---
+  (function () {
+    var headerEl = document.querySelector('.header');
+    var toggleBtn = document.querySelector('.header__toggle');
+    var nav = document.querySelector('.header__nav');
+    if (!headerEl || !toggleBtn || !nav) return;
 
-  // Close mobile menu when any nav link is clicked
-  document.querySelectorAll('.header__nav a').forEach(function (link) {
-    link.addEventListener('click', function () {
-      var header = document.querySelector('.header');
-      var toggle = document.querySelector('.header__toggle');
-      if (header && header.classList.contains('header--open')) {
-        header.classList.remove('header--open');
-        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    function openMenu() {
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      headerEl.classList.add('header--open');
+      document.body.style.overflow = 'hidden';
+      // Close dropdown if open
+      var ddMenu = document.querySelector('.header__dropdown-menu');
+      var ddTrigger = document.querySelector('.header__dropdown-trigger');
+      if (ddMenu) ddMenu.removeAttribute('data-open');
+      if (ddTrigger) ddTrigger.setAttribute('aria-expanded', 'false');
+    }
+
+    function closeMenu() {
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      headerEl.classList.remove('header--open');
+      document.body.style.overflow = '';
+      toggleBtn.focus();
+    }
+
+    toggleBtn.addEventListener('click', function () {
+      var isOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeMenu(); else openMenu();
+    });
+
+    // Close when any nav link is clicked
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (headerEl.classList.contains('header--open')) closeMenu();
+      });
+    });
+
+    // Escape closes mobile menu
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && headerEl.classList.contains('header--open')) {
+        closeMenu();
       }
     });
-  });
+
+    // Focus trap within nav when mobile menu is open
+    nav.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab' || !headerEl.classList.contains('header--open')) return;
+      var focusable = nav.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length === 0) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+  })();
 
   // Dropdown toggle
   (function () {

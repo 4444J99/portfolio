@@ -1,5 +1,16 @@
 import type p5 from 'p5';
 
+declare global {
+  interface IdleDeadline {
+    didTimeout: boolean;
+    timeRemaining(): number;
+  }
+  interface Window {
+    requestIdleCallback(callback: (deadline: IdleDeadline) => void, options?: { timeout: number }): number;
+    cancelIdleCallback(handle: number): void;
+  }
+}
+
 const sketchModules: Record<string, () => Promise<{ default: (p: p5, container: HTMLElement) => void }>> = {
   // Existing (10)
   'hero': () => import('./hero-sketch'),
@@ -40,7 +51,14 @@ const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 let prefersReducedMotion = motionQuery.matches;
 motionQuery.addEventListener('change', (e) => { prefersReducedMotion = e.matches; });
 
-const initialized = new Set<HTMLElement>();
+// Track p5 instances for teardown (Map replaces former Set for VT readiness)
+const instances = new Map<HTMLElement, p5>();
+let sketchObserver: IntersectionObserver | null = null;
+
+// Concurrency throttle: max 4 simultaneous sketch initializations
+const MAX_CONCURRENT = 4;
+let activeInits = 0;
+const initQueue: HTMLElement[] = [];
 
 function isMobile(): boolean {
   return window.innerWidth < 768;
@@ -60,15 +78,37 @@ function showFallback(container: HTMLElement, sketchId: string) {
   }
 }
 
+function processQueue() {
+  while (activeInits < MAX_CONCURRENT && initQueue.length > 0) {
+    const next = initQueue.shift()!;
+    doInitSketch(next);
+  }
+}
+
 function initSketch(container: HTMLElement) {
-  if (initialized.has(container)) return;
-  initialized.add(container);
+  if (instances.has(container)) return;
+
+  if (activeInits >= MAX_CONCURRENT) {
+    if (!initQueue.includes(container)) initQueue.push(container);
+    return;
+  }
+
+  doInitSketch(container);
+}
+
+function doInitSketch(container: HTMLElement) {
+  if (instances.has(container)) return;
+  activeInits++;
 
   const sketchId = container.dataset.sketch;
   const height = container.dataset.height || '500px';
   const mobileHeight = container.dataset.mobileHeight || '350px';
 
-  if (!sketchId || !sketchModules[sketchId]) return;
+  if (!sketchId || !sketchModules[sketchId]) {
+    activeInits--;
+    processQueue();
+    return;
+  }
 
   container.style.height = isMobile() ? mobileHeight : height;
 
@@ -82,14 +122,13 @@ function initSketch(container: HTMLElement) {
     const sketchFn = sketchModule.default;
 
     try {
-      new P5((p: p5) => {
+      const instance = new P5((p: p5) => {
         sketchFn(p, container);
 
         // For reduced motion: render a fully-grown static frame then stop
         if (prefersReducedMotion && p.draw) {
           const originalDraw = p.draw.bind(p);
-          // Run draw multiple times silently to let state build up, then stop
-          let warmupFrames = 60; // simulate ~2s of animation
+          let warmupFrames = 60;
           p.draw = function () {
             originalDraw();
             warmupFrames--;
@@ -98,7 +137,6 @@ function initSketch(container: HTMLElement) {
             }
           };
 
-          // Allow click interactions to trigger a single redraw
           const originalMousePressed = p.mousePressed?.bind(p);
           if (originalMousePressed) {
             p.mousePressed = function () {
@@ -108,6 +146,7 @@ function initSketch(container: HTMLElement) {
           }
         }
       }, container);
+      instances.set(container, instance);
     } catch (err) {
       console.error('[sketch]', sketchId, 'p5 constructor error:', err);
       showFallback(container, sketchId!);
@@ -115,16 +154,18 @@ function initSketch(container: HTMLElement) {
   }).catch((err) => {
     console.error('[sketch]', sketchId, 'load error:', err);
     showFallback(container, sketchId!);
+  }).finally(() => {
+    activeInits--;
+    processQueue();
   });
 }
 
 function deferInit(container: HTMLElement) {
-  // Defer above-the-fold sketches to avoid blocking LCP
   const rect = container.getBoundingClientRect();
   const aboveFold = rect.top < window.innerHeight;
 
   if (aboveFold && 'requestIdleCallback' in window) {
-    (window as any).requestIdleCallback(() => initSketch(container), { timeout: 2000 });
+    window.requestIdleCallback(() => initSketch(container), { timeout: 2000 });
   } else {
     initSketch(container);
   }
@@ -134,18 +175,18 @@ function observeSketches() {
   const containers = document.querySelectorAll<HTMLElement>('.sketch-container[data-sketch]');
 
   if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
+    sketchObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             deferInit(entry.target as HTMLElement);
-            observer.unobserve(entry.target);
+            sketchObserver?.unobserve(entry.target);
           }
         });
       },
       { rootMargin: '200px' }
     );
-    containers.forEach((c) => observer.observe(c));
+    containers.forEach((c) => sketchObserver!.observe(c));
   } else {
     containers.forEach(deferInit);
   }
@@ -164,8 +205,7 @@ function observeSketches() {
 
 function initBackground() {
   const bg = document.getElementById('bg-canvas');
-  if (!bg || initialized.has(bg)) return;
-  initialized.add(bg);
+  if (!bg || instances.has(bg)) return;
 
   const loader = sketchModules['background'];
   if (!loader) return;
@@ -178,7 +218,7 @@ function initBackground() {
     const sketchFn = sketchModule.default;
 
     try {
-      new P5((p: p5) => {
+      const instance = new P5((p: p5) => {
         sketchFn(p, bg);
 
         if (prefersReducedMotion && p.draw) {
@@ -193,23 +233,35 @@ function initBackground() {
           };
         }
       }, bg);
+      instances.set(bg, instance);
     } catch (err) {
       console.error('[bg-sketch] p5 constructor error:', err);
-      // Background sketch fails silently — no visible fallback needed
     }
   }).catch((err) => {
     console.error('[bg-sketch] load error:', err);
   });
 }
 
+/** Remove all active p5 instances and reset state. Call before View Transitions navigation. */
+export function teardown() {
+  instances.forEach((instance) => {
+    try { instance.remove(); } catch { /* already removed */ }
+  });
+  instances.clear();
+  initQueue.length = 0;
+  activeInits = 0;
+  if (sketchObserver) {
+    sketchObserver.disconnect();
+    sketchObserver = null;
+  }
+}
+
 function init() {
-  // Background: eager init via requestIdleCallback to avoid blocking LCP
   if ('requestIdleCallback' in window) {
-    (window as any).requestIdleCallback(() => initBackground(), { timeout: 1500 });
+    window.requestIdleCallback(() => initBackground(), { timeout: 1500 });
   } else {
     setTimeout(initBackground, 200);
   }
-  // Content sketches: lazy via IntersectionObserver
   observeSketches();
 }
 

@@ -8,7 +8,7 @@ import type { GraphData, GraphNode, GraphEdge } from '../types/data';
 import graphData from '../data/graph.json';
 import { organColors } from '../data/organ-colors';
 
-const typedGraph = graphData as unknown as GraphData;
+const typedGraph = graphData as GraphData;
 const organNodes = [...new Set(typedGraph.nodes.map((n: GraphNode) => n.organ))];
 const organEdges = typedGraph.edges.map((e: GraphEdge) => {
   const srcOrgan = typedGraph.nodes.find((n: GraphNode) => n.id === e.source)?.organ;

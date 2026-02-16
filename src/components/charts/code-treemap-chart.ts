@@ -8,6 +8,12 @@ interface OrganNode {
   total_repos: number;
 }
 
+interface TreemapDatum extends OrganNode {
+  value: number;
+}
+
+type TreemapLeaf = d3.HierarchyRectangularNode<TreemapDatum>;
+
 export default function codeTreemap(container: HTMLElement, data: { organs: OrganNode[] }) {
   const theme = getChartTheme();
   const tooltip = createTooltip(container);
@@ -19,10 +25,10 @@ export default function codeTreemap(container: HTMLElement, data: { organs: Orga
     .attr('viewBox', `0 0 ${width} ${height}`)
     .attr('preserveAspectRatio', 'xMidYMid meet');
 
-  const root = d3.hierarchy({ children: data.organs.map(o => ({ ...o, value: o.total_repos })) })
-    .sum((d: any) => d.value || 0);
+  const root = d3.hierarchy<TreemapDatum>({ children: data.organs.map(o => ({ ...o, value: o.total_repos })) } as d3.HierarchyNode<TreemapDatum>['data'])
+    .sum(d => d.value || 0);
 
-  d3.treemap<any>()
+  d3.treemap<TreemapDatum>()
     .size([width, height])
     .padding(3)
     .round(true)(root);
@@ -30,16 +36,16 @@ export default function codeTreemap(container: HTMLElement, data: { organs: Orga
   const leaves = svg.selectAll('g')
     .data(root.leaves())
     .join('g')
-    .attr('transform', (d: any) => `translate(${d.x0},${d.y0})`);
+    .attr('transform', (d: TreemapLeaf) => `translate(${d.x0},${d.y0})`);
 
   leaves.append('rect')
-    .attr('width', (d: any) => d.x1 - d.x0)
-    .attr('height', (d: any) => d.y1 - d.y0)
-    .attr('fill', (d: any) => organColors[d.data.key] || '#888')
+    .attr('width', (d: TreemapLeaf) => d.x1 - d.x0)
+    .attr('height', (d: TreemapLeaf) => d.y1 - d.y0)
+    .attr('fill', (d: TreemapLeaf) => organColors[d.data.key] || '#888')
     .attr('opacity', 0.8)
     .attr('rx', 3)
     .style('cursor', 'pointer')
-    .on('mousemove', (event: MouseEvent, d: any) => {
+    .on('mousemove', (event: MouseEvent, d: TreemapLeaf) => {
       tooltip.show(`<strong>${d.data.name}</strong><br/>${d.data.total_repos} repos`, event);
     })
     .on('mouseleave', () => tooltip.hide());
@@ -50,7 +56,7 @@ export default function codeTreemap(container: HTMLElement, data: { organs: Orga
     .attr('fill', 'rgba(0,0,0,0.7)')
     .style('font-size', '0.65rem')
     .style('font-weight', '600')
-    .text((d: any) => {
+    .text((d: TreemapLeaf) => {
       const w = d.x1 - d.x0;
       return w > 50 ? d.data.name : '';
     });

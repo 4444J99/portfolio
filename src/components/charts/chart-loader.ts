@@ -1,4 +1,4 @@
-type ChartInit = (container: HTMLElement, data: any) => void;
+type ChartInit = (container: HTMLElement, data: Record<string, unknown>) => void;
 
 const chartModules: Record<string, () => Promise<{ default: ChartInit }>> = {
   'organ-bar': () => import('./organ-bar-chart'),

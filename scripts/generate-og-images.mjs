@@ -13,8 +13,9 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const outDir = join(__dirname, '..', 'public', 'og');
-mkdirSync(outDir, { recursive: true });
+const publicDir = join(__dirname, '..', 'public');
+const ogDir = join(publicDir, 'og');
+mkdirSync(ogDir, { recursive: true });
 
 const pages = [
   { file: 'og-image.png', title: '4444j', subtitle: 'Creative Technologist' },
@@ -78,8 +79,12 @@ for (const page of pages) {
   ctx.fill();
 
   const buf = canvas.toBuffer('image/png');
-  writeFileSync(join(outDir, page.file), buf);
+  // Default OG image goes to public/ root; per-page images go to public/og/
+  const dest = page.file === 'og-image.png'
+    ? join(publicDir, page.file)
+    : join(ogDir, page.file);
+  writeFileSync(dest, buf);
   console.log(`Created ${page.file}`);
 }
 
-console.log('Done — OG images generated in public/og/');
+console.log('Done — OG images generated in public/ and public/og/');

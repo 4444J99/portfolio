@@ -10,7 +10,7 @@ import metrics from '../data/system-metrics.json';
 import graphData from '../data/graph.json';
 import { organColors } from '../data/organ-colors';
 
-const typedMetrics = metrics as unknown as SystemMetrics;
+const typedMetrics = metrics as SystemMetrics;
 
 const organNames = Object.keys(typedMetrics.registry.organs);
 const repoCounts = Object.values(typedMetrics.registry.organs).map((o: Organ) => o.total_repos);

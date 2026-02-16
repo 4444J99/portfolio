@@ -7,7 +7,7 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
 import type { EssayData, Essay } from '../types/data';
 import essayData from '../data/essays.json';
 
-const typedEssayData = essayData as unknown as EssayData;
+const typedEssayData = essayData as EssayData;
 const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title);
 ---
 

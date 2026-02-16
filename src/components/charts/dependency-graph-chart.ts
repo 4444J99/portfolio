@@ -20,6 +20,12 @@ interface GraphData {
   links: Link[];
 }
 
+interface SimNode extends d3.SimulationNodeDatum, Node {}
+interface SimLink extends d3.SimulationLinkDatum<SimNode> {
+  source: SimNode;
+  target: SimNode;
+}
+
 export default function dependencyGraph(container: HTMLElement, data: GraphData) {
   const theme = getChartTheme();
   const tooltip = createTooltip(container);
@@ -36,11 +42,11 @@ export default function dependencyGraph(container: HTMLElement, data: GraphData)
   // Only show nodes that have links (to keep the graph readable)
   const linkedIds = new Set<string>();
   data.links.forEach(l => { linkedIds.add(l.source); linkedIds.add(l.target); });
-  const nodes = data.nodes.filter(n => linkedIds.has(n.id));
+  const nodes: SimNode[] = data.nodes.filter(n => linkedIds.has(n.id)) as SimNode[];
   const links = data.links.filter(l => nodes.find(n => n.id === l.source) && nodes.find(n => n.id === l.target));
 
-  const simulation = d3.forceSimulation(nodes as any)
-    .force('link', d3.forceLink(links as any).id((d: any) => d.id).distance(80))
+  const simulation = d3.forceSimulation<SimNode>(nodes)
+    .force('link', d3.forceLink<SimNode, d3.SimulationLinkDatum<SimNode>>(links).id(d => d.id).distance(80))
     .force('charge', d3.forceManyBody().strength(-120))
     .force('center', d3.forceCenter(width / 2, height / 2))
     .force('collide', d3.forceCollide(20));
@@ -55,31 +61,31 @@ export default function dependencyGraph(container: HTMLElement, data: GraphData)
   const node = svg.selectAll('circle')
     .data(nodes)
     .join('circle')
-    .attr('r', (d: any) => d.tier === 'flagship' ? 8 : 5)
-    .attr('fill', (d: any) => organColors[d.organ] || '#888')
+    .attr('r', (d: SimNode) => d.tier === 'flagship' ? 8 : 5)
+    .attr('fill', (d: SimNode) => organColors[d.organ] || '#888')
     .attr('stroke', 'rgba(0,0,0,0.3)')
     .attr('stroke-width', 1)
     .style('cursor', 'pointer')
-    .on('mousemove', (event: MouseEvent, d: any) => {
+    .on('mousemove', (event: MouseEvent, d: SimNode) => {
       tooltip.show(`<strong>${d.name}</strong><br/>${d.organ_name} · ${d.tier}`, event);
     })
     .on('mouseleave', () => tooltip.hide())
-    .call(d3.drag<SVGCircleElement, any>()
-      .on('start', (event, d: any) => { if (!event.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
-      .on('drag', (event, d: any) => { d.fx = event.x; d.fy = event.y; })
-      .on('end', (event, d: any) => { if (!event.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; })
+    .call(d3.drag<SVGCircleElement, SimNode>()
+      .on('start', (event, d) => { if (!event.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag', (event, d) => { d.fx = event.x; d.fy = event.y; })
+      .on('end', (event, d) => { if (!event.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; })
     );
 
   simulation.on('tick', () => {
     link
-      .attr('x1', (d: any) => d.source.x)
-      .attr('y1', (d: any) => d.source.y)
-      .attr('x2', (d: any) => d.target.x)
-      .attr('y2', (d: any) => d.target.y);
+      .attr('x1', d => (d.source as unknown as SimNode).x!)
+      .attr('y1', d => (d.source as unknown as SimNode).y!)
+      .attr('x2', d => (d.target as unknown as SimNode).x!)
+      .attr('y2', d => (d.target as unknown as SimNode).y!);
 
     node
-      .attr('cx', (d: any) => d.x)
-      .attr('cy', (d: any) => d.y);
+      .attr('cx', d => d.x!)
+      .attr('cy', d => d.y!);
   });
 
   // For reduced motion: run simulation to completion instantly
@@ -87,8 +93,11 @@ export default function dependencyGraph(container: HTMLElement, data: GraphData)
     simulation.stop();
     for (let i = 0; i < 300; i++) simulation.tick();
     simulation.on('tick', null);
-    link.attr('x1', (d: any) => d.source.x).attr('y1', (d: any) => d.source.y)
-      .attr('x2', (d: any) => d.target.x).attr('y2', (d: any) => d.target.y);
-    node.attr('cx', (d: any) => d.x).attr('cy', (d: any) => d.y);
+    link
+      .attr('x1', d => (d.source as unknown as SimNode).x!)
+      .attr('y1', d => (d.source as unknown as SimNode).y!)
+      .attr('x2', d => (d.target as unknown as SimNode).x!)
+      .attr('y2', d => (d.target as unknown as SimNode).y!);
+    node.attr('cx', d => d.x!).attr('cy', d => d.y!);
   }
 }

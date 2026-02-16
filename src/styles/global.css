@@ -364,7 +364,12 @@ img {
 .table-wrap {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin: 1rem 0;
+  margin: var(--space-md) 0;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 .table-wrap table {
   width: 100%;
@@ -459,18 +464,6 @@ img {
 /* --- Sketch Containers --- */
 .prose .sketch-container {
   margin: var(--space-2xl) 0;
-}
-
-/* --- Table Responsive Wrap --- */
-.table-wrap {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin: var(--space-md) 0;
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: var(--space-md);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 /* --- Sketch Accent Container --- */

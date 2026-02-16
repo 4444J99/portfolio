@@ -4,7 +4,7 @@ interface Props {
   height?: string;
   mobileHeight?: string;
   ariaLabel: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const { sketchId, height = '500px', mobileHeight = '350px', ariaLabel, ...rest } = Astro.props;
