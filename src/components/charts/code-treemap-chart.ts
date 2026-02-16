@@ -53,7 +53,7 @@ export default function codeTreemap(container: HTMLElement, data: { organs: Orga
   leaves.append('text')
     .attr('x', 6)
     .attr('y', 16)
-    .attr('fill', 'rgba(0,0,0,0.7)')
+    .attr('fill', theme.labelDark)
     .style('font-size', '0.65rem')
     .style('font-weight', '600')
     .text((d: TreemapLeaf) => {

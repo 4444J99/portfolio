@@ -35,6 +35,7 @@
   --accent-purple: #9C27B0;
   --accent-green: #00E676;
 
+  --bg-chrome: rgba(0,0,0,0.4);
   --code-bg: rgba(0,0,0,0.2);
 
   /* Typography */
@@ -115,6 +116,7 @@ body[data-bg-mode="subtle"] {
   --bg-secondary: rgba(255,255,255,0.25);
   --bg-card: rgba(255,255,255,0.65);
   --bg-card-hover: rgba(255,255,255,0.75);
+  --bg-chrome: rgba(255,255,255,0.5);
   --code-bg: rgba(255,255,255,0.3);
 }
 
@@ -491,8 +493,10 @@ img {
 
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
-  #bg-canvas canvas, body, a, .sketch-container canvas {
+  *, *::before, *::after {
     animation: none !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
   }
 
   [data-reveal] { opacity: 1; }

@@ -16,5 +16,7 @@ export function getChartTheme() {
     border: style.getPropertyValue('--border').trim() || 'rgba(255,255,255,0.25)',
     accent: style.getPropertyValue('--accent').trim() || '#00BCD4',
     bgCard: style.getPropertyValue('--bg-card').trim() || 'rgba(255,255,255,0.12)',
+    strokeDark: 'rgba(0,0,0,0.3)',
+    labelDark: 'rgba(0,0,0,0.7)',
   };
 }

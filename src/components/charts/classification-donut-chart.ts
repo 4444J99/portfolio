@@ -30,7 +30,7 @@ export default function classificationDonut(container: HTMLElement, data: Classi
     .join('path')
     .attr('d', arc)
     .attr('fill', d => classificationColors[d.data[0]] || '#888')
-    .attr('stroke', 'rgba(0,0,0,0.3)')
+    .attr('stroke', theme.strokeDark)
     .attr('stroke-width', 1)
     .style('cursor', 'pointer')
     .on('mousemove', (event, d) => {

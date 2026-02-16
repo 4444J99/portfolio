@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { getChartTheme } from './chart-theme';
+import { getChartTheme, classificationColors } from './chart-theme';
 import { createTooltip } from './chart-utils';
 
 interface Repo {
@@ -61,7 +61,7 @@ export default function flagshipStacked(container: HTMLElement, data: { repos: R
     .attr('y', d => y(d.code_files + d.test_files))
     .attr('width', x.bandwidth())
     .attr('height', d => innerH - y(d.test_files))
-    .attr('fill', '#7ce8a6')
+    .attr('fill', classificationColors.SUBSTANTIAL)
     .attr('opacity', 0.8)
     .attr('rx', 2)
     .style('cursor', 'pointer')
@@ -91,7 +91,7 @@ export default function flagshipStacked(container: HTMLElement, data: { repos: R
 
   // Legend
   const legend = svg.append('g').attr('transform', `translate(${margin.left}, ${height - 10})`);
-  [{ label: 'Code', color: theme.accent }, { label: 'Tests', color: '#7ce8a6' }].forEach((item, i) => {
+  [{ label: 'Code', color: theme.accent }, { label: 'Tests', color: classificationColors.SUBSTANTIAL }].forEach((item, i) => {
     legend.append('rect').attr('x', i * 80).attr('y', -6).attr('width', 10).attr('height', 10).attr('fill', item.color).attr('rx', 2);
     legend.append('text').attr('x', i * 80 + 14).attr('y', 3).attr('fill', theme.textMuted).style('font-size', '0.6rem').text(item.label);
   });

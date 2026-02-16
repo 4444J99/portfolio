@@ -50,7 +50,7 @@ export default function sprintTimeline(container: HTMLElement, data: { sprints: 
       .attr('cy', innerH / 2)
       .attr('r', 5)
       .attr('fill', theme.accent)
-      .attr('stroke', 'rgba(0,0,0,0.3)')
+      .attr('stroke', theme.strokeDark)
       .attr('stroke-width', 1)
       .style('cursor', 'pointer')
       .on('mousemove', (event) => {

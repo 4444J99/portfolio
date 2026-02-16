@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { getChartTheme } from './chart-theme';
+import { getChartTheme, classificationColors } from './chart-theme';
 
 interface Target {
   key: string;
@@ -55,13 +55,13 @@ export default function praxisSparklines(container: HTMLElement, data: { targets
       .attr('width', barW * pct)
       .attr('height', 12)
       .attr('rx', 6)
-      .attr('fill', t.met ? '#7ce8a6' : theme.accent);
+      .attr('fill', t.met ? classificationColors.SUBSTANTIAL : theme.accent);
 
     // Value text
     svg.append('text')
       .attr('x', barX + barW + 10)
       .attr('y', y)
-      .attr('fill', t.met ? '#7ce8a6' : theme.textMuted)
+      .attr('fill', t.met ? classificationColors.SUBSTANTIAL : theme.textMuted)
       .attr('dominant-baseline', 'middle')
       .style('font-size', '0.65rem')
       .style('font-family', 'var(--font-mono)')

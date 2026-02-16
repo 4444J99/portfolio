@@ -63,7 +63,7 @@ export default function dependencyGraph(container: HTMLElement, data: GraphData)
     .join('circle')
     .attr('r', (d: SimNode) => d.tier === 'flagship' ? 8 : 5)
     .attr('fill', (d: SimNode) => organColors[d.organ] || '#888')
-    .attr('stroke', 'rgba(0,0,0,0.3)')
+    .attr('stroke', theme.strokeDark)
     .attr('stroke-width', 1)
     .style('cursor', 'pointer')
     .on('mousemove', (event: MouseEvent, d: SimNode) => {

@@ -41,7 +41,8 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
           ))}
         </div>
 
-        <div id="graph-container" class="graph-container">
+        <div id="graph-container" class="graph-container" role="img" aria-label="Interactive force-directed dependency graph of ORGANVM repositories" tabindex="0">
+          <noscript>Dependency graph requires JavaScript to render.</noscript>
           <div class="graph-loading">Loading dependency graph...</div>
         </div>
       </div>
@@ -83,6 +84,10 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
 
     container.innerHTML = '';
 
+    var cs = getComputedStyle(document.body);
+    var borderColor = cs.getPropertyValue('--border').trim() || '#2a2a30';
+    var bgColor = cs.getPropertyValue('--bg-card').trim() || '#0a0a0b';
+
     const width = container.clientWidth;
     const height = Math.max(500, Math.min(width * 0.6, 700));
 
@@ -108,7 +113,7 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
       .selectAll('line')
       .data(links)
       .join('line')
-      .attr('stroke', '#2a2a30')
+      .attr('stroke', borderColor)
       .attr('stroke-width', 1);
 
     const node = svg.append('g')
@@ -116,8 +121,8 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
       .data(nodes)
       .join('circle')
       .attr('r', (d) => d.tier === 'flagship' ? 8 : 4)
-      .attr('fill', (d) => organColors[d.organ] || '#888')
-      .attr('stroke', '#0a0a0b')
+      .attr('fill', (d) => organColors[d.organ] || borderColor)
+      .attr('stroke', bgColor)
       .attr('stroke-width', 1)
       .style('cursor', 'pointer');
 

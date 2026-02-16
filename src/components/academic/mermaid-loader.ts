@@ -1,4 +1,5 @@
 const initialized = new Set<HTMLElement>();
+let observer: IntersectionObserver | null = null;
 
 function initMermaid(container: HTMLElement) {
   if (initialized.has(container)) return;
@@ -33,20 +34,28 @@ function observeMermaid() {
   const containers = document.querySelectorAll<HTMLElement>('.mermaid[data-chart]');
 
   if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
+    observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             initMermaid(entry.target as HTMLElement);
-            observer.unobserve(entry.target);
+            observer?.unobserve(entry.target);
           }
         });
       },
       { rootMargin: '200px' }
     );
-    containers.forEach((c) => observer.observe(c));
+    containers.forEach((c) => observer!.observe(c));
   } else {
     containers.forEach(initMermaid);
+  }
+}
+
+export function teardown() {
+  initialized.clear();
+  if (observer) {
+    observer.disconnect();
+    observer = null;
   }
 }
 
