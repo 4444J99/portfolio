@@ -1,25 +1,20 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Linguistic Atomization Framework — 4444j" description="A computational rhetoric platform decomposing text into hierarchical atomic units across 46 canonical works in 15+ languages.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="atoms"
+<ProjectLayout pageTitle="Linguistic Atomization Framework — 4444j" description="A computational rhetoric platform decomposing text into hierarchical atomic units across 46 canonical works in 15+ languages."
+  sketchId="atoms"
       title="LingFrame — Linguistic Atomization Framework"
       tagline="Computational rhetoric across 46 works and 15 languages"
       tags={['Theory', 'Language']}
-      repo="https://github.com/organvm-i-theoria/linguistic-atomization-framework"
-    >
+      repo="https://github.com/organvm-i-theoria/linguistic-atomization-framework">
       <h2>The Problem: Rhetoric Without Instruments</h2>
 <SketchContainer sketchId="atoms" height="250px" mobileHeight="180px" ariaLabel="Linguistic particle decomposition" />
 
@@ -351,32 +346,14 @@ class LinguisticUnit:
 
       <h2>By the Numbers</h2>
       <Figure alt="Project statistics for Linguistic Atomization Framework" caption="LingFrame system metrics — a computational rhetoric platform processing 46 canonical works through six analysis modules across 12 literary traditions" number={3}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">46</div>
-            <div class="stat-label">Canonical Works</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">15+</div>
-            <div class="stat-label">Languages</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">6</div>
-            <div class="stat-label">Analysis Modules</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">142</div>
-            <div class="stat-label">Tests</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">12</div>
-            <div class="stat-label">Literary Traditions</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">Python</div>
-            <div class="stat-label">3.10+</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '46', label: 'Canonical Works' },
+          { value: '15+', label: 'Languages' },
+          { value: '6', label: 'Analysis Modules' },
+          { value: '142', label: 'Tests' },
+          { value: '12', label: 'Literary Traditions' },
+          { value: 'Python', label: '3.10+' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -392,7 +369,4 @@ class LinguisticUnit:
         { id: 10, author: "Galanter, Philip", title: "What is Generative Art? Complexity Theory as a Context for Art Theory", source: "International Conference on Generative Art", year: 2003 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

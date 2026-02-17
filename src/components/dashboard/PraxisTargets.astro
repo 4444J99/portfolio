@@ -1,0 +1,84 @@
+---
+import ChartContainer from '../charts/ChartContainer.astro';
+import type { PraxisTarget } from '../../types/data';
+
+interface Props {
+  targets: Record<string, PraxisTarget>;
+  praxisChartData: Record<string, unknown>;
+}
+
+const { targets, praxisChartData } = Astro.props;
+---
+
+<section class="section">
+  <div class="container">
+    <h2 class="section__heading">PRAXIS Targets</h2>
+    <ChartContainer chartId="praxis-sparklines" data={praxisChartData} ariaLabel="Progress bars showing PRAXIS target completion" height="240px" />
+    <div class="targets-grid">
+      {Object.entries(targets).map(([key, target]: [string, PraxisTarget]) => (
+        <div class="target-card">
+          <div class="target-card__label">{key.replace(/_/g, ' ')}</div>
+          <div class="target-card__values">
+            <span class="target-card__current">{target.current}</span>
+            <span class="target-card__separator">/</span>
+            <span class="target-card__goal">{target.target}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .targets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .target-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .target-card__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .target-card__values {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: var(--space-xs);
+  }
+
+  .target-card__current {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .target-card__separator {
+    color: var(--text-muted);
+  }
+
+  .target-card__goal {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .targets-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

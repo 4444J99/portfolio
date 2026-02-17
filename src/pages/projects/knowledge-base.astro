@@ -1,20 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="My Knowledge Base — 4444j" description="Epistemological infrastructure for converting AI conversations into durable, searchable, interconnected knowledge with multi-modal retrieval.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="spiral"
+<ProjectLayout pageTitle="My Knowledge Base — 4444j" description="Epistemological infrastructure for converting AI conversations into durable, searchable, interconnected knowledge with multi-modal retrieval."
+  sketchId="spiral"
       title="My Knowledge Base"
       tagline="Turning AI conversations into durable, interconnected knowledge"
       tags={['Theory', 'Knowledge']}
@@ -22,8 +18,7 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
       badges={[
         { src: 'https://img.shields.io/github/languages/top/organvm-i-theoria/my-knowledge-base', alt: 'Top language' },
         { src: 'https://img.shields.io/github/last-commit/organvm-i-theoria/my-knowledge-base', alt: 'Last commit' },
-      ]}
-    >
+      ]}>
       <h2>The Evaporation Problem</h2>
 <SketchContainer sketchId="spiral" height="250px" mobileHeight="180px" ariaLabel="Golden spiral knowledge growth" />
 
@@ -296,32 +291,14 @@ function reciprocalRankFusion(
 
       <h2>By the Numbers</h2>
       <Figure alt="My Knowledge Base system metrics" caption="System scope — nine sources feeding through five strategies into a triple-modal search index with LLM intelligence extraction" number={3}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">200+</div>
-            <div class="stat-label">Tests</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">9</div>
-            <div class="stat-label">Ingestion Sources</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">5</div>
-            <div class="stat-label">Atomization Strategies</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">3</div>
-            <div class="stat-label">Search Modalities</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">3</div>
-            <div class="stat-label">LLM Backends</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">BFS</div>
-            <div class="stat-label">Graph Traversal</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '200+', label: 'Tests' },
+          { value: '9', label: 'Ingestion Sources' },
+          { value: '5', label: 'Atomization Strategies' },
+          { value: '3', label: 'Search Modalities' },
+          { value: '3', label: 'LLM Backends' },
+          { value: 'BFS', label: 'Graph Traversal' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -337,7 +314,4 @@ function reciprocalRankFusion(
         { id: 10, author: "Meadows, Donella H.", title: "Thinking in Systems: A Primer", source: "Chelsea Green Publishing", year: 2008 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

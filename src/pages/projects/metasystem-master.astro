@@ -1,20 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Metasystem Master — 4444j" description="A real-time audience-participatory performance engine where collective input shapes live art through weighted consensus algorithms.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="kaleidoscope"
+<ProjectLayout pageTitle="Metasystem Master — 4444j" description="A real-time audience-participatory performance engine where collective input shapes live art through weighted consensus algorithms."
+  sketchId="kaleidoscope"
       title="Omni-Dromenon Engine (Metasystem Master)"
       tagline="Collective audience input shaping live art in real time"
       tags={['Art', 'TypeScript', 'Python', 'Architecture']}
@@ -22,8 +18,7 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
       badges={[
         { src: 'https://img.shields.io/github/languages/top/organvm-ii-poiesis/metasystem-master', alt: 'Top language' },
         { src: 'https://img.shields.io/github/last-commit/organvm-ii-poiesis/metasystem-master', alt: 'Last commit' },
-      ]}
-    >
+      ]}>
       <h2>The Problem</h2>
 <SketchContainer sketchId="kaleidoscope" height="250px" mobileHeight="180px" ariaLabel="Kaleidoscopic system visualization" />
 
@@ -195,32 +190,14 @@ function computeConsensus(
 
       <h2>By the Numbers</h2>
       <Figure alt="Key metrics for the Omni-Dromenon Engine" caption="Summary statistics for the Omni-Dromenon Engine, reflecting the scope and performance targets of the system." number={2}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">5</div>
-            <div class="stat-label">Packages</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">3</div>
-            <div class="stat-label">Weighting Axes</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">5</div>
-            <div class="stat-label">Genre Presets</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">50ms</div>
-            <div class="stat-label">Consensus Loop</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">1K+</div>
-            <div class="stat-label">Target Audience</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">TS+Py</div>
-            <div class="stat-label">Hybrid Stack</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '5', label: 'Packages' },
+          { value: '3', label: 'Weighting Axes' },
+          { value: '5', label: 'Genre Presets' },
+          { value: '50ms', label: 'Consensus Loop' },
+          { value: '1K+', label: 'Target Audience' },
+          { value: 'TS+Py', label: 'Hybrid Stack' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -238,10 +215,7 @@ function computeConsensus(
         { id: 12, author: "Bourriaud, Nicolas", title: "Relational Aesthetics", source: "Les Presses du R\u00e9el", year: 2002 }
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>
 
 <style>
   .architecture-diagram {

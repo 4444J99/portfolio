@@ -1,25 +1,20 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Life My Midst In — 4444j" description="An interactive CV system that inverts the hiring dynamic — the employer becomes the interviewee, and the resume assembles itself.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="orbits"
+<ProjectLayout pageTitle="Life My Midst In — 4444j" description="An interactive CV system that inverts the hiring dynamic — the employer becomes the interviewee, and the resume assembles itself."
+  sketchId="orbits"
       title="in-midst-my-life"
       tagline="The employer becomes the interviewee"
       tags={['Commerce', 'Product']}
-      repo="https://github.com/organvm-iii-ergon/life-my--midst--in"
-    >
+      repo="https://github.com/organvm-iii-ergon/life-my--midst--in">
       <h2>The Problem with Professional Identity</h2>
 <SketchContainer sketchId="orbits" height="250px" mobileHeight="180px" ariaLabel="Orbital social dynamics" />
 
@@ -279,32 +274,14 @@ type MaskId =
 
       <h2>By the Numbers</h2>
       <Figure alt="Project statistics for in-midst-my-life" caption="System metrics — a full-stack SaaS application with hexagonal architecture, verifiable credentials, and autonomous job search" number={3}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">68+</div>
-            <div class="stat-label">Commits</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">21</div>
-            <div class="stat-label">DB Migrations</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">16</div>
-            <div class="stat-label">Identity Masks</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">5</div>
-            <div class="stat-label">Compatibility Factors</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Shared Packages</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">W3C VC</div>
-            <div class="stat-label">Credential Standard</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '68+', label: 'Commits' },
+          { value: '21', label: 'DB Migrations' },
+          { value: '16', label: 'Identity Masks' },
+          { value: '5', label: 'Compatibility Factors' },
+          { value: '4', label: 'Shared Packages' },
+          { value: 'W3C VC', label: 'Credential Standard' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -320,7 +297,4 @@ type MaskId =
         { id: 10, author: "Simon, Herbert A.", title: "The Sciences of the Artificial", source: "MIT Press", year: 1996 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

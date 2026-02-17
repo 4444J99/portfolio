@@ -1,25 +1,20 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="AI-Conductor Model — 4444j" description="The methodology for human-AI co-creation that produced ~386K words of documentation — AI generates volume, human directs and refines.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="conductor"
+<ProjectLayout pageTitle="AI-Conductor Model — 4444j" description="The methodology for human-AI co-creation that produced ~386K words of documentation — AI generates volume, human directs and refines."
+  sketchId="conductor"
       title="AI-Conductor Model"
       tagline="Human-AI co-creation as artistic practice"
       tags={['AI', 'Process', 'Methodology']}
-      repo="https://github.com/organvm-v-logos/public-process"
-    >
+      repo="https://github.com/organvm-v-logos/public-process">
       <h2>The Model</h2>
       <p>
         Every creative team in 2026 is figuring out how to work with AI. Most approaches are "AI replaces human work" or "human ignores AI."<Cite id={1} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /> Shneiderman's framework proposes a third path: systems that amplify human capability rather than replacing it. I developed the <strong>AI-conductor model</strong>, where human acts as conductor — setting direction, maintaining quality, making every structural decision — while AI acts as an instrument capable of producing drafts at speed. This isn't "AI wrote my portfolio." It's a designed practice with explicit roles, quality gates, and attribution.<Cite id={2} author="Schön, Donald A." title="The Reflective Practitioner: How Professionals Think in Action" source="Basic Books" year={1983} />
@@ -168,32 +163,14 @@ Efficiency multiplier:   ~5x over manual authoring`}
       </ul>
 
       <Figure alt="Production metrics" caption="AI-Conductor model: production metrics across the eight-organ system">
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">386K</div>
-            <div class="stat-label">Words Produced</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">6.5M</div>
-            <div class="stat-label">Total Tokens</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">81</div>
-            <div class="stat-label">Repos Documented</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">1,267</div>
-            <div class="stat-label">Links Audited</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">10</div>
-            <div class="stat-label">Meta-System Essays</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">Human</div>
-            <div class="stat-label">Direction</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '386K', label: 'Words Produced' },
+          { value: '6.5M', label: 'Total Tokens' },
+          { value: '81', label: 'Repos Documented' },
+          { value: '1,267', label: 'Links Audited' },
+          { value: '10', label: 'Meta-System Essays' },
+          { value: 'Human', label: 'Direction' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -211,7 +188,4 @@ Efficiency multiplier:   ~5x over manual authoring`}
         { id: 12, author: "Zuboff, Shoshana", title: "The Age of Surveillance Capitalism", source: "PublicAffairs", year: 2019 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

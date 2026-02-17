@@ -1,8 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import type { EssayData, Essay } from '../types/data';
 import essayData from '../data/essays.json';
@@ -12,8 +9,6 @@ const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title
 ---
 
 <Layout title="Essays — Public Process" description="28 essays on building an eight-organ creative-institutional system in public.">
-  <Header />
-  <main id="main-content">
     <div class="sketch-accent">
       <SketchContainer sketchId="token-stream" height="250px" mobileHeight="180px" ariaLabel="Animated token stream representing text and language flow" data-tokens={essayTitles.join('|')} />
     </div>
@@ -40,8 +35,6 @@ const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title
         </div>
       </div>
     </section>
-  </main>
-  <Footer />
 </Layout>
 
 <style>

@@ -6,8 +6,9 @@ interface Props {
   ogImage: string;
 }
 
+import { canonicalBase } from '../../utils/paths';
+
 const { description, ogImage } = Astro.props;
-const canonicalBase = 'https://4444j99.github.io/portfolio';
 
 const jsonLd = {
   "@context": "https://schema.org",

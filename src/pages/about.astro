@@ -1,15 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
-
-const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+import { base } from '../utils/paths';
 ---
 
 <Layout title="About — Anthony James Padavano" description="Creative technologist building autonomous creative systems. Professional bio, practice statement, and contact information." >
-  <Header />
-  <main id="main-content">
     <div class="sketch-accent">
       <SketchContainer sketchId="particle-field" height="300px" mobileHeight="200px" ariaLabel="Generative particle field visualization representing creative identity" data-density="high" data-count="91" />
     </div>
@@ -93,8 +88,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         </section>
       </div>
     </article>
-  </main>
-  <Footer />
 </Layout>
 
 <style>

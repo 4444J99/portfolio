@@ -1,25 +1,20 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Org Architecture & Community Health — 4444j" description="Organization-wide infrastructure for CI/CD, AI agents, and community health — inherited by every repo in the org.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="hierarchy"
+<ProjectLayout pageTitle="Org Architecture & Community Health — 4444j" description="Organization-wide infrastructure for CI/CD, AI agents, and community health — inherited by every repo in the org."
+  sketchId="hierarchy"
       title="Org Architecture & Community Health"
       tagline="One repo to govern them all"
       tags={['Systems', 'Community']}
-      repo="https://github.com/organvm-i-theoria/.github"
-    >
+      repo="https://github.com/organvm-i-theoria/.github">
       <h2>The Problem: Standards at Scale</h2>
 <SketchContainer sketchId="hierarchy" height="250px" mobileHeight="180px" ariaLabel="Self-building organization tree" />
 
@@ -229,32 +224,14 @@ copilot:
       </p>
 
       <Figure alt="System metrics for the org architecture repository" caption="Organizational infrastructure metrics — a single repository governing 81 downstream repositories across 8 organizations" number={1}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">81</div>
-            <div class="stat-label">Repos Inheriting</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">3</div>
-            <div class="stat-label">Security Tools</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Health Files</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">5+</div>
-            <div class="stat-label">AI Agents</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">8</div>
-            <div class="stat-label">Organizations</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">SHA</div>
-            <div class="stat-label">Pinned Actions</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '81', label: 'Repos Inheriting' },
+          { value: '3', label: 'Security Tools' },
+          { value: '4', label: 'Health Files' },
+          { value: '5+', label: 'AI Agents' },
+          { value: '8', label: 'Organizations' },
+          { value: 'SHA', label: 'Pinned Actions' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -270,7 +247,4 @@ copilot:
         { id: 10, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

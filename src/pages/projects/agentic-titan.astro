@@ -1,20 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Agentic Titan — Anthony James Padavano" description="A polymorphic, model-agnostic multi-agent orchestration framework with nine topology patterns, 22 agent archetypes, and 1,095+ tests.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="swarm"
+<ProjectLayout pageTitle="Agentic Titan — Anthony James Padavano" description="A polymorphic, model-agnostic multi-agent orchestration framework with nine topology patterns, 22 agent archetypes, and 1,095+ tests."
+  sketchId="swarm"
       title="Agentic Titan"
       tagline="Multi-agent orchestration from laptop to production"
       tags={['Orchestration', 'AI', 'Python']}
@@ -22,8 +18,7 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
       badges={[
         { src: 'https://img.shields.io/github/languages/top/organvm-iv-taxis/agentic-titan', alt: 'Top language' },
         { src: 'https://img.shields.io/github/last-commit/organvm-iv-taxis/agentic-titan', alt: 'Last commit' },
-      ]}
-    >
+      ]}>
       <h2>Problem</h2>
 <SketchContainer sketchId="swarm" height="250px" mobileHeight="180px" ariaLabel="Multi-agent swarm visualization" />
 
@@ -171,32 +166,14 @@ result = pipeline.run(task="Analyze dataset", safety=policy)`}
 
       <h2>By the Numbers</h2>
       <Figure alt="Agentic Titan project metrics summary" caption="Key metrics across 18 development phases, 9 topologies, and 4 LLM backends">
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">1,095+</div>
-            <div class="stat-label">Tests</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">9</div>
-            <div class="stat-label">Topologies</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">22</div>
-            <div class="stat-label">Agent Archetypes</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">18</div>
-            <div class="stat-label">Dev Phases</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">LLM Backends</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">PROD</div>
-            <div class="stat-label">Status</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '1,095+', label: 'Tests' },
+          { value: '9', label: 'Topologies' },
+          { value: '22', label: 'Agent Archetypes' },
+          { value: '18', label: 'Dev Phases' },
+          { value: '4', label: 'LLM Backends' },
+          { value: 'PROD', label: 'Status' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -214,10 +191,7 @@ result = pipeline.run(task="Analyze dataset", safety=policy)`}
         { id: 12, author: "Shoham, Yoav and Kevin Leyton-Brown", title: "Multiagent Systems: Algorithmic, Game-Theoretic, and Logical Foundations", source: "Cambridge University Press", year: 2008 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>
 
 <style>
   .architecture-diagram {

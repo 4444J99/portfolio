@@ -1,15 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
-
-const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+import { base } from '../utils/paths';
 ---
 
 <Layout title="Resume — Anthony James Padavano" description="Creative technologist building autonomous creative systems. Resume and CV." >
-  <Header />
-  <main id="main-content">
     <div class="sketch-accent print-hide">
       <SketchContainer sketchId="flow-diagram" height="200px" mobileHeight="150px" ariaLabel="Animated flow diagram representing career progression" data-stages="Education,Multimedia Production,Digital Marketing,Systems Engineering,Creative Infrastructure" />
     </div>
@@ -298,8 +293,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
       </div>
     </article>
-  </main>
-  <Footer />
 </Layout>
 
 <style>

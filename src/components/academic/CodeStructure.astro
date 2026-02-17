@@ -13,3 +13,38 @@ const { lang, caption, filename } = Astro.props;
   <pre><code class={`language-${lang}`}><slot /></code></pre>
   <div class="code-structure__caption">{caption}</div>
 </div>
+
+<style>
+  .code-structure {
+    margin: var(--space-2xl) 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .code-structure__filename {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    padding: var(--space-xs) var(--space-md);
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.02em;
+  }
+
+  .code-structure pre {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+  }
+
+  .code-structure__caption {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-muted);
+    text-align: center;
+    padding: var(--space-sm) var(--space-md);
+    border-top: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+</style>

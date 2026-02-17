@@ -29,3 +29,48 @@ const sorted = [...entries].sort((a, b) => a.id - b.id);
     ))}
   </ol>
 </section>
+
+<style>
+  .references {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--border);
+  }
+
+  .references h2 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .references ol {
+    list-style: none;
+    counter-reset: ref-counter;
+    padding-left: 0;
+  }
+
+  .references li {
+    counter-increment: ref-counter;
+    padding-left: 2.5em;
+    text-indent: -2.5em;
+    margin-bottom: var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .references li::before {
+    content: "[" counter(ref-counter) "] ";
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .references li em {
+    color: var(--text-primary);
+  }
+
+  .references li a {
+    word-break: break-all;
+    font-size: 0.8em;
+  }
+</style>

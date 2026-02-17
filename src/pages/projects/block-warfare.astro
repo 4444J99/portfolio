@@ -1,25 +1,20 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="TurfSynth AR — 4444j" description="A location-based augmented reality game where your real-world neighborhood procedurally generates the game around you.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="blocks"
+<ProjectLayout pageTitle="TurfSynth AR — 4444j" description="A location-based augmented reality game where your real-world neighborhood procedurally generates the game around you."
+  sketchId="blocks"
       title="TurfSynth AR (My Block Warfare)"
       tagline="Your neighborhood procedurally generates the game"
       tags={['Commerce', 'Game']}
-      repo="https://github.com/organvm-iii-ergon/my-block-warfare"
-    >
+      repo="https://github.com/organvm-iii-ergon/my-block-warfare">
       <h2>The Problem: Geography as Decoration</h2>
 <SketchContainer sketchId="blocks" height="250px" mobileHeight="180px" ariaLabel="Falling block game visualization" />
 
@@ -309,32 +304,14 @@ export function getStrategyContext(lat: number, lng: number) {
       </p>
 
       <Figure alt="Project statistics for TurfSynth AR" caption="TurfSynth AR system metrics — a location-based AR game where real geography procedurally generates gameplay" number={2}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">5</div>
-            <div class="stat-label">Monorepo Packages</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">3</div>
-            <div class="stat-label">Data Sources</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">6</div>
-            <div class="stat-label">Territory Types</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Gameplay Modes</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Territory States</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">TypeScript</div>
-            <div class="stat-label">Strict Mode</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '5', label: 'Monorepo Packages' },
+          { value: '3', label: 'Data Sources' },
+          { value: '6', label: 'Territory Types' },
+          { value: '4', label: 'Gameplay Modes' },
+          { value: '4', label: 'Territory States' },
+          { value: 'TypeScript', label: 'Strict Mode' },
+        ]} />
       </Figure>
 
       <h2>Tradeoffs and Lessons</h2>
@@ -355,7 +332,4 @@ export function getStrategyContext(lat: number, lng: number) {
         { id: 10, author: "de Certeau, Michel", title: "The Practice of Everyday Life", source: "University of California Press", year: 1984 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

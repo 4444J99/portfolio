@@ -1,20 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Narratological Algorithmic Lenses — 4444j" description="A monorepo for formalized narrative analysis tools — Python core, CLI, FastAPI service, and React frontend.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="lenses"
+<ProjectLayout pageTitle="Narratological Algorithmic Lenses — 4444j" description="A monorepo for formalized narrative analysis tools — Python core, CLI, FastAPI service, and React frontend."
+  sketchId="lenses"
       title="Narratological Algorithmic Lenses"
       tagline="Formalized narrative analysis as executable theory"
       tags={['Theory', 'Narrative']}
@@ -22,8 +18,7 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
       badges={[
         { src: 'https://img.shields.io/github/languages/top/organvm-i-theoria/narratological-algorithmic-lenses', alt: 'Top language' },
         { src: 'https://img.shields.io/github/last-commit/organvm-i-theoria/narratological-algorithmic-lenses', alt: 'Last commit' },
-      ]}
-    >
+      ]}>
       <h2>The Problem: Narrative Theory Without Computational Infrastructure</h2>
 <SketchContainer sketchId="lenses" height="250px" mobileHeight="180px" ariaLabel="Overlapping narrative lens refraction" />
 
@@ -54,7 +49,6 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
 from enum import Enum
 from typing import Optional
 
-
 class ActantialRole(Enum):
     SUBJECT = "subject"
     OBJECT = "object"
@@ -63,12 +57,10 @@ class ActantialRole(Enum):
     HELPER = "helper"
     OPPONENT = "opponent"
 
-
 class ActantialAxis(Enum):
     DESIRE = "desire"        # Subject <-> Object
     COMMUNICATION = "communication"  # Sender <-> Receiver
     POWER = "power"          # Helper <-> Opponent
-
 
 @dataclass
 class ActantDetection:
@@ -79,7 +71,6 @@ class ActantDetection:
     confidence: float  # 0.0 to 1.0
     evidence: list[str] = field(default_factory=list)
     structural_relations: dict[str, str] = field(default_factory=dict)
-
 
 @dataclass
 class ActantialDiagnostic:
@@ -184,7 +175,6 @@ class ActantialDiagnostic:
 )
 from narratological_core.models.cross_reference import CorrespondenceMap
 
-
 def compose_analysis(
     text: str,
     frameworks: list[str] | None = None,
@@ -233,24 +223,12 @@ def compose_analysis(
       </p>
 
       <Figure alt="Project statistics for Narratological Algorithmic Lenses" caption="System metrics — a four-package monorepo encoding multiple narratological frameworks as composable, testable Python algorithms" number={2}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Packages</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4+</div>
-            <div class="stat-label">Frameworks Encoded</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">specs/</div>
-            <div class="stat-label">Research Archive</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">Typed</div>
-            <div class="stat-label">Diagnostic Output</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '4', label: 'Packages' },
+          { value: '4+', label: 'Frameworks Encoded' },
+          { value: 'specs/', label: 'Research Archive' },
+          { value: 'Typed', label: 'Diagnostic Output' },
+        ]} />
       </Figure>
 
       <h2>Why This Approach Matters</h2>
@@ -271,7 +249,4 @@ def compose_analysis(
         { id: 10, author: "Manovich, Lev", title: "Software Takes Command", source: "Bloomsbury Academic", year: 2013 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

@@ -1,0 +1,105 @@
+---
+import ChartContainer from '../charts/ChartContainer.astro';
+import type { Sprint } from '../../types/data';
+
+interface Props {
+  sprints: Sprint[];
+  sprintChartData: Record<string, unknown>;
+}
+
+const { sprints, sprintChartData } = Astro.props;
+---
+
+<section class="section">
+  <div class="container">
+    <h2 class="section__heading">Sprint Timeline</h2>
+    <ChartContainer chartId="sprint-timeline" data={sprintChartData} ariaLabel="Timeline visualization of all development sprints" height="160px" />
+    <div class="timeline">
+      {sprints.map((sprint: Sprint, i: number) => (
+        <div class="timeline__entry">
+          <div class="timeline__marker">
+            <span class="timeline__number">{i + 1}</span>
+          </div>
+          <div class="timeline__content">
+            <div class="timeline__header">
+              <span class="timeline__name">{sprint.name}</span>
+              <span class="timeline__date">{sprint.date}</span>
+            </div>
+            <p class="timeline__focus">{sprint.focus} — {sprint.deliverables}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .timeline__entry {
+    display: flex;
+    gap: var(--space-lg);
+    align-items: flex-start;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .timeline__marker {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .timeline__number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .timeline__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .timeline__header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xs);
+  }
+
+  .timeline__name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--accent-text);
+  }
+
+  .timeline__date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .timeline__focus {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .timeline__header {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+  }
+</style>

@@ -1,20 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Aetheria Classroom RPG — 4444j" description="A gamified education platform that traveled the full Theory to Art to Commerce pipeline. Honest post-mortem included.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="terrain"
+<ProjectLayout pageTitle="Aetheria Classroom RPG — 4444j" description="A gamified education platform that traveled the full Theory to Art to Commerce pipeline. Honest post-mortem included."
+  sketchId="terrain"
       title="Aetheria Classroom RPG"
       tagline="Theory → Art → Commerce: an educational RPG"
       tags={['Product', 'Education', 'Game Design']}
@@ -22,8 +18,7 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       badges={[
         { src: 'https://img.shields.io/github/languages/top/organvm-iii-ergon/classroom-rpg-aetheria', alt: 'Top language' },
         { src: 'https://img.shields.io/github/last-commit/organvm-iii-ergon/classroom-rpg-aetheria', alt: 'Last commit' },
-      ]}
-    >
+      ]}>
       <h2>The Full Pipeline</h2>
       <p>
         Aetheria is the project that proves the system works — and honestly reveals where it doesn't. It traveled the complete I→II→III path: from gamification theory to game design to revenue product. This write-up is a post-mortem, because honest reflection on what failed teaches more than polished success stories.<Cite id={1} author="Ries, Eric" title="The Lean Startup" source="Crown Business" year={2011} /> Ries argues that validated learning — the disciplined process of discovering what customers actually want — is the fundamental unit of progress for startups, and that learning often comes from failure rather than success.
@@ -174,32 +169,14 @@ interface WorldRule {
       </p>
 
       <Figure alt="Key Aetheria metrics at a glance: 47 pilot classrooms, 41% six-month retention, +23% engagement, 42 NPS, 2.5 hour onboarding, 4 character stats" caption="Aetheria by the numbers — a snapshot of what the pilot produced across engagement, retention, and design dimensions">
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">47</div>
-            <div class="stat-label">Pilot Classrooms</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">41%</div>
-            <div class="stat-label">6-Month Retention</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">+23%</div>
-            <div class="stat-label">Engagement Increase</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">42</div>
-            <div class="stat-label">Teacher NPS</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">2.5h</div>
-            <div class="stat-label">Avg. Onboarding Time</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Character Stat Axes</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '47', label: 'Pilot Classrooms' },
+          { value: '41%', label: '6-Month Retention' },
+          { value: '+23%', label: 'Engagement Increase' },
+          { value: '42', label: 'Teacher NPS' },
+          { value: '2.5h', label: 'Avg. Onboarding Time' },
+          { value: '4', label: 'Character Stat Axes' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -217,7 +194,4 @@ interface WorldRule {
         { id: 12, author: "Papert, Seymour", title: "Mindstorms: Children, Computers, and Powerful Ideas", source: "Basic Books", year: 1980 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

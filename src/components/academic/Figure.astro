@@ -20,3 +20,37 @@ const figCaption = number ? `Figure ${number}. ${caption}` : caption;
   )}
   <figcaption>{figCaption}</figcaption>
 </figure>
+
+<style>
+  .academic-figure {
+    margin: var(--space-2xl) 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-secondary);
+  }
+
+  .academic-figure img {
+    width: 100%;
+    display: block;
+    border-radius: 0;
+  }
+
+  .academic-figure .figure-content {
+    padding: var(--space-lg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+  }
+
+  .academic-figure figcaption {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-muted);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+</style>

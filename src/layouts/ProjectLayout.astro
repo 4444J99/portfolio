@@ -1,0 +1,31 @@
+---
+import Layout from './Layout.astro';
+import ProjectDetail from '../components/ProjectDetail.astro';
+
+interface Badge {
+  src: string;
+  alt: string;
+  href?: string;
+}
+
+interface Props {
+  pageTitle: string;
+  description: string;
+  title: string;
+  sketchId?: string;
+  tagline: string;
+  tags: string[];
+  repo?: string;
+  liveUrl?: string;
+  badges?: Badge[];
+  heroImage?: { src: string; alt: string };
+}
+
+const { pageTitle, description, ...projectProps } = Astro.props;
+---
+
+<Layout title={pageTitle} description={description}>
+  <ProjectDetail {...projectProps}>
+    <slot />
+  </ProjectDetail>
+</Layout>

@@ -1,20 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="AI Council Coliseum — 4444j" description="A multi-agent debate platform with voting, achievements, and gamified governance — where AI agents deliberate and audiences judge.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="deliberation"
+<ProjectLayout pageTitle="AI Council Coliseum — 4444j" description="A multi-agent debate platform with voting, achievements, and gamified governance — where AI agents deliberate and audiences judge."
+  sketchId="deliberation"
       title="AI Council Coliseum"
       tagline="Multi-agent deliberation with gamified governance"
       tags={['Art', 'AI']}
@@ -22,8 +18,7 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
       badges={[
         { src: 'https://img.shields.io/github/languages/top/organvm-ii-poiesis/a-i-council--coliseum', alt: 'Top language' },
         { src: 'https://img.shields.io/github/last-commit/organvm-ii-poiesis/a-i-council--coliseum', alt: 'Last commit' },
-      ]}
-    >
+      ]}>
       <h2>The Problem: Monologue Masquerading as Deliberation</h2>
 <SketchContainer sketchId="deliberation" height="250px" mobileHeight="180px" ariaLabel="Converging deliberation vectors" />
 
@@ -291,32 +286,14 @@ class VotingSession(BaseModel):
       </p>
 
       <Figure alt="Project statistics for AI Council Coliseum" caption="AI Council Coliseum system metrics — a multi-agent deliberation platform with gamified audience governance" number={2}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">20+</div>
-            <div class="stat-label">API Endpoints</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Agent Roles</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">3</div>
-            <div class="stat-label">Debate Rounds</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">5</div>
-            <div class="stat-label">User Tiers</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Vote Dimensions</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">501</div>
-            <div class="stat-label">Blockchain Status</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '20+', label: 'API Endpoints' },
+          { value: '4', label: 'Agent Roles' },
+          { value: '3', label: 'Debate Rounds' },
+          { value: '5', label: 'User Tiers' },
+          { value: '4', label: 'Vote Dimensions' },
+          { value: '501', label: 'Blockchain Status' },
+        ]} />
       </Figure>
 
       <h2>Tradeoffs and Lessons</h2>
@@ -337,7 +314,4 @@ class VotingSession(BaseModel):
         { id: 10, author: "Buterin, Vitalik", title: "Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform", source: "Ethereum Whitepaper", year: 2014 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

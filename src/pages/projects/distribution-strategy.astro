@@ -1,25 +1,20 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Distribution Strategy — 4444j" description="POSSE-first content distribution across the eight-organ system — audience segmentation, channel strategy, and why distribution deserves its own organ.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="scatter"
+<ProjectLayout pageTitle="Distribution Strategy — 4444j" description="POSSE-first content distribution across the eight-organ system — audience segmentation, channel strategy, and why distribution deserves its own organ."
+  sketchId="scatter"
       title="Distribution Strategy"
       tagline="POSSE-first content distribution across the eight-organ system"
       tags={['Marketing', 'Distribution']}
-      repo="https://github.com/organvm-vii-kerygma/distribution-strategy"
-    >
+      repo="https://github.com/organvm-vii-kerygma/distribution-strategy">
       <h2>The Distribution Problem</h2>
 <SketchContainer sketchId="scatter" height="250px" mobileHeight="180px" ariaLabel="Content distribution scatter pattern" />
 
@@ -231,32 +226,14 @@ jobs:
       </p>
 
       <Figure alt="Distribution strategy metrics summary" caption="Key metrics for the POSSE distribution system across the eight-organ architecture">
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Distribution Channels</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Audience Segments</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">16</div>
-            <div class="stat-label">Adaptation Strategies</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">POSSE</div>
-            <div class="stat-label">Distribution Principle</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">81</div>
-            <div class="stat-label">Source Repositories</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">386K</div>
-            <div class="stat-label">Words to Distribute</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '4', label: 'Distribution Channels' },
+          { value: '4', label: 'Audience Segments' },
+          { value: '16', label: 'Adaptation Strategies' },
+          { value: 'POSSE', label: 'Distribution Principle' },
+          { value: '81', label: 'Source Repositories' },
+          { value: '386K', label: 'Words to Distribute' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -272,7 +249,4 @@ jobs:
         { id: 10, author: "Meadows, Donella H.", title: "Thinking in Systems: A Primer", source: "Chelsea Green Publishing", year: 2008 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

@@ -1,25 +1,20 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Your Fit Tailored — 4444j" description="A circular apparel subscription platform — continuous, low-friction clothing experiences through weekly subscription and closed-loop logistics.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="weave"
+<ProjectLayout pageTitle="Your Fit Tailored — 4444j" description="A circular apparel subscription platform — continuous, low-friction clothing experiences through weekly subscription and closed-loop logistics."
+  sketchId="weave"
       title="Your Fit Tailored"
       tagline="Circular apparel subscription — zero cognitive load"
       tags={['Commerce', 'Product']}
-      repo="https://github.com/organvm-iii-ergon/your-fit-tailored"
-    >
+      repo="https://github.com/organvm-iii-ergon/your-fit-tailored">
       <h2>The Crisis of Linear Fashion</h2>
 <SketchContainer sketchId="weave" height="250px" mobileHeight="180px" ariaLabel="Interlocking thread weave pattern" />
 
@@ -281,32 +276,14 @@ interface CurationContext {
 
       <h2>By the Numbers</h2>
       <Figure alt="Your Fit Tailored system metrics" caption="Platform specification scope — six subsystems, four signal types, and eight lifecycle states defining a complete circular apparel system" number={3}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">8</div>
-            <div class="stat-label">Garment Lifecycle States</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">6</div>
-            <div class="stat-label">Platform Subsystems</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Curation Signal Types</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">3</div>
-            <div class="stat-label">Quality Gate Outcomes</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">5</div>
-            <div class="stat-label">Sustainability Metrics</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">Spec</div>
-            <div class="stat-label">Driven Design</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '8', label: 'Garment Lifecycle States' },
+          { value: '6', label: 'Platform Subsystems' },
+          { value: '4', label: 'Curation Signal Types' },
+          { value: '3', label: 'Quality Gate Outcomes' },
+          { value: '5', label: 'Sustainability Metrics' },
+          { value: 'Spec', label: 'Driven Design' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -322,7 +299,4 @@ interface CurationContext {
         { id: 10, author: "Jackson, Michael", title: "Software Requirements and Specifications: A Lexicon of Practice, Principles and Prejudices", source: "Addison-Wesley", year: 1995 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

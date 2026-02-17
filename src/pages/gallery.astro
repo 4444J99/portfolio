@@ -1,7 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 
 interface Sketch {
@@ -51,8 +49,6 @@ const featured = sketches[dayOfYear % sketches.length];
 ---
 
 <Layout title="Gallery — Generative Art" description="A collection of generative art sketches built with p5.js, each paired to a project in the eight-organ system.">
-  <Header />
-  <main id="main-content">
     <section class="section">
       <div class="container">
         <h1 class="page-title" data-reveal>Gallery</h1>
@@ -103,8 +99,6 @@ const featured = sketches[dayOfYear % sketches.length];
         </div>
       </div>
     </section>
-  </main>
-  <Footer />
 </Layout>
 
 <script>

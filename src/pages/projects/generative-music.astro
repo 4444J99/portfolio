@@ -1,25 +1,20 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Generative Music System — 4444j" description="Translating recursive narrative principles into real-time generative music — from symbolic events to live sound.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="waveform"
+<ProjectLayout pageTitle="Generative Music System — 4444j" description="Translating recursive narrative principles into real-time generative music — from symbolic events to live sound."
+  sketchId="waveform"
       title="Generative Music System"
       tagline="From recursive theory to real-time sound"
       tags={['Art', 'Audio', 'Performance']}
-      repo="https://github.com/organvm-ii-poiesis/example-generative-music"
-    >
+      repo="https://github.com/organvm-ii-poiesis/example-generative-music">
       <h2>The Translation Problem</h2>
       <p>
         How do you get from a formal system to something people actually experience? That's the core design problem of ORGAN-II. This project translates recursive narrative principles from RE:GE into a real-time generative music system. The music doesn't illustrate the narrative — it <em>is</em> the narrative, in a different medium.<Cite id={1} author="Eno, Brian" title="Generative Music" source="In Motion Magazine" year={1996} /> Eno's concept of generative music — systems that produce ever-different and changing results through rules rather than fixed compositions — provides the philosophical foundation. The choices made during translation are themselves artistic decisions, and that's where the interesting work lives.<Cite id={2} author="Roads, Curtis" title="The Computer Music Tutorial" source="MIT Press" year={1996} />
@@ -153,32 +148,14 @@ function sonify(event: SymbolicEvent): MusicalParams {
       </p>
 
       <Figure alt="System metrics for the generative music system" caption="System metrics — three architectural layers translating five symbolic event types across three performance modes" number={2}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">3</div>
-            <div class="stat-label">Architecture Layers</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">5</div>
-            <div class="stat-label">Symbolic Event Types</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">5</div>
-            <div class="stat-label">Musical Parameters</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">3</div>
-            <div class="stat-label">Performance Modes</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">12h</div>
-            <div class="stat-label">Max Continuous Run</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">TS</div>
-            <div class="stat-label">TypeScript Core</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '3', label: 'Architecture Layers' },
+          { value: '5', label: 'Symbolic Event Types' },
+          { value: '5', label: 'Musical Parameters' },
+          { value: '3', label: 'Performance Modes' },
+          { value: '12h', label: 'Max Continuous Run' },
+          { value: 'TS', label: 'TypeScript Core' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -195,7 +172,4 @@ function sonify(event: SymbolicEvent): MusicalParams {
         { id: 11, author: "Galanter, Philip", title: "What is Generative Art? Complexity Theory as a Context for Art Theory", source: "International Conference on Generative Art", year: 2003 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

@@ -1,7 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import ChartContainer from '../components/charts/ChartContainer.astro';
 
@@ -62,8 +60,6 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
 ---
 
 <Layout title="Architecture — Dependency Graph" description="Interactive dependency graph of the ORGANVM eight-organ system.">
-  <Header />
-  <main id="main-content">
     <div class="sketch-accent">
       <SketchContainer sketchId="network-graph" height="250px" mobileHeight="180px" ariaLabel="Animated network graph showing interconnected system nodes" data-nodes={organNodes.join(',')} data-edges={uniqueEdges.join(';')} />
     </div>
@@ -128,8 +124,6 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
         </div>
       </div>
     </section>
-  </main>
-  <Footer />
 </Layout>
 
 <script define:vars={{ graphData, organColors }}>

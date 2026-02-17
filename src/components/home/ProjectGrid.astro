@@ -1,0 +1,157 @@
+---
+import ProjectCard from '../ProjectCard.astro';
+
+interface ResolvedProject {
+  title: string;
+  tagline: string;
+  description: string;
+  slug: string;
+  href: string;
+  tags: string[];
+  skills: string[];
+  number: number;
+}
+
+interface ResolvedGroup {
+  organ: string;
+  name: string;
+  domain: string;
+  projects: ResolvedProject[];
+}
+
+interface Props {
+  resolvedGroups: ResolvedGroup[];
+  skillFilters: string[];
+  categoryFilters: string[];
+  featuredNumbers: Set<number>;
+  organColorMap: Record<string, string>;
+}
+
+const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organColorMap } = Astro.props;
+---
+
+<section class="section" id="work">
+  <div class="container">
+    <h2 class="section__heading">Projects</h2>
+    <div class="filter-bar" data-filter-view="engineering" role="toolbar" aria-label="Filter projects by skill">
+      <button class="filter-chip filter-chip--active" data-filter="all" aria-pressed="true">All</button>
+      {skillFilters.map(skill => (
+        <button class="filter-chip" data-filter={skill} aria-pressed="false">{skill}</button>
+      ))}
+    </div>
+    <div class="filter-bar" data-filter-view="creative" role="toolbar" aria-label="Filter projects by category" style="display: none;">
+      <button class="filter-chip filter-chip--active" data-filter="all" aria-pressed="true">All</button>
+      {categoryFilters.map(cat => (
+        <button class="filter-chip" data-filter={cat} aria-pressed="false">{cat}</button>
+      ))}
+    </div>
+    {resolvedGroups.map(group => (
+      <div class="organ-group" data-organ-group style={`--organ-color: ${organColorMap[group.organ]}`}>
+        <h3 class="organ-group__heading" data-reveal data-heading-view="engineering">
+          {group.domain} — {group.projects.length} project{group.projects.length !== 1 ? 's' : ''}
+        </h3>
+        <h3 class="organ-group__heading" data-reveal data-heading-view="creative" style="display: none;">
+          {group.organ}{group.name && <span class="organ-group__name"> — {group.name}</span>}
+          <span class="organ-group__domain">{group.domain}</span>
+        </h3>
+        <div class="project-grid">
+          {group.projects.map((project, i) => (
+            <div data-reveal style={`--stagger-index: ${i}`}>
+              <ProjectCard {...project} featured={featuredNumbers.has(project.number)} data-skills={project.skills.join(',')} data-tags={project.tags.join(',')} />
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .filter-chip {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: var(--bg-card);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+  }
+
+  .filter-chip:hover {
+    border-color: var(--text-muted);
+    color: var(--text-primary);
+  }
+
+  .filter-chip--active {
+    border-color: var(--accent);
+    color: var(--accent-text);
+    background: var(--accent-muted);
+  }
+
+  .section__heading {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .organ-group {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .organ-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .organ-group__heading {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--organ-color, var(--accent));
+    margin-bottom: var(--space-lg);
+    padding: var(--space-xs) var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border);
+    border-left: 3px solid var(--organ-color, var(--accent));
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    background: var(--bg-card);
+    border-radius: 4px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .organ-group__name {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .organ-group__domain {
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+
+  @media (max-width: 768px) {
+    .organ-group__heading {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .organ-group__domain {
+      margin-left: 0;
+    }
+  }
+</style>

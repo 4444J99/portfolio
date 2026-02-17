@@ -1,20 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Orchestration Hub — 4444j" description="The central nervous system of eight GitHub organizations — a machine-readable registry, validation scripts, and governance rules coordinating 91 repositories.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="routing"
+<ProjectLayout pageTitle="Orchestration Hub — 4444j" description="The central nervous system of eight GitHub organizations — a machine-readable registry, validation scripts, and governance rules coordinating 91 repositories."
+  sketchId="routing"
       title="Orchestration Hub"
       tagline="The central nervous system of eight GitHub organizations"
       tags={['Governance', 'Python', 'Systems']}
@@ -22,8 +18,7 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
       badges={[
         { src: 'https://img.shields.io/github/languages/top/organvm-iv-taxis/orchestration-start-here', alt: 'Top language' },
         { src: 'https://img.shields.io/github/last-commit/organvm-iv-taxis/orchestration-start-here', alt: 'Last commit' },
-      ]}
-    >
+      ]}>
       <h2>The Problem</h2>
 <SketchContainer sketchId="routing" height="250px" mobileHeight="180px" ariaLabel="Message routing between nodes" />
 
@@ -182,32 +177,14 @@ Hub validates all 31 dependency edges.`}</code></pre>
       </ul>
 
       <Figure alt="System health metrics" caption="Orchestration hub: system-wide health metrics as of launch">
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">80</div>
-            <div class="stat-label">Registry Entries</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">31</div>
-            <div class="stat-label">Dependencies</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">5</div>
-            <div class="stat-label">Workflows</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">6+4</div>
-            <div class="stat-label">Articles + Amendments</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">228</div>
-            <div class="stat-label">Validation Checks</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">0</div>
-            <div class="stat-label">Circular Deps</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '80', label: 'Registry Entries' },
+          { value: '31', label: 'Dependencies' },
+          { value: '5', label: 'Workflows' },
+          { value: '6+4', label: 'Articles + Amendments' },
+          { value: '228', label: 'Validation Checks' },
+          { value: '0', label: 'Circular Deps' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -225,10 +202,7 @@ Hub validates all 31 dependency edges.`}</code></pre>
         { id: 12, author: "McConnell, Steve", title: "Code Complete: A Practical Handbook of Software Construction", source: "Microsoft Press", year: 2004 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>
 
 <style>
   .architecture-diagram {

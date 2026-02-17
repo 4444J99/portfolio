@@ -1,20 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="The Eight-Organ System — 4444j" description="An orchestration system coordinating 91 repositories across 8 GitHub organizations, treating governance as creative infrastructure.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="octagon"
+<ProjectLayout pageTitle="The Eight-Organ System — 4444j" description="An orchestration system coordinating 91 repositories across 8 GitHub organizations, treating governance as creative infrastructure."
+  sketchId="octagon"
       title="The Eight-Organ System"
       tagline="Governance as creative infrastructure"
       tags={['Systems', 'Governance', 'Architecture']}
@@ -22,8 +18,7 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       badges={[
         { src: 'https://img.shields.io/github/languages/top/meta-organvm/orchestration-start-here', alt: 'Top language' },
         { src: 'https://img.shields.io/github/last-commit/meta-organvm/orchestration-start-here', alt: 'Last commit' },
-      ]}
-    >
+      ]}>
       <h2>The Insight</h2>
       <p>
         I started from a conviction: the way you organize creative work <em>is</em> creative work. Most technologists treat governance as overhead — project boards, CI/CD, dependency rules.<Cite id={1} author="Conway, Melvin E." title="How Do Committees Invent?" source="Datamation" year={1968} /> Conway's Law observes that system structure mirrors organizational structure; this project inverts that insight — the organizational structure was designed as an aesthetic artifact. I wanted to find out what happens when you give those decisions the same care as the art they coordinate. The result surprised me: the governance model became the most interesting artifact in the system.<Cite id={2} author="Schön, Donald A." title="The Reflective Practitioner: How Professionals Think in Action" source="Basic Books" year={1983} />
@@ -172,32 +167,14 @@ jobs:
       </p>
 
       <Figure alt="Validation results summary" caption="Platinum validation suite: 228/228 checks passing across all 8 organs">
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">81</div>
-            <div class="stat-label">Repositories</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">8</div>
-            <div class="stat-label">Organizations</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">386K</div>
-            <div class="stat-label">Words</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">31</div>
-            <div class="stat-label">Dependencies</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">228</div>
-            <div class="stat-label">Validation Checks</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">70+</div>
-            <div class="stat-label">CI Workflows</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '81', label: 'Repositories' },
+          { value: '8', label: 'Organizations' },
+          { value: '386K', label: 'Words' },
+          { value: '31', label: 'Dependencies' },
+          { value: '228', label: 'Validation Checks' },
+          { value: '70+', label: 'CI Workflows' },
+        ]} />
       </Figure>
 
       <p>
@@ -231,10 +208,7 @@ jobs:
         { id: 16, author: "Shneiderman, Ben", title: "Human-Centered AI", source: "Oxford University Press", year: 2022 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>
 
 <style>
   .architecture-diagram {

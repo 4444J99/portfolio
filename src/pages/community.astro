@@ -1,7 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 
 const communityRepos = [
@@ -30,8 +28,6 @@ const communityRepos = [
 ---
 
 <Layout title="Community — ORGAN-VI Koinonia" description="Community infrastructure: salons, reading groups, and adaptive learning — participate via GitHub Discussions.">
-  <Header />
-  <main id="main-content">
     <div class="sketch-accent">
       <SketchContainer sketchId="counterpoint" height="300px" mobileHeight="200px" ariaLabel="Animated counterpoint visualization representing dialogue and harmony" data-voices={communityRepos.map(r => r.name).join(',')} />
     </div>
@@ -86,8 +82,6 @@ const communityRepos = [
         </div>
       </div>
     </section>
-  </main>
-  <Footer />
 </Layout>
 
 <style>

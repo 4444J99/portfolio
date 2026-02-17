@@ -1,24 +1,19 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Community Infrastructure — 4444j" description="Intellectual salons and structured reading groups as institutional practice — ORGAN VI's approach to community as creative infrastructure.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="constellation"
+<ProjectLayout pageTitle="Community Infrastructure — 4444j" description="Intellectual salons and structured reading groups as institutional practice — ORGAN VI's approach to community as creative infrastructure."
+  sketchId="constellation"
       title="Community Infrastructure"
       tagline="Intellectual salons and structured reading groups as institutional practice"
-      tags={['Community', 'Education']}
-    >
+      tags={['Community', 'Education']}>
       <h2>The Problem: Creative Systems Without Relational Substrate</h2>
 <SketchContainer sketchId="constellation" height="250px" mobileHeight="180px" ariaLabel="Community constellation network" />
 
@@ -228,24 +223,12 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
       </p>
 
       <Figure alt="Community infrastructure statistics" caption="Community organ metrics — the relational infrastructure that makes the eight-organ system reproducible and governable beyond a single practitioner" number={3}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">6+</div>
-            <div class="stat-label">Salon Topics</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">3</div>
-            <div class="stat-label">Reading Group Arcs</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Theoretical Traditions</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Discussion Formats</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '6+', label: 'Salon Topics' },
+          { value: '3', label: 'Reading Group Arcs' },
+          { value: '4', label: 'Theoretical Traditions' },
+          { value: '4', label: 'Discussion Formats' },
+        ]} />
       </Figure>
 
       <h2>Why Community Infrastructure Cannot Be Deferred</h2>
@@ -266,7 +249,4 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
         { id: 10, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

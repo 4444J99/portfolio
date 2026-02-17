@@ -1,0 +1,101 @@
+---
+import type { Organ } from '../../types/data';
+
+interface Props {
+  organs: Record<string, Organ>;
+  organColors: Record<string, string>;
+}
+
+const { organs, organColors } = Astro.props;
+---
+
+<section class="section">
+  <div class="container">
+    <h2 class="section__heading">Organ Status</h2>
+    <div class="organ-grid">
+      {Object.entries(organs).map(([key, organ]: [string, Organ]) => (
+        <div class="organ-card">
+          <div class="organ-card__header">
+            <span class="organ-card__dot" style={`background: ${organColors[key] || '#888'}`}></span>
+            <span class="organ-card__key">{key}</span>
+            <span class="organ-card__name">{organ.name}</span>
+          </div>
+          <div class="organ-card__stats">
+            <span class="organ-card__repos">{organ.total_repos} repos</span>
+            <span class="organ-card__ci">{organ.ci_coverage} CI</span>
+          </div>
+          <div class="organ-card__status">
+            {organ.status}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .organ-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .organ-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    transition: border-color var(--transition-fast);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .organ-card:hover {
+    border-color: var(--border-hover);
+  }
+
+  .organ-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .organ-card__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .organ-card__key {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .organ-card__name {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .organ-card__stats {
+    display: flex;
+    gap: var(--space-md);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .organ-card__status {
+    font-size: 0.75rem;
+    color: var(--accent-text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 768px) {
+    .organ-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

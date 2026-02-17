@@ -1,26 +1,21 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Public Process — 4444j" description="21 essays on building creative infrastructure in public — transparency as design choice, process documentation as portfolio evidence.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="typewriter"
+<ProjectLayout pageTitle="Public Process — 4444j" description="21 essays on building creative infrastructure in public — transparency as design choice, process documentation as portfolio evidence."
+  sketchId="typewriter"
       title="Public Process"
       tagline="21 essays on building creative infrastructure in public"
       tags={['Essays', 'Transparency']}
       repo="https://github.com/organvm-v-logos/public-process"
-      liveUrl="https://organvm-v-logos.github.io/public-process/"
-    >
+      liveUrl="https://organvm-v-logos.github.io/public-process/">
       <h2>The Problem: Opacity as Default</h2>
 <SketchContainer sketchId="typewriter" height="250px" mobileHeight="180px" ariaLabel="Writing process visualization" />
 
@@ -197,32 +192,14 @@ feed:
       </p>
 
       <Figure alt="Public process metrics summary" caption="Key metrics for the Public Process essay collection">
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">21</div>
-            <div class="stat-label">Essays Published</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">88K</div>
-            <div class="stat-label">Total Words</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Audience Types</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Essay Categories</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">81</div>
-            <div class="stat-label">Repos Documented</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">~4,200</div>
-            <div class="stat-label">Avg. Words/Essay</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '21', label: 'Essays Published' },
+          { value: '88K', label: 'Total Words' },
+          { value: '4', label: 'Audience Types' },
+          { value: '4', label: 'Essay Categories' },
+          { value: '81', label: 'Repos Documented' },
+          { value: '~4,200', label: 'Avg. Words/Essay' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -238,7 +215,4 @@ feed:
         { id: 10, author: "Raymond, Eric S.", title: "The Cathedral and the Bazaar: Musings on Linux and Open Source by an Accidental Revolutionary", source: "O'Reilly Media", year: 1999 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

@@ -17,6 +17,44 @@ const { caption, chart } = Astro.props;
   </noscript>
 </div>
 
+<style>
+  .mermaid-container {
+    margin: var(--space-2xl) 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-secondary);
+  }
+
+  .mermaid-container .mermaid {
+    padding: var(--space-lg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+  }
+
+  .mermaid-container .mermaid :global(svg) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .mermaid-caption {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-muted);
+    text-align: center;
+    padding: var(--space-sm) var(--space-lg);
+    border-top: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+
+  .mermaid-fallback {
+    font-size: 0.8rem;
+    padding: var(--space-md);
+  }
+</style>
+
 <script>
   import '../academic/mermaid-loader';
 </script>

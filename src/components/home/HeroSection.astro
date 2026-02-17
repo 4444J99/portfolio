@@ -1,0 +1,231 @@
+---
+import SketchContainer from '../sketches/SketchContainer.astro';
+
+interface ResolvedGroup {
+  organ: string;
+  name: string;
+  domain: string;
+  projects: Array<{
+    title: string;
+    tagline: string;
+    description: string;
+    slug: string;
+    href: string;
+    tags: string[];
+    skills: string[];
+    number: number;
+  }>;
+}
+
+interface Props {
+  metrics: {
+    code_substance: {
+      total_code_files: number;
+      total_test_files: number;
+      ci_passing: number;
+    };
+    registry: {
+      total_repos: number;
+    };
+  };
+  resolvedGroups: ResolvedGroup[];
+}
+
+const { metrics, resolvedGroups } = Astro.props;
+---
+
+<section class="hero">
+  <div class="container hero__split">
+    <div class="hero__text">
+      <div class="view-toggle" role="radiogroup" aria-label="Presentation mode">
+        <button class="view-toggle__btn view-toggle__btn--active" data-view="engineering" role="radio" aria-checked="true">Engineering</button>
+        <button class="view-toggle__btn" data-view="creative" role="radio" aria-checked="false">Creative Practice</button>
+      </div>
+
+      <div class="hero__view" data-hero-view="engineering">
+        <p class="hero__label" data-reveal>Full-Stack Engineer</p>
+        <h1 class="hero__title" data-reveal style="animation-delay: 100ms">Python and TypeScript developer building AI systems, production infrastructure, and tested software.</h1>
+        <p class="hero__sub" data-reveal style="animation-delay: 200ms">{metrics.code_substance.total_code_files.toLocaleString()} code files, {metrics.code_substance.total_test_files} test files, {metrics.code_substance.ci_passing} passing CI workflows. React, Next.js, FastAPI, Docker, Terraform, PostgreSQL across {metrics.registry.total_repos} repositories.</p>
+      </div>
+
+      <div class="hero__view" data-hero-view="creative" style="display: none;">
+        <p class="hero__label">Creative Technologist</p>
+        <h1 class="hero__title">Artist-engineer building autonomous creative systems and treating their governance as artistic medium.</h1>
+        <p class="hero__sub">Coordinating theory, generative art, commerce, and community across an eight-organ infrastructure — 91 repositories, 8 organizations, ~386K words of public documentation.</p>
+      </div>
+
+      <div class="hero__credentials" data-reveal style="animation-delay: 280ms">
+        <span class="hero__credential">MFA</span>
+        <span class="hero__credential">Meta Full-Stack</span>
+        <span class="hero__credential">Google UX/PM</span>
+      </div>
+      <p class="hero__available" data-reveal style="animation-delay: 360ms">
+        <span class="hero__available-dot" aria-hidden="true"></span>
+        Open to opportunities — <a href="mailto:padavano.anthony@gmail.com">Get in touch</a>
+      </p>
+      <p class="hero__mode-hint" data-reveal style="animation-delay: 440ms">
+        This site has three visual modes — look for <strong>S</strong> / <strong>B</strong> / <strong>E</strong> in the header.
+      </p>
+    </div>
+    <div class="hero__canvas">
+      <SketchContainer
+        sketchId="hero"
+        height="480px"
+        mobileHeight="320px"
+        ariaLabel="Interactive visualization: eight organ nodes breathing in coordinated rhythm, connected by flowing particle filaments. Hover to illuminate individual organs. Click to send pulses."
+        data-repo-counts={resolvedGroups.map(g => g.projects.length).join(',')}
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: var(--space-4xl) 0 var(--space-3xl);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero__split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .hero__text {
+    min-width: 0;
+    background: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    padding: var(--space-2xl);
+  }
+
+  .hero__canvas {
+    min-width: 0;
+  }
+
+  .view-toggle {
+    display: inline-flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: var(--space-xl);
+    background: var(--bg-card);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .view-toggle__btn {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: var(--space-xs) var(--space-md);
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .view-toggle__btn:hover {
+    color: var(--text-primary);
+  }
+
+  .view-toggle__btn--active {
+    background: var(--accent-muted);
+    color: var(--accent-text);
+  }
+
+  .hero__label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-text);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__title {
+    max-width: 20ch;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__sub {
+    font-size: 1.1rem;
+    max-width: 55ch;
+    line-height: 1.7;
+  }
+
+  .hero__credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .hero__credential {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2em 0.7em;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--text-secondary);
+  }
+
+  .hero__available {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+  }
+
+  .hero__available a {
+    color: var(--accent-text);
+  }
+
+  .hero__available-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4CAF50;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero__mode-hint {
+    margin-top: var(--space-md);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+
+  .hero__mode-hint strong {
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .hero__split {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__canvas {
+      order: 2;
+    }
+
+    .hero__text {
+      order: 1;
+    }
+  }
+</style>

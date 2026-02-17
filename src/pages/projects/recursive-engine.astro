@@ -1,20 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import Cite from '../../components/academic/Cite.astro';
 import References from '../../components/academic/References.astro';
 import Figure from '../../components/academic/Figure.astro';
 import CodeStructure from '../../components/academic/CodeStructure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<Layout title="Recursive Engine (RE:GE) — 4444j" description="A symbolic operating system for myth and narrative — 21 organ handlers, a ritual syntax DSL, and 1,254 tests.">
-  <Header />
-  <main id="main-content">
-    <ProjectDetail sketchId="recursive-tree"
+<ProjectLayout pageTitle="Recursive Engine (RE:GE) — 4444j" description="A symbolic operating system for myth and narrative — 21 organ handlers, a ritual syntax DSL, and 1,254 tests."
+  sketchId="recursive-tree"
       title="Recursive Engine (RE:GE)"
       tagline="A symbolic operating system for myth and narrative"
       tags={['Theory', 'Python', 'DSL']}
@@ -22,8 +18,7 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       badges={[
         { src: 'https://img.shields.io/github/languages/top/organvm-i-theoria/recursive-engine--generative-entity', alt: 'Top language' },
         { src: 'https://img.shields.io/github/last-commit/organvm-i-theoria/recursive-engine--generative-entity', alt: 'Last commit' },
-      ]}
-    >
+      ]}>
       <h2>The Question</h2>
       <p>
         Every software system tells a story — user flows are plot arcs, state machines are character development, error handling is conflict resolution. We treat these as metaphors. I wanted to find out what happens when you treat them as engineering principles.<Cite id={1} author="Aristotle" title="Poetics" source="Penguin Classics (trans. 1996)" year={-335} /> Aristotle's six elements of drama — plot, character, thought, diction, spectacle, song — are not literary ornaments but structural primitives. What if narrative structure, from Aristotle through Propp, could be encoded as executable rules?<Cite id={2} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1968} /> Not an AI that "writes stories" — a symbolic operating system where narrative principles govern how systems organize and evolve.
@@ -96,20 +91,11 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
       </p>
 
       <Figure alt="Test strategy distribution across three categories" caption="Test strategy distribution: structural invariants, reference implementations, and round-trip consistency" number={1}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">~400</div>
-            <div class="stat-label">Structural Invariants</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">~500</div>
-            <div class="stat-label">Reference Implementations</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">~350</div>
-            <div class="stat-label">Round-Trip Consistency</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '~400', label: 'Structural Invariants' },
+          { value: '~500', label: 'Reference Implementations' },
+          { value: '~350', label: 'Round-Trip Consistency' },
+        ]} />
       </Figure>
 
       <h2>Why Symbolic, Not Neural</h2>
@@ -138,32 +124,14 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 
       <h2>By the Numbers</h2>
       <Figure alt="Project statistics for Recursive Engine" caption="RE:GE system metrics — 21 organ handlers processing symbolic values through a ritual syntax DSL" number={2}>
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">1,254</div>
-            <div class="stat-label">Tests</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">85%</div>
-            <div class="stat-label">Coverage</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">21</div>
-            <div class="stat-label">Organ Handlers</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">4</div>
-            <div class="stat-label">Organ Types</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">DSL</div>
-            <div class="stat-label">Ritual Syntax</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">Python</div>
-            <div class="stat-label">Pure</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: '1,254', label: 'Tests' },
+          { value: '85%', label: 'Coverage' },
+          { value: '21', label: 'Organ Handlers' },
+          { value: '4', label: 'Organ Types' },
+          { value: 'DSL', label: 'Ritual Syntax' },
+          { value: 'Python', label: 'Pure' },
+        ]} />
       </Figure>
 
       <References entries={[
@@ -181,7 +149,4 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
         { id: 12, author: "Reas, Casey and Ben Fry", title: "Processing: A Programming Handbook for Visual Designers", source: "MIT Press", year: 2007 },
       ]} />
 
-    </ProjectDetail>
-  </main>
-  <Footer />
-</Layout>
+</ProjectLayout>

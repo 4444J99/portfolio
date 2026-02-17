@@ -1,18 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import ChartContainer from '../components/charts/ChartContainer.astro';
+import StatGrid from '../components/StatGrid.astro';
+import QualityGates from '../components/dashboard/QualityGates.astro';
+import OrganStatus from '../components/dashboard/OrganStatus.astro';
+import SprintTimeline from '../components/dashboard/SprintTimeline.astro';
+import PraxisTargets from '../components/dashboard/PraxisTargets.astro';
+import FlagshipTable from '../components/dashboard/FlagshipTable.astro';
 
-import type { SystemMetrics, Organ, Sprint, PraxisTarget, FlagshipRepo, QualityMetrics } from '../types/data';
+import type { SystemMetrics, Organ, PraxisTarget, QualityMetrics } from '../types/data';
 import metrics from '../data/system-metrics.json';
 import graphData from '../data/graph.json';
 import qualityData from '../data/quality-metrics.json';
 import { organColors } from '../data/organ-colors';
+import { base } from '../utils/paths';
 
 const quality = qualityData as QualityMetrics;
-const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 const typedMetrics = metrics as SystemMetrics;
 
@@ -57,8 +61,6 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
 ---
 
 <Layout title="Dashboard — System Metrics" description="Live metrics for the ORGANVM eight-organ creative-institutional system.">
-  <Header />
-  <main id="main-content">
     <div class="sketch-accent">
       <SketchContainer sketchId="data-bars" height="200px" mobileHeight="150px" ariaLabel="Animated data bar visualization representing system metrics" data-values={repoCounts.join(',')} data-labels={organNames.join(',')} />
     </div>
@@ -67,32 +69,14 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
         <h1 class="page-title">System Dashboard</h1>
         <p class="page-sub">Live metrics from {typedMetrics.registry.total_repos} repositories across {typedMetrics.registry.total_organs} organs.</p>
 
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-value">{typedMetrics.code_substance.total_code_files.toLocaleString()}</div>
-            <div class="stat-label">Code Files</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{typedMetrics.code_substance.total_test_files}</div>
-            <div class="stat-label">Test Files</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{typedMetrics.code_substance.ci_passing}</div>
-            <div class="stat-label">Passing CI Workflows</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{typedMetrics.registry.total_repos}</div>
-            <div class="stat-label">Repositories</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{typedMetrics.registry.implementation_status.ACTIVE}</div>
-            <div class="stat-label">Active</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{typedMetrics.essays.total}</div>
-            <div class="stat-label">Essays</div>
-          </div>
-        </div>
+        <StatGrid stats={[
+          { value: typedMetrics.code_substance.total_code_files.toLocaleString(), label: 'Code Files' },
+          { value: typedMetrics.code_substance.total_test_files, label: 'Test Files' },
+          { value: typedMetrics.code_substance.ci_passing, label: 'Passing CI Workflows' },
+          { value: typedMetrics.registry.total_repos, label: 'Repositories' },
+          { value: typedMetrics.registry.implementation_status.ACTIVE, label: 'Active' },
+          { value: typedMetrics.essays.total, label: 'Essays' },
+        ]} />
 
         <div class="stack-badges">
           <h2 class="stack-badges__heading">Verified Technology Stack</h2>
@@ -105,69 +89,7 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="section__heading">Quality Gates</h2>
-        <p class="quality-intro">Automated quality infrastructure running on every push — tests, accessibility audits, performance budgets, and HTML validation.</p>
-
-        <div class="quality-grid">
-          <div class="quality-card">
-            <div class="quality-card__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-              </svg>
-            </div>
-            <div class="quality-card__value">{quality.tests.files}</div>
-            <div class="quality-card__label">Test Files</div>
-            <div class="quality-card__detail">{quality.tests.total} assertions</div>
-          </div>
-
-          <div class="quality-card">
-            <div class="quality-card__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <div class="quality-card__value">{quality.a11y.pagesAudited}</div>
-            <div class="quality-card__label">A11y Audited</div>
-            <div class="quality-card__detail">{quality.a11y.critical + quality.a11y.serious === 0 ? 'Zero violations' : `${quality.a11y.critical + quality.a11y.serious} issues`}</div>
-          </div>
-
-          <div class="quality-card">
-            <div class="quality-card__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-              </svg>
-            </div>
-            <div class="quality-card__value">{quality.lighthouse.performance}</div>
-            <div class="quality-card__label">Lighthouse Perf</div>
-            <div class="quality-card__detail">A11y {quality.lighthouse.accessibility} · SEO {quality.lighthouse.seo}</div>
-          </div>
-
-          <div class="quality-card">
-            <div class="quality-card__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-              </svg>
-            </div>
-            <div class="quality-card__value">{quality.build.pages}</div>
-            <div class="quality-card__label">HTML Pages</div>
-            <div class="quality-card__detail">Validated & link-checked</div>
-          </div>
-        </div>
-
-        <div class="quality-badges">
-          <img src={`${base}badges/tests.svg`} alt={`Tests: ${quality.tests.files} files`} width="90" height="20" />
-          <img src={`${base}badges/a11y.svg`} alt={`Accessibility: ${quality.a11y.status}`} width="80" height="20" />
-          <img src={`${base}badges/lighthouse-perf.svg`} alt={`Performance: ${quality.lighthouse.performance}`} width="120" height="20" />
-          <img src={`${base}badges/lighthouse-a11y.svg`} alt={`Accessibility: ${quality.lighthouse.accessibility}`} width="120" height="20" />
-          <img src={`${base}badges/lighthouse-seo.svg`} alt={`SEO: ${quality.lighthouse.seo}`} width="80" height="20" />
-          <img src={`${base}badges/pages.svg`} alt={`Pages: ${quality.build.pages}`} width="80" height="20" />
-        </div>
-
-        <p class="quality-timestamp">Last updated: {new Date(quality.generated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
-      </div>
-    </section>
+    <QualityGates quality={quality} base={base} />
 
     <section class="section">
       <div class="container">
@@ -179,62 +101,17 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="section__heading">Organ Status</h2>
-        <div class="organ-grid">
-          {Object.entries(typedMetrics.registry.organs).map(([key, organ]: [string, Organ]) => (
-            <div class="organ-card">
-              <div class="organ-card__header">
-                <span class="organ-card__dot" style={`background: ${organColors[key] || '#888'}`}></span>
-                <span class="organ-card__key">{key}</span>
-                <span class="organ-card__name">{organ.name}</span>
-              </div>
-              <div class="organ-card__stats">
-                <span class="organ-card__repos">{organ.total_repos} repos</span>
-                <span class="organ-card__ci">{organ.ci_coverage} CI</span>
-              </div>
-              <div class="organ-card__status">
-                {organ.status}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <OrganStatus organs={typedMetrics.registry.organs} organColors={organColors} />
 
-    <section class="section">
-      <div class="container">
-        <h2 class="section__heading">Flagship Analysis</h2>
-        <div class="chart-pair">
-          <ChartContainer chartId="classification-donut" data={classificationChartData} ariaLabel="Donut chart showing flagship classification breakdown" height="280px" />
-          <ChartContainer chartId="flagship-stacked" data={flagshipChartData} ariaLabel="Stacked bar chart showing code vs test files per flagship" height="280px" />
-        </div>
-      </div>
-    </section>
+    <FlagshipTable
+      repos={typedMetrics.flagship_vivification.repos}
+      classifications={typedMetrics.flagship_vivification.classifications}
+      totalAudited={typedMetrics.flagship_vivification.total_audited}
+      classificationChartData={classificationChartData}
+      flagshipChartData={flagshipChartData}
+    />
 
-    <section class="section">
-      <div class="container">
-        <h2 class="section__heading">Sprint Timeline</h2>
-        <ChartContainer chartId="sprint-timeline" data={sprintChartData} ariaLabel="Timeline visualization of all development sprints" height="160px" />
-        <div class="timeline">
-          {typedMetrics.sprint_history.map((sprint: Sprint, i: number) => (
-            <div class="timeline__entry">
-              <div class="timeline__marker">
-                <span class="timeline__number">{i + 1}</span>
-              </div>
-              <div class="timeline__content">
-                <div class="timeline__header">
-                  <span class="timeline__name">{sprint.name}</span>
-                  <span class="timeline__date">{sprint.date}</span>
-                </div>
-                <p class="timeline__focus">{sprint.focus} — {sprint.deliverables}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <SprintTimeline sprints={typedMetrics.sprint_history} sprintChartData={sprintChartData} />
 
     <section class="section">
       <div class="container">
@@ -243,70 +120,7 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="section__heading">Flagship Vivification</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Repository</th>
-                <th>Org</th>
-                <th>Classification</th>
-                <th>Code Files</th>
-                <th>Tests</th>
-              </tr>
-            </thead>
-            <tbody>
-              {typedMetrics.flagship_vivification.repos.map((repo: FlagshipRepo) => (
-                <tr>
-                  <td>
-                    <a href={`https://github.com/${repo.org}/${repo.repo}`} target="_blank" rel="noopener noreferrer">
-                      {repo.repo}
-                    </a>
-                  </td>
-                  <td>{repo.org}</td>
-                  <td>
-                    <span class={`tag tag--${repo.classification.toLowerCase()}`}>
-                      {repo.classification}
-                    </span>
-                  </td>
-                  <td>{repo.code_files}</td>
-                  <td>{repo.test_files}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p class="table-summary">
-          {typedMetrics.flagship_vivification.classifications.SUBSTANTIAL} SUBSTANTIAL,
-          {typedMetrics.flagship_vivification.classifications.PARTIAL} PARTIAL,
-          {typedMetrics.flagship_vivification.classifications.MINIMAL} MINIMAL
-          — {typedMetrics.flagship_vivification.total_audited} flagships audited
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2 class="section__heading">PRAXIS Targets</h2>
-        <ChartContainer chartId="praxis-sparklines" data={praxisChartData} ariaLabel="Progress bars showing PRAXIS target completion" height="240px" />
-        <div class="targets-grid">
-          {Object.entries(typedMetrics.praxis_targets).map(([key, target]: [string, PraxisTarget]) => (
-            <div class="target-card">
-              <div class="target-card__label">{key.replace(/_/g, ' ')}</div>
-              <div class="target-card__values">
-                <span class="target-card__current">{target.current}</span>
-                <span class="target-card__separator">/</span>
-                <span class="target-card__goal">{target.target}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  </main>
-  <Footer />
+    <PraxisTargets targets={typedMetrics.praxis_targets} praxisChartData={praxisChartData} />
 </Layout>
 
 <script>
@@ -355,254 +169,6 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
     color: var(--accent-text);
   }
 
-  .organ-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: var(--space-md);
-  }
-
-  .organ-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: var(--space-lg);
-    transition: border-color var(--transition-fast);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
-  .organ-card:hover {
-    border-color: var(--border-hover);
-  }
-
-  .organ-card__header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-sm);
-  }
-
-  .organ-card__dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .organ-card__key {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
-
-  .organ-card__name {
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  .organ-card__stats {
-    display: flex;
-    gap: var(--space-md);
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-xs);
-  }
-
-  .organ-card__status {
-    font-size: 0.75rem;
-    color: var(--accent-text);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-  }
-
-  .timeline__entry {
-    display: flex;
-    gap: var(--space-lg);
-    align-items: flex-start;
-    background: var(--bg-card);
-    border-radius: var(--radius);
-    padding: var(--space-md);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-
-  .timeline__marker {
-    flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .timeline__number {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
-
-  .timeline__content {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .timeline__header {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-md);
-    margin-bottom: var(--space-xs);
-  }
-
-  .timeline__name {
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: var(--accent-text);
-  }
-
-  .timeline__date {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  .timeline__focus {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-  }
-
-  .table-summary {
-    margin-top: var(--space-md);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-
-  .tag--substantial { background: rgba(124, 232, 166, 0.15); color: var(--color-substantial); }
-  .tag--partial { background: rgba(201, 168, 76, 0.15); color: var(--color-partial); }
-  .tag--minimal { background: rgba(232, 124, 124, 0.15); color: var(--color-minimal); }
-
-  .targets-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--space-md);
-  }
-
-  .target-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: var(--space-lg);
-    text-align: center;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
-  .target-card__label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-bottom: var(--space-sm);
-  }
-
-  .target-card__values {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: var(--space-xs);
-  }
-
-  .target-card__current {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-  }
-
-  .target-card__separator {
-    color: var(--text-muted);
-  }
-
-  .target-card__goal {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-
-  .quality-intro {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-xl);
-    max-width: 55ch;
-  }
-
-  .quality-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-md);
-    margin-bottom: var(--space-xl);
-  }
-
-  .quality-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: var(--space-lg);
-    text-align: center;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: border-color var(--transition-fast);
-  }
-
-  .quality-card:hover {
-    border-color: var(--border-hover);
-  }
-
-  .quality-card__icon {
-    color: var(--accent);
-    margin-bottom: var(--space-sm);
-  }
-
-  .quality-card__value {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 1.1;
-  }
-
-  .quality-card__label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-top: var(--space-xs);
-  }
-
-  .quality-card__detail {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-top: var(--space-xs);
-  }
-
-  .quality-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
-  }
-
-  .quality-badges img {
-    height: 20px;
-  }
-
-  .quality-timestamp {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
-
   .chart-pair {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -612,19 +178,6 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
   @media (max-width: 768px) {
     .chart-pair {
       grid-template-columns: 1fr;
-    }
-    .organ-grid {
-      grid-template-columns: 1fr;
-    }
-    .quality-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .targets-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .timeline__header {
-      flex-direction: column;
-      gap: var(--space-xs);
     }
   }
 </style>

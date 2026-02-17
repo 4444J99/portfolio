@@ -19,3 +19,22 @@ const { id, author, title, source, year, url } = Astro.props;
   data-ref-year={String(year)}
   data-ref-url={url || ''}
 ><a href={`#ref-${id}`}>[{id}]</a></sup>
+
+<style>
+  .cite {
+    font-size: 0.75em;
+    vertical-align: super;
+    line-height: 0;
+  }
+
+  .cite a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+
+  .cite a:hover {
+    text-decoration: underline;
+  }
+</style>

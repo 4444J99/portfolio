@@ -1,7 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 
 const products = [
@@ -123,8 +121,6 @@ products.forEach(p => { if (typeGroups[p.type] !== undefined) typeGroups[p.type]
 ---
 
 <Layout title="Products & Platforms" description="ORGAN-III commerce products: SaaS, B2B, B2C, and B2B2C platforms across 12 applications in various stages of development.">
-  <Header />
-  <main id="main-content">
     <div class="sketch-accent">
       <SketchContainer sketchId="pipeline" height="250px" mobileHeight="180px" ariaLabel="Animated pipeline visualization representing commerce flow" data-chambers={Object.keys(typeGroups).join(',')} data-counts={Object.values(typeGroups).join(',')} />
     </div>
@@ -162,8 +158,6 @@ products.forEach(p => { if (typeGroups[p.type] !== undefined) typeGroups[p.type]
         </div>
       </div>
     </section>
-  </main>
-  <Footer />
 </Layout>
 
 <style>
