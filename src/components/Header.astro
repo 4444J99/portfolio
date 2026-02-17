@@ -1,4 +1,6 @@
 ---
+import Search from './Search.astro';
+
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const currentPath = Astro.url.pathname;
 
@@ -99,6 +101,7 @@ const connectLinks = [
         </a>
       ))}
 
+      <Search />
       <div class="header__mode-switch" role="group" aria-label="Background intensity">
         <button data-mode="subtle" class="bg-mode-btn" aria-pressed="false" title="Subtle">S</button>
         <button data-mode="bold" class="bg-mode-btn" aria-pressed="false" title="Bold">B</button>
