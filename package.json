@@ -7,7 +7,10 @@
     "generate-data": "python3 ../ingesting-organ-document-structure/scripts/praxis-portfolio-generate.py --output-dir src/data && cp ../ingesting-organ-document-structure/system-metrics.json src/data/",
     "build": "astro build && npx pagefind --site dist --glob '**/*.html'",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.15",
@@ -21,8 +24,10 @@
     "@resvg/resvg-js": "2.6.2",
     "@types/d3": "7.4.3",
     "@types/p5": "1.7.7",
+    "@vitest/coverage-v8": "4.0.18",
     "pagefind": "1.4.0",
-    "satori": "0.19.2"
+    "satori": "0.19.2",
+    "vitest": "4.0.18"
   },
   "overrides": {
     "lodash-es": "4.17.23"
