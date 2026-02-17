@@ -66,11 +66,6 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
     </section>
 </Layout>
 
-<!-- SRI hash may need updating if puter.com updates their v2 bundle -->
-<script is:inline src="https://js.puter.com/v2/" defer
-  integrity="sha384-4FUPJPyPTQZ8N/Fmes2tzHFDcQM4YO+GqSyCJ8znhgD4nNLroyU3JiSMBeSmrLPv"
-  crossorigin="anonymous"></script>
-
 <script>
   declare const puter: { ai: { chat(message: string, options: { system: string; model: string }): Promise<string | { message?: { content?: string }; text?: string }> } };
 
@@ -127,6 +122,36 @@ RESPONSE FORMAT:
   const resetBtn = document.getElementById('reset-btn')!;
   const challengeInput = document.getElementById('challenge')! as HTMLTextAreaElement;
   const industrySelect = document.getElementById('industry')! as HTMLSelectElement;
+  let puterLoaderPromise: Promise<boolean> | null = null;
+
+  function shouldLoadPuterScript() {
+    return !['localhost', '127.0.0.1'].includes(window.location.hostname);
+  }
+
+  function loadPuterScript(): Promise<boolean> {
+    if (typeof puter !== 'undefined' && puter.ai) return Promise.resolve(true);
+    if (!shouldLoadPuterScript()) return Promise.resolve(false);
+    if (puterLoaderPromise) return puterLoaderPromise;
+
+    puterLoaderPromise = new Promise((resolve) => {
+      const existing = document.querySelector<HTMLScriptElement>('script[data-puter-sdk]');
+      if (existing) {
+        resolve(true);
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://js.puter.com/v2/';
+      script.defer = true;
+      script.crossOrigin = 'anonymous';
+      script.dataset.puterSdk = 'true';
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.head.appendChild(script);
+    });
+
+    return puterLoaderPromise;
+  }
 
   // Check for Puter API availability with timeout
   function waitForPuter(timeout: number): Promise<boolean> {
@@ -158,6 +183,11 @@ RESPONSE FORMAT:
     errorArea.hidden = true;
 
     try {
+      const loaderReady = await loadPuterScript();
+      if (!loaderReady) {
+        throw new Error('AI service unavailable');
+      }
+
       const puterReady = await waitForPuter(5000);
       if (!puterReady) {
         throw new Error('AI service unavailable');
