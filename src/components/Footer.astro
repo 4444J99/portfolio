@@ -40,11 +40,6 @@ const year = new Date().getFullYear();
       <a href={`${base}consult/`}>Consult</a>
     </nav>
     <div class="footer__right">
-      <div class="bg-mode-switch" role="group" aria-label="Background intensity">
-        <button data-mode="subtle" class="bg-mode-btn" aria-pressed="false" title="Subtle">S</button>
-        <button data-mode="bold" class="bg-mode-btn" aria-pressed="false" title="Bold">B</button>
-        <button data-mode="extreme" class="bg-mode-btn" aria-pressed="false" title="Extreme">E</button>
-      </div>
       <button class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">
         <svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="9" cy="9" r="4"/>
@@ -129,28 +124,6 @@ const year = new Date().getFullYear();
     color: var(--text-muted);
   }
 
-  .bg-mode-switch {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-  }
-
-  .bg-mode-btn {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-  }
-
-  .bg-mode-btn:hover { border-color: var(--text-primary); color: var(--text-primary); }
-  .bg-mode-btn--active { background: var(--text-primary); color: var(--bg-card); border-color: var(--text-primary); }
-
   .theme-toggle {
     width: 36px;
     height: 36px;
@@ -197,27 +170,6 @@ const year = new Date().getFullYear();
 </style>
 
 <script>
-  function initModeButtons() {
-    const currentMode = document.body.dataset.bgMode || 'subtle';
-    document.querySelectorAll<HTMLButtonElement>('.bg-mode-btn').forEach((btn) => {
-      const isActive = btn.dataset.mode === currentMode;
-      btn.classList.toggle('bg-mode-btn--active', isActive);
-      btn.setAttribute('aria-pressed', String(isActive));
-      btn.addEventListener('click', () => {
-        const mode = btn.dataset.mode!;
-        document.body.dataset.bgMode = mode;
-        localStorage.setItem('bg-mode', mode);
-        document.querySelectorAll<HTMLButtonElement>('.bg-mode-btn').forEach((b) => {
-          const active = b.dataset.mode === mode;
-          b.classList.toggle('bg-mode-btn--active', active);
-          b.setAttribute('aria-pressed', String(active));
-        });
-      });
-    });
-  }
-
-  document.addEventListener('astro:page-load', initModeButtons);
-
   function applyTheme(theme: string) {
     document.documentElement.dataset.theme = theme;
     const meta = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement | null;

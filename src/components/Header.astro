@@ -102,11 +102,6 @@ const connectLinks = [
       ))}
 
       <Search />
-      <div class="header__mode-switch" role="group" aria-label="Background intensity">
-        <button data-mode="subtle" class="bg-mode-btn" aria-pressed="false" title="Subtle">S</button>
-        <button data-mode="bold" class="bg-mode-btn" aria-pressed="false" title="Bold">B</button>
-        <button data-mode="extreme" class="bg-mode-btn" aria-pressed="false" title="Extreme">E</button>
-      </div>
       <button class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">
         <svg class="theme-icon theme-icon--sun" width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="9" cy="9" r="4"/>
@@ -359,38 +354,6 @@ const connectLinks = [
     display: none;
   }
 
-  /* --- S/B/E Mode Switch --- */
-  .header__mode-switch {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    margin-left: var(--space-sm);
-  }
-
-  .header__mode-switch .bg-mode-btn {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-  }
-
-  .header__mode-switch .bg-mode-btn:hover {
-    border-color: var(--text-primary);
-    color: var(--text-primary);
-  }
-
-  .header__mode-switch .bg-mode-btn--active {
-    background: var(--text-primary);
-    color: var(--bg-card);
-    border-color: var(--text-primary);
-  }
-
   /* --- Theme Toggle --- */
   .theme-toggle {
     width: 32px;
@@ -503,12 +466,5 @@ const connectLinks = [
       border-bottom: none;
     }
 
-    .header__mode-switch {
-      margin-left: 0;
-      margin-top: var(--space-sm);
-      padding-top: var(--space-sm);
-      border-top: 1px solid var(--border);
-      justify-content: center;
-    }
   }
 </style>

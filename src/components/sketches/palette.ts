@@ -24,8 +24,7 @@ export const PALETTE = {
   ] as RGB[],
 };
 
-/** Get text color based on current body mode */
+/** Get text color for sketch overlays */
 export function getTextColor(): RGB {
-  const mode = document.body?.dataset?.bgMode;
-  return mode === 'subtle' ? [17, 17, 17] : [255, 255, 255];
+  return [255, 255, 255];
 }

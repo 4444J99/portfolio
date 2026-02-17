@@ -91,12 +91,6 @@ function watchModeChanges() {
 
   mutationObserver = new MutationObserver(rerender);
 
-  // Watch S/B/E mode on body
-  mutationObserver.observe(document.body, {
-    attributes: true,
-    attributeFilter: ['data-bg-mode'],
-  });
-
   // Watch theme on html element
   mutationObserver.observe(document.documentElement, {
     attributes: true,

@@ -78,9 +78,6 @@ function splitWords(text: string) {
         <span class="hero__available-dot" aria-hidden="true"></span>
         Open to opportunities — <a href="mailto:padavano.anthony@gmail.com">Get in touch</a>
       </p>
-      <p class="hero__mode-hint" data-reveal style="animation-delay: 440ms">
-        This site has three visual modes — look for <strong>S</strong> / <strong>B</strong> / <strong>E</strong> in the header.
-      </p>
     </div>
     <div class="hero__canvas">
       <SketchContainer
@@ -234,18 +231,6 @@ function splitWords(text: string) {
   @keyframes pulse-dot {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.4; }
-  }
-
-  .hero__mode-hint {
-    margin-top: var(--space-md);
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    opacity: 0.7;
-  }
-
-  .hero__mode-hint strong {
-    color: var(--text-secondary);
-    font-weight: 600;
   }
 
   @media (max-width: 768px) {
