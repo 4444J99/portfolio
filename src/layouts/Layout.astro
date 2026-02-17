@@ -37,6 +37,9 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="Portfolio Feed" href="/portfolio/feed.xml" />
 
+    <!-- PWA -->
+    <link rel="manifest" href="/portfolio/manifest.json" />
+
     <!-- Identity verification -->
     <link rel="me" href="https://github.com/4444j99" />
 
@@ -193,6 +196,12 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
   }
 
   document.addEventListener('astro:page-load', initReveal);
+</script>
+<script>
+  // Service worker registration — runs once on initial load
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/portfolio/sw.js').catch(() => {});
+  }
 </script>
 <script is:inline>
   // Theme + mode restore — must be inline to avoid FOUC (runs before first paint)
