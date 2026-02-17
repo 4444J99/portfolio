@@ -38,6 +38,15 @@ Every push runs automated quality gates via [GitHub Actions](.github/workflows/q
 | HTML validation | [html-validate](https://html-validate.org/) | Zero errors |
 | Link checking | Custom script | All internal links valid |
 
+### GitHub Pages Directory Policy
+
+- Schema compatibility: `github-pages-index.v2` and `github-pages-index.v2.1` are accepted during transition.
+- Deploy continuity posture:
+  - Deploy sync uses non-strict mode with fallback to the last known-good index when GitHub API fetches fail.
+  - Deploy validation gate enforces `max-age-hours=72`, `max-errored=10`, `max-unreachable=5`.
+- Current baseline (2026-02-17): `total=85`, `built=76`, `errored=6`, `unreachable=0`.
+- Ratchet target (next checkpoint): keep errored repos at `<=8` and unreachable repos at `<=3`.
+
 Coverage ratchet policy: W2 `12/8/8/12`, W4 `18/12/12/18`, W6 `25/18/18/25` (Statements/Branches/Functions/Lines).  
 Typecheck hint budget policy: W2 `<=20`, W4 `<=8`, W6 `=0`.
 Runtime a11y coverage ratchet: `2026-02-25` `>=85%`, `2026-03-04` `>=95%`, `2026-03-18` `=100%`.

@@ -7,6 +7,7 @@
     "generate-data": "python3 ../ingesting-organ-document-structure/scripts/praxis-portfolio-generate.py --output-dir src/data && cp ../ingesting-organ-document-structure/system-metrics.json src/data/",
     "sync:github-pages": "node scripts/sync-github-pages.mjs --output src/data/github-pages.json --curation src/data/github-pages-curation.json",
     "validate:github-pages": "node scripts/validate-github-pages.mjs --input src/data/github-pages.json",
+    "check:github-pages-core": "node scripts/check-github-pages-core-drift.mjs",
     "build": "astro build && npx pagefind --site dist --glob '**/*.html'",
     "preview": "astro preview",
     "astro": "astro",

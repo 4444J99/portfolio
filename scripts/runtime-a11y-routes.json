@@ -47,6 +47,10 @@
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     },
     {
+      "path": "/github-pages",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
       "path": "/404.html",
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     },

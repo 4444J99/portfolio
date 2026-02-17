@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
-const DIST = resolve(__dirname, '../../../dist');
+const DIST = resolve(process.cwd(), 'dist');
 const FEED = resolve(DIST, 'feed.xml');
 const SITE_BASE = 'https://4444j99.github.io/portfolio/';
 

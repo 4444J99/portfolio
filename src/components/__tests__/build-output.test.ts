@@ -3,7 +3,7 @@ import { readFileSync, existsSync, readdirSync } from 'fs';
 import { resolve, join } from 'path';
 import * as cheerio from 'cheerio';
 
-const DIST = resolve(__dirname, '../../../dist');
+const DIST = resolve(process.cwd(), 'dist');
 
 function loadPage(path: string) {
   const file = resolve(DIST, path);

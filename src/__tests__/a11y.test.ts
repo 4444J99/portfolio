@@ -3,7 +3,7 @@ import { readFileSync, existsSync, readdirSync } from 'fs';
 import { join, resolve } from 'path';
 import { JSDOM } from 'jsdom';
 
-const DIST = resolve(__dirname, '../../dist');
+const DIST = resolve(process.cwd(), 'dist');
 
 function findHtmlFiles(dir: string): string[] {
   const results: string[] = [];

@@ -23,6 +23,9 @@ interface PagesRepo {
   reachable: boolean;
   redirectTarget: string | null;
   lastCheckedAt: string;
+  probeMethod?: string | null;
+  probeLatencyMs?: number | null;
+  lastError?: string | null;
 }
 
 interface PagesDirectory {
@@ -52,6 +55,7 @@ const visibleRepos = directory.repos.filter((repo) => !repo.hidden);
 const builtCount = visibleRepos.filter((repo) => repo.status === 'built').length;
 const erroredCount = visibleRepos.filter((repo) => repo.status === 'errored').length;
 const unreachableCount = visibleRepos.filter((repo) => repo.reachable === false).length;
+const erroredRepos = visibleRepos.filter((repo) => repo.status === 'errored');
 const recentlyChangedCount = visibleRepos.filter((repo) => {
   if (!repo.updatedAt || !Number.isFinite(Date.parse(repo.updatedAt))) return false;
   const ageMs = Date.now() - Date.parse(repo.updatedAt);
@@ -141,6 +145,30 @@ const groups = Array.from(grouped.entries()).sort((a, b) => {
         </div>
       </section>
 
+      <section class="diagnostics-card">
+        <h2>Why this matters</h2>
+        <p>
+          This index acts as a deploy-time reliability gate for live sites across all tracked owners.
+          Keep this panel fresh to catch Pages regressions before they ship.
+        </p>
+        {erroredRepos.length > 0 && (
+          <>
+            <p class="diagnostics-label">
+              Actionable diagnostics: {erroredRepos.length} repo{erroredRepos.length === 1 ? '' : 's'} currently report <code>status=errored</code>.
+            </p>
+            <ul class="diagnostics-list">
+              {erroredRepos.map((repo) => (
+                <li>
+                  <a href={repo.repoUrl} target="_blank" rel="noopener noreferrer">{repo.fullName}</a>
+                  {' · '}
+                  <a href={repo.pageUrl} target="_blank" rel="noopener noreferrer">open page</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </section>
+
       {featuredRepos.length > 0 && (
         <section class="featured-group" aria-labelledby="featured-pages">
           <div class="owner-group__head">
@@ -179,11 +207,16 @@ const groups = Array.from(grouped.entries()).sort((a, b) => {
                 <div class="repo-meta">
                   <span class="meta-pill">priority: {repo.priority}</span>
                   {repo.status && <span class="meta-pill">status: {repo.status}</span>}
+                  {repo.probeMethod && <span class="meta-pill">probe: {repo.probeMethod}</span>}
+                  {repo.probeLatencyMs !== null && repo.probeLatencyMs !== undefined && (
+                    <span class="meta-pill">latency: {repo.probeLatencyMs}ms</span>
+                  )}
                   {repo.httpStatus !== null && (
                     <span class:list={['meta-pill', { 'meta-pill--bad': !repo.reachable }]}>
                       http: {repo.httpStatus}
                     </span>
                   )}
+                  {repo.lastError && <span class="meta-pill meta-pill--bad">probe-error</span>}
                 </div>
               </li>
             ))}
@@ -247,7 +280,12 @@ const groups = Array.from(grouped.entries()).sort((a, b) => {
                         http: {repo.httpStatus}
                       </span>
                     )}
+                    {repo.probeMethod && <span class="meta-pill">probe: {repo.probeMethod}</span>}
+                    {repo.probeLatencyMs !== null && repo.probeLatencyMs !== undefined && (
+                      <span class="meta-pill">latency: {repo.probeLatencyMs}ms</span>
+                    )}
                     {repo.redirectTarget && <span class="meta-pill">redirected</span>}
+                    {repo.lastError && <span class="meta-pill meta-pill--bad">probe-error</span>}
                     {repo.updatedAt && <span class="meta-pill">updated: {new Date(repo.updatedAt).toISOString().slice(0, 10)}</span>}
                   </div>
                 </li>
@@ -277,16 +315,21 @@ const groups = Array.from(grouped.entries()).sort((a, b) => {
     try {
       const key = 'portfolio_github_pages_clicks';
       const raw = localStorage.getItem(key);
-      const parsed = raw ? JSON.parse(raw) : {};
+      const parsedCandidate = raw ? JSON.parse(raw) : {};
+      const parsed =
+        parsedCandidate && typeof parsedCandidate === 'object' && !Array.isArray(parsedCandidate)
+          ? parsedCandidate
+          : {};
       const bucketKey = `${fullName}:${target}`;
       const previous = parsed[bucketKey] || { count: 0, lastClickedAt: null, surface };
       parsed[bucketKey] = {
-        count: Number(previous.count || 0) + 1,
-        lastClickedAt: new Date().toISOString(),
         owner,
         repo,
+        fullName,
         target,
         surface,
+        count: Number(previous.count || 0) + 1,
+        lastClickedAt: new Date().toISOString(),
       };
       localStorage.setItem(key, JSON.stringify(parsed));
     } catch {}
@@ -351,6 +394,37 @@ const groups = Array.from(grouped.entries()).sort((a, b) => {
     margin: 0;
     color: var(--text-secondary);
     font-size: 0.92rem;
+  }
+
+  .diagnostics-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    background: var(--bg-card);
+  }
+
+  .diagnostics-card h2 {
+    margin: 0 0 var(--space-sm);
+    font-size: 1rem;
+  }
+
+  .diagnostics-card p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+  }
+
+  .diagnostics-label {
+    margin-top: var(--space-md) !important;
+  }
+
+  .diagnostics-list {
+    margin: var(--space-sm) 0 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.2rem;
+    font-size: 0.86rem;
   }
 
   .feed-links {
