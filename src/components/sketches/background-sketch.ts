@@ -4,7 +4,7 @@ const COLS = 36;
 const ROWS = 24;
 const NOISE_SCALE = 0.12;
 const TIME_SCALE = 0.003;
-const HUE_DRIFT = 0.01; // degrees per frame at 24fps
+const HUE_DRIFT = 0.1; // degrees per frame at 24fps — full cycle ≈ 2.5 min
 
 /** Convert HSL (h: 0–360, s/l: 0–1) to RGB (0–255 each) */
 function hslToRgb(h: number, s: number, l: number): [number, number, number] {
