@@ -331,7 +331,7 @@ const featuredNumbers = new Set([2, 5, 14, 20]);
             </h3>
             <div class="project-grid">
               {group.projects.map((project, i) => (
-                <div data-reveal style={`animation-delay: ${i * 60}ms`}>
+                <div data-reveal style={`--stagger-index: ${i}`}>
                   <ProjectCard {...project} featured={featuredNumbers.has(project.number)} data-skills={project.skills.join(',')} data-tags={project.tags.join(',')} />
                 </div>
               ))}

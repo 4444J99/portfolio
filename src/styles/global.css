@@ -105,6 +105,21 @@ body {
   image-rendering: crisp-edges;
 }
 
+/* --- S/B/E mode transitions (smooth color interpolation) --- */
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.header,
+.footer,
+.section,
+.stat,
+.tag {
+  transition-property: background, border-color, color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+}
+
 /* --- S/B/E gradient modes --- */
 
 /* S = Subtle: pastels + dark text + white halo */
@@ -493,6 +508,7 @@ img {
 
 [data-reveal].revealed {
   animation: reveal-up 0.6s ease forwards;
+  animation-delay: calc(var(--stagger-index, 0) * 80ms);
 }
 
 /* --- View Transitions --- */
