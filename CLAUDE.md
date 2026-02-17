@@ -9,9 +9,16 @@ npm run dev            # Dev server at localhost:4321/portfolio/
 npm run build          # Production build → dist/
 npm run preview        # Preview production build
 npm run generate-data  # Regenerate src/data/ from sibling repo (requires ../ingesting-organ-document-structure/)
+npm run test           # Unit + integration tests (vitest)
+npm run test:coverage  # Coverage report (V8)
+npm run test:a11y      # Accessibility audit (axe-core, 31 pages)
+npm run validate       # HTML validation + internal link check
+npm run lighthouse     # Lighthouse CI performance budgets
+npm run test:ci        # All quality gates chained
+npm run generate-badges # Regenerate quality badges + metrics JSON
 ```
 
-No test runner — this is a static portfolio site. Verify changes via `npm run build` (catches TypeScript and Astro errors) and `npm run dev` for visual inspection.
+**Testing strategy:** Vitest runs unit tests for utilities, data integrity, component logic, and build output verification. Accessibility via axe-core on all built pages. Lighthouse CI enforces performance/a11y/SEO budgets. HTML validation and link checking catch structural issues. All gates run in CI on every push via `.github/workflows/quality.yml`.
 
 ## Architecture
 
@@ -68,8 +75,9 @@ A full-page p5.js canvas (`#bg-canvas`, z-index -1, `pointer-events: none`) rend
 
 ### CI/CD
 
-Two GitHub Actions workflows in `.github/workflows/`:
+Three GitHub Actions workflows in `.github/workflows/`:
 - **deploy.yml** — builds and deploys to GitHub Pages on push to main (Node 22, `npm ci && npm run build`)
+- **quality.yml** — runs all quality gates on push/PR: vitest, axe-core a11y, HTML validation, link check, Lighthouse CI
 - **build-resume.yml** — renders resume YAML → PDF/DOCX via RenderCV + Pandoc, creates GitHub Release, auto-commits to `public/resume/`
 
 ## Conventions
@@ -89,7 +97,11 @@ Two GitHub Actions workflows in `.github/workflows/`:
 | p5 | 2.2.1 | Generative background canvas |
 | d3 | 7.9.0 | Data visualizations |
 | mermaid | 11.12.2 | Diagrams in project pages |
-| @types/p5 | 1.7.7 | TypeScript definitions (dev) |
+| vitest | 4.x | Test runner (dev) |
+| @vitest/coverage-v8 | 4.x | Coverage via V8 (dev) |
+| axe-core | 4.x | Accessibility auditing (dev) |
+| @lhci/cli | 0.15.x | Lighthouse CI (dev) |
+| html-validate | 10.x | HTML validation (dev) |
 
 ## Debugging
 
@@ -97,3 +109,5 @@ Two GitHub Actions workflows in `.github/workflows/`:
 - **Base path issues**: All routes and assets live under `/portfolio`. Check relative paths.
 - **Mobile menu broken**: Header uses `is:inline` script — check it's not accidentally bundled.
 - **Build chunk warnings**: Vite chunk limit is 1200kB (set for p5.js). Monitor `npm run build` output.
+- **Tests failing on build output**: Build-output and a11y tests require `npm run build` first. Run `npm run build && npm run test`.
+- **Lighthouse fails locally**: Needs Chrome installed. CI uses `ubuntu-latest` which has Chrome. Check `lighthouserc.cjs` for score thresholds.
