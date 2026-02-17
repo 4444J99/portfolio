@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "defaultPhase": "W6",
+  "phases": {
+    "W2": {
+      "typecheck": {
+        "hintsMax": 20
+      },
+      "coverage": {
+        "statements": 12,
+        "branches": 8,
+        "functions": 8,
+        "lines": 12
+      }
+    },
+    "W4": {
+      "typecheck": {
+        "hintsMax": 8
+      },
+      "coverage": {
+        "statements": 18,
+        "branches": 12,
+        "functions": 12,
+        "lines": 18
+      }
+    },
+    "W6": {
+      "typecheck": {
+        "hintsMax": 0
+      },
+      "coverage": {
+        "statements": 25,
+        "branches": 18,
+        "functions": 18,
+        "lines": 25
+      }
+    }
+  },
+  "regression": {
+    "coverageMaxDrop": {
+      "statements": 3,
+      "branches": 3,
+      "functions": 3,
+      "lines": 3
+    },
+    "lighthouseMaxDrop": {
+      "performance": 5,
+      "accessibility": 3,
+      "bestPractices": 3,
+      "seo": 3
+    },
+    "a11y": {
+      "maxCriticalIncrease": 0,
+      "maxSeriousIncrease": 0
+    }
+  }
+}

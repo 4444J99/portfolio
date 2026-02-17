@@ -9,6 +9,8 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    env:
+      QUALITY_PHASE: W6
     steps:
       - uses: actions/checkout@v4
 
@@ -19,28 +21,15 @@ jobs:
 
       - run: npm ci
 
-      - name: Typecheck
-        run: npm run typecheck
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
 
-      - name: Build
-        run: npm run build
+      - name: Quality parity pipeline
+        run: npm run quality:local
 
-      - name: Unit & integration tests
-        run: npm run test
-
-      - name: Accessibility audit
-        run: npm run test:a11y
-
-      - name: HTML validation & link checking
-        run: npm run validate
-
-      - name: Lighthouse CI
-        run: npm run lighthouse
-
-      - name: Coverage report
+      - name: Quality summary
         if: always()
-        run: npm run test:coverage
-        continue-on-error: true
+        run: npm run quality:summary -- --allow-missing
 
       - name: Upload coverage
         if: always()
@@ -56,5 +45,17 @@ jobs:
         with:
           name: lighthouse-reports
           path: .lighthouseci/
+          include-hidden-files: true
+          retention-days: 14
+
+      - name: Upload quality artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-artifacts
+          path: |
+            .quality/
+            .a11y/
+            src/data/quality-metrics.json
           include-hidden-files: true
           retention-days: 14

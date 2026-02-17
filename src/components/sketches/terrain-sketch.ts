@@ -1,12 +1,10 @@
 import type p5 from 'p5';
-import { PALETTE, getTextColor } from './palette';
 
 export default function terrainSketch(p: p5, container: HTMLElement) {
   let cols: number, rows: number;
   let terrain: number[][] = [];
   let flying = 0;
   const scl = 16;
-  const isMobile = () => container.clientWidth < 768;
 
   p.setup = function () {
     p.createCanvas(container.clientWidth, container.clientHeight);

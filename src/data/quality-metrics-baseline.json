@@ -1,9 +1,9 @@
 {
-  "generated": "2026-02-17T20:04:19.009Z",
+  "generated": "2026-02-17T16:52:15.891Z",
   "tests": {
-    "total": 193,
-    "passed": 193,
-    "files": 19
+    "total": 187,
+    "passed": 187,
+    "files": 18
   },
   "coverage": {
     "statements": 50,
@@ -20,13 +20,13 @@
   "a11y": {
     "status": "pass",
     "static": {
-      "pagesAudited": 32,
+      "pagesAudited": 31,
       "critical": 0,
       "serious": 0,
       "status": "pass"
     },
     "runtime": {
-      "pagesAudited": 11,
+      "pagesAudited": 5,
       "critical": 0,
       "serious": 0,
       "focusChecks": 2,
@@ -35,8 +35,8 @@
     }
   },
   "build": {
-    "pages": 32,
-    "bundleFiles": 116
+    "pages": 31,
+    "bundleFiles": 115
   },
   "sources": {
     "tests": ".quality/vitest-report.json",

@@ -1,5 +1,4 @@
 import type p5 from 'p5';
-import { PALETTE, getTextColor } from './palette';
 
 interface Trail {
   x: number;
@@ -51,7 +50,7 @@ export default function conductorSketch(p: p5, container: HTMLElement) {
     // Draw main trail
     p.noFill();
     p.beginShape();
-    trails.forEach((t, i) => {
+    trails.forEach((t) => {
       p.stroke(255, 255, 255, t.alpha);
       p.strokeWeight(2);
       p.vertex(t.x, t.y);

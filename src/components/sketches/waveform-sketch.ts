@@ -1,5 +1,4 @@
 import type p5 from 'p5';
-import { PALETTE, getTextColor } from './palette';
 
 export default function waveformSketch(p: p5, container: HTMLElement) {
   const waveCount = 5;

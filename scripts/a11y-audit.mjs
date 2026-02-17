@@ -39,6 +39,43 @@ function findHtmlFiles(dir) {
 async function auditPage(filePath) {
   const html = readFileSync(filePath, 'utf-8');
   const dom = new JSDOM(html, { runScripts: 'outside-only' });
+  const { window } = dom;
+  const nativeGetComputedStyle = window.getComputedStyle.bind(window);
+
+  Object.defineProperty(window, 'getComputedStyle', {
+    configurable: true,
+    value: (element) => nativeGetComputedStyle(element),
+  });
+
+  if (window.HTMLCanvasElement) {
+    Object.defineProperty(window.HTMLCanvasElement.prototype, 'getContext', {
+      configurable: true,
+      value: () => ({
+        fillRect: () => {},
+        getImageData: () => ({ data: new Uint8ClampedArray(4) }),
+        putImageData: () => {},
+        createImageData: () => [],
+        setTransform: () => {},
+        drawImage: () => {},
+        save: () => {},
+        restore: () => {},
+        beginPath: () => {},
+        closePath: () => {},
+        moveTo: () => {},
+        lineTo: () => {},
+        stroke: () => {},
+        translate: () => {},
+        scale: () => {},
+        rotate: () => {},
+        arc: () => {},
+        fill: () => {},
+        measureText: () => ({ width: 0 }),
+        transform: () => {},
+        rect: () => {},
+        clip: () => {},
+      }),
+    });
+  }
 
   // Inject axe-core into the jsdom window — this is the standard
   // documented approach for running axe-core in Node.js environments.
@@ -47,13 +84,13 @@ async function auditPage(filePath) {
     resolve('node_modules/axe-core/axe.min.js'),
     'utf-8'
   );
-  dom.window.eval(axeSource); // eslint-disable-line no-eval
+  window.eval(axeSource); // eslint-disable-line no-eval
 
-  const results = await dom.window.axe.run(dom.window.document, {
+  const results = await window.axe.run(window.document, {
     runOnly: ['wcag2a', 'wcag2aa', 'best-practice'],
   });
 
-  dom.window.close();
+  window.close();
   return results;
 }
 

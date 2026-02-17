@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { getChartTheme, organColors } from './chart-theme';
+import { getChartTheme } from './chart-theme';
 import { createTooltip } from './chart-utils';
 
 interface OrganNode {
@@ -179,7 +179,7 @@ export default function organNavigatorChart(
     projectNodes = projectGroup.selectAll<SVGGElement, ProjectNode>('g')
       .data(projData)
       .join('g')
-      .attr('transform', (p) => `translate(${d.x}, ${d.y})`)
+      .attr('transform', () => `translate(${d.x}, ${d.y})`)
       .style('cursor', 'pointer');
 
     projectNodes.append('circle')

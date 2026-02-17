@@ -1,5 +1,4 @@
 import type p5 from 'p5';
-import { PALETTE, getTextColor } from './palette';
 
 interface TreeNode {
   x: number;

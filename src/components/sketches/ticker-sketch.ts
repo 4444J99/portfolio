@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE, getTextColor } from './palette';
+import { getTextColor } from './palette';
 
 interface TickerItem {
   text: string;

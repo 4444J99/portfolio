@@ -1,5 +1,4 @@
 import type p5 from 'p5';
-import { PALETTE, getTextColor } from './palette';
 
 export default function spiralSketch(p: p5, container: HTMLElement) {
   let growth = 0;

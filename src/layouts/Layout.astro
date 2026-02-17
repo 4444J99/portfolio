@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import BackToTop from '../components/BackToTop.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -52,7 +52,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
     <SEOMeta title={title} description={description} canonicalURL={canonicalURL} ogImage={ogImage} />
     <SchemaOrg description={description} ogImage={ogImage} project={schemaProject} />
     <FontFaces />
-    <ViewTransitions />
+    <ClientRouter />
     <title>{title}</title>
   </head>
   <body>

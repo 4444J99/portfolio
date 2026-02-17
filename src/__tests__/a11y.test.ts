@@ -21,6 +21,42 @@ function findHtmlFiles(dir: string): string[] {
 async function auditFile(filePath: string) {
   const html = readFileSync(filePath, 'utf-8');
   const dom = new JSDOM(html, { runScripts: 'outside-only' });
+  const nativeGetComputedStyle = dom.window.getComputedStyle.bind(dom.window);
+
+  Object.defineProperty(dom.window, 'getComputedStyle', {
+    configurable: true,
+    value: (element: Element) => nativeGetComputedStyle(element),
+  });
+
+  if (dom.window.HTMLCanvasElement) {
+    Object.defineProperty(dom.window.HTMLCanvasElement.prototype, 'getContext', {
+      configurable: true,
+      value: () => ({
+        fillRect: () => {},
+        getImageData: () => ({ data: new Uint8ClampedArray(4) }),
+        putImageData: () => {},
+        createImageData: () => [],
+        setTransform: () => {},
+        drawImage: () => {},
+        save: () => {},
+        restore: () => {},
+        beginPath: () => {},
+        closePath: () => {},
+        moveTo: () => {},
+        lineTo: () => {},
+        stroke: () => {},
+        translate: () => {},
+        scale: () => {},
+        rotate: () => {},
+        arc: () => {},
+        fill: () => {},
+        measureText: () => ({ width: 0 }),
+        transform: () => {},
+        rect: () => {},
+        clip: () => {},
+      }),
+    });
+  }
 
   // Inject axe-core into jsdom — standard documented approach for running
   // axe-core in Node.js. The source is a trusted first-party dependency.

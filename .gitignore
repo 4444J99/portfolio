@@ -44,3 +44,7 @@ coverage/
 
 # Accessibility audit reports
 .a11y/
+
+# Quality artifacts
+.quality/*
+!.quality/ratchet-policy.json

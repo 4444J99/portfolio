@@ -3,21 +3,21 @@
 /**
  * Generate quality metric badges and structured JSON data.
  *
- * Reads from:
- *   - vitest coverage JSON (if available)
- *   - Lighthouse CI results (if available)
- *   - a11y audit JSON summary (if available)
- *   - Build output (dist/)
+ * Reads from measured artifacts when available:
+ *   - .quality/vitest-report.json
+ *   - coverage/coverage-summary.json
+ *   - .lighthouseci/lhr-*.json
+ *   - .a11y/a11y-summary.json (static)
+ *   - .a11y/runtime-summary.json (runtime)
+ *   - dist/
  *
  * Writes:
  *   - public/badges/*.svg
  *   - src/data/quality-metrics.json
- *
- * Usage: node scripts/generate-quality-badges.mjs
  */
 
-import { writeFileSync, existsSync, readFileSync, readdirSync } from 'fs';
-import { resolve, join } from 'path';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
 
 function badge(label, value, color) {
   const labelWidth = label.length * 7 + 12;
@@ -85,23 +85,50 @@ function countFiles(dir) {
   return count;
 }
 
+function toNumberOrNull(value) {
+  return typeof value === 'number' && Number.isFinite(value) ? value : null;
+}
+
 const metrics = {
   generated: new Date().toISOString(),
   tests: { total: null, passed: null, files: 0 },
   coverage: { statements: null, branches: null, functions: null, lines: null },
   lighthouse: { performance: null, accessibility: null, bestPractices: null, seo: null },
-  a11y: { pagesAudited: null, critical: null, serious: null, status: 'unknown' },
+  a11y: {
+    status: 'unknown',
+    static: { pagesAudited: null, critical: null, serious: null, status: 'unknown' },
+    runtime: {
+      pagesAudited: null,
+      critical: null,
+      serious: null,
+      focusChecks: null,
+      focusFailures: null,
+      status: 'unknown',
+    },
+  },
   build: { pages: 0, bundleFiles: 0 },
   sources: {
-    tests: 'Counted src/**/*.test.ts files (assertion counts unavailable without dedicated Vitest JSON reporter output).',
+    tests: '.quality/vitest-report.json',
     coverage: 'coverage/coverage-summary.json',
     lighthouse: '.lighthouseci/lhr-*.json',
-    a11y: '.a11y/a11y-summary.json',
+    a11yStatic: '.a11y/a11y-summary.json',
+    a11yRuntime: '.a11y/runtime-summary.json',
     build: 'dist/**/*.html and dist/_astro/**/*',
   },
 };
 
 metrics.tests.files = countTestFiles(resolve('src'));
+
+const vitestReportPath = resolve('.quality/vitest-report.json');
+if (existsSync(vitestReportPath)) {
+  try {
+    const report = JSON.parse(readFileSync(vitestReportPath, 'utf-8'));
+    metrics.tests.total = toNumberOrNull(report.numTotalTests);
+    metrics.tests.passed = toNumberOrNull(report.numPassedTests);
+  } catch {
+    // keep nulls
+  }
+}
 
 const coveragePath = resolve('coverage/coverage-summary.json');
 if (existsSync(coveragePath)) {
@@ -143,69 +170,95 @@ if (existsSync(lhciDir)) {
   }
 }
 
-const a11yPath = resolve('.a11y/a11y-summary.json');
-if (existsSync(a11yPath)) {
+const staticA11yPath = resolve('.a11y/a11y-summary.json');
+if (existsSync(staticA11yPath)) {
   try {
-    const a11y = JSON.parse(readFileSync(a11yPath, 'utf-8'));
-    metrics.a11y.pagesAudited = typeof a11y.pagesAudited === 'number' ? a11y.pagesAudited : null;
-    metrics.a11y.critical = typeof a11y.critical === 'number' ? a11y.critical : null;
-    metrics.a11y.serious = typeof a11y.serious === 'number' ? a11y.serious : null;
-    metrics.a11y.status = typeof a11y.status === 'string' ? a11y.status : 'unknown';
+    const staticA11y = JSON.parse(readFileSync(staticA11yPath, 'utf-8'));
+    metrics.a11y.static.pagesAudited = toNumberOrNull(staticA11y.pagesAudited);
+    metrics.a11y.static.critical = toNumberOrNull(staticA11y.critical);
+    metrics.a11y.static.serious = toNumberOrNull(staticA11y.serious);
+    metrics.a11y.static.status = typeof staticA11y.status === 'string' ? staticA11y.status : 'unknown';
   } catch {
-    // keep unknown defaults
+    // keep defaults
   }
+}
+
+const runtimeA11yPath = resolve('.a11y/runtime-summary.json');
+if (existsSync(runtimeA11yPath)) {
+  try {
+    const runtimeA11y = JSON.parse(readFileSync(runtimeA11yPath, 'utf-8'));
+    metrics.a11y.runtime.pagesAudited = toNumberOrNull(runtimeA11y.pagesAudited);
+    metrics.a11y.runtime.critical = toNumberOrNull(runtimeA11y.critical);
+    metrics.a11y.runtime.serious = toNumberOrNull(runtimeA11y.serious);
+    metrics.a11y.runtime.focusChecks = toNumberOrNull(runtimeA11y.focusChecks);
+    metrics.a11y.runtime.focusFailures = toNumberOrNull(runtimeA11y.focusFailures);
+    metrics.a11y.runtime.status = typeof runtimeA11y.status === 'string' ? runtimeA11y.status : 'unknown';
+  } catch {
+    // keep defaults
+  }
+}
+
+const a11yStates = [metrics.a11y.static.status, metrics.a11y.runtime.status].filter((state) => state !== 'unknown');
+if (a11yStates.length === 0) {
+  metrics.a11y.status = 'unknown';
+} else {
+  metrics.a11y.status = a11yStates.every((state) => state === 'pass') ? 'pass' : 'fail';
 }
 
 metrics.build.pages = countHtmlFiles(resolve('dist'));
 metrics.build.bundleFiles = countFiles(resolve('dist/_astro'));
 
 const badgesDir = resolve('public/badges');
+mkdirSync(badgesDir, { recursive: true });
+
 const coverageScore = metrics.coverage.lines ?? metrics.coverage.statements;
+const testsBadge = metrics.tests.total === null || metrics.tests.passed === null
+  ? `${metrics.tests.files} files`
+  : `${metrics.tests.passed}/${metrics.tests.total}`;
+const a11yColor = metrics.a11y.status === 'pass' ? '#4c1' : metrics.a11y.status === 'fail' ? '#e05d44' : '#9f9f9f';
 
-writeFileSync(
-  join(badgesDir, 'tests.svg'),
-  badge('tests', `${metrics.tests.files} files`, '#4c1')
-);
-
+writeFileSync(join(badgesDir, 'tests.svg'), badge('tests', testsBadge, '#4c1'));
 writeFileSync(
   join(badgesDir, 'coverage.svg'),
   badge('coverage', coverageScore === null ? 'n/a' : `${coverageScore}%`, scoreColor(coverageScore))
 );
-
 writeFileSync(
   join(badgesDir, 'lighthouse-perf.svg'),
-  badge('performance', metrics.lighthouse.performance === null ? 'n/a' : `${metrics.lighthouse.performance}`, scoreColor(metrics.lighthouse.performance))
+  badge(
+    'performance',
+    metrics.lighthouse.performance === null ? 'n/a' : `${metrics.lighthouse.performance}`,
+    scoreColor(metrics.lighthouse.performance)
+  )
 );
-
 writeFileSync(
   join(badgesDir, 'lighthouse-a11y.svg'),
-  badge('accessibility', metrics.lighthouse.accessibility === null ? 'n/a' : `${metrics.lighthouse.accessibility}`, scoreColor(metrics.lighthouse.accessibility))
+  badge(
+    'accessibility',
+    metrics.lighthouse.accessibility === null ? 'n/a' : `${metrics.lighthouse.accessibility}`,
+    scoreColor(metrics.lighthouse.accessibility)
+  )
 );
-
 writeFileSync(
   join(badgesDir, 'lighthouse-seo.svg'),
   badge('SEO', metrics.lighthouse.seo === null ? 'n/a' : `${metrics.lighthouse.seo}`, scoreColor(metrics.lighthouse.seo))
 );
+writeFileSync(join(badgesDir, 'a11y.svg'), badge('a11y', metrics.a11y.status, a11yColor));
+writeFileSync(join(badgesDir, 'pages.svg'), badge('pages', `${metrics.build.pages}`, '#007ec6'));
 
-const a11yColor = metrics.a11y.status === 'pass' ? '#4c1' : metrics.a11y.status === 'fail' ? '#e05d44' : '#9f9f9f';
-writeFileSync(
-  join(badgesDir, 'a11y.svg'),
-  badge('a11y', metrics.a11y.status, a11yColor)
-);
-
-writeFileSync(
-  join(badgesDir, 'pages.svg'),
-  badge('pages', `${metrics.build.pages}`, '#007ec6')
-);
-
-writeFileSync(
-  resolve('src/data/quality-metrics.json'),
-  JSON.stringify(metrics, null, 2) + '\n'
-);
+writeFileSync(resolve('src/data/quality-metrics.json'), JSON.stringify(metrics, null, 2) + '\n');
 
 console.log('Generated quality badges and metrics:');
-console.log(`  Tests: ${metrics.tests.files} files (assertions: n/a)`);
+console.log(
+  `  Tests: ${metrics.tests.passed ?? 'n/a'}/${metrics.tests.total ?? 'n/a'} (files=${metrics.tests.files})`
+);
 console.log(`  Coverage: ${coverageScore === null ? 'n/a' : `${coverageScore}%`}`);
-console.log(`  Lighthouse: perf=${metrics.lighthouse.performance ?? 'n/a'} a11y=${metrics.lighthouse.accessibility ?? 'n/a'} seo=${metrics.lighthouse.seo ?? 'n/a'}`);
-console.log(`  A11y: ${metrics.a11y.status} (critical=${metrics.a11y.critical ?? 'n/a'}, serious=${metrics.a11y.serious ?? 'n/a'})`);
+console.log(
+  `  Lighthouse: perf=${metrics.lighthouse.performance ?? 'n/a'} a11y=${metrics.lighthouse.accessibility ?? 'n/a'} seo=${metrics.lighthouse.seo ?? 'n/a'}`
+);
+console.log(
+  `  A11y static: ${metrics.a11y.static.status} (critical=${metrics.a11y.static.critical ?? 'n/a'}, serious=${metrics.a11y.static.serious ?? 'n/a'})`
+);
+console.log(
+  `  A11y runtime: ${metrics.a11y.runtime.status} (critical=${metrics.a11y.runtime.critical ?? 'n/a'}, serious=${metrics.a11y.runtime.serious ?? 'n/a'}, focusFailures=${metrics.a11y.runtime.focusFailures ?? 'n/a'})`
+);
 console.log(`  Build: pages=${metrics.build.pages} bundleFiles=${metrics.build.bundleFiles}`);

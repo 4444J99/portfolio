@@ -87,7 +87,7 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
     </section>
 </Layout>
 
-<script define:vars={{ graphData, organColors }}>
+<script is:inline define:vars={{ graphData, organColors }}>
   async function initGraph() {
     const d3 = await import('d3');
     const container = document.getElementById('graph-container');

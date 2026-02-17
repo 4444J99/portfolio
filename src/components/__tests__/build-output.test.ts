@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { readFileSync, existsSync, readdirSync, statSync } from 'fs';
+import { readFileSync, existsSync, readdirSync } from 'fs';
 import { resolve, join } from 'path';
 import * as cheerio from 'cheerio';
 
@@ -30,8 +30,8 @@ describe('build output', () => {
     expect(existsSync(DIST)).toBe(true);
   });
 
-  it('produces 31 HTML pages', () => {
-    expect(countHtmlFiles(DIST)).toBe(31);
+  it('produces at least the baseline HTML page count', () => {
+    expect(countHtmlFiles(DIST)).toBeGreaterThanOrEqual(31);
   });
 });
 

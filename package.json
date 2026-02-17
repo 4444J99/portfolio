@@ -9,14 +9,21 @@
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check",
+    "typecheck:strict": "node scripts/check-typecheck-hints.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:report": "mkdir -p .quality && vitest run --reporter=default --reporter=json --outputFile=.quality/vitest-report.json",
     "test:coverage": "vitest run --coverage",
     "test:a11y": "node scripts/a11y-audit.mjs --json-out .a11y/a11y-summary.json",
+    "test:a11y:runtime": "node scripts/a11y-runtime-audit.mjs --json-out .a11y/runtime-summary.json",
     "lighthouse": "lhci autorun --config=lighthouserc.cjs",
     "validate": "node scripts/validate-build.mjs",
-    "test:ci": "npm run typecheck && npm run test && npm run test:a11y && npm run validate && npm run lighthouse",
-    "generate-badges": "node scripts/generate-quality-badges.mjs"
+    "generate-badges": "node scripts/generate-quality-badges.mjs",
+    "verify:quality": "node scripts/verify-quality-contracts.mjs",
+    "quality:delta": "node scripts/check-quality-deltas.mjs",
+    "quality:summary": "node scripts/generate-quality-summary.mjs --out .quality/quality-summary.md",
+    "quality:local": "npm run typecheck:strict && npm run build && npm run test && npm run test:report && npm run test:coverage && npm run test:a11y && npm run test:a11y:runtime && npm run validate && npm run lighthouse && npm run generate-badges && npm run verify:quality && npm run quality:delta && npm run quality:summary",
+    "test:ci": "npm run quality:local"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.15",
@@ -40,6 +47,7 @@
     "jsdom": "28.1.0",
     "linkinator": "7.5.3",
     "pagefind": "1.4.0",
+    "playwright": "1.55.0",
     "satori": "0.19.2",
     "typescript": "5.9.3",
     "vitest": "4.0.18"

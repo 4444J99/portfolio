@@ -1,11 +1,9 @@
 import type p5 from 'p5';
-import { PALETTE, getTextColor } from './palette';
 
 export default function octagonSketch(p: p5, container: HTMLElement) {
   const segments = 8;
   let rotations: number[] = [];
   let pulses: number[] = [];
-  const isMobile = () => container.clientWidth < 768;
 
   p.setup = function () {
     p.createCanvas(container.clientWidth, container.clientHeight);

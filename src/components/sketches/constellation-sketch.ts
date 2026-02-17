@@ -1,5 +1,4 @@
 import type p5 from 'p5';
-import { PALETTE, getTextColor } from './palette';
 
 interface Star {
   x: number;
@@ -21,7 +20,7 @@ export default function constellationSketch(p: p5, container: HTMLElement) {
 
   function initStars() {
     const count = isMobile() ? 12 : 24;
-    stars = Array.from({ length: count }, (_, i) => ({
+    stars = Array.from({ length: count }, (_) => ({
       x: 40 + Math.random() * (p.width - 80),
       y: 30 + Math.random() * (p.height - 60),
       baseSize: 2 + Math.random() * 3,

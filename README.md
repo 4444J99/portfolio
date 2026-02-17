@@ -26,20 +26,30 @@ Every push runs automated quality gates via [GitHub Actions](.github/workflows/q
 | Gate | Tool | Threshold |
 |------|------|-----------|
 | Unit & integration tests | [Vitest](https://vitest.dev/) | All pass |
-| Coverage floor (ratcheted) | [Vitest Coverage](https://vitest.dev/guide/coverage) | Statements ≥ 6, Branches ≥ 5, Functions ≥ 3, Lines ≥ 6 |
-| Accessibility audit | [axe-core](https://github.com/dequelabs/axe-core) | Zero critical/serious (31 pages) |
+| Coverage floor (ratcheted) | [Vitest Coverage](https://vitest.dev/guide/coverage) | Statements ≥ 25, Branches ≥ 18, Functions ≥ 18, Lines ≥ 25 (phase `W6`) |
+| Accessibility audit | [axe-core](https://github.com/dequelabs/axe-core) | Zero critical/serious (static + runtime browser audit) |
 | Performance budgets | [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) | Perf ≥ 85, A11y ≥ 90, SEO ≥ 90 |
 | HTML validation | [html-validate](https://html-validate.org/) | Zero errors |
 | Link checking | Custom script | All internal links valid |
 
+Coverage ratchet policy: W2 `12/8/8/12`, W4 `18/12/12/18`, W6 `25/18/18/25` (Statements/Branches/Functions/Lines).  
+Typecheck hint budget policy: W2 `<=20`, W4 `<=8`, W6 `=0`.
+
 ```bash
 npm run test              # Unit + integration tests (vitest)
+npm run test:report       # Vitest JSON report for measured totals
 npm run test:coverage     # Coverage report (V8)
 npm run test:a11y         # Accessibility audit (axe-core on all pages)
+npm run test:a11y:runtime # Runtime browser accessibility audit (Playwright + axe)
 npm run typecheck         # Astro + TypeScript type checks
+npm run typecheck:strict  # Typecheck with ratcheted hint budget (phase-aware)
 npm run validate          # HTML validation + internal link check
 npm run lighthouse        # Lighthouse CI performance budgets
-npm run test:ci           # All quality gates chained
+npm run verify:quality    # Artifact-backed metrics freshness contract
+npm run quality:delta     # Baseline regression delta enforcement
+npm run quality:summary   # Markdown quality summary generation
+npm run quality:local     # CI-parity local quality pipeline
+npm run test:ci           # Alias of quality:local
 ```
 
 ## Structure

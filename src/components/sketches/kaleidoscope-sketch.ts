@@ -1,5 +1,4 @@
 import type p5 from 'p5';
-import { PALETTE, getTextColor } from './palette';
 
 export default function kaleidoscopeSketch(p: p5, container: HTMLElement) {
   const symmetry = 8;
@@ -10,7 +9,7 @@ export default function kaleidoscopeSketch(p: p5, container: HTMLElement) {
     p.createCanvas(container.clientWidth, container.clientHeight);
     p.frameRate(30);
     const count = isMobile() ? 6 : 12;
-    shapes = Array.from({ length: count }, (_, i) => ({
+    shapes = Array.from({ length: count }, (_) => ({
       angle: (Math.random() * p.TWO_PI) / symmetry,
       dist: 20 + Math.random() * Math.min(p.width, p.height) * 0.3,
       size: 8 + Math.random() * 20,

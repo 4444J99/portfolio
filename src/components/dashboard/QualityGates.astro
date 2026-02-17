@@ -11,17 +11,26 @@ const sources = quality.sources ?? {
   tests: 'unavailable',
   coverage: 'unavailable',
   lighthouse: 'unavailable',
-  a11y: 'unavailable',
+  a11yStatic: 'unavailable',
+  a11yRuntime: 'unavailable',
   build: 'unavailable',
 };
 
 const perfValue = quality.lighthouse.performance === null ? 'n/a' : String(quality.lighthouse.performance);
 const a11yValue = quality.lighthouse.accessibility === null ? 'n/a' : String(quality.lighthouse.accessibility);
 const seoValue = quality.lighthouse.seo === null ? 'n/a' : String(quality.lighthouse.seo);
-const assertionsDetail = quality.tests.total === null ? 'Assertions: n/a' : `${quality.tests.total} assertions`;
-const a11yIssueCount = quality.a11y.critical !== null && quality.a11y.serious !== null
-  ? quality.a11y.critical + quality.a11y.serious
+const testsDetail = quality.tests.total === null ? 'Tests: n/a' : `${quality.tests.total} tests`;
+const staticA11yIssueCount = quality.a11y.static.critical !== null && quality.a11y.static.serious !== null
+  ? quality.a11y.static.critical + quality.a11y.static.serious
   : null;
+const runtimeA11yIssueCount = quality.a11y.runtime.critical !== null && quality.a11y.runtime.serious !== null
+  ? quality.a11y.runtime.critical + quality.a11y.runtime.serious
+  : null;
+const combinedA11yPages =
+  (quality.a11y.static.pagesAudited ?? 0) + (quality.a11y.runtime.pagesAudited ?? 0);
+const runtimeFocusDetail = quality.a11y.runtime.focusChecks === null
+  ? 'focus n/a'
+  : `${quality.a11y.runtime.focusChecks} focus checks`;
 ---
 
 <section class="section">
@@ -38,7 +47,7 @@ const a11yIssueCount = quality.a11y.critical !== null && quality.a11y.serious !=
         </div>
         <div class="quality-card__value">{quality.tests.files}</div>
         <div class="quality-card__label">Test Files</div>
-        <div class="quality-card__detail">{assertionsDetail}</div>
+        <div class="quality-card__detail">{testsDetail}</div>
       </div>
 
       <div class="quality-card">
@@ -47,14 +56,14 @@ const a11yIssueCount = quality.a11y.critical !== null && quality.a11y.serious !=
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </div>
-        <div class="quality-card__value">{quality.a11y.pagesAudited === null ? 'n/a' : quality.a11y.pagesAudited}</div>
-        <div class="quality-card__label">A11y Audited</div>
+        <div class="quality-card__value">{combinedA11yPages === 0 ? 'n/a' : combinedA11yPages}</div>
+        <div class="quality-card__label">A11y Audits</div>
         <div class="quality-card__detail">
-          {a11yIssueCount === null
-            ? 'No report data'
-            : a11yIssueCount === 0
-              ? 'Zero violations'
-              : `${a11yIssueCount} issues`}
+          Static {staticA11yIssueCount === null ? 'n/a' : staticA11yIssueCount}
+          {' · '}
+          Runtime {runtimeA11yIssueCount === null ? 'n/a' : runtimeA11yIssueCount}
+          {' · '}
+          {runtimeFocusDetail}
         </div>
       </div>
 
@@ -92,7 +101,7 @@ const a11yIssueCount = quality.a11y.critical !== null && quality.a11y.serious !=
 
     <p class="quality-timestamp">Last updated: {new Date(quality.generated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
     <p class="quality-sources">
-      Sources: tests ({sources.tests}) · coverage ({sources.coverage}) · lighthouse ({sources.lighthouse}) · a11y ({sources.a11y}) · build ({sources.build})
+      Sources: tests ({sources.tests}) · coverage ({sources.coverage}) · lighthouse ({sources.lighthouse}) · a11y static ({sources.a11yStatic}) · a11y runtime ({sources.a11yRuntime}) · build ({sources.build})
     </p>
   </div>
 </section>

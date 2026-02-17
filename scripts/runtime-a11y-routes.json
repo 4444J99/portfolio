@@ -1,0 +1,50 @@
+{
+  "basePath": "/portfolio",
+  "routes": [
+    {
+      "path": "/",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/about",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/resume",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/dashboard",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/essays",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/gallery",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle", "gallery-filter", "fullscreen"],
+      "requiredFocusSelectors": [".sketch-ctrl--pause", ".sketch-ctrl--fullscreen"]
+    },
+    {
+      "path": "/architecture",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/community",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/consult",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/products",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/recursive-engine",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    }
+  ]
+}

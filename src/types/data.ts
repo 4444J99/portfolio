@@ -100,13 +100,25 @@ export interface QualityMetrics {
   tests: { total: number | null; passed: number | null; files: number };
   coverage: { statements: number | null; branches: number | null; functions: number | null; lines: number | null };
   lighthouse: { performance: number | null; accessibility: number | null; bestPractices: number | null; seo: number | null };
-  a11y: { pagesAudited: number | null; critical: number | null; serious: number | null; status: string };
+  a11y: {
+    status: string;
+    static: { pagesAudited: number | null; critical: number | null; serious: number | null; status: string };
+    runtime: {
+      pagesAudited: number | null;
+      critical: number | null;
+      serious: number | null;
+      focusChecks: number | null;
+      focusFailures: number | null;
+      status: string;
+    };
+  };
   build: { pages: number; bundleFiles: number };
   sources: {
     tests: string;
     coverage: string;
     lighthouse: string;
-    a11y: string;
+    a11yStatic: string;
+    a11yRuntime: string;
     build: string;
   };
 }

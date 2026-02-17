@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE, getTextColor } from './palette';
+import { getTextColor } from './palette';
 
 export default function typewriterSketch(p: p5, container: HTMLElement) {
   const lines = [
@@ -61,9 +61,6 @@ export default function typewriterSketch(p: p5, container: HTMLElement) {
       currentLine = (currentLine + 1) % lines.length;
       charIndex = 0;
     }
-
-    // Layout lines from bottom up
-    const currentTypingY = startY + displayLines.length * lineHeight;
 
     // Draw completed lines
     displayLines.forEach((line, i) => {
