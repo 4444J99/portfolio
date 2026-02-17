@@ -54,7 +54,15 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
           ))}
         </div>
 
-        <div id="graph-container" class="graph-container" role="application" aria-label="Interactive force-directed dependency graph of ORGANVM repositories" tabindex="0">
+        <div
+          id="graph-container"
+          class="graph-container"
+          role="application"
+          aria-label="Interactive force-directed dependency graph of ORGANVM repositories"
+          tabindex="0"
+          data-graph={JSON.stringify(graphData)}
+          data-organ-colors={JSON.stringify(organColors)}
+        >
           <noscript>Dependency graph requires JavaScript to render.</noscript>
           <div class="graph-loading">Loading dependency graph...</div>
         </div>
@@ -87,11 +95,14 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
     </section>
 </Layout>
 
-<script define:vars={{ graphData, organColors }}>
+<script>
+  import * as d3 from 'd3';
+
   async function initGraph() {
-    const d3 = await import('d3');
     const container = document.getElementById('graph-container');
     if (!container) return;
+    const graphData = JSON.parse(container.dataset.graph || '{"nodes":[],"edges":[]}');
+    const organColors = JSON.parse(container.dataset.organColors || '{}');
 
     container.innerHTML = '';
 
