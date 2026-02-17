@@ -1,6 +1,16 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import BackToTop from '../components/BackToTop.astro';
+import BaseMeta from '../components/head/BaseMeta.astro';
+import FaviconLinks from '../components/head/FaviconLinks.astro';
+import SiteLinks from '../components/head/SiteLinks.astro';
+import SEOMeta from '../components/head/SEOMeta.astro';
+import SchemaOrg from '../components/head/SchemaOrg.astro';
+import FontFaces from '../components/head/FontFaces.astro';
+import SketchLifecycle from '../components/scripts/SketchLifecycle.astro';
+import ScrollReveal from '../components/scripts/ScrollReveal.astro';
+import ClientBootstrap from '../components/scripts/ClientBootstrap.astro';
+import ThemeRestore from '../components/scripts/ThemeRestore.astro';
 
 interface Props {
   title: string;
@@ -16,152 +26,18 @@ const {
   description = "Creative technologist building autonomous creative systems and treating governance as artistic medium.",
   ogImage = defaultOG
 } = Astro.props;
-
 const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').href;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#0a0a0b" />
-    <link rel="canonical" href={canonicalURL} />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
-    <link rel="icon" type="image/x-icon" href="/portfolio/favicon.ico" />
-
-    <!-- RSS Feed -->
-    <link rel="alternate" type="application/rss+xml" title="Portfolio Feed" href="/portfolio/feed.xml" />
-
-    <!-- PWA -->
-    <link rel="manifest" href="/portfolio/manifest.json" />
-
-    <!-- Identity verification -->
-    <link rel="me" href="https://github.com/4444j99" />
-
-    <!-- Analytics (Plausible — privacy-friendly, no cookies) -->
-    <script defer data-domain="4444j99.github.io" src="https://plausible.io/js/script.js" integrity="sha384-TDBMBYT3vz715r8UIyVTB4AUTXubXmLI02DeDWgyDahvCXmPV4Vgx2m6yQvI19d/" crossorigin="anonymous"></script>
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="Anthony James Padavano — Portfolio" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-
-    <!-- Schema.org JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "ProfilePage",
-      "mainEntity": {
-        "@type": "Person",
-        "name": "Anthony James Padavano",
-        "jobTitle": "Creative Technologist",
-        "url": canonicalBase,
-        "image": ogImage,
-        "description": description,
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "New York City",
-          "addressRegion": "NY",
-          "addressCountry": "US"
-        },
-        "sameAs": [
-          "https://www.linkedin.com/in/anthony-james-padavano-98a40a186/",
-          "https://github.com/4444j99",
-          "https://github.com/meta-organvm",
-          "https://github.com/organvm-i-theoria",
-          "https://github.com/organvm-ii-poiesis",
-          "https://github.com/organvm-iii-ergon",
-          "https://github.com/organvm-iv-taxis",
-          "https://github.com/organvm-v-logos",
-          "https://github.com/organvm-vi-koinonia",
-          "https://github.com/organvm-vii-kerygma"
-        ],
-        "alumniOf": [
-          {
-            "@type": "CollegeOrUniversity",
-            "name": "Florida Atlantic University",
-            "url": "https://www.fau.edu"
-          },
-          {
-            "@type": "CollegeOrUniversity",
-            "name": "CUNY College of Staten Island",
-            "url": "https://www.csi.cuny.edu"
-          }
-        ],
-        "knowsAbout": [
-          "Python", "TypeScript", "JavaScript", "Go", "Rust",
-          "systems architecture", "generative art", "multi-agent AI systems",
-          "LLM orchestration", "governance design", "digital marketing",
-          "creative technology", "audio synthesis", "interactive installations"
-        ],
-        "hasCredential": [
-          {
-            "@type": "EducationalOccupationalCredential",
-            "credentialCategory": "professional certification",
-            "name": "Full-Stack Developer",
-            "recognizedBy": { "@type": "Organization", "name": "Meta" }
-          },
-          {
-            "@type": "EducationalOccupationalCredential",
-            "credentialCategory": "professional certification",
-            "name": "UX Design",
-            "recognizedBy": { "@type": "Organization", "name": "Google" }
-          },
-          {
-            "@type": "EducationalOccupationalCredential",
-            "credentialCategory": "professional certification",
-            "name": "Digital Marketing & E-commerce",
-            "recognizedBy": { "@type": "Organization", "name": "Google" }
-          },
-          {
-            "@type": "EducationalOccupationalCredential",
-            "credentialCategory": "professional certification",
-            "name": "Project Management",
-            "recognizedBy": { "@type": "Organization", "name": "Google" }
-          }
-        ],
-        "memberOf": {
-          "@type": "Organization",
-          "name": "meta-organvm",
-          "url": "https://github.com/meta-organvm"
-        }
-      }
-    })} />
-
-    <!-- Self-hosted fonts (no external requests) -->
-    <link rel="preload" href="/portfolio/fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/portfolio/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <style>
-      @font-face {
-        font-family: 'Jost';
-        font-style: normal;
-        font-weight: 400 700;
-        font-display: swap;
-        src: url('/portfolio/fonts/jost-latin.woff2') format('woff2');
-      }
-      @font-face {
-        font-family: 'JetBrains Mono';
-        font-style: normal;
-        font-weight: 400 500;
-        font-display: swap;
-        src: url('/portfolio/fonts/jetbrains-mono-latin.woff2') format('woff2');
-      }
-    </style>
+    <BaseMeta description={description} canonicalURL={canonicalURL} />
+    <FaviconLinks />
+    <SiteLinks />
+    <SEOMeta title={title} description={description} canonicalURL={canonicalURL} ogImage={ogImage} />
+    <SchemaOrg description={description} ogImage={ogImage} />
+    <FontFaces />
     <ViewTransitions />
     <title>{title}</title>
   </head>
@@ -171,72 +47,10 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
     <slot />
     <BackToTop />
   </body>
-<script>
-  import { initSketches, teardownPage, reinitPage } from '../components/sketches/sketch-loader';
-
-  // Initial load
-  initSketches();
-
-  // View Transition lifecycle: preserve bg-canvas, reinit per-page sketches
-  document.addEventListener('astro:before-swap', () => teardownPage());
-  document.addEventListener('astro:page-load', () => reinitPage());
-</script>
-<script>
-  // Scroll-reveal observer — re-runs on each page navigation
-  function initReveal() {
-    const ro = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          ro.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
-    document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => ro.observe(el));
-  }
-
-  document.addEventListener('astro:page-load', initReveal);
-</script>
-<script>
-  // Service worker registration — runs once on initial load
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/portfolio/sw.js').catch(() => {});
-  }
-
-  // Focus management for View Transitions — move focus to main content
-  // after page swap so screen readers announce the new page
-  document.addEventListener('astro:after-swap', () => {
-    const main = document.getElementById('main-content');
-    if (main) {
-      main.setAttribute('tabindex', '-1');
-      main.focus({ preventScroll: true });
-    }
-  });
-</script>
-<script is:inline>
-  // Theme + mode restore — must be inline to avoid FOUC (runs before first paint)
-  (function() {
-    // Theme: 3-state (system/light/dark) with system as default
-    var pref = localStorage.getItem('theme-preference') || 'system';
-    var theme = pref === 'system'
-      ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
-      : pref;
-    document.documentElement.dataset.theme = theme;
-
-    // Update theme-color meta
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = theme === 'light' ? '#f5f5f0' : '#0a0a0b';
-
-    // S/B/E mode restore
-    var validModes = ['subtle', 'bold', 'extreme'];
-    var urlParam = new URLSearchParams(window.location.search).get('mode');
-    var initialMode = (urlParam && validModes.indexOf(urlParam) !== -1)
-      ? urlParam
-      : localStorage.getItem('bg-mode') || 'subtle';
-    document.body.dataset.bgMode = initialMode;
-    localStorage.setItem('bg-mode', initialMode);
-  })();
-</script>
+  <SketchLifecycle />
+  <ScrollReveal />
+  <ClientBootstrap />
+  <ThemeRestore />
 </html>
 
 <style is:global>

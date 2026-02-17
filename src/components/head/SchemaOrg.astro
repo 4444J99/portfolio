@@ -1,0 +1,24 @@
+---
+import { schemaPerson } from '../../data/schema-person';
+
+interface Props {
+  description: string;
+  ogImage: string;
+}
+
+const { description, ogImage } = Astro.props;
+const canonicalBase = 'https://4444j99.github.io/portfolio';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    ...schemaPerson,
+    "url": canonicalBase,
+    "image": ogImage,
+    "description": description
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

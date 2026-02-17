@@ -1,0 +1,16 @@
+<script>
+  // Service worker registration — runs once on initial load
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/portfolio/sw.js').catch(() => {});
+  }
+
+  // Focus management for View Transitions — move focus to main content
+  // after page swap so screen readers announce the new page
+  document.addEventListener('astro:after-swap', () => {
+    const main = document.getElementById('main-content');
+    if (main) {
+      main.setAttribute('tabindex', '-1');
+      main.focus({ preventScroll: true });
+    }
+  });
+</script>

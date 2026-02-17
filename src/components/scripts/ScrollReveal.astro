@@ -1,0 +1,16 @@
+<script>
+  // Scroll-reveal observer — re-runs on each page navigation
+  function initReveal() {
+    const ro = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          ro.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+    document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => ro.observe(el));
+  }
+
+  document.addEventListener('astro:page-load', initReveal);
+</script>
