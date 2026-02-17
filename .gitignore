@@ -38,3 +38,6 @@ resume/rendercv_output/
 
 # Lighthouse CI reports
 .lighthouseci/
+
+# Coverage output
+coverage/

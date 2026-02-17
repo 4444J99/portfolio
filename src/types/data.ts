@@ -94,3 +94,12 @@ export interface GraphData {
   nodes: GraphNode[];
   edges: GraphEdge[];
 }
+
+export interface QualityMetrics {
+  generated: string;
+  tests: { total: number; passed: number; files: number };
+  coverage: { statements: number; branches: number; functions: number; lines: number };
+  lighthouse: { performance: number; accessibility: number; bestPractices: number; seo: number };
+  a11y: { pagesAudited: number; critical: number; serious: number; status: string };
+  build: { pages: number; bundleFiles: number };
+}

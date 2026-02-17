@@ -5,10 +5,13 @@ import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import ChartContainer from '../components/charts/ChartContainer.astro';
 
-import type { SystemMetrics, Organ, Sprint, PraxisTarget, FlagshipRepo } from '../types/data';
+import type { SystemMetrics, Organ, Sprint, PraxisTarget, FlagshipRepo, QualityMetrics } from '../types/data';
 import metrics from '../data/system-metrics.json';
 import graphData from '../data/graph.json';
+import qualityData from '../data/quality-metrics.json';
 import { organColors } from '../data/organ-colors';
+
+const quality = qualityData as QualityMetrics;
 
 const typedMetrics = metrics as SystemMetrics;
 
@@ -98,6 +101,70 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
             ))}
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section__heading">Quality Gates</h2>
+        <p class="quality-intro">Automated quality infrastructure running on every push — tests, accessibility audits, performance budgets, and HTML validation.</p>
+
+        <div class="quality-grid">
+          <div class="quality-card">
+            <div class="quality-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+              </svg>
+            </div>
+            <div class="quality-card__value">{quality.tests.files}</div>
+            <div class="quality-card__label">Test Files</div>
+            <div class="quality-card__detail">{quality.tests.total} assertions</div>
+          </div>
+
+          <div class="quality-card">
+            <div class="quality-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div class="quality-card__value">{quality.a11y.pagesAudited}</div>
+            <div class="quality-card__label">A11y Audited</div>
+            <div class="quality-card__detail">{quality.a11y.critical + quality.a11y.serious === 0 ? 'Zero violations' : `${quality.a11y.critical + quality.a11y.serious} issues`}</div>
+          </div>
+
+          <div class="quality-card">
+            <div class="quality-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <div class="quality-card__value">{quality.lighthouse.performance}</div>
+            <div class="quality-card__label">Lighthouse Perf</div>
+            <div class="quality-card__detail">A11y {quality.lighthouse.accessibility} · SEO {quality.lighthouse.seo}</div>
+          </div>
+
+          <div class="quality-card">
+            <div class="quality-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <div class="quality-card__value">{quality.build.pages}</div>
+            <div class="quality-card__label">HTML Pages</div>
+            <div class="quality-card__detail">Validated & link-checked</div>
+          </div>
+        </div>
+
+        <div class="quality-badges">
+          <img src={`${import.meta.env.BASE_URL}badges/tests.svg`} alt={`Tests: ${quality.tests.files} files`} width="90" height="20" />
+          <img src={`${import.meta.env.BASE_URL}badges/a11y.svg`} alt={`Accessibility: ${quality.a11y.status}`} width="80" height="20" />
+          <img src={`${import.meta.env.BASE_URL}badges/lighthouse-perf.svg`} alt={`Performance: ${quality.lighthouse.performance}`} width="120" height="20" />
+          <img src={`${import.meta.env.BASE_URL}badges/lighthouse-a11y.svg`} alt={`Accessibility: ${quality.lighthouse.accessibility}`} width="120" height="20" />
+          <img src={`${import.meta.env.BASE_URL}badges/lighthouse-seo.svg`} alt={`SEO: ${quality.lighthouse.seo}`} width="80" height="20" />
+          <img src={`${import.meta.env.BASE_URL}badges/pages.svg`} alt={`Pages: ${quality.build.pages}`} width="80" height="20" />
+        </div>
+
+        <p class="quality-timestamp">Last updated: {new Date(quality.generated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
       </div>
     </section>
 
@@ -464,6 +531,77 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
     color: var(--text-muted);
   }
 
+  .quality-intro {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+    max-width: 55ch;
+  }
+
+  .quality-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .quality-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: border-color var(--transition-fast);
+  }
+
+  .quality-card:hover {
+    border-color: var(--border-hover);
+  }
+
+  .quality-card__icon {
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .quality-card__value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .quality-card__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-top: var(--space-xs);
+  }
+
+  .quality-card__detail {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: var(--space-xs);
+  }
+
+  .quality-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .quality-badges img {
+    height: 20px;
+  }
+
+  .quality-timestamp {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
   .chart-pair {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -476,6 +614,9 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
     }
     .organ-grid {
       grid-template-columns: 1fr;
+    }
+    .quality-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
     .targets-grid {
       grid-template-columns: repeat(2, 1fr);
