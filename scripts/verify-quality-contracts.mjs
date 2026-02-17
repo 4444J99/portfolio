@@ -94,6 +94,31 @@ const greenRuns = readJson(paths.greenRuns);
 const perfSummary = readJson(paths.perfSummary);
 const perfBudget = readJson(paths.perfBudget);
 
+const requiredSourceKeys = [
+  'tests',
+  'security',
+  'securityProd',
+  'securityGithub',
+  'securityDrift',
+  'coverage',
+  'lighthouse',
+  'a11yStatic',
+  'a11yRuntime',
+  'runtimeCoverage',
+  'e2eSmoke',
+  'runtimeErrors',
+  'greenRuns',
+  'ledger',
+  'policyGovernance',
+  'performance',
+  'build',
+];
+for (const key of requiredSourceKeys) {
+  if (typeof metrics.sources?.[key] !== 'string') {
+    fail(`metrics.sources.${key} missing or not string`);
+  }
+}
+
 if (metrics.tests.total !== vitestReport.numTotalTests) {
   fail(`tests.total mismatch: metrics=${metrics.tests.total}, report=${vitestReport.numTotalTests}`);
 }
