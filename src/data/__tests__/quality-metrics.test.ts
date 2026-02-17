@@ -34,9 +34,12 @@ describe('quality-metrics.json', () => {
     expect(typeof quality.performance.routeBudgetsStatus).toBe('string');
     expect(typeof quality.performance.chunkBudgetsStatus).toBe('string');
     expect(typeof quality.performance.interactionBudgetsStatus).toBe('string');
-    expect(quality.performance.routeBudgetCheckpoint === null || typeof quality.performance.routeBudgetCheckpoint.date === 'string').toBe(true);
-    expect(quality.performance.chunkBudgetCheckpoint === null || typeof quality.performance.chunkBudgetCheckpoint.date === 'string').toBe(true);
-    expect(quality.performance.interactionBudgetCheckpoint === null || typeof quality.performance.interactionBudgetCheckpoint.date === 'string').toBe(true);
+    const routeCheckpoint = quality.performance.routeBudgetCheckpoint as { date?: unknown } | null;
+    const chunkCheckpoint = quality.performance.chunkBudgetCheckpoint as { date?: unknown } | null;
+    const interactionCheckpoint = quality.performance.interactionBudgetCheckpoint as { date?: unknown } | null;
+    expect(routeCheckpoint === null || typeof routeCheckpoint.date === 'string').toBe(true);
+    expect(chunkCheckpoint === null || typeof chunkCheckpoint.date === 'string').toBe(true);
+    expect(interactionCheckpoint === null || typeof interactionCheckpoint.date === 'string').toBe(true);
     expect(Array.isArray(quality.performance.largestChunks)).toBe(true);
     expect(typeof quality.performance.interactiveRouteJsTotals).toBe('object');
     expect(typeof quality.performance.routeJsTotals).toBe('object');
