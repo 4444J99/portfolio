@@ -24,6 +24,9 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Security gate
+        run: npm run test:security
+
       - name: Quality parity pipeline
         run: npm run quality:local
 

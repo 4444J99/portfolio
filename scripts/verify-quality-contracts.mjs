@@ -6,9 +6,14 @@ import { join, resolve } from 'node:path';
 const paths = {
   metrics: resolve('src/data/quality-metrics.json'),
   vitest: resolve('.quality/vitest-report.json'),
+  security: resolve('.quality/security-summary.json'),
   coverage: resolve('coverage/coverage-summary.json'),
   staticA11y: resolve('.a11y/a11y-summary.json'),
   runtimeA11y: resolve('.a11y/runtime-summary.json'),
+  runtimeCoverage: resolve('.quality/runtime-coverage-summary.json'),
+  e2eSmoke: resolve('.quality/e2e-smoke-summary.json'),
+  perfSummary: resolve('.quality/perf-summary.json'),
+  perfBudget: resolve('.quality/perf-budget-summary.json'),
   lighthouseDir: resolve('.lighthouseci'),
   dist: resolve('dist'),
 };
@@ -55,9 +60,14 @@ function toNullableNumber(value) {
 
 if (!existsSync(paths.metrics)) fail(`Missing metrics file: ${paths.metrics}`);
 if (!existsSync(paths.vitest)) fail(`Missing Vitest report: ${paths.vitest}`);
+if (!existsSync(paths.security)) fail(`Missing security summary: ${paths.security}`);
 if (!existsSync(paths.coverage)) fail(`Missing coverage summary: ${paths.coverage}`);
 if (!existsSync(paths.staticA11y)) fail(`Missing static a11y summary: ${paths.staticA11y}`);
 if (!existsSync(paths.runtimeA11y)) fail(`Missing runtime a11y summary: ${paths.runtimeA11y}`);
+if (!existsSync(paths.runtimeCoverage)) fail(`Missing runtime coverage summary: ${paths.runtimeCoverage}`);
+if (!existsSync(paths.e2eSmoke)) fail(`Missing e2e smoke summary: ${paths.e2eSmoke}`);
+if (!existsSync(paths.perfSummary)) fail(`Missing performance summary: ${paths.perfSummary}`);
+if (!existsSync(paths.perfBudget)) fail(`Missing performance budget summary: ${paths.perfBudget}`);
 if (!existsSync(paths.lighthouseDir)) fail(`Missing Lighthouse report directory: ${paths.lighthouseDir}`);
 if (!existsSync(paths.dist)) fail(`Missing build output: ${paths.dist}`);
 
@@ -69,15 +79,35 @@ if (errors.length) {
 
 const metrics = readJson(paths.metrics);
 const vitestReport = readJson(paths.vitest);
+const securitySummary = readJson(paths.security);
 const coverage = readJson(paths.coverage);
 const staticA11y = readJson(paths.staticA11y);
 const runtimeA11y = readJson(paths.runtimeA11y);
+const runtimeCoverage = readJson(paths.runtimeCoverage);
+const e2eSmoke = readJson(paths.e2eSmoke);
+const perfSummary = readJson(paths.perfSummary);
+const perfBudget = readJson(paths.perfBudget);
 
 if (metrics.tests.total !== vitestReport.numTotalTests) {
   fail(`tests.total mismatch: metrics=${metrics.tests.total}, report=${vitestReport.numTotalTests}`);
 }
 if (metrics.tests.passed !== vitestReport.numPassedTests) {
   fail(`tests.passed mismatch: metrics=${metrics.tests.passed}, report=${vitestReport.numPassedTests}`);
+}
+
+const securityCounts = securitySummary?.unsuppressed?.counts ?? {};
+const securityPairs = [
+  ['critical', toNullableNumber(securityCounts.critical)],
+  ['high', toNullableNumber(securityCounts.high)],
+  ['moderate', toNullableNumber(securityCounts.moderate)],
+  ['low', toNullableNumber(securityCounts.low)],
+  ['total', toNullableNumber(securityCounts.total)],
+  ['status', securitySummary.status],
+];
+for (const [field, expected] of securityPairs) {
+  if (metrics.security[field] !== expected) {
+    fail(`security.${field} mismatch: metrics=${metrics.security[field]}, summary=${expected}`);
+  }
 }
 
 const coveragePairs = [
@@ -111,12 +141,40 @@ const runtimePairs = [
   ['serious', toNullableNumber(runtimeA11y.serious)],
   ['focusChecks', toNullableNumber(runtimeA11y.focusChecks)],
   ['focusFailures', toNullableNumber(runtimeA11y.focusFailures)],
+  ['routesCovered', toNullableNumber(runtimeCoverage.routesCovered)],
+  ['totalRoutes', toNullableNumber(runtimeCoverage.totalRoutes)],
+  ['coveragePct', toNullableNumber(runtimeCoverage.coveragePct)],
   ['status', runtimeA11y.status],
 ];
 for (const [field, expected] of runtimePairs) {
   if (metrics.a11y.runtime[field] !== expected) {
     fail(`a11y.runtime.${field} mismatch: metrics=${metrics.a11y.runtime[field]}, summary=${expected}`);
   }
+}
+
+if (e2eSmoke.status !== 'pass') {
+  fail(`e2e smoke status is ${e2eSmoke.status}`);
+}
+if ((e2eSmoke.unexpected ?? 0) > 0) {
+  fail(`e2e smoke unexpected failures detected: ${e2eSmoke.unexpected}`);
+}
+if ((e2eSmoke.flaky ?? 0) > 0) {
+  fail(`e2e smoke flaky tests detected: ${e2eSmoke.flaky}`);
+}
+
+if (metrics.performance.routeBudgetsStatus !== perfBudget.status) {
+  fail(`performance.routeBudgetsStatus mismatch: metrics=${metrics.performance.routeBudgetsStatus}, summary=${perfBudget.status}`);
+}
+
+const expectedLargestChunks = Array.isArray(perfSummary.largestChunks)
+  ? perfSummary.largestChunks.slice(0, 10).map((chunk) => ({ chunk: chunk.chunk, gzipBytes: chunk.gzipBytes }))
+  : [];
+if (JSON.stringify(metrics.performance.largestChunks) !== JSON.stringify(expectedLargestChunks)) {
+  fail('performance.largestChunks mismatch with perf summary');
+}
+
+if (JSON.stringify(metrics.performance.routeJsTotals) !== JSON.stringify(perfSummary.routeJsTotals ?? {})) {
+  fail('performance.routeJsTotals mismatch with perf summary');
 }
 
 const lhrFiles = readdirSync(paths.lighthouseDir).filter((name) => name.startsWith('lhr-') && name.endsWith('.json'));
@@ -164,9 +222,14 @@ if (metrics.build.bundleFiles !== bundleCount) {
 
 const sourceTimes = [
   paths.vitest,
+  paths.security,
   paths.coverage,
   paths.staticA11y,
   paths.runtimeA11y,
+  paths.runtimeCoverage,
+  paths.e2eSmoke,
+  paths.perfSummary,
+  paths.perfBudget,
   ...lhrFiles.map((file) => join(paths.lighthouseDir, file)),
 ].map((path) => statSync(path).mtimeMs);
 const latestSourceMtime = Math.max(...sourceTimes);

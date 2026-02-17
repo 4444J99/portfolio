@@ -62,6 +62,7 @@ export default defineConfig({
       include: ['src/**/*.ts'],
       exclude: [
         'src/**/__tests__/**',
+        'src/e2e/**',
         'src/**/*.astro',
         'src/components/sketches/*-sketch.ts',
         'src/env.d.ts',

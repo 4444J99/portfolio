@@ -48,3 +48,8 @@ coverage/
 # Quality artifacts
 .quality/*
 !.quality/ratchet-policy.json
+!.quality/security-allowlist.json
+
+# Playwright artifacts
+test-results/
+playwright-report/

@@ -7,12 +7,31 @@ interface Props {
 }
 
 const { quality, base } = Astro.props;
+const security = quality.security ?? {
+  critical: null,
+  high: null,
+  moderate: null,
+  low: null,
+  total: null,
+  status: 'unknown',
+  source: null,
+};
+const performance = quality.performance ?? {
+  routeBudgetsStatus: 'unknown',
+  largestChunks: [],
+  routeJsTotals: {},
+  source: null,
+};
 const sources = quality.sources ?? {
   tests: 'unavailable',
+  security: 'unavailable',
   coverage: 'unavailable',
   lighthouse: 'unavailable',
   a11yStatic: 'unavailable',
   a11yRuntime: 'unavailable',
+  runtimeCoverage: 'unavailable',
+  e2eSmoke: 'unavailable',
+  performance: 'unavailable',
   build: 'unavailable',
 };
 
@@ -31,6 +50,13 @@ const combinedA11yPages =
 const runtimeFocusDetail = quality.a11y.runtime.focusChecks === null
   ? 'focus n/a'
   : `${quality.a11y.runtime.focusChecks} focus checks`;
+const runtimeCoverageDetail = quality.a11y.runtime.coveragePct === null
+  ? 'coverage n/a'
+  : `${quality.a11y.runtime.coveragePct}% route coverage`;
+const securityDetail = security.total === null
+  ? 'critical n/a · high n/a'
+  : `critical ${security.critical ?? 0} · high ${security.high ?? 0}`;
+const perfBudgetDetail = performance.routeBudgetsStatus;
 ---
 
 <section class="section">
@@ -53,6 +79,17 @@ const runtimeFocusDetail = quality.a11y.runtime.focusChecks === null
       <div class="quality-card">
         <div class="quality-card__icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16v16H4z"/><path d="M8 12h8"/><path d="M8 8h8"/><path d="M8 16h5"/>
+          </svg>
+        </div>
+        <div class="quality-card__value">{security.status.toUpperCase()}</div>
+        <div class="quality-card__label">Security Audit</div>
+        <div class="quality-card__detail">{securityDetail}</div>
+      </div>
+
+      <div class="quality-card">
+        <div class="quality-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </div>
@@ -63,7 +100,7 @@ const runtimeFocusDetail = quality.a11y.runtime.focusChecks === null
           {' · '}
           Runtime {runtimeA11yIssueCount === null ? 'n/a' : runtimeA11yIssueCount}
           {' · '}
-          {runtimeFocusDetail}
+          {runtimeFocusDetail} {' · '} {runtimeCoverageDetail}
         </div>
       </div>
 
@@ -81,6 +118,17 @@ const runtimeFocusDetail = quality.a11y.runtime.focusChecks === null
       <div class="quality-card">
         <div class="quality-card__icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 3h18v4H3z"/><path d="M7 7v14"/><path d="M17 7v14"/><path d="M3 21h18"/>
+          </svg>
+        </div>
+        <div class="quality-card__value">{perfBudgetDetail.toUpperCase()}</div>
+        <div class="quality-card__label">Perf Budgets</div>
+        <div class="quality-card__detail">Route JS gzip caps enforced</div>
+      </div>
+
+      <div class="quality-card">
+        <div class="quality-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
           </svg>
         </div>
@@ -92,16 +140,18 @@ const runtimeFocusDetail = quality.a11y.runtime.focusChecks === null
 
     <div class="quality-badges">
       <img src={`${base}badges/tests.svg`} alt={`Tests: ${quality.tests.files} files`} width="90" height="20" />
+      <img src={`${base}badges/security.svg`} alt={`Security: ${security.status}`} width="95" height="20" />
       <img src={`${base}badges/a11y.svg`} alt={`Accessibility: ${quality.a11y.status}`} width="80" height="20" />
       <img src={`${base}badges/lighthouse-perf.svg`} alt={`Performance: ${perfValue}`} width="120" height="20" />
       <img src={`${base}badges/lighthouse-a11y.svg`} alt={`Accessibility: ${a11yValue}`} width="120" height="20" />
       <img src={`${base}badges/lighthouse-seo.svg`} alt={`SEO: ${seoValue}`} width="80" height="20" />
+      <img src={`${base}badges/perf-budgets.svg`} alt={`Perf budgets: ${perfBudgetDetail}`} width="120" height="20" />
       <img src={`${base}badges/pages.svg`} alt={`Pages: ${quality.build.pages}`} width="80" height="20" />
     </div>
 
     <p class="quality-timestamp">Last updated: {new Date(quality.generated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
     <p class="quality-sources">
-      Sources: tests ({sources.tests}) · coverage ({sources.coverage}) · lighthouse ({sources.lighthouse}) · a11y static ({sources.a11yStatic}) · a11y runtime ({sources.a11yRuntime}) · build ({sources.build})
+      Sources: tests ({sources.tests}) · security ({sources.security}) · coverage ({sources.coverage}) · lighthouse ({sources.lighthouse}) · a11y static ({sources.a11yStatic}) · a11y runtime ({sources.a11yRuntime}) · runtime coverage ({sources.runtimeCoverage}) · e2e smoke ({sources.e2eSmoke}) · performance ({sources.performance}) · build ({sources.build})
     </p>
   </div>
 </section>
@@ -116,7 +166,7 @@ const runtimeFocusDetail = quality.a11y.runtime.focusChecks === null
 
   .quality-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-md);
     margin-bottom: var(--space-xl);
   }
@@ -185,7 +235,7 @@ const runtimeFocusDetail = quality.a11y.runtime.focusChecks === null
 
   @media (max-width: 768px) {
     .quality-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
     }
   }
 </style>

@@ -25,9 +25,13 @@ Every push runs automated quality gates via [GitHub Actions](.github/workflows/q
 
 | Gate | Tool | Threshold |
 |------|------|-----------|
+| Security audit | `npm audit` (contract script) | Unsuppressed Critical = 0, High = 0 |
 | Unit & integration tests | [Vitest](https://vitest.dev/) | All pass |
 | Coverage floor (ratcheted) | [Vitest Coverage](https://vitest.dev/guide/coverage) | Statements ≥ 25, Branches ≥ 18, Functions ≥ 18, Lines ≥ 25 (phase `W6`) |
 | Accessibility audit | [axe-core](https://github.com/dequelabs/axe-core) | Zero critical/serious (static + runtime browser audit) |
+| Runtime a11y coverage | Custom script | Runtime audited routes ≥ 75% of emitted HTML routes |
+| E2E navigation smoke | [Playwright](https://playwright.dev/) | Zero unexpected failures, zero flaky tests |
+| Route JS budget gate | Custom script | Route-level gzip JS budgets enforced |
 | Performance budgets | [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) | Perf ≥ 85, A11y ≥ 90, SEO ≥ 90 |
 | HTML validation | [html-validate](https://html-validate.org/) | Zero errors |
 | Link checking | Custom script | All internal links valid |
@@ -39,11 +43,16 @@ Typecheck hint budget policy: W2 `<=20`, W4 `<=8`, W6 `=0`.
 npm run test              # Unit + integration tests (vitest)
 npm run test:report       # Vitest JSON report for measured totals
 npm run test:coverage     # Coverage report (V8)
+npm run test:security     # Security audit gate (npm audit + allowlist contract)
 npm run test:a11y         # Accessibility audit (axe-core on all pages)
 npm run test:a11y:runtime # Runtime browser accessibility audit (Playwright + axe)
+npm run test:a11y:coverage # Runtime a11y route coverage gate
+npm run test:e2e:smoke    # Playwright navigation/lifecycle smoke suite
 npm run typecheck         # Astro + TypeScript type checks
 npm run typecheck:strict  # Typecheck with ratcheted hint budget (phase-aware)
 npm run validate          # HTML validation + internal link check
+npm run collect:perf      # Collect route/chunk performance metrics
+npm run test:perf:budgets # Enforce route-level gzip JS budgets
 npm run lighthouse        # Lighthouse CI performance budgets
 npm run verify:quality    # Artifact-backed metrics freshness contract
 npm run quality:delta     # Baseline regression delta enforcement

@@ -74,11 +74,17 @@ lines.push('');
 lines.push('## Gate Snapshot');
 lines.push('');
 lines.push(`- Typecheck: ${typecheckSummary?.status ?? 'unknown'} (hints ${typecheckSummary?.hints ?? 'n/a'} / budget ${hintTarget ?? 'n/a'})`);
+lines.push(`- Security: ${current?.security?.status ?? 'n/a'} (critical ${current?.security?.critical ?? 'n/a'}, high ${current?.security?.high ?? 'n/a'})`);
 lines.push(`- Coverage: statements ${current?.coverage?.statements ?? 'n/a'}, branches ${current?.coverage?.branches ?? 'n/a'}, functions ${current?.coverage?.functions ?? 'n/a'}, lines ${current?.coverage?.lines ?? 'n/a'}`);
 if (coverageTarget) {
   lines.push(`- Coverage targets (${phase}): ${coverageTarget.statements}/${coverageTarget.branches}/${coverageTarget.functions}/${coverageTarget.lines}`);
 }
 lines.push(`- Accessibility: static ${current?.a11y?.static?.status ?? 'n/a'}, runtime ${current?.a11y?.runtime?.status ?? 'n/a'}, overall ${current?.a11y?.status ?? 'n/a'}`);
+lines.push(
+  `- Runtime route coverage: ${current?.a11y?.runtime?.routesCovered ?? 'n/a'}/${current?.a11y?.runtime?.totalRoutes ?? 'n/a'} (${current?.a11y?.runtime?.coveragePct ?? 'n/a'}%)`
+);
+lines.push(`- E2E smoke: ${current?.sources?.e2eSmoke ?? 'n/a'}`);
+lines.push(`- Perf budgets: ${current?.performance?.routeBudgetsStatus ?? 'n/a'}`);
 lines.push(`- Lighthouse: perf ${current?.lighthouse?.performance ?? 'n/a'}, a11y ${current?.lighthouse?.accessibility ?? 'n/a'}, bp ${current?.lighthouse?.bestPractices ?? 'n/a'}, seo ${current?.lighthouse?.seo ?? 'n/a'}`);
 lines.push('');
 lines.push('## Deltas vs Baseline');
@@ -89,10 +95,13 @@ lines.push(metricRow('Coverage statements', current?.coverage?.statements, basel
 lines.push(metricRow('Coverage branches', current?.coverage?.branches, baseline?.coverage?.branches));
 lines.push(metricRow('Coverage functions', current?.coverage?.functions, baseline?.coverage?.functions));
 lines.push(metricRow('Coverage lines', current?.coverage?.lines, baseline?.coverage?.lines));
+lines.push(metricRow('Security critical', current?.security?.critical, baseline?.security?.critical));
+lines.push(metricRow('Security high', current?.security?.high, baseline?.security?.high));
 lines.push(metricRow('LH performance', current?.lighthouse?.performance, baseline?.lighthouse?.performance));
 lines.push(metricRow('LH accessibility', current?.lighthouse?.accessibility, baseline?.lighthouse?.accessibility));
 lines.push(metricRow('LH best practices', current?.lighthouse?.bestPractices, baseline?.lighthouse?.bestPractices));
 lines.push(metricRow('LH SEO', current?.lighthouse?.seo, baseline?.lighthouse?.seo));
+lines.push(metricRow('Runtime coverage %', current?.a11y?.runtime?.coveragePct, baseline?.a11y?.runtime?.coveragePct));
 lines.push(metricRow('A11y critical total', (current?.a11y?.static?.critical ?? 0) + (current?.a11y?.runtime?.critical ?? 0), (baseline?.a11y?.static?.critical ?? 0) + (baseline?.a11y?.runtime?.critical ?? 0)));
 lines.push(metricRow('A11y serious total', (current?.a11y?.static?.serious ?? 0) + (current?.a11y?.runtime?.serious ?? 0), (baseline?.a11y?.static?.serious ?? 0) + (baseline?.a11y?.runtime?.serious ?? 0)));
 lines.push('');

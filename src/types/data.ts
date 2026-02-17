@@ -98,6 +98,15 @@ export interface GraphData {
 export interface QualityMetrics {
   generated: string;
   tests: { total: number | null; passed: number | null; files: number };
+  security: {
+    critical: number | null;
+    high: number | null;
+    moderate: number | null;
+    low: number | null;
+    total: number | null;
+    status: string;
+    source: string | null;
+  };
   coverage: { statements: number | null; branches: number | null; functions: number | null; lines: number | null };
   lighthouse: { performance: number | null; accessibility: number | null; bestPractices: number | null; seo: number | null };
   a11y: {
@@ -109,16 +118,29 @@ export interface QualityMetrics {
       serious: number | null;
       focusChecks: number | null;
       focusFailures: number | null;
+      routesCovered: number | null;
+      totalRoutes: number | null;
+      coveragePct: number | null;
       status: string;
     };
+  };
+  performance: {
+    routeBudgetsStatus: string;
+    largestChunks: Array<{ chunk: string; gzipBytes: number }>;
+    routeJsTotals: Record<string, { rawBytes: number; gzipBytes: number; assetCount: number; assets: string[] }>;
+    source: string | null;
   };
   build: { pages: number; bundleFiles: number };
   sources: {
     tests: string;
+    security: string;
     coverage: string;
     lighthouse: string;
     a11yStatic: string;
     a11yRuntime: string;
+    runtimeCoverage: string;
+    e2eSmoke: string;
+    performance: string;
     build: string;
   };
 }

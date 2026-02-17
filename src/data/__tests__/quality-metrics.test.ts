@@ -18,14 +18,28 @@ describe('quality-metrics.json', () => {
     expect(typeof quality.a11y.status).toBe('string');
     expect(typeof quality.a11y.static.status).toBe('string');
     expect(typeof quality.a11y.runtime.status).toBe('string');
+    expect(typeof quality.a11y.runtime.routesCovered === 'number' || quality.a11y.runtime.routesCovered === null).toBe(true);
+    expect(typeof quality.a11y.runtime.totalRoutes === 'number' || quality.a11y.runtime.totalRoutes === null).toBe(true);
+    expect(typeof quality.a11y.runtime.coveragePct === 'number' || quality.a11y.runtime.coveragePct === null).toBe(true);
+  });
+
+  it('includes security and performance measured fields', () => {
+    expect(typeof quality.security.status).toBe('string');
+    expect(typeof quality.performance.routeBudgetsStatus).toBe('string');
+    expect(Array.isArray(quality.performance.largestChunks)).toBe(true);
+    expect(typeof quality.performance.routeJsTotals).toBe('object');
   });
 
   it('includes provenance strings for every metric family', () => {
     expect(typeof quality.sources.tests).toBe('string');
+    expect(typeof quality.sources.security).toBe('string');
     expect(typeof quality.sources.coverage).toBe('string');
     expect(typeof quality.sources.lighthouse).toBe('string');
     expect(typeof quality.sources.a11yStatic).toBe('string');
     expect(typeof quality.sources.a11yRuntime).toBe('string');
+    expect(typeof quality.sources.runtimeCoverage).toBe('string');
+    expect(typeof quality.sources.e2eSmoke).toBe('string');
+    expect(typeof quality.sources.performance).toBe('string');
     expect(typeof quality.sources.build).toBe('string');
   });
 });

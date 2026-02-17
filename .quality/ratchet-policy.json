@@ -49,6 +49,10 @@
       "bestPractices": 3,
       "seo": 3
     },
+    "securityMaxIncrease": {
+      "critical": 0,
+      "high": 0
+    },
     "a11y": {
       "maxCriticalIncrease": 0,
       "maxSeriousIncrease": 0

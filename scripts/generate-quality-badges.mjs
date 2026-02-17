@@ -5,10 +5,15 @@
  *
  * Reads from measured artifacts when available:
  *   - .quality/vitest-report.json
+ *   - .quality/security-summary.json
  *   - coverage/coverage-summary.json
  *   - .lighthouseci/lhr-*.json
  *   - .a11y/a11y-summary.json (static)
  *   - .a11y/runtime-summary.json (runtime)
+ *   - .quality/runtime-coverage-summary.json
+ *   - .quality/e2e-smoke-summary.json
+ *   - .quality/perf-summary.json
+ *   - .quality/perf-budget-summary.json
  *   - dist/
  *
  * Writes:
@@ -92,6 +97,7 @@ function toNumberOrNull(value) {
 const metrics = {
   generated: new Date().toISOString(),
   tests: { total: null, passed: null, files: 0 },
+  security: { critical: null, high: null, moderate: null, low: null, total: null, status: 'unknown', source: null },
   coverage: { statements: null, branches: null, functions: null, lines: null },
   lighthouse: { performance: null, accessibility: null, bestPractices: null, seo: null },
   a11y: {
@@ -103,16 +109,24 @@ const metrics = {
       serious: null,
       focusChecks: null,
       focusFailures: null,
+      routesCovered: null,
+      totalRoutes: null,
+      coveragePct: null,
       status: 'unknown',
     },
   },
+  performance: { routeBudgetsStatus: 'unknown', largestChunks: [], routeJsTotals: {}, source: null },
   build: { pages: 0, bundleFiles: 0 },
   sources: {
     tests: '.quality/vitest-report.json',
+    security: '.quality/security-summary.json',
     coverage: 'coverage/coverage-summary.json',
     lighthouse: '.lighthouseci/lhr-*.json',
     a11yStatic: '.a11y/a11y-summary.json',
     a11yRuntime: '.a11y/runtime-summary.json',
+    runtimeCoverage: '.quality/runtime-coverage-summary.json',
+    e2eSmoke: '.quality/e2e-smoke-summary.json',
+    performance: '.quality/perf-summary.json + .quality/perf-budget-summary.json',
     build: 'dist/**/*.html and dist/_astro/**/*',
   },
 };
@@ -127,6 +141,23 @@ if (existsSync(vitestReportPath)) {
     metrics.tests.passed = toNumberOrNull(report.numPassedTests);
   } catch {
     // keep nulls
+  }
+}
+
+const securitySummaryPath = resolve('.quality/security-summary.json');
+if (existsSync(securitySummaryPath)) {
+  try {
+    const security = JSON.parse(readFileSync(securitySummaryPath, 'utf-8'));
+    const counts = security?.unsuppressed?.counts ?? {};
+    metrics.security.critical = toNumberOrNull(counts.critical);
+    metrics.security.high = toNumberOrNull(counts.high);
+    metrics.security.moderate = toNumberOrNull(counts.moderate);
+    metrics.security.low = toNumberOrNull(counts.low);
+    metrics.security.total = toNumberOrNull(counts.total);
+    metrics.security.status = typeof security.status === 'string' ? security.status : 'unknown';
+    metrics.security.source = metrics.sources.security;
+  } catch {
+    // keep defaults
   }
 }
 
@@ -198,6 +229,45 @@ if (existsSync(runtimeA11yPath)) {
   }
 }
 
+const runtimeCoveragePath = resolve('.quality/runtime-coverage-summary.json');
+if (existsSync(runtimeCoveragePath)) {
+  try {
+    const runtimeCoverage = JSON.parse(readFileSync(runtimeCoveragePath, 'utf-8'));
+    metrics.a11y.runtime.routesCovered = toNumberOrNull(runtimeCoverage.routesCovered);
+    metrics.a11y.runtime.totalRoutes = toNumberOrNull(runtimeCoverage.totalRoutes);
+    metrics.a11y.runtime.coveragePct = toNumberOrNull(runtimeCoverage.coveragePct);
+  } catch {
+    // keep defaults
+  }
+}
+
+const perfSummaryPath = resolve('.quality/perf-summary.json');
+if (existsSync(perfSummaryPath)) {
+  try {
+    const perfSummary = JSON.parse(readFileSync(perfSummaryPath, 'utf-8'));
+    metrics.performance.largestChunks = Array.isArray(perfSummary.largestChunks)
+      ? perfSummary.largestChunks.slice(0, 10).map((chunk) => ({
+        chunk: chunk.chunk,
+        gzipBytes: chunk.gzipBytes,
+      }))
+      : [];
+    metrics.performance.routeJsTotals = perfSummary.routeJsTotals ?? {};
+    metrics.performance.source = metrics.sources.performance;
+  } catch {
+    // keep defaults
+  }
+}
+
+const perfBudgetPath = resolve('.quality/perf-budget-summary.json');
+if (existsSync(perfBudgetPath)) {
+  try {
+    const perfBudget = JSON.parse(readFileSync(perfBudgetPath, 'utf-8'));
+    metrics.performance.routeBudgetsStatus = typeof perfBudget.status === 'string' ? perfBudget.status : 'unknown';
+  } catch {
+    // keep defaults
+  }
+}
+
 const a11yStates = [metrics.a11y.static.status, metrics.a11y.runtime.status].filter((state) => state !== 'unknown');
 if (a11yStates.length === 0) {
   metrics.a11y.status = 'unknown';
@@ -216,6 +286,12 @@ const testsBadge = metrics.tests.total === null || metrics.tests.passed === null
   ? `${metrics.tests.files} files`
   : `${metrics.tests.passed}/${metrics.tests.total}`;
 const a11yColor = metrics.a11y.status === 'pass' ? '#4c1' : metrics.a11y.status === 'fail' ? '#e05d44' : '#9f9f9f';
+const securityColor = metrics.security.status === 'pass' ? '#4c1' : metrics.security.status === 'fail' ? '#e05d44' : '#9f9f9f';
+const perfBudgetColor = metrics.performance.routeBudgetsStatus === 'pass'
+  ? '#4c1'
+  : metrics.performance.routeBudgetsStatus === 'fail'
+    ? '#e05d44'
+    : '#9f9f9f';
 
 writeFileSync(join(badgesDir, 'tests.svg'), badge('tests', testsBadge, '#4c1'));
 writeFileSync(
@@ -243,6 +319,8 @@ writeFileSync(
   badge('SEO', metrics.lighthouse.seo === null ? 'n/a' : `${metrics.lighthouse.seo}`, scoreColor(metrics.lighthouse.seo))
 );
 writeFileSync(join(badgesDir, 'a11y.svg'), badge('a11y', metrics.a11y.status, a11yColor));
+writeFileSync(join(badgesDir, 'security.svg'), badge('security', metrics.security.status, securityColor));
+writeFileSync(join(badgesDir, 'perf-budgets.svg'), badge('perf-budgets', metrics.performance.routeBudgetsStatus, perfBudgetColor));
 writeFileSync(join(badgesDir, 'pages.svg'), badge('pages', `${metrics.build.pages}`, '#007ec6'));
 
 writeFileSync(resolve('src/data/quality-metrics.json'), JSON.stringify(metrics, null, 2) + '\n');
@@ -250,6 +328,9 @@ writeFileSync(resolve('src/data/quality-metrics.json'), JSON.stringify(metrics, 
 console.log('Generated quality badges and metrics:');
 console.log(
   `  Tests: ${metrics.tests.passed ?? 'n/a'}/${metrics.tests.total ?? 'n/a'} (files=${metrics.tests.files})`
+);
+console.log(
+  `  Security: status=${metrics.security.status} critical=${metrics.security.critical ?? 'n/a'} high=${metrics.security.high ?? 'n/a'}`
 );
 console.log(`  Coverage: ${coverageScore === null ? 'n/a' : `${coverageScore}%`}`);
 console.log(
@@ -260,5 +341,11 @@ console.log(
 );
 console.log(
   `  A11y runtime: ${metrics.a11y.runtime.status} (critical=${metrics.a11y.runtime.critical ?? 'n/a'}, serious=${metrics.a11y.runtime.serious ?? 'n/a'}, focusFailures=${metrics.a11y.runtime.focusFailures ?? 'n/a'})`
+);
+console.log(
+  `  Runtime coverage: ${metrics.a11y.runtime.routesCovered ?? 'n/a'}/${metrics.a11y.runtime.totalRoutes ?? 'n/a'} (${metrics.a11y.runtime.coveragePct ?? 'n/a'}%)`
+);
+console.log(
+  `  Perf budgets: ${metrics.performance.routeBudgetsStatus}`
 );
 console.log(`  Build: pages=${metrics.build.pages} bundleFiles=${metrics.build.bundleFiles}`);

@@ -65,6 +65,22 @@ function evaluateDrop(group, metric, maxDrop) {
   }
 }
 
+function evaluateIncrease(group, metric, maxIncrease = 0) {
+  const delta = metricDelta(current[group]?.[metric], baseline[group]?.[metric]);
+  if (delta === null) return;
+  if (delta > maxIncrease) {
+    regressions.push({
+      category: group,
+      metric,
+      baseline: baseline[group][metric],
+      current: current[group][metric],
+      delta,
+      allowedDrop: maxIncrease,
+      message: `${group}.${metric} increased by ${delta} (allowed ${maxIncrease})`,
+    });
+  }
+}
+
 const coverageRules = rules.coverageMaxDrop || {};
 for (const metric of ['statements', 'branches', 'functions', 'lines']) {
   evaluateDrop('coverage', metric, coverageRules[metric] ?? 0);
@@ -73,6 +89,11 @@ for (const metric of ['statements', 'branches', 'functions', 'lines']) {
 const lighthouseRules = rules.lighthouseMaxDrop || {};
 for (const metric of ['performance', 'accessibility', 'bestPractices', 'seo']) {
   evaluateDrop('lighthouse', metric, lighthouseRules[metric] ?? 0);
+}
+
+const securityRules = rules.securityMaxIncrease || {};
+for (const metric of ['critical', 'high']) {
+  evaluateIncrease('security', metric, securityRules[metric] ?? 0);
 }
 
 const baselineCritical = (baseline.a11y?.static?.critical ?? 0) + (baseline.a11y?.runtime?.critical ?? 0);
@@ -115,6 +136,18 @@ if (baseline.a11y?.status === 'pass' && current.a11y?.status !== 'pass') {
     delta: null,
     allowedDrop: 0,
     message: `a11y status regressed from ${baseline.a11y.status} to ${current.a11y?.status}`,
+  });
+}
+
+if (baseline.performance?.routeBudgetsStatus === 'pass' && current.performance?.routeBudgetsStatus !== 'pass') {
+  regressions.push({
+    category: 'performance',
+    metric: 'routeBudgetsStatus',
+    baseline: baseline.performance.routeBudgetsStatus,
+    current: current.performance?.routeBudgetsStatus,
+    delta: null,
+    allowedDrop: 0,
+    message: `performance route budgets regressed from ${baseline.performance.routeBudgetsStatus} to ${current.performance?.routeBudgetsStatus}`,
   });
 }
 

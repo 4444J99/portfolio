@@ -43,7 +43,59 @@
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     },
     {
+      "path": "/omega",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
       "path": "/projects/recursive-engine",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/agentic-titan",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/ai-conductor",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/ai-council",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/block-warfare",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/community-infrastructure",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/distribution-strategy",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/eight-organ-system",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/generative-music",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/knowledge-base",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/life-my-midst-in",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/metasystem-master",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/orchestration-hub",
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     }
   ]

@@ -19,6 +19,9 @@ export default defineConfig({
         output: {
           manualChunks(id) {
             if (id.includes('node_modules/p5')) return 'vendor-p5';
+            if (id.includes('node_modules/mermaid')) return 'vendor-mermaid';
+            if (id.includes('node_modules/cytoscape')) return 'vendor-cytoscape';
+            if (id.includes('node_modules/katex')) return 'vendor-katex';
           },
         },
       },
