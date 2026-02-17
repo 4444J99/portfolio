@@ -202,19 +202,46 @@ const year = new Date().getFullYear();
 
   document.addEventListener('astro:page-load', initModeButtons);
 
+  function applyTheme(theme: string) {
+    document.documentElement.dataset.theme = theme;
+    const meta = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement | null;
+    if (meta) meta.content = theme === 'light' ? '#f5f5f0' : '#0a0a0b';
+  }
+
+  function resolveSystemTheme(): string {
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+
   function initThemeToggle() {
-    const btn = document.querySelector('.theme-toggle') as HTMLButtonElement | null;
-    if (!btn) return;
+    const btns = document.querySelectorAll<HTMLButtonElement>('.theme-toggle');
+    if (!btns.length) return;
 
-    btn.addEventListener('click', () => {
-      const current = document.documentElement.dataset.theme || 'dark';
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
-      localStorage.setItem('theme', next);
+    // Three-state cycle: system → light → dark → system
+    btns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const pref = localStorage.getItem('theme-preference') || 'system';
+        let next: string;
+        if (pref === 'system') next = 'light';
+        else if (pref === 'light') next = 'dark';
+        else next = 'system';
 
-      // Update theme-color meta tag
-      const meta = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement | null;
-      if (meta) meta.content = next === 'light' ? '#f5f5f0' : '#0a0a0b';
+        localStorage.setItem('theme-preference', next);
+        if (next === 'system') {
+          localStorage.removeItem('theme');
+          applyTheme(resolveSystemTheme());
+        } else {
+          localStorage.setItem('theme', next);
+          applyTheme(next);
+        }
+      });
+    });
+
+    // Listen for system preference changes (only applies in 'system' mode)
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+      const pref = localStorage.getItem('theme-preference') || 'system';
+      if (pref === 'system') {
+        applyTheme(resolveSystemTheme());
+      }
     });
   }
 

@@ -192,9 +192,11 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
 <script is:inline>
   // Theme + mode restore — must be inline to avoid FOUC (runs before first paint)
   (function() {
-    // Theme: restore from localStorage or follow system preference
-    var theme = localStorage.getItem('theme') ||
-      (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    // Theme: 3-state (system/light/dark) with system as default
+    var pref = localStorage.getItem('theme-preference') || 'system';
+    var theme = pref === 'system'
+      ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+      : pref;
     document.documentElement.dataset.theme = theme;
 
     // Update theme-color meta

@@ -72,9 +72,9 @@ function observeCharts() {
   }
 }
 
-// Re-render charts when S/B/E mode changes (debounced)
+// Re-render charts when S/B/E mode or theme changes (debounced)
 function watchModeChanges() {
-  mutationObserver = new MutationObserver(() => {
+  const rerender = () => {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
       initialized.forEach((container) => {
@@ -86,11 +86,20 @@ function watchModeChanges() {
         }
       });
     }, 300);
-  });
+  };
 
+  mutationObserver = new MutationObserver(rerender);
+
+  // Watch S/B/E mode on body
   mutationObserver.observe(document.body, {
     attributes: true,
     attributeFilter: ['data-bg-mode'],
+  });
+
+  // Watch theme on html element
+  mutationObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
   });
 }
 
