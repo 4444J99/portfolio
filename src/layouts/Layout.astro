@@ -9,10 +9,12 @@ interface Props {
 }
 
 const canonicalBase = 'https://4444j99.github.io/portfolio';
+const slug = Astro.url.pathname.replace(/^\/portfolio\//, '').replace(/\/$/, '') || 'index';
+const defaultOG = `${canonicalBase}/og/${slug}.png`;
 const {
   title,
   description = "Creative technologist building autonomous creative systems and treating governance as artistic medium.",
-  ogImage = `${canonicalBase}/og-image.png`
+  ogImage = defaultOG
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').href;
