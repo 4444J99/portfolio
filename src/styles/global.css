@@ -530,16 +530,7 @@ img {
   to { opacity: 1; }
 }
 
-#bg-canvas {
-  view-transition-name: bg-canvas;
-}
-
-::view-transition-old(bg-canvas),
-::view-transition-new(bg-canvas) {
-  animation: none;
-}
-
-/* Card → Detail title morph: uses Astro's transition:animate on the elements */
+/* bg-canvas persistence handled by transition:persist in Layout.astro */
 
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
