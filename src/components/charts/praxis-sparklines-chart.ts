@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { getChartTheme, classificationColors } from './chart-theme';
+import { createTooltip } from './chart-utils';
 
 interface Target {
   key: string;
@@ -11,6 +12,7 @@ interface Target {
 
 export default function praxisSparklines(container: HTMLElement, data: { targets: Target[] }) {
   const theme = getChartTheme();
+  const tooltip = createTooltip(container);
   const width = 500;
   const rowH = 36;
   const height = data.targets.length * rowH + 20;
@@ -66,5 +68,19 @@ export default function praxisSparklines(container: HTMLElement, data: { targets
       .style('font-size', '0.65rem')
       .style('font-family', 'var(--font-mono)')
       .text(t.met ? 'MET' : `${t.current} / ${t.target}`);
+
+    // Hover hit area for tooltip
+    svg.append('rect')
+      .attr('x', barX)
+      .attr('y', y - 10)
+      .attr('width', barW)
+      .attr('height', 20)
+      .attr('fill', 'transparent')
+      .style('cursor', 'pointer')
+      .on('mousemove', (event: MouseEvent) => {
+        const status = t.met ? 'Target met' : `${(pct * 100).toFixed(0)}% complete`;
+        tooltip.show(`<strong>${t.label}</strong><br/>${t.current} / ${t.target} — ${status}`, event);
+      })
+      .on('mouseleave', () => tooltip.hide());
   });
 }

@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+import BackToTop from '../components/BackToTop.astro';
 
 interface Props {
   title: string;
@@ -160,6 +161,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
     <div id="bg-canvas" aria-hidden="true" transition:persist></div>
     <slot />
+    <BackToTop />
   </body>
 <script>
   import { initSketches, teardownPage, reinitPage } from '../components/sketches/sketch-loader';
