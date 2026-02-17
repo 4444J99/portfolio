@@ -416,65 +416,58 @@ const featuredNumbers = new Set([2, 5, 14, 20]);
   <Footer />
 </Layout>
 
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', function() {
-    var main = document.getElementById('main-content');
-    var viewBtns = document.querySelectorAll('.view-toggle__btn');
-    var cards = document.querySelectorAll('.card[data-skills]');
-    var groups = document.querySelectorAll('[data-organ-group]');
+<script>
+  function initIndexFilters() {
+    const main = document.getElementById('main-content') as HTMLElement | null;
+    if (!main?.dataset.portfolioView) return;
+
+    const viewBtns = document.querySelectorAll<HTMLButtonElement>('.view-toggle__btn');
+    const cards = document.querySelectorAll<HTMLElement>('.card[data-skills]');
+    const groups = document.querySelectorAll<HTMLElement>('[data-organ-group]');
 
     function getCurrentView() {
-      return main.dataset.portfolioView || 'engineering';
+      return main!.dataset.portfolioView || 'engineering';
     }
 
     function resetFilters() {
-      // Reset all filter chips across both bars
-      document.querySelectorAll('.filter-chip').forEach(function(c) {
+      document.querySelectorAll<HTMLButtonElement>('.filter-chip').forEach((c) => {
         c.classList.remove('filter-chip--active');
         c.setAttribute('aria-pressed', 'false');
       });
-      // Set "All" active on both bars
-      document.querySelectorAll('.filter-chip[data-filter="all"]').forEach(function(c) {
+      document.querySelectorAll<HTMLButtonElement>('.filter-chip[data-filter="all"]').forEach((c) => {
         c.classList.add('filter-chip--active');
         c.setAttribute('aria-pressed', 'true');
       });
-      // Show all cards
-      cards.forEach(function(card) { card.style.display = ''; });
-      groups.forEach(function(group) { group.style.display = ''; });
+      cards.forEach((card) => { card.style.display = ''; });
+      groups.forEach((group) => { group.style.display = ''; });
     }
 
-    function switchView(view) {
-      main.dataset.portfolioView = view;
+    function switchView(view: string) {
+      main!.dataset.portfolioView = view;
 
-      // Toggle hero views
-      document.querySelectorAll('[data-hero-view]').forEach(function(el) {
+      document.querySelectorAll<HTMLElement>('[data-hero-view]').forEach((el) => {
         el.style.display = el.getAttribute('data-hero-view') === view ? '' : 'none';
       });
 
-      // Toggle stats views
-      document.querySelectorAll('[data-stats-view]').forEach(function(el) {
+      document.querySelectorAll<HTMLElement>('[data-stats-view]').forEach((el) => {
         el.style.display = el.getAttribute('data-stats-view') === view ? '' : 'none';
       });
 
-      // Toggle filter bars
-      document.querySelectorAll('[data-filter-view]').forEach(function(el) {
+      document.querySelectorAll<HTMLElement>('[data-filter-view]').forEach((el) => {
         el.style.display = el.getAttribute('data-filter-view') === view ? '' : 'none';
       });
 
-      // Toggle organ group headings
-      document.querySelectorAll('[data-heading-view]').forEach(function(el) {
+      document.querySelectorAll<HTMLElement>('[data-heading-view]').forEach((el) => {
         el.style.display = el.getAttribute('data-heading-view') === view ? '' : 'none';
       });
 
-      // Reset filter to "All" on view switch
       resetFilters();
     }
 
-    // View toggle buttons
-    viewBtns.forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var view = btn.getAttribute('data-view');
-        viewBtns.forEach(function(b) {
+    viewBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const view = btn.getAttribute('data-view')!;
+        viewBtns.forEach((b) => {
           b.classList.remove('view-toggle__btn--active');
           b.setAttribute('aria-checked', 'false');
         });
@@ -484,41 +477,40 @@ const featuredNumbers = new Set([2, 5, 14, 20]);
       });
     });
 
-    // Filter chips — use event delegation on both filter bars
-    document.querySelectorAll('.filter-bar').forEach(function(bar) {
-      bar.addEventListener('click', function(e) {
-        var chip = e.target.closest('.filter-chip');
+    document.querySelectorAll<HTMLElement>('.filter-bar').forEach((bar) => {
+      bar.addEventListener('click', (e) => {
+        const chip = (e.target as HTMLElement).closest<HTMLButtonElement>('.filter-chip');
         if (!chip) return;
 
-        // Update active state within this bar
-        bar.querySelectorAll('.filter-chip').forEach(function(c) {
+        bar.querySelectorAll<HTMLButtonElement>('.filter-chip').forEach((c) => {
           c.classList.remove('filter-chip--active');
           c.setAttribute('aria-pressed', 'false');
         });
         chip.classList.add('filter-chip--active');
         chip.setAttribute('aria-pressed', 'true');
 
-        var filter = chip.getAttribute('data-filter');
-        var view = getCurrentView();
-        var attr = view === 'engineering' ? 'data-skills' : 'data-tags';
+        const filter = chip.getAttribute('data-filter')!;
+        const view = getCurrentView();
+        const attr = view === 'engineering' ? 'data-skills' : 'data-tags';
 
-        cards.forEach(function(card) {
+        cards.forEach((card) => {
           if (filter === 'all') {
             card.style.display = '';
           } else {
-            var values = card.getAttribute(attr) || '';
+            const values = card.getAttribute(attr) || '';
             card.style.display = values.split(',').includes(filter) ? '' : 'none';
           }
         });
 
-        // Hide organ groups with no visible cards
-        groups.forEach(function(group) {
-          var visible = group.querySelectorAll('.card:not([style*="display: none"])');
+        groups.forEach((group) => {
+          const visible = group.querySelectorAll('.card:not([style*="display: none"])');
           group.style.display = visible.length === 0 ? 'none' : '';
         });
       });
     });
-  });
+  }
+
+  document.addEventListener('astro:page-load', initIndexFilters);
 </script>
 
 <style>

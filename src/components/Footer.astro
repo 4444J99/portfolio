@@ -147,23 +147,25 @@ const year = new Date().getFullYear();
   }
 </style>
 
-<script is:inline>
-  (function() {
-    var currentMode = document.body.dataset.bgMode || 'subtle';
-    document.querySelectorAll('.bg-mode-btn').forEach(function(btn) {
-      var isActive = btn.dataset.mode === currentMode;
-      if (isActive) btn.classList.add('bg-mode-btn--active');
+<script>
+  function initModeButtons() {
+    const currentMode = document.body.dataset.bgMode || 'subtle';
+    document.querySelectorAll<HTMLButtonElement>('.bg-mode-btn').forEach((btn) => {
+      const isActive = btn.dataset.mode === currentMode;
+      btn.classList.toggle('bg-mode-btn--active', isActive);
       btn.setAttribute('aria-pressed', String(isActive));
-      btn.addEventListener('click', function() {
-        var mode = btn.dataset.mode;
+      btn.addEventListener('click', () => {
+        const mode = btn.dataset.mode!;
         document.body.dataset.bgMode = mode;
         localStorage.setItem('bg-mode', mode);
-        document.querySelectorAll('.bg-mode-btn').forEach(function(b) {
-          var active = b.dataset.mode === mode;
+        document.querySelectorAll<HTMLButtonElement>('.bg-mode-btn').forEach((b) => {
+          const active = b.dataset.mode === mode;
           b.classList.toggle('bg-mode-btn--active', active);
           b.setAttribute('aria-pressed', String(active));
         });
       });
     });
-  })();
+  }
+
+  document.addEventListener('astro:page-load', initModeButtons);
 </script>

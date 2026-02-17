@@ -108,58 +108,59 @@ const connectLinks = [
   </div>
 </header>
 
-<script is:inline>
-  // --- Mobile menu: toggle, focus trap, scroll lock ---
-  (function () {
-    var headerEl = document.querySelector('.header');
-    var toggleBtn = document.querySelector('.header__toggle');
-    var nav = document.querySelector('.header__nav');
+<script>
+  function initHeader() {
+    // --- Mobile menu: toggle, focus trap, scroll lock ---
+    const headerEl = document.querySelector('.header') as HTMLElement | null;
+    const toggleBtn = document.querySelector('.header__toggle') as HTMLButtonElement | null;
+    const nav = document.querySelector('.header__nav') as HTMLElement | null;
     if (!headerEl || !toggleBtn || !nav) return;
 
+    // Reset menu state after navigation
+    headerEl.classList.remove('header--open');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+
     function openMenu() {
-      toggleBtn.setAttribute('aria-expanded', 'true');
-      headerEl.classList.add('header--open');
+      toggleBtn!.setAttribute('aria-expanded', 'true');
+      headerEl!.classList.add('header--open');
       document.body.style.overflow = 'hidden';
-      // Close dropdown if open
-      var ddMenu = document.querySelector('.header__dropdown-menu');
-      var ddTrigger = document.querySelector('.header__dropdown-trigger');
+      const ddMenu = document.querySelector('.header__dropdown-menu');
+      const ddTrigger = document.querySelector('.header__dropdown-trigger');
       if (ddMenu) ddMenu.removeAttribute('data-open');
       if (ddTrigger) ddTrigger.setAttribute('aria-expanded', 'false');
     }
 
     function closeMenu() {
-      toggleBtn.setAttribute('aria-expanded', 'false');
-      headerEl.classList.remove('header--open');
+      toggleBtn!.setAttribute('aria-expanded', 'false');
+      headerEl!.classList.remove('header--open');
       document.body.style.overflow = '';
-      toggleBtn.focus();
+      toggleBtn!.focus();
     }
 
-    toggleBtn.addEventListener('click', function () {
-      var isOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
       if (isOpen) closeMenu(); else openMenu();
     });
 
-    // Close when any nav link is clicked
-    nav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        if (headerEl.classList.contains('header--open')) closeMenu();
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (headerEl!.classList.contains('header--open')) closeMenu();
       });
     });
 
-    // Escape closes mobile menu
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && headerEl.classList.contains('header--open')) {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && headerEl!.classList.contains('header--open')) {
         closeMenu();
       }
     });
 
-    // Focus trap within nav when mobile menu is open
-    nav.addEventListener('keydown', function (e) {
-      if (e.key !== 'Tab' || !headerEl.classList.contains('header--open')) return;
-      var focusable = nav.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+    nav.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !headerEl!.classList.contains('header--open')) return;
+      const focusable = nav!.querySelectorAll<HTMLElement>('a, button, [tabindex]:not([tabindex="-1"])');
       if (focusable.length === 0) return;
-      var first = focusable[0];
-      var last = focusable[focusable.length - 1];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
       if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
         last.focus();
@@ -168,17 +169,15 @@ const connectLinks = [
         first.focus();
       }
     });
-  })();
 
-  // Dropdown toggle
-  (function () {
-    var trigger = document.querySelector('.header__dropdown-trigger');
-    var menu = document.querySelector('.header__dropdown-menu');
+    // --- Dropdown toggle ---
+    const trigger = document.querySelector('.header__dropdown-trigger') as HTMLButtonElement | null;
+    const menu = document.querySelector('.header__dropdown-menu') as HTMLElement | null;
     if (!trigger || !menu) return;
 
-    trigger.addEventListener('click', function (e) {
+    trigger.addEventListener('click', (e) => {
       e.stopPropagation();
-      var isOpen = menu.hasAttribute('data-open');
+      const isOpen = menu.hasAttribute('data-open');
       if (isOpen) {
         menu.removeAttribute('data-open');
         trigger.setAttribute('aria-expanded', 'false');
@@ -188,17 +187,15 @@ const connectLinks = [
       }
     });
 
-    // Close on outside click
-    document.addEventListener('click', function (e) {
+    document.addEventListener('click', (e) => {
       if (!menu.hasAttribute('data-open')) return;
-      if (!menu.contains(e.target) && e.target !== trigger) {
+      if (!menu.contains(e.target as Node) && e.target !== trigger) {
         menu.removeAttribute('data-open');
         trigger.setAttribute('aria-expanded', 'false');
       }
     });
 
-    // Close on Escape
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && menu.hasAttribute('data-open')) {
         menu.removeAttribute('data-open');
         trigger.setAttribute('aria-expanded', 'false');
@@ -206,14 +203,15 @@ const connectLinks = [
       }
     });
 
-    // Close when clicking a menu link
-    menu.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
         menu.removeAttribute('data-open');
         trigger.setAttribute('aria-expanded', 'false');
       });
     });
-  })();
+  }
+
+  document.addEventListener('astro:page-load', initHeader);
 </script>
 
 <style>
