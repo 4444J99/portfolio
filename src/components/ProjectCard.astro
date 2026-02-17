@@ -36,17 +36,18 @@ const slug = href.replace(/\/$/, '').split('/').pop();
 
 <style>
   .card {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
     padding: var(--space-xl);
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-left: 3px solid var(--organ-color, var(--accent));
+    border-radius: var(--radius-lg);
     text-decoration: none;
     transition: background var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
   }
 
   .card:hover {
@@ -57,7 +58,6 @@ const slug = href.replace(/\/$/, '').split('/').pop();
 
   .card--featured {
     grid-column: span 2;
-    border-left: 3px solid var(--organ-color, var(--accent));
   }
 
   .card--featured .card__title {
@@ -72,9 +72,22 @@ const slug = href.replace(/\/$/, '').split('/').pop();
   }
 
   .card__number {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--text-muted);
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 800;
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-md);
+    opacity: 0.08;
+    line-height: 1;
+    color: var(--text-primary);
+    transition: opacity var(--transition-base), transform var(--transition-base);
+    pointer-events: none;
+  }
+
+  .card:hover .card__number {
+    opacity: 0.15;
+    transform: translateY(-2px);
   }
 
   .card__tags {
@@ -114,7 +127,7 @@ const slug = href.replace(/\/$/, '').split('/').pop();
   }
 
   .tag--skill {
-    background: rgba(0, 188, 212, 0.1);
+    background: var(--accent-muted);
     color: var(--accent-text);
   }
 

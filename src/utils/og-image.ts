@@ -2,13 +2,13 @@ import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 
 // Satori requires raw TTF/OTF — woff2 is not supported.
-// Fetch Jost from Google Fonts at build time (cached across pages).
+// Fetch Syne from Google Fonts at build time (cached across pages).
 let fontDataCache: ArrayBuffer | null = null;
 
 async function getFontData(): Promise<ArrayBuffer> {
   if (fontDataCache) return fontDataCache;
   const res = await fetch(
-    'https://fonts.gstatic.com/s/jost/v15/92zPtBhPNqw79Ij1E865zBUv7myjJQVG.ttf'
+    'https://fonts.gstatic.com/s/syne/v24/8vIS7w4qzmVxsWxjBZRjr0FKM_3fvj6k.ttf'
   );
   fontDataCache = await res.arrayBuffer();
   return fontDataCache;
@@ -17,7 +17,7 @@ async function getFontData(): Promise<ArrayBuffer> {
 export async function generateOGImage(
   title: string,
   subtitle: string,
-  accentColor = '#00BCD4'
+  accentColor = '#d4a853'
 ): Promise<Buffer> {
   const fontData = await getFontData();
   const svg = await satori(
@@ -32,7 +32,7 @@ export async function generateOGImage(
           justifyContent: 'flex-end',
           padding: '60px',
           background: '#0a0a0b',
-          fontFamily: 'Jost',
+          fontFamily: 'Syne',
         },
         children: [
           {
@@ -115,13 +115,13 @@ export async function generateOGImage(
       height: 630,
       fonts: [
         {
-          name: 'Jost',
+          name: 'Syne',
           data: fontData as Buffer,
           weight: 400,
           style: 'normal' as const,
         },
         {
-          name: 'Jost',
+          name: 'Syne',
           data: fontData as Buffer,
           weight: 700,
           style: 'normal' as const,

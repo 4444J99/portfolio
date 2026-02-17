@@ -75,15 +75,16 @@ All components use **TypeScript Props interfaces** in the frontmatter and **comp
 
 ### Layout
 
-Two layouts: `Layout.astro` (page shell: head partials + Header + `<main>` + Footer + script components) and `ProjectLayout.astro` (wraps Layout with ProjectDetail for the 19 project case-study pages). Self-hosted fonts (Jost + JetBrains Mono woff2 in `public/fonts/`).
+Two layouts: `Layout.astro` (page shell: head partials + Header + `<main>` + Footer + script components) and `ProjectLayout.astro` (wraps Layout with ProjectDetail for the 19 project case-study pages). Self-hosted fonts (Syne + Plus Jakarta Sans + JetBrains Mono variable woff2 in `public/fonts/`).
 
 ### Styling
 
 **No CSS framework.** One global stylesheet (`src/styles/global.css`, ~735 lines) defines the design system via CSS custom properties. Academic component styles are co-located in their `.astro` files.
 
-- Colors: dark theme (`#0a0a0b` base), cyan (`--accent: #00BCD4`) / magenta (`--accent-hover: #E91E63`) accent palette
-- Typography: `--font-body: 'Jost'`, `--font-mono: 'JetBrains Mono'`
-- Spacing: rem-based scale (`--space-xs` through `--space-4xl`)
+- Colors: dark theme (`#0a0a0b` base), gold (`--accent: #d4a853`) / burnt sienna (`--accent-hover: #c4463a`) accent palette
+- Typography: `--font-heading: 'Syne'` (display), `--font-body: 'Plus Jakarta Sans'`, `--font-mono: 'JetBrains Mono'`
+- Spacing: Fibonacci-influenced rem scale (`--space-2xs` through `--space-4xl`)
+- Border radius: `--radius-sm` (4px), `--radius-md` (8px), `--radius-lg` (16px), `--radius-xl` (24px)
 - Layout: `--max-width: 1100px`, `--max-width-narrow: 740px`
 - Responsive: 768px mobile breakpoint, `clamp()` fluid typography
 

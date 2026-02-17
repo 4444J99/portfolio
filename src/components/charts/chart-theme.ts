@@ -14,7 +14,7 @@ export function getChartTheme() {
     textSecondary: style.getPropertyValue('--text-secondary').trim() || '#a09e9b',
     textMuted: style.getPropertyValue('--text-muted').trim() || '#8a8884',
     border: style.getPropertyValue('--border').trim() || 'rgba(255,255,255,0.25)',
-    accent: style.getPropertyValue('--accent').trim() || '#00BCD4',
+    accent: style.getPropertyValue('--accent').trim() || '#d4a853',
     bgCard: style.getPropertyValue('--bg-card').trim() || 'rgba(255,255,255,0.12)',
     strokeDark: 'rgba(0,0,0,0.3)',
     labelDark: 'rgba(0,0,0,0.7)',

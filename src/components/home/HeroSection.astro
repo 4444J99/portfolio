@@ -32,6 +32,13 @@ interface Props {
 }
 
 const { metrics, resolvedGroups } = Astro.props;
+
+const engineeringTitle = 'Python and TypeScript developer building AI systems, production infrastructure, and tested software.';
+const creativeTitle = 'Artist-engineer building autonomous creative systems and treating their governance as artistic medium.';
+
+function splitWords(text: string) {
+  return text.split(/\s+/);
+}
 ---
 
 <section class="hero">
@@ -44,13 +51,21 @@ const { metrics, resolvedGroups } = Astro.props;
 
       <div class="hero__view" data-hero-view="engineering">
         <p class="hero__label" data-reveal>Full-Stack Engineer</p>
-        <h1 class="hero__title" data-reveal style="animation-delay: 100ms">Python and TypeScript developer building AI systems, production infrastructure, and tested software.</h1>
+        <h1 class="hero__title hero__title--animated" data-reveal style="animation-delay: 100ms">
+          {splitWords(engineeringTitle).map((word, i) => (
+            <span class="hero__word" style={`animation-delay: ${100 + i * 40}ms`}>{word} </span>
+          ))}
+        </h1>
         <p class="hero__sub" data-reveal style="animation-delay: 200ms">{metrics.code_substance.total_code_files.toLocaleString()} code files, {metrics.code_substance.total_test_files} test files, {metrics.code_substance.ci_passing} passing CI workflows. React, Next.js, FastAPI, Docker, Terraform, PostgreSQL across {metrics.registry.total_repos} repositories.</p>
       </div>
 
       <div class="hero__view" data-hero-view="creative" style="display: none;">
         <p class="hero__label">Creative Technologist</p>
-        <h1 class="hero__title">Artist-engineer building autonomous creative systems and treating their governance as artistic medium.</h1>
+        <h1 class="hero__title hero__title--animated">
+          {splitWords(creativeTitle).map((word, i) => (
+            <span class="hero__word" style={`animation-delay: ${i * 40}ms`}>{word} </span>
+          ))}
+        </h1>
         <p class="hero__sub">Coordinating theory, generative art, commerce, and community across an eight-organ infrastructure — 91 repositories, 8 organizations, ~386K words of public documentation.</p>
       </div>
 
@@ -95,9 +110,7 @@ const { metrics, resolvedGroups } = Astro.props;
   .hero__text {
     min-width: 0;
     background: var(--bg-secondary);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: var(--radius);
+    border-radius: var(--radius-xl);
     padding: var(--space-2xl);
   }
 
@@ -113,8 +126,6 @@ const { metrics, resolvedGroups } = Astro.props;
     overflow: hidden;
     margin-bottom: var(--space-xl);
     background: var(--bg-card);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
   }
 
   .view-toggle__btn {
@@ -149,6 +160,28 @@ const { metrics, resolvedGroups } = Astro.props;
   .hero__title {
     max-width: 20ch;
     margin-bottom: var(--space-lg);
+  }
+
+  .hero__word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: wordReveal 0.4s ease forwards;
+  }
+
+  @keyframes wordReveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__word {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
   }
 
   .hero__sub {

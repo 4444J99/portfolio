@@ -26,6 +26,8 @@ export default function backgroundSketch(p: p5, container: HTMLElement) {
 
     const cellW = p.width / COLS;
     const cellH = p.height / ROWS;
+    const midX = Math.floor(COLS / 2);
+    const midY = Math.floor(ROWS / 2);
 
     for (let y = 0; y < ROWS; y++) {
       for (let x = 0; x < COLS; x++) {
@@ -50,6 +52,14 @@ export default function backgroundSketch(p: p5, container: HTMLElement) {
 
         p.fill(r * dim, g * dim, b * dim);
         p.rect(x * cellW, y * cellH, Math.ceil(cellW), Math.ceil(cellH));
+
+        // Expose center cell color for spectrum-reactive header
+        if (x === midX && y === midY) {
+          document.documentElement.style.setProperty(
+            '--spectrum-current',
+            `${Math.round(r * dim)}, ${Math.round(g * dim)}, ${Math.round(b * dim)}`
+          );
+        }
       }
     }
   };

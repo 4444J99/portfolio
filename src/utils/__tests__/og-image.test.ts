@@ -85,13 +85,13 @@ describe('generateOGImage', () => {
     expect(accentBar.props.style.background).toBe('#FF0000');
   });
 
-  it('defaults accent color to cyan', async () => {
+  it('defaults accent color to gold', async () => {
     const { generateOGImage } = await getModule();
     await generateOGImage('Title', 'Sub');
 
     const call = vi.mocked(satori).mock.calls.at(-1)!;
     const jsx = call[0] as { props: { children: unknown[] } };
     const accentBar = (jsx.props.children as Array<{ props: { style: { background: string } } }>)[0];
-    expect(accentBar.props.style.background).toBe('#00BCD4');
+    expect(accentBar.props.style.background).toBe('#d4a853');
   });
 });
