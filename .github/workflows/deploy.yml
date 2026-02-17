@@ -5,6 +5,8 @@ on:
     workflows: ["Quality Gates"]
     branches: [main]
     types: [completed]
+  schedule:
+    - cron: "15 9 * * *"
   workflow_dispatch:
 
 permissions:
@@ -20,6 +22,7 @@ jobs:
   build:
     if: >-
       github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'schedule' ||
       (github.event_name == 'workflow_run' &&
        github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
@@ -35,7 +38,9 @@ jobs:
       - name: Sync GitHub Pages index
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: node scripts/sync-github-pages.mjs --output src/data/github-pages.json
+        run: npm run sync:github-pages -- --strict
+      - name: Validate GitHub Pages index
+        run: npm run validate:github-pages -- --max-age-hours 48 --max-errored 25 --max-unreachable 25
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

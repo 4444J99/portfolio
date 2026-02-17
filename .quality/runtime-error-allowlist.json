@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "description": "Temporary runtime error allowlist. Keep empty by default.",
+  "entries": []
+}

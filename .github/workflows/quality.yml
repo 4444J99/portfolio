@@ -5,6 +5,14 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    - cron: "17 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  security-events: read
 
 jobs:
   build-and-test:
@@ -21,13 +29,26 @@ jobs:
 
       - run: npm ci
 
+      - name: Validate GitHub Pages data contract
+        run: npm run validate:github-pages -- --max-age-hours 336 --max-errored 25 --max-unreachable 25
+
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
+
+      - name: Policy governance guard
+        if: github.event_name == 'pull_request'
+        env:
+          GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          GITHUB_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: node scripts/check-policy-change-governance.mjs --json-out .quality/policy-governance-summary.json
 
       - name: Security gates (prod + full tree)
         run: |
           npm run test:security:prod
           npm run test:security
+          npm run test:security:github
+          npm run test:security:drift
 
       - name: Quality parity pipeline
         run: npm run quality:local
@@ -75,5 +96,8 @@ jobs:
             .quality/security-summary-prod.json
             .quality/security-audit-raw.json
             .quality/security-audit-prod-raw.json
+            .quality/github-advisory-summary.json
+            .quality/security-drift-summary.json
+            .quality/green-run-history.json
           include-hidden-files: true
           retention-days: 14

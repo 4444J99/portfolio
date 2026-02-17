@@ -1,11 +1,9 @@
 import { expect, test } from '@playwright/test';
-import { assertMenuSingleFire, replayAstroPageLoad } from './helpers';
+import { assertMenuSingleFire, replayAstroPageLoad, TRANSITION_STRESS_ROUTES } from './helpers';
 
 test('repeated transition cycles preserve single active menu behavior', async ({ page }) => {
-  const routeCycle = ['/projects/recursive-engine', '/projects/ai-conductor', '/projects/distribution-strategy'];
-
   for (let i = 0; i < 3; i += 1) {
-    for (const route of routeCycle) {
+    for (const route of TRANSITION_STRESS_ROUTES) {
       await page.goto(route, { waitUntil: 'networkidle' });
       await replayAstroPageLoad(page, 3);
       await assertMenuSingleFire(page);

@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import pagesDirectory from '../data/github-pages.json';
+import { base } from '../utils/paths';
 
 interface PagesRepo {
   owner: string;
@@ -14,6 +15,14 @@ interface PagesRepo {
   sourceBranch: string | null;
   sourcePath: string | null;
   updatedAt: string | null;
+  featured: boolean;
+  priority: number;
+  hidden: boolean;
+  label: string | null;
+  httpStatus: number | null;
+  reachable: boolean;
+  redirectTarget: string | null;
+  lastCheckedAt: string;
 }
 
 interface PagesDirectory {
@@ -24,14 +33,54 @@ interface PagesDirectory {
 }
 
 const directory = pagesDirectory as PagesDirectory;
-const ownerOrder = new Map(
-  directory.owners.map((owner, index) => [owner.toLowerCase(), index])
-);
+const generatedAtMs = Number.isFinite(Date.parse(directory.generatedAt))
+  ? Date.parse(directory.generatedAt)
+  : null;
+const generatedLabel =
+  generatedAtMs === null
+    ? directory.generatedAt
+    : new Date(generatedAtMs).toLocaleString('en-US', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+      });
 
+const ageHours = generatedAtMs === null ? null : (Date.now() - generatedAtMs) / (1000 * 60 * 60);
+const isStale = ageHours !== null && ageHours > 48;
+
+const visibleRepos = directory.repos.filter((repo) => !repo.hidden);
+
+const builtCount = visibleRepos.filter((repo) => repo.status === 'built').length;
+const erroredCount = visibleRepos.filter((repo) => repo.status === 'errored').length;
+const unreachableCount = visibleRepos.filter((repo) => repo.reachable === false).length;
+const recentlyChangedCount = visibleRepos.filter((repo) => {
+  if (!repo.updatedAt || !Number.isFinite(Date.parse(repo.updatedAt))) return false;
+  const ageMs = Date.now() - Date.parse(repo.updatedAt);
+  return ageMs <= 7 * 24 * 60 * 60 * 1000;
+}).length;
+
+const featuredRepos = visibleRepos
+  .filter((repo) => repo.featured)
+  .sort((a, b) => b.priority - a.priority || a.fullName.localeCompare(b.fullName))
+  .slice(0, 12);
+
+const ownerOrder = new Map(directory.owners.map((owner, index) => [owner.toLowerCase(), index]));
 const grouped = new Map<string, PagesRepo[]>();
-for (const repo of directory.repos) {
+
+for (const repo of visibleRepos) {
   if (!grouped.has(repo.owner)) grouped.set(repo.owner, []);
   grouped.get(repo.owner)?.push(repo);
+}
+
+for (const [owner, repos] of grouped) {
+  grouped.set(
+    owner,
+    repos.sort(
+      (a, b) =>
+        Number(b.featured) - Number(a.featured) ||
+        b.priority - a.priority ||
+        a.repo.localeCompare(b.repo, undefined, { sensitivity: 'base' })
+    )
+  );
 }
 
 const groups = Array.from(grouped.entries()).sort((a, b) => {
@@ -42,13 +91,6 @@ const groups = Array.from(grouped.entries()).sort((a, b) => {
   if (bIdx !== undefined) return 1;
   return a[0].localeCompare(b[0], undefined, { sensitivity: 'base' });
 });
-
-const generatedLabel = Number.isFinite(Date.parse(directory.generatedAt))
-  ? new Date(directory.generatedAt).toLocaleString('en-US', {
-      dateStyle: 'medium',
-      timeStyle: 'short',
-    })
-  : directory.generatedAt;
 ---
 
 <Layout title="GitHub Pages Directory — 4444j" description="Directory of GitHub Pages sites across personal and organ organizations.">
@@ -56,23 +98,98 @@ const generatedLabel = Number.isFinite(Date.parse(directory.generatedAt))
     <div class="container">
       <h1 class="page-title">GitHub Pages Directory</h1>
       <p class="page-sub">
-        A unified index of live GitHub Pages deployments across the personal account and organ organizations.
+        Unified index of live GitHub Pages deployments with health telemetry, curation, and machine-readable feeds.
       </p>
 
       <div class="summary-grid">
         <div class="summary-card">
-          <span class="summary-label">Total Pages Repos</span>
-          <strong class="summary-value">{directory.totalRepos}</strong>
+          <span class="summary-label">Visible Repos</span>
+          <strong class="summary-value">{visibleRepos.length}</strong>
         </div>
         <div class="summary-card">
           <span class="summary-label">Owners Indexed</span>
           <strong class="summary-value">{directory.owners.length}</strong>
         </div>
-        <div class="summary-card summary-card--wide">
-          <span class="summary-label">Last Sync</span>
-          <strong class="summary-value summary-value--small">{generatedLabel}</strong>
+        <div class="summary-card">
+          <span class="summary-label">Built</span>
+          <strong class="summary-value">{builtCount}</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Errored</span>
+          <strong class="summary-value">{erroredCount}</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Unreachable</span>
+          <strong class="summary-value">{unreachableCount}</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Updated (7d)</span>
+          <strong class="summary-value">{recentlyChangedCount}</strong>
         </div>
       </div>
+
+      <section class="health-card">
+        <h2>System Pages Health</h2>
+        <p>
+          Last sync: <strong>{generatedLabel}</strong>
+          {ageHours !== null && ` · age ${ageHours.toFixed(2)}h`}
+          {isStale ? ' · stale (>48h)' : ' · fresh'}
+        </p>
+        <div class="feed-links">
+          <a href={`${base}github-pages.json`}>JSON endpoint</a>
+          <a href={`${base}github-pages.xml`}>RSS/Atom feed</a>
+        </div>
+      </section>
+
+      {featuredRepos.length > 0 && (
+        <section class="featured-group" aria-labelledby="featured-pages">
+          <div class="owner-group__head">
+            <h2 id="featured-pages">Featured</h2>
+            <span>{featuredRepos.length} highlighted</span>
+          </div>
+          <ul class="repo-list">
+            {featuredRepos.map((repo) => (
+              <li class="repo-item">
+                <div class="repo-main">
+                  <a
+                    class="repo-link"
+                    href={repo.pageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-gh-pages-track
+                    data-track-surface="directory-featured"
+                    data-track-owner={repo.owner}
+                    data-track-repo={repo.repo}
+                    data-track-target="page">
+                    {repo.label ?? repo.fullName}
+                  </a>
+                  <a
+                    class="repo-secondary"
+                    href={repo.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-gh-pages-track
+                    data-track-surface="directory-featured"
+                    data-track-owner={repo.owner}
+                    data-track-repo={repo.repo}
+                    data-track-target="repo">
+                    View repository
+                  </a>
+                </div>
+                <div class="repo-meta">
+                  <span class="meta-pill">priority: {repo.priority}</span>
+                  {repo.status && <span class="meta-pill">status: {repo.status}</span>}
+                  {repo.httpStatus !== null && (
+                    <span class:list={['meta-pill', { 'meta-pill--bad': !repo.reachable }]}>
+                      http: {repo.httpStatus}
+                    </span>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <div class="groups">
         {groups.map(([owner, repos]) => (
@@ -85,15 +202,38 @@ const generatedLabel = Number.isFinite(Date.parse(directory.generatedAt))
               {repos.map((repo) => (
                 <li class="repo-item">
                   <div class="repo-main">
-                    <a class="repo-link" href={repo.pageUrl} target="_blank" rel="noopener noreferrer">
-                      {repo.fullName}
+                    <a
+                      class="repo-link"
+                      href={repo.pageUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-gh-pages-track
+                      data-track-surface="directory-owner"
+                      data-track-owner={repo.owner}
+                      data-track-repo={repo.repo}
+                      data-track-target="page">
+                      {repo.label ?? repo.fullName}
                     </a>
-                    <a class="repo-secondary" href={repo.repoUrl} target="_blank" rel="noopener noreferrer">
+                    <a
+                      class="repo-secondary"
+                      href={repo.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-gh-pages-track
+                      data-track-surface="directory-owner"
+                      data-track-owner={repo.owner}
+                      data-track-repo={repo.repo}
+                      data-track-target="repo">
                       View repository
                     </a>
                   </div>
                   <div class="repo-meta">
-                    {repo.status && <span class="meta-pill">status: {repo.status}</span>}
+                    {repo.featured && <span class="meta-pill">featured</span>}
+                    {repo.status && (
+                      <span class:list={['meta-pill', { 'meta-pill--bad': repo.status === 'errored' }]}>
+                        status: {repo.status}
+                      </span>
+                    )}
                     {repo.buildType && <span class="meta-pill">build: {repo.buildType}</span>}
                     {repo.cname && <span class="meta-pill">cname: {repo.cname}</span>}
                     {repo.sourceBranch && (
@@ -102,6 +242,13 @@ const generatedLabel = Number.isFinite(Date.parse(directory.generatedAt))
                         {repo.sourcePath && repo.sourcePath !== '/' ? `:${repo.sourcePath}` : ''}
                       </span>
                     )}
+                    {repo.httpStatus !== null && (
+                      <span class:list={['meta-pill', { 'meta-pill--bad': !repo.reachable }]}>
+                        http: {repo.httpStatus}
+                      </span>
+                    )}
+                    {repo.redirectTarget && <span class="meta-pill">redirected</span>}
+                    {repo.updatedAt && <span class="meta-pill">updated: {new Date(repo.updatedAt).toISOString().slice(0, 10)}</span>}
                   </div>
                 </li>
               ))}
@@ -113,12 +260,56 @@ const generatedLabel = Number.isFinite(Date.parse(directory.generatedAt))
   </section>
 </Layout>
 
+<script is:inline>
+  function trackGithubPagesClick(link) {
+    const owner = link.dataset.trackOwner || 'unknown';
+    const repo = link.dataset.trackRepo || 'unknown';
+    const target = link.dataset.trackTarget || 'unknown';
+    const surface = link.dataset.trackSurface || 'unknown';
+    const fullName = `${owner}/${repo}`;
+
+    if (typeof window.plausible === 'function') {
+      window.plausible('github_pages_click', {
+        props: { owner, repo, target, surface },
+      });
+    }
+
+    try {
+      const key = 'portfolio_github_pages_clicks';
+      const raw = localStorage.getItem(key);
+      const parsed = raw ? JSON.parse(raw) : {};
+      const bucketKey = `${fullName}:${target}`;
+      const previous = parsed[bucketKey] || { count: 0, lastClickedAt: null, surface };
+      parsed[bucketKey] = {
+        count: Number(previous.count || 0) + 1,
+        lastClickedAt: new Date().toISOString(),
+        owner,
+        repo,
+        target,
+        surface,
+      };
+      localStorage.setItem(key, JSON.stringify(parsed));
+    } catch {}
+  }
+
+  function bindGithubPagesTracking() {
+    const links = document.querySelectorAll('a[data-gh-pages-track]');
+    links.forEach((link) => {
+      if (link.dataset.trackBound === '1') return;
+      link.dataset.trackBound = '1';
+      link.addEventListener('click', () => trackGithubPagesClick(link));
+    });
+  }
+
+  document.addEventListener('astro:page-load', bindGithubPagesTracking);
+</script>
+
 <style>
   .summary-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: var(--space-md);
-    margin: var(--space-xl) 0 var(--space-2xl);
+    margin: var(--space-xl) 0 var(--space-lg);
   }
 
   .summary-card {
@@ -131,25 +322,54 @@ const generatedLabel = Number.isFinite(Date.parse(directory.generatedAt))
     gap: var(--space-xs);
   }
 
-  .summary-card--wide {
-    grid-column: span 1;
-  }
-
   .summary-label {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-muted);
   }
 
   .summary-value {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     color: var(--text-primary);
   }
 
-  .summary-value--small {
+  .health-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    background: var(--bg-card);
+  }
+
+  .health-card h2 {
+    margin: 0 0 var(--space-sm);
     font-size: 1rem;
-    line-height: 1.3;
+  }
+
+  .health-card p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+  }
+
+  .feed-links {
+    margin-top: var(--space-sm);
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .feed-links a {
+    font-size: 0.84rem;
+    color: var(--accent-text);
+  }
+
+  .featured-group {
+    margin-bottom: var(--space-xl);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-card);
   }
 
   .groups {
@@ -177,7 +397,7 @@ const generatedLabel = Number.isFinite(Date.parse(directory.generatedAt))
 
   .owner-group__head h2 {
     margin: 0;
-    font-size: 1.05rem;
+    font-size: 1.03rem;
   }
 
   .owner-group__head span {
@@ -241,6 +461,17 @@ const generatedLabel = Number.isFinite(Date.parse(directory.generatedAt))
     padding: 0.15rem 0.55rem;
     color: var(--text-muted);
     background: rgba(255, 255, 255, 0.03);
+  }
+
+  .meta-pill--bad {
+    border-color: #b00020;
+    color: #b00020;
+  }
+
+  @media (max-width: 1080px) {
+    .summary-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 
   @media (max-width: 900px) {

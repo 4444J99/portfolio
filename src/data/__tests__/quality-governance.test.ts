@@ -6,6 +6,7 @@ const root = resolve(__dirname, '../../../');
 const readme = readFileSync(resolve(root, 'README.md'), 'utf-8');
 const lighthouseRc = readFileSync(resolve(root, 'lighthouserc.cjs'), 'utf-8');
 const workflow = readFileSync(resolve(root, '.github/workflows/quality.yml'), 'utf-8');
+const securityDriftWorkflow = readFileSync(resolve(root, '.github/workflows/security-drift.yml'), 'utf-8');
 const vitestConfig = readFileSync(resolve(root, 'vitest.config.ts'), 'utf-8');
 const typecheckScript = readFileSync(resolve(root, 'scripts/check-typecheck-hints.mjs'), 'utf-8');
 const runtimeCoverageScript = readFileSync(resolve(root, 'scripts/check-runtime-a11y-coverage.mjs'), 'utf-8');
@@ -124,8 +125,20 @@ describe('quality governance drift checks', () => {
   it('CI workflow explicitly sets the phase and runs the parity pipeline', () => {
     expect(workflow).toContain('QUALITY_PHASE: W6');
     expect(workflow).toContain('npm run test:security:prod');
+    expect(workflow).toContain('npm run test:security:github');
+    expect(workflow).toContain('npm run test:security:drift');
+    expect(workflow).toContain('cron: "17 9 * * *"');
+    expect(workflow).toContain('Policy governance guard');
     expect(workflow).toContain('run: npm run quality:local');
     expect(workflow).toContain('run: npm run quality:summary -- --allow-missing');
+  });
+
+  it('daily security drift monitor workflow is scheduled and blocking', () => {
+    expect(securityDriftWorkflow).toContain('name: Security Drift Monitor');
+    expect(securityDriftWorkflow).toContain('cron: "47 9 * * *"');
+    expect(securityDriftWorkflow).toContain('npm run test:security:prod');
+    expect(securityDriftWorkflow).toContain('npm run test:security:github');
+    expect(securityDriftWorkflow).toContain('npm run test:security:drift');
   });
 
   it('coverage and typecheck gates are policy-driven, not hardcoded', () => {

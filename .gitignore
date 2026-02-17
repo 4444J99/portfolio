@@ -51,6 +51,8 @@ coverage/
 !.quality/security-allowlist.json
 !.quality/security-policy.json
 !.quality/security-register.json
+!.quality/security-baseline.json
+!.quality/runtime-error-allowlist.json
 
 # Playwright artifacts
 test-results/

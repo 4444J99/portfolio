@@ -104,6 +104,8 @@ export interface QualityMetrics {
     moderate: number | null;
     low: number | null;
     total: number | null;
+    githubOpenAlerts: number | null;
+    githubAdvisoryStatus: string;
     prodCounts: {
       critical: number | null;
       high: number | null;
@@ -122,6 +124,7 @@ export interface QualityMetrics {
     policyCheckpoint: { date: string; maxModerate: number; maxLow: number } | null;
     status: string;
     source: string | null;
+    githubSource: string | null;
   };
   coverage: { statements: number | null; branches: number | null; functions: number | null; lines: number | null };
   lighthouse: { performance: number | null; accessibility: number | null; bestPractices: number | null; seo: number | null };
@@ -144,9 +147,25 @@ export interface QualityMetrics {
     routeBudgetsStatus: string;
     chunkBudgetsStatus: string;
     interactionBudgetsStatus: string;
+    routeBudgetCheckpoint: { date: string } | null;
+    chunkBudgetCheckpoint: { date: string } | null;
+    interactionBudgetCheckpoint: { date: string } | null;
     largestChunks: Array<{ chunk: string; gzipBytes: number }>;
     interactiveRouteJsTotals: Record<string, { scenario: string; rawBytes: number; gzipBytes: number; assetCount: number; assets: string[] }>;
     routeJsTotals: Record<string, { rawBytes: number; gzipBytes: number; assetCount: number; assets: string[] }>;
+    source: string | null;
+  };
+  runtimeErrors: {
+    status: string;
+    total: number | null;
+    uncategorized: number | null;
+    allowlisted: number | null;
+    source: string | null;
+  };
+  stability: {
+    status: string;
+    consecutiveSuccess: number | null;
+    requiredConsecutive: number | null;
     source: string | null;
   };
   build: { pages: number; bundleFiles: number };
@@ -154,12 +173,18 @@ export interface QualityMetrics {
     tests: string;
     security: string;
     securityProd: string;
+    securityGithub: string;
+    securityDrift: string;
     coverage: string;
     lighthouse: string;
     a11yStatic: string;
     a11yRuntime: string;
     runtimeCoverage: string;
     e2eSmoke: string;
+    runtimeErrors: string;
+    greenRuns: string;
+    ledger: string;
+    policyGovernance: string;
     performance: string;
     build: string;
   };

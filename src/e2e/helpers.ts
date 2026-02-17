@@ -1,5 +1,26 @@
 import { expect, type Page } from '@playwright/test';
 
+export const TOP_LEVEL_ROUTES = [
+  '/',
+  '/about',
+  '/community',
+  '/consult',
+  '/dashboard',
+  '/essays',
+  '/gallery',
+  '/omega',
+  '/products',
+  '/resume',
+  '/architecture',
+];
+
+export const TRANSITION_STRESS_ROUTES = [
+  '/projects/recursive-engine',
+  '/projects/ai-conductor',
+  '/projects/distribution-strategy',
+  '/projects/org-architecture',
+];
+
 export async function replayAstroPageLoad(page: Page, cycles = 3) {
   await page.evaluate((count) => {
     for (let i = 0; i < count; i += 1) {

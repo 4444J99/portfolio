@@ -2,6 +2,7 @@
 import SketchContainer from './sketches/SketchContainer.astro';
 import TableOfContents from './TableOfContents.astro';
 import { projectIndex } from '../data/project-index';
+import pagesDirectory from '../data/github-pages.json';
 import { base } from '../utils/paths';
 
 interface Badge {
@@ -23,6 +24,28 @@ interface Props {
 
 const { title, tagline, tags, repo, liveUrl, badges, heroImage, sketchId = 'recursive-tree' } = Astro.props;
 
+interface PagesRepo {
+  owner: string;
+  repo: string;
+  fullName: string;
+  pageUrl: string;
+  repoUrl: string;
+  featured: boolean;
+  priority: number;
+  hidden: boolean;
+  label: string | null;
+}
+
+function parseGitHubRepo(url?: string) {
+  if (!url) return null;
+  const match = url.match(/^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)/i);
+  if (!match) return null;
+  return {
+    owner: match[1].toLowerCase(),
+    repo: match[2].replace(/\.git$/i, '').toLowerCase(),
+  };
+}
+
 // Derive current slug from URL and find related projects by shared tags
 const segments = Astro.url.pathname.replace(/\/$/, '').split('/');
 const currentSlug = segments[segments.length - 1];
@@ -38,6 +61,49 @@ const related = projectIndex
 const currentIdx = projectIndex.findIndex(p => p.slug === currentSlug);
 const prevProject = currentIdx > 0 ? projectIndex[currentIdx - 1] : null;
 const nextProject = currentIdx < projectIndex.length - 1 ? projectIndex[currentIdx + 1] : null;
+
+const repoRef = parseGitHubRepo(repo);
+const pagesRepos = ((pagesDirectory as { repos?: PagesRepo[] }).repos ?? []).filter((entry) => !entry.hidden);
+const relatedPages = repoRef
+  ? (() => {
+      const exact = pagesRepos.find(
+        (entry) =>
+          entry.owner.toLowerCase() === repoRef.owner &&
+          entry.repo.toLowerCase() === repoRef.repo
+      );
+
+      const ownerPool = pagesRepos
+        .filter((entry) => entry.owner.toLowerCase() === repoRef.owner && entry !== exact)
+        .sort(
+          (a, b) =>
+            Number(b.featured) - Number(a.featured) ||
+            b.priority - a.priority ||
+            a.repo.localeCompare(b.repo, undefined, { sensitivity: 'base' })
+        );
+
+      const familyTokens = repoRef.repo.split(/[-_]+/).filter((token) => token.length >= 4);
+      const familyMatches = ownerPool.filter((entry) =>
+        familyTokens.some((token) => entry.repo.toLowerCase().includes(token))
+      );
+
+      const combined = [
+        ...(exact ? [exact] : []),
+        ...familyMatches,
+        ...ownerPool,
+      ];
+
+      const deduped = [];
+      const seen = new Set();
+      for (const entry of combined) {
+        const key = entry.fullName.toLowerCase();
+        if (seen.has(key)) continue;
+        seen.add(key);
+        deduped.push(entry);
+      }
+
+      return deduped.slice(0, 6);
+    })()
+  : [];
 ---
 
 <article class="project">
@@ -61,6 +127,41 @@ const nextProject = currentIdx < projectIndex.length - 1 ? projectIndex[currentI
         {repo && <a href={repo} target="_blank" rel="noopener noreferrer" class="project__link">GitHub &rarr;</a>}
         {liveUrl && <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="project__link">Live &rarr;</a>}
       </div>
+    )}
+    {relatedPages.length > 0 && (
+      <section class="project__pages" aria-label="Related GitHub Pages links">
+        <h2 class="project__pages-heading">Related Live Sites</h2>
+        <ul class="project__pages-list">
+          {relatedPages.map((entry) => (
+            <li class="project__pages-item">
+              <a
+                href={entry.pageUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project__pages-link"
+                data-gh-pages-track
+                data-track-surface="project-related"
+                data-track-owner={entry.owner}
+                data-track-repo={entry.repo}
+                data-track-target="page">
+                {entry.label ?? entry.fullName}
+              </a>
+              <a
+                href={entry.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project__pages-repo"
+                data-gh-pages-track
+                data-track-surface="project-related"
+                data-track-owner={entry.owner}
+                data-track-repo={entry.repo}
+                data-track-target="repo">
+                repo
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
     )}
   </header>
   {heroImage && (
@@ -190,6 +291,59 @@ const nextProject = currentIdx < projectIndex.length - 1 ? projectIndex[currentI
 
   .project__link:hover {
     color: var(--accent-text);
+    border-color: var(--accent);
+  }
+
+  .project__pages {
+    margin-top: var(--space-lg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-md);
+    background: var(--bg-card);
+  }
+
+  .project__pages-heading {
+    margin: 0 0 var(--space-sm);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .project__pages-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .project__pages-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .project__pages-link {
+    font-size: 0.86rem;
+    color: var(--text-primary);
+  }
+
+  .project__pages-link:hover {
+    color: var(--accent-text);
+  }
+
+  .project__pages-repo {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.1rem 0.45rem;
+  }
+
+  .project__pages-repo:hover {
+    color: var(--text-secondary);
     border-color: var(--accent);
   }
 
@@ -350,3 +504,28 @@ const nextProject = currentIdx < projectIndex.length - 1 ? projectIndex[currentI
     }
   }
 </style>
+
+<script is:inline>
+  function trackGithubPagesClick(link) {
+    const owner = link.dataset.trackOwner || 'unknown';
+    const repo = link.dataset.trackRepo || 'unknown';
+    const target = link.dataset.trackTarget || 'unknown';
+    const surface = link.dataset.trackSurface || 'unknown';
+
+    if (typeof window.plausible === 'function') {
+      window.plausible('github_pages_click', {
+        props: { owner, repo, target, surface },
+      });
+    }
+  }
+
+  function bindGithubPagesTracking() {
+    document.querySelectorAll('a[data-gh-pages-track]').forEach((link) => {
+      if (link.dataset.trackBound === '1') return;
+      link.dataset.trackBound = '1';
+      link.addEventListener('click', () => trackGithubPagesClick(link));
+    });
+  }
+
+  document.addEventListener('astro:page-load', bindGithubPagesTracking);
+</script>

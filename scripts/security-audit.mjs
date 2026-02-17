@@ -84,6 +84,7 @@ const rawOutputPath = resolve(
     scope === 'prod' ? '.quality/security-audit-prod-raw.json' : '.quality/security-audit-raw.json'
   )
 );
+const auditFixturePath = parseOption('audit-fixture', null);
 
 const policy = readJson(policyPath, null);
 if (!policy) {
@@ -164,20 +165,32 @@ for (const entry of allowlistEntries) {
   activeAllowlistEntries.push(entry);
 }
 
-const omitArg = scope === 'prod' ? '--omit=dev' : '';
-const command = ['npm', 'audit', '--json', omitArg].filter(Boolean).join(' ');
-
 let auditReport;
-try {
-  const raw = execSync(command, { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] });
-  auditReport = JSON.parse(raw);
-} catch (error) {
-  const stdout = error?.stdout?.toString?.() ?? '';
-  if (!stdout.trim()) {
-    console.error(`Failed to run security audit command: ${command}`);
+let command = 'fixture';
+
+if (auditFixturePath) {
+  const resolvedFixturePath = resolve(auditFixturePath);
+  if (!existsSync(resolvedFixturePath)) {
+    console.error(`Missing --audit-fixture file: ${resolvedFixturePath}`);
     process.exit(1);
   }
-  auditReport = JSON.parse(stdout);
+  auditReport = JSON.parse(readFileSync(resolvedFixturePath, 'utf-8'));
+  command = `fixture:${resolvedFixturePath}`;
+} else {
+  const omitArg = scope === 'prod' ? '--omit=dev' : '';
+  command = ['npm', 'audit', '--json', omitArg].filter(Boolean).join(' ');
+
+  try {
+    const raw = execSync(command, { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] });
+    auditReport = JSON.parse(raw);
+  } catch (error) {
+    const stdout = error?.stdout?.toString?.() ?? '';
+    if (!stdout.trim()) {
+      console.error(`Failed to run security audit command: ${command}`);
+      process.exit(1);
+    }
+    auditReport = JSON.parse(stdout);
+  }
 }
 
 mkdirSync(dirname(rawOutputPath), { recursive: true });

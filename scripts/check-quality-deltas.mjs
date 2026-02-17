@@ -175,6 +175,46 @@ if (baseline.performance?.interactionBudgetsStatus === 'pass' && current.perform
   });
 }
 
+const baselineGithubAlerts = baseline.security?.githubOpenAlerts;
+const currentGithubAlerts = current.security?.githubOpenAlerts;
+if (typeof baselineGithubAlerts === 'number' && typeof currentGithubAlerts === 'number' && currentGithubAlerts > baselineGithubAlerts) {
+  regressions.push({
+    category: 'security',
+    metric: 'githubOpenAlerts',
+    baseline: baselineGithubAlerts,
+    current: currentGithubAlerts,
+    delta: currentGithubAlerts - baselineGithubAlerts,
+    allowedDrop: 0,
+    message: `security github open alerts increased by ${currentGithubAlerts - baselineGithubAlerts}`,
+  });
+}
+
+if (baseline.runtimeErrors?.status === 'pass' && current.runtimeErrors?.status !== 'pass') {
+  regressions.push({
+    category: 'runtimeErrors',
+    metric: 'status',
+    baseline: baseline.runtimeErrors.status,
+    current: current.runtimeErrors?.status,
+    delta: null,
+    allowedDrop: 0,
+    message: `runtime error telemetry regressed from ${baseline.runtimeErrors.status} to ${current.runtimeErrors?.status}`,
+  });
+}
+
+const baselineRuntimeUncategorized = baseline.runtimeErrors?.uncategorized;
+const currentRuntimeUncategorized = current.runtimeErrors?.uncategorized;
+if (typeof baselineRuntimeUncategorized === 'number' && typeof currentRuntimeUncategorized === 'number' && currentRuntimeUncategorized > baselineRuntimeUncategorized) {
+  regressions.push({
+    category: 'runtimeErrors',
+    metric: 'uncategorized',
+    baseline: baselineRuntimeUncategorized,
+    current: currentRuntimeUncategorized,
+    delta: currentRuntimeUncategorized - baselineRuntimeUncategorized,
+    allowedDrop: 0,
+    message: `runtime uncategorized errors increased by ${currentRuntimeUncategorized - baselineRuntimeUncategorized}`,
+  });
+}
+
 regressions.sort((a, b) => {
   if (a.delta === null && b.delta === null) return 0;
   if (a.delta === null) return 1;

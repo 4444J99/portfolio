@@ -21,6 +21,8 @@ const baselinePath = resolve('src/data/quality-metrics-baseline.json');
 const deltaPath = resolve('.quality/delta-summary.json');
 const typecheckPath = resolve('.quality/typecheck-summary.json');
 const securityRegisterPath = resolve('.quality/security-register.json');
+const greenRunsPath = resolve('.quality/green-run-history.json');
+const runtimeErrorsPath = resolve('.quality/runtime-errors-summary.json');
 
 function readJson(path, label) {
   if (!existsSync(path)) {
@@ -56,6 +58,8 @@ let baseline;
 let deltaSummary;
 let typecheckSummary;
 let securityRegister;
+let greenRunsSummary;
+let runtimeErrorsSummary;
 
 try {
   policy = readJson(policyPath, 'ratchet policy');
@@ -64,6 +68,8 @@ try {
   deltaSummary = readJson(deltaPath, 'delta summary');
   typecheckSummary = readJson(typecheckPath, 'typecheck summary');
   securityRegister = readJson(securityRegisterPath, 'security register');
+  greenRunsSummary = readJson(greenRunsPath, 'green-run history');
+  runtimeErrorsSummary = readJson(runtimeErrorsPath, 'runtime error telemetry summary');
 } catch (error) {
   console.error(String(error));
   process.exit(1);
@@ -98,6 +104,8 @@ lines.push(
   `- Runtime route coverage: ${current?.a11y?.runtime?.routesCovered ?? 'n/a'}/${current?.a11y?.runtime?.totalRoutes ?? 'n/a'} (${current?.a11y?.runtime?.coveragePct ?? 'n/a'}%)`
 );
 lines.push(`- E2E smoke: ${current?.sources?.e2eSmoke ?? 'n/a'}`);
+lines.push(`- Runtime errors: ${runtimeErrorsSummary?.status ?? current?.runtimeErrors?.status ?? 'n/a'} (uncategorized ${runtimeErrorsSummary?.counts?.uncategorized ?? current?.runtimeErrors?.uncategorized ?? 'n/a'})`);
+lines.push(`- Green-run tracker: ${greenRunsSummary?.consecutiveSuccess ?? current?.stability?.consecutiveSuccess ?? 'n/a'}/${greenRunsSummary?.requiredConsecutive ?? current?.stability?.requiredConsecutive ?? 'n/a'} (${greenRunsSummary?.status ?? current?.stability?.status ?? 'n/a'})`);
 lines.push(`- Perf budgets: route ${current?.performance?.routeBudgetsStatus ?? 'n/a'}, chunk ${current?.performance?.chunkBudgetsStatus ?? 'n/a'}, interaction ${current?.performance?.interactionBudgetsStatus ?? 'n/a'}`);
 lines.push(`- Lighthouse: perf ${current?.lighthouse?.performance ?? 'n/a'}, a11y ${current?.lighthouse?.accessibility ?? 'n/a'}, bp ${current?.lighthouse?.bestPractices ?? 'n/a'}, seo ${current?.lighthouse?.seo ?? 'n/a'}`);
 lines.push('');
@@ -154,11 +162,13 @@ lines.push(metricRow('Security critical', current?.security?.critical, baseline?
 lines.push(metricRow('Security high', current?.security?.high, baseline?.security?.high));
 lines.push(metricRow('Security moderate', current?.security?.moderate, baseline?.security?.moderate));
 lines.push(metricRow('Security low', current?.security?.low, baseline?.security?.low));
+lines.push(metricRow('Security github open alerts', current?.security?.githubOpenAlerts, baseline?.security?.githubOpenAlerts));
 lines.push(metricRow('LH performance', current?.lighthouse?.performance, baseline?.lighthouse?.performance));
 lines.push(metricRow('LH accessibility', current?.lighthouse?.accessibility, baseline?.lighthouse?.accessibility));
 lines.push(metricRow('LH best practices', current?.lighthouse?.bestPractices, baseline?.lighthouse?.bestPractices));
 lines.push(metricRow('LH SEO', current?.lighthouse?.seo, baseline?.lighthouse?.seo));
 lines.push(metricRow('Runtime coverage %', current?.a11y?.runtime?.coveragePct, baseline?.a11y?.runtime?.coveragePct));
+lines.push(metricRow('Runtime uncategorized errors', current?.runtimeErrors?.uncategorized, baseline?.runtimeErrors?.uncategorized));
 lines.push(metricRow('A11y critical total', (current?.a11y?.static?.critical ?? 0) + (current?.a11y?.runtime?.critical ?? 0), (baseline?.a11y?.static?.critical ?? 0) + (baseline?.a11y?.runtime?.critical ?? 0)));
 lines.push(metricRow('A11y serious total', (current?.a11y?.static?.serious ?? 0) + (current?.a11y?.runtime?.serious ?? 0), (baseline?.a11y?.static?.serious ?? 0) + (baseline?.a11y?.runtime?.serious ?? 0)));
 lines.push('');

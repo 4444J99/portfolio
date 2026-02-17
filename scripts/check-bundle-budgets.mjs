@@ -52,6 +52,48 @@ function selectChunkThresholds(referenceTime) {
   return reached[reached.length - 1];
 }
 
+function selectRouteThresholds(referenceTime) {
+  const checkpoints = [
+    {
+      date: '2026-02-17',
+      thresholds: {
+        '/portfolio/about': 120 * 1024,
+        '/portfolio/resume': 120 * 1024,
+        '/portfolio/consult': 120 * 1024,
+        '/portfolio/dashboard': 220 * 1024,
+        '/portfolio/architecture': 350 * 1024,
+        '/portfolio/gallery': 420 * 1024,
+      },
+    },
+    {
+      date: '2026-03-07',
+      thresholds: {
+        '/portfolio/about': 110 * 1024,
+        '/portfolio/resume': 110 * 1024,
+        '/portfolio/consult': 110 * 1024,
+        '/portfolio/dashboard': 210 * 1024,
+        '/portfolio/architecture': 330 * 1024,
+        '/portfolio/gallery': 400 * 1024,
+      },
+    },
+    {
+      date: '2026-03-18',
+      thresholds: {
+        '/portfolio/about': 100 * 1024,
+        '/portfolio/resume': 100 * 1024,
+        '/portfolio/consult': 100 * 1024,
+        '/portfolio/dashboard': 200 * 1024,
+        '/portfolio/architecture': 300 * 1024,
+        '/portfolio/gallery': 360 * 1024,
+      },
+    },
+  ];
+
+  const reached = checkpoints.filter((checkpoint) => Date.parse(checkpoint.date) <= referenceTime);
+  if (reached.length === 0) return checkpoints[0];
+  return reached[reached.length - 1];
+}
+
 function selectInteractionThresholds(referenceTime) {
   const checkpoints = [
     {
@@ -92,15 +134,6 @@ if (dateOverride && referenceTime === null) {
   process.exit(1);
 }
 
-const ROUTE_BUDGETS_GZIP = {
-  '/portfolio/about': 120 * 1024,
-  '/portfolio/resume': 120 * 1024,
-  '/portfolio/consult': 120 * 1024,
-  '/portfolio/dashboard': 220 * 1024,
-  '/portfolio/architecture': 350 * 1024,
-  '/portfolio/gallery': 420 * 1024,
-};
-
 if (!existsSync(perfSummaryPath)) {
   console.error(`Missing performance summary: ${perfSummaryPath}`);
   process.exit(1);
@@ -110,8 +143,10 @@ const perfSummary = JSON.parse(readFileSync(perfSummaryPath, 'utf-8'));
 const routeTotals = perfSummary.routeJsTotals ?? {};
 const interactionTotals = perfSummary.interactiveRouteJsTotals ?? {};
 const chunkTotals = Array.isArray(perfSummary.largestChunks) ? perfSummary.largestChunks : [];
+const routeThresholdCheckpoint = selectRouteThresholds(referenceTime ?? Date.now());
 const chunkThresholdCheckpoint = selectChunkThresholds(referenceTime ?? Date.now());
 const interactionThresholdCheckpoint = selectInteractionThresholds(referenceTime ?? Date.now());
+const ROUTE_BUDGETS_GZIP = routeThresholdCheckpoint.thresholds;
 const CHUNK_BUDGETS_GZIP = chunkThresholdCheckpoint.thresholds;
 const INTERACTION_ROUTE_BUDGETS_GZIP = interactionThresholdCheckpoint.thresholds;
 
@@ -174,6 +209,7 @@ const summary = {
   generated: new Date().toISOString(),
   source: perfSummaryPath,
   policyReferenceDate: new Date(referenceTime ?? Date.now()).toISOString(),
+  routeThresholdCheckpoint,
   routeThresholds: ROUTE_BUDGETS_GZIP,
   interactionThresholds: INTERACTION_ROUTE_BUDGETS_GZIP,
   interactionThresholdCheckpoint,

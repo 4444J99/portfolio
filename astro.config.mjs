@@ -6,7 +6,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://4444j99.github.io',
   base: '/portfolio',
-  prefetch: true,
+  // Keep navigation transitions but avoid eager cross-route prefetch bursts on heavy pages.
+  prefetch: false,
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/404'),

@@ -14,8 +14,21 @@ export default defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:4173/portfolio',
     headless: true,
-    viewport: { width: 390, height: 844 },
   },
+  projects: [
+    {
+      name: 'mobile',
+      use: {
+        viewport: { width: 390, height: 844 },
+      },
+    },
+    {
+      name: 'desktop',
+      use: {
+        viewport: { width: 1440, height: 900 },
+      },
+    },
+  ],
   webServer: {
     command: 'npm run preview -- --host 127.0.0.1 --port 4173',
     port: 4173,

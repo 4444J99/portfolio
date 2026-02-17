@@ -19,6 +19,7 @@ const dataAttrs = Object.fromEntries(
   data-sketch={sketchId}
   data-height={height}
   data-mobile-height={mobileHeight}
+  style={`--sketch-height:${height};--sketch-mobile-height:${mobileHeight};height:var(--sketch-height);`}
   data-interactive={interactive ? '' : undefined}
   role={interactive ? "group" : "img"}
   aria-label={ariaLabel}
@@ -51,6 +52,7 @@ const dataAttrs = Object.fromEntries(
 <style>
   .sketch-container {
     width: 100%;
+    height: var(--sketch-height);
     position: relative;
     overflow: hidden;
     border-radius: 8px;
@@ -140,5 +142,11 @@ const dataAttrs = Object.fromEntries(
     color: var(--text-muted);
     background: rgba(0,0,0,0.3);
     pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .sketch-container {
+      height: var(--sketch-mobile-height);
+    }
   }
 </style>

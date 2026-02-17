@@ -127,12 +127,15 @@ const metrics = {
     moderate: null,
     low: null,
     total: null,
+    githubOpenAlerts: null,
+    githubAdvisoryStatus: 'unknown',
     prodCounts: emptyCounts(),
     devCounts: emptyCounts(),
     allowlistActive: 0,
     policyCheckpoint: null,
     status: 'unknown',
     source: null,
+    githubSource: null,
   },
   coverage: { statements: null, branches: null, functions: null, lines: null },
   lighthouse: { performance: null, accessibility: null, bestPractices: null, seo: null },
@@ -155,9 +158,25 @@ const metrics = {
     routeBudgetsStatus: 'unknown',
     chunkBudgetsStatus: 'unknown',
     interactionBudgetsStatus: 'unknown',
+    routeBudgetCheckpoint: null,
+    chunkBudgetCheckpoint: null,
+    interactionBudgetCheckpoint: null,
     largestChunks: [],
     interactiveRouteJsTotals: {},
     routeJsTotals: {},
+    source: null,
+  },
+  runtimeErrors: {
+    status: 'unknown',
+    total: null,
+    uncategorized: null,
+    allowlisted: null,
+    source: null,
+  },
+  stability: {
+    status: 'unknown',
+    consecutiveSuccess: null,
+    requiredConsecutive: null,
     source: null,
   },
   build: { pages: 0, bundleFiles: 0 },
@@ -165,12 +184,18 @@ const metrics = {
     tests: '.quality/vitest-report.json',
     security: '.quality/security-summary.json',
     securityProd: '.quality/security-summary-prod.json',
+    securityGithub: '.quality/github-advisory-summary.json',
+    securityDrift: '.quality/security-drift-summary.json',
     coverage: 'coverage/coverage-summary.json',
     lighthouse: '.lighthouseci/lhr-*.json',
     a11yStatic: '.a11y/a11y-summary.json',
     a11yRuntime: '.a11y/runtime-summary.json',
     runtimeCoverage: '.quality/runtime-coverage-summary.json',
     e2eSmoke: '.quality/e2e-smoke-summary.json',
+    runtimeErrors: '.quality/runtime-errors-summary.json',
+    greenRuns: '.quality/green-run-history.json',
+    ledger: '.quality/quality-ledger.json',
+    policyGovernance: '.quality/policy-governance-summary.json',
     performance: '.quality/perf-summary.json + .quality/perf-budget-summary.json',
     build: 'dist/**/*.html and dist/_astro/**/*',
   },
@@ -187,11 +212,15 @@ if (existsSync(vitestReportPath)) {
 
 const securitySummaryPath = resolve('.quality/security-summary.json');
 const securityProdSummaryPath = resolve('.quality/security-summary-prod.json');
+const securityGithubSummaryPath = resolve('.quality/github-advisory-summary.json');
 const securityFullSummary = existsSync(securitySummaryPath)
   ? JSON.parse(readFileSync(securitySummaryPath, 'utf-8'))
   : null;
 const securityProdSummary = existsSync(securityProdSummaryPath)
   ? JSON.parse(readFileSync(securityProdSummaryPath, 'utf-8'))
+  : null;
+const securityGithubSummary = existsSync(securityGithubSummaryPath)
+  ? JSON.parse(readFileSync(securityGithubSummaryPath, 'utf-8'))
   : null;
 
 if (securityFullSummary) {
@@ -217,6 +246,20 @@ if (securityFullSummary) {
   const prodCounts = securityProdSummary ? readSummaryCounts(securityProdSummary) : emptyCounts();
   metrics.security.prodCounts = prodCounts;
   metrics.security.devCounts = deriveDevCounts(fullCounts, prodCounts);
+}
+
+if (securityGithubSummary) {
+  metrics.security.githubAdvisoryStatus = typeof securityGithubSummary.status === 'string'
+    ? securityGithubSummary.status
+    : 'unknown';
+  metrics.security.githubOpenAlerts = toNumberOrNull(securityGithubSummary?.counts?.total);
+  metrics.security.githubSource = metrics.sources.securityGithub;
+
+  if (metrics.security.status === 'unknown') {
+    metrics.security.status = metrics.security.githubAdvisoryStatus;
+  } else if (metrics.security.status === 'pass' && metrics.security.githubAdvisoryStatus === 'fail') {
+    metrics.security.status = 'fail';
+  }
 }
 
 const coveragePath = resolve('coverage/coverage-summary.json');
@@ -303,6 +346,37 @@ if (existsSync(perfBudgetPath)) {
   metrics.performance.interactionBudgetsStatus = typeof perfBudget.interactionBudgetsStatus === 'string'
     ? perfBudget.interactionBudgetsStatus
     : 'unknown';
+  metrics.performance.routeBudgetCheckpoint =
+    perfBudget?.routeThresholdCheckpoint && typeof perfBudget.routeThresholdCheckpoint.date === 'string'
+      ? { date: perfBudget.routeThresholdCheckpoint.date }
+      : null;
+  metrics.performance.chunkBudgetCheckpoint =
+    perfBudget?.chunkThresholdCheckpoint && typeof perfBudget.chunkThresholdCheckpoint.date === 'string'
+      ? { date: perfBudget.chunkThresholdCheckpoint.date }
+      : null;
+  metrics.performance.interactionBudgetCheckpoint =
+    perfBudget?.interactionThresholdCheckpoint && typeof perfBudget.interactionThresholdCheckpoint.date === 'string'
+      ? { date: perfBudget.interactionThresholdCheckpoint.date }
+      : null;
+}
+
+const runtimeErrorsPath = resolve('.quality/runtime-errors-summary.json');
+if (existsSync(runtimeErrorsPath)) {
+  const runtimeErrors = JSON.parse(readFileSync(runtimeErrorsPath, 'utf-8'));
+  metrics.runtimeErrors.status = typeof runtimeErrors.status === 'string' ? runtimeErrors.status : 'unknown';
+  metrics.runtimeErrors.total = toNumberOrNull(runtimeErrors?.counts?.total);
+  metrics.runtimeErrors.uncategorized = toNumberOrNull(runtimeErrors?.counts?.uncategorized);
+  metrics.runtimeErrors.allowlisted = toNumberOrNull(runtimeErrors?.counts?.allowlisted);
+  metrics.runtimeErrors.source = metrics.sources.runtimeErrors;
+}
+
+const greenRunsPath = resolve('.quality/green-run-history.json');
+if (existsSync(greenRunsPath)) {
+  const greenRuns = JSON.parse(readFileSync(greenRunsPath, 'utf-8'));
+  metrics.stability.status = typeof greenRuns.status === 'string' ? greenRuns.status : 'unknown';
+  metrics.stability.consecutiveSuccess = toNumberOrNull(greenRuns.consecutiveSuccess);
+  metrics.stability.requiredConsecutive = toNumberOrNull(greenRuns.requiredConsecutive);
+  metrics.stability.source = metrics.sources.greenRuns;
 }
 
 const a11yStates = [metrics.a11y.static.status, metrics.a11y.runtime.status].filter((state) => state !== 'unknown');
@@ -365,7 +439,7 @@ writeFileSync(resolve('src/data/quality-metrics.json'), JSON.stringify(metrics, 
 console.log('Generated quality badges and metrics:');
 console.log(`  Tests: ${metrics.tests.passed ?? 'n/a'}/${metrics.tests.total ?? 'n/a'} (files=${metrics.tests.files})`);
 console.log(
-  `  Security: status=${metrics.security.status} critical=${metrics.security.critical ?? 'n/a'} high=${metrics.security.high ?? 'n/a'} moderate=${metrics.security.moderate ?? 'n/a'} low=${metrics.security.low ?? 'n/a'}`
+  `  Security: status=${metrics.security.status} critical=${metrics.security.critical ?? 'n/a'} high=${metrics.security.high ?? 'n/a'} moderate=${metrics.security.moderate ?? 'n/a'} low=${metrics.security.low ?? 'n/a'} githubAlerts=${metrics.security.githubOpenAlerts ?? 'n/a'}`
 );
 console.log(`  Coverage: ${coverageScore === null ? 'n/a' : `${coverageScore}%`}`);
 console.log(
@@ -376,5 +450,11 @@ console.log(
 );
 console.log(
   `  Perf budgets: route=${metrics.performance.routeBudgetsStatus} chunk=${metrics.performance.chunkBudgetsStatus} interaction=${metrics.performance.interactionBudgetsStatus}`
+);
+console.log(
+  `  Runtime errors: status=${metrics.runtimeErrors.status} total=${metrics.runtimeErrors.total ?? 'n/a'} uncategorized=${metrics.runtimeErrors.uncategorized ?? 'n/a'}`
+);
+console.log(
+  `  Green runs: ${metrics.stability.consecutiveSuccess ?? 'n/a'}/${metrics.stability.requiredConsecutive ?? 'n/a'} (${metrics.stability.status})`
 );
 console.log(`  Build: pages=${metrics.build.pages} bundleFiles=${metrics.build.bundleFiles}`);

@@ -1,0 +1,51 @@
+name: Security Drift Monitor
+
+on:
+  schedule:
+    - cron: "47 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  security-events: read
+
+jobs:
+  security-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Security drift gates
+        run: |
+          npm run test:security:prod
+          npm run test:security
+          npm run test:security:github
+          npm run test:security:drift
+
+      - name: Track green-run history
+        if: always()
+        run: npm run quality:green-track
+
+      - name: Upload security drift artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-drift-artifacts
+          path: |
+            .quality/security-summary.json
+            .quality/security-summary-prod.json
+            .quality/security-audit-raw.json
+            .quality/security-audit-prod-raw.json
+            .quality/github-advisory-summary.json
+            .quality/security-drift-summary.json
+            .quality/green-run-history.json
+          include-hidden-files: true
+          retention-days: 14

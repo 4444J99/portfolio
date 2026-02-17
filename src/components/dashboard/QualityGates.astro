@@ -13,32 +13,57 @@ const security = quality.security ?? {
   moderate: null,
   low: null,
   total: null,
+  githubOpenAlerts: null,
+  githubAdvisoryStatus: 'unknown',
   prodCounts: { critical: null, high: null, moderate: null, low: null, total: null },
   devCounts: { critical: null, high: null, moderate: null, low: null, total: null },
   allowlistActive: 0,
   policyCheckpoint: null,
   status: 'unknown',
   source: null,
+  githubSource: null,
 };
 const performance = quality.performance ?? {
   routeBudgetsStatus: 'unknown',
   chunkBudgetsStatus: 'unknown',
   interactionBudgetsStatus: 'unknown',
+  routeBudgetCheckpoint: null,
+  chunkBudgetCheckpoint: null,
+  interactionBudgetCheckpoint: null,
   largestChunks: [],
   interactiveRouteJsTotals: {},
   routeJsTotals: {},
+  source: null,
+};
+const runtimeErrors = quality.runtimeErrors ?? {
+  status: 'unknown',
+  total: null,
+  uncategorized: null,
+  allowlisted: null,
+  source: null,
+};
+const stability = quality.stability ?? {
+  status: 'unknown',
+  consecutiveSuccess: null,
+  requiredConsecutive: null,
   source: null,
 };
 const sources = quality.sources ?? {
   tests: 'unavailable',
   security: 'unavailable',
   securityProd: 'unavailable',
+  securityGithub: 'unavailable',
+  securityDrift: 'unavailable',
   coverage: 'unavailable',
   lighthouse: 'unavailable',
   a11yStatic: 'unavailable',
   a11yRuntime: 'unavailable',
   runtimeCoverage: 'unavailable',
   e2eSmoke: 'unavailable',
+  runtimeErrors: 'unavailable',
+  greenRuns: 'unavailable',
+  ledger: 'unavailable',
+  policyGovernance: 'unavailable',
   performance: 'unavailable',
   build: 'unavailable',
 };
@@ -71,8 +96,15 @@ const securityCheckpointDetail = security.policyCheckpoint
   ? `checkpoint ${security.policyCheckpoint.date} (moderate<=${security.policyCheckpoint.maxModerate}, low<=${security.policyCheckpoint.maxLow})`
   : 'checkpoint n/a';
 const securityAllowlistDetail = `allowlist active ${security.allowlistActive ?? 0}`;
+const securityGithubDetail = `github alerts ${security.githubOpenAlerts ?? 'n/a'} (${security.githubAdvisoryStatus})`;
 const perfBudgetDetail = performance.routeBudgetsStatus;
 const perfBudgetCompositeDetail = `route ${performance.routeBudgetsStatus} · chunk ${performance.chunkBudgetsStatus} · interaction ${performance.interactionBudgetsStatus}`;
+const runtimeErrorDetail = runtimeErrors.total === null
+  ? 'runtime telemetry n/a'
+  : `events ${runtimeErrors.total} · uncategorized ${runtimeErrors.uncategorized ?? 0}`;
+const greenRunDetail = stability.consecutiveSuccess === null
+  ? 'green run history n/a'
+  : `${stability.consecutiveSuccess}/${stability.requiredConsecutive ?? 'n/a'} consecutive`;
 ---
 
 <section class="section">
@@ -103,6 +135,7 @@ const perfBudgetCompositeDetail = `route ${performance.routeBudgetsStatus} · ch
         <div class="quality-card__detail">{securityDetail}</div>
         <div class="quality-card__detail">{securityBreakdown}</div>
         <div class="quality-card__detail">{securityAllowlistDetail}</div>
+        <div class="quality-card__detail">{securityGithubDetail}</div>
         <div class="quality-card__detail">{securityCheckpointDetail}</div>
       </div>
 
@@ -148,6 +181,28 @@ const perfBudgetCompositeDetail = `route ${performance.routeBudgetsStatus} · ch
       <div class="quality-card">
         <div class="quality-card__icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          </svg>
+        </div>
+        <div class="quality-card__value">{runtimeErrors.status.toUpperCase()}</div>
+        <div class="quality-card__label">Runtime Errors</div>
+        <div class="quality-card__detail">{runtimeErrorDetail}</div>
+      </div>
+
+      <div class="quality-card">
+        <div class="quality-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 12h4l3 8 4-16 3 8h4"/>
+          </svg>
+        </div>
+        <div class="quality-card__value">{stability.status.toUpperCase()}</div>
+        <div class="quality-card__label">Green Run Tracker</div>
+        <div class="quality-card__detail">{greenRunDetail}</div>
+      </div>
+
+      <div class="quality-card">
+        <div class="quality-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
           </svg>
         </div>
@@ -170,7 +225,7 @@ const perfBudgetCompositeDetail = `route ${performance.routeBudgetsStatus} · ch
 
     <p class="quality-timestamp">Last updated: {new Date(quality.generated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
     <p class="quality-sources">
-      Sources: tests ({sources.tests}) · security full ({sources.security}) · security prod ({sources.securityProd}) · coverage ({sources.coverage}) · lighthouse ({sources.lighthouse}) · a11y static ({sources.a11yStatic}) · a11y runtime ({sources.a11yRuntime}) · runtime coverage ({sources.runtimeCoverage}) · e2e smoke ({sources.e2eSmoke}) · performance ({sources.performance}) · build ({sources.build})
+      Sources: tests ({sources.tests}) · security full ({sources.security}) · security prod ({sources.securityProd}) · security github ({sources.securityGithub}) · security drift ({sources.securityDrift}) · coverage ({sources.coverage}) · lighthouse ({sources.lighthouse}) · a11y static ({sources.a11yStatic}) · a11y runtime ({sources.a11yRuntime}) · runtime coverage ({sources.runtimeCoverage}) · e2e smoke ({sources.e2eSmoke}) · runtime errors ({sources.runtimeErrors}) · green runs ({sources.greenRuns}) · ledger ({sources.ledger}) · performance ({sources.performance}) · build ({sources.build})
     </p>
   </div>
 </section>

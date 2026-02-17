@@ -8,6 +8,8 @@ const paths = {
   vitest: resolve('.quality/vitest-report.json'),
   security: resolve('.quality/security-summary.json'),
   securityProd: resolve('.quality/security-summary-prod.json'),
+  securityGithub: resolve('.quality/github-advisory-summary.json'),
+  securityDrift: resolve('.quality/security-drift-summary.json'),
   securityRaw: resolve('.quality/security-audit-raw.json'),
   securityProdRaw: resolve('.quality/security-audit-prod-raw.json'),
   securityPolicy: resolve('.quality/security-policy.json'),
@@ -17,6 +19,8 @@ const paths = {
   runtimeA11y: resolve('.a11y/runtime-summary.json'),
   runtimeCoverage: resolve('.quality/runtime-coverage-summary.json'),
   e2eSmoke: resolve('.quality/e2e-smoke-summary.json'),
+  runtimeErrors: resolve('.quality/runtime-errors-summary.json'),
+  greenRuns: resolve('.quality/green-run-history.json'),
   perfSummary: resolve('.quality/perf-summary.json'),
   perfBudget: resolve('.quality/perf-budget-summary.json'),
   lighthouseDir: resolve('.lighthouseci'),
@@ -76,6 +80,8 @@ const metrics = readJson(paths.metrics);
 const vitestReport = readJson(paths.vitest);
 const securitySummary = readJson(paths.security);
 const securityProdSummary = readJson(paths.securityProd);
+const securityGithubSummary = readJson(paths.securityGithub);
+const securityDriftSummary = readJson(paths.securityDrift);
 const securityPolicy = readJson(paths.securityPolicy);
 const securityRegister = readJson(paths.securityRegister);
 const coverage = readJson(paths.coverage);
@@ -83,6 +89,8 @@ const staticA11y = readJson(paths.staticA11y);
 const runtimeA11y = readJson(paths.runtimeA11y);
 const runtimeCoverage = readJson(paths.runtimeCoverage);
 const e2eSmoke = readJson(paths.e2eSmoke);
+const runtimeErrors = readJson(paths.runtimeErrors);
+const greenRuns = readJson(paths.greenRuns);
 const perfSummary = readJson(paths.perfSummary);
 const perfBudget = readJson(paths.perfBudget);
 
@@ -110,6 +118,17 @@ for (const [field, expected] of securityPairs) {
   if (metrics.security[field] !== expected) {
     fail(`security.${field} mismatch: metrics=${metrics.security[field]}, summary=${expected}`);
   }
+}
+
+const githubOpenAlerts = toNullableNumber(securityGithubSummary?.counts?.total);
+if (metrics.security.githubOpenAlerts !== githubOpenAlerts) {
+  fail(`security.githubOpenAlerts mismatch: metrics=${metrics.security.githubOpenAlerts}, summary=${githubOpenAlerts}`);
+}
+if (metrics.security.githubAdvisoryStatus !== securityGithubSummary.status) {
+  fail(`security.githubAdvisoryStatus mismatch: metrics=${metrics.security.githubAdvisoryStatus}, summary=${securityGithubSummary.status}`);
+}
+if (securityDriftSummary.status !== 'pass') {
+  fail(`security drift summary status is ${securityDriftSummary.status}`);
 }
 
 const prodPairs = [
@@ -258,6 +277,36 @@ if ((e2eSmoke.flaky ?? 0) > 0) {
   fail(`e2e smoke flaky tests detected: ${e2eSmoke.flaky}`);
 }
 
+if (runtimeErrors.status !== 'pass') {
+  fail(`runtime error telemetry status is ${runtimeErrors.status}`);
+}
+if ((runtimeErrors?.counts?.uncategorized ?? 0) > 0) {
+  fail(`runtime error telemetry uncategorized errors detected: ${runtimeErrors.counts.uncategorized}`);
+}
+
+if (metrics.runtimeErrors.status !== runtimeErrors.status) {
+  fail(`runtimeErrors.status mismatch: metrics=${metrics.runtimeErrors.status}, summary=${runtimeErrors.status}`);
+}
+if (metrics.runtimeErrors.total !== toNullableNumber(runtimeErrors?.counts?.total)) {
+  fail(`runtimeErrors.total mismatch: metrics=${metrics.runtimeErrors.total}, summary=${toNullableNumber(runtimeErrors?.counts?.total)}`);
+}
+if (metrics.runtimeErrors.uncategorized !== toNullableNumber(runtimeErrors?.counts?.uncategorized)) {
+  fail(`runtimeErrors.uncategorized mismatch: metrics=${metrics.runtimeErrors.uncategorized}, summary=${toNullableNumber(runtimeErrors?.counts?.uncategorized)}`);
+}
+if (metrics.runtimeErrors.allowlisted !== toNullableNumber(runtimeErrors?.counts?.allowlisted)) {
+  fail(`runtimeErrors.allowlisted mismatch: metrics=${metrics.runtimeErrors.allowlisted}, summary=${toNullableNumber(runtimeErrors?.counts?.allowlisted)}`);
+}
+
+if (metrics.stability.status !== greenRuns.status) {
+  fail(`stability.status mismatch: metrics=${metrics.stability.status}, summary=${greenRuns.status}`);
+}
+if (metrics.stability.consecutiveSuccess !== toNullableNumber(greenRuns.consecutiveSuccess)) {
+  fail(`stability.consecutiveSuccess mismatch: metrics=${metrics.stability.consecutiveSuccess}, summary=${toNullableNumber(greenRuns.consecutiveSuccess)}`);
+}
+if (metrics.stability.requiredConsecutive !== toNullableNumber(greenRuns.requiredConsecutive)) {
+  fail(`stability.requiredConsecutive mismatch: metrics=${metrics.stability.requiredConsecutive}, summary=${toNullableNumber(greenRuns.requiredConsecutive)}`);
+}
+
 if (metrics.performance.routeBudgetsStatus !== perfBudget.routeBudgetsStatus) {
   fail(`performance.routeBudgetsStatus mismatch: metrics=${metrics.performance.routeBudgetsStatus}, summary=${perfBudget.routeBudgetsStatus}`);
 }
@@ -266,6 +315,19 @@ if (metrics.performance.chunkBudgetsStatus !== perfBudget.chunkBudgetsStatus) {
 }
 if (metrics.performance.interactionBudgetsStatus !== perfBudget.interactionBudgetsStatus) {
   fail(`performance.interactionBudgetsStatus mismatch: metrics=${metrics.performance.interactionBudgetsStatus}, summary=${perfBudget.interactionBudgetsStatus}`);
+}
+const routeCheckpointDate = perfBudget?.routeThresholdCheckpoint?.date ?? null;
+const chunkCheckpointDate = perfBudget?.chunkThresholdCheckpoint?.date ?? null;
+const interactionCheckpointDate = perfBudget?.interactionThresholdCheckpoint?.date ?? null;
+
+if ((metrics.performance.routeBudgetCheckpoint?.date ?? null) !== routeCheckpointDate) {
+  fail(`performance.routeBudgetCheckpoint mismatch: metrics=${metrics.performance.routeBudgetCheckpoint?.date ?? null}, summary=${routeCheckpointDate}`);
+}
+if ((metrics.performance.chunkBudgetCheckpoint?.date ?? null) !== chunkCheckpointDate) {
+  fail(`performance.chunkBudgetCheckpoint mismatch: metrics=${metrics.performance.chunkBudgetCheckpoint?.date ?? null}, summary=${chunkCheckpointDate}`);
+}
+if ((metrics.performance.interactionBudgetCheckpoint?.date ?? null) !== interactionCheckpointDate) {
+  fail(`performance.interactionBudgetCheckpoint mismatch: metrics=${metrics.performance.interactionBudgetCheckpoint?.date ?? null}, summary=${interactionCheckpointDate}`);
 }
 
 const expectedLargestChunks = Array.isArray(perfSummary.largestChunks)
@@ -328,6 +390,8 @@ const sourceTimes = [
   paths.vitest,
   paths.security,
   paths.securityProd,
+  paths.securityGithub,
+  paths.securityDrift,
   paths.securityRaw,
   paths.securityProdRaw,
   paths.coverage,
@@ -335,6 +399,8 @@ const sourceTimes = [
   paths.runtimeA11y,
   paths.runtimeCoverage,
   paths.e2eSmoke,
+  paths.runtimeErrors,
+  paths.greenRuns,
   paths.perfSummary,
   paths.perfBudget,
   ...lhrFiles.map((file) => join(paths.lighthouseDir, file)),

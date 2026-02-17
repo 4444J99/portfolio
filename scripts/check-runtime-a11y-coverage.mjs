@@ -51,8 +51,8 @@ function resolveMinCoverage(referenceTime) {
   };
 }
 
-const runtimeSummaryPath = resolve('.a11y/runtime-summary.json');
-const distPath = resolve('dist');
+const runtimeSummaryPath = resolve(parseOption('runtime-summary', '.a11y/runtime-summary.json'));
+const distPath = resolve(parseOption('dist', 'dist'));
 const outputPath = resolve(parseOption('json-out', '.quality/runtime-coverage-summary.json'));
 const dateOverride = parseOption('date', process.env.RUNTIME_A11Y_POLICY_DATE ?? null);
 const referenceTime = dateOverride ? parseDateOrNull(dateOverride) : Date.now();
