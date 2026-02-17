@@ -1,0 +1,188 @@
+{
+  "generated": "2026-02-17",
+  "summary": {
+    "met": 1,
+    "in_progress": 5,
+    "not_started": 11,
+    "total": 17
+  },
+  "horizons": [
+    { "id": "H1", "name": "Prove It Works", "timeline": "Days 1-30", "met": 0, "in_progress": 3, "not_started": 2 },
+    { "id": "H2", "name": "Validate Externally", "timeline": "Days 15-90", "met": 1, "in_progress": 1, "not_started": 1 },
+    { "id": "H3", "name": "Generate Revenue", "timeline": "Days 30-180", "met": 0, "in_progress": 1, "not_started": 2 },
+    { "id": "H4", "name": "Build Community", "timeline": "Days 60-365", "met": 0, "in_progress": 0, "not_started": 3 },
+    { "id": "H5", "name": "Achieve Recognition", "timeline": "Days 90-730", "met": 0, "in_progress": 0, "not_started": 2 }
+  ],
+  "criteria": [
+    {
+      "id": 1,
+      "criterion": "30-day soak test passes",
+      "measurement": "<=3 critical incidents over 30 days",
+      "horizon": "H1",
+      "status": "in_progress",
+      "evidence": "Data collection running since Feb 16. First real snapshot Feb 17.",
+      "evidenceUrl": null,
+      "target": "March 18, 2026"
+    },
+    {
+      "id": 2,
+      "criterion": "Stranger test score >=80%",
+      "measurement": "Uninvolved person navigates system, scores >=80%",
+      "horizon": "H1",
+      "status": "not_started",
+      "evidence": "Protocol written, no participant recruited.",
+      "evidenceUrl": null,
+      "target": null
+    },
+    {
+      "id": 3,
+      "criterion": "Engagement baseline established",
+      "measurement": "30 consecutive days of engagement data",
+      "horizon": "H1",
+      "status": "in_progress",
+      "evidence": "First real engagement data: 5 stars, 3 forks, 93 views on flagship.",
+      "evidenceUrl": null,
+      "target": "March 18, 2026"
+    },
+    {
+      "id": 4,
+      "criterion": "Runbooks validated by second operator",
+      "measurement": "Second person successfully follows operational runbooks",
+      "horizon": "H1",
+      "status": "not_started",
+      "evidence": "Runbooks exist in docs/operations/. Not yet externally validated.",
+      "evidenceUrl": null,
+      "target": null
+    },
+    {
+      "id": 5,
+      "criterion": ">=1 application submitted",
+      "measurement": "Grant, job, or fellowship application submitted",
+      "horizon": "H2",
+      "status": "in_progress",
+      "evidence": "3 applications prepared with materials ready. Submission pending.",
+      "evidenceUrl": null,
+      "target": "March 2026"
+    },
+    {
+      "id": 6,
+      "criterion": "AI-conductor essay published",
+      "measurement": "Essay about methodology published on public-process",
+      "horizon": "H2",
+      "status": "met",
+      "evidence": "Multiple essays: #32 autonomous-systems guide, #36 construction-addiction.",
+      "evidenceUrl": "https://organvm-v-logos.github.io/public-process/",
+      "dateMet": "2026-02-16"
+    },
+    {
+      "id": 7,
+      "criterion": ">=3 external feedback pieces",
+      "measurement": "Feedback from people outside the system collected",
+      "horizon": "H2",
+      "status": "not_started",
+      "evidence": "No external feedback collected yet.",
+      "evidenceUrl": null,
+      "target": null
+    },
+    {
+      "id": 8,
+      "criterion": ">=1 ORGAN-III product live",
+      "measurement": "Commercial product deployed and accessible",
+      "horizon": "H3",
+      "status": "in_progress",
+      "evidence": "life-my--midst--in deployment-ready: 291 tests, Neon DB, DEPLOY.md.",
+      "evidenceUrl": null,
+      "target": "February 2026"
+    },
+    {
+      "id": 9,
+      "criterion": "revenue_status: live",
+      "measurement": ">=1 registry entry with revenue_status: live",
+      "horizon": "H3",
+      "status": "not_started",
+      "evidence": "All ORGAN-III repos at pre-launch. Needs Stripe integration.",
+      "evidenceUrl": null,
+      "target": null
+    },
+    {
+      "id": 10,
+      "criterion": "MRR >= operating costs",
+      "measurement": "Monthly recurring revenue covers system costs",
+      "horizon": "H3",
+      "status": "not_started",
+      "evidence": "No revenue. Operating costs ~$0 (free tier).",
+      "evidenceUrl": null,
+      "target": null
+    },
+    {
+      "id": 11,
+      "criterion": ">=2 salons/events held",
+      "measurement": "Community events with external participants",
+      "horizon": "H4",
+      "status": "not_started",
+      "evidence": "No events held.",
+      "evidenceUrl": null,
+      "target": null
+    },
+    {
+      "id": 12,
+      "criterion": ">=3 external contributions",
+      "measurement": "PRs, issues, feedback, or content from external people",
+      "horizon": "H4",
+      "status": "not_started",
+      "evidence": "No external contributions received.",
+      "evidenceUrl": null,
+      "target": null
+    },
+    {
+      "id": 13,
+      "criterion": ">=1 organic inbound link",
+      "measurement": "External site links to system without solicitation",
+      "horizon": "H4",
+      "status": "not_started",
+      "evidence": "Distribution pipeline active. No confirmed inbound links yet.",
+      "evidenceUrl": null,
+      "target": null
+    },
+    {
+      "id": 14,
+      "criterion": ">=1 recognition event",
+      "measurement": "Grant, citation, invitation, or adoption",
+      "horizon": "H5",
+      "status": "not_started",
+      "evidence": "Applications not yet submitted.",
+      "evidenceUrl": null,
+      "target": null
+    },
+    {
+      "id": 15,
+      "criterion": "Portfolio with external validation",
+      "measurement": "Portfolio reflects testimonials, acceptances, or user counts",
+      "horizon": "H5",
+      "status": "not_started",
+      "evidence": "Portfolio exists with system metrics. No external validation to display.",
+      "evidenceUrl": "https://4444j99.github.io/portfolio/",
+      "target": null
+    },
+    {
+      "id": 16,
+      "criterion": "Bus factor >1",
+      "measurement": "Second operator can maintain system (validated)",
+      "horizon": "H1+H4",
+      "status": "not_started",
+      "evidence": "Runbooks and CLI exist. No second operator has attempted maintenance.",
+      "evidenceUrl": null,
+      "target": null
+    },
+    {
+      "id": 17,
+      "criterion": "30+ days autonomous operation",
+      "measurement": "System runs without primary operator intervention",
+      "horizon": "H1",
+      "status": "in_progress",
+      "evidence": "12 cron workflows active. Autonomous since Feb 16.",
+      "evidenceUrl": null,
+      "target": "March 18, 2026"
+    }
+  ]
+}

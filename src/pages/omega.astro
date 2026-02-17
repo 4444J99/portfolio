@@ -1,0 +1,343 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SketchContainer from '../components/sketches/SketchContainer.astro';
+
+import omegaData from '../data/omega.json';
+
+const { summary, horizons, criteria } = omegaData;
+
+const statusColor = (status: string) => {
+  switch (status) {
+    case 'met': return 'var(--cmyk-cyan, #00bcd4)';
+    case 'in_progress': return 'var(--cmyk-yellow, #ffc107)';
+    default: return 'var(--cmyk-magenta, #e91e63)';
+  }
+};
+
+const statusLabel = (status: string) => {
+  switch (status) {
+    case 'met': return 'Met';
+    case 'in_progress': return 'In Progress';
+    default: return 'Not Started';
+  }
+};
+---
+
+<Layout title="Omega Scorecard — System Maturity" description="17 measurable criteria tracking the ORGANVM system's path from construction to sustainable autonomous operation.">
+    <div class="sketch-accent">
+      <SketchContainer sketchId="constellation" height="200px" mobileHeight="150px" ariaLabel="Animated constellation visualization representing omega criteria as stars" />
+    </div>
+    <section class="section">
+      <div class="container">
+        <h1 class="page-title">Omega Scorecard</h1>
+        <p class="page-sub">
+          17 measurable criteria defining the transition from <em>building the system</em> to <em>using the system</em>.
+          Omega is not "done" — it is the phase transition where construction ends and occupation begins.
+        </p>
+
+        <!-- Progress bar -->
+        <div class="progress-container" role="progressbar" aria-valuenow={summary.met} aria-valuemin="0" aria-valuemax={summary.total} aria-label={`${summary.met} of ${summary.total} criteria met`}>
+          <div class="progress-bar">
+            <div class="progress-fill progress-fill--met" style={`width: ${(summary.met / summary.total) * 100}%`}></div>
+            <div class="progress-fill progress-fill--progress" style={`width: ${(summary.in_progress / summary.total) * 100}%`}></div>
+          </div>
+          <div class="progress-legend">
+            <span class="progress-stat">
+              <span class="dot dot--met"></span>
+              <strong>{summary.met}</strong> Met
+            </span>
+            <span class="progress-stat">
+              <span class="dot dot--progress"></span>
+              <strong>{summary.in_progress}</strong> In Progress
+            </span>
+            <span class="progress-stat">
+              <span class="dot dot--not-started"></span>
+              <strong>{summary.not_started}</strong> Not Started
+            </span>
+          </div>
+        </div>
+
+        <!-- Horizon breakdown -->
+        <h2 class="section__heading" data-reveal>By Horizon</h2>
+        <div class="horizon-grid">
+          {horizons.map((h) => (
+            <div class="horizon-card" data-reveal>
+              <div class="horizon-id">{h.id}</div>
+              <div class="horizon-name">{h.name}</div>
+              <div class="horizon-timeline">{h.timeline}</div>
+              <div class="horizon-counts">
+                {h.met > 0 && <span class="chip chip--met">{h.met} met</span>}
+                {h.in_progress > 0 && <span class="chip chip--progress">{h.in_progress} active</span>}
+                {h.not_started > 0 && <span class="chip chip--not-started">{h.not_started} pending</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Criteria detail -->
+        <h2 class="section__heading" data-reveal>All 17 Criteria</h2>
+        <div class="criteria-list">
+          {criteria.map((c) => (
+            <div class={`criterion criterion--${c.status}`} data-reveal>
+              <div class="criterion__header">
+                <span class="criterion__id">#{c.id}</span>
+                <span class="criterion__chip" style={`background: ${statusColor(c.status)}`}>
+                  {statusLabel(c.status)}
+                </span>
+                <span class="criterion__horizon">{c.horizon}</span>
+              </div>
+              <h3 class="criterion__title">{c.criterion}</h3>
+              <p class="criterion__measurement">{c.measurement}</p>
+              <p class="criterion__evidence">{c.evidence}</p>
+              {c.evidenceUrl && (
+                <a href={c.evidenceUrl} class="criterion__link" target="_blank" rel="noopener noreferrer">
+                  View evidence &rarr;
+                </a>
+              )}
+              {c.target && (
+                <span class="criterion__target">Target: {c.target}</span>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div class="omega-footer" data-reveal>
+          <p>
+            The omega criteria are defined in
+            <a href="https://github.com/meta-organvm/organvm-corpvs-testamentvm/blob/main/docs/strategy/there%2Bback-again.md" target="_blank" rel="noopener noreferrer">there+back-again.md</a>.
+            Evidence is tracked in the
+            <a href="https://github.com/meta-organvm/organvm-corpvs-testamentvm/blob/main/docs/evaluation/omega-evidence-map.md" target="_blank" rel="noopener noreferrer">omega evidence map</a>.
+          </p>
+          <p class="omega-updated">Last updated: {omegaData.generated}</p>
+        </div>
+      </div>
+    </section>
+</Layout>
+
+<style>
+  .progress-container {
+    margin: var(--space-xl) 0;
+  }
+
+  .progress-bar {
+    height: 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .progress-fill--met {
+    background: var(--cmyk-cyan, #00bcd4);
+    transition: width 0.6s ease;
+  }
+
+  .progress-fill--progress {
+    background: var(--cmyk-yellow, #ffc107);
+    transition: width 0.6s ease;
+  }
+
+  .progress-legend {
+    display: flex;
+    gap: var(--space-lg);
+    margin-top: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .progress-stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot--met { background: var(--cmyk-cyan, #00bcd4); }
+  .dot--progress { background: var(--cmyk-yellow, #ffc107); }
+  .dot--not-started { background: var(--cmyk-magenta, #e91e63); }
+
+  /* Horizons */
+  .horizon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .horizon-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-md);
+  }
+
+  .horizon-id {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--cmyk-cyan, #00bcd4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-xs);
+  }
+
+  .horizon-name {
+    font-family: var(--font-display, 'Jost', sans-serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .horizon-timeline {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .horizon-counts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .chip--met { background: rgba(0, 188, 212, 0.15); color: var(--cmyk-cyan, #00bcd4); }
+  .chip--progress { background: rgba(255, 193, 7, 0.15); color: var(--cmyk-yellow, #ffc107); }
+  .chip--not-started { background: rgba(233, 30, 99, 0.15); color: var(--cmyk-magenta, #e91e63); }
+
+  /* Criteria */
+  .criteria-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .criterion {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-md) var(--space-lg);
+    border-left: 3px solid var(--border);
+  }
+
+  .criterion--met { border-left-color: var(--cmyk-cyan, #00bcd4); }
+  .criterion--in_progress { border-left-color: var(--cmyk-yellow, #ffc107); }
+  .criterion--not_started { border-left-color: var(--cmyk-magenta, #e91e63); }
+
+  .criterion__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .criterion__id {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .criterion__chip {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    color: var(--bg-primary, #0a0a0b);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .criterion__horizon {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+
+  .criterion__title {
+    font-family: var(--font-display, 'Jost', sans-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-xs) 0;
+  }
+
+  .criterion__measurement {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0 0 var(--space-xs) 0;
+    font-style: italic;
+  }
+
+  .criterion__evidence {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .criterion__link {
+    display: inline-block;
+    margin-top: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--cmyk-cyan, #00bcd4);
+    text-decoration: none;
+  }
+
+  .criterion__link:hover {
+    text-decoration: underline;
+  }
+
+  .criterion__target {
+    display: inline-block;
+    margin-top: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--cmyk-yellow, #ffc107);
+  }
+
+  /* Footer */
+  .omega-footer {
+    text-align: center;
+    padding: var(--space-xl) 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .omega-footer a {
+    color: var(--cmyk-cyan, #00bcd4);
+    text-decoration: none;
+  }
+
+  .omega-footer a:hover {
+    text-decoration: underline;
+  }
+
+  .omega-updated {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    margin-top: var(--space-sm);
+  }
+</style>
