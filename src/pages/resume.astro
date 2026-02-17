@@ -41,7 +41,6 @@ import { base } from '../utils/paths';
           </div>
         </header>
 
-        <hr />
 
         <section class="resume__section prose">
           <h2>Summary</h2>
@@ -50,7 +49,6 @@ import { base } from '../utils/paths';
           </p>
         </section>
 
-        <hr />
 
         <section class="resume__section">
           <h2>Skills</h2>
@@ -129,7 +127,6 @@ import { base } from '../utils/paths';
           </div>
         </section>
 
-        <hr />
 
         <section class="resume__section prose">
           <h2>Selected Projects</h2>
@@ -188,7 +185,6 @@ import { base } from '../utils/paths';
           </div>
         </section>
 
-        <hr />
 
         <section class="resume__section prose">
           <h2>Experience</h2>
@@ -252,7 +248,6 @@ import { base } from '../utils/paths';
           </div>
         </section>
 
-        <hr />
 
         <section class="resume__section prose">
           <h2>Education</h2>
@@ -266,7 +261,6 @@ import { base } from '../utils/paths';
           </div>
         </section>
 
-        <hr />
 
         <section class="resume__section prose">
           <h2>Certifications</h2>
@@ -278,7 +272,6 @@ import { base } from '../utils/paths';
           </ul>
         </section>
 
-        <hr />
 
         <section class="resume__section">
           <h2>Links</h2>
@@ -298,12 +291,14 @@ import { base } from '../utils/paths';
 <style>
   .resume {
     padding: var(--space-3xl) 0;
-    background: var(--bg-secondary);
   }
 
   .resume__header {
     text-align: center;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-xl);
+    background: var(--bg-secondary);
+    border-radius: var(--radius);
+    padding: var(--space-xl);
   }
 
   .resume__header h1 {
@@ -389,7 +384,10 @@ import { base } from '../utils/paths';
   }
 
   .resume__section {
-    margin-bottom: var(--space-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
   }
 
   .resume__section h2 {

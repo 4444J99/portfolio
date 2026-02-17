@@ -127,7 +127,6 @@ body {
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  filter: saturate(1.6) contrast(1.15);
 }
 
 #bg-canvas canvas {
@@ -233,10 +232,13 @@ pre code {
   max-width: var(--max-width-narrow);
 }
 
-/* --- Section --- */
+/* --- Section (card style) --- */
 .section {
-  padding: var(--space-4xl) 0;
+  max-width: var(--max-width);
+  margin: 0 auto var(--space-xl);
+  padding: var(--space-xl) var(--space-lg);
   background: var(--bg-secondary);
+  border-radius: var(--radius);
 }
 
 /* --- Tag / Badge --- */
