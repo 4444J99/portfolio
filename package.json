@@ -12,7 +12,8 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:a11y": "node scripts/a11y-audit.mjs",
-    "lighthouse": "lhci autorun --config=lighthouserc.cjs"
+    "lighthouse": "lhci autorun --config=lighthouserc.cjs",
+    "validate": "node scripts/validate-build.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.15",
@@ -30,7 +31,9 @@
     "@vitest/coverage-v8": "4.0.18",
     "axe-core": "4.11.1",
     "cheerio": "1.2.0",
+    "html-validate": "10.8.0",
     "jsdom": "28.1.0",
+    "linkinator": "7.5.3",
     "pagefind": "1.4.0",
     "satori": "0.19.2",
     "vitest": "4.0.18"
