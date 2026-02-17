@@ -20,9 +20,9 @@ const dataAttrs = Object.fromEntries(
   data-height={height}
   data-mobile-height={mobileHeight}
   data-interactive={interactive ? '' : undefined}
-  role="img"
+  role={interactive ? "group" : "img"}
   aria-label={ariaLabel}
-  tabindex="0"
+  tabindex={interactive ? undefined : "0"}
   {...dataAttrs}
 >
   {interactive && (
