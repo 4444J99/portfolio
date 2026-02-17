@@ -112,8 +112,6 @@ function init() {
   watchModeChanges();
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+// View Transition lifecycle
+document.addEventListener('astro:before-swap', () => teardown());
+document.addEventListener('astro:page-load', () => init());

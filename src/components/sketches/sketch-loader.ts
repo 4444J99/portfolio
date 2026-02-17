@@ -242,7 +242,7 @@ function initBackground() {
   });
 }
 
-/** Remove all active p5 instances and reset state. Call before View Transitions navigation. */
+/** Remove all active p5 instances and reset state. */
 export function teardown() {
   instances.forEach((instance) => {
     try { instance.remove(); } catch { /* already removed */ }
@@ -256,17 +256,43 @@ export function teardown() {
   }
 }
 
-function init() {
+/** Tear down per-page sketches but preserve the #bg-canvas instance. */
+export function teardownPage() {
+  const bg = document.getElementById('bg-canvas');
+  const bgInstance = bg ? instances.get(bg) : undefined;
+
+  // Remove all non-background instances
+  instances.forEach((instance, el) => {
+    if (el !== bg) {
+      try { instance.remove(); } catch { /* already removed */ }
+    }
+  });
+  instances.clear();
+
+  // Preserve background instance
+  if (bg && bgInstance) {
+    instances.set(bg, bgInstance);
+  }
+
+  initQueue.length = 0;
+  activeInits = 0;
+  if (sketchObserver) {
+    sketchObserver.disconnect();
+    sketchObserver = null;
+  }
+}
+
+/** Re-observe per-page sketch containers after a View Transition swap. */
+export function reinitPage() {
+  observeSketches();
+}
+
+/** Full init: background + per-page sketches. Called once on first load. */
+export function initSketches() {
   if ('requestIdleCallback' in window) {
     window.requestIdleCallback(() => initBackground(), { timeout: 1500 });
   } else {
     setTimeout(initBackground, 200);
   }
   observeSketches();
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
 }

@@ -63,8 +63,6 @@ export function teardown() {
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', observeMermaid);
-} else {
-  observeMermaid();
-}
+// View Transition lifecycle
+document.addEventListener('astro:before-swap', () => teardown());
+document.addEventListener('astro:page-load', () => observeMermaid());
