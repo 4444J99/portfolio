@@ -1,5 +1,6 @@
 ---
 import SketchContainer from './sketches/SketchContainer.astro';
+import TableOfContents from './TableOfContents.astro';
 import { projectIndex } from '../data/project-index';
 
 interface Badge {
@@ -68,8 +69,11 @@ const nextProject = currentIdx < projectIndex.length - 1 ? projectIndex[currentI
   <div class="sketch-accent">
     <SketchContainer sketchId={sketchId} height="250px" mobileHeight="180px" ariaLabel={`Generative sketch: ${sketchId}`} data-tags={tags.join(',')} />
   </div>
-  <div class="project__body prose">
-    <slot />
+  <div class="project__content-grid">
+    <TableOfContents />
+    <div class="project__body prose">
+      <slot />
+    </div>
   </div>
   {related.length > 0 && (
     <nav class="related" aria-label="Related projects">
@@ -112,7 +116,7 @@ const nextProject = currentIdx < projectIndex.length - 1 ? projectIndex[currentI
 
 <style>
   .project {
-    max-width: var(--max-width-narrow);
+    max-width: 960px;
     margin: 0 auto;
     padding: var(--space-3xl) var(--space-lg);
   }
@@ -189,8 +193,29 @@ const nextProject = currentIdx < projectIndex.length - 1 ? projectIndex[currentI
     border-color: var(--accent);
   }
 
+  .project__content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 769px) {
+    .project__content-grid {
+      grid-template-columns: 180px 1fr;
+    }
+
+    .project__content-grid :global(.toc) {
+      position: sticky;
+      top: 84px; /* header height (64px) + spacing */
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+  }
+
   .project__body {
     line-height: 1.8;
+    min-width: 0;
   }
   .sketch-accent {
     margin-bottom: var(--space-xl);
