@@ -13,18 +13,26 @@ const security = quality.security ?? {
   moderate: null,
   low: null,
   total: null,
+  prodCounts: { critical: null, high: null, moderate: null, low: null, total: null },
+  devCounts: { critical: null, high: null, moderate: null, low: null, total: null },
+  allowlistActive: 0,
+  policyCheckpoint: null,
   status: 'unknown',
   source: null,
 };
 const performance = quality.performance ?? {
   routeBudgetsStatus: 'unknown',
+  chunkBudgetsStatus: 'unknown',
+  interactionBudgetsStatus: 'unknown',
   largestChunks: [],
+  interactiveRouteJsTotals: {},
   routeJsTotals: {},
   source: null,
 };
 const sources = quality.sources ?? {
   tests: 'unavailable',
   security: 'unavailable',
+  securityProd: 'unavailable',
   coverage: 'unavailable',
   lighthouse: 'unavailable',
   a11yStatic: 'unavailable',
@@ -55,8 +63,16 @@ const runtimeCoverageDetail = quality.a11y.runtime.coveragePct === null
   : `${quality.a11y.runtime.coveragePct}% route coverage`;
 const securityDetail = security.total === null
   ? 'critical n/a · high n/a'
-  : `critical ${security.critical ?? 0} · high ${security.high ?? 0}`;
+  : `critical ${security.critical ?? 0} · high ${security.high ?? 0} · moderate ${security.moderate ?? 0} · low ${security.low ?? 0}`;
+const securityBreakdown = security.prodCounts.total === null
+  ? 'prod/dev split n/a'
+  : `prod ${security.prodCounts.total ?? 0} · dev ${security.devCounts.total ?? 0}`;
+const securityCheckpointDetail = security.policyCheckpoint
+  ? `checkpoint ${security.policyCheckpoint.date} (moderate<=${security.policyCheckpoint.maxModerate}, low<=${security.policyCheckpoint.maxLow})`
+  : 'checkpoint n/a';
+const securityAllowlistDetail = `allowlist active ${security.allowlistActive ?? 0}`;
 const perfBudgetDetail = performance.routeBudgetsStatus;
+const perfBudgetCompositeDetail = `route ${performance.routeBudgetsStatus} · chunk ${performance.chunkBudgetsStatus} · interaction ${performance.interactionBudgetsStatus}`;
 ---
 
 <section class="section">
@@ -85,6 +101,9 @@ const perfBudgetDetail = performance.routeBudgetsStatus;
         <div class="quality-card__value">{security.status.toUpperCase()}</div>
         <div class="quality-card__label">Security Audit</div>
         <div class="quality-card__detail">{securityDetail}</div>
+        <div class="quality-card__detail">{securityBreakdown}</div>
+        <div class="quality-card__detail">{securityAllowlistDetail}</div>
+        <div class="quality-card__detail">{securityCheckpointDetail}</div>
       </div>
 
       <div class="quality-card">
@@ -123,7 +142,7 @@ const perfBudgetDetail = performance.routeBudgetsStatus;
         </div>
         <div class="quality-card__value">{perfBudgetDetail.toUpperCase()}</div>
         <div class="quality-card__label">Perf Budgets</div>
-        <div class="quality-card__detail">Route JS gzip caps enforced</div>
+        <div class="quality-card__detail">{perfBudgetCompositeDetail}</div>
       </div>
 
       <div class="quality-card">
@@ -151,7 +170,7 @@ const perfBudgetDetail = performance.routeBudgetsStatus;
 
     <p class="quality-timestamp">Last updated: {new Date(quality.generated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
     <p class="quality-sources">
-      Sources: tests ({sources.tests}) · security ({sources.security}) · coverage ({sources.coverage}) · lighthouse ({sources.lighthouse}) · a11y static ({sources.a11yStatic}) · a11y runtime ({sources.a11yRuntime}) · runtime coverage ({sources.runtimeCoverage}) · e2e smoke ({sources.e2eSmoke}) · performance ({sources.performance}) · build ({sources.build})
+      Sources: tests ({sources.tests}) · security full ({sources.security}) · security prod ({sources.securityProd}) · coverage ({sources.coverage}) · lighthouse ({sources.lighthouse}) · a11y static ({sources.a11yStatic}) · a11y runtime ({sources.a11yRuntime}) · runtime coverage ({sources.runtimeCoverage}) · e2e smoke ({sources.e2eSmoke}) · performance ({sources.performance}) · build ({sources.build})
     </p>
   </div>
 </section>

@@ -24,8 +24,10 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Security gate
-        run: npm run test:security
+      - name: Security gates (prod + full tree)
+        run: |
+          npm run test:security:prod
+          npm run test:security
 
       - name: Quality parity pipeline
         run: npm run quality:local
@@ -60,5 +62,18 @@ jobs:
             .quality/
             .a11y/
             src/data/quality-metrics.json
+          include-hidden-files: true
+          retention-days: 14
+
+      - name: Upload security artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-artifacts
+          path: |
+            .quality/security-summary.json
+            .quality/security-summary-prod.json
+            .quality/security-audit-raw.json
+            .quality/security-audit-prod-raw.json
           include-hidden-files: true
           retention-days: 14

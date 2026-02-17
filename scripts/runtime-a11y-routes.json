@@ -47,7 +47,11 @@
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     },
     {
-      "path": "/projects/recursive-engine",
+      "path": "/404.html",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/aetheria-rpg",
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     },
     {
@@ -91,11 +95,39 @@
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     },
     {
+      "path": "/projects/linguistic-atomization",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
       "path": "/projects/metasystem-master",
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     },
     {
+      "path": "/projects/narratological-lenses",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
       "path": "/projects/orchestration-hub",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/org-architecture",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/public-process",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/recursive-engine",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/the-actual-news",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/projects/your-fit-tailored",
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     }
   ]

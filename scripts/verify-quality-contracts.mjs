@@ -7,6 +7,11 @@ const paths = {
   metrics: resolve('src/data/quality-metrics.json'),
   vitest: resolve('.quality/vitest-report.json'),
   security: resolve('.quality/security-summary.json'),
+  securityProd: resolve('.quality/security-summary-prod.json'),
+  securityRaw: resolve('.quality/security-audit-raw.json'),
+  securityProdRaw: resolve('.quality/security-audit-prod-raw.json'),
+  securityPolicy: resolve('.quality/security-policy.json'),
+  securityRegister: resolve('.quality/security-register.json'),
   coverage: resolve('coverage/coverage-summary.json'),
   staticA11y: resolve('.a11y/a11y-summary.json'),
   runtimeA11y: resolve('.a11y/runtime-summary.json'),
@@ -50,26 +55,16 @@ function countFiles(dir) {
 
 function average(arr) {
   if (!arr.length) return null;
-  const sum = arr.reduce((acc, value) => acc + value, 0);
-  return Math.round(sum / arr.length);
+  return Math.round(arr.reduce((acc, value) => acc + value, 0) / arr.length);
 }
 
 function toNullableNumber(value) {
   return typeof value === 'number' && Number.isFinite(value) ? value : null;
 }
 
-if (!existsSync(paths.metrics)) fail(`Missing metrics file: ${paths.metrics}`);
-if (!existsSync(paths.vitest)) fail(`Missing Vitest report: ${paths.vitest}`);
-if (!existsSync(paths.security)) fail(`Missing security summary: ${paths.security}`);
-if (!existsSync(paths.coverage)) fail(`Missing coverage summary: ${paths.coverage}`);
-if (!existsSync(paths.staticA11y)) fail(`Missing static a11y summary: ${paths.staticA11y}`);
-if (!existsSync(paths.runtimeA11y)) fail(`Missing runtime a11y summary: ${paths.runtimeA11y}`);
-if (!existsSync(paths.runtimeCoverage)) fail(`Missing runtime coverage summary: ${paths.runtimeCoverage}`);
-if (!existsSync(paths.e2eSmoke)) fail(`Missing e2e smoke summary: ${paths.e2eSmoke}`);
-if (!existsSync(paths.perfSummary)) fail(`Missing performance summary: ${paths.perfSummary}`);
-if (!existsSync(paths.perfBudget)) fail(`Missing performance budget summary: ${paths.perfBudget}`);
-if (!existsSync(paths.lighthouseDir)) fail(`Missing Lighthouse report directory: ${paths.lighthouseDir}`);
-if (!existsSync(paths.dist)) fail(`Missing build output: ${paths.dist}`);
+for (const [key, path] of Object.entries(paths)) {
+  if (!existsSync(path)) fail(`Missing ${key} artifact: ${path}`);
+}
 
 if (errors.length) {
   console.error('Quality contract failed: required artifacts missing.');
@@ -80,6 +75,9 @@ if (errors.length) {
 const metrics = readJson(paths.metrics);
 const vitestReport = readJson(paths.vitest);
 const securitySummary = readJson(paths.security);
+const securityProdSummary = readJson(paths.securityProd);
+const securityPolicy = readJson(paths.securityPolicy);
+const securityRegister = readJson(paths.securityRegister);
 const coverage = readJson(paths.coverage);
 const staticA11y = readJson(paths.staticA11y);
 const runtimeA11y = readJson(paths.runtimeA11y);
@@ -95,19 +93,117 @@ if (metrics.tests.passed !== vitestReport.numPassedTests) {
   fail(`tests.passed mismatch: metrics=${metrics.tests.passed}, report=${vitestReport.numPassedTests}`);
 }
 
-const securityCounts = securitySummary?.unsuppressed?.counts ?? {};
+const fullCounts = securitySummary?.unsuppressed?.counts ?? {};
+const prodCounts = securityProdSummary?.unsuppressed?.counts ?? {};
+
 const securityPairs = [
-  ['critical', toNullableNumber(securityCounts.critical)],
-  ['high', toNullableNumber(securityCounts.high)],
-  ['moderate', toNullableNumber(securityCounts.moderate)],
-  ['low', toNullableNumber(securityCounts.low)],
-  ['total', toNullableNumber(securityCounts.total)],
+  ['critical', toNullableNumber(fullCounts.critical)],
+  ['high', toNullableNumber(fullCounts.high)],
+  ['moderate', toNullableNumber(fullCounts.moderate)],
+  ['low', toNullableNumber(fullCounts.low)],
+  ['total', toNullableNumber(fullCounts.total)],
   ['status', securitySummary.status],
+  ['allowlistActive', toNullableNumber(securitySummary?.allowlist?.activeCount) ?? 0],
 ];
+
 for (const [field, expected] of securityPairs) {
   if (metrics.security[field] !== expected) {
     fail(`security.${field} mismatch: metrics=${metrics.security[field]}, summary=${expected}`);
   }
+}
+
+const prodPairs = [
+  ['critical', toNullableNumber(prodCounts.critical)],
+  ['high', toNullableNumber(prodCounts.high)],
+  ['moderate', toNullableNumber(prodCounts.moderate)],
+  ['low', toNullableNumber(prodCounts.low)],
+  ['total', toNullableNumber(prodCounts.total)],
+];
+for (const [field, expected] of prodPairs) {
+  if (metrics.security.prodCounts[field] !== expected) {
+    fail(`security.prodCounts.${field} mismatch: metrics=${metrics.security.prodCounts[field]}, summary=${expected}`);
+  }
+}
+
+const expectedDevCounts = {
+  critical: typeof fullCounts.critical === 'number' && typeof prodCounts.critical === 'number' ? Math.max(0, fullCounts.critical - prodCounts.critical) : null,
+  high: typeof fullCounts.high === 'number' && typeof prodCounts.high === 'number' ? Math.max(0, fullCounts.high - prodCounts.high) : null,
+  moderate: typeof fullCounts.moderate === 'number' && typeof prodCounts.moderate === 'number' ? Math.max(0, fullCounts.moderate - prodCounts.moderate) : null,
+  low: typeof fullCounts.low === 'number' && typeof prodCounts.low === 'number' ? Math.max(0, fullCounts.low - prodCounts.low) : null,
+  total: typeof fullCounts.total === 'number' && typeof prodCounts.total === 'number' ? Math.max(0, fullCounts.total - prodCounts.total) : null,
+};
+for (const field of ['critical', 'high', 'moderate', 'low', 'total']) {
+  if (metrics.security.devCounts[field] !== expectedDevCounts[field]) {
+    fail(`security.devCounts.${field} mismatch: metrics=${metrics.security.devCounts[field]}, expected=${expectedDevCounts[field]}`);
+  }
+}
+
+if (securitySummary.status !== 'pass') {
+  fail(`security summary status is ${securitySummary.status}`);
+}
+if (securityProdSummary.status !== 'pass') {
+  fail(`security prod summary status is ${securityProdSummary.status}`);
+}
+
+if (!metrics.security.policyCheckpoint || typeof metrics.security.policyCheckpoint.date !== 'string') {
+  fail('security.policyCheckpoint missing in metrics');
+} else {
+  const checkpointDate = metrics.security.policyCheckpoint.date;
+  const checkpoint = Array.isArray(securityPolicy.checkpoints)
+    ? securityPolicy.checkpoints.find((entry) => entry.date === checkpointDate)
+    : null;
+
+  if (!checkpoint) {
+    fail(`security.policyCheckpoint date ${checkpointDate} missing from security policy`);
+  }
+}
+
+const requiredSprintDates = ['2026-02-21', '2026-02-28', '2026-03-07', '2026-03-14', '2026-03-18'];
+const registerCheckpoints = Array.isArray(securityRegister.checkpoints) ? securityRegister.checkpoints : [];
+for (const date of requiredSprintDates) {
+  if (!registerCheckpoints.some((checkpoint) => checkpoint?.date === date)) {
+    fail(`security register missing checkpoint date ${date}`);
+  }
+}
+
+const vulnerabilityFamilies = Array.isArray(securityRegister.vulnerabilityFamilies)
+  ? securityRegister.vulnerabilityFamilies
+  : [];
+if (vulnerabilityFamilies.length === 0) {
+  fail('security register has no vulnerabilityFamilies entries');
+}
+for (const family of vulnerabilityFamilies) {
+  if (typeof family.family !== 'string' || family.family.trim().length === 0) {
+    fail('security register vulnerability family missing `family` name');
+  }
+  if (typeof family.owner !== 'string' || family.owner.trim().length === 0) {
+    fail(`security register family ${family.family ?? 'unknown'} missing owner`);
+  }
+  if (typeof family.eta !== 'string' || !Number.isFinite(Date.parse(family.eta))) {
+    fail(`security register family ${family.family ?? 'unknown'} has invalid ETA`);
+  }
+  if (typeof family.status !== 'string' || family.status.trim().length === 0) {
+    fail(`security register family ${family.family ?? 'unknown'} missing status`);
+  }
+}
+
+const rollbackPolicy = securityRegister.rollbackPolicy ?? null;
+if (!rollbackPolicy || typeof rollbackPolicy !== 'object') {
+  fail('security register missing rollbackPolicy');
+} else {
+  if (typeof rollbackPolicy.intent !== 'string' || rollbackPolicy.intent.trim().length === 0) {
+    fail('security register rollbackPolicy.intent missing');
+  }
+  if (!Number.isFinite(rollbackPolicy.maxRelaxationDays) || rollbackPolicy.maxRelaxationDays > 14) {
+    fail('security register rollbackPolicy.maxRelaxationDays must be <=14');
+  }
+  if (!Array.isArray(rollbackPolicy.requirements) || rollbackPolicy.requirements.length === 0) {
+    fail('security register rollbackPolicy.requirements missing');
+  }
+}
+
+if ((securityRegister.exitCriteria?.consecutiveGreenRuns ?? null) !== 5) {
+  fail('security register exitCriteria.consecutiveGreenRuns must equal 5');
 }
 
 const coveragePairs = [
@@ -162,8 +258,14 @@ if ((e2eSmoke.flaky ?? 0) > 0) {
   fail(`e2e smoke flaky tests detected: ${e2eSmoke.flaky}`);
 }
 
-if (metrics.performance.routeBudgetsStatus !== perfBudget.status) {
-  fail(`performance.routeBudgetsStatus mismatch: metrics=${metrics.performance.routeBudgetsStatus}, summary=${perfBudget.status}`);
+if (metrics.performance.routeBudgetsStatus !== perfBudget.routeBudgetsStatus) {
+  fail(`performance.routeBudgetsStatus mismatch: metrics=${metrics.performance.routeBudgetsStatus}, summary=${perfBudget.routeBudgetsStatus}`);
+}
+if (metrics.performance.chunkBudgetsStatus !== perfBudget.chunkBudgetsStatus) {
+  fail(`performance.chunkBudgetsStatus mismatch: metrics=${metrics.performance.chunkBudgetsStatus}, summary=${perfBudget.chunkBudgetsStatus}`);
+}
+if (metrics.performance.interactionBudgetsStatus !== perfBudget.interactionBudgetsStatus) {
+  fail(`performance.interactionBudgetsStatus mismatch: metrics=${metrics.performance.interactionBudgetsStatus}, summary=${perfBudget.interactionBudgetsStatus}`);
 }
 
 const expectedLargestChunks = Array.isArray(perfSummary.largestChunks)
@@ -172,9 +274,11 @@ const expectedLargestChunks = Array.isArray(perfSummary.largestChunks)
 if (JSON.stringify(metrics.performance.largestChunks) !== JSON.stringify(expectedLargestChunks)) {
   fail('performance.largestChunks mismatch with perf summary');
 }
-
 if (JSON.stringify(metrics.performance.routeJsTotals) !== JSON.stringify(perfSummary.routeJsTotals ?? {})) {
   fail('performance.routeJsTotals mismatch with perf summary');
+}
+if (JSON.stringify(metrics.performance.interactiveRouteJsTotals) !== JSON.stringify(perfSummary.interactiveRouteJsTotals ?? {})) {
+  fail('performance.interactiveRouteJsTotals mismatch with perf summary');
 }
 
 const lhrFiles = readdirSync(paths.lighthouseDir).filter((name) => name.startsWith('lhr-') && name.endsWith('.json'));
@@ -223,6 +327,9 @@ if (metrics.build.bundleFiles !== bundleCount) {
 const sourceTimes = [
   paths.vitest,
   paths.security,
+  paths.securityProd,
+  paths.securityRaw,
+  paths.securityProdRaw,
   paths.coverage,
   paths.staticA11y,
   paths.runtimeA11y,
@@ -232,6 +339,7 @@ const sourceTimes = [
   paths.perfBudget,
   ...lhrFiles.map((file) => join(paths.lighthouseDir, file)),
 ].map((path) => statSync(path).mtimeMs);
+
 const latestSourceMtime = Math.max(...sourceTimes);
 const metricsGenerated = Date.parse(metrics.generated);
 if (!Number.isFinite(metricsGenerated)) {

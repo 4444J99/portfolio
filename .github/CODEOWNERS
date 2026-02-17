@@ -1,0 +1,14 @@
+# Default owner
+* @4444j99
+
+# Quality and security governance contracts
+.github/workflows/quality.yml @4444j99
+.github/pull_request_template.md @4444j99
+.quality/security-policy.json @4444j99
+.quality/security-allowlist.json @4444j99
+.quality/security-register.json @4444j99
+scripts/security-audit.mjs @4444j99
+scripts/check-runtime-a11y-coverage.mjs @4444j99
+scripts/collect-performance-metrics.mjs @4444j99
+scripts/check-bundle-budgets.mjs @4444j99
+scripts/verify-quality-contracts.mjs @4444j99

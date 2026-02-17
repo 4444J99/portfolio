@@ -104,6 +104,22 @@ export interface QualityMetrics {
     moderate: number | null;
     low: number | null;
     total: number | null;
+    prodCounts: {
+      critical: number | null;
+      high: number | null;
+      moderate: number | null;
+      low: number | null;
+      total: number | null;
+    };
+    devCounts: {
+      critical: number | null;
+      high: number | null;
+      moderate: number | null;
+      low: number | null;
+      total: number | null;
+    };
+    allowlistActive: number;
+    policyCheckpoint: { date: string; maxModerate: number; maxLow: number } | null;
     status: string;
     source: string | null;
   };
@@ -126,7 +142,10 @@ export interface QualityMetrics {
   };
   performance: {
     routeBudgetsStatus: string;
+    chunkBudgetsStatus: string;
+    interactionBudgetsStatus: string;
     largestChunks: Array<{ chunk: string; gzipBytes: number }>;
+    interactiveRouteJsTotals: Record<string, { scenario: string; rawBytes: number; gzipBytes: number; assetCount: number; assets: string[] }>;
     routeJsTotals: Record<string, { rawBytes: number; gzipBytes: number; assetCount: number; assets: string[] }>;
     source: string | null;
   };
@@ -134,6 +153,7 @@ export interface QualityMetrics {
   sources: {
     tests: string;
     security: string;
+    securityProd: string;
     coverage: string;
     lighthouse: string;
     a11yStatic: string;

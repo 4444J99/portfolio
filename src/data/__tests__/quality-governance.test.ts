@@ -8,7 +8,9 @@ const lighthouseRc = readFileSync(resolve(root, 'lighthouserc.cjs'), 'utf-8');
 const workflow = readFileSync(resolve(root, '.github/workflows/quality.yml'), 'utf-8');
 const vitestConfig = readFileSync(resolve(root, 'vitest.config.ts'), 'utf-8');
 const typecheckScript = readFileSync(resolve(root, 'scripts/check-typecheck-hints.mjs'), 'utf-8');
+const runtimeCoverageScript = readFileSync(resolve(root, 'scripts/check-runtime-a11y-coverage.mjs'), 'utf-8');
 const policy = JSON.parse(readFileSync(resolve(root, '.quality/ratchet-policy.json'), 'utf-8'));
+const securityPolicy = JSON.parse(readFileSync(resolve(root, '.quality/security-policy.json'), 'utf-8'));
 
 function parseCoverageRatchetFromReadme() {
   const match = readme.match(
@@ -47,6 +49,18 @@ function parseHintRatchetFromReadme() {
   };
 }
 
+function parseRuntimeCoverageRatchetFromReadme() {
+  const match = readme.match(
+    /Runtime a11y coverage ratchet:\s*`([0-9-]+)` `>=([0-9]+)%`, `([0-9-]+)` `>=([0-9]+)%`, `([0-9-]+)` `=([0-9]+)%`/
+  );
+  expect(match).not.toBeNull();
+  return [
+    { date: match![1], coverage: Number(match![2]) },
+    { date: match![3], coverage: Number(match![4]) },
+    { date: match![5], coverage: Number(match![6]) },
+  ];
+}
+
 describe('quality governance drift checks', () => {
   it('README performance threshold matches Lighthouse enforcement', () => {
     const readmePerf = readme.match(/Perf ≥ ([0-9]+)/);
@@ -74,10 +88,42 @@ describe('quality governance drift checks', () => {
       W4: policy.phases.W4.typecheck.hintsMax,
       W6: policy.phases.W6.typecheck.hintsMax,
     });
+
+    const runtimeCoverageRatchet = parseRuntimeCoverageRatchetFromReadme();
+    expect(runtimeCoverageRatchet).toEqual([
+      { date: '2026-02-25', coverage: 85 },
+      { date: '2026-03-04', coverage: 95 },
+      { date: '2026-03-18', coverage: 100 },
+    ]);
+
+    expect(runtimeCoverageScript).toContain(`{ date: '2026-02-25', minCoveragePct: 85 }`);
+    expect(runtimeCoverageScript).toContain(`{ date: '2026-03-04', minCoveragePct: 95 }`);
+    expect(runtimeCoverageScript).toContain(`{ date: '2026-03-18', minCoveragePct: 100 }`);
+  });
+
+  it('README security ratchet schedule matches security policy file', () => {
+    const readmeSecurity = readme.match(
+      /Security ratchet checkpoints:\s*`([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`, `([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`, `([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`, `([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`/
+    );
+    expect(readmeSecurity).not.toBeNull();
+
+    const checkpoints = securityPolicy.checkpoints.map((checkpoint: { date: string; maxModerate: number; maxLow: number }) => ({
+      date: checkpoint.date,
+      maxModerate: checkpoint.maxModerate,
+      maxLow: checkpoint.maxLow,
+    }));
+
+    expect(checkpoints).toEqual([
+      { date: readmeSecurity![1], maxModerate: Number(readmeSecurity![2]), maxLow: Number(readmeSecurity![3]) },
+      { date: readmeSecurity![4], maxModerate: Number(readmeSecurity![5]), maxLow: Number(readmeSecurity![6]) },
+      { date: readmeSecurity![7], maxModerate: Number(readmeSecurity![8]), maxLow: Number(readmeSecurity![9]) },
+      { date: readmeSecurity![10], maxModerate: Number(readmeSecurity![11]), maxLow: Number(readmeSecurity![12]) },
+    ]);
   });
 
   it('CI workflow explicitly sets the phase and runs the parity pipeline', () => {
     expect(workflow).toContain('QUALITY_PHASE: W6');
+    expect(workflow).toContain('npm run test:security:prod');
     expect(workflow).toContain('run: npm run quality:local');
     expect(workflow).toContain('run: npm run quality:summary -- --allow-missing');
   });

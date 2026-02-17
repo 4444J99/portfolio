@@ -92,7 +92,7 @@ for (const metric of ['performance', 'accessibility', 'bestPractices', 'seo']) {
 }
 
 const securityRules = rules.securityMaxIncrease || {};
-for (const metric of ['critical', 'high']) {
+for (const metric of ['critical', 'high', 'moderate', 'low']) {
   evaluateIncrease('security', metric, securityRules[metric] ?? 0);
 }
 
@@ -148,6 +148,30 @@ if (baseline.performance?.routeBudgetsStatus === 'pass' && current.performance?.
     delta: null,
     allowedDrop: 0,
     message: `performance route budgets regressed from ${baseline.performance.routeBudgetsStatus} to ${current.performance?.routeBudgetsStatus}`,
+  });
+}
+
+if (baseline.performance?.chunkBudgetsStatus === 'pass' && current.performance?.chunkBudgetsStatus !== 'pass') {
+  regressions.push({
+    category: 'performance',
+    metric: 'chunkBudgetsStatus',
+    baseline: baseline.performance.chunkBudgetsStatus,
+    current: current.performance?.chunkBudgetsStatus,
+    delta: null,
+    allowedDrop: 0,
+    message: `performance chunk budgets regressed from ${baseline.performance.chunkBudgetsStatus} to ${current.performance?.chunkBudgetsStatus}`,
+  });
+}
+
+if (baseline.performance?.interactionBudgetsStatus === 'pass' && current.performance?.interactionBudgetsStatus !== 'pass') {
+  regressions.push({
+    category: 'performance',
+    metric: 'interactionBudgetsStatus',
+    baseline: baseline.performance.interactionBudgetsStatus,
+    current: current.performance?.interactionBudgetsStatus,
+    delta: null,
+    allowedDrop: 0,
+    message: `performance interaction budgets regressed from ${baseline.performance.interactionBudgetsStatus} to ${current.performance?.interactionBudgetsStatus}`,
   });
 }
 

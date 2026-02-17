@@ -5,9 +5,12 @@
 ## Quality Gates
 - [ ] `npm run quality:local` passes locally
 - [ ] `npm run quality:summary` regenerated and reviewed
+- [ ] Security policy impact reviewed (`.quality/security-policy.json`) when thresholds change
+- [ ] Security allowlist impact reviewed (`.quality/security-allowlist.json`) when entries change
 - [ ] No security gate regressions (`npm run test:security`)
+- [ ] No prod security regressions (`npm run test:security:prod`)
 - [ ] No route budget regressions (`npm run test:perf:budgets`)
-- [ ] Runtime a11y coverage remains >= 75% (`npm run test:a11y:coverage`)
+- [ ] Runtime a11y coverage meets current ratchet checkpoint (`npm run test:a11y:coverage`)
 - [ ] E2E smoke suite is stable with zero flaky tests (`npm run test:e2e:smoke`)
 
 ## Risk Notes

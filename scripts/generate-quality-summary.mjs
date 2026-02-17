@@ -20,6 +20,7 @@ const currentPath = resolve('src/data/quality-metrics.json');
 const baselinePath = resolve('src/data/quality-metrics-baseline.json');
 const deltaPath = resolve('.quality/delta-summary.json');
 const typecheckPath = resolve('.quality/typecheck-summary.json');
+const securityRegisterPath = resolve('.quality/security-register.json');
 
 function readJson(path, label) {
   if (!existsSync(path)) {
@@ -40,11 +41,21 @@ function metricRow(label, current, baseline) {
   return `| ${label} | ${current ?? 'n/a'} | ${baseline ?? 'n/a'} | ${deltaText(current, baseline)} |`;
 }
 
+function formatSeverityTarget(target) {
+  if (!target || typeof target !== 'object') return 'n/a';
+  const critical = Number.isFinite(target.critical) ? target.critical : 'n/a';
+  const high = Number.isFinite(target.high) ? target.high : 'n/a';
+  const moderate = Number.isFinite(target.moderate) ? target.moderate : 'n/a';
+  const low = Number.isFinite(target.low) ? target.low : 'n/a';
+  return `C${critical} H${high} M${moderate} L${low}`;
+}
+
 let policy;
 let current;
 let baseline;
 let deltaSummary;
 let typecheckSummary;
+let securityRegister;
 
 try {
   policy = readJson(policyPath, 'ratchet policy');
@@ -52,6 +63,7 @@ try {
   baseline = readJson(baselinePath, 'quality baseline');
   deltaSummary = readJson(deltaPath, 'delta summary');
   typecheckSummary = readJson(typecheckPath, 'typecheck summary');
+  securityRegister = readJson(securityRegisterPath, 'security register');
 } catch (error) {
   console.error(String(error));
   process.exit(1);
@@ -75,6 +87,8 @@ lines.push('## Gate Snapshot');
 lines.push('');
 lines.push(`- Typecheck: ${typecheckSummary?.status ?? 'unknown'} (hints ${typecheckSummary?.hints ?? 'n/a'} / budget ${hintTarget ?? 'n/a'})`);
 lines.push(`- Security: ${current?.security?.status ?? 'n/a'} (critical ${current?.security?.critical ?? 'n/a'}, high ${current?.security?.high ?? 'n/a'})`);
+lines.push(`- Security split: prod ${current?.security?.prodCounts?.total ?? 'n/a'} / dev ${current?.security?.devCounts?.total ?? 'n/a'} (allowlist active ${current?.security?.allowlistActive ?? 'n/a'})`);
+lines.push(`- Security checkpoint: ${current?.security?.policyCheckpoint ? `${current.security.policyCheckpoint.date} (moderate<=${current.security.policyCheckpoint.maxModerate}, low<=${current.security.policyCheckpoint.maxLow})` : 'n/a'}`);
 lines.push(`- Coverage: statements ${current?.coverage?.statements ?? 'n/a'}, branches ${current?.coverage?.branches ?? 'n/a'}, functions ${current?.coverage?.functions ?? 'n/a'}, lines ${current?.coverage?.lines ?? 'n/a'}`);
 if (coverageTarget) {
   lines.push(`- Coverage targets (${phase}): ${coverageTarget.statements}/${coverageTarget.branches}/${coverageTarget.functions}/${coverageTarget.lines}`);
@@ -84,8 +98,49 @@ lines.push(
   `- Runtime route coverage: ${current?.a11y?.runtime?.routesCovered ?? 'n/a'}/${current?.a11y?.runtime?.totalRoutes ?? 'n/a'} (${current?.a11y?.runtime?.coveragePct ?? 'n/a'}%)`
 );
 lines.push(`- E2E smoke: ${current?.sources?.e2eSmoke ?? 'n/a'}`);
-lines.push(`- Perf budgets: ${current?.performance?.routeBudgetsStatus ?? 'n/a'}`);
+lines.push(`- Perf budgets: route ${current?.performance?.routeBudgetsStatus ?? 'n/a'}, chunk ${current?.performance?.chunkBudgetsStatus ?? 'n/a'}, interaction ${current?.performance?.interactionBudgetsStatus ?? 'n/a'}`);
 lines.push(`- Lighthouse: perf ${current?.lighthouse?.performance ?? 'n/a'}, a11y ${current?.lighthouse?.accessibility ?? 'n/a'}, bp ${current?.lighthouse?.bestPractices ?? 'n/a'}, seo ${current?.lighthouse?.seo ?? 'n/a'}`);
+lines.push('');
+lines.push('## Security Sprint Cadence');
+lines.push('');
+
+const checkpoints = Array.isArray(securityRegister?.checkpoints) ? securityRegister.checkpoints : [];
+if (checkpoints.length > 0) {
+  lines.push('| Date | Target | Status | Notes |');
+  lines.push('|---|---|---|---|');
+  checkpoints.forEach((checkpoint) => {
+    lines.push(`| ${checkpoint.date ?? 'n/a'} | ${formatSeverityTarget(checkpoint.target)} | ${checkpoint.status ?? 'n/a'} | ${checkpoint.notes ?? ''} |`);
+  });
+} else {
+  lines.push('- No checkpoint schedule found.');
+}
+lines.push('');
+lines.push('### Vulnerability Families');
+lines.push('');
+const families = Array.isArray(securityRegister?.vulnerabilityFamilies) ? securityRegister.vulnerabilityFamilies : [];
+if (families.length > 0) {
+  families.forEach((family) => {
+    lines.push(`- ${family.family ?? 'unknown'}: owner ${family.owner ?? 'n/a'}, ETA ${family.eta ?? 'n/a'}, status ${family.status ?? 'n/a'}`);
+  });
+} else {
+  lines.push('- None');
+}
+lines.push('');
+lines.push('### Rollback Policy');
+lines.push('');
+const rollbackPolicy = securityRegister?.rollbackPolicy ?? null;
+if (rollbackPolicy) {
+  lines.push(`- Intent: ${rollbackPolicy.intent ?? 'n/a'}`);
+  lines.push(`- Maximum temporary relaxation: ${rollbackPolicy.maxRelaxationDays ?? 'n/a'} day(s)`);
+  const requirements = Array.isArray(rollbackPolicy.requirements) ? rollbackPolicy.requirements : [];
+  if (requirements.length === 0) {
+    lines.push('- Requirements: none documented');
+  } else {
+    requirements.forEach((requirement) => lines.push(`- Requirement: ${requirement}`));
+  }
+} else {
+  lines.push('- No rollback policy documented.');
+}
 lines.push('');
 lines.push('## Deltas vs Baseline');
 lines.push('');
@@ -97,6 +152,8 @@ lines.push(metricRow('Coverage functions', current?.coverage?.functions, baselin
 lines.push(metricRow('Coverage lines', current?.coverage?.lines, baseline?.coverage?.lines));
 lines.push(metricRow('Security critical', current?.security?.critical, baseline?.security?.critical));
 lines.push(metricRow('Security high', current?.security?.high, baseline?.security?.high));
+lines.push(metricRow('Security moderate', current?.security?.moderate, baseline?.security?.moderate));
+lines.push(metricRow('Security low', current?.security?.low, baseline?.security?.low));
 lines.push(metricRow('LH performance', current?.lighthouse?.performance, baseline?.lighthouse?.performance));
 lines.push(metricRow('LH accessibility', current?.lighthouse?.accessibility, baseline?.lighthouse?.accessibility));
 lines.push(metricRow('LH best practices', current?.lighthouse?.bestPractices, baseline?.lighthouse?.bestPractices));

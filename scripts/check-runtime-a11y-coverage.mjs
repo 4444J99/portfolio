@@ -4,6 +4,12 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import { dirname, join, resolve } from 'node:path';
 
 const args = process.argv.slice(2);
+const BASELINE_MIN_COVERAGE = 75;
+const COVERAGE_CHECKPOINTS = [
+  { date: '2026-02-25', minCoveragePct: 85 },
+  { date: '2026-03-04', minCoveragePct: 95 },
+  { date: '2026-03-18', minCoveragePct: 100 },
+];
 
 function parseOption(name, fallback = null) {
   const eq = args.find((entry) => entry.startsWith(`--${name}=`));
@@ -23,10 +29,44 @@ function countHtmlFiles(dir) {
   return total;
 }
 
+function parseDateOrNull(value) {
+  if (!value || typeof value !== 'string') return null;
+  const ts = Date.parse(value);
+  return Number.isFinite(ts) ? ts : null;
+}
+
+function resolveMinCoverage(referenceTime) {
+  const sorted = [...COVERAGE_CHECKPOINTS].sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+  const reached = sorted.filter((checkpoint) => Date.parse(checkpoint.date) <= referenceTime);
+  if (reached.length === 0) {
+    return {
+      checkpoint: null,
+      minCoveragePct: BASELINE_MIN_COVERAGE,
+    };
+  }
+  const checkpoint = reached[reached.length - 1];
+  return {
+    checkpoint,
+    minCoveragePct: checkpoint.minCoveragePct,
+  };
+}
+
 const runtimeSummaryPath = resolve('.a11y/runtime-summary.json');
 const distPath = resolve('dist');
 const outputPath = resolve(parseOption('json-out', '.quality/runtime-coverage-summary.json'));
-const minCoverage = Number(parseOption('min-coverage', process.env.RUNTIME_A11Y_MIN_COVERAGE ?? '75'));
+const dateOverride = parseOption('date', process.env.RUNTIME_A11Y_POLICY_DATE ?? null);
+const referenceTime = dateOverride ? parseDateOrNull(dateOverride) : Date.now();
+
+if (dateOverride && referenceTime === null) {
+  console.error(`Invalid --date/RUNTIME_A11Y_POLICY_DATE value: ${dateOverride}`);
+  process.exit(1);
+}
+
+const minCoverageOverride = parseOption('min-coverage', null);
+const resolvedCoverage = resolveMinCoverage(referenceTime ?? Date.now());
+const minCoverage = minCoverageOverride === null
+  ? resolvedCoverage.minCoveragePct
+  : Number(minCoverageOverride);
 
 if (!existsSync(runtimeSummaryPath)) {
   console.error(`Missing runtime a11y summary: ${runtimeSummaryPath}`);
@@ -58,6 +98,10 @@ const summary = {
   generated: new Date().toISOString(),
   sourceRuntime: runtimeSummaryPath,
   sourceRoutes: distPath,
+  policyReferenceDate: new Date(referenceTime ?? Date.now()).toISOString(),
+  policyBaselineMinCoveragePct: BASELINE_MIN_COVERAGE,
+  policyCheckpoints: COVERAGE_CHECKPOINTS,
+  policyCheckpoint: resolvedCoverage.checkpoint,
   routesCovered,
   totalRoutes,
   coveragePct,

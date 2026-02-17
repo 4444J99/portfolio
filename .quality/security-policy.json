@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "description": "Security severity ratchet checkpoints for the 30-day security-to-zero sprint.",
+  "rules": {
+    "maxCritical": 0,
+    "maxHigh": 0
+  },
+  "checkpoints": [
+    {
+      "date": "2026-02-21",
+      "maxModerate": 5,
+      "maxLow": 4
+    },
+    {
+      "date": "2026-02-28",
+      "maxModerate": 2,
+      "maxLow": 2
+    },
+    {
+      "date": "2026-03-07",
+      "maxModerate": 1,
+      "maxLow": 1
+    },
+    {
+      "date": "2026-03-18",
+      "maxModerate": 0,
+      "maxLow": 0
+    }
+  ],
+  "allowlist": {
+    "maxDurationDays": 14,
+    "requiredFields": [
+      "package",
+      "severity",
+      "reason",
+      "owner",
+      "created",
+      "expires",
+      "trackingIssue"
+    ]
+  }
+}

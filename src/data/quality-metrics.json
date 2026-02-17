@@ -1,16 +1,36 @@
 {
-  "generated": "2026-02-17T21:10:46.303Z",
+  "generated": "2026-02-17T21:54:34.157Z",
   "tests": {
-    "total": 199,
-    "passed": 199,
+    "total": 200,
+    "passed": 200,
     "files": 20
   },
   "security": {
     "critical": 0,
     "high": 0,
-    "moderate": 5,
-    "low": 4,
-    "total": 9,
+    "moderate": 0,
+    "low": 0,
+    "total": 0,
+    "prodCounts": {
+      "critical": 0,
+      "high": 0,
+      "moderate": 0,
+      "low": 0,
+      "total": 0
+    },
+    "devCounts": {
+      "critical": 0,
+      "high": 0,
+      "moderate": 0,
+      "low": 0,
+      "total": 0
+    },
+    "allowlistActive": 0,
+    "policyCheckpoint": {
+      "date": "2026-02-21",
+      "maxModerate": 5,
+      "maxLow": 4
+    },
     "status": "pass",
     "source": ".quality/security-summary.json"
   },
@@ -35,19 +55,21 @@
       "status": "pass"
     },
     "runtime": {
-      "pagesAudited": 24,
+      "pagesAudited": 32,
       "critical": 0,
       "serious": 0,
       "focusChecks": 2,
       "focusFailures": 0,
-      "routesCovered": 24,
+      "routesCovered": 32,
       "totalRoutes": 32,
-      "coveragePct": 75,
+      "coveragePct": 100,
       "status": "pass"
     }
   },
   "performance": {
     "routeBudgetsStatus": "pass",
+    "chunkBudgetsStatus": "pass",
+    "interactionBudgetsStatus": "pass",
     "largestChunks": [
       {
         "chunk": "_astro/vendor-mermaid.tIu9KGBW.js",
@@ -90,6 +112,68 @@
         "gzipBytes": 1530
       }
     ],
+    "interactiveRouteJsTotals": {
+      "/portfolio/architecture": {
+        "scenario": "architecture-interaction",
+        "rawBytes": 3449124,
+        "gzipBytes": 985959,
+        "assetCount": 11,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CON9sG30.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B_ir-_DH.js",
+          "_astro/background-sketch.ByO5Pm1e.js",
+          "_astro/index.DPpxZ3MW.js",
+          "_astro/network-graph-sketch.BPa-0SfN.js",
+          "_astro/page.BgmgLP1E.js",
+          "_astro/palette.BEtSnNQw.js",
+          "_astro/sketch-loader.BYlUxrif.js",
+          "_astro/vendor-cytoscape.C5TakKzA.js",
+          "_astro/vendor-mermaid.tIu9KGBW.js",
+          "_astro/vendor-p5.Ca8ta-ah.js"
+        ]
+      },
+      "/portfolio/gallery": {
+        "scenario": "gallery-interaction",
+        "rawBytes": 3491293,
+        "gzipBytes": 1006066,
+        "assetCount": 33,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CON9sG30.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B_ir-_DH.js",
+          "_astro/atoms-sketch.PufMKsIk.js",
+          "_astro/background-sketch.ByO5Pm1e.js",
+          "_astro/blocks-sketch.B7F_8nzg.js",
+          "_astro/conductor-sketch.CsNW48Wi.js",
+          "_astro/constellation-sketch.DRcmd8D1.js",
+          "_astro/counterpoint-sketch.NmcrWekv.js",
+          "_astro/data-bars-sketch.BUpXGqsy.js",
+          "_astro/deliberation-sketch.omHpgCF3.js",
+          "_astro/flow-diagram-sketch.C8cKzYBJ.js",
+          "_astro/gallery.astro_astro_type_script_index_0_lang.uP_qekPr.js",
+          "_astro/hero-sketch.D4Adanfx.js",
+          "_astro/index.DPpxZ3MW.js",
+          "_astro/network-graph-sketch.BPa-0SfN.js",
+          "_astro/octagon-sketch.B3DUTcy5.js",
+          "_astro/orbits-sketch.Bw-ZxLSd.js",
+          "_astro/organ-system-sketch.C9w9uwJI.js",
+          "_astro/page.BgmgLP1E.js",
+          "_astro/palette.BEtSnNQw.js",
+          "_astro/particle-field-sketch.DJwvGiuk.js",
+          "_astro/pipeline-sketch.BgvTQ8X0.js",
+          "_astro/recursive-tree-sketch.BMtYJSUL.js",
+          "_astro/scatter-sketch.igYaWaCn.js",
+          "_astro/sketch-loader.BYlUxrif.js",
+          "_astro/spiral-sketch.C_SjJ2Wj.js",
+          "_astro/swarm-sketch.CzIOHSfj.js",
+          "_astro/terrain-sketch.Bh4-jho8.js",
+          "_astro/token-stream-sketch.WVCHn-Iz.js",
+          "_astro/vendor-cytoscape.C5TakKzA.js",
+          "_astro/vendor-mermaid.tIu9KGBW.js",
+          "_astro/vendor-p5.Ca8ta-ah.js",
+          "_astro/waveform-sketch.WeesPYoH.js"
+        ]
+      }
+    },
     "routeJsTotals": {
       "/portfolio/404.html": {
         "rawBytes": 13425,
@@ -444,6 +528,7 @@
   "sources": {
     "tests": ".quality/vitest-report.json",
     "security": ".quality/security-summary.json",
+    "securityProd": ".quality/security-summary-prod.json",
     "coverage": "coverage/coverage-summary.json",
     "lighthouse": ".lighthouseci/lhr-*.json",
     "a11yStatic": ".a11y/a11y-summary.json",

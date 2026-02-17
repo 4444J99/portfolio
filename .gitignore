@@ -49,6 +49,8 @@ coverage/
 .quality/*
 !.quality/ratchet-policy.json
 !.quality/security-allowlist.json
+!.quality/security-policy.json
+!.quality/security-register.json
 
 # Playwright artifacts
 test-results/

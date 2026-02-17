@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "program": "30-day-security-to-zero",
+  "window": {
+    "start": "2026-02-17",
+    "end": "2026-03-18"
+  },
+  "checkpoints": [
+    {
+      "date": "2026-02-21",
+      "target": {
+        "critical": 0,
+        "high": 0,
+        "moderate": 5,
+        "low": 4
+      },
+      "status": "planned",
+      "notes": "Baseline lock and initial dependency closure."
+    },
+    {
+      "date": "2026-02-28",
+      "target": {
+        "critical": 0,
+        "high": 0,
+        "moderate": 2,
+        "low": 2
+      },
+      "status": "planned",
+      "notes": "Transitive vulnerability reduction with policy ratchet."
+    },
+    {
+      "date": "2026-03-07",
+      "target": {
+        "critical": 0,
+        "high": 0,
+        "moderate": 1,
+        "low": 1
+      },
+      "status": "planned",
+      "notes": "Near-zero checkpoint and allowlist burn-down."
+    },
+    {
+      "date": "2026-03-14",
+      "target": {
+        "critical": 0,
+        "high": 0,
+        "moderate": 0,
+        "low": 0
+      },
+      "status": "planned",
+      "notes": "Stabilization window and consecutive green run tracking."
+    },
+    {
+      "date": "2026-03-18",
+      "target": {
+        "critical": 0,
+        "high": 0,
+        "moderate": 0,
+        "low": 0
+      },
+      "status": "planned",
+      "notes": "Program closeout; require five consecutive green CI runs."
+    }
+  ],
+  "vulnerabilityFamilies": [
+    {
+      "family": "astro-tooling-chain",
+      "packages": [
+        "@astrojs/check",
+        "@astrojs/language-server",
+        "volar-service-yaml",
+        "yaml-language-server",
+        "lodash"
+      ],
+      "owner": "@4444j99",
+      "eta": "2026-02-28",
+      "status": "open"
+    },
+    {
+      "family": "lhci-transitive-tmp",
+      "packages": [
+        "@lhci/cli",
+        "inquirer",
+        "external-editor",
+        "tmp"
+      ],
+      "owner": "@4444j99",
+      "eta": "2026-03-07",
+      "status": "open"
+    }
+  ],
+  "exitCriteria": {
+    "allSeveritiesZero": true,
+    "allowlistActiveCount": 0,
+    "consecutiveGreenRuns": 5,
+    "rollbackPolicyDocumented": true
+  },
+  "rollbackPolicy": {
+    "intent": "Emergency-only temporary gate relaxation with expiry and explicit ownership.",
+    "requirements": [
+      "Document risk and mitigation in pull request Risk Notes.",
+      "Use allowlist entries only with owner, reason, tracking issue, and <=14 day expiry.",
+      "Get explicit CODEOWNER review on workflow/policy changes before merge.",
+      "Revert relaxation immediately after upstream fix lands.",
+      "Record closure status in the next weekly checkpoint."
+    ],
+    "maxRelaxationDays": 14
+  }
+}

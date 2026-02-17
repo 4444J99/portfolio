@@ -25,14 +25,22 @@ describe('quality-metrics.json', () => {
 
   it('includes security and performance measured fields', () => {
     expect(typeof quality.security.status).toBe('string');
+    expect(typeof quality.security.allowlistActive).toBe('number');
+    expect(typeof quality.security.prodCounts).toBe('object');
+    expect(typeof quality.security.devCounts).toBe('object');
+    expect(quality.security.policyCheckpoint === null || typeof quality.security.policyCheckpoint.date === 'string').toBe(true);
     expect(typeof quality.performance.routeBudgetsStatus).toBe('string');
+    expect(typeof quality.performance.chunkBudgetsStatus).toBe('string');
+    expect(typeof quality.performance.interactionBudgetsStatus).toBe('string');
     expect(Array.isArray(quality.performance.largestChunks)).toBe(true);
+    expect(typeof quality.performance.interactiveRouteJsTotals).toBe('object');
     expect(typeof quality.performance.routeJsTotals).toBe('object');
   });
 
   it('includes provenance strings for every metric family', () => {
     expect(typeof quality.sources.tests).toBe('string');
     expect(typeof quality.sources.security).toBe('string');
+    expect(typeof quality.sources.securityProd).toBe('string');
     expect(typeof quality.sources.coverage).toBe('string');
     expect(typeof quality.sources.lighthouse).toBe('string');
     expect(typeof quality.sources.a11yStatic).toBe('string');

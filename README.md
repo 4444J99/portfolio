@@ -25,24 +25,27 @@ Every push runs automated quality gates via [GitHub Actions](.github/workflows/q
 
 | Gate | Tool | Threshold |
 |------|------|-----------|
-| Security audit | `npm audit` (contract script) | Unsuppressed Critical = 0, High = 0 |
+| Security audit | `npm audit` (contract scripts) | Unsuppressed Critical = 0, High = 0, policy-ratcheted Moderate/Low |
 | Unit & integration tests | [Vitest](https://vitest.dev/) | All pass |
 | Coverage floor (ratcheted) | [Vitest Coverage](https://vitest.dev/guide/coverage) | Statements ≥ 25, Branches ≥ 18, Functions ≥ 18, Lines ≥ 25 (phase `W6`) |
 | Accessibility audit | [axe-core](https://github.com/dequelabs/axe-core) | Zero critical/serious (static + runtime browser audit) |
-| Runtime a11y coverage | Custom script | Runtime audited routes ≥ 75% of emitted HTML routes |
+| Runtime a11y coverage | Custom script | Policy-ratcheted route coverage, target 100% by 2026-03-18 |
 | E2E navigation smoke | [Playwright](https://playwright.dev/) | Zero unexpected failures, zero flaky tests |
-| Route JS budget gate | Custom script | Route-level gzip JS budgets enforced |
+| JS budget gates | Custom scripts | Route + chunk + interaction gzip budgets enforced |
 | Performance budgets | [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) | Perf ≥ 85, A11y ≥ 90, SEO ≥ 90 |
 | HTML validation | [html-validate](https://html-validate.org/) | Zero errors |
 | Link checking | Custom script | All internal links valid |
 
 Coverage ratchet policy: W2 `12/8/8/12`, W4 `18/12/12/18`, W6 `25/18/18/25` (Statements/Branches/Functions/Lines).  
 Typecheck hint budget policy: W2 `<=20`, W4 `<=8`, W6 `=0`.
+Runtime a11y coverage ratchet: `2026-02-25` `>=85%`, `2026-03-04` `>=95%`, `2026-03-18` `=100%`.
+Security ratchet checkpoints: `2026-02-21` `moderate<=5, low<=4`, `2026-02-28` `moderate<=2, low<=2`, `2026-03-07` `moderate<=1, low<=1`, `2026-03-18` `moderate<=0, low<=0`.
 
 ```bash
 npm run test              # Unit + integration tests (vitest)
 npm run test:report       # Vitest JSON report for measured totals
 npm run test:coverage     # Coverage report (V8)
+npm run test:security:prod # Security audit gate (prod deps only)
 npm run test:security     # Security audit gate (npm audit + allowlist contract)
 npm run test:a11y         # Accessibility audit (axe-core on all pages)
 npm run test:a11y:runtime # Runtime browser accessibility audit (Playwright + axe)
@@ -52,7 +55,7 @@ npm run typecheck         # Astro + TypeScript type checks
 npm run typecheck:strict  # Typecheck with ratcheted hint budget (phase-aware)
 npm run validate          # HTML validation + internal link check
 npm run collect:perf      # Collect route/chunk performance metrics
-npm run test:perf:budgets # Enforce route-level gzip JS budgets
+npm run test:perf:budgets # Enforce route/chunk/interaction gzip JS budgets
 npm run lighthouse        # Lighthouse CI performance budgets
 npm run verify:quality    # Artifact-backed metrics freshness contract
 npm run quality:delta     # Baseline regression delta enforcement

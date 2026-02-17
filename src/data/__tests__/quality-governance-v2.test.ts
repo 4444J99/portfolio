@@ -10,13 +10,15 @@ const metricsType = readFileSync(resolve(root, 'src/types/data.ts'), 'utf-8');
 
 describe('quality governance v2 contracts', () => {
   it('includes security gate and blocking parity pipeline in CI', () => {
-    expect(workflow).toContain('name: Security gate');
-    expect(workflow).toContain('run: npm run test:security');
+    expect(workflow).toContain('name: Security gates (prod + full tree)');
+    expect(workflow).toContain('npm run test:security:prod');
+    expect(workflow).toContain('npm run test:security');
     expect(workflow).toContain('run: npm run quality:local');
   });
 
   it('exposes the expanded quality scripts in package.json', () => {
     const scripts = packageJson.scripts ?? {};
+    expect(typeof scripts['test:security:prod']).toBe('string');
     expect(typeof scripts['test:security']).toBe('string');
     expect(typeof scripts['test:a11y:coverage']).toBe('string');
     expect(typeof scripts['test:e2e:smoke']).toBe('string');
@@ -34,13 +36,20 @@ describe('quality governance v2 contracts', () => {
 
   it('defines security/performance fields in QualityMetrics type', () => {
     expect(metricsType).toContain('security: {');
+    expect(metricsType).toContain('prodCounts');
+    expect(metricsType).toContain('policyCheckpoint');
     expect(metricsType).toContain('performance: {');
+    expect(metricsType).toContain('chunkBudgetsStatus');
+    expect(metricsType).toContain('interactionBudgetsStatus');
     expect(metricsType).toContain('runtimeCoverage');
     expect(metricsType).toContain('routeBudgetsStatus');
   });
 
-  it('tracks automation configs for dependency updates and security allowlist', () => {
+  it('tracks automation configs and security policy contracts', () => {
     expect(existsSync(resolve(root, '.github/dependabot.yml'))).toBe(true);
     expect(existsSync(resolve(root, '.quality/security-allowlist.json'))).toBe(true);
+    expect(existsSync(resolve(root, '.quality/security-policy.json'))).toBe(true);
+    expect(existsSync(resolve(root, '.quality/security-register.json'))).toBe(true);
+    expect(existsSync(resolve(root, '.github/CODEOWNERS'))).toBe(true);
   });
 });
