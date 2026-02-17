@@ -28,25 +28,38 @@ describe('quality-metrics.json', () => {
     expect(typeof quality.security.allowlistActive).toBe('number');
     expect(typeof quality.security.prodCounts).toBe('object');
     expect(typeof quality.security.devCounts).toBe('object');
+    expect(typeof quality.security.githubAdvisoryStatus).toBe('string');
+    expect(typeof quality.security.githubOpenAlerts === 'number' || quality.security.githubOpenAlerts === null).toBe(true);
     expect(quality.security.policyCheckpoint === null || typeof quality.security.policyCheckpoint.date === 'string').toBe(true);
     expect(typeof quality.performance.routeBudgetsStatus).toBe('string');
     expect(typeof quality.performance.chunkBudgetsStatus).toBe('string');
     expect(typeof quality.performance.interactionBudgetsStatus).toBe('string');
+    expect(quality.performance.routeBudgetCheckpoint === null || typeof quality.performance.routeBudgetCheckpoint.date === 'string').toBe(true);
+    expect(quality.performance.chunkBudgetCheckpoint === null || typeof quality.performance.chunkBudgetCheckpoint.date === 'string').toBe(true);
+    expect(quality.performance.interactionBudgetCheckpoint === null || typeof quality.performance.interactionBudgetCheckpoint.date === 'string').toBe(true);
     expect(Array.isArray(quality.performance.largestChunks)).toBe(true);
     expect(typeof quality.performance.interactiveRouteJsTotals).toBe('object');
     expect(typeof quality.performance.routeJsTotals).toBe('object');
+    expect(typeof quality.runtimeErrors.status).toBe('string');
+    expect(typeof quality.stability.status).toBe('string');
   });
 
   it('includes provenance strings for every metric family', () => {
     expect(typeof quality.sources.tests).toBe('string');
     expect(typeof quality.sources.security).toBe('string');
     expect(typeof quality.sources.securityProd).toBe('string');
+    expect(typeof quality.sources.securityGithub).toBe('string');
+    expect(typeof quality.sources.securityDrift).toBe('string');
     expect(typeof quality.sources.coverage).toBe('string');
     expect(typeof quality.sources.lighthouse).toBe('string');
     expect(typeof quality.sources.a11yStatic).toBe('string');
     expect(typeof quality.sources.a11yRuntime).toBe('string');
     expect(typeof quality.sources.runtimeCoverage).toBe('string');
     expect(typeof quality.sources.e2eSmoke).toBe('string');
+    expect(typeof quality.sources.runtimeErrors).toBe('string');
+    expect(typeof quality.sources.greenRuns).toBe('string');
+    expect(typeof quality.sources.ledger).toBe('string');
+    expect(typeof quality.sources.policyGovernance).toBe('string');
     expect(typeof quality.sources.performance).toBe('string');
     expect(typeof quality.sources.build).toBe('string');
   });
