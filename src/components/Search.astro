@@ -1,6 +1,7 @@
 ---
 // Search component: Cmd+K trigger with Pagefind UI in a dialog overlay.
-// Zero JS until opened — Pagefind UI is lazy-loaded on first interaction.
+// Pagefind UI is lazy-loaded on first interaction.
+// Uses is:inline to avoid Vite module bundling — prevents View Transition stalls.
 ---
 
 <button class="search-trigger" aria-label="Search (Cmd+K)" type="button">
@@ -22,78 +23,109 @@
   </div>
 </dialog>
 
-<script>
-  function initSearch() {
-    const trigger = document.querySelector('.search-trigger') as HTMLButtonElement | null;
-    const dialog = document.querySelector('.search-dialog') as HTMLDialogElement | null;
-    const closeBtn = document.querySelector('.search-dialog__close') as HTMLButtonElement | null;
-    if (!trigger || !dialog) return;
+<script is:inline>
+  (function () {
+    var BASE = '/portfolio/';
+    var pagefindLoaded = false;
 
-    let pagefindLoaded = false;
+    function initSearch() {
+      var trigger = document.querySelector('.search-trigger');
+      var dialog = document.querySelector('.search-dialog');
+      var closeBtn = document.querySelector('.search-dialog__close');
+      if (!trigger || !dialog) return;
 
-    async function loadPagefind() {
+      // Clone-and-replace trigger to prevent listener accumulation across navigations
+      var fresh = trigger.cloneNode(true);
+      trigger.parentNode.replaceChild(fresh, trigger);
+
+      function openSearch() {
+        dialog.showModal();
+        loadPagefind();
+        var input = document.querySelector('#pagefind-container input');
+        if (input) input.focus();
+      }
+
+      function closeSearch() {
+        dialog.close();
+      }
+
+      fresh.addEventListener('click', openSearch);
+      if (closeBtn) closeBtn.addEventListener('click', closeSearch);
+
+      // Click outside to close
+      dialog.addEventListener('click', function (e) {
+        if (e.target === dialog) closeSearch();
+      });
+
+      // Cmd+K / Ctrl+K — document-level, registered once
+      if (!document.__searchKbdInit) {
+        document.__searchKbdInit = true;
+        document.addEventListener('keydown', function (e) {
+          if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            // Re-query DOM — View Transitions may have swapped it
+            var d = document.querySelector('.search-dialog');
+            if (!d) return;
+            if (d.open) d.close();
+            else {
+              d.showModal();
+              loadPagefind();
+              var input = document.querySelector('#pagefind-container input');
+              if (input) input.focus();
+            }
+          }
+        });
+      }
+    }
+
+    function loadPagefind() {
       if (pagefindLoaded) return;
       pagefindLoaded = true;
 
-      const container = document.getElementById('pagefind-container');
+      var container = document.getElementById('pagefind-container');
       if (!container) return;
 
-      // Pagefind generates its bundle at /pagefind/pagefind-ui.js during build
-      const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-
       // Load Pagefind UI CSS
-      const link = document.createElement('link');
+      var link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = `${base}pagefind/pagefind-ui.css`;
+      link.href = BASE + 'pagefind/pagefind-ui.css';
       document.head.appendChild(link);
 
-      // Load Pagefind UI JS
-      const { PagefindUI } = await import(/* @vite-ignore */ `${base}pagefind/pagefind-ui.js`);
-      new PagefindUI({
-        element: container,
-        showSubResults: true,
-        showImages: false,
-        baseUrl: base,
-      });
-
-      // Focus the search input after load
-      setTimeout(() => {
-        const input = container.querySelector<HTMLInputElement>('input');
-        input?.focus();
-      }, 50);
-    }
-
-    function openSearch() {
-      dialog.showModal();
-      loadPagefind();
-      // Focus input if already loaded
-      const input = document.querySelector<HTMLInputElement>('#pagefind-container input');
-      input?.focus();
-    }
-
-    function closeSearch() {
-      dialog.close();
-    }
-
-    trigger.addEventListener('click', openSearch);
-    closeBtn?.addEventListener('click', closeSearch);
-
-    // Click outside to close
-    dialog.addEventListener('click', (e) => {
-      if (e.target === dialog) closeSearch();
-    });
-
-    // Cmd+K / Ctrl+K shortcut
-    document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        if (dialog.open) closeSearch();
-        else openSearch();
+      // Load Pagefind UI JS via script tag (no ES module import in is:inline)
+      try {
+        var script = document.createElement('script');
+        script.src = BASE + 'pagefind/pagefind-ui.js';
+        script.onload = function () {
+          if (window.PagefindUI) {
+            new window.PagefindUI({
+              element: container,
+              showSubResults: true,
+              showImages: false,
+              baseUrl: BASE,
+            });
+            setTimeout(function () {
+              var input = container.querySelector('input');
+              if (input) input.focus();
+            }, 50);
+          }
+        };
+        script.onerror = function () {
+          container.textContent = 'Search unavailable \u2014 run a production build to enable Pagefind.';
+        };
+        document.head.appendChild(script);
+      } catch (err) {
+        container.textContent = 'Search unavailable.';
       }
-    });
-  }
+    }
 
-  document.addEventListener('astro:page-load', initSearch);
+    // Dual init: covers initial load + View Transition navigations
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSearch);
+    } else {
+      initSearch();
+    }
+    document.addEventListener('astro:page-load', initSearch);
+  })();
 </script>
 
 <style>
