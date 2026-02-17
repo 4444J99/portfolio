@@ -2,13 +2,13 @@
   "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
-    "total_repos": 91,
-    "active_repos": 82,
+    "total_repos": 97,
+    "active_repos": 90,
     "archived_repos": 7,
     "dependency_edges": 31,
     "ci_workflows": 77,
     "operational_organs": 8,
-    "sprints_completed": 13
+    "sprints_completed": 33
   },
   "organs": [
     {
@@ -16,7 +16,7 @@
       "name": "Theory",
       "greek": "Theoria",
       "org": "organvm-i-theoria",
-      "repo_count": 19,
+      "repo_count": 20,
       "status": "OPERATIONAL",
       "description": "Epistemological frameworks, recursive engines, ontological systems, conceptual research"
     },
@@ -25,7 +25,7 @@
       "name": "Art",
       "greek": "Poiesis",
       "org": "organvm-ii-poiesis",
-      "repo_count": 28,
+      "repo_count": 30,
       "status": "OPERATIONAL",
       "description": "Generative art, interactive systems, performance frameworks, experiential work"
     },
@@ -34,7 +34,7 @@
       "name": "Commerce",
       "greek": "Ergon",
       "org": "organvm-iii-ergon",
-      "repo_count": 24,
+      "repo_count": 27,
       "status": "OPERATIONAL",
       "description": "Product platforms, deployed systems, customer-facing tools, B2B/B2C applications"
     },
@@ -111,6 +111,16 @@
       "summary": "Gap-fill \u2014 11 repos, 14 promotions"
     },
     {
+      "name": "GAP-FILL",
+      "date": "2026-02-11",
+      "summary": "Coverage completion across all eight organs"
+    },
+    {
+      "name": "PLATINUM",
+      "date": "2026-02-11",
+      "summary": "CI/CD and health file standardization across 77 repos"
+    },
+    {
       "name": "AUTONOMY",
       "date": "2026-02-12",
       "summary": "seed.yaml contracts, agents, workflows"
@@ -149,7 +159,97 @@
       "name": "ILLUSTRATIO",
       "date": "2026-02-14",
       "summary": "Portfolio polish \u2014 CMYK design, p5.js animations, LLM consultation"
+    },
+    {
+      "name": "SUBMISSIO",
+      "date": "2026-02-14",
+      "summary": "Application materials \u2014 5 packages, qualification assessment"
+    },
+    {
+      "name": "OPERATIO-I",
+      "date": "2026-02-16",
+      "summary": "Post-construction governance \u2014 monitoring, runbooks, operational readiness"
+    },
+    {
+      "name": "REMEDIUM",
+      "date": "2026-02-16",
+      "summary": "Stale metrics refresh \u2014 13 files updated to current"
+    },
+    {
+      "name": "SYNCHRONIUM",
+      "date": "2026-02-16",
+      "summary": "Workspace restructure \u2014 flat 2-level layout, 68 repos moved"
+    },
+    {
+      "name": "CONCORDIA",
+      "date": "2026-02-16",
+      "summary": "Registry reconciliation \u2014 6 orphan repos registered (91\u219297)"
+    },
+    {
+      "name": "TRIPARTITUM",
+      "date": "2026-02-16",
+      "summary": "Combined REMEDIUM+MEMORIA+ANNOTATIO \u2014 19 sprint specs written"
+    },
+    {
+      "name": "METRICUM",
+      "date": "2026-02-16",
+      "summary": "Metrics pipeline \u2014 automated calculation and propagation"
+    },
+    {
+      "name": "PUBLICATIO",
+      "date": "2026-02-16",
+      "summary": "4 essays deployed, 3 new essays written (29\u219233)"
+    },
+    {
+      "name": "CANON",
+      "date": "2026-02-16",
+      "summary": "Catalog reconciliation \u2014 4 numbering collisions fixed"
+    },
+    {
+      "name": "INSPECTIO",
+      "date": "2026-02-16",
+      "summary": "Product assessment \u2014 life-my--midst--in identified as beta candidate"
+    },
+    {
+      "name": "PROPAGATIO",
+      "date": "2026-02-16",
+      "summary": "Findings propagation \u2014 stale data corrected across 20+ files"
+    },
+    {
+      "name": "BETA-VITAE",
+      "date": "2026-02-16",
+      "summary": "Beta deployment prep \u2014 Neon DB, 291 tests pass, DEPLOY.md"
+    },
+    {
+      "name": "RECOGNITIO",
+      "date": "2026-02-17",
+      "summary": "E2G-II review \u2014 omega scorecard (1/17), P0 external contact gate"
+    },
+    {
+      "name": "AUTOMATA",
+      "date": "2026-02-17",
+      "summary": "Autonomous systems \u2014 3 cron workflows, auto-deploy, system-pulse"
+    },
+    {
+      "name": "DISTRIBUTIO",
+      "date": "2026-02-17",
+      "summary": "Autonomous essay distribution \u2014 backfill pipeline, rich metadata"
+    },
+    {
+      "name": "FUNDAMEN",
+      "date": "2026-02-17",
+      "summary": "Infrastructure hardening \u2014 6 repos synced, 25+ new tests"
+    },
+    {
+      "name": "SENSORIA",
+      "date": "2026-02-17",
+      "summary": "Perception layer \u2014 100% seed.yaml coverage, stale-detector"
+    },
+    {
+      "name": "OPERATIO",
+      "date": "2026-02-17",
+      "summary": "Operations batch \u2014 essay-deploy, organ-cli, health dashboard"
     }
   ],
-  "generated": "2026-02-14T20:12:00.706166+00:00"
+  "generated": "2026-02-17T22:00:00.000000+00:00"
 }

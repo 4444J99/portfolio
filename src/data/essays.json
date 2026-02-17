@@ -1,5 +1,5 @@
 {
-  "total": 29,
+  "total": 36,
   "essays": [
     {
       "path": "_posts/2026-02-13-aesthetic-nervous-system.md",
@@ -232,9 +232,65 @@
       "slug": "meta-system-as-portfolio-asset",
       "title": "Meta System As Portfolio Asset",
       "url": "https://organvm-v-logos.github.io/public-process/essays/meta-system-as-portfolio-asset/"
+    },
+    {
+      "path": "_posts/2026-02-16-governance-frameworks-for-artists.md",
+      "filename": "2026-02-16-governance-frameworks-for-artists.md",
+      "date": "2026-02-16",
+      "slug": "governance-frameworks-for-artists",
+      "title": "Governance Frameworks for Artists: Why Creative Practice Needs Institutional Thinking",
+      "url": "https://organvm-v-logos.github.io/public-process/essays/governance-frameworks-for-artists/"
+    },
+    {
+      "path": "_posts/2026-02-16-how-to-think-about-autonomous-systems.md",
+      "filename": "2026-02-16-how-to-think-about-autonomous-systems.md",
+      "date": "2026-02-16",
+      "slug": "how-to-think-about-autonomous-systems",
+      "title": "How to Think About Autonomous Systems: A Practitioner's Guide",
+      "url": "https://organvm-v-logos.github.io/public-process/essays/how-to-think-about-autonomous-systems/"
+    },
+    {
+      "path": "_posts/2026-02-16-promotions-in-practice.md",
+      "filename": "2026-02-16-promotions-in-practice.md",
+      "date": "2026-02-16",
+      "slug": "promotions-in-practice",
+      "title": "Promotions in Practice: What We Learned Exercising the State Machine",
+      "url": "https://organvm-v-logos.github.io/public-process/essays/promotions-in-practice/"
+    },
+    {
+      "path": "_posts/2026-02-16-twenty-six-sprints-in-six-days.md",
+      "filename": "2026-02-16-twenty-six-sprints-in-six-days.md",
+      "date": "2026-02-16",
+      "slug": "twenty-six-sprints-in-six-days",
+      "title": "Twenty-Six Sprints in Six Days: What the AI-Conductor Model Actually Looks Like",
+      "url": "https://organvm-v-logos.github.io/public-process/essays/twenty-six-sprints-in-six-days/"
+    },
+    {
+      "path": "_posts/2026-02-16-what-it-takes-to-ship-a-product-from-inside-an-organ-system.md",
+      "filename": "2026-02-16-what-it-takes-to-ship-a-product-from-inside-an-organ-system.md",
+      "date": "2026-02-16",
+      "slug": "what-it-takes-to-ship-a-product-from-inside-an-organ-system",
+      "title": "What It Takes to Ship a Product from Inside an Organ System",
+      "url": "https://organvm-v-logos.github.io/public-process/essays/what-it-takes-to-ship-a-product-from-inside-an-organ-system/"
+    },
+    {
+      "path": "_posts/2026-02-16-why-the-organ-model-separates-commerce-from-theory.md",
+      "filename": "2026-02-16-why-the-organ-model-separates-commerce-from-theory.md",
+      "date": "2026-02-16",
+      "slug": "why-the-organ-model-separates-commerce-from-theory",
+      "title": "Why the Organ Model Separates Commerce from Theory",
+      "url": "https://organvm-v-logos.github.io/public-process/essays/why-the-organ-model-separates-commerce-from-theory/"
+    },
+    {
+      "path": "_posts/2026-02-17-construction-addiction.md",
+      "filename": "2026-02-17-construction-addiction.md",
+      "date": "2026-02-17",
+      "slug": "construction-addiction",
+      "title": "The Construction Addiction: When Building Becomes Avoidance",
+      "url": "https://organvm-v-logos.github.io/public-process/essays/construction-addiction/"
     }
   ],
   "feed_url": "https://organvm-v-logos.github.io/public-process/feed.xml",
   "site_url": "https://organvm-v-logos.github.io/public-process/",
-  "generated": "2026-02-14T20:12:00.982586+00:00"
+  "generated": "2026-02-17T22:00:00.000000+00:00"
 }
