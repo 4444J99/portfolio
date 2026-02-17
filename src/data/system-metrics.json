@@ -4,15 +4,15 @@
   "system": {
     "name": "ORGANVM",
     "launch_date": "2026-02-11",
-    "project_status": "OPERATIO SPRINT 2026-02-17. 33 sprints in 9 days. 97 repos (90 ACTIVE, 7 ARCHIVED), 36 essays (~132K words), ~404K+ total words. Autonomous perception layer active (stale-detector, system-pulse, essay-deploy, organ-cli). life-my--midst--in beta-ready (44 tables, 291 tests, Neon DB). POSSE distribution live (Mastodon + Discord + RSS). 100% seed.yaml coverage. 31 stars, 6 forks. Hermetic seal broken: social posts live, submission scripts ready."
+    "project_status": "OPERATIO SPRINT 2026-02-17. 33 sprints in 9 days. 97 repos (87 ACTIVE, 10 ARCHIVED), 36 essays (~132K words), ~404K+ total words. Autonomous perception layer active (stale-detector, system-pulse, essay-deploy, organ-cli). life-my--midst--in beta-ready (44 tables, 291 tests, Neon DB). POSSE distribution live (Mastodon + Discord + RSS). 100% seed.yaml coverage. 31 stars, 6 forks. Hermetic seal broken: social posts live, submission scripts ready."
   },
   "registry": {
     "total_repos": 97,
     "total_organs": 8,
     "operational_organs": 8,
     "implementation_status": {
-      "ACTIVE": 90,
-      "ARCHIVED": 7
+      "ACTIVE": 87,
+      "ARCHIVED": 10
     },
     "tier_distribution": {
       "flagship": 8,
@@ -34,7 +34,8 @@
         "status": "OPERATIONAL",
         "total_repos": 20,
         "implementation_status": {
-          "ACTIVE": 20
+          "ACTIVE": 17,
+          "ARCHIVED": 3
         },
         "tier_distribution": {
           "flagship": 1,

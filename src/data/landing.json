@@ -3,8 +3,8 @@
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
     "total_repos": 97,
-    "active_repos": 90,
-    "archived_repos": 7,
+    "active_repos": 87,
+    "archived_repos": 10,
     "dependency_edges": 31,
     "ci_workflows": 77,
     "operational_organs": 8,
