@@ -1,9 +1,9 @@
 {
-  "generated": "2026-02-17T21:54:34.157Z",
+  "generated": "2026-02-17T22:31:24.896Z",
   "tests": {
     "total": 200,
     "passed": 200,
-    "files": 20
+    "files": 21
   },
   "security": {
     "critical": 0,
@@ -11,6 +11,8 @@
     "moderate": 0,
     "low": 0,
     "total": 0,
+    "githubOpenAlerts": 0,
+    "githubAdvisoryStatus": "skipped",
     "prodCounts": {
       "critical": 0,
       "high": 0,
@@ -32,7 +34,8 @@
       "maxLow": 4
     },
     "status": "pass",
-    "source": ".quality/security-summary.json"
+    "source": ".quality/security-summary.json",
+    "githubSource": ".quality/github-advisory-summary.json"
   },
   "coverage": {
     "statements": 50,
@@ -70,6 +73,13 @@
     "routeBudgetsStatus": "pass",
     "chunkBudgetsStatus": "pass",
     "interactionBudgetsStatus": "pass",
+    "routeBudgetCheckpoint": null,
+    "chunkBudgetCheckpoint": {
+      "date": "2026-02-17"
+    },
+    "interactionBudgetCheckpoint": {
+      "date": "2026-02-17"
+    },
     "largestChunks": [
       {
         "chunk": "_astro/vendor-mermaid.tIu9KGBW.js",
@@ -521,20 +531,39 @@
     },
     "source": ".quality/perf-summary.json + .quality/perf-budget-summary.json"
   },
+  "runtimeErrors": {
+    "status": "unknown",
+    "total": null,
+    "uncategorized": null,
+    "allowlisted": null,
+    "source": null
+  },
+  "stability": {
+    "status": "skipped",
+    "consecutiveSuccess": null,
+    "requiredConsecutive": 5,
+    "source": ".quality/green-run-history.json"
+  },
   "build": {
-    "pages": 32,
-    "bundleFiles": 60
+    "pages": 33,
+    "bundleFiles": 58
   },
   "sources": {
     "tests": ".quality/vitest-report.json",
     "security": ".quality/security-summary.json",
     "securityProd": ".quality/security-summary-prod.json",
+    "securityGithub": ".quality/github-advisory-summary.json",
+    "securityDrift": ".quality/security-drift-summary.json",
     "coverage": "coverage/coverage-summary.json",
     "lighthouse": ".lighthouseci/lhr-*.json",
     "a11yStatic": ".a11y/a11y-summary.json",
     "a11yRuntime": ".a11y/runtime-summary.json",
     "runtimeCoverage": ".quality/runtime-coverage-summary.json",
     "e2eSmoke": ".quality/e2e-smoke-summary.json",
+    "runtimeErrors": ".quality/runtime-errors-summary.json",
+    "greenRuns": ".quality/green-run-history.json",
+    "ledger": ".quality/quality-ledger.json",
+    "policyGovernance": ".quality/policy-governance-summary.json",
     "performance": ".quality/perf-summary.json + .quality/perf-budget-summary.json",
     "build": "dist/**/*.html and dist/_astro/**/*"
   }
