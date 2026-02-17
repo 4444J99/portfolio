@@ -4,37 +4,50 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 
-const sketches = [
-  { id: 'hero', label: 'Organ Breathing', context: 'Homepage' },
-  { id: 'organ-system', label: 'Organ System', context: 'Architecture' },
-  { id: 'recursive-tree', label: 'Recursive Tree', context: 'RE:GE' },
-  { id: 'counterpoint', label: 'Counterpoint', context: 'Generative Music' },
-  { id: 'pipeline', label: 'Pipeline Flow', context: 'Orchestration' },
-  { id: 'token-stream', label: 'Token Stream', context: 'AI Conductor' },
-  { id: 'network-graph', label: 'Network Graph', context: 'Knowledge Base' },
-  { id: 'flow-diagram', label: 'Flow Diagram', context: 'Agentic Titan' },
-  { id: 'data-bars', label: 'Data Bars', context: 'Dashboard' },
-  { id: 'particle-field', label: 'Particle Field', context: 'About' },
-  { id: 'terrain', label: 'Terrain', context: 'TurfSynth AR' },
-  { id: 'conductor', label: 'Conductor', context: 'AI Conductor' },
-  { id: 'octagon', label: 'Octagon', context: 'Eight-Organ System' },
-  { id: 'waveform', label: 'Waveform', context: 'Generative Music' },
-  { id: 'swarm', label: 'Swarm', context: 'Agentic Titan' },
-  { id: 'deliberation', label: 'Deliberation', context: 'AI Council' },
-  { id: 'blocks', label: 'Blocks', context: 'TurfSynth AR' },
-  { id: 'constellation', label: 'Constellation', context: 'Community' },
-  { id: 'scatter', label: 'Scatter', context: 'Dashboard' },
-  { id: 'spiral', label: 'Spiral', context: 'Recursive Engine' },
-  { id: 'orbits', label: 'Orbits', context: 'Orchestration Hub' },
-  { id: 'atoms', label: 'Atoms', context: 'LingFrame' },
-  { id: 'kaleidoscope', label: 'Kaleidoscope', context: 'Metasystem Master' },
-  { id: 'lenses', label: 'Lenses', context: 'Narratological Lenses' },
-  { id: 'routing', label: 'Routing', context: 'Distribution' },
-  { id: 'hierarchy', label: 'Hierarchy', context: 'Org Architecture' },
-  { id: 'typewriter', label: 'Typewriter', context: 'Public Process' },
-  { id: 'ticker', label: 'Ticker', context: 'The Actual News' },
-  { id: 'weave', label: 'Weave', context: 'Your Fit Tailored' },
+interface Sketch {
+  id: string;
+  label: string;
+  context: string;
+  organ: string;
+}
+
+const sketches: Sketch[] = [
+  { id: 'hero', label: 'Organ Breathing', context: 'Homepage', organ: 'META' },
+  { id: 'organ-system', label: 'Organ System', context: 'Architecture', organ: 'META' },
+  { id: 'recursive-tree', label: 'Recursive Tree', context: 'RE:GE', organ: 'ORGAN-I' },
+  { id: 'counterpoint', label: 'Counterpoint', context: 'Generative Music', organ: 'ORGAN-II' },
+  { id: 'pipeline', label: 'Pipeline Flow', context: 'Orchestration', organ: 'ORGAN-III' },
+  { id: 'token-stream', label: 'Token Stream', context: 'AI Conductor', organ: 'ORGAN-I' },
+  { id: 'network-graph', label: 'Network Graph', context: 'Knowledge Base', organ: 'ORGAN-I' },
+  { id: 'flow-diagram', label: 'Flow Diagram', context: 'Agentic Titan', organ: 'ORGAN-III' },
+  { id: 'data-bars', label: 'Data Bars', context: 'Dashboard', organ: 'META' },
+  { id: 'particle-field', label: 'Particle Field', context: 'About', organ: 'META' },
+  { id: 'terrain', label: 'Terrain', context: 'TurfSynth AR', organ: 'ORGAN-IV' },
+  { id: 'conductor', label: 'Conductor', context: 'AI Conductor', organ: 'ORGAN-I' },
+  { id: 'octagon', label: 'Octagon', context: 'Eight-Organ System', organ: 'META' },
+  { id: 'waveform', label: 'Waveform', context: 'Generative Music', organ: 'ORGAN-II' },
+  { id: 'swarm', label: 'Swarm', context: 'Agentic Titan', organ: 'ORGAN-III' },
+  { id: 'deliberation', label: 'Deliberation', context: 'AI Council', organ: 'ORGAN-II' },
+  { id: 'blocks', label: 'Blocks', context: 'TurfSynth AR', organ: 'ORGAN-IV' },
+  { id: 'constellation', label: 'Constellation', context: 'Community', organ: 'ORGAN-VI' },
+  { id: 'scatter', label: 'Scatter', context: 'Dashboard', organ: 'META' },
+  { id: 'spiral', label: 'Spiral', context: 'Recursive Engine', organ: 'ORGAN-I' },
+  { id: 'orbits', label: 'Orbits', context: 'Orchestration Hub', organ: 'ORGAN-III' },
+  { id: 'atoms', label: 'Atoms', context: 'LingFrame', organ: 'ORGAN-I' },
+  { id: 'kaleidoscope', label: 'Kaleidoscope', context: 'Metasystem Master', organ: 'ORGAN-II' },
+  { id: 'lenses', label: 'Lenses', context: 'Narratological Lenses', organ: 'ORGAN-I' },
+  { id: 'routing', label: 'Routing', context: 'Distribution', organ: 'ORGAN-VII' },
+  { id: 'hierarchy', label: 'Hierarchy', context: 'Org Architecture', organ: 'ORGAN-VI' },
+  { id: 'typewriter', label: 'Typewriter', context: 'Public Process', organ: 'ORGAN-V' },
+  { id: 'ticker', label: 'Ticker', context: 'The Actual News', organ: 'ORGAN-IV' },
+  { id: 'weave', label: 'Weave', context: 'Your Fit Tailored', organ: 'ORGAN-IV' },
 ];
+
+const organs = [...new Set(sketches.map((s) => s.organ))];
+
+// Deterministic "featured" sketch based on the day of the year
+const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+const featured = sketches[dayOfYear % sketches.length];
 ---
 
 <Layout title="Gallery — Generative Art" description="A collection of generative art sketches built with p5.js, each paired to a project in the eight-organ system.">
@@ -43,16 +56,43 @@ const sketches = [
     <section class="section">
       <div class="container">
         <h1 class="page-title" data-reveal>Gallery</h1>
-        <p class="page-sub" data-reveal style="animation-delay: 100ms">{sketches.length} generative sketches built with p5.js — each one paired to a project in the system.</p>
+        <p class="page-sub" data-reveal>{sketches.length} generative sketches built with p5.js — each one paired to a project in the system.</p>
+
+        <!-- Featured sketch -->
+        <div class="gallery-featured" data-reveal>
+          <span class="gallery-featured__badge">Featured</span>
+          <SketchContainer
+            sketchId={featured.id}
+            height="400px"
+            mobileHeight="280px"
+            ariaLabel={`Featured generative sketch: ${featured.label}`}
+            interactive={true}
+          />
+          <div class="gallery-featured__info">
+            <span class="gallery-featured__label">{featured.label}</span>
+            <span class="gallery-featured__context">{featured.context}</span>
+          </div>
+        </div>
+
+        <!-- Filter buttons -->
+        <div class="gallery-filters" data-reveal role="group" aria-label="Filter sketches by organ">
+          <button class="gallery-filter gallery-filter--active" data-filter="all">All</button>
+          {organs.map((organ) => (
+            <button class="gallery-filter" data-filter={organ}>
+              {organ === 'META' ? 'Meta' : organ.replace('ORGAN-', '')}
+            </button>
+          ))}
+        </div>
 
         <div class="gallery-grid">
           {sketches.map((sketch, i) => (
-            <div class="gallery-item" data-reveal style={`animation-delay: ${Math.min(i * 40, 400)}ms`}>
+            <div class="gallery-item" data-reveal data-organ={sketch.organ} style={`--stagger-index: ${Math.min(i, 8)}`}>
               <SketchContainer
                 sketchId={sketch.id}
                 height="280px"
                 mobileHeight="200px"
                 ariaLabel={`Generative sketch: ${sketch.label}`}
+                interactive={true}
               />
               <div class="gallery-item__info">
                 <span class="gallery-item__label">{sketch.label}</span>
@@ -67,7 +107,155 @@ const sketches = [
   <Footer />
 </Layout>
 
+<script>
+  import { pauseSketch, resumeSketch, getSketchInstance } from '../components/sketches/sketch-loader';
+
+  function initGalleryControls() {
+    // Pause/Resume buttons
+    document.querySelectorAll<HTMLButtonElement>('.sketch-ctrl--pause').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const container = btn.closest('.sketch-container') as HTMLElement;
+        if (!container) return;
+        if (container.hasAttribute('data-paused')) {
+          resumeSketch(container);
+        } else {
+          pauseSketch(container);
+        }
+      });
+    });
+
+    // Fullscreen buttons
+    document.querySelectorAll<HTMLButtonElement>('.sketch-ctrl--fullscreen').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const container = btn.closest('.sketch-container') as HTMLElement;
+        if (!container) return;
+        if (document.fullscreenElement === container) {
+          document.exitFullscreen();
+        } else {
+          container.requestFullscreen().catch(() => {});
+        }
+      });
+    });
+
+    // Resize canvas on fullscreen change
+    document.addEventListener('fullscreenchange', () => {
+      const el = document.fullscreenElement as HTMLElement | null;
+      if (el?.classList.contains('sketch-container')) {
+        const inst = getSketchInstance(el);
+        if (inst) {
+          inst.resizeCanvas(window.innerWidth, window.innerHeight);
+        }
+      } else {
+        // Exited fullscreen — find the container that was fullscreen and restore size
+        document.querySelectorAll<HTMLElement>('.sketch-container[data-interactive]').forEach((c) => {
+          const inst = getSketchInstance(c);
+          if (inst) {
+            const w = c.clientWidth;
+            const h = c.clientHeight;
+            inst.resizeCanvas(w, h);
+          }
+        });
+      }
+    });
+
+    // Filter buttons
+    document.querySelectorAll<HTMLButtonElement>('.gallery-filter').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter!;
+        document.querySelectorAll<HTMLButtonElement>('.gallery-filter').forEach((b) => {
+          b.classList.toggle('gallery-filter--active', b === btn);
+        });
+        document.querySelectorAll<HTMLElement>('.gallery-item').forEach((item) => {
+          if (filter === 'all' || item.dataset.organ === filter) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initGalleryControls);
+</script>
+
 <style>
+  /* --- Featured --- */
+  .gallery-featured {
+    position: relative;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .gallery-featured__badge {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    z-index: 5;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 4px;
+  }
+
+  .gallery-featured__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-sm) var(--space-xs);
+    margin-top: var(--space-xs);
+  }
+
+  .gallery-featured__label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .gallery-featured__context {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  /* --- Filters --- */
+  .gallery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .gallery-filter {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: var(--space-xs) var(--space-md);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .gallery-filter:hover {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+  }
+
+  .gallery-filter--active {
+    background: var(--text-primary);
+    color: var(--bg-card);
+    border-color: var(--text-primary);
+  }
+
+  /* --- Grid --- */
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

@@ -4,10 +4,11 @@ interface Props {
   height?: string;
   mobileHeight?: string;
   ariaLabel: string;
+  interactive?: boolean;
   [key: string]: unknown;
 }
 
-const { sketchId, height = '500px', mobileHeight = '350px', ariaLabel, ...rest } = Astro.props;
+const { sketchId, height = '500px', mobileHeight = '350px', ariaLabel, interactive = false, ...rest } = Astro.props;
 const dataAttrs = Object.fromEntries(
   Object.entries(rest).filter(([k]) => k.startsWith('data-'))
 );
@@ -18,11 +19,30 @@ const dataAttrs = Object.fromEntries(
   data-sketch={sketchId}
   data-height={height}
   data-mobile-height={mobileHeight}
+  data-interactive={interactive ? '' : undefined}
   role="img"
   aria-label={ariaLabel}
   tabindex="0"
   {...dataAttrs}
 >
+  {interactive && (
+    <div class="sketch-controls">
+      <button class="sketch-ctrl sketch-ctrl--pause" aria-label="Pause/Resume sketch" title="Pause/Resume">
+        <svg class="ctrl-icon ctrl-icon--pause" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <rect x="3" y="2" width="4" height="12" rx="1"/>
+          <rect x="9" y="2" width="4" height="12" rx="1"/>
+        </svg>
+        <svg class="ctrl-icon ctrl-icon--play" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M4 2l10 6-10 6z"/>
+        </svg>
+      </button>
+      <button class="sketch-ctrl sketch-ctrl--fullscreen" aria-label="Toggle fullscreen" title="Fullscreen">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4"/>
+        </svg>
+      </button>
+    </div>
+  )}
   <noscript>
     <p class="sketch-fallback">{ariaLabel}</p>
   </noscript>
@@ -49,5 +69,80 @@ const dataAttrs = Object.fromEntries(
     color: var(--text-muted);
     font-style: italic;
     text-align: center;
+  }
+
+  /* --- Interactive controls overlay --- */
+  .sketch-controls {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    display: flex;
+    gap: 4px;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .sketch-container:hover .sketch-controls,
+  .sketch-container:focus-within .sketch-controls {
+    opacity: 1;
+  }
+
+  .sketch-ctrl {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+  }
+
+  .sketch-ctrl:hover {
+    border-color: var(--accent);
+    color: var(--accent-text);
+  }
+
+  /* Pause/play icon toggle */
+  .ctrl-icon--play { display: none; }
+  .sketch-container[data-paused] .ctrl-icon--pause { display: none; }
+  .sketch-container[data-paused] .ctrl-icon--play { display: block; }
+
+  /* Fullscreen styles */
+  .sketch-container:fullscreen {
+    background: #000;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sketch-container:fullscreen .sketch-controls {
+    opacity: 1;
+    top: var(--space-md);
+    right: var(--space-md);
+  }
+
+  /* Pause indicator overlay */
+  .sketch-container[data-paused]::after {
+    content: 'PAUSED';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    background: rgba(0,0,0,0.3);
+    pointer-events: none;
   }
 </style>

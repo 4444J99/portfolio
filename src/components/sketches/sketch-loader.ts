@@ -287,6 +287,29 @@ export function reinitPage() {
   observeSketches();
 }
 
+/** Get the p5 instance for a sketch container. */
+export function getSketchInstance(el: HTMLElement): p5 | undefined {
+  return instances.get(el);
+}
+
+/** Pause (noLoop) a sketch in the given container. */
+export function pauseSketch(el: HTMLElement) {
+  const inst = instances.get(el);
+  if (inst) {
+    inst.noLoop();
+    el.setAttribute('data-paused', '');
+  }
+}
+
+/** Resume (loop) a sketch in the given container. */
+export function resumeSketch(el: HTMLElement) {
+  const inst = instances.get(el);
+  if (inst) {
+    inst.loop();
+    el.removeAttribute('data-paused');
+  }
+}
+
 /** Full init: background + per-page sketches. Called once on first load. */
 export function initSketches() {
   if ('requestIdleCallback' in window) {
