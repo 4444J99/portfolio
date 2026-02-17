@@ -523,6 +523,8 @@ img {
   animation: none;
 }
 
+/* Card → Detail title morph: uses Astro's transition:animate on the elements */
+
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

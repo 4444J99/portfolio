@@ -13,6 +13,9 @@ interface Props {
 }
 
 const { title, tagline, description, href, tags, number, featured, skills = [], 'data-skills': dataSkills, 'data-tags': dataTags } = Astro.props;
+
+// Derive slug from href for named view transition
+const slug = href.replace(/\/$/, '').split('/').pop();
 ---
 
 <a href={href} class:list={['card', { 'card--featured': featured }]} data-skills={dataSkills} data-tags={dataTags}>
@@ -25,7 +28,7 @@ const { title, tagline, description, href, tags, number, featured, skills = [], 
       {skills.map(s => <span class="tag tag--skill">{s}</span>)}
     </div>
   </div>
-  <h3 class="card__title">{title}</h3>
+  <h3 class="card__title" transition:name={`project-${slug}`} transition:animate="initial">{title}</h3>
   <p class="card__tagline card__tagline--creative">{tagline}</p>
   <p class="card__desc">{description}</p>
   <span class="card__cta">View project &rarr;</span>
