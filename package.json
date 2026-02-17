@@ -13,7 +13,8 @@
     "test:coverage": "vitest run --coverage",
     "test:a11y": "node scripts/a11y-audit.mjs",
     "lighthouse": "lhci autorun --config=lighthouserc.cjs",
-    "validate": "node scripts/validate-build.mjs"
+    "validate": "node scripts/validate-build.mjs",
+    "test:ci": "npm run test && npm run test:a11y && npm run validate && npm run lighthouse"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.15",
