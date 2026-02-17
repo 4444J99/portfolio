@@ -47,7 +47,7 @@
     "jsdom": "28.1.0",
     "linkinator": "7.5.3",
     "pagefind": "1.4.0",
-    "playwright": "1.55.0",
+    "playwright": "1.55.1",
     "satori": "0.19.2",
     "typescript": "5.9.3",
     "vitest": "4.0.18"
