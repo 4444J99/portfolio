@@ -21,10 +21,6 @@ interface GraphData {
 }
 
 interface SimNode extends d3.SimulationNodeDatum, Node {}
-interface SimLink extends d3.SimulationLinkDatum<SimNode> {
-  source: SimNode;
-  target: SimNode;
-}
 
 export default function dependencyGraph(container: HTMLElement, data: GraphData) {
   const theme = getChartTheme();
@@ -43,7 +39,9 @@ export default function dependencyGraph(container: HTMLElement, data: GraphData)
   const linkedIds = new Set<string>();
   data.links.forEach(l => { linkedIds.add(l.source); linkedIds.add(l.target); });
   const nodes: SimNode[] = data.nodes.filter(n => linkedIds.has(n.id)) as SimNode[];
-  const links = data.links.filter(l => nodes.find(n => n.id === l.source) && nodes.find(n => n.id === l.target));
+  const links: d3.SimulationLinkDatum<SimNode>[] = data.links.filter(
+    (l) => nodes.find((n) => n.id === l.source) && nodes.find((n) => n.id === l.target)
+  );
 
   const simulation = d3.forceSimulation<SimNode>(nodes)
     .force('link', d3.forceLink<SimNode, d3.SimulationLinkDatum<SimNode>>(links).id(d => d.id).distance(80))
@@ -51,14 +49,16 @@ export default function dependencyGraph(container: HTMLElement, data: GraphData)
     .force('center', d3.forceCenter(width / 2, height / 2))
     .force('collide', d3.forceCollide(20));
 
-  const link = svg.selectAll('line')
+  const link = svg
+    .selectAll<SVGLineElement, d3.SimulationLinkDatum<SimNode>>('line')
     .data(links)
     .join('line')
     .attr('stroke', theme.border)
     .attr('stroke-width', 1)
     .attr('opacity', 0.5);
 
-  const node = svg.selectAll('circle')
+  const node = svg
+    .selectAll<SVGCircleElement, SimNode>('circle')
     .data(nodes)
     .join('circle')
     .attr('r', (d: SimNode) => d.tier === 'flagship' ? 8 : 5)

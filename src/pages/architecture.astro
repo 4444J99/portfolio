@@ -6,48 +6,9 @@ import ChartContainer from '../components/charts/ChartContainer.astro';
 import type { GraphData, GraphNode, GraphEdge } from '../types/data';
 import graphData from '../data/graph.json';
 import { organColors } from '../data/organ-colors';
-import { projectIndex } from '../data/project-index';
-import projectsData from '../data/projects.json';
+import { buildArchitectureNavigatorData } from '../utils/architecture-data';
 
-// Build organ → projects mapping for the navigator
-const organNames: Record<string, string> = {
-  'ORGAN-I': 'Theory',
-  'ORGAN-II': 'Art',
-  'ORGAN-III': 'Ergon',
-  'ORGAN-IV': 'Commerce',
-  'ORGAN-V': 'Logos',
-  'ORGAN-VI': 'Community',
-  'ORGAN-VII': 'Marketing',
-  'META-ORGANVM': 'Meta',
-};
-
-// Map curated projects to their organs using projectIndex slugs
-const organProjectMap = new Map<string, { slug: string; title: string }[]>();
-for (const proj of projectsData.projects) {
-  const organ = proj.organ as string;
-  if (!organProjectMap.has(organ)) organProjectMap.set(organ, []);
-  // Try to find a matching slug in projectIndex
-  const match = projectIndex.find((pi) =>
-    proj.name.includes(pi.slug) ||
-    pi.slug.includes(proj.name.split('--')[0])
-  );
-  if (match) {
-    organProjectMap.get(organ)!.push({ slug: match.slug, title: match.title });
-  }
-}
-
-const navigatorData = {
-  organs: Object.entries(organColors).map(([organ, color]) => {
-    const projects = organProjectMap.get(organ) || [];
-    return {
-      organ,
-      label: organNames[organ] || organ,
-      count: projects.length,
-      projects,
-      color,
-    };
-  }),
-};
+const navigatorData = buildArchitectureNavigatorData();
 
 const typedGraph = graphData as GraphData;
 const organNodes = [...new Set(typedGraph.nodes.map((n: GraphNode) => n.organ))];

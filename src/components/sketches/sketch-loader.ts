@@ -2,7 +2,7 @@ import type p5 from 'p5';
 
 declare global {
   interface IdleDeadline {
-    didTimeout: boolean;
+    readonly didTimeout: boolean;
     timeRemaining(): number;
   }
   interface Window {
@@ -65,6 +65,8 @@ function isMobile(): boolean {
 }
 
 let resizeTimer: ReturnType<typeof setTimeout> | null = null;
+let resizeHandler: (() => void) | null = null;
+let observedContainers: HTMLElement[] = [];
 
 function showFallback(container: HTMLElement, sketchId: string) {
   const fallback = container.querySelector('.sketch-noscript');
@@ -172,7 +174,8 @@ function deferInit(container: HTMLElement) {
 }
 
 function observeSketches() {
-  const containers = document.querySelectorAll<HTMLElement>('.sketch-container[data-sketch]');
+  observedContainers = Array.from(document.querySelectorAll<HTMLElement>('.sketch-container[data-sketch]'));
+  const containers = observedContainers;
 
   if ('IntersectionObserver' in window) {
     sketchObserver = new IntersectionObserver(
@@ -191,16 +194,19 @@ function observeSketches() {
     containers.forEach(deferInit);
   }
 
-  window.addEventListener('resize', () => {
-    if (resizeTimer) clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      containers.forEach((container) => {
-        const height = container.dataset.height || '500px';
-        const mobileHeight = container.dataset.mobileHeight || '350px';
-        container.style.height = isMobile() ? mobileHeight : height;
-      });
-    }, 100);
-  });
+  if (!resizeHandler) {
+    resizeHandler = () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        observedContainers.forEach((container) => {
+          const height = container.dataset.height || '500px';
+          const mobileHeight = container.dataset.mobileHeight || '350px';
+          container.style.height = isMobile() ? mobileHeight : height;
+        });
+      }, 100);
+    };
+    window.addEventListener('resize', resizeHandler);
+  }
 }
 
 function initBackground() {
@@ -244,6 +250,15 @@ function initBackground() {
 
 /** Remove all active p5 instances and reset state. */
 export function teardown() {
+  if (resizeTimer) {
+    clearTimeout(resizeTimer);
+    resizeTimer = null;
+  }
+  if (resizeHandler) {
+    window.removeEventListener('resize', resizeHandler);
+    resizeHandler = null;
+  }
+  observedContainers = [];
   instances.forEach((instance) => {
     try { instance.remove(); } catch { /* already removed */ }
   });
@@ -258,6 +273,15 @@ export function teardown() {
 
 /** Tear down per-page sketches but preserve the #bg-canvas instance. */
 export function teardownPage() {
+  if (resizeTimer) {
+    clearTimeout(resizeTimer);
+    resizeTimer = null;
+  }
+  if (resizeHandler) {
+    window.removeEventListener('resize', resizeHandler);
+    resizeHandler = null;
+  }
+  observedContainers = [];
   const bg = document.getElementById('bg-canvas');
   const bgInstance = bg ? instances.get(bg) : undefined;
 

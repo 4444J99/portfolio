@@ -7,6 +7,21 @@ interface Props {
 }
 
 const { quality, base } = Astro.props;
+const sources = quality.sources ?? {
+  tests: 'unavailable',
+  coverage: 'unavailable',
+  lighthouse: 'unavailable',
+  a11y: 'unavailable',
+  build: 'unavailable',
+};
+
+const perfValue = quality.lighthouse.performance === null ? 'n/a' : String(quality.lighthouse.performance);
+const a11yValue = quality.lighthouse.accessibility === null ? 'n/a' : String(quality.lighthouse.accessibility);
+const seoValue = quality.lighthouse.seo === null ? 'n/a' : String(quality.lighthouse.seo);
+const assertionsDetail = quality.tests.total === null ? 'Assertions: n/a' : `${quality.tests.total} assertions`;
+const a11yIssueCount = quality.a11y.critical !== null && quality.a11y.serious !== null
+  ? quality.a11y.critical + quality.a11y.serious
+  : null;
 ---
 
 <section class="section">
@@ -23,7 +38,7 @@ const { quality, base } = Astro.props;
         </div>
         <div class="quality-card__value">{quality.tests.files}</div>
         <div class="quality-card__label">Test Files</div>
-        <div class="quality-card__detail">{quality.tests.total} assertions</div>
+        <div class="quality-card__detail">{assertionsDetail}</div>
       </div>
 
       <div class="quality-card">
@@ -32,9 +47,15 @@ const { quality, base } = Astro.props;
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </div>
-        <div class="quality-card__value">{quality.a11y.pagesAudited}</div>
+        <div class="quality-card__value">{quality.a11y.pagesAudited === null ? 'n/a' : quality.a11y.pagesAudited}</div>
         <div class="quality-card__label">A11y Audited</div>
-        <div class="quality-card__detail">{quality.a11y.critical + quality.a11y.serious === 0 ? 'Zero violations' : `${quality.a11y.critical + quality.a11y.serious} issues`}</div>
+        <div class="quality-card__detail">
+          {a11yIssueCount === null
+            ? 'No report data'
+            : a11yIssueCount === 0
+              ? 'Zero violations'
+              : `${a11yIssueCount} issues`}
+        </div>
       </div>
 
       <div class="quality-card">
@@ -43,9 +64,9 @@ const { quality, base } = Astro.props;
             <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
           </svg>
         </div>
-        <div class="quality-card__value">{quality.lighthouse.performance}</div>
+        <div class="quality-card__value">{perfValue}</div>
         <div class="quality-card__label">Lighthouse Perf</div>
-        <div class="quality-card__detail">A11y {quality.lighthouse.accessibility} · SEO {quality.lighthouse.seo}</div>
+        <div class="quality-card__detail">A11y {a11yValue} · SEO {seoValue}</div>
       </div>
 
       <div class="quality-card">
@@ -63,13 +84,16 @@ const { quality, base } = Astro.props;
     <div class="quality-badges">
       <img src={`${base}badges/tests.svg`} alt={`Tests: ${quality.tests.files} files`} width="90" height="20" />
       <img src={`${base}badges/a11y.svg`} alt={`Accessibility: ${quality.a11y.status}`} width="80" height="20" />
-      <img src={`${base}badges/lighthouse-perf.svg`} alt={`Performance: ${quality.lighthouse.performance}`} width="120" height="20" />
-      <img src={`${base}badges/lighthouse-a11y.svg`} alt={`Accessibility: ${quality.lighthouse.accessibility}`} width="120" height="20" />
-      <img src={`${base}badges/lighthouse-seo.svg`} alt={`SEO: ${quality.lighthouse.seo}`} width="80" height="20" />
+      <img src={`${base}badges/lighthouse-perf.svg`} alt={`Performance: ${perfValue}`} width="120" height="20" />
+      <img src={`${base}badges/lighthouse-a11y.svg`} alt={`Accessibility: ${a11yValue}`} width="120" height="20" />
+      <img src={`${base}badges/lighthouse-seo.svg`} alt={`SEO: ${seoValue}`} width="80" height="20" />
       <img src={`${base}badges/pages.svg`} alt={`Pages: ${quality.build.pages}`} width="80" height="20" />
     </div>
 
     <p class="quality-timestamp">Last updated: {new Date(quality.generated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+    <p class="quality-sources">
+      Sources: tests ({sources.tests}) · coverage ({sources.coverage}) · lighthouse ({sources.lighthouse}) · a11y ({sources.a11y}) · build ({sources.build})
+    </p>
   </div>
 </section>
 
@@ -141,6 +165,13 @@ const { quality, base } = Astro.props;
   .quality-timestamp {
     font-size: 0.75rem;
     color: var(--text-muted);
+  }
+
+  .quality-sources {
+    margin-top: var(--space-sm);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.5;
   }
 
   @media (max-width: 768px) {

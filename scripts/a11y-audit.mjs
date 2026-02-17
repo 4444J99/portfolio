@@ -4,15 +4,24 @@
  * Accessibility audit — runs axe-core against all built HTML pages.
  * Exits non-zero if any critical or serious violations are found.
  *
- * Usage: node scripts/a11y-audit.mjs [--verbose]
+ * Usage: node scripts/a11y-audit.mjs [--verbose] [--json] [--json-out <path>]
  */
 
-import { readFileSync, readdirSync } from 'fs';
-import { join, resolve } from 'path';
+import { readFileSync, readdirSync, writeFileSync, mkdirSync } from 'fs';
+import { dirname, join, resolve } from 'path';
 import { JSDOM } from 'jsdom';
 
 const DIST = resolve('dist');
-const verbose = process.argv.includes('--verbose');
+const args = process.argv.slice(2);
+const verbose = args.includes('--verbose');
+const jsonStdout = args.includes('--json');
+const jsonOutIndex = args.indexOf('--json-out');
+const jsonOutPath = jsonOutIndex >= 0 ? args[jsonOutIndex + 1] : null;
+
+if (jsonOutIndex >= 0 && !jsonOutPath) {
+  console.error('Missing value for --json-out');
+  process.exit(1);
+}
 
 function findHtmlFiles(dir) {
   const results = [];
@@ -50,7 +59,9 @@ async function auditPage(filePath) {
 
 async function main() {
   const files = findHtmlFiles(DIST);
-  console.log(`Auditing ${files.length} HTML pages for accessibility...\n`);
+  if (!jsonStdout) {
+    console.log(`Auditing ${files.length} HTML pages for accessibility...\n`);
+  }
 
   let criticalCount = 0;
   let seriousCount = 0;
@@ -70,6 +81,8 @@ async function main() {
     seriousCount += serious.length;
     moderateCount += moderate.length;
     minorCount += minor.length;
+
+    if (jsonStdout) continue;
 
     if (critical.length > 0 || serious.length > 0 || verbose) {
       const icon = critical.length > 0 ? '✗' : serious.length > 0 ? '!' : '✓';
@@ -94,19 +107,39 @@ async function main() {
     }
   }
 
-  console.log('\n--- Summary ---');
-  console.log(`Pages audited: ${files.length}`);
-  console.log(`Critical: ${criticalCount}`);
-  console.log(`Serious:  ${seriousCount}`);
-  console.log(`Moderate: ${moderateCount}`);
-  console.log(`Minor:    ${minorCount}`);
+  const summary = {
+    generated: new Date().toISOString(),
+    pagesAudited: files.length,
+    critical: criticalCount,
+    serious: seriousCount,
+    moderate: moderateCount,
+    minor: minorCount,
+    status: criticalCount > 0 || seriousCount > 0 ? 'fail' : 'pass',
+  };
 
-  if (criticalCount > 0 || seriousCount > 0) {
-    console.log('\n✗ FAIL — critical or serious violations found');
-    process.exit(1);
+  if (jsonOutPath) {
+    const absoluteOutPath = resolve(jsonOutPath);
+    mkdirSync(dirname(absoluteOutPath), { recursive: true });
+    writeFileSync(absoluteOutPath, JSON.stringify(summary, null, 2) + '\n');
   }
 
-  console.log('\n✓ PASS — no critical or serious violations');
+  if (jsonStdout) {
+    console.log(JSON.stringify(summary, null, 2));
+  } else {
+    console.log('\n--- Summary ---');
+    console.log(`Pages audited: ${summary.pagesAudited}`);
+    console.log(`Critical: ${summary.critical}`);
+    console.log(`Serious:  ${summary.serious}`);
+    console.log(`Moderate: ${summary.moderate}`);
+    console.log(`Minor:    ${summary.minor}`);
+    if (summary.status === 'fail') {
+      console.log('\n✗ FAIL — critical or serious violations found');
+    } else {
+      console.log('\n✓ PASS — no critical or serious violations');
+    }
+  }
+
+  process.exit(summary.status === 'fail' ? 1 : 0);
 }
 
 main().catch(err => {

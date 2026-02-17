@@ -116,7 +116,23 @@ const connectLinks = [
 </header>
 
 <script>
+  interface HeaderState {
+    controller?: AbortController;
+  }
+
+  function getHeaderState(): HeaderState {
+    const w = window as Window & { __headerState?: HeaderState };
+    if (!w.__headerState) w.__headerState = {};
+    return w.__headerState;
+  }
+
   function initHeader() {
+    const state = getHeaderState();
+    state.controller?.abort();
+    const controller = new AbortController();
+    const { signal } = controller;
+    state.controller = controller;
+
     // --- Mobile menu: toggle, focus trap, scroll lock ---
     const headerEl = document.querySelector('.header') as HTMLElement | null;
     const toggleBtn = document.querySelector('.header__toggle') as HTMLButtonElement | null;
@@ -148,19 +164,19 @@ const connectLinks = [
     toggleBtn.addEventListener('click', () => {
       const isOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
       if (isOpen) closeMenu(); else openMenu();
-    });
+    }, { signal });
 
     nav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         if (headerEl!.classList.contains('header--open')) closeMenu();
-      });
+      }, { signal });
     });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && headerEl!.classList.contains('header--open')) {
         closeMenu();
       }
-    });
+    }, { signal });
 
     nav.addEventListener('keydown', (e) => {
       if (e.key !== 'Tab' || !headerEl!.classList.contains('header--open')) return;
@@ -175,7 +191,7 @@ const connectLinks = [
         e.preventDefault();
         first.focus();
       }
-    });
+    }, { signal });
 
     // --- Dropdown toggle ---
     const trigger = document.querySelector('.header__dropdown-trigger') as HTMLButtonElement | null;
@@ -192,7 +208,7 @@ const connectLinks = [
         menu.setAttribute('data-open', '');
         trigger.setAttribute('aria-expanded', 'true');
       }
-    });
+    }, { signal });
 
     document.addEventListener('click', (e) => {
       if (!menu.hasAttribute('data-open')) return;
@@ -200,7 +216,7 @@ const connectLinks = [
         menu.removeAttribute('data-open');
         trigger.setAttribute('aria-expanded', 'false');
       }
-    });
+    }, { signal });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && menu.hasAttribute('data-open')) {
@@ -208,14 +224,18 @@ const connectLinks = [
         trigger.setAttribute('aria-expanded', 'false');
         trigger.focus();
       }
-    });
+    }, { signal });
 
     menu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         menu.removeAttribute('data-open');
         trigger.setAttribute('aria-expanded', 'false');
-      });
+      }, { signal });
     });
+
+    document.addEventListener('astro:before-swap', () => {
+      controller.abort();
+    }, { once: true, signal });
   }
 
   document.addEventListener('astro:page-load', initHeader);

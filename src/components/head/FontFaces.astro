@@ -1,26 +1,36 @@
-<link rel="preload" href="/portfolio/fonts/syne-latin.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/portfolio/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/portfolio/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
-<style>
+---
+import { base } from '../../utils/paths';
+
+const syneFontUrl = `${base}fonts/syne-latin.woff2`;
+const plusJakartaFontUrl = `${base}fonts/plus-jakarta-sans-latin.woff2`;
+const jetbrainsMonoFontUrl = `${base}fonts/jetbrains-mono-latin.woff2`;
+
+const fontFaceCss = `
   @font-face {
     font-family: 'Syne';
     font-style: normal;
     font-weight: 400 800;
     font-display: swap;
-    src: url('/portfolio/fonts/syne-latin.woff2') format('woff2');
+    src: url('${syneFontUrl}') format('woff2');
   }
   @font-face {
     font-family: 'Plus Jakarta Sans';
     font-style: normal;
     font-weight: 400 700;
     font-display: swap;
-    src: url('/portfolio/fonts/plus-jakarta-sans-latin.woff2') format('woff2');
+    src: url('${plusJakartaFontUrl}') format('woff2');
   }
   @font-face {
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 400 500;
     font-display: swap;
-    src: url('/portfolio/fonts/jetbrains-mono-latin.woff2') format('woff2');
+    src: url('${jetbrainsMonoFontUrl}') format('woff2');
   }
-</style>
+`;
+---
+
+<link rel="preload" href={syneFontUrl} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={plusJakartaFontUrl} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={jetbrainsMonoFontUrl} as="font" type="font/woff2" crossorigin />
+<style is:inline set:html={fontFaceCss} />

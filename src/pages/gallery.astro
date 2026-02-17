@@ -104,7 +104,23 @@ const featured = sketches[dayOfYear % sketches.length];
 <script>
   import { pauseSketch, resumeSketch, getSketchInstance } from '../components/sketches/sketch-loader';
 
+  interface GalleryControlsState {
+    controller?: AbortController;
+  }
+
+  function getGalleryControlsState(): GalleryControlsState {
+    const w = window as Window & { __galleryControlsState?: GalleryControlsState };
+    if (!w.__galleryControlsState) w.__galleryControlsState = {};
+    return w.__galleryControlsState;
+  }
+
   function initGalleryControls() {
+    const state = getGalleryControlsState();
+    state.controller?.abort();
+    const controller = new AbortController();
+    const { signal } = controller;
+    state.controller = controller;
+
     // Pause/Resume buttons
     document.querySelectorAll<HTMLButtonElement>('.sketch-ctrl--pause').forEach((btn) => {
       btn.addEventListener('click', (e) => {
@@ -116,7 +132,7 @@ const featured = sketches[dayOfYear % sketches.length];
         } else {
           pauseSketch(container);
         }
-      });
+      }, { signal });
     });
 
     // Fullscreen buttons
@@ -130,7 +146,7 @@ const featured = sketches[dayOfYear % sketches.length];
         } else {
           container.requestFullscreen().catch(() => {});
         }
-      });
+      }, { signal });
     });
 
     // Resize canvas on fullscreen change
@@ -152,7 +168,7 @@ const featured = sketches[dayOfYear % sketches.length];
           }
         });
       }
-    });
+    }, { signal });
 
     // Filter buttons
     document.querySelectorAll<HTMLButtonElement>('.gallery-filter').forEach((btn) => {
@@ -168,8 +184,12 @@ const featured = sketches[dayOfYear % sketches.length];
             item.style.display = 'none';
           }
         });
-      });
+      }, { signal });
     });
+
+    document.addEventListener('astro:before-swap', () => {
+      controller.abort();
+    }, { once: true, signal });
   }
 
   document.addEventListener('astro:page-load', initGalleryControls);

@@ -8,13 +8,14 @@
     "build": "astro build && npx pagefind --site dist --glob '**/*.html'",
     "preview": "astro preview",
     "astro": "astro",
+    "typecheck": "astro check",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:a11y": "node scripts/a11y-audit.mjs",
+    "test:a11y": "node scripts/a11y-audit.mjs --json-out .a11y/a11y-summary.json",
     "lighthouse": "lhci autorun --config=lighthouserc.cjs",
     "validate": "node scripts/validate-build.mjs",
-    "test:ci": "npm run test && npm run test:a11y && npm run validate && npm run lighthouse",
+    "test:ci": "npm run typecheck && npm run test && npm run test:a11y && npm run validate && npm run lighthouse",
     "generate-badges": "node scripts/generate-quality-badges.mjs"
   },
   "dependencies": {
@@ -26,9 +27,11 @@
     "p5": "2.2.1"
   },
   "devDependencies": {
+    "@astrojs/check": "0.9.6",
     "@lhci/cli": "0.15.1",
     "@resvg/resvg-js": "2.6.2",
     "@types/d3": "7.4.3",
+    "@types/jsdom": "27.0.0",
     "@types/p5": "1.7.7",
     "@vitest/coverage-v8": "4.0.18",
     "axe-core": "4.11.1",
@@ -38,6 +41,7 @@
     "linkinator": "7.5.3",
     "pagefind": "1.4.0",
     "satori": "0.19.2",
+    "typescript": "5.9.3",
     "vitest": "4.0.18"
   },
   "overrides": {

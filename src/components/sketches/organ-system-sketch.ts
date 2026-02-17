@@ -217,13 +217,9 @@ export default function organSystemSketch(p: p5, container: HTMLElement) {
   }
 
   p.mousePressed = handleClick;
-  p.touchStarted = function () {
-    // On touch, update mouseX/mouseY-based hover detection first
+  (p as p5 & { touchStarted?: () => boolean | void }).touchStarted = function () {
     if (p.touches.length > 0) {
       const touch = p.touches[0] as { x: number; y: number };
-      p.mouseX = touch.x;
-      p.mouseY = touch.y;
-      // Re-detect hover for the tap position
       hoveredOrgan = -1;
       for (let i = 0; i < ORGANS.length; i++) {
         const [ox, oy] = organPos(i);

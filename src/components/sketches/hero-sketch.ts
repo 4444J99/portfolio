@@ -232,7 +232,7 @@ export default function heroSketch(p: p5, container: HTMLElement) {
   }
 
   p.mousePressed = handleClick;
-  p.touchStarted = function () {
+  (p as p5 & { touchStarted?: () => boolean | void }).touchStarted = function () {
     handleClick();
     return false; // prevent default
   };

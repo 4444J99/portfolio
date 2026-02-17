@@ -1,7 +1,7 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { generateOGImage } from '../../utils/og-image';
 
-interface OGPage {
+interface OGPage extends Record<string, unknown> {
   slug: string;
   title: string;
   subtitle: string;
@@ -54,7 +54,7 @@ export const GET: APIRoute = async ({ props }) => {
   const { title, subtitle, accent } = props as OGPage;
   const png = await generateOGImage(title, subtitle, accent);
 
-  return new Response(png, {
+  return new Response(new Uint8Array(png), {
     headers: {
       'Content-Type': 'image/png',
       'Cache-Control': 'public, max-age=31536000, immutable',

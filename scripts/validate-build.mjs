@@ -11,6 +11,7 @@ import { join, resolve } from 'path';
 import { spawnSync } from 'child_process';
 
 const DIST = resolve('dist');
+const SITE_BASE = 'https://4444j99.github.io/portfolio/';
 let exitCode = 0;
 
 // --- HTML Validation ---
@@ -114,6 +115,44 @@ if (brokenLinks > 0) {
   exitCode = 1;
 } else {
   console.log('✓ All internal links valid\n');
+}
+
+// --- Feed XML Link Checking ---
+console.log('=== Feed XML Link Checking ===\n');
+
+const feedPath = resolve(DIST, 'feed.xml');
+if (!existsSync(feedPath)) {
+  console.log('✗ dist/feed.xml not found\n');
+  exitCode = 1;
+} else {
+  const feedXml = readFileSync(feedPath, 'utf-8');
+  const feedLinks = [...feedXml.matchAll(/<link>([^<]+)<\/link>/g)].map((m) => m[1]);
+  const internalFeedLinks = feedLinks.filter((link) => link.startsWith(SITE_BASE));
+  let brokenFeedLinks = 0;
+
+  for (const link of internalFeedLinks) {
+    const resolved = link.slice(SITE_BASE.length).replace(/^\/+/, '');
+    const variants = [
+      resolved,
+      resolved + 'index.html',
+      resolved.replace(/\/$/, '') + '/index.html',
+      resolved.replace(/\/$/, ''),
+    ];
+
+    const found = variants.some((v) => allPaths.has(v));
+    if (!found) {
+      console.log(`  ✗ feed.xml → ${link} (resolved: ${resolved})`);
+      brokenFeedLinks++;
+    }
+  }
+
+  console.log(`Checked ${internalFeedLinks.length} internal feed links`);
+  if (brokenFeedLinks > 0) {
+    console.log(`✗ Found ${brokenFeedLinks} broken feed links\n`);
+    exitCode = 1;
+  } else {
+    console.log('✓ All internal feed links valid\n');
+  }
 }
 
 process.exit(exitCode);

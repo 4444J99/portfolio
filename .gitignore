@@ -41,3 +41,6 @@ resume/rendercv_output/
 
 # Coverage output
 coverage/
+
+# Accessibility audit reports
+.a11y/

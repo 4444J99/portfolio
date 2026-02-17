@@ -119,6 +119,18 @@ const year = new Date().getFullYear();
 </style>
 
 <script>
+  interface ThemeToggleState {
+    controller?: AbortController;
+    mediaQuery?: MediaQueryList;
+    mediaListener?: () => void;
+  }
+
+  function getThemeToggleState(): ThemeToggleState {
+    const w = window as Window & { __themeToggleState?: ThemeToggleState };
+    if (!w.__themeToggleState) w.__themeToggleState = {};
+    return w.__themeToggleState;
+  }
+
   function applyTheme(theme: string) {
     document.documentElement.dataset.theme = theme;
     const meta = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement | null;
@@ -130,6 +142,12 @@ const year = new Date().getFullYear();
   }
 
   function initThemeToggle() {
+    const state = getThemeToggleState();
+    state.controller?.abort();
+    const controller = new AbortController();
+    const { signal } = controller;
+    state.controller = controller;
+
     const btns = document.querySelectorAll<HTMLButtonElement>('.theme-toggle');
     if (!btns.length) return;
 
@@ -150,16 +168,24 @@ const year = new Date().getFullYear();
           localStorage.setItem('theme', next);
           applyTheme(next);
         }
-      });
+      }, { signal });
     });
 
-    // Listen for system preference changes (only applies in 'system' mode)
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
-      const pref = localStorage.getItem('theme-preference') || 'system';
-      if (pref === 'system') {
-        applyTheme(resolveSystemTheme());
-      }
-    });
+    // Listen once for system preference changes (only applies in 'system' mode)
+    if (!state.mediaListener) {
+      state.mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+      state.mediaListener = () => {
+        const pref = localStorage.getItem('theme-preference') || 'system';
+        if (pref === 'system') {
+          applyTheme(resolveSystemTheme());
+        }
+      };
+      state.mediaQuery.addEventListener('change', state.mediaListener);
+    }
+
+    document.addEventListener('astro:before-swap', () => {
+      controller.abort();
+    }, { once: true, signal });
   }
 
   document.addEventListener('astro:page-load', initThemeToggle);

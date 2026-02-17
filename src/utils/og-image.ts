@@ -18,7 +18,7 @@ export async function generateOGImage(
   title: string,
   subtitle: string,
   accentColor = '#d4a853'
-): Promise<Buffer> {
+): Promise<Uint8Array> {
   const fontData = await getFontData();
   const svg = await satori(
     {
@@ -116,13 +116,13 @@ export async function generateOGImage(
       fonts: [
         {
           name: 'Syne',
-          data: fontData as Buffer,
+          data: fontData,
           weight: 400,
           style: 'normal' as const,
         },
         {
           name: 'Syne',
-          data: fontData as Buffer,
+          data: fontData,
           weight: 700,
           style: 'normal' as const,
         },

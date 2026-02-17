@@ -97,9 +97,16 @@ export interface GraphData {
 
 export interface QualityMetrics {
   generated: string;
-  tests: { total: number; passed: number; files: number };
-  coverage: { statements: number; branches: number; functions: number; lines: number };
-  lighthouse: { performance: number; accessibility: number; bestPractices: number; seo: number };
-  a11y: { pagesAudited: number; critical: number; serious: number; status: string };
+  tests: { total: number | null; passed: number | null; files: number };
+  coverage: { statements: number | null; branches: number | null; functions: number | null; lines: number | null };
+  lighthouse: { performance: number | null; accessibility: number | null; bestPractices: number | null; seo: number | null };
+  a11y: { pagesAudited: number | null; critical: number | null; serious: number | null; status: string };
   build: { pages: number; bundleFiles: number };
+  sources: {
+    tests: string;
+    coverage: string;
+    lighthouse: string;
+    a11y: string;
+    build: string;
+  };
 }

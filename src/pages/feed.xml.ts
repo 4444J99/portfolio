@@ -1,34 +1,26 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
-import projectsData from '../data/projects.json';
 import essaysData from '../data/essays.json';
-
-interface ProjectItem {
-  name: string;
-  description: string;
-  organ_name: string;
-}
+import { projectCatalog } from '../data/project-catalog';
 
 interface EssayItem {
   title: string;
   date: string;
   url: string;
-  slug: string;
 }
 
 export function GET(context: APIContext) {
-  const siteBase = 'https://4444j99.github.io/portfolio';
+  const siteBase = 'https://4444j99.github.io/portfolio/';
+  const fallbackProjectDate = new Date('2026-02-10T00:00:00.000Z');
 
-  const projectItems = (projectsData.projects as ProjectItem[]).map((p) => {
-    const slug = p.name.replace(/--/g, '-').toLowerCase();
+  const projectItems = projectCatalog.map((project) => {
+    const pubDate = project.publishedAt ? new Date(project.publishedAt) : fallbackProjectDate;
     return {
-      title: p.name.split('--').map((w: string) =>
-        w.charAt(0).toUpperCase() + w.slice(1)
-      ).join(' — '),
-      description: p.description,
-      link: `${siteBase}/projects/${slug}/`,
-      pubDate: new Date('2026-02-10'),
-      categories: [p.organ_name],
+      title: project.title,
+      description: project.summary,
+      link: `${siteBase}projects/${project.slug}/`,
+      pubDate,
+      categories: [project.organ, ...project.tags],
     };
   });
 

@@ -8,14 +8,14 @@ Personal portfolio site showcasing 20 project case studies, an interactive p5.js
 
 **Live:** [4444j99.github.io/portfolio](https://4444j99.github.io/portfolio/)
 
-![Portfolio Preview](public/images/portfolio-preview.png)
+![Portfolio Preview](homepage-full.png)
 
 ## Tech Stack
 
 - **Framework:** [Astro](https://astro.build/) — static site generation with zero JS by default
 - **Interactive:** [p5.js](https://p5js.org/) — generative art hero visualization
 - **Visualizations:** [D3.js](https://d3js.org/) — 8 interactive data charts
-- **Typography:** Jost + JetBrains Mono (self-hosted woff2)
+- **Typography:** Syne + Plus Jakarta Sans + JetBrains Mono (self-hosted woff2)
 - **Deployment:** GitHub Pages via GitHub Actions
 - **Theme:** Dark (`#0a0a0b`) with cyan (`#00BCD4`) / magenta (`#E91E63`) accents
 
@@ -26,6 +26,7 @@ Every push runs automated quality gates via [GitHub Actions](.github/workflows/q
 | Gate | Tool | Threshold |
 |------|------|-----------|
 | Unit & integration tests | [Vitest](https://vitest.dev/) | All pass |
+| Coverage floor (ratcheted) | [Vitest Coverage](https://vitest.dev/guide/coverage) | Statements ≥ 6, Branches ≥ 5, Functions ≥ 3, Lines ≥ 6 |
 | Accessibility audit | [axe-core](https://github.com/dequelabs/axe-core) | Zero critical/serious (31 pages) |
 | Performance budgets | [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) | Perf ≥ 85, A11y ≥ 90, SEO ≥ 90 |
 | HTML validation | [html-validate](https://html-validate.org/) | Zero errors |
@@ -35,6 +36,7 @@ Every push runs automated quality gates via [GitHub Actions](.github/workflows/q
 npm run test              # Unit + integration tests (vitest)
 npm run test:coverage     # Coverage report (V8)
 npm run test:a11y         # Accessibility audit (axe-core on all pages)
+npm run typecheck         # Astro + TypeScript type checks
 npm run validate          # HTML validation + internal link check
 npm run lighthouse        # Lighthouse CI performance budgets
 npm run test:ci           # All quality gates chained
