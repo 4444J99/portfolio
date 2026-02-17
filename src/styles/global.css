@@ -69,6 +69,66 @@
   --transition-base: 250ms ease;
 }
 
+/* --- Light Theme --- */
+html[data-theme="light"] {
+  background: #f5f5f0;
+}
+
+html[data-theme="light"] :root,
+:root[data-theme="light"] {
+  --bg-primary: transparent;
+  --bg-secondary: rgba(255,255,255,0.25);
+  --bg-card: rgba(255,255,255,0.7);
+  --bg-card-hover: rgba(255,255,255,0.85);
+  --border: rgba(0,0,0,0.12);
+  --border-hover: rgba(0,0,0,0.25);
+
+  --text-primary: #1a1a1b;
+  --text-secondary: #4a4a4d;
+  --text-muted: #6e6e71;
+
+  --accent: #0097A7;
+  --accent-text: #00838F;
+  --accent-hover: #C2185B;
+  --accent-muted: rgba(0,151,167,0.12);
+
+  --color-substantial: #2e7d32;
+  --color-partial: #9e7b1e;
+  --color-minimal: #c62828;
+
+  --bg-chrome: rgba(255,255,255,0.6);
+  --code-bg: rgba(0,0,0,0.05);
+}
+
+[data-theme="light"] #bg-canvas {
+  filter: brightness(1.2) saturate(0.6) opacity(0.3);
+}
+
+[data-theme="light"][data-bg-mode="bold"] #bg-canvas,
+[data-theme="light"] body[data-bg-mode="bold"] #bg-canvas {
+  filter: brightness(1.1) saturate(0.8) opacity(0.4);
+}
+
+[data-theme="light"][data-bg-mode="extreme"] #bg-canvas,
+[data-theme="light"] body[data-bg-mode="extreme"] #bg-canvas {
+  filter: saturate(1.0) opacity(0.5);
+}
+
+/* Light-mode S/B/E overrides: subtle uses lighter glass, bold/extreme keep readability */
+[data-theme="light"] body[data-bg-mode="subtle"] {
+  --bg-card: rgba(255,255,255,0.75);
+  --bg-card-hover: rgba(255,255,255,0.88);
+  --bg-chrome: rgba(255,255,255,0.7);
+}
+
+[data-theme="light"] body[data-bg-mode="bold"],
+[data-theme="light"] body[data-bg-mode="extreme"] {
+  --text-primary: #1a1a1b;
+  --text-secondary: #4a4a4d;
+  --bg-card: rgba(255,255,255,0.65);
+  --bg-card-hover: rgba(255,255,255,0.8);
+}
+
 html {
   font-size: 16px;
   scroll-behavior: smooth;
@@ -436,9 +496,9 @@ img {
   left: -9999px;
   z-index: 999;
   padding: var(--space-sm) var(--space-md);
-  background: #0a0a0b;
-  color: #00BCD4;
-  border: 2px solid #00BCD4;
+  background: var(--bg-card);
+  color: var(--accent-text);
+  border: 2px solid var(--accent);
   text-decoration: none;
   font-weight: 600;
 }

@@ -190,8 +190,18 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
   document.addEventListener('astro:page-load', initReveal);
 </script>
 <script is:inline>
-  // Mode restore — must be inline to avoid FOUC (runs before first paint)
+  // Theme + mode restore — must be inline to avoid FOUC (runs before first paint)
   (function() {
+    // Theme: restore from localStorage or follow system preference
+    var theme = localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.dataset.theme = theme;
+
+    // Update theme-color meta
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = theme === 'light' ? '#f5f5f0' : '#0a0a0b';
+
+    // S/B/E mode restore
     var validModes = ['subtle', 'bold', 'extreme'];
     var urlParam = new URLSearchParams(window.location.search).get('mode');
     var initialMode = (urlParam && validModes.indexOf(urlParam) !== -1)
