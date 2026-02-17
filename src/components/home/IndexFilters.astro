@@ -6,6 +6,17 @@
     const viewBtns = document.querySelectorAll<HTMLButtonElement>('.view-toggle__btn');
     const cards = document.querySelectorAll<HTMLElement>('.card[data-skills]');
     const groups = document.querySelectorAll<HTMLElement>('[data-organ-group]');
+    const filterStatus = document.getElementById('filter-status');
+    const totalCards = cards.length;
+
+    function announceFilterStatus(prefix?: string) {
+      if (!filterStatus) return;
+      const visible = document.querySelectorAll<HTMLElement>('.card[data-skills]:not([style*="display: none"])').length;
+      const count = visible === totalCards
+        ? `Showing all ${totalCards} projects.`
+        : `Showing ${visible} of ${totalCards} projects.`;
+      filterStatus.textContent = prefix ? `${prefix} ${count}` : count;
+    }
 
     function getCurrentView() {
       return main!.dataset.portfolioView || 'engineering';
@@ -56,6 +67,8 @@
         btn.classList.add('view-toggle__btn--active');
         btn.setAttribute('aria-checked', 'true');
         switchView(view);
+        const label = view.charAt(0).toUpperCase() + view.slice(1);
+        announceFilterStatus(`Switched to ${label} view.`);
       });
     });
 
@@ -88,6 +101,8 @@
           const visible = group.querySelectorAll('.card:not([style*="display: none"])');
           group.style.display = visible.length === 0 ? 'none' : '';
         });
+
+        announceFilterStatus();
       });
     });
   }

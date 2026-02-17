@@ -45,6 +45,7 @@ const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organCol
         <button class="filter-chip" data-filter={cat} aria-pressed="false">{cat}</button>
       ))}
     </div>
+    <p id="filter-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
     {resolvedGroups.map(group => (
       <div class="organ-group" data-organ-group style={`--organ-color: ${organColorMap[group.organ]}`}>
         <h3 class="organ-group__heading" data-reveal data-heading-view="engineering">
