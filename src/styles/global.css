@@ -805,3 +805,97 @@ img {
     font-size: 0.7rem;
   }
 }
+
+/* --- Print Stylesheet --- */
+@media print {
+  /* Hide non-essential UI */
+  #bg-canvas,
+  .header,
+  .footer,
+  .btt,
+  .btt-sentinel,
+  .search-trigger,
+  .toc-sidebar,
+  .sketch-accent,
+  .sketch-controls,
+  .bg-mode-switch,
+  .theme-toggle,
+  .gallery-filters {
+    display: none !important;
+  }
+
+  /* Force readable colors */
+  html, body {
+    background: #fff !important;
+    color: #111 !important;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  /* Show all revealed elements */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Override custom properties for print */
+  :root {
+    --text-primary: #111 !important;
+    --text-secondary: #333 !important;
+    --text-muted: #666 !important;
+    --border: #ddd !important;
+    --bg-card: #f8f8f8 !important;
+    --bg-secondary: transparent !important;
+    --bg-chrome: transparent !important;
+    --code-bg: #f0f0f0 !important;
+  }
+
+  /* Show link URLs */
+  a[href^="http"]::after,
+  a[href^="mailto"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #666;
+    word-break: break-all;
+  }
+
+  /* Clean layout */
+  .section {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: transparent;
+    padding: 1rem 0;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  /* Single-column for project pages */
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Page breaks */
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  .stat, .tag {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+  }
+
+  img {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+
+  @page {
+    size: A4;
+    margin: 1.5cm;
+    orphans: 3;
+    widows: 3;
+  }
+}

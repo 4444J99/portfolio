@@ -40,6 +40,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <a class="resume__download resume__download--alt" href={`${base}resume/Anthony_James_Padavano_CV.docx`} download>
               DOCX (ATS-friendly)
             </a>
+            <button class="resume__download resume__download--print print-hide" onclick="window.print()">
+              Print / Save as PDF
+            </button>
           </div>
         </header>
 
@@ -369,6 +372,18 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   }
 
   .resume__download--alt:hover {
+    background: var(--text-muted);
+    color: var(--bg-primary);
+  }
+
+  .resume__download--print {
+    border-color: var(--text-muted);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: var(--font-body);
+  }
+
+  .resume__download--print:hover {
     background: var(--text-muted);
     color: var(--bg-primary);
   }

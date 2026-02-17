@@ -202,6 +202,16 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/portfolio/sw.js').catch(() => {});
   }
+
+  // Focus management for View Transitions — move focus to main content
+  // after page swap so screen readers announce the new page
+  document.addEventListener('astro:after-swap', () => {
+    const main = document.getElementById('main-content');
+    if (main) {
+      main.setAttribute('tabindex', '-1');
+      main.focus({ preventScroll: true });
+    }
+  });
 </script>
 <script is:inline>
   // Theme + mode restore — must be inline to avoid FOUC (runs before first paint)
