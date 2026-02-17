@@ -32,6 +32,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Sync GitHub Pages index
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/sync-github-pages.mjs --output src/data/github-pages.json
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
