@@ -3,10 +3,53 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
+import ChartContainer from '../components/charts/ChartContainer.astro';
 
 import type { GraphData, GraphNode, GraphEdge } from '../types/data';
 import graphData from '../data/graph.json';
 import { organColors } from '../data/organ-colors';
+import { projectIndex } from '../data/project-index';
+import projectsData from '../data/projects.json';
+
+// Build organ → projects mapping for the navigator
+const organNames: Record<string, string> = {
+  'ORGAN-I': 'Theory',
+  'ORGAN-II': 'Art',
+  'ORGAN-III': 'Ergon',
+  'ORGAN-IV': 'Commerce',
+  'ORGAN-V': 'Logos',
+  'ORGAN-VI': 'Community',
+  'ORGAN-VII': 'Marketing',
+  'META-ORGANVM': 'Meta',
+};
+
+// Map curated projects to their organs using projectIndex slugs
+const organProjectMap = new Map<string, { slug: string; title: string }[]>();
+for (const proj of projectsData.projects) {
+  const organ = proj.organ as string;
+  if (!organProjectMap.has(organ)) organProjectMap.set(organ, []);
+  // Try to find a matching slug in projectIndex
+  const match = projectIndex.find((pi) =>
+    proj.name.includes(pi.slug) ||
+    pi.slug.includes(proj.name.split('--')[0])
+  );
+  if (match) {
+    organProjectMap.get(organ)!.push({ slug: match.slug, title: match.title });
+  }
+}
+
+const navigatorData = {
+  organs: Object.entries(organColors).map(([organ, color]) => {
+    const projects = organProjectMap.get(organ) || [];
+    return {
+      organ,
+      label: organNames[organ] || organ,
+      count: projects.length,
+      projects,
+      color,
+    };
+  }),
+};
 
 const typedGraph = graphData as GraphData;
 const organNodes = [...new Set(typedGraph.nodes.map((n: GraphNode) => n.organ))];
@@ -24,6 +67,19 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
     <div class="sketch-accent">
       <SketchContainer sketchId="network-graph" height="250px" mobileHeight="180px" ariaLabel="Animated network graph showing interconnected system nodes" data-nodes={organNodes.join(',')} data-edges={uniqueEdges.join(';')} />
     </div>
+    <section class="section">
+      <div class="container">
+        <h2 class="section__heading" data-reveal>Navigate the System</h2>
+        <p class="page-sub" data-reveal>Click an organ to explore its projects. Click a project to navigate there.</p>
+        <ChartContainer
+          chartId="organ-navigator"
+          data={navigatorData}
+          ariaLabel="Interactive organ navigator showing 8 organ nodes with expandable project satellites"
+          height="450px"
+        />
+      </div>
+    </section>
+
     <section class="section">
       <div class="container">
         <h1 class="page-title">System Architecture</h1>

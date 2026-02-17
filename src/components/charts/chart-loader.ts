@@ -8,6 +8,7 @@ const chartModules: Record<string, () => Promise<{ default: ChartInit }>> = {
   'dependency-graph': () => import('./dependency-graph-chart'),
   'praxis-sparklines': () => import('./praxis-sparklines-chart'),
   'flagship-stacked': () => import('./flagship-stacked-chart'),
+  'organ-navigator': () => import('./organ-navigator-chart'),
 };
 
 const initialized = new Set<HTMLElement>();
