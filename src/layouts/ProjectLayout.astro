@@ -21,11 +21,11 @@ interface Props {
   heroImage?: { src: string; alt: string };
 }
 
-const { pageTitle, description, ...projectProps } = Astro.props;
+const { pageTitle, description, title, tags, repo, liveUrl, ...projectProps } = Astro.props;
 ---
 
-<Layout title={pageTitle} description={description}>
-  <ProjectDetail {...projectProps}>
+<Layout title={pageTitle} description={description} schemaProject={{ name: title, description, tags, repo, liveUrl }}>
+  <ProjectDetail title={title} tags={tags} repo={repo} liveUrl={liveUrl} {...projectProps}>
     <slot />
   </ProjectDetail>
 </Layout>

@@ -21,6 +21,13 @@ interface Props {
   ogImage?: string;
   mainClass?: string;
   mainAttrs?: Record<string, string>;
+  schemaProject?: {
+    name: string;
+    description: string;
+    tags: string[];
+    repo?: string;
+    liveUrl?: string;
+  };
 }
 
 const slug = Astro.url.pathname.replace(/^\/portfolio\//, '').replace(/\/$/, '') || 'index';
@@ -31,6 +38,7 @@ const {
   ogImage = defaultOG,
   mainClass,
   mainAttrs = {},
+  schemaProject,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').href;
 ---
@@ -42,7 +50,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
     <FaviconLinks />
     <SiteLinks />
     <SEOMeta title={title} description={description} canonicalURL={canonicalURL} ogImage={ogImage} />
-    <SchemaOrg description={description} ogImage={ogImage} />
+    <SchemaOrg description={description} ogImage={ogImage} project={schemaProject} />
     <FontFaces />
     <ViewTransitions />
     <title>{title}</title>

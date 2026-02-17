@@ -67,7 +67,10 @@ import { base } from '../utils/paths';
     </section>
 </Layout>
 
-<script is:inline src="https://js.puter.com/v2/" defer></script>
+<!-- SRI hash may need updating if puter.com updates their v2 bundle -->
+<script is:inline src="https://js.puter.com/v2/" defer
+  integrity="sha384-4FUPJPyPTQZ8N/Fmes2tzHFDcQM4YO+GqSyCJ8znhgD4nNLroyU3JiSMBeSmrLPv"
+  crossorigin="anonymous"></script>
 
 <script>
   declare const puter: { ai: { chat(message: string, options: { system: string; model: string }): Promise<string | { message?: { content?: string }; text?: string }> } };

@@ -9,12 +9,15 @@ module.exports = {
         'http://localhost/dashboard/index.html',
         'http://localhost/resume/index.html',
         'http://localhost/projects/recursive-engine/index.html',
+        'http://localhost/gallery/index.html',
+        'http://localhost/consult/index.html',
+        'http://localhost/architecture/index.html',
       ],
       numberOfRuns: 1,
     },
     assert: {
       assertions: {
-        'categories:performance': ['warn', { minScore: 0.85 }],
+        'categories:performance': ['error', { minScore: 0.80 }],
         'categories:accessibility': ['error', { minScore: 0.90 }],
         'categories:best-practices': ['warn', { minScore: 0.90 }],
         'categories:seo': ['warn', { minScore: 0.90 }],

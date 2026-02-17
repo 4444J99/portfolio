@@ -15,6 +15,13 @@ export default defineConfig({
   vite: {
     build: {
       chunkSizeWarningLimit: 1200,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/p5')) return 'vendor-p5';
+          },
+        },
+      },
     },
   },
 });

@@ -38,16 +38,10 @@ async function auditFile(filePath: string) {
   return results;
 }
 
-// Key pages to audit — representative sample covering all page types
-const keyPages = [
-  'index.html',
-  'about/index.html',
-  'dashboard/index.html',
-  'resume/index.html',
-  'essays/index.html',
-  'projects/recursive-engine/index.html',
-  '404.html',
-];
+// Discover all HTML pages in dist/ for full-site auditing
+const keyPages = existsSync(DIST)
+  ? findHtmlFiles(DIST).map((f) => f.slice(DIST.length + 1))
+  : [];
 
 describe('accessibility (axe-core)', () => {
   it('dist/ exists for a11y auditing', () => {

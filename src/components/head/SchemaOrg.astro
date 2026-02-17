@@ -1,25 +1,46 @@
 ---
 import { schemaPerson } from '../../data/schema-person';
+import { canonicalBase } from '../../utils/paths';
 
 interface Props {
   description: string;
   ogImage: string;
+  project?: {
+    name: string;
+    description: string;
+    tags: string[];
+    repo?: string;
+    liveUrl?: string;
+  };
 }
 
-import { canonicalBase } from '../../utils/paths';
+const { description, ogImage, project } = Astro.props;
 
-const { description, ogImage } = Astro.props;
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "mainEntity": {
-    ...schemaPerson,
-    "url": canonicalBase,
-    "image": ogImage,
-    "description": description
-  }
-};
+const jsonLd = project
+  ? {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "mainEntity": {
+        "@type": "CreativeWork",
+        "name": project.name,
+        "description": project.description,
+        "creator": schemaPerson,
+        "keywords": project.tags.join(', '),
+        ...(project.repo && { "codeRepository": project.repo }),
+        ...(project.liveUrl && { "url": project.liveUrl }),
+        "image": ogImage,
+      }
+    }
+  : {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        ...schemaPerson,
+        "url": canonicalBase,
+        "image": ogImage,
+        "description": description
+      }
+    };
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
