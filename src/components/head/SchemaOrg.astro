@@ -15,21 +15,33 @@ interface Props {
 }
 
 const { description, ogImage, project } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').href;
 
 const jsonLd = project
   ? {
       "@context": "https://schema.org",
-      "@type": "WebPage",
-      "mainEntity": {
-        "@type": "CreativeWork",
-        "name": project.name,
-        "description": project.description,
-        "creator": schemaPerson,
-        "keywords": project.tags.join(', '),
-        ...(project.repo && { "codeRepository": project.repo }),
-        ...(project.liveUrl && { "url": project.liveUrl }),
-        "image": ogImage,
-      }
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "mainEntity": {
+            "@type": "CreativeWork",
+            "name": project.name,
+            "description": project.description,
+            "creator": schemaPerson,
+            "keywords": project.tags.join(', '),
+            ...(project.repo && { "codeRepository": project.repo }),
+            ...(project.liveUrl && { "url": project.liveUrl }),
+            "image": ogImage,
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": canonicalBase },
+            { "@type": "ListItem", "position": 2, "name": project.name, "item": canonicalURL }
+          ]
+        }
+      ]
     }
   : {
       "@context": "https://schema.org",

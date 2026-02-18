@@ -72,13 +72,14 @@ const featured = sketches[dayOfYear % sketches.length];
 
         <!-- Filter buttons -->
         <div class="gallery-filters" data-reveal role="group" aria-label="Filter sketches by organ">
-          <button class="gallery-filter gallery-filter--active" data-filter="all">All</button>
+          <button class="gallery-filter gallery-filter--active" data-filter="all" aria-pressed="true">All</button>
           {organs.map((organ) => (
-            <button class="gallery-filter" data-filter={organ}>
+            <button class="gallery-filter" data-filter={organ} aria-pressed="false">
               {organ === 'META' ? 'Meta' : organ.replace('ORGAN-', '')}
             </button>
           ))}
         </div>
+        <p id="gallery-filter-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
 
         <div class="gallery-grid">
           {sketches.map((sketch, i) => (
@@ -171,19 +172,24 @@ const featured = sketches[dayOfYear % sketches.length];
     }, { signal });
 
     // Filter buttons
+    const allItems = document.querySelectorAll<HTMLElement>('.gallery-item');
     document.querySelectorAll<HTMLButtonElement>('.gallery-filter').forEach((btn) => {
       btn.addEventListener('click', () => {
         const filter = btn.dataset.filter!;
         document.querySelectorAll<HTMLButtonElement>('.gallery-filter').forEach((b) => {
           b.classList.toggle('gallery-filter--active', b === btn);
+          b.setAttribute('aria-pressed', String(b === btn));
         });
-        document.querySelectorAll<HTMLElement>('.gallery-item').forEach((item) => {
+        allItems.forEach((item) => {
           if (filter === 'all' || item.dataset.organ === filter) {
             item.style.display = '';
           } else {
             item.style.display = 'none';
           }
         });
+        const visible = document.querySelectorAll('.gallery-item:not([style*="display: none"])').length;
+        const status = document.getElementById('gallery-filter-status');
+        if (status) status.textContent = `Showing ${visible} of ${allItems.length} sketches`;
       }, { signal });
     });
 

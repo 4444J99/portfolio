@@ -8,7 +8,7 @@ const typedEssayData = essayData as EssayData;
 const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title);
 ---
 
-<Layout title="Essays — Public Process" description="28 essays on building an eight-organ creative-institutional system in public.">
+<Layout title="Essays — Public Process" description={`${typedEssayData.total} essays on building an eight-organ creative-institutional system in public.`}>
     <div class="sketch-accent">
       <SketchContainer sketchId="token-stream" height="250px" mobileHeight="180px" ariaLabel="Animated token stream representing text and language flow" data-tokens={essayTitles.join('|')} />
     </div>

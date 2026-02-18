@@ -1,6 +1,7 @@
 ---
 import SketchContainer from './sketches/SketchContainer.astro';
 import TableOfContents from './TableOfContents.astro';
+import GithubPagesTracking from './scripts/GithubPagesTracking.astro';
 import { projectIndex } from '../data/project-index';
 import pagesDirectory from '../data/github-pages.json';
 import { base } from '../utils/paths';
@@ -508,50 +509,4 @@ const relatedPages = repoRef
   }
 </style>
 
-<script is:inline>
-  function trackGithubPagesClick(link) {
-    const owner = link.dataset.trackOwner || 'unknown';
-    const repo = link.dataset.trackRepo || 'unknown';
-    const target = link.dataset.trackTarget || 'unknown';
-    const surface = link.dataset.trackSurface || 'unknown';
-    const fullName = `${owner}/${repo}`;
-
-    if (typeof window.plausible === 'function') {
-      window.plausible('github_pages_click', {
-        props: { owner, repo, target, surface },
-      });
-    }
-
-    try {
-      const key = 'portfolio_github_pages_clicks';
-      const raw = localStorage.getItem(key);
-      const parsedCandidate = raw ? JSON.parse(raw) : {};
-      const parsed =
-        parsedCandidate && typeof parsedCandidate === 'object' && !Array.isArray(parsedCandidate)
-          ? parsedCandidate
-          : {};
-      const bucketKey = `${fullName}:${target}`;
-      const previous = parsed[bucketKey] || { count: 0, lastClickedAt: null, surface };
-      parsed[bucketKey] = {
-        owner,
-        repo,
-        fullName,
-        target,
-        surface,
-        count: Number(previous.count || 0) + 1,
-        lastClickedAt: new Date().toISOString(),
-      };
-      localStorage.setItem(key, JSON.stringify(parsed));
-    } catch {}
-  }
-
-  function bindGithubPagesTracking() {
-    document.querySelectorAll('a[data-gh-pages-track]').forEach((link) => {
-      if (link.dataset.trackBound === '1') return;
-      link.dataset.trackBound = '1';
-      link.addEventListener('click', () => trackGithubPagesClick(link));
-    });
-  }
-
-  document.addEventListener('astro:page-load', bindGithubPagesTracking);
-</script>
+<GithubPagesTracking />

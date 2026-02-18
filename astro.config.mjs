@@ -10,7 +10,7 @@ export default defineConfig({
   prefetch: false,
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/404'),
+      filter: (page) => !page.includes('/404') && !page.includes('/og/'),
     }),
   ],
   vite: {

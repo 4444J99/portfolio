@@ -4,13 +4,15 @@ interface Props {
   description: string;
   canonicalURL: string;
   ogImage: string;
+  ogType?: string;
 }
 
-const { title, description, canonicalURL, ogImage } = Astro.props;
+const { title, description, canonicalURL, ogImage, ogType = 'website' } = Astro.props;
 ---
 
 <!-- Open Graph -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
+<meta property="og:locale" content="en_US" />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -24,3 +26,4 @@ const { title, description, canonicalURL, ogImage } = Astro.props;
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
+<meta name="twitter:creator" content="@4444j99" />

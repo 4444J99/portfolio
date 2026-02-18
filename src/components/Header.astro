@@ -59,7 +59,7 @@ const connectLinks = [
         <button
           class="header__link header__dropdown-trigger"
           aria-expanded="false"
-          aria-haspopup="true"
+          aria-haspopup="menu"
         >
           More
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -209,7 +209,18 @@ const connectLinks = [
       } else {
         menu.setAttribute('data-open', '');
         trigger.setAttribute('aria-expanded', 'true');
+        const items = menu.querySelectorAll<HTMLElement>('[role="menuitem"]');
+        if (items.length) items[0].focus();
       }
+    }, { signal });
+
+    menu.addEventListener('keydown', (e) => {
+      const items = [...menu.querySelectorAll<HTMLElement>('[role="menuitem"]')];
+      const idx = items.indexOf(document.activeElement as HTMLElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); items[(idx + 1) % items.length].focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); items[(idx - 1 + items.length) % items.length].focus(); }
+      else if (e.key === 'Home') { e.preventDefault(); items[0].focus(); }
+      else if (e.key === 'End') { e.preventDefault(); items[items.length - 1].focus(); }
     }, { signal });
 
     document.addEventListener('click', (e) => {

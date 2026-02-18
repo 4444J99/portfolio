@@ -26,6 +26,12 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
     </div>
     <section class="section">
       <div class="container">
+        <h1 class="page-title">System Architecture</h1>
+        <p class="page-sub">
+          {graphData.total_nodes} active repositories connected by {graphData.total_edges} dependency edges.
+          Nodes are colored by organ; flagships are larger. Drag to rearrange. Hover for details.
+        </p>
+
         <h2 class="section__heading" data-reveal>Navigate the System</h2>
         <p class="page-sub" data-reveal>Click an organ to explore its projects. Click a project to navigate there.</p>
         <ChartContainer
@@ -39,11 +45,7 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
 
     <section class="section">
       <div class="container">
-        <h1 class="page-title">System Architecture</h1>
-        <p class="page-sub">
-          {graphData.total_nodes} active repositories connected by {graphData.total_edges} dependency edges.
-          Nodes are colored by organ; flagships are larger. Drag to rearrange. Hover for details.
-        </p>
+        <h2 class="section__heading">Dependency Graph</h2>
 
         <div class="legend">
           {Object.entries(organColors).map(([key, color]) => (

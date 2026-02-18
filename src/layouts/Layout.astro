@@ -49,7 +49,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
     <BaseMeta description={description} canonicalURL={canonicalURL} />
     <FaviconLinks />
     <SiteLinks />
-    <SEOMeta title={title} description={description} canonicalURL={canonicalURL} ogImage={ogImage} />
+    <SEOMeta title={title} description={description} canonicalURL={canonicalURL} ogImage={ogImage} ogType={schemaProject ? 'article' : 'website'} />
     <SchemaOrg description={description} ogImage={ogImage} project={schemaProject} />
     <FontFaces />
     <ClientRouter />

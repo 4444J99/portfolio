@@ -10,9 +10,32 @@ import { base } from '../utils/paths';
         <h1 class="not-found__title">Page not found</h1>
         <p class="not-found__desc">The page you're looking for doesn't exist, has been moved, or you may be offline.</p>
         <a href={base} class="not-found__link">Back to homepage</a>
+
+        <nav class="not-found__nav" aria-label="Quick links">
+          <a href={`${base}about/`} class="not-found__quick-link">About</a>
+          <a href={`${base}resume/`} class="not-found__quick-link">Resume</a>
+          <a href={`${base}essays/`} class="not-found__quick-link">Essays</a>
+          <a href={`${base}gallery/`} class="not-found__quick-link">Gallery</a>
+          <a href={`${base}dashboard/`} class="not-found__quick-link">Dashboard</a>
+          <a href={`${base}architecture/`} class="not-found__quick-link">Architecture</a>
+        </nav>
+
+        <button class="not-found__search" type="button">Search the site</button>
       </div>
     </section>
 </Layout>
+
+<script>
+  function init404Search() {
+    const btn = document.querySelector('.not-found__search');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const trigger = document.querySelector<HTMLElement>('.search-trigger');
+      if (trigger) trigger.click();
+    });
+  }
+  document.addEventListener('astro:page-load', init404Search);
+</script>
 
 <style>
   .not-found {
@@ -58,5 +81,48 @@ import { base } from '../utils/paths';
   .not-found__link:hover {
     background: var(--accent);
     color: var(--bg-primary);
+  }
+
+  .not-found__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-2xl);
+  }
+
+  .not-found__quick-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .not-found__quick-link:hover {
+    border-color: var(--accent);
+    color: var(--accent-text);
+  }
+
+  .not-found__search {
+    display: inline-block;
+    margin-top: var(--space-lg);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: var(--space-xs) var(--space-lg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .not-found__search:hover {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
   }
 </style>

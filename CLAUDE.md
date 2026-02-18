@@ -11,7 +11,7 @@ npm run preview        # Preview production build
 npm run generate-data  # Regenerate src/data/ from sibling repo (requires ../ingesting-organ-document-structure/)
 npm run test           # Unit + integration tests (vitest)
 npm run test:coverage  # Coverage report (V8)
-npm run test:a11y      # Accessibility audit (axe-core, 31 pages)
+npm run test:a11y      # Accessibility audit (axe-core, 33 pages)
 npm run validate       # HTML validation + internal link check
 npm run lighthouse     # Lighthouse CI performance budgets
 npm run test:ci        # All quality gates chained
@@ -30,7 +30,7 @@ All internal links and assets must account for the `/portfolio` base path config
 
 ### Routing
 
-Pages in `src/pages/` map directly to URLs (Astro file-based routing). There are 19 project case-study pages under `src/pages/projects/` plus top-level pages: index, about, resume, dashboard, essays, architecture, community, consult, products, and 404.
+Pages in `src/pages/` map directly to URLs (Astro file-based routing). There are 20 project case-study pages under `src/pages/projects/` plus top-level pages: index, about, resume, dashboard, essays, architecture, community, consult, products, and 404.
 
 ### Components
 
@@ -38,7 +38,7 @@ Pages in `src/pages/` map directly to URLs (Astro file-based routing). There are
 src/
 ├── layouts/
 │   ├── Layout.astro              # Page shell: head + Header + main + Footer + scripts
-│   └── ProjectLayout.astro       # Extends Layout with ProjectDetail wrapper (19 project pages)
+│   └── ProjectLayout.astro       # Extends Layout with ProjectDetail wrapper (20 project pages)
 ├── components/
 │   ├── head/                     # <head> partials (imported by Layout.astro)
 │   │   ├── BaseMeta.astro, FaviconLinks.astro, SiteLinks.astro
@@ -75,7 +75,7 @@ All components use **TypeScript Props interfaces** in the frontmatter and **comp
 
 ### Layout
 
-Two layouts: `Layout.astro` (page shell: head partials + Header + `<main>` + Footer + script components) and `ProjectLayout.astro` (wraps Layout with ProjectDetail for the 19 project case-study pages). Self-hosted fonts (Syne + Plus Jakarta Sans + JetBrains Mono variable woff2 in `public/fonts/`).
+Two layouts: `Layout.astro` (page shell: head partials + Header + `<main>` + Footer + script components) and `ProjectLayout.astro` (wraps Layout with ProjectDetail for the 20 project case-study pages). Self-hosted fonts (Syne + Plus Jakarta Sans + JetBrains Mono variable woff2 in `public/fonts/`).
 
 ### Styling
 

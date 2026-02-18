@@ -151,6 +151,14 @@ const year = new Date().getFullYear();
     const btns = document.querySelectorAll<HTMLButtonElement>('.theme-toggle');
     if (!btns.length) return;
 
+    function updateToggleLabel() {
+      const pref = localStorage.getItem('theme-preference') || 'system';
+      const label = pref === 'system' ? 'Theme: System (click for Light)'
+        : pref === 'light' ? 'Theme: Light (click for Dark)'
+        : 'Theme: Dark (click for System)';
+      document.querySelectorAll('.theme-toggle').forEach(b => b.setAttribute('aria-label', label));
+    }
+
     // Three-state cycle: system → light → dark → system
     btns.forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -168,8 +176,11 @@ const year = new Date().getFullYear();
           localStorage.setItem('theme', next);
           applyTheme(next);
         }
+        updateToggleLabel();
       }, { signal });
     });
+
+    updateToggleLabel();
 
     // Listen once for system preference changes (only applies in 'system' mode)
     if (!state.mediaListener) {
