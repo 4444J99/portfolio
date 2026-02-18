@@ -42,9 +42,10 @@ Every push runs automated quality gates via [GitHub Actions](.github/workflows/q
 
 - Schema compatibility: `github-pages-index.v2` and `github-pages-index.v2.1` are accepted during transition.
 - Migration notes: `docs/GITHUB_PAGES_SCHEMA_MIGRATION.md`.
+- Canonical threshold source: `scripts/config/github-pages-policy.json`.
 - Deploy continuity posture:
   - Deploy sync uses non-strict mode with fallback to the last known-good index when GitHub API fetches fail.
-  - Deploy validation gate enforces `max-age-hours=72`, `max-errored=8`, `max-unreachable=5`.
+  - Deploy validation gate defaults resolve from policy (`max-age-hours=72`, `max-errored=8`, `max-unreachable=5`) unless explicitly overridden via CLI flags.
 - Alerting posture:
   - Open alert if fallback sync occurs more than once in a rolling 24-hour window.
   - Open alert if `errored` exceeds policy budget (`>8`).
@@ -72,6 +73,7 @@ npm run test:a11y         # Accessibility audit (axe-core on all pages)
 npm run test:a11y:runtime # Runtime browser accessibility audit (Playwright + axe)
 npm run test:a11y:coverage # Runtime a11y route coverage gate
 npm run test:e2e:smoke    # Playwright navigation/lifecycle smoke suite
+npm run check:runtime-route-manifest # Dist vs runtime telemetry manifest sync gate
 npm run test:runtime:errors # Playwright runtime error telemetry (desktop + mobile)
 npm run typecheck         # Astro + TypeScript type checks
 npm run typecheck:strict  # Typecheck with ratcheted hint budget (phase-aware)

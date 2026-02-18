@@ -119,16 +119,70 @@ const year = new Date().getFullYear();
 </style>
 
 <script>
+  type ThemePreference = 'system' | 'light' | 'dark';
+
   interface ThemeToggleState {
     controller?: AbortController;
     mediaQuery?: MediaQueryList;
     mediaListener?: () => void;
   }
 
+  interface ThemeStorageFallbackState {
+    preference: ThemePreference;
+  }
+
   function getThemeToggleState(): ThemeToggleState {
     const w = window as Window & { __themeToggleState?: ThemeToggleState };
     if (!w.__themeToggleState) w.__themeToggleState = {};
     return w.__themeToggleState;
+  }
+
+  function getThemeStorageFallbackState(): ThemeStorageFallbackState {
+    const w = window as Window & { __themeStorageFallback?: ThemeStorageFallbackState };
+    if (!w.__themeStorageFallback) {
+      w.__themeStorageFallback = { preference: 'system' };
+    }
+    return w.__themeStorageFallback;
+  }
+
+  function readStorageItem(key: string): string | null {
+    try {
+      return window.localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  function writeStorageItem(key: string, value: string): boolean {
+    try {
+      window.localStorage.setItem(key, value);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function removeStorageItem(key: string): boolean {
+    try {
+      window.localStorage.removeItem(key);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function readThemePreference(): ThemePreference {
+    const stored = readStorageItem('theme-preference');
+    if (stored === 'system' || stored === 'light' || stored === 'dark') {
+      getThemeStorageFallbackState().preference = stored;
+      return stored;
+    }
+    return getThemeStorageFallbackState().preference;
+  }
+
+  function writeThemePreference(next: ThemePreference) {
+    getThemeStorageFallbackState().preference = next;
+    writeStorageItem('theme-preference', next);
   }
 
   function applyTheme(theme: string) {
@@ -152,7 +206,7 @@ const year = new Date().getFullYear();
     if (!btns.length) return;
 
     function updateToggleLabel() {
-      const pref = localStorage.getItem('theme-preference') || 'system';
+      const pref = readThemePreference();
       const label = pref === 'system' ? 'Theme: System (click for Light)'
         : pref === 'light' ? 'Theme: Light (click for Dark)'
         : 'Theme: Dark (click for System)';
@@ -162,18 +216,18 @@ const year = new Date().getFullYear();
     // Three-state cycle: system → light → dark → system
     btns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        const pref = localStorage.getItem('theme-preference') || 'system';
-        let next: string;
+        const pref = readThemePreference();
+        let next: ThemePreference;
         if (pref === 'system') next = 'light';
         else if (pref === 'light') next = 'dark';
         else next = 'system';
 
-        localStorage.setItem('theme-preference', next);
+        writeThemePreference(next);
         if (next === 'system') {
-          localStorage.removeItem('theme');
+          removeStorageItem('theme');
           applyTheme(resolveSystemTheme());
         } else {
-          localStorage.setItem('theme', next);
+          writeStorageItem('theme', next);
           applyTheme(next);
         }
         updateToggleLabel();
@@ -186,7 +240,7 @@ const year = new Date().getFullYear();
     if (!state.mediaListener) {
       state.mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
       state.mediaListener = () => {
-        const pref = localStorage.getItem('theme-preference') || 'system';
+        const pref = readThemePreference();
         if (pref === 'system') {
           applyTheme(resolveSystemTheme());
         }

@@ -1,5 +1,22 @@
 <script>
+  interface IndexFiltersState {
+    controller?: AbortController;
+    pageLoadBound?: boolean;
+  }
+
+  function getIndexFiltersState(): IndexFiltersState {
+    const w = window as Window & { __indexFiltersState?: IndexFiltersState };
+    if (!w.__indexFiltersState) w.__indexFiltersState = {};
+    return w.__indexFiltersState;
+  }
+
   function initIndexFilters() {
+    const state = getIndexFiltersState();
+    state.controller?.abort();
+    const controller = new AbortController();
+    const { signal } = controller;
+    state.controller = controller;
+
     const main = document.getElementById('main-content') as HTMLElement | null;
     if (!main?.dataset.portfolioView) return;
 
@@ -69,7 +86,7 @@
         switchView(view);
         const label = view.charAt(0).toUpperCase() + view.slice(1);
         announceFilterStatus(`Switched to ${label} view.`);
-      });
+      }, { signal });
     });
 
     document.querySelectorAll<HTMLElement>('.filter-bar').forEach((bar) => {
@@ -103,9 +120,17 @@
         });
 
         announceFilterStatus();
-      });
+      }, { signal });
     });
+
+    document.addEventListener('astro:before-swap', () => {
+      controller.abort();
+    }, { once: true, signal });
   }
 
-  document.addEventListener('astro:page-load', initIndexFilters);
+  const indexFiltersState = getIndexFiltersState();
+  if (!indexFiltersState.pageLoadBound) {
+    document.addEventListener('astro:page-load', initIndexFilters);
+    indexFiltersState.pageLoadBound = true;
+  }
 </script>

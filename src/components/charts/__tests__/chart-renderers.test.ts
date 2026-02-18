@@ -53,6 +53,7 @@ describe('chart renderers', () => {
       organs: [
         { key: 'ORGAN-I', name: 'Theoria', total_repos: 12, ci_coverage: 92 },
         { key: 'ORGAN-II', name: 'Poiesis', total_repos: 8, ci_coverage: 88 },
+        { key: 'CUSTOM', name: 'Custom', total_repos: 3, ci_coverage: 50 },
       ],
     });
 
@@ -63,13 +64,13 @@ describe('chart renderers', () => {
   it('renders classification donut chart', () => {
     const container = createContainer();
     classificationDonut(container, {
-      classifications: { SUBSTANTIAL: 6, PARTIAL: 4, MINIMAL: 2 },
-      total: 12,
+      classifications: { SUBSTANTIAL: 6, PARTIAL: 4, MINIMAL: 2, EXPERIMENTAL: 1 },
+      total: 13,
     });
 
     expect(container.querySelector('svg')).not.toBeNull();
     expect(container.querySelectorAll('path').length).toBeGreaterThan(0);
-    expect(container.textContent).toContain('12');
+    expect(container.textContent).toContain('13');
   });
 
   it('renders sprint timeline chart', () => {

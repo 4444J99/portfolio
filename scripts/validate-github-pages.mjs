@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { validateGitHubPagesIndex } from '@meta-organvm/github-pages-index-core';
 
 const args = process.argv.slice(2);
+const DEFAULT_POLICY_PATH = 'scripts/config/github-pages-policy.json';
 
 function parseOption(name, fallback = null) {
   const prefix = `--${name}=`;
@@ -15,19 +17,64 @@ function parseOption(name, fallback = null) {
   return fallback;
 }
 
+function parseFiniteNumber(value, fallback) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function parseFiniteInteger(value, fallback) {
+  const parsed = Number.parseInt(String(value), 10);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function loadValidationPolicy(policyPath) {
+  let parsed;
+  try {
+    parsed = JSON.parse(readFileSync(policyPath, 'utf-8'));
+  } catch (error) {
+    console.error(
+      `Failed to read GitHub Pages validation policy (${policyPath}): ${error instanceof Error ? error.message : String(error)}`
+    );
+    process.exit(1);
+  }
+
+  const validation = parsed?.validation ?? {};
+  return {
+    maxAgeHours: parseFiniteNumber(validation.maxAgeHours, 72),
+    maxErrored: parseFiniteInteger(validation.maxErrored, 8),
+    maxUnreachable: parseFiniteInteger(validation.maxUnreachable, 5),
+  };
+}
+
 const inputPath = resolve(parseOption('input', 'src/data/github-pages.json'));
-const maxAgeHours = Number.parseFloat(parseOption('max-age-hours', '48'));
-const maxErrored = Number.parseInt(parseOption('max-errored', '25'), 10);
-const maxUnreachable = Number.parseInt(parseOption('max-unreachable', '25'), 10);
+const policyPath = resolve(parseOption('policy', DEFAULT_POLICY_PATH));
+const policy = loadValidationPolicy(policyPath);
+
+const maxAgeHours = parseFiniteNumber(
+  parseOption('max-age-hours', String(policy.maxAgeHours)),
+  policy.maxAgeHours
+);
+const maxErrored = parseFiniteInteger(
+  parseOption('max-errored', String(policy.maxErrored)),
+  policy.maxErrored
+);
+const maxUnreachable = parseFiniteInteger(
+  parseOption('max-unreachable', String(policy.maxUnreachable)),
+  policy.maxUnreachable
+);
 
 const result = validateGitHubPagesIndex({
   inputPath,
-  maxAgeHours: Number.isFinite(maxAgeHours) ? maxAgeHours : 48,
-  maxErrored: Number.isFinite(maxErrored) ? maxErrored : 25,
-  maxUnreachable: Number.isFinite(maxUnreachable) ? maxUnreachable : 25,
+  maxAgeHours,
+  maxErrored,
+  maxUnreachable,
 });
 
 if (result.summary) {
+  console.log(`GitHub Pages validation policy (${policyPath}):`);
+  console.log(`- max-age-hours: ${maxAgeHours}`);
+  console.log(`- max-errored: ${maxErrored}`);
+  console.log(`- max-unreachable: ${maxUnreachable}`);
   console.log(`GitHub Pages index summary (${inputPath}):`);
   console.log(`- total: ${result.summary.totalRepos}`);
   console.log(`- built: ${result.summary.builtCount}`);

@@ -1,8 +1,8 @@
 {
-  "generated": "2026-02-18T03:20:10.634Z",
+  "generated": "2026-02-18T07:30:12.871Z",
   "tests": {
-    "total": 217,
-    "passed": 217,
+    "total": 226,
+    "passed": 226,
     "files": 23
   },
   "security": {
@@ -38,10 +38,10 @@
     "githubSource": ".quality/github-advisory-summary.json"
   },
   "coverage": {
-    "statements": 49,
+    "statements": 48,
     "branches": 29,
-    "functions": 43,
-    "lines": 50
+    "functions": 42,
+    "lines": 48
   },
   "lighthouse": {
     "performance": 100,
@@ -144,9 +144,9 @@
       },
       "/portfolio/gallery": {
         "scenario": "gallery-interaction",
-        "rawBytes": 3464671,
-        "gzipBytes": 993138,
-        "assetCount": 16,
+        "rawBytes": 3466078,
+        "gzipBytes": 993860,
+        "assetCount": 17,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js",
@@ -155,6 +155,7 @@
           "_astro/gallery.astro_astro_type_script_index_0_lang.EN6oftQe.js",
           "_astro/hero-sketch.D4Adanfx.js",
           "_astro/network-graph-sketch.BPa-0SfN.js",
+          "_astro/orbits-sketch.Bw-ZxLSd.js",
           "_astro/organ-system-sketch.C9w9uwJI.js",
           "_astro/palette.BEtSnNQw.js",
           "_astro/recursive-tree-sketch.BMtYJSUL.js",

@@ -1,0 +1,7 @@
+{
+  "validation": {
+    "maxAgeHours": 72,
+    "maxErrored": 8,
+    "maxUnreachable": 5
+  }
+}

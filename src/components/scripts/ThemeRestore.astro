@@ -1,8 +1,27 @@
 <script is:inline>
   // Theme restore — must be inline to avoid FOUC (runs before first paint)
   (function() {
+    // Storage can throw in privacy-restricted environments; keep a memory fallback.
+    var w = window;
+    if (!w.__themeStorageFallback || typeof w.__themeStorageFallback !== 'object') {
+      w.__themeStorageFallback = { preference: 'system' };
+    }
+
+    function readPreference() {
+      var stored = null;
+      try {
+        stored = w.localStorage.getItem('theme-preference');
+      } catch {}
+
+      if (stored === 'system' || stored === 'light' || stored === 'dark') {
+        w.__themeStorageFallback.preference = stored;
+        return stored;
+      }
+      return w.__themeStorageFallback.preference || 'system';
+    }
+
     // Theme: 3-state (system/light/dark) with system as default
-    var pref = localStorage.getItem('theme-preference') || 'system';
+    var pref = readPreference();
     var theme = pref === 'system'
       ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
       : pref;
