@@ -12,6 +12,7 @@ on:
 permissions:
   contents: read
   pages: write
+  issues: write
   id-token: write # allow-secret
 
 concurrency:
@@ -42,7 +43,22 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: npm run sync:github-pages
       - name: Validate GitHub Pages index
-        run: npm run validate:github-pages -- --max-age-hours 72 --max-errored 10 --max-unreachable 5
+        run: npm run validate:github-pages -- --max-age-hours 72 --max-errored 8 --max-unreachable 5
+      - name: Emit GitHub Pages telemetry
+        run: npm run telemetry:github-pages
+      - name: Evaluate GitHub Pages alert rules
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm run alerts:github-pages
+      - name: Upload GitHub Pages telemetry artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages-telemetry-${{ github.run_id }}
+          path: |
+            .quality/github-pages-telemetry.json
+            .quality/github-pages-alerts.json
+          if-no-files-found: ignore
+          retention-days: 14
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

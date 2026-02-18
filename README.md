@@ -41,11 +41,19 @@ Every push runs automated quality gates via [GitHub Actions](.github/workflows/q
 ### GitHub Pages Directory Policy
 
 - Schema compatibility: `github-pages-index.v2` and `github-pages-index.v2.1` are accepted during transition.
+- Migration notes: `docs/GITHUB_PAGES_SCHEMA_MIGRATION.md`.
 - Deploy continuity posture:
   - Deploy sync uses non-strict mode with fallback to the last known-good index when GitHub API fetches fail.
-  - Deploy validation gate enforces `max-age-hours=72`, `max-errored=10`, `max-unreachable=5`.
+  - Deploy validation gate enforces `max-age-hours=72`, `max-errored=8`, `max-unreachable=5`.
+- Alerting posture:
+  - Open alert if fallback sync occurs more than once in a rolling 24-hour window.
+  - Open alert if `errored` exceeds policy budget (`>8`).
 - Current baseline (2026-02-17): `total=85`, `built=76`, `errored=6`, `unreachable=0`.
-- Ratchet target (next checkpoint): keep errored repos at `<=8` and unreachable repos at `<=3`.
+- Active budget (2026-02-18 onward): keep errored repos at `<=8` and unreachable repos at `<=5`.
+- Schema migration notes (`v2 -> v2.1`):
+  - Added top-level optional fields: `syncStatus`, `syncWarnings`, `stats`.
+  - Added repo-level optional fields: `probeMethod`, `probeLatencyMs`, `lastError`.
+  - Existing `v2` consumers remain compatible because all `v2.1` additions are optional.
 
 Coverage ratchet policy: W2 `12/8/8/12`, W4 `18/12/12/18`, W6 `25/18/18/25` (Statements/Branches/Functions/Lines).  
 Typecheck hint budget policy: W2 `<=20`, W4 `<=8`, W6 `=0`.
