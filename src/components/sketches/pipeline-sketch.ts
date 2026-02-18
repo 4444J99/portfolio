@@ -35,6 +35,36 @@ interface Sediment {
   alpha: number;
 }
 
+function toRomanNumeral(value: number): string {
+  const numerals: Array<[number, string]> = [
+    [1000, 'M'],
+    [900, 'CM'],
+    [500, 'D'],
+    [400, 'CD'],
+    [100, 'C'],
+    [90, 'XC'],
+    [50, 'L'],
+    [40, 'XL'],
+    [10, 'X'],
+    [9, 'IX'],
+    [5, 'V'],
+    [4, 'IV'],
+    [1, 'I'],
+  ];
+
+  if (!Number.isFinite(value) || value <= 0) return '';
+
+  let remaining = Math.floor(value);
+  let result = '';
+  for (const [unit, glyph] of numerals) {
+    while (remaining >= unit) {
+      result += glyph;
+      remaining -= unit;
+    }
+  }
+  return result;
+}
+
 export default function pipelineSketch(p: p5, container: HTMLElement) {
   let particles: Particle[] = [];
   let sediments: Sediment[] = [];
@@ -137,9 +167,10 @@ export default function pipelineSketch(p: p5, container: HTMLElement) {
 
       // Roman numeral
       const numerals = ['I', 'II', 'III'];
+      const chamberOrdinal = numerals[i] ?? toRomanNumeral(i + 1);
       p.fill(...PALETTE.accent, isHovered ? 180 : 60);
       p.textSize(isMobile() ? 7 : 9);
-      p.text(numerals[i], cx, chamberBottom + 14);
+      p.text(chamberOrdinal || String(i + 1), cx, chamberBottom + 14);
 
       if (isHovered) {
         const rate = Math.round(chamber.successRate * 100 * (0.8 + strictness() * 0.4));

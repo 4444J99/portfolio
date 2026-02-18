@@ -6,6 +6,7 @@ import { dirname, resolve } from 'node:path';
 import { chromium } from 'playwright';
 
 const args = process.argv.slice(2);
+const DEFAULT_MANIFEST_PATH = resolve('scripts/runtime-a11y-routes.json');
 
 function parseOption(name, fallback = null) {
   const eq = args.find((entry) => entry.startsWith(`--${name}=`));
@@ -17,26 +18,73 @@ function parseOption(name, fallback = null) {
 
 const outputPath = resolve(parseOption('json-out', '.quality/runtime-errors-summary.json'));
 const allowlistPath = resolve(parseOption('allowlist', '.quality/runtime-error-allowlist.json'));
-const basePath = '/portfolio';
+const manifestPath = resolve(parseOption('manifest', DEFAULT_MANIFEST_PATH));
+const routeLimitOption = parseOption('route-limit', null);
 const host = '127.0.0.1';
 const port = Number(parseOption('port', '4322'));
 const previewUrl = `http://${host}:${port}`;
-
-const routeMatrix = [
-  '/',
-  '/about',
-  '/dashboard',
-  '/consult',
-  '/omega',
-  '/architecture',
-  '/gallery',
-  '/projects/recursive-engine',
-];
 
 const viewportProfiles = [
   { name: 'mobile', viewport: { width: 390, height: 844 } },
   { name: 'desktop', viewport: { width: 1440, height: 900 } },
 ];
+
+function normalizeBasePath(value) {
+  if (typeof value !== 'string') return '/portfolio';
+  const trimmed = value.trim();
+  if (!trimmed.startsWith('/')) return '/portfolio';
+  if (trimmed.length > 1 && trimmed.endsWith('/')) return trimmed.slice(0, -1);
+  return trimmed || '/portfolio';
+}
+
+function normalizeRoutePath(value) {
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  if (trimmed === '/') return '/';
+  const prefixed = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+  return prefixed.endsWith('/') ? prefixed.slice(0, -1) : prefixed;
+}
+
+function parseRouteLimit(rawValue) {
+  if (rawValue === null) return null;
+  const parsed = Number.parseInt(rawValue, 10);
+  if (!Number.isFinite(parsed) || parsed <= 0) {
+    console.error(`Invalid --route-limit value: ${rawValue}. Use a positive integer.`);
+    process.exit(1);
+  }
+  return parsed;
+}
+
+function readRouteManifest() {
+  if (!existsSync(manifestPath)) {
+    console.error(`Runtime telemetry manifest not found: ${manifestPath}`);
+    process.exit(1);
+  }
+
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'));
+  const basePath = normalizeBasePath(manifest.basePath);
+  const rawRoutes = Array.isArray(manifest.routes) ? manifest.routes : [];
+  const routeMatrix = [...new Set(
+    rawRoutes
+      .map((entry) => normalizeRoutePath(entry?.path))
+      .filter((route) => typeof route === 'string')
+  )];
+
+  if (routeMatrix.length === 0) {
+    console.error(`Runtime telemetry manifest has no routes: ${manifestPath}`);
+    process.exit(1);
+  }
+
+  return { basePath, routeMatrix };
+}
+
+const routeLimit = parseRouteLimit(routeLimitOption);
+const routeManifest = readRouteManifest();
+const basePath = routeManifest.basePath;
+const routeMatrix = routeLimit === null
+  ? routeManifest.routeMatrix
+  : routeManifest.routeMatrix.slice(0, routeLimit);
 
 function readAllowlist() {
   if (!existsSync(allowlistPath)) {
@@ -194,10 +242,14 @@ const allowlisted = events.filter((event) => event.classification === 'allowlist
 const summary = {
   generated: new Date().toISOString(),
   source: 'playwright runtime telemetry',
+  manifestPath,
   basePath,
+  routeSourceCount: routeManifest.routeMatrix.length,
+  routeLimitApplied: routeLimit,
   profiles: viewportProfiles.map((profile) => profile.name),
   routes: routeMatrix.map((route) => `${basePath}${route}`),
   counts: {
+    routes: routeMatrix.length,
     total: events.length,
     uncategorized: uncategorized.length,
     allowlisted: allowlisted.length,

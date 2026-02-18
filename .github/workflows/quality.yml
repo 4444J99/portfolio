@@ -74,7 +74,7 @@ jobs:
           npm run test:security:drift
 
       - name: Quality parity pipeline
-        run: npm run quality:local
+        run: npm run quality:core
 
       - name: Quality summary
         if: always()

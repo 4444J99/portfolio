@@ -1,6 +1,4 @@
-type ChartInit = (container: HTMLElement, data: any) => void;
-
-const chartModules: Record<string, () => Promise<{ default: ChartInit }>> = {
+const chartModules = {
   'organ-bar': () => import('./organ-bar-chart'),
   'classification-donut': () => import('./classification-donut-chart'),
   'sprint-timeline': () => import('./sprint-timeline-chart'),
@@ -9,7 +7,9 @@ const chartModules: Record<string, () => Promise<{ default: ChartInit }>> = {
   'praxis-sparklines': () => import('./praxis-sparklines-chart'),
   'flagship-stacked': () => import('./flagship-stacked-chart'),
   'organ-navigator': () => import('./organ-navigator-chart'),
-};
+} as const;
+
+type ChartId = keyof typeof chartModules;
 
 const initialized = new Set<HTMLElement>();
 const visible = new Set<HTMLElement>();
@@ -19,19 +19,40 @@ let intersectionObserver: IntersectionObserver | null = null;
 let mutationObserver: MutationObserver | null = null;
 let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 
+function isChartId(value: string): value is ChartId {
+  return value in chartModules;
+}
+
+function parseChartPayload(raw: string | undefined, chartId: string) {
+  try {
+    return JSON.parse(raw ?? '{}');
+  } catch (err) {
+    console.error('[chart]', chartId, 'invalid chart payload:', err);
+    return {};
+  }
+}
+
+function readChartData(container: HTMLElement, chartId: string) {
+  const dataEl = container.querySelector('script[type="application/json"]');
+  if (dataEl) {
+    return parseChartPayload(dataEl.textContent ?? '{}', chartId);
+  }
+  return parseChartPayload(container.dataset.chartData, chartId);
+}
+
 function initChart(container: HTMLElement) {
   if (initialized.has(container)) return;
   initialized.add(container);
   stale.delete(container);
 
   const chartId = container.dataset.chart;
-  if (!chartId || !chartModules[chartId]) return;
+  if (!chartId || !isChartId(chartId)) return;
 
-  const dataEl = container.querySelector('script[type="application/json"]');
-  const data = dataEl ? JSON.parse(dataEl.textContent || '{}') : JSON.parse(container.dataset.chartData || '{}');
+  const data = readChartData(container, chartId);
 
   chartModules[chartId]().then((mod) => {
-    mod.default(container, data);
+    const init = mod.default as (host: HTMLElement, payload: unknown) => void;
+    init(container, data);
   }).catch((err) => {
     console.error('[chart]', chartId, 'load error:', err);
   });

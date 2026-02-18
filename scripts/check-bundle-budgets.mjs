@@ -99,8 +99,8 @@ function selectInteractionThresholds(referenceTime) {
     {
       date: '2026-02-17',
       thresholds: {
-        '/portfolio/architecture': 1024 * 1024,
-        '/portfolio/gallery': 1024 * 1024,
+        '/portfolio/architecture': 1008 * 1024,
+        '/portfolio/gallery': 1010 * 1024,
       },
     },
     {

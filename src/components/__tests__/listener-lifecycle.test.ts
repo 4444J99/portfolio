@@ -28,6 +28,13 @@ describe('client listener lifecycle guards', () => {
     expect(source).toContain("document.addEventListener('fullscreenchange'");
   });
 
+  it('search dialog listeners are rebound through AbortController cleanup', () => {
+    const source = read('components/Search.astro');
+    expect(source).toContain('new AbortController()');
+    expect(source).toContain('state.controller.abort()');
+    expect(source).toContain("document.addEventListener('astro:before-swap'");
+  });
+
   it('sketch loader keeps a single resize handler and removes it on teardown', () => {
     const source = read('components/sketches/sketch-loader.ts');
     expect(source).toContain('let resizeHandler');

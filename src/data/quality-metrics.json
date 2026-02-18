@@ -1,9 +1,9 @@
 {
-  "generated": "2026-02-17T22:53:29.273Z",
+  "generated": "2026-02-18T03:20:10.634Z",
   "tests": {
-    "total": 205,
-    "passed": 205,
-    "files": 21
+    "total": 217,
+    "passed": 217,
+    "files": 23
   },
   "security": {
     "critical": 0,
@@ -108,12 +108,12 @@
         "gzipBytes": 3114
       },
       {
-        "chunk": "_astro/sketch-loader.DGlPODjS.js",
-        "gzipBytes": 2305
+        "chunk": "_astro/sketch-loader.CXHdk1hf.js",
+        "gzipBytes": 2408
       },
       {
-        "chunk": "_astro/pipeline-sketch.BgvTQ8X0.js",
-        "gzipBytes": 1730
+        "chunk": "_astro/pipeline-sketch.DHi0Q2oz.js",
+        "gzipBytes": 1878
       },
       {
         "chunk": "_astro/token-stream-sketch.WVCHn-Iz.js",
@@ -127,17 +127,16 @@
     "interactiveRouteJsTotals": {
       "/portfolio/architecture": {
         "scenario": "architecture-interaction",
-        "rawBytes": 3448759,
-        "gzipBytes": 985899,
-        "assetCount": 10,
+        "rawBytes": 3447856,
+        "gzipBytes": 985388,
+        "assetCount": 9,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js",
           "_astro/architecture.astro_astro_type_script_index_0_lang.CCpSZ2rq.js",
-          "_astro/background-sketch.ByO5Pm1e.js",
           "_astro/network-graph-sketch.BPa-0SfN.js",
           "_astro/palette.BEtSnNQw.js",
-          "_astro/sketch-loader.DGlPODjS.js",
+          "_astro/sketch-loader.CXHdk1hf.js",
           "_astro/vendor-cytoscape.C5TakKzA.js",
           "_astro/vendor-mermaid.C_f1ZiXj.js",
           "_astro/vendor-p5.Ca8ta-ah.js"
@@ -145,22 +144,21 @@
       },
       "/portfolio/gallery": {
         "scenario": "gallery-interaction",
-        "rawBytes": 3465322,
-        "gzipBytes": 993532,
-        "assetCount": 17,
+        "rawBytes": 3464671,
+        "gzipBytes": 993138,
+        "assetCount": 16,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js",
           "_astro/atoms-sketch.PufMKsIk.js",
-          "_astro/background-sketch.ByO5Pm1e.js",
           "_astro/conductor-sketch.CsNW48Wi.js",
-          "_astro/gallery.astro_astro_type_script_index_0_lang.CSfrP5H0.js",
+          "_astro/gallery.astro_astro_type_script_index_0_lang.EN6oftQe.js",
           "_astro/hero-sketch.D4Adanfx.js",
           "_astro/network-graph-sketch.BPa-0SfN.js",
           "_astro/organ-system-sketch.C9w9uwJI.js",
           "_astro/palette.BEtSnNQw.js",
           "_astro/recursive-tree-sketch.BMtYJSUL.js",
-          "_astro/sketch-loader.DGlPODjS.js",
+          "_astro/sketch-loader.CXHdk1hf.js",
           "_astro/spiral-sketch.C_SjJ2Wj.js",
           "_astro/token-stream-sketch.WVCHn-Iz.js",
           "_astro/vendor-cytoscape.C5TakKzA.js",
@@ -172,323 +170,323 @@
     "routeJsTotals": {
       "/portfolio/404.html": {
         "rawBytes": 13321,
-        "gzipBytes": 4703,
+        "gzipBytes": 4701,
         "assetCount": 2,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/about": {
         "rawBytes": 13321,
-        "gzipBytes": 4703,
+        "gzipBytes": 4701,
         "assetCount": 2,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/architecture": {
         "rawBytes": 15353,
-        "gzipBytes": 5765,
+        "gzipBytes": 5763,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js",
           "_astro/architecture.astro_astro_type_script_index_0_lang.CCpSZ2rq.js"
         ]
       },
       "/portfolio/community": {
         "rawBytes": 13321,
-        "gzipBytes": 4703,
+        "gzipBytes": 4701,
         "assetCount": 2,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/consult": {
         "rawBytes": 19620,
-        "gzipBytes": 7817,
+        "gzipBytes": 7815,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js",
           "_astro/consult.astro_astro_type_script_index_0_lang.BfI8oWIP.js"
         ]
       },
       "/portfolio/dashboard": {
-        "rawBytes": 16128,
-        "gzipBytes": 5820,
+        "rawBytes": 16310,
+        "gzipBytes": 5893,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js",
-          "_astro/dashboard.astro_astro_type_script_index_0_lang.UEJpVLE9.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js",
+          "_astro/dashboard.astro_astro_type_script_index_0_lang.BSKmhXzo.js"
         ]
       },
       "/portfolio/essays": {
         "rawBytes": 13321,
-        "gzipBytes": 4703,
+        "gzipBytes": 4701,
         "assetCount": 2,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/gallery": {
-        "rawBytes": 15065,
-        "gzipBytes": 5398,
+        "rawBytes": 15317,
+        "gzipBytes": 5513,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js",
-          "_astro/gallery.astro_astro_type_script_index_0_lang.CSfrP5H0.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js",
+          "_astro/gallery.astro_astro_type_script_index_0_lang.EN6oftQe.js"
         ]
       },
       "/portfolio/github-pages": {
         "rawBytes": 13321,
-        "gzipBytes": 4703,
+        "gzipBytes": 4701,
         "assetCount": 2,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/": {
         "rawBytes": 13321,
-        "gzipBytes": 4703,
+        "gzipBytes": 4701,
         "assetCount": 2,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/omega": {
         "rawBytes": 13321,
-        "gzipBytes": 4703,
+        "gzipBytes": 4701,
         "assetCount": 2,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/products": {
         "rawBytes": 13321,
-        "gzipBytes": 4703,
+        "gzipBytes": 4701,
         "assetCount": 2,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/aetheria-rpg": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/agentic-titan": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/ai-conductor": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/ai-council": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/block-warfare": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/community-infrastructure": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/distribution-strategy": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/eight-organ-system": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/generative-music": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/knowledge-base": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/life-my-midst-in": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/linguistic-atomization": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/metasystem-master": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/narratological-lenses": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/orchestration-hub": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/org-architecture": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/public-process": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/recursive-engine": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/the-actual-news": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/projects/your-fit-tailored": {
         "rawBytes": 15825,
-        "gzipBytes": 5762,
+        "gzipBytes": 5760,
         "assetCount": 3,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
           "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       },
       "/portfolio/resume": {
         "rawBytes": 13321,
-        "gzipBytes": 4703,
+        "gzipBytes": 4701,
         "assetCount": 2,
         "assets": [
           "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DfuUOJGY.js"
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.DRuyzIu1.js"
         ]
       }
     },

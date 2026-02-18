@@ -105,6 +105,20 @@ const runtimeErrorDetail = runtimeErrors.total === null
 const greenRunDetail = stability.consecutiveSuccess === null
   ? 'green run history n/a'
   : `${stability.consecutiveSuccess}/${stability.requiredConsecutive ?? 'n/a'} consecutive`;
+const generatedTime = Date.parse(quality.generated);
+const freshnessHours = Number.isFinite(generatedTime)
+  ? Math.max(0, (Date.now() - generatedTime) / 3_600_000)
+  : null;
+const freshnessStatus = freshnessHours === null
+  ? 'unknown'
+  : freshnessHours <= 24
+    ? 'fresh'
+    : freshnessHours <= 48
+      ? 'aging'
+      : 'stale';
+const freshnessDetail = freshnessHours === null
+  ? 'Metrics freshness: unavailable'
+  : `Metrics freshness: ${freshnessStatus} (${freshnessHours.toFixed(1)}h old)`;
 ---
 
 <section class="section">
@@ -224,6 +238,7 @@ const greenRunDetail = stability.consecutiveSuccess === null
     </div>
 
     <p class="quality-timestamp">Last updated: {new Date(quality.generated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+    <p class:list={['quality-freshness', `quality-freshness--${freshnessStatus}`]}>{freshnessDetail}</p>
     <p class="quality-sources">
       Sources: tests ({sources.tests}) · security full ({sources.security}) · security prod ({sources.securityProd}) · security github ({sources.securityGithub}) · security drift ({sources.securityDrift}) · coverage ({sources.coverage}) · lighthouse ({sources.lighthouse}) · a11y static ({sources.a11yStatic}) · a11y runtime ({sources.a11yRuntime}) · runtime coverage ({sources.runtimeCoverage}) · e2e smoke ({sources.e2eSmoke}) · runtime errors ({sources.runtimeErrors}) · green runs ({sources.greenRuns}) · ledger ({sources.ledger}) · performance ({sources.performance}) · build ({sources.build})
     </p>
@@ -298,6 +313,26 @@ const greenRunDetail = stability.consecutiveSuccess === null
   .quality-timestamp {
     font-size: 0.75rem;
     color: var(--text-muted);
+  }
+
+  .quality-freshness {
+    margin-top: var(--space-xs);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .quality-freshness--fresh {
+    color: var(--color-substantial);
+  }
+
+  .quality-freshness--aging {
+    color: var(--color-partial);
+  }
+
+  .quality-freshness--stale,
+  .quality-freshness--unknown {
+    color: var(--color-minimal);
   }
 
   .quality-sources {

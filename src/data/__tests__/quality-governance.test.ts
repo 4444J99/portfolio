@@ -129,7 +129,7 @@ describe('quality governance drift checks', () => {
     expect(workflow).toContain('npm run test:security:drift');
     expect(workflow).toContain('cron: "17 9 * * *"');
     expect(workflow).toContain('Policy governance guard');
-    expect(workflow).toContain('run: npm run quality:local');
+    expect(workflow).toContain('run: npm run quality:core');
     expect(workflow).toContain('run: npm run quality:summary -- --allow-missing');
   });
 

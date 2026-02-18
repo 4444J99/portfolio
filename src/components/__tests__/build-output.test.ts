@@ -4,6 +4,7 @@ import { resolve, join } from 'path';
 import * as cheerio from 'cheerio';
 
 const DIST = resolve(process.cwd(), 'dist');
+const SERVICE_WORKER_PATH = resolve(process.cwd(), 'public/sw.js');
 
 function loadPage(path: string) {
   const file = resolve(DIST, path);
@@ -32,6 +33,14 @@ describe('build output', () => {
 
   it('produces at least the baseline HTML page count', () => {
     expect(countHtmlFiles(DIST)).toBeGreaterThanOrEqual(31);
+  });
+});
+
+describe('service worker contracts', () => {
+  it('precache list includes the 404 fallback route', () => {
+    const sw = readFileSync(SERVICE_WORKER_PATH, 'utf-8');
+    expect(sw).toContain('`${BASE}/404.html`');
+    expect(sw).toContain('caches.match(`${BASE}/404.html`)');
   });
 });
 

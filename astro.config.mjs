@@ -15,7 +15,9 @@ export default defineConfig({
   ],
   vite: {
     build: {
-      chunkSizeWarningLimit: 1200,
+      // Runtime policy is enforced by gzip budget gates in scripts/check-bundle-budgets.mjs.
+      // Keep this warning threshold high enough to avoid contradictory CI noise.
+      chunkSizeWarningLimit: 1800,
       rollupOptions: {
         output: {
           manualChunks(id) {

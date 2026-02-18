@@ -17,7 +17,7 @@ Personal portfolio site showcasing 20 project case studies, an interactive p5.js
 - **Visualizations:** [D3.js](https://d3js.org/) — 8 interactive data charts
 - **Typography:** Syne + Plus Jakarta Sans + JetBrains Mono (self-hosted woff2)
 - **Deployment:** GitHub Pages via GitHub Actions
-- **Theme:** Dark (`#0a0a0b`) with cyan (`#00BCD4`) / magenta (`#E91E63`) accents
+- **Theme:** Dynamic dark/light system with gold (`#d4a853`) / burnt sienna (`#c4463a`) accents
 
 ## Quality Infrastructure
 
@@ -79,7 +79,7 @@ npm run validate          # HTML validation + internal link check
 npm run collect:perf      # Collect route/chunk performance metrics
 npm run test:perf:budgets # Enforce route/chunk/interaction gzip JS budgets
 npm run lighthouse        # Lighthouse CI performance budgets
-npm run verify:quality    # Artifact-backed metrics freshness contract
+npm run verify:quality    # Artifact-backed metrics freshness contract (requires freshly generated quality artifacts)
 npm run quality:delta     # Baseline regression delta enforcement
 npm run quality:green-track # Consecutive-green-run tracker artifact
 npm run quality:summary   # Markdown quality summary generation

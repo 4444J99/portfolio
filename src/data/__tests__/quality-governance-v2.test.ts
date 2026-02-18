@@ -7,6 +7,7 @@ const workflow = readFileSync(resolve(root, '.github/workflows/quality.yml'), 'u
 const packageJson = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf-8'));
 const qualityGates = readFileSync(resolve(root, 'src/components/dashboard/QualityGates.astro'), 'utf-8');
 const metricsType = readFileSync(resolve(root, 'src/types/data.ts'), 'utf-8');
+const runtimeErrorScript = readFileSync(resolve(root, 'scripts/test-runtime-errors.mjs'), 'utf-8');
 
 describe('quality governance v2 contracts', () => {
   it('includes security gate and blocking parity pipeline in CI', () => {
@@ -17,7 +18,7 @@ describe('quality governance v2 contracts', () => {
     expect(workflow).toContain('npm run test:security:drift');
     expect(workflow).toContain('cron: "17 9 * * *"');
     expect(workflow).toContain('Policy governance guard');
-    expect(workflow).toContain('run: npm run quality:local');
+    expect(workflow).toContain('run: npm run quality:core');
   });
 
   it('exposes the expanded quality scripts in package.json', () => {
@@ -33,7 +34,15 @@ describe('quality governance v2 contracts', () => {
     expect(typeof scripts['test:perf:budgets']).toBe('string');
     expect(typeof scripts['quality:green-track']).toBe('string');
     expect(typeof scripts['quality:ledger']).toBe('string');
+    expect(typeof scripts['quality:core']).toBe('string');
     expect(typeof scripts['quality:local']).toBe('string');
+  });
+
+  it('runtime error telemetry is manifest-driven', () => {
+    expect(runtimeErrorScript).toContain('scripts/runtime-a11y-routes.json');
+    expect(runtimeErrorScript).toContain("parseOption('manifest'");
+    expect(runtimeErrorScript).toContain("parseOption('route-limit'");
+    expect(runtimeErrorScript).toContain('manifest.routes');
   });
 
   it('renders security/perf sections in quality gates UI', () => {

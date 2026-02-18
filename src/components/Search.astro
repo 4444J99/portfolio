@@ -1,4 +1,6 @@
 ---
+import { base } from '../utils/paths';
+
 // Search component: Cmd+K trigger with Pagefind UI in a dialog overlay.
 // Pagefind UI is lazy-loaded on first interaction.
 // Uses is:inline to avoid Vite module bundling — prevents View Transition stalls.
@@ -14,7 +16,7 @@
   </kbd>
 </button>
 
-<dialog class="search-dialog" aria-label="Site search">
+<dialog class="search-dialog" aria-label="Site search" data-base={base}>
   <div class="search-dialog__inner">
     <div id="pagefind-container"></div>
     <button class="search-dialog__close" aria-label="Close search" type="button">
@@ -26,61 +28,75 @@
 <script is:inline>
   (function () {
     var BASE = '/portfolio/';
-    var pagefindLoaded = false;
+    var globalScope = globalThis;
+    var state = globalScope.__portfolioSearchState;
+    if (!state) {
+      state = {
+        controller: null,
+        pagefindLoaded: false,
+      };
+      globalScope.__portfolioSearchState = state;
+    }
 
     function initSearch() {
+      if (state.controller) state.controller.abort();
+      var controller = new AbortController();
+      var signal = controller.signal;
+      state.controller = controller;
+
       var trigger = document.querySelector('.search-trigger');
       var dialog = document.querySelector('.search-dialog');
       var closeBtn = document.querySelector('.search-dialog__close');
       if (!trigger || !dialog) return;
+      BASE = dialog.dataset.base || BASE;
 
-      // Clone-and-replace trigger to prevent listener accumulation across navigations
-      var fresh = trigger.cloneNode(true);
-      trigger.parentNode.replaceChild(fresh, trigger);
-
-      function openSearch() {
-        dialog.showModal();
-        loadPagefind();
+      function focusSearchInput() {
         var input = document.querySelector('#pagefind-container input');
         if (input) input.focus();
       }
 
-      function closeSearch() {
-        dialog.close();
+      function openSearch() {
+        if (!dialog.open) dialog.showModal();
+        loadPagefind();
+        focusSearchInput();
       }
 
-      fresh.addEventListener('click', openSearch);
-      if (closeBtn) closeBtn.addEventListener('click', closeSearch);
+      function closeSearch() {
+        if (dialog.open) dialog.close();
+      }
+
+      trigger.addEventListener('click', openSearch, { signal });
+      if (closeBtn) closeBtn.addEventListener('click', closeSearch, { signal });
 
       // Click outside to close
       dialog.addEventListener('click', function (e) {
         if (e.target === dialog) closeSearch();
-      });
+      }, { signal });
 
-      // Cmd+K / Ctrl+K — document-level, registered once
-      if (!document.__searchKbdInit) {
-        document.__searchKbdInit = true;
-        document.addEventListener('keydown', function (e) {
-          if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-            e.preventDefault();
-            // Re-query DOM — View Transitions may have swapped it
-            var d = document.querySelector('.search-dialog');
-            if (!d) return;
-            if (d.open) d.close();
-            else {
-              d.showModal();
-              loadPagefind();
-              var input = document.querySelector('#pagefind-container input');
-              if (input) input.focus();
-            }
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && dialog.open) {
+          closeSearch();
+          return;
+        }
+
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          if (dialog.open) {
+            closeSearch();
+          } else {
+            openSearch();
           }
-        });
-      }
+        }
+      }, { signal });
+
+      document.addEventListener('astro:before-swap', function () {
+        controller.abort();
+      }, { once: true, signal });
     }
 
     function loadPagefind() {
-      if (pagefindLoaded) return;
-      pagefindLoaded = true;
+      if (state.pagefindLoaded) return;
+      state.pagefindLoaded = true;
 
       var container = document.getElementById('pagefind-container');
       if (!container) return;

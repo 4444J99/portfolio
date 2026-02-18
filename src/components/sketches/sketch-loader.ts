@@ -51,6 +51,9 @@ const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 let prefersReducedMotion = motionQuery.matches;
 motionQuery.addEventListener('change', (e) => { prefersReducedMotion = e.matches; });
 
+// Defer background sketch boot on the heaviest interactive routes.
+const BACKGROUND_DEFER_ROUTES = new Set(['/portfolio/architecture', '/portfolio/gallery']);
+
 // Track p5 instances for teardown (Map replaces former Set for VT readiness)
 const instances = new Map<HTMLElement, p5>();
 let sketchObserver: IntersectionObserver | null = null;
@@ -67,6 +70,15 @@ function isMobile(): boolean {
 let resizeTimer: ReturnType<typeof setTimeout> | null = null;
 let resizeHandler: (() => void) | null = null;
 let observedContainers: HTMLElement[] = [];
+
+function normalizePath(pathname: string): string {
+  if (pathname === '/') return '/';
+  return pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+}
+
+function shouldBootBackground(pathname = window.location.pathname): boolean {
+  return !BACKGROUND_DEFER_ROUTES.has(normalizePath(pathname));
+}
 
 function showFallback(container: HTMLElement, sketchId: string) {
   const fallback = container.querySelector('.sketch-noscript');
@@ -248,6 +260,14 @@ function initBackground() {
   });
 }
 
+function scheduleBackgroundInit() {
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(() => initBackground(), { timeout: 1500 });
+  } else {
+    setTimeout(initBackground, 200);
+  }
+}
+
 /** Remove all active p5 instances and reset state. */
 export function teardown() {
   if (resizeTimer) {
@@ -308,6 +328,9 @@ export function teardownPage() {
 
 /** Re-observe per-page sketch containers after a View Transition swap. */
 export function reinitPage() {
+  if (shouldBootBackground()) {
+    scheduleBackgroundInit();
+  }
   observeSketches();
 }
 
@@ -336,10 +359,8 @@ export function resumeSketch(el: HTMLElement) {
 
 /** Full init: background + per-page sketches. Called once on first load. */
 export function initSketches() {
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(() => initBackground(), { timeout: 1500 });
-  } else {
-    setTimeout(initBackground, 200);
+  if (shouldBootBackground()) {
+    scheduleBackgroundInit();
   }
   observeSketches();
 }

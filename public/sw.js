@@ -6,6 +6,7 @@ const BASE = '/portfolio';
 // Assets to precache on install
 const PRECACHE_URLS = [
   `${BASE}/`,
+  `${BASE}/404.html`,
   `${BASE}/fonts/syne-latin.woff2`,
   `${BASE}/fonts/plus-jakarta-sans-latin.woff2`,
   `${BASE}/fonts/jetbrains-mono-latin.woff2`,
