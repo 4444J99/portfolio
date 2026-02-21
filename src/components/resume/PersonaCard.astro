@@ -45,6 +45,13 @@ const { persona } = Astro.props;
     height: 100%;
     position: relative;
     overflow: hidden;
+    outline: none;
+  }
+
+  .persona-card:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--accent);
+    transform: translateY(-4px);
   }
 
   .persona-card:hover {

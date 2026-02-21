@@ -16,5 +16,10 @@
     "errored": 6,
     "status": "pass"
   },
-  "generatedAt": "2026-02-21T11:58:30.080Z"
+  "humanImpact": {
+    "totalStudents": 2000,
+    "completionRate": 97,
+    "approval": 92
+  },
+  "generatedAt": "2026-02-21T14:37:40.510Z"
 }

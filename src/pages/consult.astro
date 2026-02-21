@@ -330,6 +330,11 @@ RESPONSE FORMAT:
     box-shadow: 0 0 0 2px var(--accent-muted);
   }
 
+  .form-select:invalid:not(:placeholder-shown),
+  .form-textarea:invalid:not(:placeholder-shown) {
+    border-color: var(--color-minimal);
+  }
+
   .form-textarea {
     resize: vertical;
     min-height: 120px;

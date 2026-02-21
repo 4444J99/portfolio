@@ -40,28 +40,39 @@ const { trace } = sample;
 <script>
   function setupGovPreview() {
     const preview = document.getElementById('gov-preview');
-    const closeBtn = document.getElementById('close-gov-preview');
+    const closeBtn = document.getElementById('close-gov-preview') as HTMLButtonElement;
     const trigger = document.getElementById('view-trace-btn');
 
     if (!preview || !trigger || !closeBtn) return;
 
-    trigger.addEventListener('click', (e) => {
+    function openPreview(e: Event) {
       e.preventDefault();
-      preview.hidden = false;
+      preview!.hidden = false;
       document.body.style.overflow = 'hidden';
-    });
+      closeBtn!.focus();
+    }
 
-    closeBtn.addEventListener('click', () => {
-      preview.hidden = true;
+    function closePreview() {
+      preview!.hidden = true;
       document.body.style.overflow = '';
+      (trigger as HTMLElement).focus();
+    }
+
+    trigger.addEventListener('click', openPreview);
+    closeBtn.addEventListener('click', closePreview);
+
+    // Trap focus and handle keyboard
+    preview.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePreview();
+      
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        closeBtn.focus(); // Only one focusable element in this simple modal, so we loop back to it
+      }
     });
 
-    // Close on backdrop click
     preview.addEventListener('click', (e) => {
-      if (e.target === preview) {
-        preview.hidden = true;
-        document.body.style.overflow = '';
-      }
+      if (e.target === preview) closePreview();
     });
   }
 

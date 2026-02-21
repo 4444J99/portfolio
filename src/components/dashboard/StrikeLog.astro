@@ -1,5 +1,5 @@
 ---
-import { strikes, stats } from '../../data/operative-log.json';
+import { strikes, global_stats } from '../../data/operative-log.json';
 
 const statusColors = {
   SHIPPED: 'var(--color-substantial)',
@@ -13,8 +13,8 @@ const statusColors = {
   <div class="strike-log__header">
     <h3>Operative Intelligence</h3>
     <div class="strike-stats">
-      <span class="stat-pill">Strikes: {stats.total_strikes}</span>
-      <span class="stat-pill">Interviews: {stats.interviews}</span>
+      <span class="stat-pill">Strikes: {global_stats.total_strikes}</span>
+      <span class="stat-pill">Conversion: {global_stats.conversion_rate.toFixed(1)}%</span>
     </div>
   </div>
 
