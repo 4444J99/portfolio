@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import crypto from 'crypto';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const QUALITY_DIR = path.join(__dirname, '../.quality');
@@ -9,12 +10,16 @@ const OUTPUT_PATH = path.join(__dirname, '../src/data/trust-vitals.json');
 async function syncVitals() {
   console.log('📡 Syncing Engineering Vitals...');
 
+  const buildTimestamp = new Date().toISOString();
+  const artifactHash = crypto.createHash('shake256', { outputLength: 4 }).update(buildTimestamp).digest('hex');
+
   const vitals = {
     tests: { total: 0, passed: 0, suites: 0, status: 'unknown' },
     security: { status: 'unknown', vulnerabilities: 0, lastAudit: null },
     ecosystem: { totalRepos: 0, healthy: 0, errored: 0, status: 'unknown' },
     humanImpact: { totalStudents: 2000, completionRate: 97, approval: 92 },
-    generatedAt: new Date().toISOString()
+    generatedAt: buildTimestamp,
+    fingerprint: artifactHash.toUpperCase()
   };
 
   // 1. Parse Tests

@@ -1,7 +1,7 @@
 ---
 import vitals from '../../data/trust-vitals.json';
 
-const { tests, security, ecosystem, humanImpact, generatedAt } = vitals;
+const { tests, security, ecosystem, humanImpact, generatedAt, fingerprint } = vitals;
 
 const statusColors = {
   pass: 'var(--color-substantial)',
@@ -24,7 +24,11 @@ const formatDate = (iso: string) => {
 <div class="vitals-hud print-hide" data-reveal>
   <div class="vitals-hud__header">
     <span class="vitals-hud__label">Live Engineering Vitals</span>
-    <span class="vitals-hud__timestamp">Last Verified: {formatDate(generatedAt)}</span>
+    <div class="vitals-hud__meta">
+      <span class="vitals-hud__fingerprint" title="Unique build artifact hash">Fingerprint: {fingerprint}</span>
+      <span class="sep" aria-hidden="true">|</span>
+      <span class="vitals-hud__timestamp">Verified: {formatDate(generatedAt)}</span>
+    </div>
   </div>
   
   <div class="vitals-hud__grid">
@@ -81,10 +85,28 @@ const formatDate = (iso: string) => {
     color: var(--accent);
   }
 
+  .vitals-hud__meta {
+    display: flex;
+    gap: var(--space-xs);
+    align-items: center;
+  }
+
+  .vitals-hud__fingerprint {
+    font-size: 0.6rem;
+    color: var(--accent-text);
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+
   .vitals-hud__timestamp {
     font-size: 0.6rem;
     color: var(--text-muted);
     font-family: var(--font-mono);
+  }
+
+  .sep {
+    font-size: 0.6rem;
+    color: var(--border);
   }
 
   .vitals-hud__grid {

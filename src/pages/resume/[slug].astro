@@ -94,6 +94,17 @@ const featuredProjects = persona.featured_projects.map(fp => {
       </section>
 
       <section class="resume-section">
+        <h2 class="section-label">Leadership & Strategic Impact</h2>
+        <div class="summary-box">
+          <ul class="leadership-list">
+            <li><strong>Mentorship:</strong> Directed the academic growth of 2,000+ students across 100+ courses, applying UX principles to learning systems.</li>
+            <li><strong>Fiscal Responsibility:</strong> Raised $2M in project funding and delivered a 328% ROI on major digital transformation initiatives.</li>
+            <li><strong>Scale:</strong> Managed 100+ concurrent multimedia and construction projects from concept to production-grade delivery.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="resume-section">
         <h2 class="section-label">Evidence of Technical Impact</h2>
         <div class="featured-projects">
           {featuredProjects.map(project => (
@@ -288,6 +299,20 @@ const featuredProjects = persona.featured_projects.map(fp => {
     background: var(--bg-secondary);
     padding: var(--space-lg);
     border-radius: var(--radius);
+  }
+
+  .leadership-list {
+    list-style: none;
+    padding: 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .leadership-list li strong {
+    color: var(--accent-text);
   }
 
   .market-summary {
