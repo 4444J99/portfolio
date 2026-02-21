@@ -5,10 +5,17 @@ interface Props {
   canonicalURL: string;
   ogImage: string;
   ogType?: string;
+  keywords?: string[];
 }
 
-const { title, description, canonicalURL, ogImage, ogType = 'website' } = Astro.props;
+const { title, description, canonicalURL, ogImage, ogType = 'website', keywords = [] } = Astro.props;
+const keywordString = keywords.length > 0 
+  ? keywords.join(', ') 
+  : "AI Orchestration, Systems Architect, Creative Technologist, Technical PM, MFA, Python, TypeScript, Multi-Agent Systems, Logocentric Architecture";
 ---
+
+<!-- Global Metadata -->
+<meta name="keywords" content={keywordString} />
 
 <!-- Open Graph -->
 <meta property="og:type" content={ogType} />

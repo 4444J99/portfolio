@@ -26,7 +26,11 @@ const featuredProjects = persona.featured_projects.map(fp => {
 });
 ---
 
-<Layout title={`${persona.title} — Resume`} description={persona.market_summary}>
+<Layout 
+  title={`${persona.title} — Resume`} 
+  description={persona.market_summary}
+  keywords={[...persona.stack, persona.title, persona.subtitle]}
+>
   <article class="market-resume">
     <div class="container container--narrow">
       

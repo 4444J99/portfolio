@@ -31,7 +31,11 @@ const featuredProjects = persona.featured_projects.map(fp => {
 });
 ---
 
-<Layout title={`Application for ${target.company} — Anthony James Padavano`} description={`Tailored application for ${target.role} at ${target.company}.`}>
+<Layout 
+  title={`Application for ${target.company} — Anthony James Padavano`} 
+  description={`Tailored application for ${target.role} at ${target.company}.`}
+  keywords={[target.company, target.role, ...persona.stack]}
+>
   <div class="application-wrapper">
     
     <!-- Targeted Header -->
