@@ -31,6 +31,8 @@ interface Props {
 }
 
 const slug = Astro.url.pathname.replace(/^\/portfolio\//, '').replace(/\/$/, '') || 'index';
+// Normalize nested slugs for OG images (replace / with -)
+const normalizedSlug = slug.replace(/\//g, '-');
 const defaultOG = `${canonicalBase}/og/${slug}.png`;
 const {
   title,

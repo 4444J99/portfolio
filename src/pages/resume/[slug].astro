@@ -185,6 +185,19 @@ const featuredProjects = persona.featured_projects.map(fp => {
     color: var(--text-muted);
     text-decoration: none;
     font-weight: 600;
+    transition: color var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .back-link svg {
+    transition: transform var(--transition-fast);
+  }
+
+  .back-link:hover svg {
+    transform: translateX(-4px);
   }
 
   .resume-header {

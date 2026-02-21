@@ -41,6 +41,18 @@ const pages: OGPage[] = [
   { slug: 'projects/recursive-engine', title: 'Recursive Engine (RE:GE)', subtitle: 'Symbolic operating system for myth and narrative', accent: '#7c9bf5' },
   { slug: 'projects/the-actual-news', title: 'The Actual News', subtitle: 'Media platform and news aggregation', accent: '#c9a84c' },
   { slug: 'projects/your-fit-tailored', title: 'Your Fit Tailored', subtitle: 'Personalized fashion and commerce', accent: '#c9a84c' },
+  // Persona Resume pages
+  { slug: 'resume/ai-systems-engineer', title: 'AI Systems Engineer', subtitle: 'Staff-level orchestration and agentic infrastructure' },
+  { slug: 'resume/systems-architect', title: 'Systems Architect', subtitle: 'High-reliability backends and custom DSL design' },
+  { slug: 'resume/creative-technologist', title: 'Creative Technologist', subtitle: 'R&D at the intersection of theory and code' },
+  { slug: 'resume/technical-pm', title: 'Technical Program Manager', subtitle: 'Strategic delivery and platform governance' },
+  { slug: 'resume/polymath', title: 'Visionary Polymath', subtitle: 'The complete eight-organ creative-institutional system' },
+  // Targeted Application pages
+  { slug: 'for/anthropic', title: 'Anthropic Application', subtitle: 'Specialized focus on safe, scalable AI orchestration' },
+  { slug: 'for/vercel', title: 'Vercel Application', subtitle: 'Specialized focus on platform engineering and Next.js' },
+  { slug: 'for/miami-dade', title: 'MDC Application', subtitle: 'Strategic digital transformation and student experience' },
+  { slug: 'for/ideo', title: 'IDEO Application', subtitle: 'Human-centered creative technology and R&D' },
+  { slug: 'philosophy', title: 'Logocentric Architecture', subtitle: 'Why I treat Governance as Art — The Core Thesis' },
 ];
 
 export const getStaticPaths: GetStaticPaths = () => {

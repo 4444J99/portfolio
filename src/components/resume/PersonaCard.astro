@@ -15,7 +15,7 @@ interface Props {
 const { persona } = Astro.props;
 ---
 
-<a href={`${base}resume/${persona.slug}/`} class="persona-card" data-reveal>
+<a href={`${base}resume/${persona.slug}/`} class="persona-card" aria-label={`View specialized resume for ${persona.title}`} data-reveal>
   <div class="persona-card__content">
     <h3 class="persona-card__title">{persona.title}</h3>
     <p class="persona-card__subtitle">{persona.subtitle}</p>
