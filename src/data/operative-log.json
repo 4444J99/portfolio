@@ -4,22 +4,31 @@
       "date": "2026-02-20",
       "target": "Anthropic",
       "persona": "ai-systems-engineer",
+      "variable_tested": "safety-invariants-intro",
       "status": "SHIPPED",
-      "channel": "Direct Application",
-      "notes": "Initial deployment of the MLPS architecture. Sent custom PDF bundle with Agentic Titan focus."
+      "channel": "Direct Outreach (LinkedIn)",
+      "response_received": false,
+      "notes": "Testing the 'Safe Orchestration' signal vs. generic MTS signal."
     },
     {
       "date": "2026-02-20",
       "target": "Vercel",
       "persona": "systems-architect",
+      "variable_tested": "91-repo-orchestration-depth",
       "status": "SHIPPED",
       "channel": "Direct Application",
-      "notes": "Emphasized platform engineering and 91-repo orchestration depth."
+      "response_received": false,
+      "notes": "Testing if 91-repo scale is a differentiator for platform roles."
     }
   ],
-  "stats": {
+  "persona_performance": {
+    "ai-systems-engineer": { "sent": 1, "replies": 0, "interviews": 0 },
+    "systems-architect": { "sent": 1, "replies": 0, "interviews": 0 },
+    "creative-technologist": { "sent": 0, "replies": 0, "interviews": 0 },
+    "technical-pm": { "sent": 0, "replies": 0, "interviews": 0 }
+  },
+  "global_stats": {
     "total_strikes": 2,
-    "interviews": 0,
-    "conversions": 0
+    "conversion_rate": 0
   }
 }

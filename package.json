@@ -15,6 +15,7 @@
     "build": "npm run sync:vitals && astro build && npx pagefind --site dist --glob '**/*.html'",
     "build:resume": "node scripts/generate-resume-pdfs.mjs",
     "build:qr": "node scripts/generate-qr-codes.mjs",
+    "analyze:strikes": "node scripts/analyze-operative-data.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check",
