@@ -19,6 +19,7 @@ async function analyze() {
     "technical-pm": { "sent": 0, "replies": 0, "interviews": 0 }
   };
 
+  // 1. Persona Analysis
   strikes.forEach(s => {
     if (perf[s.persona]) {
       perf[s.persona].sent++;
@@ -27,7 +28,27 @@ async function analyze() {
     }
   });
 
+  // 2. Channel & Tier Analysis
+  const channels = {};
+  const tiers = {};
+
+  strikes.forEach(s => {
+    // Channel Analysis
+    const channel = s.channel || 'Unknown';
+    if (!channels[channel]) channels[channel] = { sent: 0, replies: 0 };
+    channels[channel].sent++;
+    if (s.response_received) channels[channel].replies++;
+
+    // Tier Analysis
+    const tier = s.tier || 'Unknown';
+    if (!tiers[tier]) tiers[tier] = { sent: 0, replies: 0 };
+    tiers[tier].sent++;
+    if (s.response_received) tiers[tier].replies++;
+  });
+
   data.persona_performance = perf;
+  data.channel_performance = channels;
+  data.tier_performance = tiers;
   data.global_stats.total_strikes = strikes.length;
   data.global_stats.conversion_rate = strikes.length > 0 
     ? (strikes.filter(s => s.response_received).length / strikes.length) * 100 
@@ -35,9 +56,16 @@ async function analyze() {
 
   fs.writeFileSync(LOG_PATH, JSON.stringify(data, null, 2));
   
-  console.log('📊 Analysis Complete:');
+  console.log('\n--- PERSONA PERFORMANCE ---');
   console.table(perf);
-  console.log(`🚀 Global Conversion Rate: ${data.global_stats.conversion_rate.toFixed(2)}%`);
+
+  console.log('\n--- CHANNEL PERFORMANCE ---');
+  console.table(channels);
+
+  console.log('\n--- TIER PERFORMANCE ---');
+  console.table(tiers);
+
+  console.log(`\n🚀 Global Conversion Rate: ${data.global_stats.conversion_rate.toFixed(2)}%`);
 }
 
 analyze().catch(console.error);

@@ -4,29 +4,21 @@
       "slug": "anthropic",
       "company": "Anthropic",
       "role": "Prompt Engineer / Member of Technical Staff",
+      "tier": "Staff",
+      "channel": "Cold (LinkedIn Outreach)",
       "persona_id": "ai-systems-engineer",
+      "keyword_focus": ["Safety Invariants", "Orchestration", "Model-Agnostic", "Constitutional AI"],
       "intro": "Anthropic's focus on safe, steerable AI aligns directly with my work on Agentic Titan's safety invariants. I don't just prompt models; I build the orchestration machinery that ensures they operate within constitutional bounds at scale. My work on the Eight-Organ System demonstrates the capacity to manage complex, self-governing technical ecosystems."
     },
     {
       "slug": "vercel",
       "company": "Vercel",
       "role": "Product Engineer (Platform)",
+      "tier": "Senior",
+      "channel": "Direct Application",
       "persona_id": "systems-architect",
+      "keyword_focus": ["RSC", "Hexagonal Architecture", "Next.js 16", "Platform Infrastructure"],
       "intro": "Vercel defines the modern web. My experience building 'in-midst-my-life' (Next.js 16 + RSC) and orchestrating 91 repos proves I understand the platform depth required to build tools for other developers. I specialize in the kind of high-reliability, hexagonal architecture that platform engineering demands."
-    },
-    {
-      "slug": "miami-dade",
-      "company": "Miami Dade College",
-      "role": "Director of Digital Strategy",
-      "persona_id": "technical-pm",
-      "intro": "Having already delivered 328% ROI for the Foundation, I am ready to scale that success system-wide. I combine institutional knowledge with modern DevEx rigor to modernize the college's digital infrastructure, bridging the gap between administrative goals and student user experience."
-    },
-    {
-      "slug": "ideo",
-      "company": "IDEO",
-      "role": "Creative Technologist",
-      "persona_id": "creative-technologist",
-      "intro": "Design is no longer just visual; it is systemic. My work bridging narrative theory (MFA) with generative code (p5.js/WebAudio) fits IDEO's legacy of human-centered innovation. I build 'living' systems that treat code and culture as a unified medium for exploration."
     }
   ]
 }
