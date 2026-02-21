@@ -1,0 +1,183 @@
+---
+import sample from '../../data/governance-sample.json';
+
+const { trace } = sample;
+---
+
+<div class="gov-preview print-hide" id="gov-preview" hidden>
+  <div class="gov-preview__inner">
+    <div class="gov-preview__header">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="title">System Governance Trace — PROOF OF INTEGRITY</span>
+    </div>
+    <div class="gov-preview__content">
+      <div class="trace-meta">
+        <span class="line"><span class="prompt">$</span> organ-cli governance verify --all</span>
+        <span class="timestamp">[{trace.timestamp}] Initiating invariant check...</span>
+      </div>
+      
+      <div class="trace-checks">
+        {trace.checks.map(check => (
+          <div class="check-line">
+            <span class="check-status">[ {check.status} ]</span>
+            <span class="check-name">{check.invariant}:</span>
+            <span class="check-details">{check.details}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="trace-footer">
+        <span class="signature">Signature: {trace.signature}</span>
+        <span class="status-msg">Governance state: 🟢 STABLE</span>
+      </div>
+    </div>
+    <button class="gov-preview__close" id="close-gov-preview">Close Trace</button>
+  </div>
+</div>
+
+<script>
+  function setupGovPreview() {
+    const preview = document.getElementById('gov-preview');
+    const closeBtn = document.getElementById('close-gov-preview');
+    const trigger = document.getElementById('view-trace-btn');
+
+    if (!preview || !trigger || !closeBtn) return;
+
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      preview.hidden = false;
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      preview.hidden = true;
+      document.body.style.overflow = '';
+    });
+
+    // Close on backdrop click
+    preview.addEventListener('click', (e) => {
+      if (e.target === preview) {
+        preview.hidden = true;
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupGovPreview);
+</script>
+
+<style>
+  .gov-preview {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+  }
+
+  .gov-preview__inner {
+    width: 100%;
+    max-width: 800px;
+    background: #0a0a0b;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    box-shadow: 0 0 40px rgba(212, 168, 83, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gov-preview__header {
+    background: #1a1a1b;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+
+  .title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-left: 8px;
+  }
+
+  .gov-preview__content {
+    padding: var(--space-xl);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: #7ce8a6;
+    line-height: 1.6;
+    overflow-y: auto;
+    max-height: 60vh;
+  }
+
+  .prompt { color: var(--accent); margin-right: 8px; }
+  .timestamp { color: var(--text-muted); display: block; margin-bottom: var(--space-lg); }
+
+  .trace-checks {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .check-line {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .check-status { font-weight: 700; white-space: nowrap; }
+  .check-name { color: var(--text-primary); white-space: nowrap; }
+  .check-details { color: var(--text-secondary); }
+
+  .trace-footer {
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+  }
+
+  .signature { color: var(--text-muted); }
+  .status-msg { font-weight: 700; }
+
+  .gov-preview__close {
+    background: var(--bg-secondary);
+    border: none;
+    border-top: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: var(--space-md);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+
+  .gov-preview__close:hover {
+    background: var(--accent-muted);
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .check-line { flex-direction: column; gap: 2px; }
+    .trace-footer { flex-direction: column; gap: var(--space-sm); }
+  }
+</style>

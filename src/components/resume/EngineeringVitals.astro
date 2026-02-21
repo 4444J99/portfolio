@@ -1,13 +1,14 @@
 ---
 import vitals from '../../data/trust-vitals.json';
 
-const { tests, security, ecosystem, generatedAt } = vitals;
+const { tests, security, ecosystem, humanImpact, generatedAt } = vitals;
 
 const statusColors = {
   pass: 'var(--color-substantial)',
   fail: 'var(--color-minimal)',
   warning: 'var(--color-partial)',
-  unknown: 'var(--text-muted)'
+  unknown: 'var(--text-muted)',
+  human: 'var(--accent-purple)'
 };
 
 const formatDate = (iso: string) => {
@@ -44,10 +45,10 @@ const formatDate = (iso: string) => {
     </div>
 
     <div class="vital-item">
-      <span class="vital-item__status" style={`background: ${statusColors[ecosystem.status]}`}></span>
+      <span class="vital-item__status" style={`background: ${statusColors.human}`}></span>
       <div class="vital-item__data">
-        <span class="vital-item__value">{ecosystem.healthy}/{ecosystem.totalRepos}</span>
-        <span class="vital-item__label">Fleet Health</span>
+        <span class="vital-item__value">{humanImpact.totalStudents}+</span>
+        <span class="vital-item__label">Students Mentored</span>
       </div>
     </div>
   </div>

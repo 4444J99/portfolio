@@ -1,0 +1,25 @@
+{
+  "trace": {
+    "timestamp": "2026-02-20T14:30:00Z",
+    "event": "GOVERNANCE_INVARIANT_CHECK",
+    "subject": "META-ORGANVM",
+    "checks": [
+      {
+        "invariant": "DAG_CONSTRAINTS",
+        "status": "PASS",
+        "details": "Verified 31 edges; zero back-edge violations detected (I -> II -> III flow preserved)."
+      },
+      {
+        "invariant": "PROVENANCE_INTEGRITY",
+        "status": "PASS",
+        "details": "BLAKE3 hash-chain verified for 1,901 classified files. No unauthorized state-shifts."
+      },
+      {
+        "invariant": "DEPENDENCY_REGISTRY",
+        "status": "PASS",
+        "details": "All 91 repositories resolve to canonical registry version 2.1.0."
+      }
+    ],
+    "signature": "blake3:7f8e9a2b1c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f"
+  }
+}

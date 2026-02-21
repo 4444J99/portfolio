@@ -1,0 +1,129 @@
+---
+import { strikes, stats } from '../../data/operative-log.json';
+
+const statusColors = {
+  SHIPPED: 'var(--color-substantial)',
+  PENDING: 'var(--color-partial)',
+  REJECTED: 'var(--color-minimal)',
+  INTERVIEW: 'var(--accent-purple)'
+};
+---
+
+<div class="strike-log">
+  <div class="strike-log__header">
+    <h3>Operative Intelligence</h3>
+    <div class="strike-stats">
+      <span class="stat-pill">Strikes: {stats.total_strikes}</span>
+      <span class="stat-pill">Interviews: {stats.interviews}</span>
+    </div>
+  </div>
+
+  <div class="strike-table-wrap">
+    <table class="strike-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Target</th>
+          <th>Persona</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {strikes.map(strike => (
+          <tr>
+            <td class="col-date">{strike.date}</td>
+            <td class="col-target"><strong>{strike.target}</strong></td>
+            <td class="col-persona"><code>{strike.persona}</code></td>
+            <td class="col-status">
+              <span class="status-badge" style={`background: ${statusColors[strike.status]}`}>
+                {strike.status}
+              </span>
+            </td>
+            <td class="col-notes">{strike.notes}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .strike-log {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-top: var(--space-2xl);
+  }
+
+  .strike-log__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .strike-stats {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .stat-pill {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    background: var(--bg-secondary);
+    padding: 0.2em 0.6em;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .strike-table-wrap {
+    overflow-x: auto;
+  }
+
+  .strike-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  .strike-table th {
+    text-align: left;
+    padding: var(--space-sm);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .strike-table td {
+    padding: var(--space-md) var(--space-sm);
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  .col-date { font-family: var(--font-mono); color: var(--text-muted); white-space: nowrap; }
+  .col-persona code { font-size: 0.75rem; color: var(--accent); }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 0.15em 0.5em;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 768px) {
+    .strike-log__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-sm);
+    }
+  }
+</style>

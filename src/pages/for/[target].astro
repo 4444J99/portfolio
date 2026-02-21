@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { targets } from '../../data/targets.json';
 import { personas } from '../../data/personas.json';
 import EngineeringVitals from '../../components/resume/EngineeringVitals.astro';
+import GovernancePreview from '../../components/resume/GovernancePreview.astro';
 import { history, education, certifications } from '../../data/experience.json';
 import { projectCatalogBySlug } from '../../data/project-catalog';
 import { base } from '../../utils/paths';
@@ -46,12 +47,17 @@ const featuredProjects = persona.featured_projects.map(fp => {
           <a class="action-btn secondary" href={`mailto:padavano.anthony@gmail.com?subject=Audit%20Request:%20${target.company}&body=I'd%20like%20to%20request%20a%20technical%20audit%20of%20the%20Eight-Organ%20governance%20logs.`}>
             Request System Audit
           </a>
+          <button class="action-btn secondary" id="view-trace-btn">
+            View Governance Trace
+          </button>
           <a class="action-btn secondary" href="https://linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank">
             Book Tech Synthesis
           </a>
         </div>
       </div>
     </header>
+
+    <GovernancePreview />
 
     <!-- Visual Anchor -->
     <div class="sketch-accent print-hide">
