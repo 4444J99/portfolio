@@ -33,8 +33,8 @@ interface Props {
 
 const { metrics, resolvedGroups } = Astro.props;
 
-const engineeringTitle = 'Python and TypeScript developer building AI systems, production infrastructure, and tested software.';
-const creativeTitle = 'Artist-engineer building autonomous creative systems and treating their governance as artistic medium.';
+const engineeringTitle = 'AI Orchestration Architect building safe, model-agnostic swarms and highly reliable distributed backends.';
+const creativeTitle = 'Bridging MFA-level narrative theory with meta-certified engineering to build living, logocentric systems.';
 
 function splitWords(text: string) {
   return text.split(/\s+/);
@@ -50,13 +50,13 @@ function splitWords(text: string) {
       </div>
 
       <div class="hero__view" data-hero-view="engineering">
-        <p class="hero__label" data-reveal>Full-Stack Engineer</p>
+        <p class="hero__label" data-reveal>AI Systems Architect</p>
         <h1 class="hero__title hero__title--animated" data-reveal style="animation-delay: 100ms">
           {splitWords(engineeringTitle).map((word, i) => (
             <span class="hero__word" style={`animation-delay: ${100 + i * 40}ms`}>{word} </span>
           ))}
         </h1>
-        <p class="hero__sub" data-reveal style="animation-delay: 200ms">{metrics.code_substance.total_code_files.toLocaleString()} code files, {metrics.code_substance.total_test_files} test files, {metrics.code_substance.ci_passing} passing CI workflows. React, Next.js, FastAPI, Docker, Terraform, PostgreSQL across {metrics.registry.total_repos} repositories.</p>
+        <p class="hero__sub" data-reveal style="animation-delay: 200ms">15 years of high-stakes delivery. Expert in multi-agent orchestration, hexagonal architecture, and automated governance. 1,254 tests and 85% coverage across a 91-repo production fleet.</p>
       </div>
 
       <div class="hero__view" data-hero-view="creative" style="display: none;">
@@ -66,7 +66,7 @@ function splitWords(text: string) {
             <span class="hero__word" style={`animation-delay: ${i * 40}ms`}>{word} </span>
           ))}
         </h1>
-        <p class="hero__sub">Coordinating theory, generative art, commerce, and community across an eight-organ infrastructure — 91 repositories, 8 organizations, ~386K words of public documentation.</p>
+        <p class="hero__sub">Directing the intersection of rhetoric and code. Coordinating 91 repositories and 8 organizations as a unified artistic ecosystem — ~404K words of planning and process documentation.</p>
       </div>
 
       <div class="hero__credentials" data-reveal style="animation-delay: 280ms">
