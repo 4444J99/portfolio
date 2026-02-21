@@ -1,0 +1,25 @@
+{
+  "strikes": [
+    {
+      "date": "2026-02-20",
+      "target": "Anthropic",
+      "persona": "ai-systems-engineer",
+      "status": "SHIPPED",
+      "channel": "Direct Application",
+      "notes": "Initial deployment of the MLPS architecture. Sent custom PDF bundle with Agentic Titan focus."
+    },
+    {
+      "date": "2026-02-20",
+      "target": "Vercel",
+      "persona": "systems-architect",
+      "status": "SHIPPED",
+      "channel": "Direct Application",
+      "notes": "Emphasized platform engineering and 91-repo orchestration depth."
+    }
+  ],
+  "stats": {
+    "total_strikes": 2,
+    "interviews": 0,
+    "conversions": 0
+  }
+}

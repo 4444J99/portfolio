@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import EngineeringVitals from '../../components/resume/EngineeringVitals.astro';
 import { personas } from '../../data/personas.json';
 import { history, education, certifications } from '../../data/experience.json';
 import { projectCatalogBySlug } from '../../data/project-catalog';
@@ -42,6 +43,7 @@ const featuredProjects = persona.featured_projects.map(fp => {
       </div>
 
       <header class="resume-header">
+        <EngineeringVitals />
         <div class="resume-header__main">
           <h1>Anthony James Padavano</h1>
           <p class="resume-header__title">{persona.title}</p>

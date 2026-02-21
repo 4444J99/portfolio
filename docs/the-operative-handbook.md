@@ -1,0 +1,52 @@
+# The Operative Handbook: Strategic Market Capture
+
+This manual defines the tactical protocols for using the **Targeted Application Engine** and the **Engineering Vitals HUD** to secure income.
+
+---
+
+## 🎯 Protocol 1: The Precision Strike (Job Applications)
+
+1.  **Identify the Target:** Find a high-value role.
+2.  **Select the Mask:** Decide which persona (AI Engineer, Architect, etc.) is the best fit.
+3.  **Deploy the Landing:**
+    - Edit `src/data/targets.json`.
+    - Add the company, role, and a custom intro that connects their mission to your architecture.
+4.  **Generate Artifacts:**
+    - Run `npm run build:resume`.
+    - This generates the bespoke PDF bundle in `public/resume/`.
+5.  **Engage:**
+    - Submit the custom PDF.
+    - Link to `4444j99.github.io/portfolio/for/[company-slug]`.
+
+---
+
+## 🛡️ Protocol 2: The Trust Signal (Vitals HUD)
+
+The **Vitals HUD** on your resume is live. It proves you are not just a dreamer, but a disciplined engineer.
+
+- **Keep it Green:** Regularly run your quality pipeline (`npm run quality:local`).
+- **Sync the Pulse:** The `npm run sync:vitals` command updates the data surfaced to recruiters.
+- **Verification:** If a technical lead asks "How do I know this works?", point them to the HUD and offer the **"System Audit"** (detailed in the Targeted Landing).
+
+---
+
+## 📱 Protocol 3: The Real-World Signal (QR Codes)
+
+You have specialized QR codes in `public/qr/`.
+
+- **Networking:** Print these on physical cards or keep them on your phone.
+- **Contextual Link:** If you're talking to a CTO, show the **Systems Architect QR**. If you're talking to a Gallery Owner, show the **Creative Technologist QR**.
+
+---
+
+## 📊 Protocol 4: The Intelligence Ledger
+
+Every application is a data point.
+
+- **Log the Strike:** Update `src/data/operative-log.json` every time you apply.
+- **Analyze:** If one persona is getting more hits, double down on that signal.
+- **Optimize:** Refine your "Impact Statements" in `personas.json` based on feedback.
+
+---
+
+**Remember:** You are not a candidate seeking permission. You are an Architect delivering a solution.

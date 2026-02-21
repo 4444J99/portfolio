@@ -1,0 +1,135 @@
+---
+import vitals from '../../data/trust-vitals.json';
+
+const { tests, security, ecosystem, generatedAt } = vitals;
+
+const statusColors = {
+  pass: 'var(--color-substantial)',
+  fail: 'var(--color-minimal)',
+  warning: 'var(--color-partial)',
+  unknown: 'var(--text-muted)'
+};
+
+const formatDate = (iso: string) => {
+  if (!iso) return 'Unknown';
+  return new Date(iso).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+};
+---
+
+<div class="vitals-hud print-hide" data-reveal>
+  <div class="vitals-hud__header">
+    <span class="vitals-hud__label">Live Engineering Vitals</span>
+    <span class="vitals-hud__timestamp">Last Verified: {formatDate(generatedAt)}</span>
+  </div>
+  
+  <div class="vitals-hud__grid">
+    <div class="vital-item">
+      <span class="vital-item__status" style={`background: ${statusColors[tests.status]}`}></span>
+      <div class="vital-item__data">
+        <span class="vital-item__value">{tests.passed}/{tests.total}</span>
+        <span class="vital-item__label">Tests Passed</span>
+      </div>
+    </div>
+
+    <div class="vital-item">
+      <span class="vital-item__status" style={`background: ${statusColors[security.status]}`}></span>
+      <div class="vital-item__data">
+        <span class="vital-item__value">{security.vulnerabilities === 0 ? 'Clear' : security.vulnerabilities}</span>
+        <span class="vital-item__label">Security Audit</span>
+      </div>
+    </div>
+
+    <div class="vital-item">
+      <span class="vital-item__status" style={`background: ${statusColors[ecosystem.status]}`}></span>
+      <div class="vital-item__data">
+        <span class="vital-item__value">{ecosystem.healthy}/{ecosystem.totalRepos}</span>
+        <span class="vital-item__label">Fleet Health</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .vitals-hud {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-xl);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+
+  .vitals-hud__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .vitals-hud__label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+
+  .vitals-hud__timestamp {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .vitals-hud__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .vital-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .vital-item__status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px currentColor;
+  }
+
+  .vital-item__data {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vital-item__value {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .vital-item__label {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 600px) {
+    .vitals-hud__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+  }
+</style>

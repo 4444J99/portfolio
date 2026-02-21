@@ -1,0 +1,20 @@
+{
+  "tests": {
+    "total": 226,
+    "passed": 226,
+    "suites": 69,
+    "status": "pass"
+  },
+  "security": {
+    "status": "pass",
+    "vulnerabilities": 0,
+    "lastAudit": "2026-02-18T07:19:58.625Z"
+  },
+  "ecosystem": {
+    "totalRepos": 85,
+    "healthy": 76,
+    "errored": 6,
+    "status": "pass"
+  },
+  "generatedAt": "2026-02-21T11:58:30.080Z"
+}
