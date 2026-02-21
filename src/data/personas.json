@@ -3,30 +3,30 @@
     {
       "id": "ai-systems-engineer",
       "slug": "ai-systems-engineer",
-      "title": "Staff AI Systems Engineer",
-      "subtitle": "AI Orchestration & Agentic Infrastructure",
+      "title": "AI Orchestration Architect",
+      "subtitle": "AI-Native Systems & Agentic Infrastructure",
       "sketchId": "swarm",
-      "thesis": "I build the safe, scalable orchestration machinery that allows autonomous agent swarms to solve complex problems. My work bridges the gap between high-level intention and low-level execution through model-agnostic topologies and rigorous safety invariants.",
-      "stack": ["Python", "TypeScript", "LLM Orchestration", "Multi-Agent Systems", "Ray", "CI/CD"],
+      "thesis": "I am an AI-Native Architect specializing in the orchestration of autonomous agent swarms. I treat code as a structural medium directed by narrative theory, using AI to build safe, scalable systems that bridge high-level intention with production-grade execution.",
+      "stack": ["AI Orchestration", "System Design", "Multi-Agent Systems", "Python (Architectural)", "CI/CD Automation", "Prompt Engineering"],
       "featured_projects": [
         {
           "slug": "agentic-titan",
-          "impact": "Architected a polymorphic orchestration framework in Python with 9 communication topologies and 22 agent archetypes. Implemented mandatory safety sandboxing and resource limits, verified by a 1,095+ test suite."
+          "impact": "Directed the creation of a polymorphic orchestration framework with 9 communication topologies and 22 agent archetypes. Established mandatory safety sandboxing and resource limits across a 1,095+ test validation suite."
         },
         {
           "slug": "ai-conductor",
-          "impact": "Developed a high-volume documentation methodology for human-AI co-creation. Scaled technical output to ~400K words across 91 repositories with automated quality gates and link-integrity validation."
+          "impact": "Architected a high-volume documentation methodology for human-AI co-creation. Scaled technical output to ~400K words across 91 repositories with automated quality gates and link-integrity validation."
         },
         {
           "slug": "ai-council",
-          "impact": "Built a multi-agent deliberation framework demonstrating autonomous consensus-building. Implemented weighted decision-making algorithms and real-time state management for agent swarms."
+          "impact": "Modeled a multi-agent deliberation framework for autonomous consensus-building. Implemented weighted decision-making algorithms and real-time state management for agent swarms."
         },
         {
           "slug": "linguistic-atomization",
-          "impact": "Engineered an NLP-driven text decomposition framework to ground AI tool-use in ontological structures. Specialized in mapping rhetorical patterns to executable code primitives."
+          "impact": "Engineered an NLP-driven text decomposition framework to ground AI tool-use in ontological structures, mapping rhetorical patterns to executable system logic."
         }
       ],
-      "market_summary": "12 months of deep-tech R&D in AI orchestration. Architected a framework with 9 communication topologies, 22 agent archetypes, and 1,000+ tests. Expertise in autonomous governance and safety-by-default systems."
+      "market_summary": "15+ years of strategic delivery and multimedia impact. AI-Native Architect who directed the development of a 91-repo ecosystem with 1,000+ tests. Expertise in system orchestration, automated governance, and the rhetoric of code."
     },
     {
       "id": "systems-architect",
