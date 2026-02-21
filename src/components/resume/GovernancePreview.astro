@@ -106,10 +106,10 @@ const { trace } = sample;
 
   .gov-preview__header {
     background: #1a1a1b;
-    padding: 10px 16px;
+    padding: var(--space-xs) var(--space-md);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-sm);
     border-bottom: 1px solid var(--border);
   }
 
@@ -126,7 +126,7 @@ const { trace } = sample;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-left: 8px;
+    margin-left: var(--space-sm);
   }
 
   .gov-preview__content {
@@ -139,7 +139,7 @@ const { trace } = sample;
     max-height: 60vh;
   }
 
-  .prompt { color: var(--accent); margin-right: 8px; }
+  .prompt { color: var(--accent); margin-right: var(--space-sm); }
   .timestamp { color: var(--text-muted); display: block; margin-bottom: var(--space-lg); }
 
   .trace-checks {
@@ -188,7 +188,7 @@ const { trace } = sample;
   }
 
   @media (max-width: 600px) {
-    .check-line { flex-direction: column; gap: 2px; }
+    .check-line { flex-direction: column; gap: var(--space-2xs); }
     .trace-footer { flex-direction: column; gap: var(--space-sm); }
   }
 </style>
