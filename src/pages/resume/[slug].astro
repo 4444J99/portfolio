@@ -1,0 +1,476 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import { personas } from '../../data/personas.json';
+import { history, education, certifications } from '../../data/experience.json';
+import { projectCatalogBySlug } from '../../data/project-catalog';
+import { base } from '../../utils/paths';
+
+export async function getStaticPaths() {
+  return personas.map((persona) => ({
+    params: { slug: persona.slug },
+    props: { persona },
+  }));
+}
+
+const { persona } = Astro.props;
+
+// Enrich featured projects with catalog data
+const featuredProjects = persona.featured_projects.map(fp => {
+  const catalogEntry = projectCatalogBySlug.get(fp.slug);
+  return {
+    ...catalogEntry,
+    market_impact: fp.impact
+  };
+});
+---
+
+<Layout title={`${persona.title} — Resume`} description={persona.market_summary}>
+  <article class="market-resume">
+    <div class="container container--narrow">
+      
+      <!-- Back to selection -->
+      <nav class="resume-nav print-hide">
+        <a href={`${base}resume/`} class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Switch Persona
+        </a>
+      </nav>
+
+      <div class="sketch-accent print-hide">
+        <SketchContainer sketchId={persona.sketchId} height="180px" mobileHeight="120px" ariaLabel={`Generative visualization for ${persona.title}`} />
+      </div>
+
+      <header class="resume-header">
+        <div class="resume-header__main">
+          <h1>Anthony James Padavano</h1>
+          <p class="resume-header__title">{persona.title}</p>
+          <p class="resume-header__subtitle">{persona.subtitle}</p>
+        </div>
+        
+        <div class="resume-header__contact">
+          <span>New York City</span>
+          <span class="sep">/</span>
+          <a href="mailto:padavano.anthony@gmail.com">padavano.anthony@gmail.com</a>
+          <span class="sep">/</span>
+          <a href="https://linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank">LinkedIn</a>
+          <span class="sep">/</span>
+          <a href={base}>Portfolio</a>
+        </div>
+
+        <div class="resume-actions print-hide">
+          <a class="action-btn" href={`${base}resume/Anthony_James_Padavano_${persona.title.replace(/\s+/g, '_')}.pdf`} download>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download PDF
+          </a>
+          <button class="action-btn" onclick="window.print()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Print Resume
+          </button>
+        </div>
+      </header>
+
+      <section class="resume-section">
+        <h2 class="section-label">Professional Summary</h2>
+        <div class="summary-box">
+          <p class="market-summary">{persona.market_summary}</p>
+          <p class="persona-thesis">{persona.thesis}</p>
+        </div>
+      </section>
+
+      <section class="resume-section">
+        <h2 class="section-label">Core Tech Stack</h2>
+        <div class="stack-grid">
+          {persona.stack.map(tech => (
+            <span class="stack-tag">{tech}</span>
+          ))}
+        </div>
+      </section>
+
+      <section class="resume-section">
+        <h2 class="section-label">Evidence of Technical Impact</h2>
+        <div class="featured-projects">
+          {featuredProjects.map(project => (
+            <div class="resume-project">
+              <div class="resume-project__header">
+                <h3>{project.title}</h3>
+                <span class="resume-project__repo">{project.sourceRepoName || project.slug}</span>
+              </div>
+              <p class="resume-project__impact"><strong>Impact:</strong> {project.market_impact}</p>
+              <div class="resume-project__tags">
+                {project.tags.map(tag => <span class="mini-tag">{tag}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="resume-section">
+        <h2 class="section-label">Professional History</h2>
+        <div class="history-list">
+          {history.map(entry => (
+            <div class="history-entry">
+              <div class="history-entry__header">
+                <span class="history-role">{entry.role}</span>
+                <span class="history-date">{entry.date}</span>
+              </div>
+              {entry.company && <p class="history-company">{entry.company}</p>}
+              {entry.description ? (
+                <p class="history-desc">{entry.description}</p>
+              ) : (
+                <ul class="history-highlights">
+                  {entry.highlights.map(h => <li>{h}</li>)}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div class="resume-grid-two-col">
+        <section class="resume-section">
+          <h2 class="section-label">Education</h2>
+          {education.map(edu => (
+            <div class="edu-entry">
+              <strong>{edu.degree}</strong>
+              <span>{edu.institution}</span>
+              <span class="edu-date">{edu.date}</span>
+            </div>
+          ))}
+        </section>
+
+        <section class="resume-section">
+          <h2 class="section-label">Certifications</h2>
+          <ul class="cert-list">
+            {certifications.map(cert => (
+              <li><strong>{cert.issuer}</strong> {cert.name} <span class="cert-date">({cert.date})</span></li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <footer class="resume-footer">
+        <p>This resume is a market-aligned view of a <a href={`${base}philosophy/`}>Logocentric Architecture</a>.</p>
+        <div class="footer-links">
+          <a href={`${base}resume/polymath/`} class="polymath-link">
+            View Visionary Polymath Version
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+          </a>
+        </div>
+      </footer>
+
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .market-resume {
+    padding: var(--space-3xl) 0;
+    color: var(--text-primary);
+  }
+
+  .resume-nav {
+    margin-bottom: var(--space-xl);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .resume-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .resume-header__title {
+    font-size: 1.5rem;
+    color: var(--accent-text);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .resume-header__subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .resume-header__contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .resume-header__contact a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .resume-header__contact .sep {
+    color: var(--border);
+  }
+
+  .resume-actions {
+    margin-top: var(--space-lg);
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all var(--transition-fast);
+  }
+
+  .action-btn:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+  }
+
+  .resume-section {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: var(--space-lg);
+    border-left: 3px solid var(--accent);
+    padding-left: var(--space-sm);
+  }
+
+  .summary-box {
+    background: var(--bg-secondary);
+    padding: var(--space-lg);
+    border-radius: var(--radius);
+  }
+
+  .market-summary {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+    line-height: 1.4;
+  }
+
+  .persona-thesis {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .stack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .stack-tag {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+  }
+
+  .featured-projects {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .resume-project {
+    background: var(--bg-card);
+    padding: var(--space-lg);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+
+  .resume-project__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-sm);
+  }
+
+  .resume-project__repo {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .resume-project__impact {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .mini-tag {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    background: var(--bg-secondary);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    margin-right: 4px;
+    color: var(--text-muted);
+  }
+
+  .history-entry {
+    margin-bottom: var(--space-xl);
+  }
+
+  .history-entry__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-2xs);
+  }
+
+  .history-role {
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .history-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .history-company {
+    font-size: 0.9rem;
+    color: var(--accent-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .history-highlights {
+    padding-left: var(--space-lg);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .history-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .resume-grid-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .edu-entry {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--space-md);
+    font-size: 0.9rem;
+  }
+
+  .edu-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .cert-list {
+    list-style: none;
+    font-size: 0.85rem;
+  }
+
+  .cert-list li {
+    margin-bottom: var(--space-xs);
+  }
+
+  .cert-date {
+    color: var(--text-muted);
+  }
+
+  .resume-footer {
+    margin-top: var(--space-4xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .resume-footer p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+    max-width: none;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  .polymath-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .resume-grid-two-col {
+      grid-template-columns: 1fr;
+    }
+    
+    .history-entry__header {
+      flex-direction: column;
+    }
+  }
+
+  /* Print specific overrides */
+  @media print {
+    .market-resume {
+      padding: 0;
+    }
+    
+    .resume-header {
+      border-bottom: 2px solid #333;
+    }
+
+    .resume-project, .summary-box {
+      background: #fafafa !important;
+      border: 1px solid #eee !important;
+      page-break-inside: avoid;
+    }
+
+    .section-label {
+      border-left: 4px solid #333 !important;
+      color: #111 !important;
+    }
+
+    .history-entry {
+      page-break-inside: avoid;
+    }
+  }
+</style>

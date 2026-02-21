@@ -1,0 +1,113 @@
+---
+import { base } from '../../utils/paths';
+
+interface Props {
+  persona: {
+    id: string;
+    slug: string;
+    title: string;
+    subtitle: string;
+    market_summary: string;
+    stack: string[];
+  };
+}
+
+const { persona } = Astro.props;
+---
+
+<a href={`${base}resume/${persona.slug}/`} class="persona-card" data-reveal>
+  <div class="persona-card__content">
+    <h3 class="persona-card__title">{persona.title}</h3>
+    <p class="persona-card__subtitle">{persona.subtitle}</p>
+    <p class="persona-card__summary">{persona.market_summary}</p>
+    <div class="persona-card__stack">
+      {persona.stack.slice(0, 4).map((tech) => (
+        <span class="tag">{tech}</span>
+      ))}
+    </div>
+  </div>
+  <div class="persona-card__action">
+    <span>View Specialized Resume</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+  </div>
+</a>
+
+<style>
+  .persona-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .persona-card:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .persona-card__title {
+    color: var(--accent-text);
+    margin-bottom: var(--space-2xs);
+    font-size: 1.5rem;
+  }
+
+  .persona-card__subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .persona-card__summary {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
+    flex-grow: 1;
+  }
+
+  .persona-card__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xl);
+  }
+
+  .persona-card__action {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-primary);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border);
+  }
+
+  .persona-card svg {
+    transition: transform var(--transition-fast);
+  }
+
+  .persona-card:hover .persona-card__action svg {
+    transform: translateX(4px);
+  }
+
+  /* CMYK-inspired accents on hover */
+  .persona-card:nth-child(1):hover { border-bottom: 4px solid var(--accent-yellow); }
+  .persona-card:nth-child(2):hover { border-bottom: 4px solid var(--accent-purple); }
+  .persona-card:nth-child(3):hover { border-bottom: 4px solid var(--accent-green); }
+  .persona-card:nth-child(4):hover { border-bottom: 4px solid var(--accent); }
+</style>

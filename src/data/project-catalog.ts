@@ -160,6 +160,27 @@ export const projectCatalog: ProjectCatalogEntry[] = [
     summary: 'POSSE-first multi-channel distribution and audience strategy.',
   },
   {
+    slug: 'public-record-data-scrapper',
+    title: 'Public Record Data Scraper',
+    organ: 'ORGAN-III',
+    tags: ['Commerce', 'Python', 'AWS', 'Terraform'],
+    summary: '50-state UCC public records aggregation platform with automated collection agents.',
+  },
+  {
+    slug: 'collective-persona-operations',
+    title: 'Collective Persona Operations',
+    organ: 'ORGAN-I',
+    tags: ['Theory', 'AI', 'Identity'],
+    summary: 'Framework for managing multi-agent identity state-shifts and role-playing.',
+  },
+  {
+    slug: 'a-mavs-olevm',
+    title: 'A-Mavs-Olevm (etceter4)',
+    organ: 'ORGAN-II',
+    tags: ['Art', 'Vanilla JS', 'Performance'],
+    summary: 'The "Living Pantheon" flagship artistic ecosystem and website.',
+  },
+  {
     slug: 'eight-organ-system',
     title: 'The Eight-Organ System',
     organ: 'META-ORGANVM',

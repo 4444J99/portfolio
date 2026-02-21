@@ -1,0 +1,40 @@
+{
+  "mappings": [
+    {
+      "humanities_concept": "Dramaturgical Analysis (Goffman)",
+      "technical_abstraction": "Identity Masking & State Management",
+      "implementation": "in-midst-my-life",
+      "proof": "Implemented 16 professional masks that dynamically filter state based on audience (recruiter, collaborator, etc.) using a directed acyclic graph (DAG) of credentials."
+    },
+    {
+      "humanities_concept": "Morphology of the Folktale (Propp)",
+      "technical_abstraction": "Declarative State Transitions (DSL)",
+      "implementation": "Recursive Engine (RE:GE)",
+      "proof": "Encoded 31 Proppian functions as executable Python primitives within a custom DSL (Ritual Syntax), formalizing narrative structure as computable logic."
+    },
+    {
+      "humanities_concept": "Rhetorical Situation (Bitzer)",
+      "technical_abstraction": "Context-Aware Orchestration",
+      "implementation": "Agentic Titan",
+      "proof": "Designed 9 communication topologies that enforce 'rhetorical' constraints on agent swarms, ensuring information flow matches the situational exigence of the task."
+    },
+    {
+      "humanities_concept": "Intertextuality (Kristeva)",
+      "technical_abstraction": "Dependency Graph & Registry Architecture",
+      "implementation": "Eight-Organ System",
+      "proof": "Built a machine-readable registry for 91 repositories where 'meaning' (functionality) emerges from the validated inter-repo dependency graph (31 edges)."
+    },
+    {
+      "humanities_concept": "The Hero's Journey (Campbell)",
+      "technical_abstraction": "Process Lifecycle & Promotion Logic",
+      "implementation": "System Governance Framework",
+      "proof": "Authored a 4-phase governance pipeline (Candidate -> Local -> Candidate -> Public) that treats codebase maturity as a narrative arc with explicit transformation gates."
+    },
+    {
+      "humanities_concept": "Semiotics (Peirce)",
+      "technical_abstraction": "Ontological Function Calling",
+      "implementation": "LingFrame / call-function--ontological",
+      "proof": "Bridged symbolic signs with technical execution via a 12-concept architectural framework for grounded AI tool use, mapping 'Sign' to 'Code'."
+    }
+  ]
+}

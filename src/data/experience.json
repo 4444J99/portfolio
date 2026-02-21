@@ -1,0 +1,69 @@
+{
+  "history": [
+    {
+      "role": "Independent Creative Technologist",
+      "date": "2021 — Present",
+      "description": "Designed and launched the eight-organ orchestration system coordinating 91 repositories across 8 GitHub organizations. Built recursive-engine (1,254 tests, 85% coverage) — a symbolic operating system translating epistemological frameworks into executable Python. Developed generative art/music systems and AI-conductor workflow."
+    },
+    {
+      "role": "Digital Marketing Manager",
+      "company": "Miami Dade College Foundation",
+      "date": "2023 — 2024",
+      "highlights": [
+        "Designed and executed digital campaigns increasing donor engagement by 32%.",
+        "Rebuilt foundation website — 38% traffic growth, 22% improvement in donation conversions.",
+        "Produced multimedia storytelling content driving 28% increase in click-through rates.",
+        "Developed social media strategy boosting engagement rates across platforms by 23%."
+      ]
+    },
+    {
+      "role": "Multimedia Specialist",
+      "company": "AJP Media Arts",
+      "date": "2011 — Present",
+      "highlights": [
+        "Produced video, audio, and visual campaigns achieving 17.5M+ views and $2M in client fundraising.",
+        "Integrated SEO and paid media strategies achieving 290% ROI for key campaigns.",
+        "Launched and managed client websites with 42% engagement increase.",
+        "Delivered intuitive UI/UX designs — 26% satisfaction increase, 35% retention improvement."
+      ]
+    },
+    {
+      "role": "Instructor (Composition & Rhetoric)",
+      "company": "Various Institutions (MDC, FAU, Nova)",
+      "date": "2015 — Present",
+      "highlights": [
+        "Designed and delivered 100+ composition courses to 2,000+ students.",
+        "Applied UX principles to create accessible course materials — 92% student approval rating.",
+        "Refined teaching methods using performance analytics — 24% improvement in student retention."
+      ]
+    },
+    {
+      "role": "Project Manager",
+      "company": "Majestic Design",
+      "date": "2007 — 2018",
+      "highlights": [
+        "Led 50 commercial and residential construction projects from concept to completion.",
+        "90% on-time and within budget delivery.",
+        "Collaborated with marketing teams on 3D renderings and video walkthroughs."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "M.F.A. Creative Writing",
+      "institution": "Florida Atlantic University",
+      "date": "2015 — 2018"
+    },
+    {
+      "degree": "B.A. English Literature",
+      "institution": "CUNY College of Staten Island",
+      "date": "2010 — 2014"
+    }
+  ],
+  "certifications": [
+    { "name": "Full-Stack Developer", "issuer": "Meta", "date": "2023 — 2024" },
+    { "name": "UX Design", "issuer": "Google", "date": "2022 — 2023" },
+    { "name": "Digital Marketing & E-commerce", "issuer": "Google", "date": "2022 — 2023" },
+    { "name": "Project Management", "issuer": "Google", "date": "2022 — 2023" }
+  ]
+}

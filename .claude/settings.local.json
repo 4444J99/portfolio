@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run test:a11y:*)",
+      "Bash(npm run validate:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(npx astro dev:*)",
+      "Bash(open \"http://localhost:4323/portfolio\")"
+    ]
+  }
+}

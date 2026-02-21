@@ -1,0 +1,299 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SketchContainer from '../components/sketches/SketchContainer.astro';
+import { mappings } from '../data/ontology.json';
+import { base } from '../utils/paths';
+---
+
+<Layout title="The Logocentric Architect — Philosophy" description="Bridging the gap between Humanities and Systems Engineering. How MFA-level rhetoric becomes production-grade code.">
+  <div class="philosophy-page">
+    <div class="sketch-accent">
+      <SketchContainer sketchId="recursive-tree" height="300px" mobileHeight="200px" ariaLabel="Generative recursive tree representing the growth of ideas into systems" />
+    </div>
+
+    <article class="container container--narrow">
+      <header class="philosophy-header" data-reveal>
+        <h1 class="page-title">Rhetoric as System Design</h1>
+        <p class="philosophy-subtitle">The Core Thesis of Anthony James Padavano</p>
+      </header>
+
+      <section class="prose" data-reveal style="--stagger-index: 1">
+        <p>
+          I do not come to engineering from a vacuum. I come to it from <strong>Literature</strong>, <strong>Rhetoric</strong>, and <strong>Narrative Theory</strong>. To me, code is not just a tool for computation—it is a medium for <em>structured intention</em>.
+        </p>
+        <p>
+          Most technical systems fail not because of bad syntax, but because of poor <strong>narrative coherence</strong>. If a system's state machine doesn't have a clear "character arc," it becomes buggy. If an orchestration layer lacks "rhetorical awareness," it collapses under scale.
+        </p>
+        <blockquote>
+          "Humanities provide the 'Why' and the 'How things mean.' Engineering provides the 'What' and the 'How things work.' My work is the bridge."
+        </blockquote>
+      </section>
+
+      <section class="ontology-mapping" data-reveal style="--stagger-index: 2">
+        <h2 class="section-label">The Ontology: From Theory to Proof</h2>
+        <p class="section-intro">Here is the exhaustive proof of how my academic background translates into technical qualification.</p>
+        
+        <div class="mapping-grid">
+          {mappings.map((m) => (
+            <div class="mapping-card">
+              <div class="mapping-card__humanities">
+                <span class="label">Humanities Concept</span>
+                <h3>{m.humanities_concept}</h3>
+              </div>
+              <div class="mapping-card__arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </div>
+              <div class="mapping-card__technical">
+                <span class="label">Technical Abstraction</span>
+                <h3>{m.technical_abstraction}</h3>
+              </div>
+              <div class="mapping-card__proof">
+                <p><strong>The Proof:</strong> {m.proof}</p>
+                <div class="mapping-card__tag">Implemented in: <code>{m.implementation}</code></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="identity-stack" data-reveal style="--stagger-index: 3">
+        <h2 class="section-label">The Evolutionary Stack</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h4>The Foundation: Undergraduate Literature</h4>
+              <p>Critical analysis of complex texts. Learned to deconstruct systems of meaning before I ever touched a compiler.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h4>The Craft: MFA in Creative Writing</h4>
+              <p>Mastered the architecture of narrative and the rigor of peer review. Narrative design is the ultimate preparation for UX and system state machines.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h4>The Praxis: A Decade in Postsecondary Education</h4>
+              <p>Managed the "user experience" of learning for 2,000+ students. Learned to translate complex abstractions into clear, actionable protocols.</p>
+            </div>
+          </div>
+          <div class="timeline-item highlight">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h4>The Synthesis: The Eight-Organ System</h4>
+              <p>The culmination of these identities. 91 repositories of code, 400K words of documentation, and a fully governed creative ecosystem.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="philosophy-footer" data-reveal style="--stagger-index: 4">
+        <h3>Ready to build something momentous?</h3>
+        <p>Whether you need an AI Architect, a Creative Technologist, or a Strategic Lead, I bring a unique "Logocentric" edge to your team.</p>
+        <div class="cta-group">
+          <a href={`${base}resume/`} class="btn">View Specialized Resumes</a>
+          <a href={`${base}consult/`} class="btn secondary">Inquire for Collaboration</a>
+        </div>
+      </footer>
+    </article>
+  </div>
+</Layout>
+
+<style>
+  .philosophy-page {
+    padding: var(--space-3xl) 0;
+  }
+
+  .philosophy-header {
+    text-align: center;
+    margin-bottom: var(--space-4xl);
+  }
+
+  .philosophy-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-top: var(--space-sm);
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: var(--space-lg);
+    border-left: 3px solid var(--accent);
+    padding-left: var(--space-sm);
+  }
+
+  .section-intro {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2xl);
+  }
+
+  /* Ontology Mapping */
+  .mapping-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-4xl);
+  }
+
+  .mapping-card {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas: "hum arrow tech" "proof proof proof";
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    gap: var(--space-lg);
+    transition: border-color var(--transition-fast);
+  }
+
+  .mapping-card:hover {
+    border-color: var(--accent);
+  }
+
+  .mapping-card__humanities { grid-area: hum; }
+  .mapping-card__technical { grid-area: tech; }
+  .mapping-card__arrow { 
+    grid-area: arrow; 
+    display: flex; 
+    align-items: center; 
+    color: var(--accent);
+  }
+  .mapping-card__proof { 
+    grid-area: proof;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+  }
+
+  .mapping-card .label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .mapping-card h3 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+
+  .mapping-card__tag {
+    margin-top: var(--space-md);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .mapping-card__tag code {
+    color: var(--accent-text);
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: var(--space-xl);
+    margin-bottom: var(--space-4xl);
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: calc(-1 * var(--space-xl) - 5px);
+    top: 0.5rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--border);
+    border: 2px solid var(--bg-primary);
+  }
+
+  .timeline-item.highlight .timeline-marker {
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+  }
+
+  .timeline-content h4 {
+    margin-bottom: var(--space-xs);
+    color: var(--accent-text);
+  }
+
+  /* Footer */
+  .philosophy-footer {
+    text-align: center;
+    background: var(--bg-secondary);
+    padding: var(--space-3xl);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+  }
+
+  .philosophy-footer h3 {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .cta-group {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .btn {
+    background: var(--accent);
+    color: var(--bg-primary);
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.2s;
+  }
+
+  .btn.secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .mapping-card {
+      grid-template-columns: 1fr;
+      grid-template-areas: "hum" "arrow" "tech" "proof";
+    }
+    .mapping-card__arrow {
+      transform: rotate(90deg);
+      justify-content: center;
+    }
+    .cta-group {
+      flex-direction: column;
+    }
+  }
+</style>

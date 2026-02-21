@@ -1,0 +1,116 @@
+{
+  "personas": [
+    {
+      "id": "ai-systems-engineer",
+      "slug": "ai-systems-engineer",
+      "title": "Staff AI Systems Engineer",
+      "subtitle": "AI Orchestration & Agentic Infrastructure",
+      "sketchId": "swarm",
+      "thesis": "I build the safe, scalable orchestration machinery that allows autonomous agent swarms to solve complex problems. My work bridges the gap between high-level intention and low-level execution through model-agnostic topologies and rigorous safety invariants.",
+      "stack": ["Python", "TypeScript", "LLM Orchestration", "Multi-Agent Systems", "Ray", "CI/CD"],
+      "featured_projects": [
+        {
+          "slug": "agentic-titan",
+          "impact": "Architected a polymorphic orchestration framework in Python with 9 communication topologies and 22 agent archetypes. Implemented mandatory safety sandboxing and resource limits, verified by a 1,095+ test suite."
+        },
+        {
+          "slug": "ai-conductor",
+          "impact": "Developed a high-volume documentation methodology for human-AI co-creation. Scaled technical output to ~400K words across 91 repositories with automated quality gates and link-integrity validation."
+        },
+        {
+          "slug": "ai-council",
+          "impact": "Built a multi-agent deliberation framework demonstrating autonomous consensus-building. Implemented weighted decision-making algorithms and real-time state management for agent swarms."
+        },
+        {
+          "slug": "linguistic-atomization",
+          "impact": "Engineered an NLP-driven text decomposition framework to ground AI tool-use in ontological structures. Specialized in mapping rhetorical patterns to executable code primitives."
+        }
+      ],
+      "market_summary": "12 months of deep-tech R&D in AI orchestration. Architected a framework with 9 communication topologies, 22 agent archetypes, and 1,000+ tests. Expertise in autonomous governance and safety-by-default systems."
+    },
+    {
+      "id": "systems-architect",
+      "slug": "systems-architect",
+      "title": "Systems Architect / Backend Lead",
+      "subtitle": "Engineering Rigor & Logocentric Architecture",
+      "sketchId": "recursive-tree",
+      "thesis": "I apply the rigor of linguistic analysis and narrative theory to software architecture. I specialize in building highly reliable systems, custom domain-specific languages (DSLs), and automated governance frameworks for massive repository ecosystems.",
+      "stack": ["Python", "Hexagonal Architecture", "DSL Design", "PostgreSQL", "Terraform", "Systems Thinking"],
+      "featured_projects": [
+        {
+          "slug": "recursive-engine",
+          "impact": "Developed a symbolic OS in Python featuring an external DSL and a custom interpreter. Achieved 85% code coverage across 1,254 tests, formalizing narrative principles as structural primitives."
+        },
+        {
+          "slug": "orchestration-hub",
+          "impact": "Engineered the central nervous system for a 91-repository ecosystem. Automated dependency validation (31 unique edges) and implemented a machine-readable governance registry."
+        },
+        {
+          "slug": "metasystem-master",
+          "impact": "Architected a distributed monorepo for real-time performance systems. Integrated Python core engines with TypeScript SDKs, providing a unified API for audience-participatory applications."
+        },
+        {
+          "slug": "public-record-data-scrapper",
+          "impact": "Built a production UCC data pipeline with 60+ collection agents. Implemented Terraform-managed AWS infrastructure and a 2,055+ test suite for high-reliability data extraction."
+        }
+      ],
+      "market_summary": "Expert in complex system reliability. Built a symbolic OS with a custom DSL and 1,254 tests (85% coverage). Orchestrated a 91-repo fleet with automated dependency validation and zero back-edge violations."
+    },
+    {
+      "id": "creative-technologist",
+      "slug": "creative-technologist",
+      "title": "Lead Creative Technologist",
+      "subtitle": "R&D at the Intersection of Theory & Code",
+      "sketchId": "kaleidoscope",
+      "thesis": "I am an artist-engineer bridging MFA-level narrative theory with Meta-certified technical execution. I build 'living' systems and performance-grade tools that treat code, sound, and language as a unified medium for exploration.",
+      "stack": ["Astro", "TypeScript", "p5.js", "Web Audio API", "Narratological Theory", "Generative Art"],
+      "featured_projects": [
+        {
+          "slug": "a-mavs-olevm",
+          "impact": "Launched the 'etceter4' Living Pantheon website. Engineered a 'breathing' UI with generative pathway logic and subtle motion dynamics using Vanilla JS and performance-optimized animations."
+        },
+        {
+          "slug": "generative-music",
+          "impact": "Developed a performance-grade audio synthesis engine using the Web Audio API. Mapped symbolic data structures to real-time sonic parameters for live generative composition."
+        },
+        {
+          "slug": "narratological-lenses",
+          "impact": "Translated classical narrative theory (Aristotle, Propp) into executable software lenses. Created computational tools for analyzing and generating structural plot arcs."
+        },
+        {
+          "slug": "block-warfare",
+          "impact": "Engineered 'TurfSynth AR,' a spatial computing concept applying neighborhood topology to location-aware gameplay. Bridged physical environment data with game-state persistence."
+        }
+      ],
+      "market_summary": "Bridging humanities and engineering for 10+ years. Developed the 'Living Pantheon' artistic ecosystem. Specialized in generative systems, spatial computing (AR), and narrative-as-software primitives."
+    },
+    {
+      "id": "technical-pm",
+      "slug": "technical-pm",
+      "title": "Technical Program Manager / DevEx",
+      "subtitle": "Strategic Delivery & Platform Governance",
+      "sketchId": "pipeline",
+      "thesis": "I combine a decade of high-impact project management with modern engineering depth. I specialize in managing the developer experience (DevEx) for complex technical ecosystems, ensuring strategic alignment between product, art, and infrastructure.",
+      "stack": ["Project Management", "Digital Marketing", "Platform Engineering", "Governance", "Automation", "Strategic Distribution"],
+      "featured_projects": [
+        {
+          "slug": "eight-organ-system",
+          "impact": "Designed a meta-governance model for coordinating 8 GitHub organizations. Synchronized theory, art, commerce, and community into a single strategic roadmap with 33 successful sprints."
+        },
+        {
+          "slug": "org-architecture",
+          "impact": "Authored machine-readable promotion criteria and monthly audit protocols. Automated the validation of system-wide invariants across 91 repositories."
+        },
+        {
+          "slug": "public-process",
+          "impact": "Led the public distribution strategy for complex technical R&D. Managed a narrative layer of 36 essays (~132K words) with RSS and multi-channel synchronization."
+        },
+        {
+          "slug": "distribution-strategy",
+          "impact": "Integrated POSSE (Publish on Own Site, Syndicate Elsewhere) architecture. Automated cross-platform audience engagement for high-dimensional intellectual property."
+        }
+      ],
+      "market_summary": "Managed 100+ projects and $2M in revenue. Rebuilt Miami Dade Foundation's digital presence (328% ROI). Currently leading an automated 91-repo orchestration system with 77 active CI/CD workflows."
+    }
+  ]
+}
