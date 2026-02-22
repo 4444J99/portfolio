@@ -652,6 +652,18 @@ img {
     padding: 0;
   }
 
+  /* Expand all collapsible organ groups */
+  .organ-group__panel {
+    grid-template-rows: 1fr !important;
+  }
+  .organ-group__panel[aria-hidden="true"] {
+    grid-template-rows: 1fr !important;
+  }
+  .organ-group__controls,
+  .organ-group__chevron {
+    display: none !important;
+  }
+
   /* Single-column for project pages */
   .project-grid {
     grid-template-columns: 1fr;

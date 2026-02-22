@@ -35,8 +35,26 @@
         filterStatus.textContent = prefix ? `${prefix} ${count}` : count;
       }
   
+      function expandGroup(group: HTMLElement) {
+        const toggle = group.querySelector<HTMLButtonElement>('.organ-group__toggle');
+        const panel = group.querySelector<HTMLElement>('.organ-group__panel');
+        if (toggle && panel) {
+          toggle.setAttribute('aria-expanded', 'true');
+          panel.setAttribute('aria-hidden', 'false');
+        }
+      }
+
+      function collapseGroup(group: HTMLElement) {
+        const toggle = group.querySelector<HTMLButtonElement>('.organ-group__toggle');
+        const panel = group.querySelector<HTMLElement>('.organ-group__panel');
+        if (toggle && panel) {
+          toggle.setAttribute('aria-expanded', 'false');
+          panel.setAttribute('aria-hidden', 'true');
+        }
+      }
+
       function resetFilters() {
-        document.querySelectorAll<HTMLButtonElement>('.filter-chip').forEach((c) => {
+        document.querySelectorAll<HTMLButtonElement>('.filter-chip:not([data-expand-all])').forEach((c) => {
           c.classList.remove('filter-chip--active');
           c.setAttribute('aria-pressed', 'false');
         });
@@ -113,11 +131,51 @@
           groups.forEach((group) => {
             const visible = group.querySelectorAll('.project-grid [data-reveal]:not([style*="display: none"])');
             group.style.display = visible.length === 0 ? 'none' : '';
+            // Auto-expand collapsed groups that have visible cards after filtering
+            if (visible.length > 0) {
+              const panel = group.querySelector<HTMLElement>('.organ-group__panel');
+              if (panel && panel.getAttribute('aria-hidden') === 'true') {
+                expandGroup(group);
+              }
+            }
           });
-  
+
           announceFilterStatus();
         }, { signal });
       });
+    // --- Organ group toggle ---
+    groups.forEach((group) => {
+      const toggle = group.querySelector<HTMLButtonElement>('.organ-group__toggle');
+      if (!toggle) return;
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+          collapseGroup(group);
+        } else {
+          expandGroup(group);
+        }
+      }, { signal });
+    });
+
+    // --- Expand All / Collapse All ---
+    const expandAllBtn = document.querySelector<HTMLButtonElement>('[data-expand-all]');
+    if (expandAllBtn) {
+      expandAllBtn.addEventListener('click', () => {
+        const allExpanded = [...groups].every((g) => {
+          const panel = g.querySelector<HTMLElement>('.organ-group__panel');
+          return !panel || panel.getAttribute('aria-hidden') !== 'true';
+        });
+        groups.forEach((group) => {
+          if (allExpanded) {
+            collapseGroup(group);
+          } else {
+            expandGroup(group);
+          }
+        });
+        expandAllBtn.textContent = allExpanded ? 'Expand All' : 'Collapse All';
+      }, { signal });
+    }
+
     document.addEventListener('astro:before-swap', () => {
       controller.abort();
     }, { once: true, signal });

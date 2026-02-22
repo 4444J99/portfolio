@@ -46,21 +46,38 @@ const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organCol
       ))}
     </div>
     <p id="filter-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
-    {resolvedGroups.map(group => (
+    <div class="organ-group__controls">
+      <button class="filter-chip" data-expand-all aria-pressed="false">Expand All</button>
+    </div>
+    {resolvedGroups.map((group, gi) => (
       <div class="organ-group" data-organ-group style={`--organ-color: ${organColorMap[group.organ]}`}>
-        <h3 class="organ-group__heading" data-reveal data-heading-view="engineering">
-          {group.domain} — {group.projects.length} project{group.projects.length !== 1 ? 's' : ''}
-        </h3>
-        <h3 class="organ-group__heading" data-reveal data-heading-view="creative" style="display: none;">
-          {group.organ}{group.name && <span class="organ-group__name"> — {group.name}</span>}
-          <span class="organ-group__domain">{group.domain}</span>
-        </h3>
-        <div class="project-grid">
-          {group.projects.map((project, i) => (
-            <div data-reveal style={`--stagger-index: ${i}`}>
-              <ProjectCard {...project} featured={featuredNumbers.has(project.number)} data-skills={project.skills.join(',')} data-tags={project.tags.join(',')} />
+        <button
+          class="organ-group__toggle"
+          aria-expanded={gi < 2 ? 'true' : 'false'}
+          aria-controls={`panel-${gi}`}
+          type="button"
+        >
+          <h3 class="organ-group__heading" data-heading-view="engineering">
+            {group.domain} — {group.projects.length} project{group.projects.length !== 1 ? 's' : ''}
+          </h3>
+          <h3 class="organ-group__heading" data-heading-view="creative" style="display: none;">
+            {group.organ}{group.name && <span class="organ-group__name"> — {group.name}</span>}
+            <span class="organ-group__domain">{group.domain}</span>
+          </h3>
+          <svg class="organ-group__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 6l4 4 4-4"/>
+          </svg>
+        </button>
+        <div class="organ-group__panel" id={`panel-${gi}`} aria-hidden={gi < 2 ? 'false' : 'true'}>
+          <div class="organ-group__panel-inner">
+            <div class="project-grid">
+              {group.projects.map((project, i) => (
+                <div data-reveal style={`--stagger-index: ${i}`}>
+                  <ProjectCard {...project} featured={featuredNumbers.has(project.number)} data-skills={project.skills.join(',')} data-tags={project.tags.join(',')} />
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     ))}
@@ -111,12 +128,62 @@ const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organCol
     opacity: 0.8;
   }
 
+  .organ-group__controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--space-md);
+  }
+
   .organ-group {
     margin-bottom: var(--space-3xl);
   }
 
   .organ-group:last-child {
     margin-bottom: 0;
+  }
+
+  .organ-group__toggle {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    font-family: inherit;
+    gap: var(--space-sm);
+  }
+
+  .organ-group__toggle:hover .organ-group__heading {
+    border-color: var(--organ-color, var(--accent));
+  }
+
+  .organ-group__chevron {
+    flex-shrink: 0;
+    color: var(--text-muted);
+    transition: transform 300ms ease;
+    margin-left: auto;
+  }
+
+  .organ-group__toggle[aria-expanded="true"] .organ-group__chevron {
+    transform: rotate(180deg);
+  }
+
+  .organ-group__panel {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 400ms ease;
+    overflow: hidden;
+  }
+
+  .organ-group__panel[aria-hidden="true"] {
+    grid-template-rows: 0fr;
+  }
+
+  .organ-group__panel-inner {
+    min-height: 0;
+    overflow: hidden;
   }
 
   .organ-group__heading {
@@ -136,6 +203,7 @@ const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organCol
     flex-wrap: wrap;
     background: var(--bg-card);
     border-radius: 4px;
+    flex: 1;
   }
 
   .organ-group__name {

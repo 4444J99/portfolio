@@ -131,6 +131,16 @@ const slug = href.replace(/\/$/, '').split('/').pop();
     color: var(--text-secondary);
     line-height: 1.6;
     flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: -webkit-line-clamp 200ms ease;
+  }
+
+  .card:hover .card__desc,
+  .card:focus-within .card__desc {
+    -webkit-line-clamp: unset;
   }
 
   .card__cta {
