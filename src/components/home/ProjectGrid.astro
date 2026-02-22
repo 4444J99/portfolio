@@ -72,8 +72,14 @@ const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organCol
           <div class="organ-group__panel-inner">
             <div class="project-grid">
               {group.projects.map((project, i) => (
-                <div data-reveal style={`--stagger-index: ${i}`}>
-                  <ProjectCard {...project} featured={featuredNumbers.has(project.number)} data-skills={project.skills.join(',')} data-tags={project.tags.join(',')} />
+                <div data-reveal
+                  class:list={[{ 'reveal--featured': featuredNumbers.has(project.number) }]}
+                  style={`--stagger-index: ${i}`}>
+                  <ProjectCard {...project}
+                    organ={group.organ}
+                    featured={featuredNumbers.has(project.number)}
+                    data-skills={project.skills.join(',')}
+                    data-tags={project.tags.join(',')} />
                 </div>
               ))}
             </div>
@@ -217,7 +223,15 @@ const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organCol
     margin-left: auto;
   }
 
+  .reveal--featured {
+    grid-column: span 2;
+  }
+
   @media (max-width: 768px) {
+    .reveal--featured {
+      grid-column: span 1;
+    }
+
     .organ-group__heading {
       flex-direction: column;
       gap: var(--space-xs);

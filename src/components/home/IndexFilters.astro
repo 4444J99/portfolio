@@ -118,7 +118,7 @@
           const filter = chip.getAttribute('data-filter')!;
   
                   cards.forEach((container) => {
-                    const card = container.querySelector('.card') as HTMLElement | null;
+                    const card = container.querySelector('.flip-card') as HTMLElement | null;
                     if (!card) return;
           
                     if (filter === 'all') {

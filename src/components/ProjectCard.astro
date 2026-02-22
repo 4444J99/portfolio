@@ -8,56 +8,348 @@ interface Props {
   number: number;
   featured?: boolean;
   skills?: string[];
+  organ?: string;
   'data-skills'?: string;
   'data-tags'?: string;
 }
 
-const { title, tagline, description, href, tags, number, featured, skills = [], 'data-skills': dataSkills, 'data-tags': dataTags } = Astro.props;
+const { title, tagline, description, href, tags, number, featured, skills = [], organ, 'data-skills': dataSkills, 'data-tags': dataTags } = Astro.props;
 
 // Derive slug from href for named view transition
 const slug = href.replace(/\/$/, '').split('/').pop();
+const paddedNumber = String(number).padStart(2, '0');
 ---
 
-<a href={href} class:list={['card', { 'card--featured': featured }]} data-skills={dataSkills} data-tags={dataTags}>
-  {featured && <span class="card__featured-badge">Featured Artifact</span>}
-  <div class="card__header">
-    <span class="card__number">{String(number).padStart(2, '0')}</span>
-    <div class="card__tags card__tags--creative">
-      {tags.map(tag => <span class="tag">{tag}</span>)}
-    </div>
-    <div class="card__tags card__tags--engineering">
-      {skills.map(s => <span class="tag tag--skill">{s}</span>)}
+<div class="flip-card" data-skills={dataSkills} data-tags={dataTags} data-organ={organ}>
+  {featured && <span class="flip-card__badge">Featured Artifact</span>}
+  <div class="flip-card__scene">
+    <div class="flip-card__inner">
+      <!-- Front face -->
+      <div class="flip-card__face flip-card__face--front" role="button" tabindex="0" aria-label={`${title} — flip for details`}>
+        <div class="flip-card__pattern" aria-hidden="true"></div>
+        <span class="flip-card__number" aria-hidden="true">{paddedNumber}</span>
+        <h3 class="flip-card__title">{title}</h3>
+        <span class="flip-card__hint" aria-hidden="true">&#x21bb; Flip</span>
+      </div>
+      <!-- Back face -->
+      <div class="flip-card__face flip-card__face--back" aria-hidden="true">
+        <button class="flip-card__close" tabindex="-1" aria-label="Close details">&times;</button>
+        <h3 class="flip-card__back-title" transition:name={`project-${slug}`} transition:animate="initial">{title}</h3>
+        <p class="flip-card__tagline flip-card__tagline--creative">{tagline}</p>
+        <p class="flip-card__description">{description}</p>
+        <div class="flip-card__tags flip-card__tags--creative">
+          {tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+        <div class="flip-card__tags flip-card__tags--engineering">
+          {skills.map(s => <span class="tag tag--skill">{s}</span>)}
+        </div>
+        <a href={href} class="flip-card__cta" tabindex="-1">View project &rarr;</a>
+      </div>
     </div>
   </div>
-  <h3 class="card__title" transition:name={`project-${slug}`} transition:animate="initial">{title}</h3>
-  <p class="card__tagline card__tagline--creative">{tagline}</p>
-  <p class="card__desc">{description}</p>
-  <span class="card__cta">View project &rarr;</span>
-</a>
+</div>
+
+<script>
+  interface FlipCardState {
+    controller?: AbortController;
+    pageLoadBound?: boolean;
+  }
+
+  function getFlipCardState(): FlipCardState {
+    const w = window as Window & { __flipCardState?: FlipCardState };
+    if (!w.__flipCardState) w.__flipCardState = {};
+    return w.__flipCardState;
+  }
+
+  function initFlipCards() {
+    const state = getFlipCardState();
+    state.controller?.abort();
+    const controller = new AbortController();
+    const { signal } = controller;
+    state.controller = controller;
+
+    // Reset any stale flipped states from previous navigation
+    document.querySelectorAll<HTMLElement>('.flip-card.is-flipped').forEach((card) => {
+      card.classList.remove('is-flipped');
+    });
+
+    document.querySelectorAll<HTMLElement>('.flip-card').forEach((card) => {
+      const front = card.querySelector<HTMLElement>('.flip-card__face--front');
+      const back = card.querySelector<HTMLElement>('.flip-card__face--back');
+      const closeBtn = card.querySelector<HTMLButtonElement>('.flip-card__close');
+      const backCta = card.querySelector<HTMLAnchorElement>('.flip-card__cta');
+
+      if (!front || !back || !closeBtn) return;
+
+      function flipOpen() {
+        card.classList.add('is-flipped');
+        front!.setAttribute('aria-hidden', 'true');
+        front!.setAttribute('tabindex', '-1');
+        back!.setAttribute('aria-hidden', 'false');
+        closeBtn!.setAttribute('tabindex', '0');
+        backCta?.setAttribute('tabindex', '0');
+        closeBtn!.focus();
+      }
+
+      function flipClose() {
+        card.classList.remove('is-flipped');
+        front!.setAttribute('aria-hidden', 'false');
+        front!.setAttribute('tabindex', '0');
+        back!.setAttribute('aria-hidden', 'true');
+        closeBtn!.setAttribute('tabindex', '-1');
+        backCta?.setAttribute('tabindex', '-1');
+        front!.focus();
+      }
+
+      // Front face click → flip open
+      front.addEventListener('click', flipOpen, { signal });
+      front.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          flipOpen();
+        }
+      }, { signal });
+
+      // Close button → flip close
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        flipClose();
+      }, { signal });
+
+      // Escape key on back face → flip close
+      back.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          flipClose();
+        }
+      }, { signal });
+    });
+
+    document.addEventListener('astro:before-swap', () => {
+      controller.abort();
+    }, { once: true, signal });
+  }
+
+  const flipCardState = getFlipCardState();
+  if (!flipCardState.pageLoadBound) {
+    document.addEventListener('astro:page-load', initFlipCards);
+    flipCardState.pageLoadBound = true;
+  }
+</script>
 
 <style>
-  .card {
+  /* --- Flip card structure --- */
+  .flip-card {
+    position: relative;
+  }
+
+  .flip-card__scene {
+    perspective: 1000px;
+  }
+
+  .flip-card__inner {
+    position: relative;
+    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+
+  .flip-card.is-flipped .flip-card__inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card__face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+
+  /* --- Front face --- */
+  .flip-card__face--front {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    justify-content: flex-end;
+    min-height: 260px;
     padding: var(--space-xl);
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--organ-color, var(--accent));
-    border-radius: var(--radius-lg);
-    text-decoration: none;
-    transition: background var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+    cursor: pointer;
     overflow: hidden;
+    border-left: 3px solid var(--organ-color, var(--accent));
+    transition: border-color var(--transition-base);
   }
 
-  .card:hover {
-    background: var(--bg-card-hover);
+  .flip-card__face--front:hover {
     border-color: var(--organ-color, var(--border-hover));
-    transform: translateY(-2px);
   }
 
-  .card__featured-badge {
+  .flip-card__face--front:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* --- Pattern overlay --- */
+  .flip-card__pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  /* I — Theoria: concentric radials */
+  :global([data-organ-group]) .flip-card[data-organ="ORGAN I"] .flip-card__pattern {
+    background:
+      radial-gradient(circle at 50% 50%, var(--organ-color) 10%, transparent 11%),
+      radial-gradient(circle at 50% 50%, var(--organ-color) 25%, transparent 26%),
+      radial-gradient(circle at 50% 50%, var(--organ-color) 40%, transparent 41%),
+      radial-gradient(circle at 50% 50%, var(--organ-color) 55%, transparent 56%),
+      radial-gradient(circle at 50% 50%, var(--organ-color) 70%, transparent 71%);
+  }
+
+  /* II — Poiesis: diagonal stripes */
+  :global([data-organ-group]) .flip-card[data-organ="ORGAN II"] .flip-card__pattern {
+    background: repeating-linear-gradient(
+      45deg,
+      var(--organ-color),
+      var(--organ-color) 2px,
+      transparent 2px,
+      transparent 16px
+    );
+  }
+
+  /* III — Ergon: grid mesh */
+  :global([data-organ-group]) .flip-card[data-organ="ORGAN III"] .flip-card__pattern {
+    background:
+      linear-gradient(var(--organ-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--organ-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* IV — Taxis: diamond lattice */
+  :global([data-organ-group]) .flip-card[data-organ="ORGAN IV"] .flip-card__pattern {
+    background:
+      linear-gradient(45deg, var(--organ-color) 1px, transparent 1px),
+      linear-gradient(-45deg, var(--organ-color) 1px, transparent 1px),
+      linear-gradient(45deg, transparent calc(50% - 1px), var(--organ-color) calc(50% - 1px), var(--organ-color) calc(50% + 1px), transparent calc(50% + 1px)),
+      linear-gradient(-45deg, transparent calc(50% - 1px), var(--organ-color) calc(50% - 1px), var(--organ-color) calc(50% + 1px), transparent calc(50% + 1px));
+    background-size: 28px 28px;
+  }
+
+  /* V — Logos: horizontal rules */
+  :global([data-organ-group]) .flip-card[data-organ="ORGAN V"] .flip-card__pattern {
+    background: repeating-linear-gradient(
+      0deg,
+      var(--organ-color),
+      var(--organ-color) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+  }
+
+  /* VI — Koinonia: interlocking circles */
+  :global([data-organ-group]) .flip-card[data-organ="ORGAN VI"] .flip-card__pattern {
+    background:
+      radial-gradient(circle at 0% 50%, var(--organ-color) 12px, transparent 12px),
+      radial-gradient(circle at 100% 50%, var(--organ-color) 12px, transparent 12px),
+      radial-gradient(circle at 50% 0%, var(--organ-color) 12px, transparent 12px),
+      radial-gradient(circle at 50% 100%, var(--organ-color) 12px, transparent 12px);
+    background-size: 32px 32px;
+  }
+
+  /* VII — Kerygma: starburst rays */
+  :global([data-organ-group]) .flip-card[data-organ="ORGAN VII"] .flip-card__pattern {
+    background: conic-gradient(
+      from 0deg at 50% 50%,
+      var(--organ-color) 0deg,
+      transparent 15deg,
+      transparent 30deg,
+      var(--organ-color) 30deg,
+      transparent 45deg,
+      transparent 60deg,
+      var(--organ-color) 60deg,
+      transparent 75deg,
+      transparent 90deg,
+      var(--organ-color) 90deg,
+      transparent 105deg,
+      transparent 120deg,
+      var(--organ-color) 120deg,
+      transparent 135deg,
+      transparent 150deg,
+      var(--organ-color) 150deg,
+      transparent 165deg,
+      transparent 180deg,
+      var(--organ-color) 180deg,
+      transparent 195deg,
+      transparent 210deg,
+      var(--organ-color) 210deg,
+      transparent 225deg,
+      transparent 240deg,
+      var(--organ-color) 240deg,
+      transparent 255deg,
+      transparent 270deg,
+      var(--organ-color) 270deg,
+      transparent 285deg,
+      transparent 300deg,
+      var(--organ-color) 300deg,
+      transparent 315deg,
+      transparent 330deg,
+      var(--organ-color) 330deg,
+      transparent 345deg,
+      transparent 360deg
+    );
+  }
+
+  /* Meta: dot matrix */
+  :global([data-organ-group]) .flip-card[data-organ="META"] .flip-card__pattern {
+    background: radial-gradient(circle, var(--organ-color) 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
+  }
+
+  /* --- Number watermark --- */
+  .flip-card__number {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--organ-color, var(--text-primary));
+    opacity: 0.08;
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-lg);
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+  }
+
+  .flip-card__face--front:hover .flip-card__number {
+    opacity: 0.15;
+  }
+
+  /* --- Front face title --- */
+  .flip-card__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* --- Flip hint --- */
+  .flip-card__hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    margin-top: var(--space-xs);
+  }
+
+  .flip-card__face--front:hover .flip-card__hint,
+  .flip-card__face--front:focus-visible .flip-card__hint {
+    opacity: 1;
+  }
+
+  /* --- Featured badge --- */
+  .flip-card__badge {
     position: absolute;
     top: 0;
     left: var(--space-xl);
@@ -70,88 +362,77 @@ const slug = href.replace(/\/$/, '').split('/').pop();
     letter-spacing: 0.1em;
     padding: 0.2rem 0.6rem;
     border-radius: 2px;
-    z-index: 2;
+    z-index: 3;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
 
-  .card--featured {
-    grid-column: span 2;
-  }
-
-  .card--featured .card__title {
-    font-size: 1.4rem;
-  }
-
-  .card__header {
+  /* --- Back face --- */
+  .flip-card__face--back {
+    position: absolute;
+    inset: 0;
+    transform: rotateY(180deg);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: var(--space-xs);
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-xl);
+    overflow-y: auto;
+    border-left: 3px solid var(--organ-color, var(--accent));
   }
 
-  .card__number {
-    font-family: var(--font-heading);
-    font-size: 2.5rem;
-    font-weight: 800;
+  .flip-card__close {
     position: absolute;
     top: var(--space-sm);
-    right: var(--space-md);
-    opacity: 0.08;
-    line-height: 1;
-    color: var(--text-primary);
-    transition: opacity var(--transition-base), transform var(--transition-base);
-    pointer-events: none;
-  }
-
-  .card:hover .card__number {
-    opacity: 0.15;
-    transform: translateY(-2px);
-  }
-
-  .card__tags {
-    display: flex;
-    gap: var(--space-xs);
-  }
-
-  .card__title {
+    right: var(--space-sm);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm, 4px);
+    color: var(--text-muted);
     font-size: 1.25rem;
+    line-height: 1;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .flip-card__close:hover {
+    color: var(--text-primary);
+    border-color: var(--text-muted);
+  }
+
+  .flip-card__close:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .flip-card__back-title {
+    font-size: 1.15rem;
     font-weight: 600;
     color: var(--text-primary);
     line-height: 1.3;
+    padding-right: var(--space-xl);
   }
 
-  .card__tagline {
-    font-size: 0.9rem;
+  .flip-card__tagline {
+    font-size: 0.85rem;
     color: var(--accent-text);
     font-style: italic;
   }
 
-  .card__desc {
-    font-size: 0.9rem;
+  .flip-card__description {
+    font-size: 0.85rem;
     color: var(--text-secondary);
     line-height: 1.6;
     flex: 1;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    transition: -webkit-line-clamp 200ms ease;
   }
 
-  .card:hover .card__desc,
-  .card:focus-within .card__desc {
-    -webkit-line-clamp: unset;
-  }
-
-  .card__cta {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-top: var(--space-sm);
-    transition: color var(--transition-fast);
-  }
-
-  .card:hover .card__cta {
-    color: var(--accent-text);
+  .flip-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
   }
 
   .tag--skill {
@@ -159,13 +440,67 @@ const slug = href.replace(/\/$/, '').split('/').pop();
     color: var(--accent-text);
   }
 
-  /* Dual-view visibility: engineering mode hides creative elements, vice versa */
-  :global([data-portfolio-view="engineering"]) .card__tags--creative,
-  :global([data-portfolio-view="engineering"]) .card__tagline--creative {
+  .flip-card__cta {
+    font-size: 0.85rem;
+    color: var(--accent-text);
+    text-decoration: none;
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    transition: color var(--transition-fast);
+  }
+
+  .flip-card__cta:hover {
+    color: var(--accent-hover);
+  }
+
+  .flip-card__cta:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* --- Dual-view visibility --- */
+  :global([data-portfolio-view="engineering"]) .flip-card__tags--creative,
+  :global([data-portfolio-view="engineering"]) .flip-card__tagline--creative {
     display: none;
   }
 
-  :global([data-portfolio-view="creative"]) .card__tags--engineering {
+  :global([data-portfolio-view="creative"]) .flip-card__tags--engineering {
     display: none;
+  }
+
+  /* --- Mobile --- */
+  @media (max-width: 768px) {
+    .flip-card__face--front {
+      min-height: 220px;
+    }
+
+    .flip-card__number {
+      font-size: 3.5rem;
+    }
+  }
+
+  /* --- Print --- */
+  @media print {
+    .flip-card__inner {
+      transform: none !important;
+    }
+
+    .flip-card__face--back {
+      position: relative;
+      transform: none;
+    }
+
+    .flip-card__pattern,
+    .flip-card__close,
+    .flip-card__hint {
+      display: none;
+    }
+  }
+
+  /* --- Reduced motion --- */
+  @media (prefers-reduced-motion: reduce) {
+    .flip-card__inner {
+      transition-duration: 0s !important;
+    }
   }
 </style>

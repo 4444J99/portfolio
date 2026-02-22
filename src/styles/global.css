@@ -669,6 +669,11 @@ img {
     grid-template-columns: 1fr;
   }
 
+  /* Flatten flip cards for print */
+  .flip-card__inner {
+    transform: none !important;
+  }
+
   /* Page breaks */
   h1, h2, h3 {
     page-break-after: avoid;
