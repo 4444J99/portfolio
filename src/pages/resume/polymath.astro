@@ -4,16 +4,16 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import { base } from '../../utils/paths';
 ---
 
-<Layout title="Resume (Polymath) — Anthony James Padavano" description="Creative technologist building autonomous creative systems. Full polymathic resume and CV." >
+<Layout title="Resume (Polymath) — AI Orchestration Architect" description="Comprehensive CV of Anthony James Padavano: AI-Native Architect, Systems Designer, and Creative Technologist.">
     <div class="sketch-accent print-hide">
-      <SketchContainer sketchId="flow-diagram" height="200px" mobileHeight="150px" ariaLabel="Animated flow diagram representing career progression" data-stages="Education,Multimedia Production,Digital Marketing,Systems Engineering,Creative Infrastructure" />
+      <SketchContainer sketchId="flow-diagram" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="Animated flow diagram representing career progression" data-stages="Education,Multimedia Production,Digital Marketing,Systems Engineering,Creative Infrastructure" />
     </div>
     <article class="resume">
       <div class="container container--narrow">
 
         <header class="resume__header">
           <h1>Anthony James Padavano</h1>
-          <p class="resume__title">Creative Technologist (Polymath)</p>
+          <p class="resume__title">AI Orchestration Architect & Systems Director</p>
           <div class="resume__contact">
             <span class="resume__location">New York City</span>
             <span class="resume__sep" aria-hidden="true">/</span>
@@ -26,16 +26,16 @@ import { base } from '../../utils/paths';
             <a href={base}>Portfolio</a>
           </div>
           <div class="resume__downloads">
-            <a class="resume__download" href={`${base}resume/Anthony_James_Padavano_CV_Polymath.pdf`} download>
-              Visionary Polymath PDF
+            <a class="resume__download" href={`${base}resume/Anthony_James_Padavano_CV_Polymath.pdf`} download title="Download full CV as PDF">
+              Strategic Polymath PDF
             </a>
-            <a class="resume__download resume__download--alt" href={`${base}resume/Anthony_James_Padavano_CV.pdf`} download>
-              Creative Technologist PDF
+            <a class="resume__download resume__download--alt" href={`${base}resume/Anthony_James_Padavano_CV.pdf`} download title="Download systems CV as PDF">
+              Systems Architect PDF
             </a>
-            <a class="resume__download resume__download--alt" href={`${base}resume/Anthony_James_Padavano_Multimedia.pdf`} download>
-              Multimedia Specialist PDF
+            <a class="resume__download resume__download--alt" href={`${base}resume/Anthony_James_Padavano_Multimedia.pdf`} download title="Download multimedia CV as PDF">
+              Multimedia Director PDF
             </a>
-            <a class="resume__download resume__download--alt" href={`${base}resume/Anthony_James_Padavano_CV.docx`} download>
+            <a class="resume__download resume__download--alt" href={`${base}resume/Anthony_James_Padavano_CV.docx`} download title="Download ATS-friendly DOCX">
               DOCX (ATS-friendly)
             </a>
             <button class="resume__download resume__download--print print-hide" onclick="window.print()">
@@ -46,9 +46,9 @@ import { base } from '../../utils/paths';
 
 
         <section class="resume__section prose">
-          <h2>Summary</h2>
+          <h2>Executive Summary</h2>
           <p>
-            Creative technologist and artist-engineer with 10+ years across multimedia production, digital marketing, and systems design. Builds autonomous creative systems and treats their governance as artistic medium — most recently shipping an eight-organ orchestration system coordinating 91 repositories across 8 GitHub organizations with ~386K words of public documentation. Achieved +17.5M views and raised $2M across nonprofit and commercial projects. MFA in Creative Writing; Google-certified in UX Design, Digital Marketing, and Project Management; Meta Full-Stack Developer.
+            AI Orchestration Architect and Systems Director with 15 years of experience bridging high-stakes infrastructure with creative R&D. Expert in multi-agent orchestration, automated governance, and large-scale system design. Recently engineered an eight-organ creative-institutional system coordinating 91 repositories across 8 organizations with ~386K words of public documentation and 1,254 automated tests (85% coverage). Delivered +17.5M views and contributed to $2M in revenue/fundraising across commercial and nonprofit sectors. MFA in Creative Writing; Google-certified in UX, PM, and Digital Marketing; Meta-certified Full-Stack Developer.
           </p>
         </section>
 

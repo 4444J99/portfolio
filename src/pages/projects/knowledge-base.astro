@@ -52,7 +52,7 @@ import StatGrid from '../../components/StatGrid.astro';
 
       <h2>Multi-Source Export</h2>
       <p>
-        The first subsystem solves the ingestion problem: AI platforms do not offer robust export APIs, so the system uses browser automation (Playwright) to extract conversations from Claude, ChatGPT, and Gemini, supplemented by direct file system access for local documents, Google Docs API integration, and Apple Notes extraction via AppleScript bridging.<Cite id={3} author="Engelbart, Douglas C." title="Augmenting Human Intellect: A Conceptual Framework" source="Stanford Research Institute" year={1962} /> Engelbart's foundational vision was not artificial intelligence but intelligence augmentation — tools that amplify human capability by organizing the artifacts of thought. The export engine is precisely this: it recovers intellectual artifacts that would otherwise be locked inside proprietary interfaces. Each source adapter normalizes conversations into a common intermediate representation — a sequence of turns with metadata (timestamp, model, token count, source platform) — so that downstream subsystems operate on a uniform data structure regardless of origin. The system currently supports nine sources, with the adapter interface designed for extensibility: adding a new source requires implementing a single TypeScript interface with three methods (authenticate, list, extract).<Cite id={4} author="Nelson, Ted" title="Computer Lib/Dream Machines" source="Self-published" year={1974} /> Nelson's dream of universal, interconnected documents — hypertext as he originally conceived it — motivates the design: knowledge should not be imprisoned in the application that created it.
+        The first subsystem solves the ingestion problem: AI platforms do not offer robust export APIs, so the system uses browser automation (Playwright) to extract conversations. I directed the implementation of the <a href="https://github.com/organvm-i-theoria/my-knowledge-base/tree/main/src/adapters" target="_blank">source adapters</a> to normalize conversations from nine disparate platforms into a common intermediate representation.<Cite id={3} author="Engelbart, Douglas C." title="Augmenting Human Intellect: A Conceptual Framework" source="Stanford Research Institute" year={1962} />
       </p>
 
       <CodeStructure lang="typescript" caption="Source adapter interface and atomizer pipeline — the contract every ingestion source must satisfy" filename="atomizer-pipeline.ts">
@@ -178,7 +178,10 @@ type AtomizationStrategy =
       </p>
 
       <CodeStructure lang="typescript" caption="Search fusion algorithm — Reciprocal Rank Fusion merges keyword and semantic results without weight tuning" filename="search-fusion.ts">
-{`interface SearchResult {
+{`// View implementation at:
+// github.com/organvm-i-theoria/my-knowledge-base/src/search/fusion.ts
+
+interface SearchResult {
   atomId: string;
   score: number;
   source: 'fts5' | 'chromadb' | 'fused';

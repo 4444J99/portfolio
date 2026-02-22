@@ -1,14 +1,3 @@
----
-import ProjectLayout from '../../layouts/ProjectLayout.astro';
-import SketchContainer from '../../components/sketches/SketchContainer.astro';
-import Cite from '../../components/academic/Cite.astro';
-import References from '../../components/academic/References.astro';
-import Figure from '../../components/academic/Figure.astro';
-import CodeStructure from '../../components/academic/CodeStructure.astro';
-import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
-import StatGrid from '../../components/StatGrid.astro';
----
-
 <ProjectLayout pageTitle="The Eight-Organ System — 4444j" description="An orchestration system coordinating 91 repositories across 8 GitHub organizations, treating governance as creative infrastructure."
   sketchId="octagon"
       title="The Eight-Organ System"
@@ -28,7 +17,7 @@ import StatGrid from '../../components/StatGrid.astro';
         sketchId="octagon"
         height="500px"
         mobileHeight="350px"
-        ariaLabel="Interactive directed graph: 8 organ nodes with 81 repo particles orbiting. Directed edges enforce no-back-edges rule — particles flow I to II to III only. Hover organs to see repo counts. Click to send pulses along outgoing edges."
+        ariaLabel="Interactive directed graph: 8 organ nodes with 91 repo particles orbiting. Directed edges enforce no-back-edges rule — particles flow I to II to III only. Hover organs to see repo counts. Click to send pulses along outgoing edges."
       />
 
       <h2>How It Works</h2>
@@ -56,7 +45,7 @@ import StatGrid from '../../components/StatGrid.astro';
 
       <h2>The Registry</h2>
       <p>
-        A machine-readable JSON registry (<code>registry-v2.json</code>) serves as the single source of truth for all 91 repositories.<Cite id={5} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's principle of a "single authoritative data source" applies here at the organizational level — every repo entry carries status, dependencies, documentation tier, and promotion state. Automated scripts validate the registry against the live state of every repo, checking CI/CD, documentation, dependency integrity, and constitutional compliance.<Cite id={6} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation" source="Addison-Wesley" year={2010} />
+        A machine-readable <a href="https://github.com/meta-organvm/orchestration-start-here/blob/main/registry-v2.json" target="_blank">JSON registry</a> serves as the single source of truth for all 91 repositories.<Cite id={5} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's principle of a "single authoritative data source" applies here at the organizational level — every repo entry carries status, dependencies, documentation tier, and promotion state. Automated scripts validate the registry against the live state of every repo, checking CI/CD, documentation, dependency integrity, and constitutional compliance.<Cite id={6} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation" source="Addison-Wesley" year={2010} />
       </p>
 
       <CodeStructure lang="json" caption="Registry entry structure — each of 91 repos carries this metadata" filename="registry-v2.json (excerpt)">
@@ -164,29 +153,29 @@ jobs:
 
       <h2>Results</h2>
       <p>
-        The system launched on 2026-02-11 with 9/9 launch criteria met. All 8 organs are operational.<Cite id={13} author="Deming, W. Edwards" title="Out of the Crisis" source="MIT Press" year={1986} /> Deming's quality management principles — measure, validate, improve — are embedded in the monthly audit cycle. 228 validation checks pass across the Platinum validation suite, covering CI workflow presence, CHANGELOG files, architectural decision records, badge rows, and implementation status fields for every repo. POSSE distribution is live (Mastodon + Discord). Jekyll/GitHub Pages publishes 10 meta-system essays (~40K words) with an Atom RSS feed.
+        The system launched on 2026-02-11 with 9/9 launch criteria met. All 8 organs are operational.<Cite id={13} author="Deming, W. Edwards" title="Out of the Crisis" source="MIT Press" year={1986} /> Deming's quality management principles — measure, validate, improve — are embedded in the monthly audit cycle. 228 validation checks pass across the Platinum validation suite, covering CI workflow presence, CHANGELOG files, architectural decision records, badge rows, and implementation status fields for every repo. POSSE distribution is live (Mastodon + Discord). Jekyll/GitHub Pages publishes 36 meta-system essays (~132K words) with an Atom RSS feed.
       </p>
 
       <Figure alt="Validation results summary" caption="Platinum validation suite: 228/228 checks passing across all 8 organs">
         <StatGrid stats={[
-          { value: '81', label: 'Repositories' },
+          { value: '91', label: 'Repositories' },
           { value: '8', label: 'Organizations' },
-          { value: '386K', label: 'Words' },
+          { value: '404K', label: 'Words' },
           { value: '31', label: 'Dependencies' },
           { value: '228', label: 'Validation Checks' },
-          { value: '70+', label: 'CI Workflows' },
+          { value: '77', label: 'CI Workflows' },
         ]} />
       </Figure>
 
       <p>
-        65 repositories carry CI workflows. 130 architectural decision records document key design choices. Every repo has a CHANGELOG and documentation tier assignment (7 flagship, 57 standard, 5 archive, 8 infrastructure).<Cite id={14} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2018} />
+        77 repositories carry CI workflows. 130 architectural decision records document key design choices. Every repo has a CHANGELOG and documentation tier assignment (8 flagship, 70 standard, 5 archive, 8 infrastructure).<Cite id={14} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2018} />
       </p>
 
       <h2>Tradeoffs & Lessons</h2>
       <ul>
-        <li><strong>Documentation volume vs. maintenance burden</strong> — ~386K words is powerful as proof-of-work, but each README is a liability if the underlying repo changes. The registry-as-source-of-truth pattern helps: stats flow from the registry, not from hand-editing.<Cite id={15} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /></li>
+        <li><strong>Documentation volume vs. maintenance burden</strong> — ~404K words is powerful as proof-of-work, but each README is a liability if the underlying repo changes. The registry-as-source-of-truth pattern helps: stats flow from the registry, not from hand-editing.<Cite id={15} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /></li>
         <li><strong>Strict dependency rules vs. convenience</strong> — The no-back-edges constraint is the system's best design decision <em>and</em> its most annoying one. It forced clean interfaces but also meant rewriting code that wanted to "just import" from a downstream organ.</li>
-        <li><strong>AI-conductor workflow</strong> — ~386K words were produced using a human-AI co-creation model: AI generates volume, human directs and refines. This is honest and documented. The risk is perception ("AI wrote your portfolio"). The mitigation is transparency: every essay in ORGAN-V explains the process.<Cite id={16} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /></li>
+        <li><strong>AI-conductor workflow</strong> — ~404K words were produced using a human-AI co-creation model: AI generates volume, human directs and refines. This is honest and documented. The risk is perception ("AI wrote your portfolio"). The mitigation is transparency: every essay in ORGAN-V explains the process.<Cite id={16} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /></li>
         <li><strong>Naming scheme lock-in</strong> — Greek ontological naming (Theoria, Poiesis, Ergon) is distinctive but means renaming requires 40+ file edits. This was worth the tradeoff for identity coherence.</li>
       </ul>
 
@@ -197,14 +186,14 @@ jobs:
         { id: 4, author: "Meadows, Donella H.", title: "Thinking in Systems: A Primer", source: "Chelsea Green Publishing", year: 2008 },
         { id: 5, author: "Fowler, Martin", title: "Patterns of Enterprise Application Architecture", source: "Addison-Wesley", year: 2002 },
         { id: 6, author: "Humble, Jez and David Farley", title: "Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation", source: "Addison-Wesley", year: 2010 },
-        { id: 7, author: "Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides", title: "Design Patterns: Elements of Reusable Object-Oriented Software", source: "Addison-Wesley", year: 1994 },
+        { id: 1, author: "Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides", title: "Design Patterns: Elements of Reusable Object-Oriented Software", source: "Addison-Wesley", year: 1994 },
         { id: 8, author: "McConnell, Steve", title: "Code Complete: A Practical Handbook of Software Construction", source: "Microsoft Press", year: 2004 },
         { id: 9, author: "Martin, Robert C.", title: "Clean Architecture: A Craftsman's Guide to Software Structure and Design", source: "Prentice Hall", year: 2017 },
         { id: 10, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
         { id: 11, author: "Scott, James C.", title: "Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed", source: "Yale University Press", year: 1998 },
         { id: 12, author: "Csikszentmihalyi, Mihaly", title: "Creativity: Flow and the Psychology of Discovery and Invention", source: "Harper Perennial", year: 1996 },
         { id: 13, author: "Deming, W. Edwards", title: "Out of the Crisis", source: "MIT Press", year: 1986 },
-        { id: 14, author: "Nygard, Michael T.", title: "Release It! Design and Deploy Production-Ready Software", source: "Pragmatic Bookshelf", year: 2018 },
+        { id: 14, author: "Nygard, Michael T." , title: "Release It! Design and Deploy Production-Ready Software", source: "Pragmatic Bookshelf", year: 2018 },
         { id: 15, author: "Brooks, Frederick P.", title: "The Mythical Man-Month: Essays on Software Engineering", source: "Addison-Wesley", year: 1975 },
         { id: 16, author: "Shneiderman, Ben", title: "Human-Centered AI", source: "Oxford University Press", year: 2022 },
       ]} />

@@ -8,16 +8,15 @@ const typedEssayData = essayData as EssayData;
 const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title);
 ---
 
-<Layout title="Essays — Public Process" description={`${typedEssayData.total} essays on building an eight-organ creative-institutional system in public.`}>
+<Layout title="Essays — Thought Leadership" description={`${typedEssayData.total} strategic and technical essays documenting the 91-repository system's architectural evolution.`}>
     <div class="sketch-accent">
-      <SketchContainer sketchId="token-stream" height="250px" mobileHeight="180px" ariaLabel="Animated token stream representing text and language flow" data-tokens={essayTitles.join('|')} />
+      <SketchContainer sketchId="token-stream" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="Animated token stream representing text and language flow" data-tokens={essayTitles.join('|')} />
     </div>
     <section class="section">
       <div class="container">
-        <h1 class="page-title">Public Process Essays</h1>
+        <h1 class="page-title">Thought Leadership</h1>
         <p class="page-sub">
-          {typedEssayData.total} essays documenting architectural decisions, sprint narratives, and methodology
-          — transparency as design choice, process documentation as portfolio evidence.
+          {typedEssayData.total} long-form analyses documenting architectural invariants, sprint delivery, and creative-institutional methodology. Transparency as evidence; documentation as structural integrity.
         </p>
         <p class="page-feed">
           <a href={typedEssayData.feed_url} target="_blank" rel="noopener noreferrer">RSS Feed</a>

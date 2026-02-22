@@ -65,11 +65,11 @@ const featuredProjects = persona.featured_projects.map(fp => {
         </div>
 
         <div class="resume-actions print-hide">
-          <a class="action-btn" href={`${base}resume/Anthony_James_Padavano_${persona.title.replace(/\s+/g, '_')}.pdf`} download>
+          <a class="action-btn" href={`${base}resume/Anthony_James_Padavano_${persona.title.replace(/\s+/g, '_')}.pdf`} download aria-label={`Download ${persona.title} resume as PDF`}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             Download PDF
           </a>
-          <button class="action-btn" onclick="window.print()">
+          <button class="action-btn" onclick="window.print()" aria-label="Print this resume">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
             Print Resume
           </button>
@@ -97,9 +97,9 @@ const featuredProjects = persona.featured_projects.map(fp => {
         <h2 class="section-label">Leadership & Strategic Impact</h2>
         <div class="summary-box">
           <ul class="leadership-list">
-            <li><strong>Mentorship:</strong> Directed the academic growth of 2,000+ students across 100+ courses, applying UX principles to learning systems.</li>
-            <li><strong>Fiscal Responsibility:</strong> Raised $2M in project funding and delivered a 328% ROI on major digital transformation initiatives.</li>
-            <li><strong>Scale:</strong> Managed 100+ concurrent multimedia and construction projects from concept to production-grade delivery.</li>
+            <li><span class="bullet" aria-hidden="true"></span> <strong>Mentorship:</strong> Directed the academic growth of 2,000+ students across 100+ courses, applying UX principles to learning systems.</li>
+            <li><span class="bullet" aria-hidden="true"></span> <strong>Fiscal Responsibility:</strong> Raised $2M in project funding and delivered a 328% ROI on major digital transformation initiatives.</li>
+            <li><span class="bullet" aria-hidden="true"></span> <strong>Scale:</strong> Managed 100+ concurrent multimedia and construction projects from concept to production-grade delivery.</li>
           </ul>
         </div>
       </section>
@@ -111,7 +111,7 @@ const featuredProjects = persona.featured_projects.map(fp => {
             <div class="resume-project">
               <div class="resume-project__header">
                 <h3>{project.title}</h3>
-                <a href={`https://github.com/${project.organ}/${project.sourceRepoName || project.slug}`} target="_blank" class="resume-project__repo">
+                <a href={`https://github.com/${project.organ}/${project.sourceRepoName || project.slug}`} target="_blank" class="resume-project__repo" aria-label={`View source code for ${project.title} on GitHub`}>
                   {project.sourceRepoName || project.slug}
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                 </a>
@@ -309,6 +309,21 @@ const featuredProjects = persona.featured_projects.map(fp => {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
+  }
+
+  .leadership-list li {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: baseline;
+  }
+
+  .bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 0.6rem;
   }
 
   .leadership-list li strong {

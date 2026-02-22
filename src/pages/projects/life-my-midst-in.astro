@@ -43,11 +43,14 @@ import StatGrid from '../../components/StatGrid.astro';
 
       <h2>Technical Architecture</h2>
       <p>
-        The system is a full-stack monorepo implementing hexagonal architecture — a pattern where the core business logic has no dependencies on frameworks, databases, or delivery mechanisms.<Cite id={3} author="Cockburn, Alistair" title="Hexagonal Architecture" source="alistair.cockburn.us" year={2005} /> The outer shell consists of a <strong>Next.js 16 frontend</strong> (React Server Components, streaming SSR) and a <strong>Fastify 5 REST API</strong> (JSON Schema validation, OpenAPI generation), but these are interchangeable adapters around a framework-agnostic core. A Node.js orchestrator manages long-running processes — credential verification, compatibility scoring, and the autonomous Hunter Protocol. The monorepo shares four packages: Zod schemas for runtime type validation, a core logic library, a narrative model that structures professional identity as a directed acyclic graph, and a design system implementing the visual language.<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's separation of domain logic from infrastructure concerns maps directly onto this architecture: the mask system, compatibility scorer, and credential verifier are pure domain objects that know nothing about HTTP, databases, or React.
+        The system is a full-stack monorepo implementing hexagonal architecture — a pattern where the core business logic has no dependencies on frameworks, databases, or delivery mechanisms.<Cite id={3} author="Cockburn, Alistair" title="Hexagonal Architecture" source="alistair.cockburn.us" year={2005} /> I directed the architectural specification for a <strong>Next.js 16 frontend</strong> (React Server Components, streaming SSR) and a <strong>Fastify 5 REST API</strong>, implemented as interchangeable adapters around a framework-agnostic core. A Node.js orchestrator manages long-running processes — credential verification, compatibility scoring, and the autonomous Hunter Protocol. The monorepo shares four packages: Zod schemas for runtime type validation, a core logic library, a narrative model that structures professional identity as a directed acyclic graph, and a design system implementing the visual language.<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} />
       </p>
 
       <CodeStructure lang="typescript" caption="Mask system type definition — 16 identity masks across three cognitive categories, each defining how the same underlying professional truth is filtered for a specific audience" filename="packages/core/src/masks/types.ts">
-{`interface ProfessionalMask {
+{`// View canonical definitions at: 
+// https://github.com/organvm-iii-ergon/life-my--midst--in/tree/main/packages/core/src/masks
+
+interface ProfessionalMask {
   id: MaskId;
   category: 'cognitive' | 'expressive' | 'operational';
   label: string;

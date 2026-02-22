@@ -48,19 +48,19 @@ const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0,
 const featured = sketches[dayOfYear % sketches.length];
 ---
 
-<Layout title="Gallery — Generative Art" description="A collection of generative art sketches built with p5.js, each paired to a project in the eight-organ system.">
+<Layout title="Gallery — Creative R&D" description="A collection of generative art sketches and algorithmic experiments built with p5.js, each mapped to a system capability.">
     <section class="section">
       <div class="container">
-        <h1 class="page-title" data-reveal>Gallery</h1>
-        <p class="page-sub" data-reveal>{sketches.length} generative sketches built with p5.js — each one paired to a project in the system.</p>
+        <h1 class="page-title" data-reveal>Creative R&D</h1>
+        <p class="page-sub" data-reveal>{sketches.length} generative sketches orchestrated with p5.js — each providing a visual interface to specific system mechanics.</p>
 
         <!-- Featured sketch -->
         <div class="gallery-featured" data-reveal>
-          <span class="gallery-featured__badge">Featured</span>
+          <span class="gallery-featured__badge">Active Experiment</span>
           <SketchContainer
             sketchId={featured.id}
-            height="400px"
-            mobileHeight="280px"
+            height="var(--space-6xl)"
+            mobileHeight="var(--space-5xl)"
             ariaLabel={`Featured generative sketch: ${featured.label}`}
             interactive={true}
           />
@@ -72,7 +72,7 @@ const featured = sketches[dayOfYear % sketches.length];
 
         <!-- Filter buttons -->
         <div class="gallery-filters" data-reveal role="group" aria-label="Filter sketches by organ">
-          <button class="gallery-filter gallery-filter--active" data-filter="all" aria-pressed="true">All</button>
+          <button class="gallery-filter gallery-filter--active" data-filter="all" aria-pressed="true">All Organs</button>
           {organs.map((organ) => (
             <button class="gallery-filter" data-filter={organ} aria-pressed="false">
               {organ === 'META' ? 'Meta' : organ.replace('ORGAN-', '')}
@@ -86,8 +86,8 @@ const featured = sketches[dayOfYear % sketches.length];
             <div class="gallery-item" data-reveal data-organ={sketch.organ} style={`--stagger-index: ${Math.min(i, 8)}`}>
               <SketchContainer
                 sketchId={sketch.id}
-                height="280px"
-                mobileHeight="200px"
+                height="var(--space-5xl)"
+                mobileHeight="var(--space-4xl)"
                 ariaLabel={`Generative sketch: ${sketch.label}`}
                 interactive={true}
               />

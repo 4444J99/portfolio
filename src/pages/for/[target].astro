@@ -41,20 +41,17 @@ const featuredProjects = persona.featured_projects.map(fp => {
     <!-- Targeted Header -->
     <header class="target-header print-hide">
       <div class="container container--narrow">
-        <div class="target-badge">Application for {target.company}</div>
+        <div class="target-badge">Strategic Technical Proposal &middot; {target.company}</div>
         <h1 class="target-role">{target.role}</h1>
         <p class="target-intro">{target.intro}</p>
         <div class="target-actions">
-          <a class="action-btn primary" href={`${base}resume/Anthony_James_Padavano_App_${target.company.replace(/\s+/g, '_')}.pdf`} download>
+          <a class="action-btn primary" href={`${base}resume/Anthony_James_Padavano_App_${target.company.replace(/\s+/g, '_')}.pdf`} download aria-label={`Download tailored application bundle for ${target.company}`}>
             Download PDF Bundle
           </a>
-          <a class="action-btn secondary" href={`mailto:padavano.anthony@gmail.com?subject=Audit%20Request:%20${target.company}&body=I'd%20like%20to%20request%20a%20technical%20audit%20of%20the%20Eight-Organ%20governance%20logs.`}>
-            Request System Audit
-          </a>
-          <button class="action-btn secondary" id="view-trace-btn">
+          <button class="action-btn secondary" id="view-trace-btn" aria-label="View technical governance trace">
             View Governance Trace
           </button>
-          <a class="action-btn secondary" href="https://linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank">
+          <a class="action-btn secondary" href="https://linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="noopener noreferrer">
             Book Tech Synthesis
           </a>
         </div>
@@ -67,6 +64,14 @@ const featuredProjects = persona.featured_projects.map(fp => {
     <div class="sketch-accent print-hide">
       <SketchContainer sketchId={persona.sketchId} height="120px" mobileHeight="100px" ariaLabel={`Generative visualization for ${target.company}`} />
     </div>
+
+    <!-- Back to selection -->
+    <nav class="resume-nav container container--narrow print-hide">
+      <a href={`${base}resume/`} class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Switch Persona
+      </a>
+    </nav>
 
     <!-- The Resume Content (Identical to Persona View) -->
     <article class="market-resume">

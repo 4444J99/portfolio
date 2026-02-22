@@ -120,17 +120,16 @@ const typeGroups: Record<string, number> = { SaaS: 0, B2B: 0, B2C: 0, B2B2C: 0 }
 products.forEach(p => { if (typeGroups[p.type] !== undefined) typeGroups[p.type]++; });
 ---
 
-<Layout title="Products & Platforms" description="ORGAN-III commerce products: SaaS, B2B, B2C, and B2B2C platforms across 12 applications in various stages of development.">
+<Layout title="Products & Platforms — Solution Catalog" description="A catalog of 12 production-ready and prototype platforms across SaaS, B2B, and B2C domains, showcasing architecture-first delivery.">
     <div class="sketch-accent">
-      <SketchContainer sketchId="pipeline" height="250px" mobileHeight="180px" ariaLabel="Animated pipeline visualization representing commerce flow" data-chambers={Object.keys(typeGroups).join(',')} data-counts={Object.values(typeGroups).join(',')} />
+      <SketchContainer sketchId="pipeline" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="Animated pipeline visualization representing commerce flow" data-chambers={Object.keys(typeGroups).join(',')} data-counts={Object.values(typeGroups).join(',')} />
     </div>
     <section class="section">
       <div class="container">
-        <h1 class="page-title">Products & Platforms</h1>
+        <h1 class="page-title">Solution Catalog</h1>
         <p class="page-sub">
-          {products.length} products spanning SaaS platforms,
-          B2B tools, B2C consumer applications, and hybrid B2B2C marketplaces.
-          Each product lists its current development status and technology stack.
+          {products.length} high-stakes platforms spanning automated compliance, distributed trading, and circular logistics.
+          Every product is an architectural instantiation of the eight-organ system.
         </p>
 
         <h2 class="section__heading">Product Catalog</h2>

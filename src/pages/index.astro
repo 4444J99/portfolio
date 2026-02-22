@@ -20,7 +20,7 @@ const resolvedGroups = organGroups.map(group => ({
 <Layout 
   title="Anthony James Padavano — AI Orchestration Architect" 
   mainAttrs={{ "data-portfolio-view": "engineering" }}
-  keywords={["AI Orchestration", "Systems Architect", "Creative Technologist", "Staff Engineer", "Multi-Agent Systems", "Python", "TypeScript", "CI/CD Automation"]}
+  keywords={["AI Orchestration", "Systems Architect", "Platform Governance", "Logocentric Architecture", "Staff Engineer", "Multi-Agent Systems", "Python", "TypeScript", "CI/CD Automation"]}
 >
     <HeroSection metrics={metrics} resolvedGroups={resolvedGroups} />
 
@@ -32,7 +32,7 @@ const resolvedGroups = organGroups.map(group => ({
       organColorMap={organColorMap}
     />
 
-    <section class="section stats-section">
+    <section class="section stats-section stats-section--home">
       <div class="container">
         <div class="stat-grid" data-stats-view="engineering" data-reveal>
           <div class="stat">
@@ -81,11 +81,11 @@ const resolvedGroups = organGroups.map(group => ({
       </div>
     </section>
 
-    <section class="section contact-section" id="contact">
+    <section class="section contact-section contact-section--home" id="contact">
       <div class="container">
-        <h2 class="section__heading">Get in Touch</h2>
+        <h2 class="section__heading">Strategic Orchestration</h2>
         <p class="contact__text">
-          I am an AI-Native Architect bridging 15 years of high-impact delivery with modern system orchestration. I am available for Staff-level roles in AI Infrastructure, Systems Architecture, and Creative R&D.
+          I bridge 15 years of high-stakes delivery with modern system orchestration. I am available for Staff and Director-level roles in AI Infrastructure, Systems Architecture, and Creative R&D.
         </p>
         <div class="contact__links">
           <a href="mailto:padavano.anthony@gmail.com" class="contact__link">
@@ -104,6 +104,47 @@ const resolvedGroups = organGroups.map(group => ({
       </div>
     </section>
 </Layout>
+
+<IndexFilters />
+
+<style>
+  .stats-section--home,
+  .contact-section--home {
+    padding: var(--space-4xl) 0;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .section__heading {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .contact__text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+    max-width: 50ch;
+  }
+
+  .contact__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+  }
+
+  .contact__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .contact__link:hover {
+    color: var(--accent-text);
+  }
+</style>
 
 <IndexFilters />
 

@@ -13,10 +13,10 @@ import StatGrid from '../../components/StatGrid.astro';
   sketchId="ticker"
       title="The Actual News"
       tagline="News as a public service — verifiable by design"
-      tags={['Commerce', 'Media']}
+      tags={['Microservices', 'TypeScript', 'PostgreSQL', 'Journalism Tech']}
       repo="https://github.com/organvm-iii-ergon/the-actual-news">
       <h2>The Problem: Architectural Truthfulness</h2>
-<SketchContainer sketchId="ticker" height="250px" mobileHeight="180px" ariaLabel="News data ticker stream" />
+<SketchContainer sketchId="ticker" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="News data ticker stream" />
 
       <p>
         The crisis in journalism is not primarily one of intent but of architecture. Newsrooms filled with principled reporters publish through platforms whose economic incentives reward engagement over accuracy, whose correction mechanisms are afterthoughts, and whose verification processes are invisible to readers. Kovach and Rosenstiel identified the core tension decades ago: journalism's first obligation is to the truth, but the institutions delivering journalism are structured around business models that treat truth as a byproduct rather than the product itself.<Cite id={1} author="Kovach, Bill and Tom Rosenstiel" title="The Elements of Journalism: What Newspeople Should Know and the Public Should Expect" source="Three Rivers Press" year={2014} /> Habermas's analysis of the public sphere reveals the deeper structural problem — when the communicative infrastructure of democratic discourse is colonized by market logic, the rational-critical debate that journalism is supposed to enable degrades into manufactured consent and spectacle.<Cite id={2} author="Habermas, Jurgen" title="The Structural Transformation of the Public Sphere" source="MIT Press" year={1962} /> The Actual News starts from a different premise: what if the platform itself made truthfulness the product? Not fact-checking after publication, but a native architecture where every published story ships with a machine-readable verification spine — atomic claims with confidence scores, content-addressed evidence graphs with provenance chains, and append-only correction history. If a story does not meet the evidence threshold, it does not publish.

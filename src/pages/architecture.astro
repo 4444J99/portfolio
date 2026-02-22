@@ -20,25 +20,25 @@ const organEdges = typedGraph.edges.map((e: GraphEdge) => {
 const uniqueEdges = [...new Set(organEdges)] as string[];
 ---
 
-<Layout title="Architecture — Dependency Graph" description="Interactive dependency graph of the ORGANVM eight-organ system.">
+<Layout title="Architecture — System Topology" description="Interactive dependency graph and architectural mapping of the 91-repository creative-institutional system.">
     <div class="sketch-accent">
-      <SketchContainer sketchId="network-graph" height="250px" mobileHeight="180px" ariaLabel="Animated network graph showing interconnected system nodes" data-nodes={organNodes.join(',')} data-edges={uniqueEdges.join(';')} />
+      <SketchContainer sketchId="network-graph" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="Animated network graph showing interconnected system nodes" data-nodes={organNodes.join(',')} data-edges={uniqueEdges.join(';')} />
     </div>
     <section class="section">
       <div class="container">
-        <h1 class="page-title">System Architecture</h1>
+        <h1 class="page-title">System Topology</h1>
         <p class="page-sub">
-          {graphData.total_nodes} active repositories connected by {graphData.total_edges} dependency edges.
-          Nodes are colored by organ; flagships are larger. Drag to rearrange. Hover for details.
+          {graphData.total_nodes} active repositories orchestrated through {graphData.total_edges} validated dependency edges.
+          Nodes represent discrete Organs; flagships anchor the system. Interactivity enabled for deep inspection.
         </p>
 
-        <h2 class="section__heading" data-reveal>Navigate the System</h2>
-        <p class="page-sub" data-reveal>Click an organ to explore its projects. Click a project to navigate there.</p>
+        <h2 class="section__heading" data-reveal>System Navigator</h2>
+        <p class="page-sub" data-reveal>Drill down into specific Organs to inspect repository clusters and cross-functional interfaces.</p>
         <ChartContainer
           chartId="organ-navigator"
           data={navigatorData}
           ariaLabel="Interactive organ navigator showing 8 organ nodes with expandable project satellites"
-          height="450px"
+          height="var(--space-6xl)"
         />
       </div>
     </section>

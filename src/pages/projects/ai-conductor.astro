@@ -9,7 +9,7 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import StatGrid from '../../components/StatGrid.astro';
 ---
 
-<ProjectLayout pageTitle="AI-Conductor Model — 4444j" description="The methodology for human-AI co-creation that produced ~386K words of documentation — AI generates volume, human directs and refines."
+<ProjectLayout pageTitle="AI-Conductor Model — 4444j" description="The methodology for human-AI co-creation that produced ~404K words of documentation — AI generates volume, human directs and refines."
   sketchId="conductor"
       title="AI-Conductor Model"
       tagline="Human-AI co-creation as artistic practice"
@@ -29,9 +29,9 @@ import StatGrid from '../../components/StatGrid.astro';
     D -->|Pass| E[Approved Output]
     D -->|Fail| F[Revision Brief]
     F --> B
-    style A fill:#c9a84c,color:#0a0a0b
-    style C fill:#c9a84c,color:#0a0a0b
-    style E fill:#c9a84c,color:#0a0a0b`}
+    style A fill:#7ce8a6,color:#0a0a0b
+    style C fill:#7ce8a6,color:#0a0a0b
+    style E fill:#7ce8a6,color:#0a0a0b`}
       />
 
       <h2>How It Works in Practice</h2>
@@ -65,7 +65,7 @@ import StatGrid from '../../components/StatGrid.astro';
         sketchId="conductor"
         height="350px"
         mobileHeight="250px"
-        ariaLabel="Interactive token stream visualization: river of token rectangles flowing left to right through 4 phases (Context, Generation, Review, Validation). River widens at Generation and narrows at Review — the human bottleneck. Tokens change color through review: gold for verified, dim for flagged. Mouse X zooms into phases. Click tokens in Review to see verification status. Running counter ticks toward 386K."
+        ariaLabel="Interactive token stream visualization: river of token rectangles flowing left to right through 4 phases (Context, Generation, Review, Validation). River widens at Generation and narrows at Review — the human bottleneck. Tokens change color through review: gold for verified, dim for flagged. Mouse X zooms into phases. Click tokens in Review to see verification status. Running counter ticks toward 404K."
       />
 
       <h2>The Token Economy</h2>
@@ -89,15 +89,15 @@ import StatGrid from '../../components/StatGrid.astro';
 
       <CodeStructure lang="text" caption="Token economics: the conductor model's cost structure at scale" filename="production-metrics.txt">
 {`Total system budget:     ~6.5 million tokens
-Words produced:          386,000
-Token-to-word ratio:     ~19:1 (includes context, revision, validation)
-Human hours equivalent:  ~1,700+ hours at 200 words/hour
-Actual human time:       ~340 hours (direction + review)
+Words produced:          404,000
+Token-to-word ratio:     ~16:1 (includes context, revision, validation)
+Human hours equivalent:  ~2,000+ hours at 200 words/hour
+Actual human time:       ~400 hours (direction + review)
 Efficiency multiplier:   ~5x over manual authoring`}
       </CodeStructure>
 
       <p>
-        Total system budget: ~6.5 million tokens across three phases. 386,000 words produced.<Cite id={6} author="Brynjolfsson, Erik and Andrew McAfee" title="The Second Machine Age: Work, Progress, and Prosperity in a Time of Brilliant Technologies" source="W. W. Norton" year={2014} />
+        Total system budget: ~6.5 million tokens across three phases. 404,000 words produced.<Cite id={6} author="Brynjolfsson, Erik and Andrew McAfee" title="The Second Machine Age: Work, Progress, and Prosperity in a Time of Brilliant Technologies" source="W. W. Norton" year={2014} />
       </p>
 
       <h2>What Makes This Different</h2>
@@ -119,7 +119,7 @@ Efficiency multiplier:   ~5x over manual authoring`}
       />
 
       <p>
-        <strong>Attribution.</strong> Every document is transparent about its production method. No pretense that a human typed 386K words — and no pretense that AI produced quality work unsupervised.<Cite id={8} author="Floridi, Luciano" title="The Ethics of Artificial Intelligence" source="Oxford University Press" year={2023} /> Floridi argues that AI transparency is not merely ethical — it's epistemologically necessary. Readers who know the production method can calibrate their trust appropriately.
+        <strong>Attribution.</strong> Every document is transparent about its production method. No pretense that a human typed 404K words — and no pretense that AI produced quality work unsupervised.<Cite id={8} author="Floridi, Luciano" title="The Ethics of Artificial Intelligence" source="Oxford University Press" year={2023} /> Floridi argues that AI transparency is not merely ethical — it's epistemologically necessary. Readers who know the production method can calibrate their trust appropriately.
       </p>
       <p>
         <strong>Artistic intent.</strong> The conductor metaphor is literal. A conductor doesn't play instruments, but the performance is their artistic vision.<Cite id={9} author="Bourdieu, Pierre" title="The Field of Cultural Production" source="Columbia University Press" year={1993} /> Bourdieu's concept of cultural capital applies: the structural decisions — what goes in each document, how documents relate, what to emphasize for which audience — these are human decisions that constitute the creative work. AI is the orchestra.
@@ -156,19 +156,19 @@ Efficiency multiplier:   ~5x over manual authoring`}
 
       <h2>Tradeoffs & Lessons</h2>
       <ul>
-        <li><strong>Volume vs. voice</strong> — AI generates text quickly, but maintaining a consistent authorial voice across 386K words requires extensive human editing. The conductor metaphor helps: strategic direction is human, execution is AI, but the seams show if review is rushed.</li>
+        <li><strong>Volume vs. voice</strong> — AI generates text quickly, but maintaining a consistent authorial voice across 404K words requires extensive human editing. The conductor metaphor helps: strategic direction is human, execution is AI, but the seams show if review is rushed.</li>
         <li><strong>Transparency vs. perception</strong> — Being fully transparent about AI involvement risks the reaction "AI wrote your portfolio." The mitigation is honesty: every essay explains the process, and the quality speaks for itself. Hiding AI involvement would be worse.<Cite id={12} author="Zuboff, Shoshana" title="The Age of Surveillance Capitalism" source="PublicAffairs" year={2019} /></li>
         <li><strong>Quality gates add time</strong> — Template compliance, link checking, and human review add 30-40% overhead to each document. Without them, plausible-sounding text masks factual errors and inconsistencies. The overhead is the cost of trustworthy output.</li>
-        <li><strong>Token economics</strong> — At ~6.5M total tokens, the system cost is non-trivial. But compared to the human-hours equivalent of writing 386K words from scratch (estimated 1,700+ hours at 200 words/hour), the conductor model is dramatically more efficient.</li>
+        <li><strong>Token economics</strong> — At ~6.5M total tokens, the system cost is non-trivial. But compared to the human-hours equivalent of writing 404K words from scratch (estimated 2,000+ hours at 200 words/hour), the conductor model is dramatically more efficient.</li>
       </ul>
 
       <Figure alt="Production metrics" caption="AI-Conductor model: production metrics across the eight-organ system">
         <StatGrid stats={[
-          { value: '386K', label: 'Words Produced' },
+          { value: '404K', label: 'Words Produced' },
           { value: '6.5M', label: 'Total Tokens' },
-          { value: '81', label: 'Repos Documented' },
+          { value: '91', label: 'Repos Documented' },
           { value: '1,267', label: 'Links Audited' },
-          { value: '10', label: 'Meta-System Essays' },
+          { value: '36', label: 'Meta-System Essays' },
           { value: 'Human', label: 'Direction' },
         ]} />
       </Figure>

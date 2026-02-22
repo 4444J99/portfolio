@@ -84,7 +84,7 @@ import StatGrid from '../../components/StatGrid.astro';
 
       <h2>Nine Topology Patterns</h2>
       <p>
-        Each topology encodes a different communication contract between agents.<Cite id={7} author="Tanenbaum, Andrew S. and Maarten van Steen" title="Distributed Systems: Principles and Paradigms" source="Pearson" year={2007} /> Tanenbaum and van Steen's classification of distributed system architectures — centralized, decentralized, and hybrid — maps directly onto these nine patterns. The topology engine enforces routing rules at the framework level so agents cannot violate their communication contracts.<Cite id={11} author="Hewitt, Carl" title="Actor Model of Computation" source="arXiv" year={2010} />
+        Each topology encodes a different communication contract between agents. Tanenbaum and van Steen's classification of distributed system architectures maps directly onto these nine patterns. The <a href="https://github.com/organvm-iv-taxis/agentic-titan/blob/main/src/topology/engine.py" target="_blank">topology engine</a> enforces routing rules at the framework level.<Cite id={7} author="Tanenbaum, Andrew S. and Maarten van Steen" title="Distributed Systems: Principles and Paradigms" source="Pearson" year={2007} /><Cite id={11} author="Hewitt, Carl" title="Actor Model of Computation" source="arXiv" year={2010} />
       </p>
       <div class="table-wrap">
         <table>
@@ -154,7 +154,7 @@ result = pipeline.run(task="Analyze dataset", safety=policy)`}
 
       <h2>Results</h2>
       <p>
-        1,095+ tests across the full test suite with production-hardened status.<Cite id={6} author="Fowler, Martin" title="Refactoring: Improving the Design of Existing Code" source="Addison-Wesley" year={2018} /> Fowler's discipline of continuous refactoring — improving internal structure without changing external behavior — kept the test suite stable across 18 development phases while the architecture evolved underneath. The framework is consumed downstream by ORGAN-III products: the Hunter Protocol in <em>in-midst-my-life</em> uses hierarchical topology for resume analysis, and the verification pipeline in <em>The Actual News</em> uses fan-out topology for parallel source checking. The governance patterns designed here (topology-as-constraint, safety-by-default) inform how ORGAN-IV manages the broader eight-organ system.
+        1,095+ tests across the full test suite with production-grade status.<Cite id={6} author="Fowler, Martin" title="Refactoring: Improving the Design of Existing Code" source="Addison-Wesley" year={2018} /> Fowler's discipline of continuous refactoring — improving internal structure without changing external behavior — kept the test suite stable across 18 development phases while the architecture evolved underneath. The framework is consumed downstream by ORGAN-III products: the Hunter Protocol in <em>in-midst-my-life</em> uses hierarchical topology for resume analysis, and the verification pipeline in <em>The Actual News</em> uses fan-out topology for parallel source checking. The governance patterns designed here (topology-as-constraint, safety-by-default) inform how ORGAN-IV manages the broader eight-organ system.
       </p>
 
       <h2>Tradeoffs & Lessons</h2>
@@ -173,7 +173,7 @@ result = pipeline.run(task="Analyze dataset", safety=policy)`}
           { value: '22', label: 'Agent Archetypes' },
           { value: '18', label: 'Dev Phases' },
           { value: '4', label: 'LLM Backends' },
-          { value: 'PROD', label: 'Status' },
+          { value: 'ACTIVE', label: 'Status' },
         ]} />
       </Figure>
 

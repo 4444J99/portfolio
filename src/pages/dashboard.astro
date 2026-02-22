@@ -61,14 +61,14 @@ const praxisChartData = {
 const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
 ---
 
-<Layout title="Dashboard — System Metrics" description="Live metrics for the ORGANVM eight-organ creative-institutional system.">
+<Layout title="Operative Dashboard — System Command" description="Live technical and strategic vitals for the 91-repository creative-institutional system.">
     <div class="sketch-accent">
-      <SketchContainer sketchId="data-bars" height="200px" mobileHeight="150px" ariaLabel="Animated data bar visualization representing system metrics" data-values={repoCounts.join(',')} data-labels={organNames.join(',')} />
+      <SketchContainer sketchId="data-bars" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="Animated data bar visualization representing system metrics" data-values={repoCounts.join(',')} data-labels={organNames.join(',')} />
     </div>
     <section class="section">
       <div class="container">
-        <h1 class="page-title">System Dashboard</h1>
-        <p class="page-sub">Live metrics from {typedMetrics.registry.total_repos} repositories across {typedMetrics.registry.total_organs} organs.</p>
+        <h1 class="page-title">Operative Dashboard</h1>
+        <p class="page-sub">Live orchestration vitals from {typedMetrics.registry.total_repos} repositories across {typedMetrics.registry.total_organs} organs.</p>
 
         <StatGrid stats={[
           { value: typedMetrics.code_substance.total_code_files.toLocaleString(), label: 'Code Files' },
@@ -80,7 +80,7 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
         ]} />
 
         <div class="stack-badges">
-          <h2 class="stack-badges__heading">Verified Technology Stack</h2>
+          <h2 class="stack-badges__heading">Orchestration Tech Stack</h2>
           <div class="stack-badges__grid">
             {['Python', 'TypeScript', 'React', 'Next.js', 'FastAPI', 'Express', 'Fastify', 'Docker', 'Terraform', 'PostgreSQL', 'Redis', 'Rust', 'Astro', 'p5.js', 'D3.js', 'Solana/Anchor'].map(tech => (
               <span class="stack-badge">{tech}</span>
@@ -102,8 +102,8 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
       <div class="container">
         <h2 class="section__heading">Repositories by Organ</h2>
         <div class="chart-pair">
-          <ChartContainer chartId="organ-bar" data={organChartData} ariaLabel="Bar chart showing repository count per organ" height="300px" />
-          <ChartContainer chartId="code-treemap" data={treemapData} ariaLabel="Treemap showing repository distribution by organ" height="300px" />
+          <ChartContainer chartId="organ-bar" data={organChartData} ariaLabel="Bar chart showing repository count per organ" height="var(--space-5xl)" />
+          <ChartContainer chartId="code-treemap" data={treemapData} ariaLabel="Treemap showing repository distribution by organ" height="var(--space-5xl)" />
         </div>
       </div>
     </section>
@@ -123,7 +123,7 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
     <section class="section">
       <div class="container">
         <h2 class="section__heading">Dependency Graph</h2>
-        <ChartContainer chartId="dependency-graph" data={graphData} ariaLabel="Force-directed graph showing repository dependencies" height="420px" />
+        <ChartContainer chartId="dependency-graph" data={graphData} ariaLabel="Force-directed graph showing repository dependencies" height="var(--space-6xl)" />
       </div>
     </section>
 

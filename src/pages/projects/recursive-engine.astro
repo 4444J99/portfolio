@@ -27,7 +27,7 @@ import StatGrid from '../../components/StatGrid.astro';
 
       <h2>What RE:GE Does</h2>
       <p>
-        RE:GE is a pure Python engine where <strong>myths, identities, rituals, and recursive structures are first-class computational objects</strong>.<Cite id={3} author="Campbell, Joseph" title="The Hero with a Thousand Faces" source="New World Library" year={1949} /> Campbell's monomyth — the hero's departure, initiation, and return — becomes a function signature: entity state in, transformed state out. The engine implements 21 organ handlers that process symbolic values through a ritual syntax DSL:
+        RE:GE is a pure Python engine where <strong>myths, identities, rituals, and recursive structures are first-class computational objects</strong>.<Cite id={3} author="Campbell, Joseph" title="The Hero with a Thousand Faces" source="New World Library" year={1949} /> Campbell's monomyth — the hero's departure, initiation, and return — becomes a function signature: entity state in, transformed state out. The engine implements <a href="https://github.com/organvm-i-theoria/recursive-engine--generative-entity/tree/main/src/organs" target="_blank">21 organ handlers</a> that process symbolic values through a ritual syntax DSL:
       </p>
       <ul>
         <li><strong>Myth organs</strong> — encode narrative archetypes as transformation rules. A hero's journey is a function: entity state in, transformed state out.</li>
@@ -93,9 +93,9 @@ import StatGrid from '../../components/StatGrid.astro';
 
       <Figure alt="Test strategy distribution across three categories" caption="Test strategy distribution: structural invariants, reference implementations, and round-trip consistency" number={1}>
         <StatGrid stats={[
-          { value: '~400', label: 'Structural Invariants' },
-          { value: '~500', label: 'Reference Implementations' },
-          { value: '~350', label: 'Round-Trip Consistency' },
+          { value: '400+', label: 'Structural Invariants' },
+          { value: '500+', label: 'Reference Implementations' },
+          { value: '350+', label: 'Round-Trip Consistency' },
         ]} />
       </Figure>
 

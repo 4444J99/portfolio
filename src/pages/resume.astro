@@ -6,7 +6,11 @@ import { base } from '../utils/paths';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 ---
 
-<Layout title="Choose Your Entry Point — Resume" description="Anthony James Padavano: Polymath, Architect, and Engineer. Select a specialized persona to view technical outcomes and market-aligned evidence.">
+<Layout 
+  title="Choose Your Entry Point — Resume" 
+  description="Anthony James Padavano: Polymath, Architect, and Engineer. Select a specialized persona to view technical outcomes and market-aligned evidence."
+  keywords={["Resume", "CV", "AI Architect", "Systems Architect", "Creative Technologist", "Technical PM", "Polymath"]}
+>
   <div class="resume-gateway">
     <div class="container container--narrow">
       <header class="gateway-header" data-reveal>
@@ -14,7 +18,7 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
         <p class="gateway-intro">
           My work spans engineering, theory, and art. Built upon a <a href={`${base}philosophy/`}>Logocentric Architecture</a>, I've engineered specific "masks" that translate my high-dimensional body of work into market-legible signals.
         </p>
-        <p class="gateway-prompt">Which version of my work do you need to see?</p>
+        <p class="gateway-prompt">Select a specialized mask to view my evidence:</p>
       </header>
 
       <div class="gateway-grid">

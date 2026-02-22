@@ -1,0 +1,94 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import Cite from '../../components/academic/Cite.astro';
+import References from '../../components/academic/References.astro';
+import Figure from '../../components/academic/Figure.astro';
+import CodeStructure from '../../components/academic/CodeStructure.astro';
+import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import StatGrid from '../../components/StatGrid.astro';
+---
+
+<ProjectLayout pageTitle="Public Record Data Scraper — Anthony James Padavano" description="A 50-state UCC public records aggregation platform with automated collection agents, Terraform-managed AWS infrastructure, and 2,055+ tests."
+  keywords={["Data Pipeline", "B2B SaaS", "Python", "AWS", "Terraform", "Web Scraping", "Infrastructure as Code"]}
+  sketchId="data-bars"
+      title="Public Record Data Scraper"
+      tagline="Directed architecture for high-reliability data extraction"
+      tags={['Commerce', 'Python', 'AWS', 'Terraform']}
+      repo="https://github.com/organvm-iii-ergon/public-record-data-scrapper">
+      
+      <h2>The Challenge of 50-State Scale</h2>
+      <p>
+        Public record data in the United States is structurally fragmented. Each state maintains its own Uniform Commercial Code (UCC) filing system, often with proprietary interfaces, inconsistent data schemas, and aggressive anti-scraping measures. I directed the architecture of a 50-state aggregation platform designed to normalize this fragmentation into a single, high-reliability B2B data pipeline.
+      </p>
+
+      <MermaidDiagram
+        caption="High-level data extraction pipeline — from state-specific agents to normalized PostgreSQL output"
+        chart={`graph LR
+    S1[State Source A] --> A1[Agent A]
+    S2[State Source B] --> A2[Agent B]
+    S3[State Source C] --> A3[Agent C]
+    A1 --> Q[Collection Queue]
+    A2 --> Q
+    A3 --> Q
+    Q --> P[Normalization Engine]
+    P --> DB[(PostgreSQL)]
+    P --> V[Validation Gate]
+    V -->|fail| R[Retry/Alert]
+    style DB fill:#7ce8a6,stroke:#333`}
+      />
+
+      <h2>Technical Architecture</h2>
+      <p>
+        The system utilizes an <strong>Agentic Collection Model</strong>. Instead of a single monolithic scraper, I specified 60+ specialized collection agents, each hardened against the specific quirks of a state's portal. The infrastructure is entirely managed via <strong>Terraform</strong> on <strong>AWS</strong>, utilizing Lambda for lightweight extraction tasks and ECS/Docker for long-running stateful sessions.
+      </p>
+
+      <CodeStructure lang="hcl" caption="Infrastructure as Code — managing collection agent clusters and database security groups" filename="infra/main.tf">
+{`module "collection_cluster" {
+  source = "./modules/ecs-cluster"
+  cluster_name = "ucc-scraper-prod"
+  node_count   = 60
+  instance_type = "t3.medium"
+}
+
+resource "aws_db_instance" "ucc_normalized" {
+  allocated_storage    = 100
+  engine               = "postgres"
+  engine_version       = "15.4"
+  instance_class       = "db.t3.large"
+  db_name              = "ucc_data"
+  username             = var.db_user
+  password             = var.db_password # allow-secret
+  publicly_accessible  = false
+  vpc_security_group_ids = [aws_security_group.db_access.id]
+}`}
+      </CodeStructure>
+
+      <h2>Testing for Truth</h2>
+      <p>
+        In financial data, an error is a failure of trust. I implemented a rigorous testing regime that goes beyond unit coverage. The system features <strong>2,055+ tests</strong> including:
+      </p>
+      <ul>
+        <li><strong>Structural Tests</strong> — Verifying schema consistency across 50 state inputs.</li>
+        <li><strong>Adversarial Simulation</strong> — Testing how agents respond to UI changes and portal downtime.</li>
+        <li><strong>Round-Trip Validation</strong> — Ensuring data written to the database matches the source payload exactly.</li>
+      </ul>
+
+      <Figure alt="Scraper metrics grid" caption="Production metrics — high-reliability extraction at scale" number={1}>
+        <StatGrid stats={[
+          { value: '2,055+', label: 'Tests' },
+          { value: '60+', label: 'Agents' },
+          { value: '50', label: 'States Covered' },
+          { value: 'AWS', label: 'Infrastructure' },
+          { value: '99.9%', label: 'Uptime' },
+          { value: 'PROD', label: 'Status' },
+        ]} />
+      </Figure>
+
+      <h2>Lessons in Scale</h2>
+      <ul>
+        <li><strong>Decoupling is non-negotiable</strong> — By separating extraction (Lambda) from normalization (ECS), we prevented portal downtime in one state from cascading into the entire system.</li>
+        <li><strong>Observability as a Feature</strong> — In a 50-state system, you don't "fix bugs"; you manage "portal drift." I specified a logging architecture that treats every extraction as an auditable event.</li>
+      </ul>
+
+</ProjectLayout>

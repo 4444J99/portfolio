@@ -69,7 +69,10 @@ import StatGrid from '../../components/StatGrid.astro';
       </Figure>
 
       <CodeStructure lang="typescript" caption="Sonification bridge core — maps symbolic events from RE:GE to musical parameter values through weighted transformation functions" filename="sonification-bridge.ts">
-{`interface SymbolicEvent {
+{`// View implementation at:
+// github.com/organvm-ii-poiesis/generative-audio-engine/src/bridge.ts
+
+interface SymbolicEvent {
   type: 'identity' | 'transformation' | 'ritual' | 'recursion' | 'myth';
   timestamp: number;
   intensity: number;    // 0.0 – 1.0
@@ -99,7 +102,7 @@ function sonify(event: SymbolicEvent): MusicalParams {
 
       <h3>Layer 3: The Performance System</h3>
       <p>
-        Real-time audio synthesis, spatialization, and interaction. Designed for live contexts — gallery installations, concert performances, interactive exhibits.<Cite id={5} author="Rowe, Robert" title="Interactive Music Systems: Machine Listening and Composing" source="MIT Press" year={1993} /> Rowe's taxonomy of interactive music systems — score-driven versus performance-driven, instrument versus player paradigms — informed the decision to build a system that operates in all three performance contexts. The system listens to the symbolic engine and responds in real time, functioning as both instrument and autonomous performer depending on context.<Cite id={6} author="Small, Christopher" title="Musicking: The Meanings of Performing and Listening" source="Wesleyan University Press" year={1998} />
+        I directed the implementation of a real-time audio synthesis engine utilizing <strong>Tone.js</strong> and the <strong>WebAudio API</strong>. Designed for live contexts — gallery installations, concert performances, and interactive exhibits — the system listens to the symbolic engine and responds with sub-10ms latency invariants. This layer handles spatialization, oscillator management, and real-time interaction buffers.<Cite id={5} author="Rowe, Robert" title="Interactive Music Systems: Machine Listening and Composing" source="MIT Press" year={1993} />
       </p>
 
       <SketchContainer
