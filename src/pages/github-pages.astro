@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import GithubPagesTracking from '../components/scripts/GithubPagesTracking.astro';
 import pagesDirectory from '../data/github-pages.json';
+import vitals from '../data/vitals.json';
 import { base } from '../utils/paths';
 
 interface PagesRepo {
@@ -98,7 +99,7 @@ const groups = Array.from(grouped.entries()).sort((a, b) => {
 });
 ---
 
-<Layout title="Static Fleet — Site Reliability" description="A unified index of live GitHub Pages deployments with health telemetry and architectural curation across 91 repositories.">
+<Layout title="Static Fleet — Site Reliability" description={`A unified index of live GitHub Pages deployments with health telemetry and architectural curation across ${vitals.repos.total} repositories.`}>
   <section class="section">
     <div class="container">
       <h1 class="page-title">Static Fleet</h1>

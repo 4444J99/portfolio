@@ -31,7 +31,10 @@ const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title
                 <time class="essay-entry__date" datetime={essay.date}>{essay.date}</time>
               </div>
               <div class="essay-entry__content">
-                <h2 class="essay-entry__title">{essay.title}</h2>
+                <div class="essay-entry__header-wrap">
+                  <h2 class="essay-entry__title">{essay.title}</h2>
+                  {essay.category && <span class={`essay-category essay-category--${essay.category.toLowerCase().replace(/\s+/g, '-')}`}>{essay.category}</span>}
+                </div>
                 {essay.subtitle && <p class="essay-entry__subtitle">{essay.subtitle}</p>}
                 {essay.summary && <p class="essay-entry__summary">{essay.summary}</p>}
               </div>
@@ -91,6 +94,13 @@ const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title
     gap: var(--space-xs);
   }
 
+  .essay-entry__header-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
   .essay-entry__title {
     font-size: 1.2rem;
     font-weight: 700;
@@ -99,6 +109,23 @@ const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title
     line-height: 1.2;
     transition: color var(--transition-fast);
   }
+
+  .essay-category {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .essay-category--architecture { border-color: var(--cmyk-cyan); color: var(--cmyk-cyan); }
+  .essay-category--post-mortem { border-color: var(--cmyk-magenta); color: var(--cmyk-magenta); }
+  .essay-category--theory { border-color: var(--cmyk-yellow); color: var(--cmyk-yellow); }
+  .essay-category--methodology { border-color: var(--accent); color: var(--accent); }
 
   .essay-entry__subtitle {
     font-size: 0.9rem;

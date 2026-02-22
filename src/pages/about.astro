@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
+import vitals from '../data/vitals.json';
 import { base } from '../utils/paths';
 ---
 
@@ -12,7 +13,7 @@ import { base } from '../utils/paths';
         mobileHeight="var(--space-4xl)" 
         ariaLabel="Generative particle field visualization representing creative identity" 
         data-density="high" 
-        data-count="91" 
+        data-count={vitals.repos.total} 
         title="Identity Plexus"
         caption="A generative network representing the 91 nodes of the creative system."
         dataSource="System Graph"
@@ -46,7 +47,7 @@ import { base } from '../utils/paths';
             Most creative portfolios are flat — a list of projects with screenshots. Mine is an operating system.
           </p>
           <p>
-            The <a href="https://github.com/meta-organvm" target="_blank" rel="noopener noreferrer">eight-organ system</a> is a coordinated infrastructure spanning 91 repositories across 8 GitHub organizations, with ~386K words of public documentation. Each "organ" handles a different function:
+            The <a href="https://github.com/meta-organvm" target="_blank" rel="noopener noreferrer">eight-organ system</a> is a coordinated infrastructure spanning {vitals.repos.total} repositories across {vitals.repos.orgs} GitHub organizations, with ~{Math.floor(vitals.logos.words / 1000)}K words of public documentation. Each "organ" handles a different function:
           </p>
           <div class="about__organ-map">
             <div class="organ-row"><span class="organ-num">I</span> <strong>Theoria</strong> — Ontology, recursion, epistemic engines</div>

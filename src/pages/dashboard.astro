@@ -12,6 +12,7 @@ import StrikeLog from '../components/dashboard/StrikeLog.astro';
 
 import type { SystemMetrics, Organ, PraxisTarget, QualityMetrics } from '../types/data';
 import metrics from '../data/system-metrics.json';
+import vitals from '../data/vitals.json';
 import graphData from '../data/graph.json';
 import qualityData from '../data/quality-metrics.json';
 import { organColors } from '../data/organ-colors';
@@ -61,7 +62,7 @@ const praxisChartData = {
 const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
 ---
 
-<Layout title="Operative Dashboard — System Command" description="Live technical and strategic vitals for the 91-repository creative-institutional system.">
+<Layout title="Operative Dashboard — System Command" description={`Live technical and strategic vitals for the ${vitals.repos.total}-repository creative-institutional system.`}>
     <div class="sketch-accent">
       <SketchContainer 
         sketchId="data-bars" 
@@ -78,7 +79,7 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
     <section class="section">
       <div class="container">
         <h1 class="page-title">Operative Dashboard</h1>
-        <p class="page-sub">Live orchestration vitals from {typedMetrics.registry.total_repos} repositories across {typedMetrics.registry.total_organs} organs.</p>
+        <p class="page-sub">Live orchestration vitals from {vitals.repos.total} repositories across {vitals.repos.orgs} organs.</p>
 
         <StatGrid stats={[
           { value: typedMetrics.code_substance.total_code_files.toLocaleString(), label: 'Code Files' },

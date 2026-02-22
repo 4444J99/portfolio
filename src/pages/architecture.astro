@@ -5,6 +5,7 @@ import ChartContainer from '../components/charts/ChartContainer.astro';
 
 import type { GraphData, GraphNode, GraphEdge } from '../types/data';
 import graphData from '../data/graph.json';
+import vitals from '../data/vitals.json';
 import { organColors } from '../data/organ-colors';
 import { buildArchitectureNavigatorData } from '../utils/architecture-data';
 
@@ -20,7 +21,7 @@ const organEdges = typedGraph.edges.map((e: GraphEdge) => {
 const uniqueEdges = [...new Set(organEdges)] as string[];
 ---
 
-<Layout title="Architecture — System Topology" description="Interactive dependency graph and architectural mapping of the 91-repository creative-institutional system.">
+<Layout title="Architecture — System Topology" description={`Interactive dependency graph and architectural mapping of the ${vitals.repos.total}-repository creative-institutional system.`}>
     <div class="sketch-accent">
       <SketchContainer 
         sketchId="network-graph" 
@@ -38,7 +39,7 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
       <div class="container">
         <h1 class="page-title">System Topology</h1>
         <p class="page-sub">
-          {graphData.total_nodes} active repositories orchestrated through {graphData.total_edges} validated dependency edges.
+          {vitals.repos.total} repositories orchestrated through {graphData.total_edges} validated dependency edges.
           Nodes represent discrete Organs; flagships anchor the system. Interactivity enabled for deep inspection.
         </p>
 

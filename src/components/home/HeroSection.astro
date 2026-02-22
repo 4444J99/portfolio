@@ -1,5 +1,6 @@
 ---
 import SketchContainer from '../sketches/SketchContainer.astro';
+import vitals from '../../data/vitals.json';
 
 interface ResolvedGroup {
   organ: string;
@@ -56,7 +57,7 @@ function splitWords(text: string) {
             <span class="hero__word" style={`animation-delay: ${100 + i * 40}ms`}>{word}&nbsp;</span>
           ))}
         </h1>
-        <p class="hero__sub" data-reveal style="animation-delay: 200ms">15 years of strategic delivery. Lead Architect for a 91-repo orchestration ecosystem. Expert in autonomous governance, multi-agent topologies, and hexagonal reliability. 1,254 tests and 85% coverage across the production fleet.</p>
+        <p class="hero__sub" data-reveal style="animation-delay: 200ms">15 years of strategic delivery. Lead Architect for a {vitals.repos.total}-repo orchestration ecosystem. Expert in autonomous governance, multi-agent topologies, and hexagonal reliability. {vitals.substance.automated_tests.toLocaleString()} tests and {vitals.substance.ci_coverage_pct}% coverage across the production fleet.</p>
       </div>
 
       <div class="hero__view" data-hero-view="creative" style="display: none;">
@@ -66,7 +67,7 @@ function splitWords(text: string) {
             <span class="hero__word" style={`animation-delay: ${i * 40}ms`}>{word}&nbsp;</span>
           ))}
         </h1>
-        <p class="hero__sub">Directing the intersection of rhetoric and code. Coordinating 9 repositories and 8 organizations as a unified artistic ecosystem — ~386K words of architectural planning and public process documentation.</p>
+        <p class="hero__sub">Directing the intersection of rhetoric and code. Coordinating {vitals.repos.total} repositories and {vitals.repos.orgs} organizations as a unified artistic ecosystem — ~{Math.floor(vitals.logos.words / 1000)}K words of architectural planning and public process documentation.</p>
       </div>
 
       <div class="hero__credentials" data-reveal style="animation-delay: 280ms">

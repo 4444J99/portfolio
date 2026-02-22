@@ -338,21 +338,30 @@ RESPONSE FORMAT:
 
   .form-select,
   .form-textarea {
-    background: var(--bg-secondary, #16161a);
-    border: 1px solid var(--border);
-    border-radius: 6px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-bright);
+    border-radius: var(--radius-sm);
     padding: var(--space-sm) var(--space-md);
     color: var(--text-primary);
     font-family: var(--font-body);
     font-size: 1rem;
-    transition: border-color 0.2s;
+    transition: all var(--transition-fast);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
   }
 
   .form-select:focus,
   .form-textarea:focus {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 0 2px var(--accent-muted);
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 0 0 4px var(--accent-muted), inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  :global(html[data-theme="dark"]) .form-select:focus,
+  :global(html[data-theme="dark"]) .form-textarea:focus {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
   }
 
   .form-select:invalid:not(:placeholder-shown),

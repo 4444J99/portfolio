@@ -4,11 +4,10 @@ import HeroSection from '../components/home/HeroSection.astro';
 import ProjectGrid from '../components/home/ProjectGrid.astro';
 import IndexFilters from '../components/home/IndexFilters.astro';
 import metrics from '../data/system-metrics.json';
+import vitals from '../data/vitals.json';
 import { organColorMap } from '../data/organ-colors';
 import { base } from '../utils/paths';
 import { organGroups, skillFilters, categoryFilters, featuredNumbers } from '../data/organ-groups';
-
-const totalTests = metrics.flagship_vivification.repos.reduce((sum: number, r: { test_files: number }) => sum + r.test_files, 0) + 2800;
 
 // Resolve slugs to full hrefs at build time
 const resolvedGroups = organGroups.map(group => ({
@@ -36,41 +35,41 @@ const resolvedGroups = organGroups.map(group => ({
       <div class="container">
         <div class="stat-grid" data-stats-view="engineering" data-reveal>
           <div class="stat">
-            <div class="stat-value">{metrics.code_substance.total_code_files.toLocaleString()}</div>
+            <div class="stat-value">{vitals.substance.code_files.toLocaleString()}</div>
             <div class="stat-label">Code Files</div>
           </div>
           <div class="stat">
-            <div class="stat-value">{metrics.code_substance.total_test_files}</div>
+            <div class="stat-value">{vitals.substance.test_files}</div>
             <div class="stat-label">Test Files</div>
           </div>
           <div class="stat">
-            <div class="stat-value">{metrics.code_substance.ci_passing}</div>
+            <div class="stat-value">{vitals.substance.ci_passing}</div>
             <div class="stat-label">Passing CI Workflows</div>
           </div>
           <div class="stat">
-            <div class="stat-value">{metrics.registry.total_repos}</div>
+            <div class="stat-value">{vitals.repos.total}</div>
             <div class="stat-label">Repositories</div>
           </div>
           <div class="stat">
-            <div class="stat-value">{totalTests.toLocaleString()}+</div>
+            <div class="stat-value">{vitals.substance.automated_tests.toLocaleString()}+</div>
             <div class="stat-label">Automated Tests</div>
           </div>
         </div>
         <div class="stat-grid" data-stats-view="creative" style="display: none;">
           <div class="stat">
-            <div class="stat-value">{metrics.registry.total_repos}</div>
+            <div class="stat-value">{vitals.repos.total}</div>
             <div class="stat-label">Repositories</div>
           </div>
           <div class="stat">
-            <div class="stat-value">{metrics.registry.total_organs}</div>
+            <div class="stat-value">{vitals.repos.orgs}</div>
             <div class="stat-label">Organizations</div>
           </div>
           <div class="stat">
-            <div class="stat-value">386K</div>
+            <div class="stat-value">{Math.floor(vitals.logos.words / 1000)}K</div>
             <div class="stat-label">Words Documented</div>
           </div>
           <div class="stat">
-            <div class="stat-value">{metrics.essays.total}</div>
+            <div class="stat-value">{vitals.logos.essays}</div>
             <div class="stat-label">Published Essays</div>
           </div>
           <div class="stat">
@@ -114,41 +113,6 @@ const resolvedGroups = organGroups.map(group => ({
     margin-bottom: var(--space-2xl);
   }
 
-  .section__heading {
-    margin-bottom: var(--space-2xl);
-  }
-
-  .contact__text {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-bottom: var(--space-xl);
-    max-width: 50ch;
-  }
-
-  .contact__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-lg);
-  }
-
-  .contact__link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color var(--transition-fast);
-  }
-
-  .contact__link:hover {
-    color: var(--accent-text);
-  }
-</style>
-
-<IndexFilters />
-
-<style>
   .section__heading {
     margin-bottom: var(--space-2xl);
   }

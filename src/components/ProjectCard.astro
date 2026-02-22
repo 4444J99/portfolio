@@ -19,6 +19,7 @@ const slug = href.replace(/\/$/, '').split('/').pop();
 ---
 
 <a href={href} class:list={['card', { 'card--featured': featured }]} data-skills={dataSkills} data-tags={dataTags}>
+  {featured && <span class="card__featured-badge">Featured Artifact</span>}
   <div class="card__header">
     <span class="card__number">{String(number).padStart(2, '0')}</span>
     <div class="card__tags card__tags--creative">
@@ -54,6 +55,23 @@ const slug = href.replace(/\/$/, '').split('/').pop();
     background: var(--bg-card-hover);
     border-color: var(--organ-color, var(--border-hover));
     transform: translateY(-2px);
+  }
+
+  .card__featured-badge {
+    position: absolute;
+    top: 0;
+    left: var(--space-xl);
+    transform: translateY(-50%);
+    background: var(--accent-yellow);
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
 
   .card--featured {
