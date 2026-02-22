@@ -134,12 +134,12 @@ RESPONSE FORMAT:
   let puterLoaderPromise: Promise<boolean> | null = null;
 
   function shouldLoadPuterScript() {
-    return !['localhost', '127.0.0.1'].includes(window.location.hostname);
+    // Load everywhere for now to ensure availability
+    return true;
   }
 
   function loadPuterScript(): Promise<boolean> {
-    if (typeof puter !== 'undefined' && puter.ai) return Promise.resolve(true);
-    if (!shouldLoadPuterScript()) return Promise.resolve(false);
+    if (typeof (window as any).puter !== 'undefined' && (window as any).puter.ai) return Promise.resolve(true);
     if (puterLoaderPromise) return puterLoaderPromise;
 
     puterLoaderPromise = new Promise((resolve) => {
@@ -154,8 +154,14 @@ RESPONSE FORMAT:
       script.defer = true;
       script.crossOrigin = 'anonymous';
       script.dataset.puterSdk = 'true';
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
+      script.onload = () => {
+        console.log('Puter SDK loaded');
+        resolve(true);
+      };
+      script.onerror = () => {
+        console.error('Puter SDK failed to load');
+        resolve(false);
+      };
       document.head.appendChild(script);
     });
 
@@ -165,11 +171,16 @@ RESPONSE FORMAT:
   // Check for Puter API availability with timeout
   function waitForPuter(timeout: number): Promise<boolean> {
     return new Promise((resolve) => {
-      if (typeof puter !== 'undefined' && puter.ai) { resolve(true); return; }
+      if (typeof (window as any).puter !== 'undefined' && (window as any).puter.ai) { resolve(true); return; }
       const start = Date.now();
       const check = setInterval(() => {
-        if (typeof puter !== 'undefined' && puter.ai) { clearInterval(check); resolve(true); }
-        else if (Date.now() - start > timeout) { clearInterval(check); resolve(false); }
+        if (typeof (window as any).puter !== 'undefined' && (window as any).puter.ai) { 
+          clearInterval(check); 
+          resolve(true); 
+        } else if (Date.now() - start > timeout) { 
+          clearInterval(check); 
+          resolve(false); 
+        }
       }, 200);
     });
   }
@@ -192,22 +203,33 @@ RESPONSE FORMAT:
     errorArea.hidden = true;
 
     try {
-      const loaderReady = await loadPuterScript();
-      if (!loaderReady) {
-        throw new Error('AI service unavailable');
-      }
-
-      const puterReady = await waitForPuter(5000);
+      await loadPuterScript();
+      const puterReady = await waitForPuter(10000); // Increased timeout to 10s
+      
       if (!puterReady) {
-        throw new Error('AI service unavailable');
+        throw new Error('AI service initialization timed out');
       }
 
-      const response = await puter.ai.chat(userMessage, {
+      const response = await (window as any).puter.ai.chat(userMessage, {
         system: SYSTEM_PROMPT,
-        model: 'claude-sonnet-4-5'
+        model: 'claude-3-5-sonnet' // Changed to a more universally supported model
       });
 
-      const text = typeof response === 'string' ? response : response?.message?.content || response?.text || JSON.stringify(response);
+      // Handle different possible response structures from Puter.js
+      let text = '';
+      if (typeof response === 'string') {
+        text = response;
+      } else if (response?.message?.content) {
+        text = response.message.content;
+      } else if (response?.text) {
+        text = response.text;
+      } else {
+        text = JSON.stringify(response);
+      }
+
+      if (!text || text === '{}') {
+        throw new Error('Empty response from AI service');
+      }
 
       // Escape HTML entities before markdown conversion to prevent XSS.
       // This ensures no raw HTML from the AI response survives — only the
