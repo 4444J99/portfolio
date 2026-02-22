@@ -318,8 +318,15 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: 8px;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     min-height: 500px;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: var(--space-xl);
   }
 
   .graph-container :global(svg) {

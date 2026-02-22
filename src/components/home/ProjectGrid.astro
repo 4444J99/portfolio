@@ -32,7 +32,7 @@ const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organCol
 
 <section class="section" id="work">
   <div class="container">
-    <h2 class="section__heading">Projects</h2>
+    <h2 class="section__heading">System Artifacts <span class="section__cue">— Start Here</span></h2>
     <div class="filter-bar" data-filter-view="engineering" role="toolbar" aria-label="Filter projects by skill">
       <button class="filter-chip filter-chip--active" data-filter="all" aria-pressed="true">All</button>
       {skillFilters.map(skill => (
@@ -101,6 +101,14 @@ const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organCol
 
   .section__heading {
     margin-bottom: var(--space-2xl);
+  }
+
+  .section__cue {
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 400;
+    margin-left: var(--space-sm);
+    opacity: 0.8;
   }
 
   .organ-group {
