@@ -42,17 +42,19 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
           Nodes represent discrete Organs; flagships anchor the system. Interactivity enabled for deep inspection.
         </p>
 
-        <h2 class="section__heading" data-reveal>System Navigator</h2>
+        <h2 class="section__heading" data-reveal style="margin-top: var(--space-2xl);">System Navigator</h2>
         <p class="page-sub" data-reveal>Drill down into specific Organs to inspect repository clusters and cross-functional interfaces.</p>
-        <ChartContainer
-          chartId="organ-navigator"
-          data={navigatorData}
-          ariaLabel="Interactive organ navigator showing 8 organ nodes with expandable project satellites"
-          height="var(--space-6xl)"
-          title="Functional Hierarchy"
-          caption="Radial mapping of repositories categorized by their governing Organ."
-          dataSource="ORGANVM Registry"
-        />
+        <div class="navigator-wrap" style="margin-top: var(--space-lg);">
+          <ChartContainer
+            chartId="organ-navigator"
+            data={navigatorData}
+            ariaLabel="Interactive organ navigator showing 8 organ nodes with expandable project satellites"
+            height="var(--space-6xl)"
+            title="Functional Hierarchy"
+            caption="Radial mapping of repositories categorized by their governing Organ."
+            dataSource="ORGANVM Registry"
+          />
+        </div>
       </div>
     </section>
 
@@ -105,8 +107,8 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
             <tbody>
               {graphData.edges.map((edge: GraphEdge) => (
                 <tr>
-                  <td><code>{edge.source.split('/')[1]}</code></td>
-                  <td><code>{edge.target.split('/')[1]}</code></td>
+                  <td><code style="word-break: break-all; white-space: normal;">{edge.source.split('/')[1]}</code></td>
+                  <td><code style="word-break: break-all; white-space: normal;">{edge.target.split('/')[1]}</code></td>
                 </tr>
               ))}
             </tbody>

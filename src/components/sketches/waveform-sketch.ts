@@ -20,10 +20,10 @@ export default function waveformSketch(p: p5, container: HTMLElement) {
       const freq = 0.8 + w * 0.6;
       const amp = p.height * (0.08 + w * 0.03);
       const yCenter = p.height * (0.25 + w * 0.12);
-      const alpha = 160 - w * 25;
+      const alpha = 200 - w * 30;
 
       p.noFill();
-      p.stroke(255, 255, 255, alpha);
+      p.stroke(124, 232, 232, alpha); // Organ VI Cyan
       p.strokeWeight(1.5 - w * 0.15);
       p.beginShape();
 
@@ -38,7 +38,7 @@ export default function waveformSketch(p: p5, container: HTMLElement) {
       p.endShape();
 
       // Fill under wave with subtle gradient
-      p.fill(255, 255, 255, 5 + w * 2);
+      p.fill(124, 232, 232, 10 + w * 3);
       p.noStroke();
       p.beginShape();
       for (let i = 0; i <= steps; i++) {

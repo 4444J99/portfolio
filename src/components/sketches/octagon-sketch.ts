@@ -23,7 +23,7 @@ export default function octagonSketch(p: p5, container: HTMLElement) {
     for (let ring = 3; ring >= 0; ring--) {
       const r = maxR + ring * 15;
       p.noFill();
-      p.stroke(255, 255, 255, 8 - ring * 2);
+      p.stroke(124, 232, 166, 15 - ring * 3); // Organ III Green
       p.strokeWeight(1);
       p.beginShape();
       for (let i = 0; i <= segments; i++) {
@@ -46,7 +46,7 @@ export default function octagonSketch(p: p5, container: HTMLElement) {
 
       // Segment fill
       p.noStroke();
-      p.fill(255, 255, 255, 15 + pulse * 25);
+      p.fill(124, 232, 166, 25 + pulse * 35);
       p.beginShape();
       p.vertex(cx + Math.cos(segAngle) * innerR, cy + Math.sin(segAngle) * innerR);
       for (let s = 0; s <= 8; s++) {
@@ -58,7 +58,7 @@ export default function octagonSketch(p: p5, container: HTMLElement) {
 
       // Segment outline
       p.noFill();
-      p.stroke(255, 255, 255, 40 + pulse * 60);
+      p.stroke(124, 232, 166, 80 + pulse * 80);
       p.strokeWeight(1);
       p.beginShape();
       p.vertex(cx + Math.cos(segAngle) * innerR, cy + Math.sin(segAngle) * innerR);
@@ -70,14 +70,14 @@ export default function octagonSketch(p: p5, container: HTMLElement) {
       p.endShape(p.CLOSE);
 
       // Radial line from center
-      p.stroke(255, 255, 255, 20);
+      p.stroke(124, 232, 166, 40);
       p.line(cx, cy, cx + Math.cos(segAngle + sweep / 2) * outerR, cy + Math.sin(segAngle + sweep / 2) * outerR);
     }
 
     // Center diamond
     const diamondSize = 8 + Math.sin(time * 2) * 3;
     p.noStroke();
-    p.fill(255, 255, 255, 120);
+    p.fill(124, 232, 166, 180);
     p.quad(cx, cy - diamondSize, cx + diamondSize, cy, cx, cy + diamondSize, cx - diamondSize, cy);
   };
 

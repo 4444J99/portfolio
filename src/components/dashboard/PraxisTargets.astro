@@ -23,16 +23,26 @@ const { targets, praxisChartData } = Astro.props;
       dataSource="Praxis Registry"
     />
     <div class="targets-grid">
-      {Object.entries(targets).map(([key, target]: [string, PraxisTarget]) => (
-        <div class="target-card">
-          <div class="target-card__label">{key.replace(/_/g, ' ')}</div>
-          <div class="target-card__values">
-            <span class="target-card__current">{target.current}</span>
-            <span class="target-card__separator">/</span>
-            <span class="target-card__goal">{target.target}</span>
+      {Object.entries(targets).map(([key, target]: [string, PraxisTarget]) => {
+        const isNumeric = !isNaN(Number(target.current)) && !isNaN(Number(target.target));
+        return (
+          <div class="target-card">
+            <div class="target-card__label">{key.replace(/_/g, ' ')}</div>
+            {isNumeric ? (
+              <div class="target-card__values">
+                <span class="target-card__current">{target.current}</span>
+                <span class="target-card__separator">/</span>
+                <span class="target-card__goal">{target.target}</span>
+              </div>
+            ) : (
+              <div class="target-card__desc">
+                <p>{target.current}</p>
+                <p class="target-card__goal-meta">Target: {target.target}</p>
+              </div>
+            )}
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>
