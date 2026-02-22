@@ -17,7 +17,8 @@ interface Link {
 
 interface GraphData {
   nodes: Node[];
-  links: Link[];
+  links?: Link[];
+  edges?: Link[];
 }
 
 interface SimNode extends d3.SimulationNodeDatum, Node {}
@@ -28,6 +29,8 @@ export default function dependencyGraph(container: HTMLElement, data: GraphData)
   const width = 600;
   const height = 400;
 
+  const rawLinks = data.links || data.edges || [];
+
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const svg = d3.select(container)
@@ -37,9 +40,9 @@ export default function dependencyGraph(container: HTMLElement, data: GraphData)
 
   // Only show nodes that have links (to keep the graph readable)
   const linkedIds = new Set<string>();
-  data.links.forEach(l => { linkedIds.add(l.source); linkedIds.add(l.target); });
+  rawLinks.forEach(l => { linkedIds.add(l.source); linkedIds.add(l.target); });
   const nodes: SimNode[] = data.nodes.filter(n => linkedIds.has(n.id)) as SimNode[];
-  const links: d3.SimulationLinkDatum<SimNode>[] = data.links.filter(
+  const links: d3.SimulationLinkDatum<SimNode>[] = rawLinks.filter(
     (l) => nodes.find((n) => n.id === l.source) && nodes.find((n) => n.id === l.target)
   );
 

@@ -7,6 +7,8 @@
       "date": "2026-02-13",
       "slug": "aesthetic-nervous-system",
       "title": "Aesthetic Nervous System",
+      "subtitle": "The Sensory Logic of Autonomous Infrastructure",
+      "summary": "Mapping the interaction between generative feedback loops and the human observer within a governed technical ecosystem.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/aesthetic-nervous-system/"
     },
     {
@@ -15,6 +17,8 @@
       "date": "2026-02-13",
       "slug": "archive-paradox",
       "title": "Archive Paradox",
+      "subtitle": "Preservation through Constant Transformation",
+      "summary": "Exploring the structural tension between static historical records and the fluid state of live architectural codebases.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/archive-paradox/"
     },
     {
@@ -23,6 +27,8 @@
       "date": "2026-02-13",
       "slug": "bootstrap-to-scale",
       "title": "Bootstrap To Scale",
+      "subtitle": "The Logistics of Institutional Emergence",
+      "summary": "A tactical analysis of how to transition a single-repository project into a multi-organization institutional system.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/bootstrap-to-scale/"
     },
     {
@@ -31,6 +37,8 @@
       "date": "2026-02-13",
       "slug": "dependency-graph",
       "title": "Dependency Graph",
+      "subtitle": "The Geometry of Institutional Relations",
+      "summary": "Formalizing the unidirectional flow of trust and data across the eight-organ system's 91-repository fleet.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/dependency-graph/"
     },
     {
@@ -39,6 +47,8 @@
       "date": "2026-02-13",
       "slug": "deploying-the-portfolio",
       "title": "Deploying The Portfolio",
+      "subtitle": "Shipping the Nervous System to the Edge",
+      "summary": "The DevOps story of automating site generation from a fragmented multi-repo data lake into a unified Astro 5 interface.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/deploying-the-portfolio/"
     },
     {
@@ -47,6 +57,8 @@
       "date": "2026-02-13",
       "slug": "how-this-was-built",
       "title": "How This Was Built",
+      "subtitle": "The AI-Conductor Architectural Blueprint",
+      "summary": "A deep dive into the human-directed, machine-executed workflow that produced 386K words of evidence in 14 days.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/how-this-was-built/"
     },
     {
@@ -55,6 +67,8 @@
       "date": "2026-02-13",
       "slug": "provenance-as-practice",
       "title": "Provenance As Practice",
+      "subtitle": "The Ethics of Digital Ancestry",
+      "summary": "Why documenting the origin of every architectural decision is the primary moral obligation of the systems engineer.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/provenance-as-practice/"
     },
     {
@@ -63,6 +77,8 @@
       "date": "2026-02-13",
       "slug": "registry-driven-development",
       "title": "Registry Driven Development",
+      "subtitle": "Governing through Centralized Meta-Data",
+      "summary": "Using a single machine-readable JSON registry to enforce consistency across 91 disparate development environments.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/registry-driven-development/"
     },
     {
@@ -71,6 +87,8 @@
       "date": "2026-02-13",
       "slug": "seed-contracts",
       "title": "Seed Contracts",
+      "subtitle": "The Initial Agreement of Creation",
+      "summary": "Defining the immutable principles that must be satisfied before any new project is permitted to enter the organ system.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/seed-contracts/"
     },
     {
@@ -79,6 +97,8 @@
       "date": "2026-02-13",
       "slug": "the-convergence",
       "title": "The Convergence",
+      "subtitle": "When Theory, Art, and Code Become Indistinguishable",
+      "summary": "Synthesizing the eight organs into a single unified living organism of technical and creative output.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/the-convergence/"
     },
     {
@@ -87,6 +107,8 @@
       "date": "2026-02-13",
       "slug": "the-promotion-pipeline",
       "title": "The Promotion Pipeline",
+      "subtitle": "The State Machine of Quality Control",
+      "summary": "How digital artifacts mature through automated gates from experimental theory to production-grade implementation.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/the-promotion-pipeline/"
     },
     {
@@ -94,7 +116,9 @@
       "filename": "2026-02-13-why-ai-function-calling-needs-ontological-grounding.md",
       "date": "2026-02-13",
       "slug": "why-ai-function-calling-needs-ontological-grounding",
-      "title": "Why Ai Function Calling Needs Ontological Grounding",
+      "title": "Why AI Function Calling Needs Ontological Grounding",
+      "subtitle": "Logic over Probabilistic Reasoning",
+      "summary": "Arguing that autonomous agents require strict formal ontologies to navigate complex systems without hallucinating logic.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/why-ai-function-calling-needs-ontological-grounding/"
     },
     {
@@ -103,6 +127,8 @@
       "date": "2026-02-12",
       "slug": "the-parallel-launch",
       "title": "The Parallel Launch",
+      "subtitle": "Synchronizing 91 Deployments",
+      "summary": "The strategy for launching a complete institutional ecosystem simultaneously across multiple organizations.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/the-parallel-launch/"
     },
     {
@@ -110,7 +136,9 @@
       "filename": "2026-02-11-aetheria-rpg-post-mortem.md",
       "date": "2026-02-11",
       "slug": "aetheria-rpg-post-mortem",
-      "title": "Aetheria Rpg Post Mortem",
+      "title": "Aetheria RPG Post Mortem",
+      "subtitle": "Gamifying the Classroom through Code",
+      "summary": "Reflections on building a distributed pedagogical system and the lessons learned from high-engagement student users.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/aetheria-rpg-post-mortem/"
     },
     {
@@ -118,7 +146,9 @@
       "filename": "2026-02-11-ai-conductor-methodology.md",
       "date": "2026-02-11",
       "slug": "ai-conductor-methodology",
-      "title": "Ai Conductor Methodology",
+      "title": "AI Conductor Methodology",
+      "subtitle": "Directing the Machine Symphony",
+      "summary": "Defining the formal protocol for human-AI collaboration where the human provides the soul and the machine provides the scale.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/ai-conductor-methodology/"
     },
     {
@@ -127,6 +157,8 @@
       "date": "2026-02-11",
       "slug": "bronze-to-platinum",
       "title": "Bronze To Platinum",
+      "subtitle": "The Taxonomy of Asset Maturity",
+      "summary": "A rigorous classification system for determining the quality and completion level of digital infrastructure.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/bronze-to-platinum/"
     },
     {
@@ -135,6 +167,8 @@
       "date": "2026-02-11",
       "slug": "choreographic-interface",
       "title": "Choreographic Interface",
+      "subtitle": "Mapping Movement to Machine Logic",
+      "summary": "Exploring the intersection of physical performance and real-time interactive systems through Laban-inspired algorithms.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/choreographic-interface/"
     },
     {
@@ -143,6 +177,8 @@
       "date": "2026-02-11",
       "slug": "coaching-platform-metrics",
       "title": "Coaching Platform Metrics",
+      "subtitle": "Quantifying Behavioral Change",
+      "summary": "How to build data structures that measure the invisible progress of human mentorship and self-actualization.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/coaching-platform-metrics/"
     },
     {
@@ -151,6 +187,8 @@
       "date": "2026-02-11",
       "slug": "documentation-implementation-gap",
       "title": "Documentation Implementation Gap",
+      "subtitle": "The Truth in the Delta",
+      "summary": "Analyzing the distance between what we say we've built and what the code actually executes.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/documentation-implementation-gap/"
     },
     {
@@ -159,6 +197,8 @@
       "date": "2026-02-11",
       "slug": "epistemic-tuning-explained",
       "title": "Epistemic Tuning Explained",
+      "subtitle": "Calibrating the Internal Truth Engine",
+      "summary": "The methodology for refining the internal worldview of autonomous agents to align with institutional reality.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/epistemic-tuning-explained/"
     },
     {
@@ -167,6 +207,8 @@
       "date": "2026-02-11",
       "slug": "generative-music-case-study",
       "title": "Generative Music Case Study",
+      "subtitle": "Algorithmic Composition as Systems Art",
+      "summary": "Tracing the development of a real-time audio environment driven by the underlying metrics of the eight-organ system.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/generative-music-case-study/"
     },
     {
@@ -175,6 +217,8 @@
       "date": "2026-02-11",
       "slug": "recursive-engines-at-scale",
       "title": "Recursive Engines At Scale",
+      "subtitle": "The Operational Burden of Self-Reference",
+      "summary": "Managing the computational and cognitive overhead of systems that perpetually examine and modify themselves.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/recursive-engines-at-scale/"
     },
     {
@@ -183,6 +227,8 @@
       "date": "2026-02-11",
       "slug": "testing-the-meta-system",
       "title": "Testing The Meta System",
+      "subtitle": "Verifying the Infrastructure of Verification",
+      "summary": "How to write unit and integration tests for the very tools that govern and validate other repositories.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/testing-the-meta-system/"
     },
     {
@@ -191,6 +237,8 @@
       "date": "2026-02-11",
       "slug": "uniform-quality-at-scale",
       "title": "Uniform Quality At Scale",
+      "subtitle": "The Industrialization of Creative Excellence",
+      "summary": "Implementing automated quality gates that ensure every repository meets the same high standard of architectural integrity.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/uniform-quality-at-scale/"
     },
     {
@@ -199,6 +247,8 @@
       "date": "2026-02-10",
       "slug": "building-in-public",
       "title": "Building In Public",
+      "subtitle": "The Radical Transparency of the logos Organ",
+      "summary": "Why making the messy work of creation visible is essential for building genuine community and institutional trust.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/building-in-public/"
     },
     {
@@ -207,6 +257,8 @@
       "date": "2026-02-10",
       "slug": "five-years-autonomous-creative",
       "title": "Five Years Autonomous Creative",
+      "subtitle": "A Half-Decade of Human-AI Synthesis",
+      "summary": "Looking back at the evolution of autonomous systems and predicting the next era of directed creativity.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/five-years-autonomous-creative/"
     },
     {
@@ -215,6 +267,8 @@
       "date": "2026-02-10",
       "slug": "governance-as-creative-practice",
       "title": "Governance As Creative Practice",
+      "subtitle": "Treating Protocols as Artistic Medium",
+      "summary": "Moving beyond the artifact to see the rules, systems, and institutional structures as the primary work of art.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/governance-as-creative-practice/"
     },
     {
@@ -223,6 +277,8 @@
       "date": "2026-02-10",
       "slug": "how-we-orchestrate-eight-organs",
       "title": "How We Orchestrate Eight Organs",
+      "subtitle": "The Command and Control of Distributed Creativity",
+      "summary": "A detailed technical breakdown of the Taxis organ's role in coordinating 91 independent repositories.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/how-we-orchestrate-eight-organs/"
     },
     {
@@ -231,6 +287,8 @@
       "date": "2026-02-10",
       "slug": "meta-system-as-portfolio-asset",
       "title": "Meta System As Portfolio Asset",
+      "subtitle": "The Architecture is the Evidence",
+      "summary": "Why the registry and the dependency graph are more compelling proof of skill than any individual code snippet.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/meta-system-as-portfolio-asset/"
     },
     {
@@ -238,7 +296,9 @@
       "filename": "2026-02-16-governance-frameworks-for-artists.md",
       "date": "2026-02-16",
       "slug": "governance-frameworks-for-artists",
-      "title": "Governance Frameworks for Artists: Why Creative Practice Needs Institutional Thinking",
+      "title": "Governance Frameworks for Artists",
+      "subtitle": "Why Creative Practice Needs Institutional Thinking",
+      "summary": "Arguing that sustainable art requires the same level of architectural rigor as any large-scale technical enterprise.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/governance-frameworks-for-artists/"
     },
     {
@@ -246,7 +306,9 @@
       "filename": "2026-02-16-how-to-think-about-autonomous-systems.md",
       "date": "2026-02-16",
       "slug": "how-to-think-about-autonomous-systems",
-      "title": "How to Think About Autonomous Systems: A Practitioner's Guide",
+      "title": "How to Think About Autonomous Systems",
+      "subtitle": "A Practitioner's Guide to System Agency",
+      "summary": "Defining the mental models required to design and direct technical systems that possess limited independent agency.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/how-to-think-about-autonomous-systems/"
     },
     {
@@ -254,7 +316,9 @@
       "filename": "2026-02-16-promotions-in-practice.md",
       "date": "2026-02-16",
       "slug": "promotions-in-practice",
-      "title": "Promotions in Practice: What We Learned Exercising the State Machine",
+      "title": "Promotions in Practice",
+      "subtitle": "What We Learned Exercising the State Machine",
+      "summary": "A post-mortem analysis of how 91 repositories successfully navigated the promotion from bronze to platinum status.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/promotions-in-practice/"
     },
     {
@@ -262,7 +326,9 @@
       "filename": "2026-02-16-twenty-six-sprints-in-six-days.md",
       "date": "2026-02-16",
       "slug": "twenty-six-sprints-in-six-days",
-      "title": "Twenty-Six Sprints in Six Days: What the AI-Conductor Model Actually Looks Like",
+      "title": "Twenty-Six Sprints in Six Days",
+      "subtitle": "What the AI-Conductor Model Actually Looks Like",
+      "summary": "A detailed timeline of the massive burst of productivity enabled by our proprietary human-directed AI workflow.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/twenty-six-sprints-in-six-days/"
     },
     {
@@ -270,7 +336,9 @@
       "filename": "2026-02-16-what-it-takes-to-ship-a-product-from-inside-an-organ-system.md",
       "date": "2026-02-16",
       "slug": "what-it-takes-to-ship-a-product-from-inside-an-organ-system",
-      "title": "What It Takes to Ship a Product from Inside an Organ System",
+      "title": "Shipping from the Inside Out",
+      "subtitle": "Deploying Products within a Governed Framework",
+      "summary": "Why the organ model accelerates product delivery by providing pre-built institutional and technical primitives.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/what-it-takes-to-ship-a-product-from-inside-an-organ-system/"
     },
     {
@@ -278,7 +346,9 @@
       "filename": "2026-02-16-why-the-organ-model-separates-commerce-from-theory.md",
       "date": "2026-02-16",
       "slug": "why-the-organ-model-separates-commerce-from-theory",
-      "title": "Why the Organ Model Separates Commerce from Theory",
+      "title": "Theory vs. Commerce",
+      "subtitle": "The Architectural Split between I and III",
+      "summary": "Explaining the strategic decision to isolate pure theoretical research from the economic realities of production software.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/why-the-organ-model-separates-commerce-from-theory/"
     },
     {
@@ -286,7 +356,9 @@
       "filename": "2026-02-17-construction-addiction.md",
       "date": "2026-02-17",
       "slug": "construction-addiction",
-      "title": "The Construction Addiction: When Building Becomes Avoidance",
+      "title": "The Construction Addiction",
+      "subtitle": "When Building Becomes Avoidance",
+      "summary": "A psychological audit of the systems engineer's tendency to build new infrastructure instead of inhabiting what exists.",
       "url": "https://organvm-v-logos.github.io/public-process/essays/construction-addiction/"
     }
   ],

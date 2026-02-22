@@ -10,119 +10,120 @@
     return w.__indexFiltersState;
   }
 
-  function initIndexFilters() {
-    const state = getIndexFiltersState();
-    state.controller?.abort();
-    const controller = new AbortController();
-    const { signal } = controller;
-    state.controller = controller;
-
-    const main = document.getElementById('main-content') as HTMLElement | null;
-    if (!main?.dataset.portfolioView) return;
-
-    const viewBtns = document.querySelectorAll<HTMLButtonElement>('.view-toggle__btn');
-    const cards = document.querySelectorAll<HTMLElement>('.card[data-skills]');
-    const groups = document.querySelectorAll<HTMLElement>('[data-organ-group]');
-    const filterStatus = document.getElementById('filter-status');
-    const totalCards = cards.length;
-
-    function announceFilterStatus(prefix?: string) {
-      if (!filterStatus) return;
-      const visible = document.querySelectorAll<HTMLElement>('.card[data-skills]:not([style*="display: none"])').length;
-      const count = visible === totalCards
-        ? `Showing all ${totalCards} projects.`
-        : `Showing ${visible} of ${totalCards} projects.`;
-      filterStatus.textContent = prefix ? `${prefix} ${count}` : count;
-    }
-
-    function getCurrentView() {
-      return main!.dataset.portfolioView || 'engineering';
-    }
-
-    function resetFilters() {
-      document.querySelectorAll<HTMLButtonElement>('.filter-chip').forEach((c) => {
-        c.classList.remove('filter-chip--active');
-        c.setAttribute('aria-pressed', 'false');
-      });
-      document.querySelectorAll<HTMLButtonElement>('.filter-chip[data-filter="all"]').forEach((c) => {
-        c.classList.add('filter-chip--active');
-        c.setAttribute('aria-pressed', 'true');
-      });
-      cards.forEach((card) => { card.style.display = ''; });
-      groups.forEach((group) => { group.style.display = ''; });
-    }
-
-    function switchView(view: string) {
-      main!.dataset.portfolioView = view;
-
-      document.querySelectorAll<HTMLElement>('[data-hero-view]').forEach((el) => {
-        el.style.display = el.getAttribute('data-hero-view') === view ? '' : 'none';
-      });
-
-      document.querySelectorAll<HTMLElement>('[data-stats-view]').forEach((el) => {
-        el.style.display = el.getAttribute('data-stats-view') === view ? '' : 'none';
-      });
-
-      document.querySelectorAll<HTMLElement>('[data-filter-view]').forEach((el) => {
-        el.style.display = el.getAttribute('data-filter-view') === view ? '' : 'none';
-      });
-
-      document.querySelectorAll<HTMLElement>('[data-heading-view]').forEach((el) => {
-        el.style.display = el.getAttribute('data-heading-view') === view ? '' : 'none';
-      });
-
-      resetFilters();
-    }
-
-    viewBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const view = btn.getAttribute('data-view')!;
-        viewBtns.forEach((b) => {
-          b.classList.remove('view-toggle__btn--active');
-          b.setAttribute('aria-checked', 'false');
-        });
-        btn.classList.add('view-toggle__btn--active');
-        btn.setAttribute('aria-checked', 'true');
-        switchView(view);
-        const label = view.charAt(0).toUpperCase() + view.slice(1);
-        announceFilterStatus(`Switched to ${label} view.`);
-      }, { signal });
-    });
-
-    document.querySelectorAll<HTMLElement>('.filter-bar').forEach((bar) => {
-      bar.addEventListener('click', (e) => {
-        const chip = (e.target as HTMLElement).closest<HTMLButtonElement>('.filter-chip');
-        if (!chip) return;
-
-        bar.querySelectorAll<HTMLButtonElement>('.filter-chip').forEach((c) => {
+      function initIndexFilters() {
+      const state = getIndexFiltersState();
+      state.controller?.abort();
+      const controller = new AbortController();
+      const { signal } = controller;
+      state.controller = controller;
+  
+      const main = document.getElementById('main-content') as HTMLElement | null;
+      if (!main?.dataset.portfolioView) return;
+  
+      const viewBtns = document.querySelectorAll<HTMLButtonElement>('.view-toggle__btn');
+      const cards = document.querySelectorAll<HTMLElement>('.project-grid [data-reveal]');
+      const groups = document.querySelectorAll<HTMLElement>('[data-organ-group]');
+      const filterStatus = document.getElementById('filter-status');
+      const totalCards = cards.length;
+  
+      function announceFilterStatus(prefix?: string) {
+        if (!filterStatus) return;
+        const visible = document.querySelectorAll<HTMLElement>('.project-grid [data-reveal]:not([style*="display: none"])').length;
+        const count = visible === totalCards
+          ? `Showing all ${totalCards} projects.`
+          : `Showing ${visible} of ${totalCards} projects.`;
+        filterStatus.textContent = prefix ? `${prefix} ${count}` : count;
+      }
+  
+      function getCurrentView() {
+        return main!.dataset.portfolioView || 'engineering';
+      }
+  
+      function resetFilters() {
+        document.querySelectorAll<HTMLButtonElement>('.filter-chip').forEach((c) => {
           c.classList.remove('filter-chip--active');
           c.setAttribute('aria-pressed', 'false');
         });
-        chip.classList.add('filter-chip--active');
-        chip.setAttribute('aria-pressed', 'true');
-
-        const filter = chip.getAttribute('data-filter')!;
-        const view = getCurrentView();
-        const attr = view === 'engineering' ? 'data-skills' : 'data-tags';
-
-        cards.forEach((card) => {
-          if (filter === 'all') {
-            card.style.display = '';
-          } else {
-            const values = card.getAttribute(attr) || '';
-            card.style.display = values.split(',').includes(filter) ? '' : 'none';
-          }
+        document.querySelectorAll<HTMLButtonElement>('.filter-chip[data-filter="all"]').forEach((c) => {
+          c.classList.add('filter-chip--active');
+          c.setAttribute('aria-pressed', 'true');
         });
-
-        groups.forEach((group) => {
-          const visible = group.querySelectorAll('.card:not([style*="display: none"])');
-          group.style.display = visible.length === 0 ? 'none' : '';
+        cards.forEach((card) => { card.style.display = ''; });
+        groups.forEach((group) => { group.style.display = ''; });
+      }
+  
+      function switchView(view: string) {
+        main!.dataset.portfolioView = view;
+  
+        document.querySelectorAll<HTMLElement>('[data-hero-view]').forEach((el) => {
+          el.style.display = el.getAttribute('data-hero-view') === view ? '' : 'none';
         });
-
-        announceFilterStatus();
-      }, { signal });
-    });
-
+  
+        document.querySelectorAll<HTMLElement>('[data-stats-view]').forEach((el) => {
+          el.style.display = el.getAttribute('data-stats-view') === view ? '' : 'none';
+        });
+  
+        document.querySelectorAll<HTMLElement>('[data-filter-view]').forEach((el) => {
+          el.style.display = el.getAttribute('data-filter-view') === view ? '' : 'none';
+        });
+  
+        document.querySelectorAll<HTMLElement>('[data-heading-view]').forEach((el) => {
+          el.style.display = el.getAttribute('data-heading-view') === view ? '' : 'none';
+        });
+  
+        resetFilters();
+      }
+  
+      viewBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const view = btn.getAttribute('data-view')!;
+          viewBtns.forEach((b) => {
+            b.classList.remove('view-toggle__btn--active');
+            b.setAttribute('aria-checked', 'false');
+          });
+          btn.classList.add('view-toggle__btn--active');
+          btn.setAttribute('aria-checked', 'true');
+          switchView(view);
+          const label = view.charAt(0).toUpperCase() + view.slice(1);
+          announceFilterStatus(`Switched to ${label} view.`);
+        }, { signal });
+      });
+  
+      document.querySelectorAll<HTMLElement>('.filter-bar').forEach((bar) => {
+        bar.addEventListener('click', (e) => {
+          const chip = (e.target as HTMLElement).closest<HTMLButtonElement>('.filter-chip');
+          if (!chip) return;
+  
+          bar.querySelectorAll<HTMLButtonElement>('.filter-chip').forEach((c) => {
+            c.classList.remove('filter-chip--active');
+            c.setAttribute('aria-pressed', 'false');
+          });
+          chip.classList.add('filter-chip--active');
+          chip.setAttribute('aria-pressed', 'true');
+  
+          const filter = chip.getAttribute('data-filter')!;
+          const view = getCurrentView();
+          const attr = view === 'engineering' ? 'data-skills' : 'data-tags';
+  
+                  cards.forEach((container) => {
+                    const card = container.querySelector('.card') as HTMLElement | null;
+                    if (!card) return;
+          
+                    if (filter === 'all') {
+                      container.style.display = '';
+                    } else {
+                      const values = card.dataset.skills || card.dataset.tags || '';
+                      container.style.display = values.split(',').includes(filter) ? '' : 'none';
+                    }
+                  });  
+          groups.forEach((group) => {
+            const visible = group.querySelectorAll('.project-grid [data-reveal]:not([style*="display: none"])');
+            group.style.display = visible.length === 0 ? 'none' : '';
+          });
+  
+          announceFilterStatus();
+        }, { signal });
+      });
     document.addEventListener('astro:before-swap', () => {
       controller.abort();
     }, { once: true, signal });

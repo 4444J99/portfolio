@@ -53,7 +53,7 @@ function splitWords(text: string) {
         <p class="hero__label" data-reveal>AI Systems Architect</p>
         <h1 class="hero__title hero__title--animated" data-reveal style="animation-delay: 100ms">
           {splitWords(engineeringTitle).map((word, i) => (
-            <span class="hero__word" style={`animation-delay: ${100 + i * 40}ms`}>{word} </span>
+            <span class="hero__word" style={`animation-delay: ${100 + i * 40}ms`}>{word}&nbsp;</span>
           ))}
         </h1>
         <p class="hero__sub" data-reveal style="animation-delay: 200ms">15 years of strategic delivery. Lead Architect for a 91-repo orchestration ecosystem. Expert in autonomous governance, multi-agent topologies, and hexagonal reliability. 1,254 tests and 85% coverage across the production fleet.</p>
@@ -63,7 +63,7 @@ function splitWords(text: string) {
         <p class="hero__label">Creative Technologist</p>
         <h1 class="hero__title hero__title--animated">
           {splitWords(creativeTitle).map((word, i) => (
-            <span class="hero__word" style={`animation-delay: ${i * 40}ms`}>{word} </span>
+            <span class="hero__word" style={`animation-delay: ${i * 40}ms`}>{word}&nbsp;</span>
           ))}
         </h1>
         <p class="hero__sub">Directing the intersection of rhetoric and code. Coordinating 9 repositories and 8 organizations as a unified artistic ecosystem — ~386K words of architectural planning and public process documentation.</p>
@@ -167,7 +167,8 @@ function splitWords(text: string) {
     opacity: 0;
     transform: translateY(8px);
     animation: wordReveal 0.4s ease forwards;
-    margin-right: 0.3em;
+    margin-right: 0.1em;
+    white-space: pre-wrap;
   }
 
   @keyframes wordReveal {

@@ -66,6 +66,8 @@ export interface Essay {
   date: string;
   slug: string;
   title: string;
+  subtitle?: string;
+  summary?: string;
   url: string;
 }
 

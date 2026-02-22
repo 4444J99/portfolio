@@ -27,8 +27,15 @@ const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title
         <div class="essay-list">
           {typedEssayData.essays.map((essay: Essay) => (
             <a href={essay.url} target="_blank" rel="noopener noreferrer" class="essay-entry">
-              <time class="essay-entry__date" datetime={essay.date}>{essay.date}</time>
-              <span class="essay-entry__title">{essay.title}</span>
+              <div class="essay-entry__meta">
+                <time class="essay-entry__date" datetime={essay.date}>{essay.date}</time>
+              </div>
+              <div class="essay-entry__content">
+                <h2 class="essay-entry__title">{essay.title}</h2>
+                {essay.subtitle && <p class="essay-entry__subtitle">{essay.subtitle}</p>}
+                {essay.summary && <p class="essay-entry__summary">{essay.summary}</p>}
+              </div>
+              <span class="essay-entry__cta" aria-hidden="true">Read &rarr;</span>
             </a>
           ))}
         </div>
@@ -49,44 +56,90 @@ const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title
   .essay-list {
     display: flex;
     flex-direction: column;
+    gap: var(--space-md);
   }
 
   .essay-entry {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-lg);
-    padding: var(--space-md);
-    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    align-items: start;
+    gap: var(--space-xl);
+    padding: var(--space-xl);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     text-decoration: none;
-    transition: background var(--transition-fast);
+    transition: all var(--transition-fast);
     background: var(--bg-secondary);
   }
 
   .essay-entry:hover {
     background: var(--bg-card);
+    border-color: var(--accent);
+    transform: translateY(-2px);
   }
 
   .essay-entry__date {
-    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
     color: var(--text-muted);
-    flex-shrink: 0;
-    min-width: 7em;
+    letter-spacing: 0.05em;
+  }
+
+  .essay-entry__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
   }
 
   .essay-entry__title {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
     color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+    transition: color var(--transition-fast);
+  }
+
+  .essay-entry__subtitle {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-text);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .essay-entry__summary {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: var(--space-xs) 0 0;
+    line-height: 1.6;
+    max-width: 65ch;
+  }
+
+  .essay-entry__cta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    align-self: center;
     transition: color var(--transition-fast);
   }
 
   .essay-entry:hover .essay-entry__title {
+    color: var(--text-primary);
+  }
+
+  .essay-entry:hover .essay-entry__cta {
     color: var(--accent-text);
   }
 
   @media (max-width: 768px) {
     .essay-entry {
-      flex-direction: column;
-      gap: var(--space-xs);
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .essay-entry__cta {
+      display: none;
     }
   }
 </style>

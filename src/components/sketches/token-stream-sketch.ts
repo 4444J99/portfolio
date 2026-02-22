@@ -87,12 +87,12 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
       p.fill(...PALETTE.card, isZoomed ? 60 : 30);
       p.rect(px, top, pw, bottom - top, 4);
 
-      p.stroke(...PALETTE.border, isZoomed ? 80 : 40);
+      p.stroke(...PALETTE.border, isZoomed ? 120 : 60);
       p.strokeWeight(0.5);
       p.line(px, top, px + pw, top);
       p.line(px, bottom, px + pw, bottom);
 
-      p.fill(...getTextColor(), isZoomed ? 180 : 60);
+      p.fill(255, 255, 255, isZoomed ? 220 : 100);
       p.noStroke();
       p.textFont('JetBrains Mono, monospace');
       p.textSize(isMobile() ? 8 : 10);
@@ -100,7 +100,7 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
       p.text(phase.label, px + pw / 2, top - 12);
 
       if (i === 2) {
-        p.fill(...PALETTE.accent, 30 + Math.sin(time * 2) * 15);
+        p.fill(...PALETTE.spectrum[1], 100 + Math.sin(time * 2) * 50);
         p.textSize(isMobile() ? 6 : 8);
         p.text('human bottleneck', px + pw / 2, bottom + 12);
       }
@@ -161,22 +161,22 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
       // Token color
       let r: number, g: number, b: number;
       if (token.verified === null) {
-        [r, g, b] = PALETTE.muted;
+        [r, g, b] = PALETTE.spectrum[8]; // Blue-ish
       } else if (token.verified) {
-        [r, g, b] = PALETTE.accent;
+        [r, g, b] = PALETTE.spectrum[11]; // Green-ish
       } else {
-        [r, g, b] = [180, 80, 80];
+        [r, g, b] = PALETTE.spectrum[2]; // Red-ish
       }
 
       p.noStroke();
-      p.fill(r, g, b, token.alpha * 0.8);
+      p.fill(r, g, b, token.alpha * 0.9);
       p.rect(token.x, token.y, token.width, token.height, 1);
 
       // Draw essay title label on token if available
       if (token.labelIdx >= 0 && tokenLabels[token.labelIdx] && !isMobile()) {
-        p.fill(r, g, b, token.alpha * 0.6);
+        p.fill(255, 255, 255, token.alpha * 0.8);
         p.textFont('JetBrains Mono, monospace');
-        p.textSize(5);
+        p.textSize(7);
         p.textAlign(p.LEFT, p.CENTER);
         p.text(tokenLabels[token.labelIdx].substring(0, 18), token.x + 2, token.y + token.height / 2);
       }
@@ -185,7 +185,7 @@ export default function tokenStreamSketch(p: p5, container: HTMLElement) {
     // Running counter
     const displayCount = Math.min(tokenCounter * 15, 289000);
     const countStr = displayCount >= 289000 ? '289K' : `${Math.floor(displayCount / 1000)}K`;
-    p.fill(...PALETTE.accent, 60);
+    p.fill(...PALETTE.spectrum[0], 120);
     p.noStroke();
     p.textFont('JetBrains Mono, monospace');
     p.textSize(isMobile() ? 10 : 14);
