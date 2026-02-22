@@ -41,6 +41,7 @@
         if (toggle && panel) {
           toggle.setAttribute('aria-expanded', 'true');
           panel.setAttribute('aria-hidden', 'false');
+          panel.inert = false;
         }
       }
 
@@ -50,6 +51,7 @@
         if (toggle && panel) {
           toggle.setAttribute('aria-expanded', 'false');
           panel.setAttribute('aria-hidden', 'true');
+          panel.inert = true;
         }
       }
 

@@ -31,9 +31,9 @@ const paddedNumber = String(number).padStart(2, '0');
         <h3 class="flip-card__title">{title}</h3>
         <span class="flip-card__hint" aria-hidden="true">&#x21bb; Flip</span>
       </div>
-      <!-- Back face -->
-      <div class="flip-card__face flip-card__face--back" aria-hidden="true">
-        <button class="flip-card__close" tabindex="-1" aria-label="Close details">&times;</button>
+      <!-- Back face — inert handles a11y hiding + focus prevention -->
+      <div class="flip-card__face flip-card__face--back" inert>
+        <button class="flip-card__close" aria-label="Close details">&times;</button>
         <h3 class="flip-card__back-title" transition:name={`project-${slug}`} transition:animate="initial">{title}</h3>
         <p class="flip-card__tagline flip-card__tagline--creative">{tagline}</p>
         <p class="flip-card__description">{description}</p>
@@ -43,7 +43,7 @@ const paddedNumber = String(number).padStart(2, '0');
         <div class="flip-card__tags flip-card__tags--engineering">
           {skills.map(s => <span class="tag tag--skill">{s}</span>)}
         </div>
-        <a href={href} class="flip-card__cta" tabindex="-1">View project &rarr;</a>
+        <a href={href} class="flip-card__cta">View project &rarr;</a>
       </div>
     </div>
   </div>
@@ -77,27 +77,20 @@ const paddedNumber = String(number).padStart(2, '0');
       const front = card.querySelector<HTMLElement>('.flip-card__face--front');
       const back = card.querySelector<HTMLElement>('.flip-card__face--back');
       const closeBtn = card.querySelector<HTMLButtonElement>('.flip-card__close');
-      const backCta = card.querySelector<HTMLAnchorElement>('.flip-card__cta');
 
       if (!front || !back || !closeBtn) return;
 
       function flipOpen() {
         card.classList.add('is-flipped');
-        front!.setAttribute('aria-hidden', 'true');
-        front!.setAttribute('tabindex', '-1');
-        back!.setAttribute('aria-hidden', 'false');
-        closeBtn!.setAttribute('tabindex', '0');
-        backCta?.setAttribute('tabindex', '0');
+        front!.inert = true;
+        back!.inert = false;
         closeBtn!.focus();
       }
 
       function flipClose() {
         card.classList.remove('is-flipped');
-        front!.setAttribute('aria-hidden', 'false');
-        front!.setAttribute('tabindex', '0');
-        back!.setAttribute('aria-hidden', 'true');
-        closeBtn!.setAttribute('tabindex', '-1');
-        backCta?.setAttribute('tabindex', '-1');
+        front!.inert = false;
+        back!.inert = true;
         front!.focus();
       }
 

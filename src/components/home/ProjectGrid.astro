@@ -68,7 +68,7 @@ const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organCol
             <path d="M4 6l4 4 4-4"/>
           </svg>
         </button>
-        <div class="organ-group__panel" id={`panel-${gi}`} aria-hidden={gi < 2 ? 'false' : 'true'}>
+        <div class="organ-group__panel" id={`panel-${gi}`} aria-hidden={gi < 2 ? 'false' : 'true'} inert={gi >= 2}>
           <div class="organ-group__panel-inner">
             <div class="project-grid">
               {group.projects.map((project, i) => (
