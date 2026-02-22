@@ -104,7 +104,7 @@ describe('quality governance drift checks', () => {
 
   it('README security ratchet schedule matches security policy file', () => {
     const readmeSecurity = readme.match(
-      /Security ratchet checkpoints:\s*`([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`, `([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`, `([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`, `([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`/
+      /Security ratchet checkpoints:\s*`([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`, `([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`, `([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`, `([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`, `([0-9-]+)` `moderate<=([0-9]+), low<=([0-9]+)`/
     );
     expect(readmeSecurity).not.toBeNull();
 
@@ -119,6 +119,7 @@ describe('quality governance drift checks', () => {
       { date: readmeSecurity![4], maxModerate: Number(readmeSecurity![5]), maxLow: Number(readmeSecurity![6]) },
       { date: readmeSecurity![7], maxModerate: Number(readmeSecurity![8]), maxLow: Number(readmeSecurity![9]) },
       { date: readmeSecurity![10], maxModerate: Number(readmeSecurity![11]), maxLow: Number(readmeSecurity![12]) },
+      { date: readmeSecurity![13], maxModerate: Number(readmeSecurity![14]), maxLow: Number(readmeSecurity![15]) },
     ]);
   });
 

@@ -2,17 +2,9 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync, appendFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { parseOption } from './lib/cli-utils.mjs';
 
 const args = process.argv.slice(2);
-
-function parseOption(name) {
-  const eq = args.find((entry) => entry.startsWith(`--${name}=`));
-  if (eq) return eq.split('=')[1] ?? null;
-  const index = args.indexOf(`--${name}`);
-  if (index >= 0) return args[index + 1] ?? null;
-  return null;
-}
-
 const allowMissing = args.includes('--allow-missing');
 const outputPath = resolve(parseOption('out') || '.quality/quality-summary.md');
 const policyPath = resolve('.quality/ratchet-policy.json');

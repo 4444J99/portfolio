@@ -157,6 +157,15 @@ export const organGroups: OrganGroup[] = [
         skills: ['Full-Stack', 'Creative'],
         number: 13,
       },
+      {
+        title: 'Public Record Data Scraper',
+        tagline: '50-state UCC records aggregation at scale',
+        description: 'Automated public records collection platform scraping UCC filings across all 50 US states. AWS infrastructure with Terraform IaC, Python scraping agents, and structured data pipeline.',
+        slug: 'public-record-data-scrapper',
+        tags: ['Commerce', 'Python', 'AWS', 'Terraform'],
+        skills: ['Python', 'Systems'],
+        number: 21,
+      },
     ],
   },
   {

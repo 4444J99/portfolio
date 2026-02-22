@@ -35,6 +35,7 @@ module.exports = {
         'http://localhost/projects/orchestration-hub/index.html',
         'http://localhost/projects/org-architecture/index.html',
         'http://localhost/projects/public-process/index.html',
+        'http://localhost/projects/public-record-data-scrapper/index.html',
         'http://localhost/projects/the-actual-news/index.html',
         'http://localhost/projects/your-fit-tailored/index.html',
       ],

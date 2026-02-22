@@ -4,17 +4,9 @@ import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { chromium } from 'playwright';
+import { parseOption } from './lib/cli-utils.mjs';
 
-const args = process.argv.slice(2);
 const DEFAULT_MANIFEST_PATH = resolve('scripts/runtime-a11y-routes.json');
-
-function parseOption(name, fallback = null) {
-  const eq = args.find((entry) => entry.startsWith(`--${name}=`));
-  if (eq) return eq.split('=')[1] ?? fallback;
-  const index = args.indexOf(`--${name}`);
-  if (index >= 0) return args[index + 1] ?? fallback;
-  return fallback;
-}
 
 const outputPath = resolve(parseOption('json-out', '.quality/runtime-errors-summary.json'));
 const allowlistPath = resolve(parseOption('allowlist', '.quality/runtime-error-allowlist.json'));

@@ -6,9 +6,9 @@
  * Usage: node scripts/validate-build.mjs
  */
 
-import { readdirSync, readFileSync, existsSync } from 'fs';
-import { join, resolve } from 'path';
-import { spawnSync } from 'child_process';
+import { readdirSync, readFileSync, existsSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const DIST = resolve('dist');
 const SITE_BASE = 'https://4444j99.github.io/portfolio/';

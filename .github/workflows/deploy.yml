@@ -20,12 +20,34 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  check-quality:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    outputs:
+      quality-passed: ${{ steps.check.outputs.passed }}
+    steps:
+      - name: Verify latest quality run passed
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          conclusion=$(gh run list --workflow quality.yml --branch main --limit 1 --json conclusion -q '.[0].conclusion' --repo "$GITHUB_REPOSITORY")
+          if [ "$conclusion" = "success" ]; then
+            echo "passed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::Latest quality run conclusion: $conclusion — skipping deploy"
+            echo "passed=false" >> "$GITHUB_OUTPUT"
+          fi
+
   build:
+    needs: [check-quality]
     if: >-
-      github.event_name == 'workflow_dispatch' ||
-      github.event_name == 'schedule' ||
-      (github.event_name == 'workflow_run' &&
-       github.event.workflow_run.conclusion == 'success')
+      always() && (
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'schedule' && needs.check-quality.outputs.quality-passed == 'true') ||
+        (github.event_name == 'workflow_run' &&
+         github.event.workflow_run.conclusion == 'success')
+      )
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

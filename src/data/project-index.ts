@@ -23,6 +23,7 @@ export const projectIndex: ProjectEntry[] = [
   { slug: 'orchestration-hub', title: 'Orchestration Hub', tags: ['Governance', 'Python', 'Systems'] },
   { slug: 'org-architecture', title: 'Org Architecture & Community Health', tags: ['Systems', 'Community'] },
   { slug: 'public-process', title: 'Public Process', tags: ['Essays', 'Transparency'] },
+  { slug: 'public-record-data-scrapper', title: 'Public Record Data Scraper', tags: ['Commerce', 'Python', 'AWS', 'Terraform'] },
   { slug: 'recursive-engine', title: 'Recursive Engine (RE:GE)', tags: ['Theory', 'Python', 'DSL'] },
   { slug: 'the-actual-news', title: 'The Actual News', tags: ['Commerce', 'Media'] },
   { slug: 'your-fit-tailored', title: 'Your Fit Tailored', tags: ['Commerce', 'Product'] },

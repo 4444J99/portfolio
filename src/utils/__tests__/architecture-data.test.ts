@@ -21,9 +21,9 @@ describe('buildArchitectureNavigatorData', () => {
   it('maps project counts by organ deterministically', () => {
     const counts = Object.fromEntries(data.organs.map((o) => [o.organ, o.count]));
     expect(counts).toEqual({
-      'ORGAN-I': 5,
-      'ORGAN-II': 3,
-      'ORGAN-III': 5,
+      'ORGAN-I': 6,
+      'ORGAN-II': 4,
+      'ORGAN-III': 6,
       'ORGAN-IV': 2,
       'ORGAN-V': 2,
       'ORGAN-VI': 1,

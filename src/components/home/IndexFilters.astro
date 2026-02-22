@@ -79,10 +79,10 @@
           const view = btn.getAttribute('data-view')!;
           viewBtns.forEach((b) => {
             b.classList.remove('view-toggle__btn--active');
-            b.setAttribute('aria-checked', 'false');
+            b.setAttribute('aria-pressed', 'false');
           });
           btn.classList.add('view-toggle__btn--active');
-          btn.setAttribute('aria-checked', 'true');
+          btn.setAttribute('aria-pressed', 'true');
           switchView(view);
           const label = view.charAt(0).toUpperCase() + view.slice(1);
           announceFilterStatus(`Switched to ${label} view.`);

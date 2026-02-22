@@ -2,22 +2,14 @@
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
+import { parseOption } from './lib/cli-utils.mjs';
 
-const args = process.argv.slice(2);
 const BASELINE_MIN_COVERAGE = 75;
 const COVERAGE_CHECKPOINTS = [
   { date: '2026-02-25', minCoveragePct: 85 },
   { date: '2026-03-04', minCoveragePct: 95 },
   { date: '2026-03-18', minCoveragePct: 100 },
 ];
-
-function parseOption(name, fallback = null) {
-  const eq = args.find((entry) => entry.startsWith(`--${name}=`));
-  if (eq) return eq.split('=')[1] ?? fallback;
-  const index = args.indexOf(`--${name}`);
-  if (index >= 0) return args[index + 1] ?? fallback;
-  return fallback;
-}
 
 function countHtmlFiles(dir) {
   let total = 0;

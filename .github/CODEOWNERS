@@ -6,6 +6,7 @@
 .github/workflows/security-drift.yml @4444j99
 .github/pull_request_template.md @4444j99
 .quality/security-policy.json @4444j99
+.quality/ratchet-policy.json @4444j99
 .quality/security-allowlist.json @4444j99
 .quality/security-register.json @4444j99
 .quality/security-baseline.json @4444j99

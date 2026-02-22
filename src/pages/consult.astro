@@ -133,11 +133,7 @@ RESPONSE FORMAT:
   const industrySelect = document.getElementById('industry')! as HTMLSelectElement;
   let puterLoaderPromise: Promise<boolean> | null = null;
 
-  function shouldLoadPuterScript() {
-    // Load everywhere for now to ensure availability
-    return true;
-  }
-
+  // Puter.js SDK has no TypeScript declarations; window.puter is dynamically injected
   function loadPuterScript(): Promise<boolean> {
     if (typeof (window as any).puter !== 'undefined' && (window as any).puter.ai) return Promise.resolve(true);
     if (puterLoaderPromise) return puterLoaderPromise;
@@ -155,7 +151,6 @@ RESPONSE FORMAT:
       script.crossOrigin = 'anonymous';
       script.dataset.puterSdk = 'true';
       script.onload = () => {
-        console.log('Puter SDK loaded');
         resolve(true);
       };
       script.onerror = () => {

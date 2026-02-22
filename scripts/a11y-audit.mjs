@@ -7,8 +7,8 @@
  * Usage: node scripts/a11y-audit.mjs [--verbose] [--json] [--json-out <path>]
  */
 
-import { readFileSync, readdirSync, writeFileSync, mkdirSync } from 'fs';
-import { dirname, join, resolve } from 'path';
+import { readFileSync, readdirSync, writeFileSync, mkdirSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
 import { JSDOM } from 'jsdom';
 
 const DIST = resolve('dist');

@@ -19,12 +19,13 @@ interface Props {
   liveUrl?: string;
   badges?: Badge[];
   heroImage?: { src: string; alt: string };
+  keywords?: string[];
 }
 
-const { pageTitle, description, title, tags, repo, liveUrl, ...projectProps } = Astro.props;
+const { pageTitle, description, title, tags, repo, liveUrl, keywords, ...projectProps } = Astro.props;
 ---
 
-<Layout title={pageTitle} description={description} schemaProject={{ name: title, description, tags, repo, liveUrl }}>
+<Layout title={pageTitle} description={description} keywords={keywords} schemaProject={{ name: title, description, tags, repo, liveUrl }}>
   <ProjectDetail title={title} tags={tags} repo={repo} liveUrl={liveUrl} {...projectProps}>
     <slot />
   </ProjectDetail>

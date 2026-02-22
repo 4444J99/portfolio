@@ -2,20 +2,11 @@
 
 import { resolve } from 'node:path';
 import { DEFAULT_OWNERS, syncGitHubPagesDirectory } from '@meta-organvm/github-pages-index-core';
+import { parseOption } from './lib/cli-utils.mjs';
 
+const args = process.argv.slice(2);
 const DEFAULT_OUTPUT = 'src/data/github-pages.json';
 const DEFAULT_CURATION = 'src/data/github-pages-curation.json';
-const args = process.argv.slice(2);
-
-function parseOption(name, fallback = null) {
-  const prefix = `--${name}=`;
-  const eq = args.find((entry) => entry.startsWith(prefix));
-  if (eq) return eq.slice(prefix.length) || fallback;
-
-  const index = args.indexOf(`--${name}`);
-  if (index >= 0) return args[index + 1] ?? fallback;
-  return fallback;
-}
 
 function parseOwners(raw) {
   if (!raw) return null;

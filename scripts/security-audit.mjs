@@ -3,19 +3,12 @@
 import { execSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { parseOption } from './lib/cli-utils.mjs';
 
 const args = process.argv.slice(2);
 const DEFAULT_OUTPUT = resolve('.quality/security-summary.json');
 const DEFAULT_ALLOWLIST = resolve('.quality/security-allowlist.json');
 const DEFAULT_POLICY = resolve('.quality/security-policy.json');
-
-function parseOption(name, fallback = null) {
-  const eq = args.find((entry) => entry.startsWith(`--${name}=`));
-  if (eq) return eq.split('=')[1] ?? fallback;
-  const index = args.indexOf(`--${name}`);
-  if (index >= 0) return args[index + 1] ?? fallback;
-  return fallback;
-}
 
 function hasFlag(name) {
   return args.includes(`--${name}`) || args.some((entry) => entry.startsWith(`--${name}=`));

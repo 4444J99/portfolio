@@ -59,7 +59,7 @@ Every push runs automated quality gates via [GitHub Actions](.github/workflows/q
 Coverage ratchet policy: W2 `12/8/8/12`, W4 `18/12/12/18`, W6 `25/18/18/25` (Statements/Branches/Functions/Lines).  
 Typecheck hint budget policy: W2 `<=20`, W4 `<=8`, W6 `=0`.
 Runtime a11y coverage ratchet: `2026-02-25` `>=85%`, `2026-03-04` `>=95%`, `2026-03-18` `=100%`.
-Security ratchet checkpoints: `2026-02-21` `moderate<=5, low<=4`, `2026-02-28` `moderate<=2, low<=2`, `2026-03-07` `moderate<=1, low<=1`, `2026-03-18` `moderate<=0, low<=0`.
+Security ratchet checkpoints: `2026-02-21` `moderate<=5, low<=4`, `2026-02-28` `moderate<=2, low<=2`, `2026-03-07` `moderate<=1, low<=1`, `2026-03-14` `moderate<=0, low<=0`, `2026-03-18` `moderate<=0, low<=0`.
 
 ```bash
 npm run test              # Unit + integration tests (vitest)

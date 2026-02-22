@@ -3,16 +3,7 @@
 import { mkdirSync, existsSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
-
-const args = process.argv.slice(2);
-
-function parseOption(name, fallback = null) {
-  const eq = args.find((entry) => entry.startsWith(`--${name}=`));
-  if (eq) return eq.split('=')[1] ?? fallback;
-  const index = args.indexOf(`--${name}`);
-  if (index >= 0) return args[index + 1] ?? fallback;
-  return fallback;
-}
+import { parseOption } from './lib/cli-utils.mjs';
 
 function countTestsFromSuites(suites = []) {
   let total = 0;

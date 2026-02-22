@@ -3,18 +3,9 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { buildGitHubPagesTelemetry } from '@meta-organvm/github-pages-index-core';
+import { parseOption } from './lib/cli-utils.mjs';
 
 const args = process.argv.slice(2);
-
-function parseOption(name, fallback = null) {
-  const prefix = `--${name}=`;
-  const eq = args.find((entry) => entry.startsWith(prefix));
-  if (eq) return eq.slice(prefix.length) || fallback;
-
-  const index = args.indexOf(`--${name}`);
-  if (index >= 0) return args[index + 1] ?? fallback;
-  return fallback;
-}
 
 function boolFlag(name) {
   return args.includes(`--${name}`);

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
+import { readFileSync, readdirSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 /**
  * Tests for the sketch registry in sketch-loader.ts.
@@ -40,7 +40,6 @@ describe('sketch registry', () => {
   });
 
   it('every sketch ID has a corresponding file', () => {
-    const { readdirSync } = require('fs');
     const sketchDir = resolve(__dirname, '..');
     const files = readdirSync(sketchDir) as string[];
     const sketchFiles = new Set(

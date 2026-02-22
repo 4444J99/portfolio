@@ -60,22 +60,21 @@ const connectLinks = [
         <button
           class="header__link header__dropdown-trigger"
           aria-expanded="false"
-          aria-haspopup="menu"
+          aria-haspopup="true"
         >
           More
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M3 5l3 3 3-3"/>
           </svg>
         </button>
-        <div class="header__dropdown-menu" role="menu">
+        <div class="header__dropdown-menu">
           {moreLinks.map(item => (
-            <a href={item.href} role="menuitem">{item.label}</a>
+            <a href={item.href}>{item.label}</a>
           ))}
           <hr />
           {connectLinks.map(item => (
             <a
               href={item.href}
-              role="menuitem"
               {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
               {item.label}{item.external && <span class="header__external" aria-hidden="true"> ↗</span>}
@@ -210,13 +209,13 @@ const connectLinks = [
       } else {
         menu.setAttribute('data-open', '');
         trigger.setAttribute('aria-expanded', 'true');
-        const items = menu.querySelectorAll<HTMLElement>('[role="menuitem"]');
+        const items = menu.querySelectorAll<HTMLElement>('a');
         if (items.length) items[0].focus();
       }
     }, { signal });
 
     menu.addEventListener('keydown', (e) => {
-      const items = [...menu.querySelectorAll<HTMLElement>('[role="menuitem"]')];
+      const items = [...menu.querySelectorAll<HTMLElement>('a')];
       const idx = items.indexOf(document.activeElement as HTMLElement);
       if (e.key === 'ArrowDown') { e.preventDefault(); items[(idx + 1) % items.length].focus(); }
       else if (e.key === 'ArrowUp') { e.preventDefault(); items[(idx - 1 + items.length) % items.length].focus(); }
@@ -409,8 +408,8 @@ const connectLinks = [
 
   /* --- Theme Toggle --- */
   .theme-toggle {
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: 1px solid var(--border);
     background: transparent;

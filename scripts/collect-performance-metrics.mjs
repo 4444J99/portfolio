@@ -5,8 +5,8 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSy
 import { dirname, join, relative, resolve } from 'node:path';
 import zlib from 'node:zlib';
 import { chromium } from 'playwright';
+import { parseOption } from './lib/cli-utils.mjs';
 
-const args = process.argv.slice(2);
 const DIST = resolve('dist');
 const ASTRO_DIR = resolve('dist/_astro');
 const OUTPUT_PATH = resolve(parseOption('json-out', '.quality/perf-summary.json'));
@@ -18,14 +18,6 @@ const INTERACTIVE_SCENARIOS = [
   { route: '/architecture', scenario: 'architecture-interaction' },
   { route: '/gallery', scenario: 'gallery-interaction' },
 ];
-
-function parseOption(name, fallback = null) {
-  const eq = args.find((entry) => entry.startsWith(`--${name}=`));
-  if (eq) return eq.split('=')[1] ?? fallback;
-  const index = args.indexOf(`--${name}`);
-  if (index >= 0) return args[index + 1] ?? fallback;
-  return fallback;
-}
 
 function walkFiles(dir, predicate, results = []) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
