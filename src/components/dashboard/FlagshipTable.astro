@@ -17,8 +17,24 @@ const { repos, classifications, totalAudited, classificationChartData, flagshipC
   <div class="container">
     <h2 class="section__heading">Flagship Analysis</h2>
     <div class="chart-pair">
-      <ChartContainer chartId="classification-donut" data={classificationChartData} ariaLabel="Donut chart showing flagship classification breakdown" height="280px" />
-      <ChartContainer chartId="flagship-stacked" data={flagshipChartData} ariaLabel="Stacked bar chart showing code vs test files per flagship" height="280px" />
+      <ChartContainer 
+        chartId="classification-donut" 
+        data={classificationChartData} 
+        ariaLabel="Donut chart showing flagship classification breakdown" 
+        height="280px" 
+        title="Asset Maturity"
+        caption="Breakdown of flagship repositories by their current vivification state."
+        dataSource="Flagship Audit"
+      />
+      <ChartContainer 
+        chartId="flagship-stacked" 
+        data={flagshipChartData} 
+        ariaLabel="Stacked bar chart showing code vs test files per flagship" 
+        height="280px" 
+        title="Code/Test Balance"
+        caption="Comparative volume of implementation code vs. verification logic."
+        dataSource="File System Metrics"
+      />
     </div>
   </div>
 </section>

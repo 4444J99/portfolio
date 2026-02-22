@@ -13,7 +13,15 @@ const { sprints, sprintChartData } = Astro.props;
 <section class="section">
   <div class="container">
     <h2 class="section__heading">Sprint Timeline</h2>
-    <ChartContainer chartId="sprint-timeline" data={sprintChartData} ariaLabel="Timeline visualization of all development sprints" height="160px" />
+    <ChartContainer 
+      chartId="sprint-timeline" 
+      data={sprintChartData} 
+      ariaLabel="Timeline visualization of all development sprints" 
+      height="160px" 
+      title="Development Momentum"
+      caption="Chronological mapping of architectural sprints and delivery milestones."
+      dataSource="System Sprint Logs"
+    />
     <div class="timeline">
       {sprints.map((sprint: Sprint, i: number) => (
         <div class="timeline__entry">

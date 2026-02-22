@@ -43,7 +43,15 @@ const featuredProjects = persona.featured_projects.map(fp => {
       </nav>
 
       <div class="sketch-accent print-hide">
-        <SketchContainer sketchId={persona.sketchId} height="180px" mobileHeight="120px" ariaLabel={`Generative visualization for ${persona.title}`} />
+        <SketchContainer 
+          sketchId={persona.sketchId} 
+          height="180px" 
+          mobileHeight="120px" 
+          ariaLabel={`Generative visualization for ${persona.title}`} 
+          title={`${persona.title} Persona`}
+          caption="A symbolic visualization of this persona's core architectural approach."
+          dataSource="Generative System"
+        />
       </div>
 
       <header class="resume-header">

@@ -13,7 +13,15 @@ const { targets, praxisChartData } = Astro.props;
 <section class="section">
   <div class="container">
     <h2 class="section__heading">PRAXIS Targets</h2>
-    <ChartContainer chartId="praxis-sparklines" data={praxisChartData} ariaLabel="Progress bars showing PRAXIS target completion" height="240px" />
+    <ChartContainer 
+      chartId="praxis-sparklines" 
+      data={praxisChartData} 
+      ariaLabel="Progress bars showing PRAXIS target completion" 
+      height="240px" 
+      title="Strategic Alignment"
+      caption="Progress tracking toward quantified architectural and production targets."
+      dataSource="Praxis Registry"
+    />
     <div class="targets-grid">
       {Object.entries(targets).map(([key, target]: [string, PraxisTarget]) => (
         <div class="target-card">

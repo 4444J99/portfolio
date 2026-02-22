@@ -172,7 +172,16 @@ const relatedPages = repoRef
     <img class="project__hero-image" src={heroImage.src} alt={heroImage.alt} loading="lazy" />
   )}
   <div class="sketch-accent">
-    <SketchContainer sketchId={sketchId} height="250px" mobileHeight="180px" ariaLabel={`Generative sketch: ${sketchId}`} data-tags={tags.join(',')} />
+    <SketchContainer 
+      sketchId={sketchId} 
+      height="250px" 
+      mobileHeight="180px" 
+      ariaLabel={`Generative sketch: ${sketchId}`} 
+      data-tags={tags.join(',')} 
+      title={`${title} Concept Sketch`}
+      caption={`Algorithmic visualization representing the underlying logic of ${title}.`}
+      dataSource="Dynamic Generation"
+    />
   </div>
   <div class="project__content-grid">
     <TableOfContents />

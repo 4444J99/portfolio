@@ -5,7 +5,16 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
 
 <Layout title="Consult — Capability Mapping" description="Map your organizational challenges to the 91-repository creative-institutional system through AI-powered capability analysis.">
     <div class="sketch-accent">
-      <SketchContainer sketchId="organ-system" height="var(--space-5xl)" mobileHeight="var(--space-4xl)" ariaLabel="Interactive organ system visualization highlighting relevant capabilities" data-repo-counts="19,26,24,7,2,4,4,3" />
+      <SketchContainer 
+        sketchId="organ-system" 
+        height="var(--space-5xl)" 
+        mobileHeight="var(--space-4xl)" 
+        ariaLabel="Interactive organ system visualization highlighting relevant capabilities" 
+        data-repo-counts="19,26,24,7,2,4,4,3" 
+        title="Capability Engine"
+        caption="Mapping functional capacity across the eight system Organs."
+        dataSource="System Metadata"
+      />
     </div>
 
     <section class="consult-section">

@@ -22,7 +22,17 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
 
 <Layout title="Architecture — System Topology" description="Interactive dependency graph and architectural mapping of the 91-repository creative-institutional system.">
     <div class="sketch-accent">
-      <SketchContainer sketchId="network-graph" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="Animated network graph showing interconnected system nodes" data-nodes={organNodes.join(',')} data-edges={uniqueEdges.join(';')} />
+      <SketchContainer 
+        sketchId="network-graph" 
+        height="var(--space-4xl)" 
+        mobileHeight="var(--space-3xl)" 
+        ariaLabel="Animated network graph showing interconnected system nodes" 
+        title="Organ Connectivity"
+        caption="High-level topological mapping of the eight functional Organs."
+        dataSource="ORGANVM Ontology"
+        data-nodes={organNodes.join(',')} 
+        data-edges={uniqueEdges.join(';')} 
+      />
     </div>
     <section class="section">
       <div class="container">
@@ -39,6 +49,9 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
           data={navigatorData}
           ariaLabel="Interactive organ navigator showing 8 organ nodes with expandable project satellites"
           height="var(--space-6xl)"
+          title="Functional Hierarchy"
+          caption="Radial mapping of repositories categorized by their governing Organ."
+          dataSource="ORGANVM Registry"
         />
       </div>
     </section>
@@ -56,18 +69,24 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
           ))}
         </div>
 
-        <div
-          id="graph-container"
-          class="graph-container"
-          role="application"
-          aria-label="Interactive force-directed dependency graph of ORGANVM repositories"
-          tabindex="0"
-          data-graph={JSON.stringify(graphData)}
-          data-organ-colors={JSON.stringify(organColors)}
-        >
-          <noscript>Dependency graph requires JavaScript to render.</noscript>
-          <div class="graph-loading">Loading dependency graph...</div>
-        </div>
+        <figure class="graph-figure">
+          <div
+            id="graph-container"
+            class="graph-container"
+            role="application"
+            aria-label="Interactive force-directed dependency graph of ORGANVM repositories"
+            tabindex="0"
+            data-graph={JSON.stringify(graphData)}
+            data-organ-colors={JSON.stringify(organColors)}
+          >
+            <noscript>Dependency graph requires JavaScript to render.</noscript>
+            <div class="graph-loading">Loading dependency graph...</div>
+          </div>
+          <figcaption class="graph-caption">
+            <span>Force-directed mapping of internal dependencies. Flow is strictly unidirectional (I &rarr; II &rarr; III).</span>
+            <span class="graph-source">Source: Repository Manifests</span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
@@ -266,6 +285,29 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .graph-figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .graph-caption {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .graph-source {
+    font-family: var(--font-mono);
+    opacity: 0.8;
+    white-space: nowrap;
   }
 
   .graph-container {
