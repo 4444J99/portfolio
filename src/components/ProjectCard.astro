@@ -175,11 +175,15 @@ const paddedNumber = String(number).padStart(2, '0');
     cursor: pointer;
     overflow: hidden;
     border-left: 3px solid var(--organ-color, var(--accent));
-    transition: border-color var(--transition-base);
+    background:
+      linear-gradient(to bottom, color-mix(in srgb, var(--organ-color, var(--accent)) 8%, var(--bg-card)), var(--bg-card));
+    transition: border-color var(--transition-base), background var(--transition-base);
   }
 
   .flip-card__face--front:hover {
     border-color: var(--organ-color, var(--border-hover));
+    background:
+      linear-gradient(to bottom, color-mix(in srgb, var(--organ-color, var(--accent)) 14%, var(--bg-card)), var(--bg-card));
   }
 
   .flip-card__face--front:focus-visible {
@@ -191,7 +195,7 @@ const paddedNumber = String(number).padStart(2, '0');
   .flip-card__pattern {
     position: absolute;
     inset: 0;
-    opacity: 0.12;
+    opacity: 0.35;
     pointer-events: none;
     border-radius: inherit;
   }
@@ -312,7 +316,7 @@ const paddedNumber = String(number).padStart(2, '0');
     font-weight: 800;
     line-height: 1;
     color: var(--organ-color, var(--text-primary));
-    opacity: 0.08;
+    opacity: 0.18;
     position: absolute;
     top: var(--space-md);
     right: var(--space-lg);
@@ -321,7 +325,7 @@ const paddedNumber = String(number).padStart(2, '0');
   }
 
   .flip-card__face--front:hover .flip-card__number {
-    opacity: 0.15;
+    opacity: 0.3;
   }
 
   /* --- Front face title --- */
