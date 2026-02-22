@@ -50,10 +50,10 @@ jobs:
       )
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
@@ -73,7 +73,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: npm run alerts:github-pages
       - name: Upload GitHub Pages telemetry artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: github-pages-telemetry-${{ github.run_id }}
           path: |
@@ -82,7 +82,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
       - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
 
