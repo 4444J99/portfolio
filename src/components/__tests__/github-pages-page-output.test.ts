@@ -19,7 +19,7 @@ describe('GitHub Pages directory output', () => {
     const html = readFileSync(PAGE, 'utf-8');
     const $ = cheerio.load(html);
 
-    expect($('h1').first().text().toLowerCase()).toContain('github pages directory');
+    expect($('h1').first().text().toLowerCase()).toContain('static fleet');
     expect($('h2').filter((_index, node) => $(node).text().includes('System Pages Health')).length).toBeGreaterThan(0);
     expect($('h2').filter((_index, node) => $(node).text().includes('Why this matters')).length).toBeGreaterThan(0);
     expect($('a[data-gh-pages-track]').length).toBeGreaterThan(0);

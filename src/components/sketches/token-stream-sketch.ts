@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { PALETTE, getTextColor } from './palette';
+import { PALETTE } from './palette';
 
 const PHASES = [
   { label: 'Context', x: 0.08, width: 0.18 },

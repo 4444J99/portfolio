@@ -123,6 +123,10 @@
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     },
     {
+      "path": "/projects/public-record-data-scrapper",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
       "path": "/projects/recursive-engine",
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     },
@@ -132,6 +136,38 @@
     },
     {
       "path": "/projects/your-fit-tailored",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/philosophy",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/for/anthropic",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/for/vercel",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/resume/ai-systems-engineer",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/resume/systems-architect",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/resume/creative-technologist",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/resume/technical-pm",
+      "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
+    },
+    {
+      "path": "/resume/polymath",
       "checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
     }
   ]

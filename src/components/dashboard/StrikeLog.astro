@@ -36,7 +36,7 @@ const statusColors = {
             <td class="col-target"><strong>{strike.target}</strong></td>
             <td class="col-persona"><code>{strike.persona}</code></td>
             <td class="col-status">
-              <span class="status-badge" style={`background: ${statusColors[strike.status]}`}>
+              <span class="status-badge" style={`background: ${statusColors[strike.status as keyof typeof statusColors]}`}>
                 {strike.status}
               </span>
             </td>

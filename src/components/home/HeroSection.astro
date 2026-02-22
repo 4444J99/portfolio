@@ -32,7 +32,7 @@ interface Props {
   resolvedGroups: ResolvedGroup[];
 }
 
-const { metrics, resolvedGroups } = Astro.props;
+const { resolvedGroups } = Astro.props;
 
 const engineeringTitle = 'AI Orchestration Architect building model-agnostic swarms and enterprise-grade distributed backends.';
 const creativeTitle = 'Bridging MFA-level narrative theory with meta-certified engineering to build living, logocentric systems.';
@@ -45,7 +45,7 @@ function splitWords(text: string) {
 <section class="hero">
   <div class="container hero__split">
     <div class="hero__text">
-      <div class="view-toggle" aria-label="Presentation mode">
+      <div class="view-toggle" role="group" aria-label="Presentation mode">
         <button class="view-toggle__btn view-toggle__btn--active" data-view="engineering" aria-pressed="true">Engineering</button>
         <button class="view-toggle__btn" data-view="creative" aria-pressed="false">Creative Practice</button>
       </div>

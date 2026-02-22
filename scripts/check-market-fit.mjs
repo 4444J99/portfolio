@@ -14,7 +14,7 @@ async function checkFit() {
   const jobDescPath = process.argv[3];
 
   if (!personaId || !jobDescPath) {
-    console.error('❌ Usage: node scripts/check-market-fit.mjs [persona-id] [path-to-job-desc.txt]');
+    console.error('Usage: node scripts/check-market-fit.mjs [persona-id] [path-to-job-desc.txt]');
     process.exit(1);
   }
 
@@ -23,13 +23,12 @@ async function checkFit() {
   const jobDesc = fs.readFileSync(jobDescPath, 'utf8').toLowerCase();
 
   if (!persona) {
-    console.error(`❌ Persona ${personaId} not found.`);
+    console.error(`Persona ${personaId} not found.`);
     process.exit(1);
   }
 
-  console.log(`
-🧐 Optimizing Signal for: ${persona.title}`);
-  console.log(`📄 Analyzing Job Description: ${path.basename(jobDescPath)}`);
+  console.log(`\nOptimizing Signal for: ${persona.title}`);
+  console.log(`Analyzing Job Description: ${path.basename(jobDescPath)}`);
 
   const results = {
     matched: [],
@@ -47,18 +46,15 @@ async function checkFit() {
 
   results.score = (results.matched.length / persona.stack.length) * 100;
 
-  console.log('
---- MATCH REPORT ---');
-  console.log(`✅ MATCHED KEYWORDS: ${results.matched.join(', ')}`);
-  console.log(`⚠️ MISSING KEYWORDS: ${results.missing.join(', ')}`);
-  console.log(`📊 RAW SIGNAL SCORE: ${results.score.toFixed(2)}%`);
+  console.log('\n--- MATCH REPORT ---');
+  console.log(`MATCHED KEYWORDS: ${results.matched.join(', ')}`);
+  console.log(`MISSING KEYWORDS: ${results.missing.join(', ')}`);
+  console.log(`RAW SIGNAL SCORE: ${results.score.toFixed(2)}%`);
 
   if (results.score < 70) {
-    console.log('
-🚨 STRATEGIC ADVICE: Signal too low. Adjust persona impact statements or choose a different mask.');
+    console.log('\nSTRATEGIC ADVICE: Signal too low. Adjust persona impact statements or choose a different mask.');
   } else {
-    console.log('
-🚀 STRATEGIC ADVICE: High-signal match. Proceed to Strike.');
+    console.log('\nSTRATEGIC ADVICE: High-signal match. Proceed to Strike.');
   }
 }
 

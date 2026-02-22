@@ -68,6 +68,7 @@ export interface Essay {
   title: string;
   subtitle?: string;
   summary?: string;
+  category?: string;
   url: string;
 }
 

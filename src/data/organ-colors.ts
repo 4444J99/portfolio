@@ -33,7 +33,7 @@ export function getOrganColor(key: string, fallback = '#888'): string {
 /**
  * Space-separated keys (ORGAN I, ORGAN II, etc.) used by index.astro
  * where project data uses space format.
- * @deprecated Use getOrganColor() with any key format instead.
+ * Prefer getOrganColor() for new code.
  */
 export const organColorMap: Record<string, string> = {
   'ORGAN I': '#7c9bf5',

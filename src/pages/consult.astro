@@ -76,8 +76,6 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
 </Layout>
 
 <script>
-  declare const puter: { ai: { chat(message: string, options: { system: string; model: string }): Promise<string | { message?: { content?: string }; text?: string }> } };
-
   const SYSTEM_PROMPT = `You are the ORGANVM Capability Advisor. You help prospective collaborators, clients, and partners understand how the eight-organ creative-institutional system can address their specific needs.
 
 THE EIGHT-ORGAN SYSTEM:

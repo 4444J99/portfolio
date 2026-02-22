@@ -2,6 +2,7 @@ import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import essaysData from '../data/essays.json';
 import { projectCatalog } from '../data/project-catalog';
+import { projectIndex } from '../data/project-index';
 
 interface EssayItem {
   title: string;
@@ -12,8 +13,9 @@ interface EssayItem {
 export function GET(context: APIContext) {
   const siteBase = 'https://4444j99.github.io/portfolio/';
   const fallbackProjectDate = new Date('2026-02-10T00:00:00.000Z');
+  const indexSlugs = new Set(projectIndex.map(p => p.slug));
 
-  const projectItems = projectCatalog.map((project) => {
+  const projectItems = projectCatalog.filter(p => indexSlugs.has(p.slug)).map((project) => {
     const pubDate = project.publishedAt ? new Date(project.publishedAt) : fallbackProjectDate;
     return {
       title: project.title,

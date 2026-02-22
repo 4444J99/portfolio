@@ -1,7 +1,7 @@
 ---
 import vitals from '../../data/trust-vitals.json';
 
-const { tests, security, ecosystem, humanImpact, generatedAt, fingerprint } = vitals;
+const { tests, security, humanImpact, generatedAt, fingerprint } = vitals;
 
 const statusColors = {
   pass: 'var(--color-substantial)',
@@ -33,7 +33,7 @@ const formatDate = (iso: string) => {
   
   <div class="vitals-hud__grid">
     <div class="vital-item">
-      <span class="vital-item__status" style={`background: ${statusColors[tests.status]}`}></span>
+      <span class="vital-item__status" style={`background: ${statusColors[tests.status as keyof typeof statusColors]}`}></span>
       <div class="vital-item__data">
         <span class="vital-item__value">{tests.passed}/{tests.total}</span>
         <span class="vital-item__label">Tests Passed</span>
@@ -41,7 +41,7 @@ const formatDate = (iso: string) => {
     </div>
 
     <div class="vital-item">
-      <span class="vital-item__status" style={`background: ${statusColors[security.status]}`}></span>
+      <span class="vital-item__status" style={`background: ${statusColors[security.status as keyof typeof statusColors]}`}></span>
       <div class="vital-item__data">
         <span class="vital-item__value">{security.vulnerabilities === 0 ? 'Clear' : security.vulnerabilities}</span>
         <span class="vital-item__label">Security Audit</span>

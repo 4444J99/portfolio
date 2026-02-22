@@ -35,10 +35,6 @@
         filterStatus.textContent = prefix ? `${prefix} ${count}` : count;
       }
   
-      function getCurrentView() {
-        return main!.dataset.portfolioView || 'engineering';
-      }
-  
       function resetFilters() {
         document.querySelectorAll<HTMLButtonElement>('.filter-chip').forEach((c) => {
           c.classList.remove('filter-chip--active');
@@ -102,8 +98,6 @@
           chip.setAttribute('aria-pressed', 'true');
   
           const filter = chip.getAttribute('data-filter')!;
-          const view = getCurrentView();
-          const attr = view === 'engineering' ? 'data-skills' : 'data-tags';
   
                   cards.forEach((container) => {
                     const card = container.querySelector('.card') as HTMLElement | null;
