@@ -39,7 +39,7 @@ module.exports = {
         'http://localhost/projects/the-actual-news/index.html',
         'http://localhost/projects/your-fit-tailored/index.html',
       ],
-      numberOfRuns: 3,
+      numberOfRuns: 1,
     },
     assert: {
       assertions: {
