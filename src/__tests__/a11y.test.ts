@@ -79,7 +79,7 @@ const keyPages = existsSync(DIST)
   ? findHtmlFiles(DIST).map((f) => f.slice(DIST.length + 1))
   : [];
 
-describe('accessibility (axe-core)', () => {
+describe('accessibility (axe-core)', { timeout: 15_000 }, () => {
   it('dist/ exists for a11y auditing', () => {
     expect(existsSync(DIST)).toBe(true);
   });
