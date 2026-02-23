@@ -153,6 +153,37 @@ body {
   image-rendering: crisp-edges;
 }
 
+/* --- Background Placeholder (visible until p5.js mounts) --- */
+@property --bg-hue {
+  syntax: '<number>';
+  initial-value: 220;
+  inherits: false;
+}
+
+#bg-canvas:empty {
+  background:
+    linear-gradient(
+      135deg,
+      hsl(var(--bg-hue), 70%, 25%) 0%,
+      hsl(calc(var(--bg-hue) + 60), 60%, 20%) 25%,
+      hsl(calc(var(--bg-hue) + 180), 70%, 25%) 50%,
+      hsl(calc(var(--bg-hue) + 240), 60%, 20%) 75%,
+      hsl(var(--bg-hue), 70%, 22%) 100%
+    );
+  background-size: 400% 400%;
+  animation: bg-drift 30s ease infinite, bg-hue 150s linear infinite;
+}
+
+@keyframes bg-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes bg-hue {
+  from { --bg-hue: 220; }
+  to { --bg-hue: 580; }
+}
+
 /* --- Typography --- */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
@@ -517,6 +548,15 @@ img {
   animation-delay: calc(var(--stagger-index, 0) * 80ms);
 }
 
+/* Above-fold LCP elements: visible from first paint (bypass JS-gated reveal) */
+.hero [data-reveal],
+.page-title[data-reveal],
+.page-title + [data-reveal] {
+  opacity: 1;
+  animation: reveal-up 0.6s ease forwards;
+  animation-delay: calc(var(--stagger-index, 0) * 80ms);
+}
+
 /* --- View Transitions --- */
 ::view-transition-old(root) {
   animation: vt-fade-out 200ms ease forwards;
@@ -548,6 +588,10 @@ img {
 
   [data-reveal] { opacity: 1; }
   [data-reveal].revealed { animation: none; }
+  .hero [data-reveal],
+  .page-title[data-reveal],
+  .page-title + [data-reveal] { opacity: 1; animation: none; }
+  #bg-canvas:empty { animation: none; background: linear-gradient(135deg, hsl(220, 70%, 25%), hsl(40, 70%, 25%)); }
 
   ::view-transition-old(root),
   ::view-transition-new(root) {

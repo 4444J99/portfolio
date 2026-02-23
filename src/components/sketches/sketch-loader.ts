@@ -261,8 +261,24 @@ function initBackground() {
 }
 
 function scheduleBackgroundInit() {
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(() => initBackground(), { timeout: 1500 });
+  const startInit = () => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => initBackground(), { timeout: 3000 });
+    } else {
+      setTimeout(initBackground, 100);
+    }
+  };
+
+  if ('PerformanceObserver' in window) {
+    const po = new PerformanceObserver(() => {
+      po.disconnect();
+      startInit();
+    });
+    try {
+      po.observe({ type: 'largest-contentful-paint', buffered: true });
+    } catch {
+      startInit();
+    }
   } else {
     setTimeout(initBackground, 200);
   }
