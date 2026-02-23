@@ -12,6 +12,8 @@ export const TOP_LEVEL_ROUTES = [
   '/products',
   '/resume',
   '/architecture',
+  '/github-pages',
+  '/philosophy',
 ];
 
 export const TRANSITION_STRESS_ROUTES = [

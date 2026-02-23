@@ -51,6 +51,20 @@ describe('client listener lifecycle guards', () => {
     expect(source).toContain("document.addEventListener('astro:before-swap'");
   });
 
+  it('back-to-top button uses AbortController-based cleanup', () => {
+    const source = read('components/BackToTop.astro');
+    expect(source).toContain('new AbortController()');
+    expect(source).toContain('{ signal }');
+    expect(source).toContain("document.addEventListener('astro:before-swap'");
+  });
+
+  it('table of contents uses AbortController-based cleanup', () => {
+    const source = read('components/TableOfContents.astro');
+    expect(source).toContain('new AbortController()');
+    expect(source).toContain('{ signal }');
+    expect(source).toContain("document.addEventListener('astro:before-swap'");
+  });
+
   it('sketch loader keeps a single resize handler and removes it on teardown', () => {
     const source = read('components/sketches/sketch-loader.ts');
     expect(source).toContain('let resizeHandler');
