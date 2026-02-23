@@ -37,13 +37,6 @@ const PERF_THRESHOLD = 0.85;
 
 async function runPSI(route) {
   const url = `${BASE_URL}${route}`;
-  const params = new URLSearchParams({
-    url,
-    strategy,
-    category: 'performance',
-    category: 'accessibility',
-  });
-  // PSI API accepts multiple category params
   const apiUrl = `${PSI_API}?url=${encodeURIComponent(url)}&strategy=${strategy}&category=performance&category=accessibility${API_KEY ? `&key=${API_KEY}` : ''}`;
 
   const res = await fetch(apiUrl);
