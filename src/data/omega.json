@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-17",
+  "generated": "2026-02-23",
   "summary": {
     "met": 1,
     "in_progress": 5,
@@ -20,7 +20,7 @@
       "measurement": "<=3 critical incidents over 30 days",
       "horizon": "H1",
       "status": "in_progress",
-      "evidence": "Data collection running since Feb 16. First real snapshot Feb 17.",
+      "evidence": "4 snapshots collected (Feb 16-18, 23). Daily cron automation active via soak-test-daily.yml.",
       "evidenceUrl": null,
       "target": "March 18, 2026"
     },
@@ -40,7 +40,7 @@
       "measurement": "30 consecutive days of engagement data",
       "horizon": "H1",
       "status": "in_progress",
-      "evidence": "First real engagement data: 5 stars, 3 forks, 93 views on flagship.",
+      "evidence": "4 snapshots with engagement data. 5 stars, 3 forks tracked. Daily automation resumed.",
       "evidenceUrl": null,
       "target": "March 18, 2026"
     },
@@ -180,7 +180,7 @@
       "measurement": "System runs without primary operator intervention",
       "horizon": "H1",
       "status": "in_progress",
-      "evidence": "12 cron workflows active. Autonomous since Feb 16.",
+      "evidence": "12 cron workflows active. Autonomous since Feb 16. Soak test automation confirmed operational.",
       "evidenceUrl": null,
       "target": "March 18, 2026"
     }
