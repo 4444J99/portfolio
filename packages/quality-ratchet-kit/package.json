@@ -1,0 +1,14 @@
+{
+  "name": "@4444j99/quality-ratchet-kit",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "import": "./src/index.mjs"
+    }
+  },
+  "scripts": {
+    "test": "node --test test/ratchet-kit.test.mjs"
+  }
+}

@@ -15,6 +15,9 @@
     "alerts:github-pages": "node scripts/github-pages-alerts.mjs --input src/data/github-pages.json --max-errored 8 --max-unreachable 5 --window-hours 24 --output .quality/github-pages-alerts.json",
     "check:github-pages-core": "node scripts/check-github-pages-core-drift.mjs",
     "test:github-pages-core": "node --test packages/github-pages-index-core/test/core-fixtures.test.mjs",
+    "test:quality-ratchet-kit": "node --test packages/quality-ratchet-kit/test/ratchet-kit.test.mjs",
+    "test:sketches": "node --test packages/sketches/test/sketches.test.mjs",
+    "sync:workspace-health": "node scripts/sync-workspace-health.mjs --output src/data/workspace-health.json",
     "build": "npm run sync:vitals && astro build && npx pagefind --site dist --glob '**/*.html'",
     "build:resume": "node scripts/generate-resume-pdfs.mjs",
     "build:qr": "node scripts/generate-qr-codes.mjs",
@@ -57,6 +60,8 @@
   },
   "dependencies": {
     "@meta-organvm/github-pages-index-core": "file:packages/github-pages-index-core",
+    "@4444j99/quality-ratchet-kit": "file:packages/quality-ratchet-kit",
+    "@4444j99/sketches": "file:packages/sketches",
     "@astrojs/rss": "4.0.15",
     "@astrojs/sitemap": "3.7.0",
     "astro": "^5.17.2",

@@ -1,0 +1,6 @@
+# seed.yaml
+organ: PERSONAL
+tier: flagship
+status: CANDIDATE
+produces: []
+consumes: []
