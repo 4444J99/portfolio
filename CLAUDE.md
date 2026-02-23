@@ -23,10 +23,12 @@ npm run test:perf:budgets       # Date-ratcheted gzip chunk/route budgets
 # Quality gates
 npm run typecheck               # Astro check (type diagnostics)
 npm run typecheck:strict        # Ratcheted hint budget (fails if hints > threshold)
-npm run quality:local           # Security gates + full quality pipeline (CI-parity)
+npm run quality:local           # Security gates + full quality pipeline (CI-parity, includes Lighthouse)
+npm run quality:local:no-lh    # Same as above but skips Lighthouse (recommended locally)
 npm run test:ci                 # Alias for quality:local
 npm run validate                # HTML validation + internal link check
-npm run lighthouse              # Lighthouse CI performance budgets
+npm run lighthouse              # Lighthouse CI performance budgets (local Chrome, resource-heavy)
+npm run lighthouse:cloud        # PageSpeed Insights API (tests live deployed site, no local Chrome)
 npm run generate-badges         # Regenerate quality badges + metrics JSON
 
 # Data sync
