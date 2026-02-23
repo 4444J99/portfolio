@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-17T22:00:00.000000+00:00",
+  "generated": "2026-02-23T19:31:31.353176+00:00",
   "sprint": "OPERATIO",
   "system": {
     "name": "ORGANVM",
@@ -7,12 +7,12 @@
     "project_status": "OPERATIO SPRINT 2026-02-17. 33 sprints in 9 days. 97 repos (87 ACTIVE, 10 ARCHIVED), 36 essays (~132K words), ~404K+ total words. Autonomous perception layer active (stale-detector, system-pulse, essay-deploy, organ-cli). life-my--midst--in beta-ready (44 tables, 291 tests, Neon DB). POSSE distribution live (Mastodon + Discord + RSS). 100% seed.yaml coverage. 31 stars, 6 forks. Hermetic seal broken: social posts live, submission scripts ready."
   },
   "registry": {
-    "total_repos": 97,
+    "total_repos": 101,
     "total_organs": 8,
     "operational_organs": 8,
     "implementation_status": {
-      "ACTIVE": 87,
-      "ARCHIVED": 10
+      "ACTIVE": 92,
+      "ARCHIVED": 9
     },
     "tier_distribution": {
       "flagship": 8,
@@ -26,8 +26,8 @@
       "CANDIDATE": 2,
       "ARCHIVED": 7
     },
-    "ci_coverage": 77,
-    "dependency_edges": 31,
+    "ci_coverage": 82,
+    "dependency_edges": 39,
     "organs": {
       "ORGAN-I": {
         "name": "Theory",
@@ -134,7 +134,7 @@
       "META-ORGANVM": {
         "name": "Meta",
         "status": "OPERATIONAL",
-        "total_repos": 3,
+        "total_repos": 7,
         "implementation_status": {
           "ACTIVE": 3
         },
@@ -454,7 +454,7 @@
       "name": "VERITAS",
       "date": "2026-02-13",
       "focus": "Credibility",
-      "deliverables": "PRODUCTION→ACTIVE, revenue split, essay dates, honesty essay"
+      "deliverables": "PRODUCTION\u2192ACTIVE, revenue split, essay dates, honesty essay"
     },
     {
       "name": "MANIFESTATIO",
@@ -592,12 +592,12 @@
   "praxis_targets": {
     "portfolio_site": {
       "target": "Live",
-      "current": "Live at 4444j99.github.io/portfolio/ — Jost+CMYK redesign, p5.js on all pages, LLM consult page",
+      "current": "Live at 4444j99.github.io/portfolio/ \u2014 Jost+CMYK redesign, p5.js on all pages, LLM consult page",
       "met": true
     },
     "flagship_repos_with_code": {
       "target": "30+",
-      "current": "38 (MANIFESTATIO corrected — was 6)",
+      "current": "38 (MANIFESTATIO corrected \u2014 was 6)",
       "met": true
     },
     "distribution_channels": {
@@ -608,7 +608,7 @@
     "applications_submitted": {
       "target": "3-5",
       "current": "0",
-      "next_deadline": "Knight Foundation — 2026-06-20",
+      "next_deadline": "Knight Foundation \u2014 2026-06-20",
       "note": "Processing Foundation cycle closed. Next target: Knight Foundation Arts + Technology (deadline June 20, 2026)"
     },
     "community_events": {
@@ -621,7 +621,7 @@
     },
     "real_test_suites": {
       "target": "30+",
-      "current": "56 (MANIFESTATIO corrected — was 4)",
+      "current": "56 (MANIFESTATIO corrected \u2014 was 4)",
       "met": true
     }
   },
@@ -683,7 +683,7 @@
       "salon-archive": true
     },
     "analytics": {
-      "public_process_jekyll": "GoatCounter config in _config.yml but commented out. Account organvm.goatcounter.com returns 400 — needs signup at goatcounter.com/signup first. Then uncomment goatcounter_url in _config.yml."
+      "public_process_jekyll": "GoatCounter config in _config.yml but commented out. Account organvm.goatcounter.com returns 400 \u2014 needs signup at goatcounter.com/signup first. Then uncomment goatcounter_url in _config.yml."
     }
   }
 }
