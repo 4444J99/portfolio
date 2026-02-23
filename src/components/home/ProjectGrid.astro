@@ -109,6 +109,9 @@ const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organCol
     color: var(--text-secondary);
     cursor: pointer;
     transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .filter-chip:hover {
@@ -156,6 +159,7 @@ const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organCol
     border: none;
     cursor: pointer;
     padding: 0;
+    min-height: 44px;
     text-align: left;
     font-family: inherit;
     gap: var(--space-sm);

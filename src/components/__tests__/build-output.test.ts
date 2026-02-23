@@ -32,7 +32,7 @@ describe('build output', () => {
   });
 
   it('produces at least the baseline HTML page count', () => {
-    expect(countHtmlFiles(DIST)).toBeGreaterThanOrEqual(31);
+    expect(countHtmlFiles(DIST)).toBeGreaterThanOrEqual(42);
   });
 });
 
@@ -85,11 +85,16 @@ describe('dashboard page', () => {
 });
 
 describe('project pages', () => {
-  const projectSlugs = [
-    'recursive-engine',
-    'agentic-titan',
-    'eight-organ-system',
-  ];
+  const projectsDir = join(DIST, 'projects');
+  const projectSlugs = existsSync(projectsDir)
+    ? readdirSync(projectsDir, { withFileTypes: true })
+        .filter(d => d.isDirectory())
+        .map(d => d.name)
+    : [];
+
+  it('has at least 21 project directories', () => {
+    expect(projectSlugs.length).toBeGreaterThanOrEqual(21);
+  });
 
   for (const slug of projectSlugs) {
     it(`projects/${slug} exists and has title`, () => {
@@ -100,7 +105,8 @@ describe('project pages', () => {
   }
 
   it('project pages have article element', () => {
-    const $ = loadPage('projects/recursive-engine/index.html');
+    const $ = loadPage(`projects/${projectSlugs[0]}/index.html`);
+    expect($).not.toBeNull();
     expect($!('article').length).toBeGreaterThanOrEqual(1);
   });
 });

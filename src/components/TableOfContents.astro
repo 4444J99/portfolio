@@ -56,7 +56,8 @@
       a.textContent = h.textContent!.trim();
       a.addEventListener('click', (e) => {
         e.preventDefault();
-        h.scrollIntoView({ behavior: 'smooth' });
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        h.scrollIntoView({ behavior: prefersReduced ? 'instant' : 'smooth' });
         history.replaceState(null, '', `#${h.id}`);
       }, { signal });
       li.appendChild(a);
