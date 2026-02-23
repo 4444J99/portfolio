@@ -23,6 +23,9 @@
     const prose = document.querySelector('.project__body.prose') as HTMLElement | null;
     if (!toc || !list || !prose) return;
 
+    const controller = new AbortController();
+    const { signal } = controller;
+
     // Extract h2 and h3 headings
     const headings = prose.querySelectorAll<HTMLHeadingElement>('h2, h3');
     if (headings.length < 2) {
@@ -55,7 +58,7 @@
         e.preventDefault();
         h.scrollIntoView({ behavior: 'smooth' });
         history.replaceState(null, '', `#${h.id}`);
-      });
+      }, { signal });
       li.appendChild(a);
       list.appendChild(li);
     });
@@ -95,10 +98,13 @@
       const expanded = toggle.getAttribute('aria-expanded') === 'true';
       toggle.setAttribute('aria-expanded', String(!expanded));
       nav?.classList.toggle('toc__nav--open', !expanded);
-    });
+    }, { signal });
 
     // Teardown on next navigation
-    document.addEventListener('astro:before-swap', () => observer.disconnect(), { once: true });
+    document.addEventListener('astro:before-swap', () => {
+      observer.disconnect();
+      controller.abort();
+    }, { once: true, signal });
   }
 
   document.addEventListener('astro:page-load', initToc);

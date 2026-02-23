@@ -25,6 +25,35 @@
       const groups = document.querySelectorAll<HTMLElement>('[data-organ-group]');
       const filterStatus = document.getElementById('filter-status');
       const totalCards = cards.length;
+
+      // Restore saved view preference
+      try {
+        const savedView = localStorage.getItem('portfolio-view');
+        if (savedView && savedView !== main!.dataset.portfolioView) {
+          const matchingBtn = [...viewBtns].find((b) => b.getAttribute('data-view') === savedView);
+          if (matchingBtn) {
+            viewBtns.forEach((b) => {
+              b.classList.remove('view-toggle__btn--active');
+              b.setAttribute('aria-pressed', 'false');
+            });
+            matchingBtn.classList.add('view-toggle__btn--active');
+            matchingBtn.setAttribute('aria-pressed', 'true');
+            main!.dataset.portfolioView = savedView;
+            document.querySelectorAll<HTMLElement>('[data-hero-view]').forEach((el) => {
+              el.style.display = el.getAttribute('data-hero-view') === savedView ? '' : 'none';
+            });
+            document.querySelectorAll<HTMLElement>('[data-stats-view]').forEach((el) => {
+              el.style.display = el.getAttribute('data-stats-view') === savedView ? '' : 'none';
+            });
+            document.querySelectorAll<HTMLElement>('[data-filter-view]').forEach((el) => {
+              el.style.display = el.getAttribute('data-filter-view') === savedView ? '' : 'none';
+            });
+            document.querySelectorAll<HTMLElement>('[data-heading-view]').forEach((el) => {
+              el.style.display = el.getAttribute('data-heading-view') === savedView ? '' : 'none';
+            });
+          }
+        }
+      } catch {}
   
       function announceFilterStatus(prefix?: string) {
         if (!filterStatus) return;
@@ -70,24 +99,26 @@
   
       function switchView(view: string) {
         main!.dataset.portfolioView = view;
-  
+
         document.querySelectorAll<HTMLElement>('[data-hero-view]').forEach((el) => {
           el.style.display = el.getAttribute('data-hero-view') === view ? '' : 'none';
         });
-  
+
         document.querySelectorAll<HTMLElement>('[data-stats-view]').forEach((el) => {
           el.style.display = el.getAttribute('data-stats-view') === view ? '' : 'none';
         });
-  
+
         document.querySelectorAll<HTMLElement>('[data-filter-view]').forEach((el) => {
           el.style.display = el.getAttribute('data-filter-view') === view ? '' : 'none';
         });
-  
+
         document.querySelectorAll<HTMLElement>('[data-heading-view]').forEach((el) => {
           el.style.display = el.getAttribute('data-heading-view') === view ? '' : 'none';
         });
-  
+
         resetFilters();
+
+        try { localStorage.setItem('portfolio-view', view); } catch {}
       }
   
       viewBtns.forEach((btn) => {

@@ -18,6 +18,7 @@ function selectChunkThresholds(referenceTime) {
         'vendor-mermaid': 480 * 1024,
         'vendor-p5': 320 * 1024,
         'vendor-cytoscape': 200 * 1024,
+        'vendor-katex': 230 * 1024,
       },
     },
     {
@@ -26,6 +27,7 @@ function selectChunkThresholds(referenceTime) {
         'vendor-mermaid': 430 * 1024,
         'vendor-p5': 290 * 1024,
         'vendor-cytoscape': 185 * 1024,
+        'vendor-katex': 210 * 1024,
       },
     },
     {
@@ -34,6 +36,7 @@ function selectChunkThresholds(referenceTime) {
         'vendor-mermaid': 350 * 1024,
         'vendor-p5': 260 * 1024,
         'vendor-cytoscape': 170 * 1024,
+        'vendor-katex': 190 * 1024,
       },
     },
   ];

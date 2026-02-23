@@ -2,6 +2,9 @@
   "name": "portfolio",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "npm run sync:vitals && astro dev",
     "generate-data": "python3 ../ingesting-organ-document-structure/scripts/praxis-portfolio-generate.py --output-dir src/data && cp ../ingesting-organ-document-structure/system-metrics.json src/data/",

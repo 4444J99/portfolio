@@ -17,6 +17,9 @@
     const sentinel = document.querySelector('.btt-sentinel') as HTMLElement | null;
     if (!btn || !sentinel) return;
 
+    const controller = new AbortController();
+    const { signal } = controller;
+
     const observer = new IntersectionObserver(([entry]) => {
       btn.hidden = entry.isIntersecting;
     }, { threshold: 0 });
@@ -26,9 +29,12 @@
     btn.addEventListener('click', () => {
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       window.scrollTo({ top: 0, behavior: prefersReduced ? 'instant' : 'smooth' });
-    });
+    }, { signal });
 
-    document.addEventListener('astro:before-swap', () => observer.disconnect(), { once: true });
+    document.addEventListener('astro:before-swap', () => {
+      observer.disconnect();
+      controller.abort();
+    }, { once: true, signal });
   }
 
   document.addEventListener('astro:page-load', initBackToTop);

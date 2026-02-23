@@ -22,3 +22,4 @@ scripts/track-green-runs.mjs @4444j99
 scripts/generate-quality-ledger.mjs @4444j99
 scripts/check-policy-change-governance.mjs @4444j99
 scripts/verify-quality-contracts.mjs @4444j99
+src/data/__tests__/quality-governance.test.ts @4444j99
