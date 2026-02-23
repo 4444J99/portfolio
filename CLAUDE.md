@@ -101,7 +101,7 @@ Separate from p5.js sketches. Lives in `src/components/charts/` with `chart-load
 
 ### p5.js Background
 
-Full-page canvas (`#bg-canvas`, z-index -1, `pointer-events: none`) renders generative art. Three visual modes via `data-bg-mode` on `<body>`: subtle, bold, extreme — each applies different CSS filter/saturation rules in `global.css`.
+Full-page canvas (`#bg-canvas`, z-index -1, `pointer-events: none`) renders generative art behind all page content.
 
 ### Pagefind Search
 

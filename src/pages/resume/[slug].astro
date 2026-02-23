@@ -158,7 +158,7 @@ const featuredProjects = persona.featured_projects.map(fp => {
 
       <div class="resume-grid-two-col">
         <section class="resume-section">
-          <h2 class="section-label">Education</h2>
+          <h3 class="section-label">Education</h3>
           {education.map(edu => (
             <div class="edu-entry">
               <strong>{edu.degree}</strong>
@@ -169,7 +169,7 @@ const featuredProjects = persona.featured_projects.map(fp => {
         </section>
 
         <section class="resume-section">
-          <h2 class="section-label">Certifications</h2>
+          <h3 class="section-label">Certifications</h3>
           <ul class="cert-list">
             {certifications.map(cert => (
               <li><strong>{cert.issuer}</strong> {cert.name} <span class="cert-date">({cert.date})</span></li>

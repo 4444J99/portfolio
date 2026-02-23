@@ -13,6 +13,18 @@ interface NavGroup {
   items: NavItem[];
 }
 
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+function isActive(href: string): boolean {
+  if (href.includes('#') || href.startsWith('mailto:') || href.startsWith('http')) return false;
+  const normalized = href.replace(/\/$/, '') || '/';
+  return currentPath === normalized;
+}
+
+function groupContainsActive(group: NavGroup): boolean {
+  return group.items.some(item => isActive(item.href));
+}
+
 const navGroups: NavGroup[] = [
   {
     label: 'Work',
@@ -73,7 +85,7 @@ const navGroups: NavGroup[] = [
       {navGroups.map((group, i) => (
         <div class="header__dropdown" data-dropdown-group={i}>
           <button
-            class="header__link header__dropdown-trigger"
+            class:list={['header__link', 'header__dropdown-trigger', { 'header__link--active': groupContainsActive(group) }]}
             aria-expanded="false"
             aria-haspopup="true"
             aria-controls={`dropdown-${i}`}
@@ -88,6 +100,7 @@ const navGroups: NavGroup[] = [
             {group.items.map(item => (
               <a
                 href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
                 {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
                 {item.label}{item.external && <span class="header__external" aria-hidden="true"> &#8599;</span>}
@@ -104,7 +117,8 @@ const navGroups: NavGroup[] = [
           {group.items.map(item => (
             <a
               href={item.href}
-              class="header__link header__link--mobile"
+              class:list={['header__link', 'header__link--mobile', { 'header__link--active': isActive(item.href) }]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
               {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
               {item.label}{item.external && <span class="header__external" aria-hidden="true"> &#8599;</span>}
@@ -406,7 +420,8 @@ const navGroups: NavGroup[] = [
     transition: background var(--transition-fast), color var(--transition-fast);
   }
 
-  .header__dropdown-menu a:hover {
+  .header__dropdown-menu a:hover,
+  .header__dropdown-menu a[aria-current="page"] {
     background: var(--bg-card-hover);
     color: var(--text-primary);
   }

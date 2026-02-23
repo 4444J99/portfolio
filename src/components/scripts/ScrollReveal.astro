@@ -1,6 +1,11 @@
 <script>
   // Scroll-reveal observer — re-runs on each page navigation
+  let revealObserver: IntersectionObserver | null = null;
+
   function initReveal() {
+    revealObserver?.disconnect();
+    revealObserver = null;
+
     const targets = document.querySelectorAll<HTMLElement>('[data-reveal]:not(.revealed)');
 
     // Skip observer entirely when user prefers reduced motion
@@ -9,16 +14,20 @@
       return;
     }
 
-    const ro = new IntersectionObserver((entries) => {
+    revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
-          ro.unobserve(entry.target);
+          revealObserver?.unobserve(entry.target);
         }
       });
     }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
-    targets.forEach((el) => ro.observe(el));
+    targets.forEach((el) => revealObserver!.observe(el));
   }
 
   document.addEventListener('astro:page-load', initReveal);
+  document.addEventListener('astro:before-swap', () => {
+    revealObserver?.disconnect();
+    revealObserver = null;
+  }, { once: false });
 </script>
