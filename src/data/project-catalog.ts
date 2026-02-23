@@ -175,7 +175,7 @@ export const projectCatalog: ProjectCatalogEntry[] = [
   },
   {
     slug: 'a-mavs-olevm',
-    title: 'A-Mavs-Olevm (etceter4)',
+    title: 'A-Mavs-Olevm',
     organ: 'ORGAN-II',
     tags: ['Art', 'Vanilla JS', 'Performance'],
     summary: 'The "Living Pantheon" flagship artistic ecosystem and website.',

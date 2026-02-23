@@ -31,7 +31,6 @@ if (token) {
 
 const REPOS = [
   { name: 'portfolio', owner: '4444J99' },
-  { name: 'etceter4', owner: '4444J99' },
   { name: '4444J99', owner: '4444J99' },
   { name: 'theoretical-specifications-first', owner: '4444J99' },
   { name: 'intake', owner: '4444J99' },
