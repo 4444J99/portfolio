@@ -108,7 +108,8 @@ def compute_vitals(canonical: dict) -> dict:
         },
         "logos": {
             "essays": c.get("published_essays", 0),
-            "words": m.get("total_words_numeric", 0),
+            "words": c.get("total_words_numeric") or m.get("total_words_numeric", 0),
+            **({"word_breakdown": c["word_counts"]} if "word_counts" in c else {}),
         },
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
