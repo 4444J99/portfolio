@@ -1,15 +1,15 @@
 {
-  "generated": "2026-02-23",
+  "generated": "2026-02-24",
   "summary": {
-    "met": 1,
-    "in_progress": 5,
-    "not_started": 11,
+    "met": 2,
+    "in_progress": 3,
+    "not_started": 12,
     "total": 17
   },
   "horizons": [
     { "id": "H1", "name": "Prove It Works", "timeline": "Days 1-30", "met": 0, "in_progress": 3, "not_started": 2 },
-    { "id": "H2", "name": "Validate Externally", "timeline": "Days 15-90", "met": 1, "in_progress": 1, "not_started": 1 },
-    { "id": "H3", "name": "Generate Revenue", "timeline": "Days 30-180", "met": 0, "in_progress": 1, "not_started": 2 },
+    { "id": "H2", "name": "Validate Externally", "timeline": "Days 15-90", "met": 2, "in_progress": 0, "not_started": 1 },
+    { "id": "H3", "name": "Generate Revenue", "timeline": "Days 30-180", "met": 0, "in_progress": 0, "not_started": 3 },
     { "id": "H4", "name": "Build Community", "timeline": "Days 60-365", "met": 0, "in_progress": 0, "not_started": 3 },
     { "id": "H5", "name": "Achieve Recognition", "timeline": "Days 90-730", "met": 0, "in_progress": 0, "not_started": 2 }
   ],
@@ -20,7 +20,7 @@
       "measurement": "<=3 critical incidents over 30 days",
       "horizon": "H1",
       "status": "in_progress",
-      "evidence": "4 snapshots collected (Feb 16-18, 23). Daily cron automation active via soak-test-daily.yml.",
+      "evidence": "9 consecutive snapshots (Feb 16-24). 0 critical incidents. Daily cron automation active.",
       "evidenceUrl": null,
       "target": "March 18, 2026"
     },
@@ -40,7 +40,7 @@
       "measurement": "30 consecutive days of engagement data",
       "horizon": "H1",
       "status": "in_progress",
-      "evidence": "4 snapshots with engagement data. 5 stars, 3 forks tracked. Daily automation resumed.",
+      "evidence": "9 snapshots with engagement data. Daily automation operational since Feb 16.",
       "evidenceUrl": null,
       "target": "March 18, 2026"
     },
@@ -59,10 +59,10 @@
       "criterion": ">=1 application submitted",
       "measurement": "Grant, job, or fellowship application submitted",
       "horizon": "H2",
-      "status": "in_progress",
-      "evidence": "3 applications prepared with materials ready. Submission pending.",
-      "evidenceUrl": null,
-      "target": "March 2026"
+      "status": "met",
+      "evidence": "Doris Duke / Mozilla Artists Make Technology Lab submitted 2026-02-24. 27 additional applications staged, 9 drafting.",
+      "evidenceUrl": "https://www.dorisduke.org/grants/projects/artists-make-technology-lab",
+      "dateMet": "2026-02-24"
     },
     {
       "id": 6,
@@ -70,7 +70,7 @@
       "measurement": "Essay about methodology published on public-process",
       "horizon": "H2",
       "status": "met",
-      "evidence": "Multiple essays: #32 autonomous-systems guide, #36 construction-addiction.",
+      "evidence": "36 essays published. AI-conductor methodology, autonomous systems guide, construction-addiction.",
       "evidenceUrl": "https://organvm-v-logos.github.io/public-process/",
       "dateMet": "2026-02-16"
     },
@@ -89,10 +89,10 @@
       "criterion": ">=1 ORGAN-III product live",
       "measurement": "Commercial product deployed and accessible",
       "horizon": "H3",
-      "status": "in_progress",
-      "evidence": "life-my--midst--in deployment-ready: 291 tests, Neon DB, DEPLOY.md.",
+      "status": "not_started",
+      "evidence": "public-record-data-scrapper deployment-ready: 2,055 tests, Docker, Vercel config, Terraform. Awaiting production deployment.",
       "evidenceUrl": null,
-      "target": "February 2026"
+      "target": "March 2026"
     },
     {
       "id": 9,
@@ -100,7 +100,7 @@
       "measurement": ">=1 registry entry with revenue_status: live",
       "horizon": "H3",
       "status": "not_started",
-      "evidence": "All ORGAN-III repos at pre-launch. Needs Stripe integration.",
+      "evidence": "All ORGAN-III repos at pre-launch. Needs deployment + Stripe integration.",
       "evidenceUrl": null,
       "target": null
     },
@@ -150,7 +150,7 @@
       "measurement": "Grant, citation, invitation, or adoption",
       "horizon": "H5",
       "status": "not_started",
-      "evidence": "Applications not yet submitted.",
+      "evidence": "1 application submitted, awaiting response.",
       "evidenceUrl": null,
       "target": null
     },
@@ -159,10 +159,10 @@
       "criterion": "Portfolio with external validation",
       "measurement": "Portfolio reflects testimonials, acceptances, or user counts",
       "horizon": "H5",
-      "status": "not_started",
-      "evidence": "Portfolio exists with system metrics. No external validation to display.",
-      "evidenceUrl": "https://4444j99.github.io/portfolio/",
-      "target": null
+      "status": "in_progress",
+      "evidence": "Portfolio live with omega scorecard, system metrics, and validation data. Pending external validation events (grant outcomes, user signups).",
+      "evidenceUrl": "https://4444j99.github.io/portfolio/omega",
+      "target": "Pending external validation"
     },
     {
       "id": 16,
@@ -180,7 +180,7 @@
       "measurement": "System runs without primary operator intervention",
       "horizon": "H1",
       "status": "in_progress",
-      "evidence": "12 cron workflows active. Autonomous since Feb 16. Soak test automation confirmed operational.",
+      "evidence": "12 cron workflows active. Autonomous since Feb 16. 9/30 days with 0 critical incidents.",
       "evidenceUrl": null,
       "target": "March 18, 2026"
     }
