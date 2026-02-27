@@ -25,6 +25,35 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
           Our AI advisor will map your requirements to field-tested architectures across the eight-organ system.
         </p>
 
+        <div class="services-section">
+          <h2 class="services-heading">Services</h2>
+          <div class="services-grid">
+            <div class="service-card">
+              <h3>Systems Architecture Review</h3>
+              <p class="service-price">$500</p>
+              <p class="service-desc">2-hour deep-dive into your system architecture with a written report covering recommendations, dependency analysis, and migration paths.</p>
+              <p class="service-format">2hr session + written report</p>
+            </div>
+            <div class="service-card">
+              <h3>AI-Conductor Workshop</h3>
+              <p class="service-price">$250 <span class="price-note">per person</span></p>
+              <p class="service-desc">Hands-on group workshop on the AI-conductor methodology — human-directed, AI-generated volume with human review. Recorded for async access.</p>
+              <p class="service-format">3hr group (up to 10) &middot; Zoom &middot; Recorded</p>
+            </div>
+            <div class="service-card">
+              <h3>Creative Infrastructure Audit</h3>
+              <p class="service-price">$1,000</p>
+              <p class="service-desc">Half-day comprehensive audit of your creative or institutional infrastructure. Delivered as a 10-page report with prioritized action items.</p>
+              <p class="service-format">Half-day &middot; 10-page deliverable</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="ai-advisor-heading">AI Capability Advisor</h2>
+        <p class="consult-intro">
+          Not sure which service fits? Describe your challenge below and our AI advisor will map your needs to specific capabilities.
+        </p>
+
         <form id="consult-form" class="consult-form">
           <div class="form-group">
             <label for="industry" class="form-label">Industry / Domain <span class="optional">(optional)</span></label>
@@ -497,6 +526,74 @@ RESPONSE FORMAT:
 
   .error-text a {
     color: var(--accent);
+  }
+
+  .services-section {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .services-heading {
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin-bottom: var(--space-lg);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    transition: border-color var(--transition-fast);
+  }
+
+  .service-card:hover {
+    border-color: var(--accent);
+  }
+
+  .service-card h3 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .service-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-yellow, #FFD600);
+    margin-bottom: var(--space-sm);
+  }
+
+  .price-note {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+
+  .service-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-sm);
+  }
+
+  .service-format {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .ai-advisor-heading {
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
   }
 
   @media (max-width: 768px) {
