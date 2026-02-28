@@ -51,10 +51,11 @@ export const getStaticPaths: GetStaticPaths = () => {
 
   // Dynamic Targeted Application pages
   targets.forEach(target => {
+    const persona = personas.find(p => p.id === target.persona_id);
     pages.push({
       slug: `for/${target.slug}`,
-      title: `${target.company} Application`,
-      subtitle: `Targeted application for ${target.role} at ${target.company}`
+      title: `For ${target.company}`,
+      subtitle: persona?.title || target.role
     });
   });
 

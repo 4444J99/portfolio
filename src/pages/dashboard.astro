@@ -10,6 +10,7 @@ import SprintTimeline from '../components/dashboard/SprintTimeline.astro';
 import PraxisTargets from '../components/dashboard/PraxisTargets.astro';
 import FlagshipTable from '../components/dashboard/FlagshipTable.astro';
 import StrikeLog from '../components/dashboard/StrikeLog.astro';
+import ScoutTriage from '../components/dashboard/ScoutTriage.astro';
 import WorkspaceHealth from '../components/dashboard/WorkspaceHealth.astro';
 
 import type { SystemMetrics, Organ, PraxisTarget, QualityMetrics } from '../types/data';
@@ -109,6 +110,7 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
 
     <section class="section">
       <div class="container">
+        <ScoutTriage />
         <StrikeLog />
       </div>
     </section>

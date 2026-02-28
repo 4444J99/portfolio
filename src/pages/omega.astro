@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import SketchContainer from '../components/sketches/SketchContainer.astro';
+import OmegaGalaxy from '../components/galaxy/OmegaGalaxy.astro';
 
 interface OmegaData {
   generated: string;
@@ -32,17 +32,13 @@ const statusLabel = (status: string) => {
 ---
 
 <Layout title="Omega Scorecard — System Maturity" description="17 measurable criteria tracking the 91-repository system's transition from construction to sustainable autonomous operation.">
-    <div class="sketch-accent">
-      <SketchContainer 
-        sketchId="constellation" 
-        height="var(--space-4xl)" 
-        mobileHeight="var(--space-3xl)" 
-        ariaLabel="Animated constellation visualization representing omega criteria as stars" 
-        title="Omega Constellation"
-        caption="A mapping of maturity criteria as stellar nodes within the system horizon."
-        dataSource="Omega Protocol"
-      />
-    </div>
+    <section class="section section--full-width print-hide">
+      <div class="container">
+        <h2 class="section__heading">System Galaxy (91 Repositories)</h2>
+        <OmegaGalaxy />
+      </div>
+    </section>
+
     <section class="section">
       <div class="container">
         <h1 class="page-title">System Maturity Scorecard</h1>

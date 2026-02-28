@@ -1,0 +1,368 @@
+---
+import { projectCatalog } from '../../data/project-catalog';
+import { organColors } from '../../data/organ-colors';
+
+const projects = projectCatalog.map(p => ({
+  ...p,
+  color: organColors[p.organ] || '#888888'
+}));
+---
+
+<div id="omega-galaxy-container" class="galaxy-container">
+  <canvas id="omega-galaxy-canvas"></canvas>
+  <div id="galaxy-overlay" class="galaxy-overlay">
+    <div id="repo-info" class="repo-info-card hidden">
+      <div class="repo-info-header">
+        <span id="repo-organ" class="repo-organ-badge"></span>
+        <h3 id="repo-title"></h3>
+      </div>
+      <p id="repo-summary"></p>
+      <div id="repo-tags" class="repo-tags"></div>
+      <a id="repo-link" href="#" class="repo-btn">View Intelligence &rarr;</a>
+    </div>
+    <div class="galaxy-controls">
+      <button id="reset-view" class="control-btn" aria-label="Reset View">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+      </button>
+      <div class="galaxy-hint">Drag to rotate · Scroll to zoom · Click stars for data</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+  const container = document.getElementById('omega-galaxy-container');
+  const canvas = document.getElementById('omega-galaxy-canvas') as HTMLCanvasElement;
+  
+  if (container && canvas) {
+    const projects = JSON.parse(container.dataset.projects || '[]');
+
+    // Initialize Scene
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color('#0a0a0b');
+    scene.fog = new THREE.FogExp2('#0a0a0b', 0.002);
+
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 2000);
+    camera.position.z = 400;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.rotateSpeed = 0.5;
+
+    // Star Groups (Constellations by Organ)
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    const starObjects: THREE.Mesh[] = [];
+
+    // Star Geometry
+    const starGeometry = new THREE.SphereGeometry(2, 16, 16);
+
+    // Position Logic: Distribute organs in a spiral/spherical volume
+    const organKeys = [...new Set(projects.map((p: any) => p.organ))];
+    
+    projects.forEach((project: any) => {
+      const organIndex = organKeys.indexOf(project.organ);
+      const organAngle = (organIndex / organKeys.length) * Math.PI * 2;
+      const organRadius = 150 + Math.random() * 50;
+      
+      // Position within organ cluster
+      const clusterAngle = Math.random() * Math.PI * 2;
+      const clusterRadius = 40 + Math.random() * 60;
+      
+      const x = Math.cos(organAngle) * organRadius + Math.cos(clusterAngle) * clusterRadius;
+      const y = (Math.random() - 0.5) * 100 + (organIndex - 4) * 20;
+      const z = Math.sin(organAngle) * organRadius + Math.sin(clusterAngle) * clusterRadius;
+
+      const material = new THREE.MeshBasicMaterial({ 
+        color: project.color,
+        transparent: true,
+        opacity: 0.8
+      });
+
+      const star = new THREE.Mesh(starGeometry, material);
+      star.position.set(x, y, z);
+      star.userData = project;
+      
+      scene.add(star);
+      starObjects.push(star);
+
+      // Add a glow effect
+      const spriteMaterial = new THREE.SpriteMaterial({
+        map: createGlowTexture(project.color),
+        transparent: true,
+        blending: THREE.AdditiveBlending
+      });
+      const sprite = new THREE.Sprite(spriteMaterial);
+      sprite.scale.set(12, 12, 1);
+      star.add(sprite);
+    });
+
+    // Background stars
+    const bgStarsGeometry = new THREE.BufferGeometry();
+    const bgStarsCount = 2000;
+    const bgStarsPos = new Float32Array(bgStarsCount * 3);
+    for (let i = 0; i < bgStarsCount * 3; i++) {
+      bgStarsPos[i] = (Math.random() - 0.5) * 2000;
+    }
+    bgStarsGeometry.setAttribute('position', new THREE.BufferAttribute(bgStarsPos, 3));
+    const bgStarsMaterial = new THREE.PointsMaterial({ color: '#ffffff', size: 1, transparent: true, opacity: 0.3 });
+    const bgStars = new THREE.Points(bgStarsGeometry, bgStarsMaterial);
+    scene.add(bgStars);
+
+    function createGlowTexture(color: string) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 64;
+      canvas.height = 64;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return null;
+      
+      const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      gradient.addColorStop(0, color);
+      gradient.addColorStop(0.2, color);
+      gradient.addColorStop(0.5, 'rgba(0,0,0,0)');
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 64, 64);
+      
+      const texture = new THREE.CanvasTexture(canvas);
+      return texture;
+    }
+
+    // Interactivity
+    const infoCard = document.getElementById('repo-info');
+    const repoTitle = document.getElementById('repo-title');
+    const repoOrgan = document.getElementById('repo-organ');
+    const repoSummary = document.getElementById('repo-summary');
+    const repoTags = document.getElementById('repo-tags');
+    const repoLink = document.getElementById('repo-link') as HTMLAnchorElement;
+
+    function onPointerDown(event: PointerEvent) {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(starObjects);
+
+      if (intersects.length > 0) {
+        const project = intersects[0].object.userData;
+        showRepoInfo(project);
+        
+        // Animate camera to star
+        const targetPos = intersects[0].object.position.clone();
+        const cameraTargetPos = targetPos.clone().add(new THREE.Vector3(0, 0, 100));
+        
+        // Simple lerp-based movement
+        camera.position.lerp(cameraTargetPos, 0.1);
+        controls.target.lerp(targetPos, 0.1);
+      } else {
+        infoCard?.classList.add('hidden');
+      }
+    }
+
+    function showRepoInfo(project: any) {
+      if (!infoCard || !repoTitle || !repoOrgan || !repoSummary || !repoTags || !repoLink) return;
+      
+      repoTitle.textContent = project.title;
+      repoOrgan.textContent = project.organ;
+      repoOrgan.style.backgroundColor = project.color;
+      repoSummary.textContent = project.summary;
+      repoLink.href = `/portfolio/projects/${project.slug}`;
+      
+      repoTags.innerHTML = '';
+      project.tags.forEach((tag: string) => {
+        const span = document.createElement('span');
+        span.className = 'mini-tag';
+        span.textContent = tag;
+        repoTags.appendChild(span);
+      });
+      
+      infoCard.classList.remove('hidden');
+    }
+
+    canvas.addEventListener('pointerdown', onPointerDown);
+
+    document.getElementById('reset-view')?.addEventListener('click', () => {
+      camera.position.set(0, 0, 400);
+      controls.target.set(0, 0, 0);
+      infoCard?.classList.add('hidden');
+    });
+
+    window.addEventListener('resize', () => {
+      if (!container) return;
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      
+      // Gentle rotation of the whole galaxy
+      scene.rotation.y += 0.0005;
+      
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  }
+</script>
+
+<style>
+  .galaxy-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    background: #0a0a0b;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: var(--space-2xl);
+  }
+
+  #omega-galaxy-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .galaxy-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .repo-info-card {
+    pointer-events: auto;
+    background: rgba(15, 15, 17, 0.9);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    border-radius: var(--radius);
+    max-width: 320px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .repo-info-card.hidden {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .repo-info-header {
+    margin-bottom: var(--space-sm);
+  }
+
+  .repo-organ-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #000;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+  }
+
+  #repo-title {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #fff;
+  }
+
+  #repo-summary {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+  }
+
+  .repo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .repo-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg-primary);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .repo-btn:hover {
+    transform: translateX(4px);
+  }
+
+  .galaxy-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .control-btn {
+    pointer-events: auto;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .control-btn:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .galaxy-hint {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  :global(.mini-tag) {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.05);
+    padding: 1px 6px;
+    border-radius: 2px;
+    color: var(--text-muted);
+  }
+</style>
+
+<script define:vars={{ projects }}>
+  // Inject data into container for client script
+  document.getElementById('omega-galaxy-container').dataset.projects = JSON.stringify(projects);
+</script>

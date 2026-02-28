@@ -1,11 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-
 import { execSync } from 'node:child_process';
+import { generateOGImage } from './generate-og-images.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TARGETS_PATH = path.join(__dirname, '../src/data/targets.json');
+const PUBLIC_DIR = path.join(__dirname, '../public');
 
 function generateAIIntro(company, role, persona) {
   console.log(`🧠 AI Engine generating targeted synthesis for ${company}...`);
@@ -74,6 +75,12 @@ async function createStrike() {
   data.targets.unshift(newTarget);
   
   fs.writeFileSync(TARGETS_PATH, JSON.stringify(data, null, 2) + "\n");
+
+  // Generate bespoke OG image
+  console.log(`🎨 Generating bespoke social card for ${company}...`);
+  const ogPath = path.join(PUBLIC_DIR, 'og', 'strikes', `${slug}.png`);
+  const personaTitle = persona.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  await generateOGImage(ogPath, `For ${company}`, personaTitle);
   
   console.log(`\n✅ Strike target generated: ${company}`);
   console.log(`\n  1. Target injected into src/data/targets.json`);

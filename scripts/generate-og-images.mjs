@@ -1,90 +1,239 @@
 #!/usr/bin/env node
 /**
- * Generate OG images (1200x630) for social sharing.
- * Uses canvas to create dark-themed branded images.
- *
- * Usage: node scripts/generate-og-images.mjs
- * Requires: npm install canvas (dev dependency)
+ * Bespoke Social Card Factory
+ * Generates high-signal OG images (1200x630) using satori and resvg.
+ * 
+ * Propulsion: Bespoke images for targeted strikes.
  */
 
-import { createCanvas } from 'canvas';
-import { writeFileSync, mkdirSync } from 'node:fs';
+import satori from 'satori';
+import { Resvg } from '@resvg/resvg-js';
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const publicDir = join(__dirname, '..', 'public');
-const ogDir = join(publicDir, 'og');
-mkdirSync(ogDir, { recursive: true });
+const fontPath = join(publicDir, 'fonts', 'syne-latin.ttf'); // Assuming we might have it or fetch it
 
-const pages = [
-  { file: 'og-image.png', title: '4444j', subtitle: 'Creative Technologist' },
-  { file: 'about.png', title: 'About', subtitle: 'Anthony James Padavano' },
-  { file: 'resume.png', title: 'Resume', subtitle: 'Creative Technologist & Systems Architect' },
-  { file: 'dashboard.png', title: 'Dashboard', subtitle: 'System Metrics — 91 Repositories' },
-  { file: 'gallery.png', title: 'Gallery', subtitle: 'Generative Art Collection' },
-  { file: 'essays.png', title: 'Essays', subtitle: 'Public Process — 28 Essays' },
-];
+let fontDataCache = null;
 
-const W = 1200;
-const H = 630;
-
-for (const page of pages) {
-  const canvas = createCanvas(W, H);
-  const ctx = canvas.getContext('2d');
-
-  // Background
-  ctx.fillStyle = '#0a0a0b';
-  ctx.fillRect(0, 0, W, H);
-
-  // Subtle grid pattern
-  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
-  ctx.lineWidth = 1;
-  for (let x = 0; x < W; x += 40) {
-    ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, H);
-    ctx.stroke();
+async function getFontData() {
+  if (fontDataCache) return fontDataCache;
+  
+  // If local TTF exists, use it, otherwise fetch
+  if (existsSync(fontPath)) {
+    fontDataCache = readFileSync(fontPath);
+  } else {
+    console.log('🌐 Fetching Syne font for OG generation...');
+    const res = await fetch('https://fonts.gstatic.com/s/syne/v24/8vIS7w4qzmVxsWxjBZRjr0FKM_3fvj6k.ttf');
+    fontDataCache = await res.arrayBuffer();
   }
-  for (let y = 0; y < H; y += 40) {
-    ctx.beginPath();
-    ctx.moveTo(0, y);
-    ctx.lineTo(W, y);
-    ctx.stroke();
-  }
-
-  // Accent line
-  ctx.fillStyle = '#00BCD4';
-  ctx.fillRect(80, 200, 4, 120);
-
-  // Title
-  ctx.fillStyle = '#e0e0e0';
-  ctx.font = 'bold 64px sans-serif';
-  ctx.fillText(page.title, 110, 280);
-
-  // Subtitle
-  ctx.fillStyle = '#888888';
-  ctx.font = '28px sans-serif';
-  ctx.fillText(page.subtitle, 110, 330);
-
-  // Footer branding
-  ctx.fillStyle = '#444444';
-  ctx.font = '18px monospace';
-  ctx.fillText('4444j99.github.io/portfolio', 80, H - 50);
-
-  // Accent dot
-  ctx.fillStyle = '#E91E63';
-  ctx.beginPath();
-  ctx.arc(W - 100, 100, 6, 0, Math.PI * 2);
-  ctx.fill();
-
-  const buf = canvas.toBuffer('image/png');
-  // Default OG image goes to public/ root; per-page images go to public/og/
-  const dest = page.file === 'og-image.png'
-    ? join(publicDir, page.file)
-    : join(ogDir, page.file);
-  writeFileSync(dest, buf);
-  console.log(`Created ${page.file}`);
+  return fontDataCache;
 }
 
-console.log('Done — OG images generated in public/ and public/og/');
+/**
+ * Generate a bespoke OG image.
+ * @param {string} destPath - Full path to save the image
+ * @param {string} title - Main title (e.g. "For Anthropic")
+ * @param {string} subtitle - Subtitle (e.g. "AI Orchestration Architect")
+ * @param {string} accentColor - Hex color for accents
+ */
+export async function generateOGImage(destPath, title, subtitle, accentColor = '#00BCD4') {
+  mkdirSync(dirname(destPath), { recursive: true });
+  const fontData = await getFontData();
+
+  const svg = await satori(
+    {
+      type: 'div',
+      props: {
+        style: {
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '80px',
+          background: '#0a0a0b',
+          fontFamily: 'Syne',
+          border: `1px solid ${accentColor}33`,
+        },
+        children: [
+          // Top section: Branding
+          {
+            type: 'div',
+            props: {
+              style: {
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              },
+              children: [
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: '24px',
+                      fontWeight: 700,
+                      color: accentColor,
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                    },
+                    children: 'Anthony James Padavano',
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      width: '12px',
+                      height: '12px',
+                      borderRadius: '50%',
+                      background: '#E91E63',
+                    },
+                  },
+                }
+              ]
+            }
+          },
+          // Middle section: The Core Message
+          {
+            type: 'div',
+            props: {
+              style: {
+                display: 'flex',
+                flexDirection: 'column',
+              },
+              children: [
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      width: '60px',
+                      height: '4px',
+                      background: accentColor,
+                      marginBottom: '32px',
+                    },
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: '72px',
+                      fontWeight: 700,
+                      color: '#ffffff',
+                      lineHeight: 1.1,
+                      marginBottom: '16px',
+                      letterSpacing: '-0.03em',
+                    },
+                    children: title,
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: '32px',
+                      color: '#888888',
+                      letterSpacing: '0.02em',
+                    },
+                    children: subtitle,
+                  },
+                }
+              ]
+            }
+          },
+          // Bottom section: Metadata
+          {
+            type: 'div',
+            props: {
+              style: {
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'flex-end',
+                fontSize: '18px',
+                color: '#444444',
+                fontFamily: 'monospace',
+              },
+              children: [
+                {
+                  type: 'div',
+                  props: {
+                    children: '4444j99.github.io/portfolio',
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    children: 'Phase W10 · Operative Intel',
+                  },
+                }
+              ]
+            }
+          }
+        ],
+      },
+    },
+    {
+      width: 1200,
+      height: 630,
+      fonts: [
+        {
+          name: 'Syne',
+          data: fontData,
+          weight: 400,
+          style: 'normal',
+        },
+        {
+          name: 'Syne',
+          data: fontData,
+          weight: 700,
+          style: 'normal',
+        },
+      ],
+    }
+  );
+
+  const resvg = new Resvg(svg, {
+    fitTo: { mode: 'width', value: 1200 },
+  });
+  const pngData = resvg.render().asPng();
+  writeFileSync(destPath, pngData);
+}
+
+// Bulk generation if run as script
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  (async () => {
+    const pages = [
+      { file: 'og-image.png', title: '4444j', subtitle: 'Creative Technologist' },
+      { file: 'about.png', title: 'About Anthony', subtitle: 'Systems Architect' },
+      { file: 'resume.png', title: 'Intelligence Ledger', subtitle: 'Professional History & Vitals' },
+      { file: 'dashboard.png', title: 'System Metrics', subtitle: '91 Repositories — Live Analysis' },
+      { file: 'gallery.png', title: 'The Gallery', subtitle: '29 Generative p5.js Sketches' },
+      { file: 'essays.png', title: 'Public Process', subtitle: '28 Philosophical & Technical Essays' },
+    ];
+
+    for (const page of pages) {
+      const dest = page.file === 'og-image.png'
+        ? join(publicDir, page.file)
+        : join(publicDir, 'og', page.file);
+      await generateOGImage(dest, page.title, page.subtitle);
+      console.log(`✅ Created ${page.file}`);
+    }
+
+    // Generate for all targets
+    const targetsPath = join(__dirname, '../src/data/targets.json');
+    if (existsSync(targetsPath)) {
+      const { targets } = JSON.parse(readFileSync(targetsPath, 'utf8'));
+      for (const target of targets) {
+        const dest = join(publicDir, 'og', 'strikes', `${target.slug}.png`);
+        const personaTitle = target.persona_id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        await generateOGImage(dest, `For ${target.company}`, personaTitle);
+        console.log(`✅ Created strike card: ${target.slug}.png`);
+      }
+    }
+
+    console.log('Done — Bespoke social cards generated.');
+  })();
+}

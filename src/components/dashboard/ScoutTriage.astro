@@ -1,0 +1,197 @@
+---
+import { candidates, last_scout } from '../../data/scout-candidates.json';
+
+const personaColors = {
+  'ai-systems-engineer': 'var(--cmyk-cyan)',
+  'systems-architect': 'var(--cmyk-yellow)',
+  'creative-technologist': 'var(--cmyk-magenta)',
+  'technical-pm': 'var(--accent-purple)'
+};
+
+const triageCandidates = candidates.filter(c => c.status === 'triage');
+---
+
+<div class="scout-triage">
+  <div class="scout-triage__header">
+    <div class="header-main">
+      <h3>Scout Triage</h3>
+      <span class="scout-meta">Last scout: {new Date(last_scout).toLocaleDateString()}</span>
+    </div>
+    <div class="scout-stats">
+      <span class="stat-pill">{triageCandidates.length} Candidates Found</span>
+    </div>
+  </div>
+
+  <div class="candidate-grid">
+    {triageCandidates.map(candidate => (
+      <div class="candidate-card">
+        <div class="card-header">
+          <span class="persona-badge" style={`background: ${personaColors[candidate.persona_id as keyof typeof personaColors] || 'var(--border)'}`}>
+            {candidate.persona_id.replace(/-/g, ' ')}
+          </span>
+          <span class="discovered-date">{new Date(candidate.discovered_at).toLocaleDateString()}</span>
+        </div>
+        
+        <h4 class="company-name">{candidate.company}</h4>
+        <p class="role-title">{candidate.role}</p>
+        <p class="justification">{candidate.reason}</p>
+        
+        <div class="card-actions">
+          <button class="promote-btn" data-company={candidate.company} data-role={candidate.role} data-persona={candidate.persona_id}>
+            Promote to Strike
+          </button>
+          <button class="ignore-btn">Ignore</button>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .scout-triage {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .scout-triage__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--space-sm);
+  }
+
+  .header-main h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .scout-meta {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .stat-pill {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--accent);
+    color: var(--accent-text);
+    padding: 0.2em 0.8em;
+    border-radius: 20px;
+  }
+
+  .candidate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .candidate-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .candidate-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .persona-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #000;
+  }
+
+  .discovered-date {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+  }
+
+  .company-name {
+    font-size: 1.2rem;
+    margin: 0 0 var(--space-xs) 0;
+    color: #fff;
+  }
+
+  .role-title {
+    font-size: 0.9rem;
+    color: var(--accent-text);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+  }
+
+  .justification {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: var(--space-lg);
+    flex-grow: 1;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .promote-btn {
+    background: var(--accent);
+    color: var(--bg-primary);
+    border: none;
+    padding: var(--space-xs) var(--space-md);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    flex-grow: 2;
+  }
+
+  .ignore-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    flex-grow: 1;
+  }
+
+  .ignore-btn:hover {
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+  }
+</style>
+
+<script>
+  // Handlers for Promotion
+  const buttons = document.querySelectorAll('.promote-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const { company, role, persona } = (btn as HTMLElement).dataset;
+      console.log(`Promoting ${company} to active strike...`);
+      // In a real app, this would call an API or CLI tool
+      alert(`To deploy this strike, run:
+npm run strike:new "${company}" "${role}" "${persona}"`);
+    });
+  });
+</script>
