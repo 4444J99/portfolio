@@ -15,7 +15,7 @@ const securityPolicy = JSON.parse(readFileSync(resolve(root, '.quality/security-
 
 function parseCoverageRatchetFromReadme() {
   const match = readme.match(
-    /Coverage ratchet policy:\s*W2 `([0-9]+)\/([0-9]+)\/([0-9]+)\/([0-9]+)`, W4 `([0-9]+)\/([0-9]+)\/([0-9]+)\/([0-9]+)`, W6 `([0-9]+)\/([0-9]+)\/([0-9]+)\/([0-9]+)`/
+    /Coverage ratchet policy:\s*W2 `([0-9]+)\/([0-9]+)\/([0-9]+)\/([0-9]+)`, W4 `([0-9]+)\/([0-9]+)\/([0-9]+)\/([0-9]+)`, W6 `([0-9]+)\/([0-9]+)\/([0-9]+)\/([0-9]+)`, W8 `([0-9]+)\/([0-9]+)\/([0-9]+)\/([0-9]+)`, W10 `([0-9]+)\/([0-9]+)\/([0-9]+)\/([0-9]+)`/
   );
   expect(match).not.toBeNull();
   return {
@@ -37,16 +37,30 @@ function parseCoverageRatchetFromReadme() {
       functions: Number(match![11]),
       lines: Number(match![12]),
     },
+    W8: {
+      statements: Number(match![13]),
+      branches: Number(match![14]),
+      functions: Number(match![15]),
+      lines: Number(match![16]),
+    },
+    W10: {
+      statements: Number(match![17]),
+      branches: Number(match![18]),
+      functions: Number(match![19]),
+      lines: Number(match![20]),
+    },
   };
 }
 
 function parseHintRatchetFromReadme() {
-  const match = readme.match(/Typecheck hint budget policy:\s*W2 `<=([0-9]+)`, W4 `<=([0-9]+)`, W6 `=([0-9]+)`/);
+  const match = readme.match(/Typecheck hint budget policy:\s*W2 `<=([0-9]+)`, W4 `<=([0-9]+)`, W6 `=([0-9]+)`, W8 `=([0-9]+)`, W10 `=([0-9]+)`/);
   expect(match).not.toBeNull();
   return {
     W2: Number(match![1]),
     W4: Number(match![2]),
     W6: Number(match![3]),
+    W8: Number(match![4]),
+    W10: Number(match![5]),
   };
 }
 
@@ -75,6 +89,8 @@ describe('quality governance drift checks', () => {
       W2: policy.phases.W2.coverage,
       W4: policy.phases.W4.coverage,
       W6: policy.phases.W6.coverage,
+      W8: policy.phases.W8.coverage,
+      W10: policy.phases.W10.coverage,
     });
 
     const readmeHints = parseHintRatchetFromReadme();
@@ -82,6 +98,8 @@ describe('quality governance drift checks', () => {
       W2: policy.phases.W2.typecheck.hintsMax,
       W4: policy.phases.W4.typecheck.hintsMax,
       W6: policy.phases.W6.typecheck.hintsMax,
+      W8: policy.phases.W8.typecheck.hintsMax,
+      W10: policy.phases.W10.typecheck.hintsMax,
     });
 
     const runtimeCoverageRatchet = parseRuntimeCoverageRatchetFromReadme();
@@ -112,7 +130,7 @@ describe('quality governance drift checks', () => {
   });
 
   it('CI workflow explicitly sets the phase and runs the parity pipeline', () => {
-    expect(workflow).toContain('QUALITY_PHASE: W6');
+    expect(workflow).toContain('QUALITY_PHASE: W10');
     expect(workflow).toContain('npm run test:security:prod');
     expect(workflow).toContain('npm run test:security:github');
     expect(workflow).toContain('npm run test:security:drift');

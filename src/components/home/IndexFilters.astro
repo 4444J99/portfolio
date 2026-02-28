@@ -26,9 +26,11 @@
       const filterStatus = document.getElementById('filter-status');
       const totalCards = cards.length;
 
-      // Restore saved view preference
+      // URL parameter takes priority, then localStorage
       try {
-        const savedView = localStorage.getItem('portfolio-view');
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlView = urlParams.get('view');
+        const savedView = (urlView === 'creative' || urlView === 'engineering') ? urlView : localStorage.getItem('portfolio-view');
         if (savedView && savedView !== main!.dataset.portfolioView) {
           const matchingBtn = [...viewBtns].find((b) => b.getAttribute('data-view') === savedView);
           if (matchingBtn) {
@@ -54,7 +56,23 @@
           }
         }
       } catch {}
-  
+
+      // Restore saved filter chip
+      try {
+        const savedFilter = localStorage.getItem('portfolio-filter');
+        if (savedFilter && savedFilter !== 'all') {
+          const currentView = main!.dataset.portfolioView || 'engineering';
+          const activeBar = document.querySelector<HTMLElement>(`.filter-bar[data-filter-view="${currentView}"]`) ||
+                            document.querySelector<HTMLElement>('.filter-bar:not([style*="display: none"])');
+          if (activeBar) {
+            const chip = activeBar.querySelector<HTMLButtonElement>(`.filter-chip[data-filter="${savedFilter}"]`);
+            if (chip) {
+              chip.click();
+            }
+          }
+        }
+      } catch {}
+
       function announceFilterStatus(prefix?: string) {
         if (!filterStatus) return;
         const visible = document.querySelectorAll<HTMLElement>('.project-grid [data-reveal]:not([style*="display: none"])').length;
@@ -118,7 +136,13 @@
 
         resetFilters();
 
-        try { localStorage.setItem('portfolio-view', view); } catch {}
+        try {
+          localStorage.removeItem('portfolio-filter');
+          localStorage.setItem('portfolio-view', view);
+          const url = new URL(window.location.href);
+          url.searchParams.set('view', view);
+          history.replaceState(null, '', url.toString());
+        } catch {}
       }
   
       viewBtns.forEach((btn) => {
@@ -149,7 +173,9 @@
           chip.setAttribute('aria-pressed', 'true');
   
           const filter = chip.getAttribute('data-filter')!;
-  
+
+          try { localStorage.setItem('portfolio-filter', filter); } catch {}
+
                   cards.forEach((container) => {
                     const card = container.querySelector('.flip-card') as HTMLElement | null;
                     if (!card) return;

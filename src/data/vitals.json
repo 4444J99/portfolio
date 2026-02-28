@@ -5,14 +5,14 @@
     "orgs": 8
   },
   "substance": {
-    "code_files": 0,
-    "test_files": 0,
-    "automated_tests": 0,
+    "code_files": 3586,
+    "test_files": 736,
+    "automated_tests": 5000,
     "ci_passing": 94,
     "ci_coverage_pct": 91
   },
   "logos": {
-    "essays": 0,
+    "essays": 36,
     "words": 809812,
     "word_breakdown": {
       "readmes": 267147,

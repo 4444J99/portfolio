@@ -21,7 +21,7 @@ async function waitForServer(url, timeoutMs = 30000) {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
     if (await isServerRunning(url)) return true;
-    await new Promise((r) => setTimeout(res, 500));
+    await new Promise((r) => setTimeout(r, 500));
   }
   return false;
 }

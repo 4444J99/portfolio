@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      QUALITY_PHASE: W6
+      QUALITY_PHASE: W10
     steps:
       - uses: actions/checkout@v4
         with:

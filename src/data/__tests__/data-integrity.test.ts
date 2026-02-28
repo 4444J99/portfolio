@@ -5,6 +5,7 @@ import landing from '../landing.json';
 import about from '../about.json';
 import graph from '../graph.json';
 import systemMetrics from '../system-metrics.json';
+import vitals from '../vitals.json';
 
 describe('projects.json', () => {
   it('has a projects array', () => {
@@ -108,6 +109,24 @@ describe('graph.json', () => {
       expect(nodeIds.has(e.source)).toBe(true);
       expect(nodeIds.has(e.target)).toBe(true);
     }
+  });
+});
+
+describe('vitals.json', () => {
+  it('substance metrics are non-zero', () => {
+    expect(vitals.substance.code_files).toBeGreaterThan(0);
+    expect(vitals.substance.test_files).toBeGreaterThan(0);
+    expect(vitals.substance.automated_tests).toBeGreaterThan(0);
+  });
+
+  it('logos metrics are non-zero', () => {
+    expect(vitals.logos.essays).toBeGreaterThan(0);
+    expect(vitals.logos.words).toBeGreaterThan(0);
+  });
+
+  it('repo counts are non-zero', () => {
+    expect(vitals.repos.total).toBeGreaterThan(0);
+    expect(vitals.repos.active).toBeGreaterThan(0);
   });
 });
 

@@ -11,8 +11,7 @@
         "Architecture",
         "System Design"
       ],
-      "intro": "[DRAFT] Put your high-value synthesis here linking Palantir's mission to your proven capabilities.",
-      "proposal": "<p>[DRAFT PROPOSAL] Detailed architectural proposal goes here.</p>"
+      "intro": "Palantir builds the operating system for decisions at civilizational scale. My work on Agentic Titan — a polymorphic orchestration framework with 9 communication topologies, 22 agent archetypes, and mandatory safety sandboxing — demonstrates the exact architectural discipline required to build reliable systems where autonomous agents must operate within strict governance bounds. I've managed the end-to-end lifecycle of a 91-repository ecosystem with automated dependency validation and machine-readable promotion criteria, proving I can ship complex infrastructure at the intersection of AI autonomy and institutional trust."
     },
     {
       "slug": "openai",
@@ -25,7 +24,7 @@
         "Architecture",
         "System Design"
       ],
-      "intro": "[DRAFT] Put your high-value synthesis here linking OpenAI's mission to your proven capabilities."
+      "intro": "OpenAI is defining the frontier of what AI systems can do; my focus is ensuring that frontier is architecturally sound. I've built a symbolic OS with a custom DSL and interpreter (85% coverage across 1,254 tests), engineered the governance layer for a 91-repo ecosystem with zero back-edge violations, and designed hexagonal architectures that cleanly separate domain logic from infrastructure concerns. My background in systems thinking — from Terraform-managed data pipelines to multi-agent coordination frameworks — maps directly to the challenge of building reliable, scalable infrastructure for models that are growing faster than the systems that serve them."
     },
     {
       "slug": "anthropic",

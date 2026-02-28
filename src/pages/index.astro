@@ -8,6 +8,7 @@ import vitals from '../data/vitals.json';
 import { organColorMap } from '../data/organ-colors';
 import { base } from '../utils/paths';
 import { organGroups, skillFilters, categoryFilters, featuredNumbers } from '../data/organ-groups';
+import { SKETCH_NAMES } from '@4444j99/sketches';
 
 // Resolve slugs to full hrefs at build time
 const resolvedGroups = organGroups.map(group => ({
@@ -73,7 +74,7 @@ const resolvedGroups = organGroups.map(group => ({
             <div class="stat-label">Published Essays</div>
           </div>
           <div class="stat">
-            <div class="stat-value">32</div>
+            <div class="stat-value">{SKETCH_NAMES.length}</div>
             <div class="stat-label">Generative Sketches</div>
           </div>
         </div>
