@@ -17,7 +17,7 @@ let exitCode = 0;
 // --- HTML Validation ---
 console.log('=== HTML Validation ===\n');
 const htmlValidateResult = spawnSync(
-  'npx', ['html-validate', `${DIST}/**/*.html`],
+  'npx', ['html-validate', '--config', '.config/.htmlvalidate.json', `${DIST}/**/*.html`],
   { stdio: 'inherit', timeout: 60000 }
 );
 

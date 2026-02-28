@@ -4,6 +4,7 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
 import ChartContainer from '../components/charts/ChartContainer.astro';
 import StatGrid from '../components/StatGrid.astro';
 import QualityGates from '../components/dashboard/QualityGates.astro';
+import QualityScoreboard from '../components/dashboard/QualityScoreboard.astro';
 import OrganStatus from '../components/dashboard/OrganStatus.astro';
 import SprintTimeline from '../components/dashboard/SprintTimeline.astro';
 import PraxisTargets from '../components/dashboard/PraxisTargets.astro';
@@ -103,6 +104,8 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
     </section>
 
     <QualityGates quality={quality} base={base} />
+
+    <QualityScoreboard quality={quality} />
 
     <section class="section">
       <div class="container">

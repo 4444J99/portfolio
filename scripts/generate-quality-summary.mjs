@@ -97,7 +97,8 @@ lines.push(
 );
 lines.push(`- E2E smoke: ${current?.sources?.e2eSmoke ?? 'n/a'}`);
 lines.push(`- Runtime errors: ${runtimeErrorsSummary?.status ?? current?.runtimeErrors?.status ?? 'n/a'} (uncategorized ${runtimeErrorsSummary?.counts?.uncategorized ?? current?.runtimeErrors?.uncategorized ?? 'n/a'})`);
-lines.push(`- Green-run tracker: ${greenRunsSummary?.consecutiveSuccess ?? current?.stability?.consecutiveSuccess ?? 'n/a'}/${greenRunsSummary?.requiredConsecutive ?? current?.stability?.requiredConsecutive ?? 'n/a'} (${greenRunsSummary?.status ?? current?.stability?.status ?? 'n/a'})`);
+const greenRunStatus = greenRunsSummary?.status === 'skipped' ? 'Local Skip (Missing GITHUB_TOKEN)' : (greenRunsSummary?.status ?? current?.stability?.status ?? 'unknown');
+lines.push(`- Green-run tracker: ${greenRunStatus} (${greenRunsSummary?.consecutiveSuccess ?? current?.stability?.consecutiveSuccess ?? 'n/a'}/${greenRunsSummary?.requiredConsecutive ?? current?.stability?.requiredConsecutive ?? 'n/a'} consecutive)`);
 lines.push(`- Perf budgets: route ${current?.performance?.routeBudgetsStatus ?? 'n/a'}, chunk ${current?.performance?.chunkBudgetsStatus ?? 'n/a'}, interaction ${current?.performance?.interactionBudgetsStatus ?? 'n/a'}`);
 lines.push(`- Lighthouse: perf ${current?.lighthouse?.performance ?? 'n/a'}, a11y ${current?.lighthouse?.accessibility ?? 'n/a'}, bp ${current?.lighthouse?.bestPractices ?? 'n/a'}, seo ${current?.lighthouse?.seo ?? 'n/a'}`);
 lines.push('');

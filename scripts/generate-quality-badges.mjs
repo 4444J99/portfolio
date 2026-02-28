@@ -178,6 +178,11 @@ const metrics = {
     consecutiveSuccess: null,
     requiredConsecutive: null,
     source: null,
+    history: [],
+  },
+  ledger: {
+    generated: null,
+    snapshots: [],
   },
   build: { pages: 0, bundleFiles: 0 },
   sources: {
@@ -376,7 +381,15 @@ if (existsSync(greenRunsPath)) {
   metrics.stability.status = typeof greenRuns.status === 'string' ? greenRuns.status : 'unknown';
   metrics.stability.consecutiveSuccess = toNumberOrNull(greenRuns.consecutiveSuccess);
   metrics.stability.requiredConsecutive = toNumberOrNull(greenRuns.requiredConsecutive);
+  metrics.stability.history = Array.isArray(greenRuns.runs) ? greenRuns.runs : [];
   metrics.stability.source = metrics.sources.greenRuns;
+}
+
+const qualityLedgerPath = resolve('.quality/quality-ledger.json');
+if (existsSync(qualityLedgerPath)) {
+  const ledger = JSON.parse(readFileSync(qualityLedgerPath, 'utf-8'));
+  metrics.ledger.generated = ledger.generated;
+  metrics.ledger.snapshots = Array.isArray(ledger.snapshots) ? ledger.snapshots : [];
 }
 
 const a11yStates = [metrics.a11y.static.status, metrics.a11y.runtime.status].filter((state) => state !== 'unknown');

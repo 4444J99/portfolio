@@ -67,8 +67,8 @@
       "stack": ["Astro", "TypeScript", "p5.js", "Web Audio API", "Narratological Theory", "Generative Art"],
       "featured_projects": [
         {
-          "slug": "a-mavs-olevm",
-          "impact": "Launched the 'etceter4' Living Pantheon website. Engineered a 'breathing' UI with generative pathway logic and subtle motion dynamics using Vanilla JS and performance-optimized animations."
+          "slug": "aetheria-rpg",
+          "impact": "Directed the full Theory-to-Art-to-Commerce pipeline for a gamified education platform. Engineered a recursive pedagogy system and managed a comprehensive post-mortem process to optimize product market fit."
         },
         {
           "slug": "generative-music",

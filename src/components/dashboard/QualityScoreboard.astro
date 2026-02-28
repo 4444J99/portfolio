@@ -1,0 +1,212 @@
+---
+import type { QualityMetrics } from '../../types/data';
+
+interface Props {
+  quality: QualityMetrics;
+}
+
+const { quality } = Astro.props;
+const history = quality.stability?.history || [];
+const snapshots = quality.ledger?.snapshots || [];
+
+// Last 14 runs for the scoreboard row
+const displayRuns = history.slice(0, 14).reverse();
+const displaySnapshots = snapshots.slice(-5); // Last 5 weeks/snapshots
+---
+
+<section class="section scoreboard">
+  <div class="container">
+    <h2 class="section__heading">Quality Scoreboard</h2>
+    <p class="scoreboard__intro">Historical stability and longitudinal quality trends across the system lifecycle.</p>
+
+    <div class="scoreboard__grid">
+      <div class="scoreboard__panel">
+        <h3 class="scoreboard__subheading">Stability Pulse (Last {displayRuns.length} Runs)</h3>
+        <div class="pulse-row">
+          {displayRuns.length > 0 ? (
+            displayRuns.map((run) => (
+              <a 
+                href={run.htmlUrl} 
+                class:list={[
+                  'pulse-block', 
+                  `pulse-block--${run.conclusion || 'pending'}`,
+                  run.status === 'in_progress' && 'pulse-block--loading'
+                ]}
+                title={`Run #${run.runNumber}: ${run.conclusion || run.status} (${new Date(run.createdAt).toLocaleDateString()})`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="sr-only">Run {run.runNumber}: {run.conclusion}</span>
+              </a>
+            ))
+          ) : (
+            <p class="empty-state">No stability history available in local environment.</p>
+          )}
+        </div>
+        <div class="pulse-legend">
+          <span class="legend-item"><span class="pulse-block pulse-block--success"></span> Success</span>
+          <span class="legend-item"><span class="pulse-block pulse-block--failure"></span> Failure</span>
+          <span class="legend-item"><span class="pulse-block pulse-block--pending"></span> Pending/In-Progress</span>
+        </div>
+      </div>
+
+      <div class="scoreboard__panel">
+        <h3 class="scoreboard__subheading">Longitudinal Quality Ledger</h3>
+        <div class="ledger-table-wrapper">
+          <table class="ledger-table">
+            <thead>
+              <tr>
+                <th>Snapshot</th>
+                <th>Coverage (L)</th>
+                <th>LH Perf</th>
+                <th>Security</th>
+                <th>A11y %</th>
+              </tr>
+            </thead>
+            <tbody>
+              {displaySnapshots.length > 0 ? (
+                displaySnapshots.map((snap) => (
+                  <tr>
+                    <td>{new Date(snap.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
+                    <td>{snap.coverage.lines}%</td>
+                    <td class:list={[{ 'text-success': snap.lighthouse.performance >= 90 }]}>{snap.lighthouse.performance}</td>
+                    <td>{snap.securityStatus}</td>
+                    <td>{snap.a11yCoverage}%</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colspan="5" class="empty-state">No snapshot data available.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scoreboard {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: var(--space-2xl) 0;
+    padding: var(--space-xl) 0;
+  }
+
+  .scoreboard__intro {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+  }
+
+  .scoreboard__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-xl);
+  }
+
+  .scoreboard__panel {
+    background: var(--bg-body);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-lg);
+  }
+
+  .scoreboard__subheading {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .pulse-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .pulse-block {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background: var(--border);
+    transition: transform var(--transition-fast), filter var(--transition-fast);
+  }
+
+  .pulse-block:hover {
+    transform: scale(1.15);
+    z-index: 10;
+    filter: brightness(1.2);
+  }
+
+  .pulse-block--success { background-color: var(--color-substantial); }
+  .pulse-block--failure { background-color: var(--color-minimal); }
+  .pulse-block--cancelled { background-color: var(--text-muted); }
+  .pulse-block--pending { background-color: var(--border); }
+
+  .pulse-block--loading {
+    animation: pulse-animation 1.5s infinite ease-in-out;
+  }
+
+  @keyframes pulse-animation {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+  }
+
+  .pulse-legend {
+    display: flex;
+    gap: var(--space-md);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .legend-item .pulse-block {
+    width: 10px;
+    height: 10px;
+  }
+
+  .ledger-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .ledger-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+  }
+
+  .ledger-table th {
+    text-align: left;
+    color: var(--text-muted);
+    font-weight: 500;
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ledger-table td {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .text-success { color: var(--color-substantial); }
+  .empty-state { font-family: var(--font-body); color: var(--text-muted); font-style: italic; }
+
+  @media (max-width: 900px) {
+    .scoreboard__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -36,7 +36,7 @@ if (existsSync(reportPath)) rmSync(reportPath);
 const npxCmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 const result = spawnSync(
   npxCmd,
-  ['playwright', 'test', '--config=playwright.smoke.config.ts'],
+  ['playwright', 'test', '--config=.config/playwright.smoke.config.ts'],
   {
     cwd: resolve('.'),
     env: process.env,

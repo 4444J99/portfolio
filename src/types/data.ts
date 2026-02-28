@@ -190,7 +190,51 @@ export interface QualityMetrics {
     policyGovernance: string;
     performance: string;
     build: string;
-  };
+    }
+
+    export interface QualityLedgerEntry {
+    timestamp: string;
+    securityStatus: string;
+    a11yCoverage: number;
+    perfBudgets: string;
+    coverage: {
+      statements: number;
+      branches: number;
+      functions: number;
+      lines: number;
+    };
+    lighthouse: {
+      performance: number;
+      accessibility: number;
+      bestPractices: number;
+      seo: number;
+    };
+    }
+
+    export interface QualityLedger {
+    generated: string;
+    snapshots: QualityLedgerEntry[];
+    }
+
+    export interface GreenRun {
+    id: number;
+    runNumber: number;
+    event: string;
+    status: string;
+    conclusion: string;
+    htmlUrl: string;
+    createdAt: string;
+    updatedAt: string;
+    }
+
+    export interface GreenRunHistory {
+    generated: string;
+    consecutiveSuccess: number | null;
+    requiredConsecutive: number;
+    status: string;
+    runs: GreenRun[];
+    }
+;
 }
 
 export interface GitHubPagesRepo {

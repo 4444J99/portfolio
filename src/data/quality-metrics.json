@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-28T13:53:44.645Z",
+  "generated": "2026-02-28T14:10:38.603Z",
   "tests": {
     "total": 284,
     "passed": 284,
@@ -607,7 +607,370 @@
     "status": "skipped",
     "consecutiveSuccess": null,
     "requiredConsecutive": 5,
-    "source": ".quality/green-run-history.json"
+    "source": ".quality/green-run-history.json",
+    "history": []
+  },
+  "ledger": {
+    "generated": "2026-02-28T13:53:45.341Z",
+    "snapshots": [
+      {
+        "generated": "2026-02-17T22:46:04.353Z",
+        "tests": {
+          "total": 205,
+          "passed": 205
+        },
+        "coverage": {
+          "statements": 49,
+          "branches": 29,
+          "functions": 43,
+          "lines": 50
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 96.97
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": -1,
+          "coverageBranchesDelta": -3,
+          "coverageFunctionsDelta": -1,
+          "coverageLinesDelta": 0,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": null
+        }
+      },
+      {
+        "generated": "2026-02-17T22:47:32.595Z",
+        "tests": {
+          "total": 205,
+          "passed": 205
+        },
+        "coverage": {
+          "statements": 49,
+          "branches": 29,
+          "functions": 43,
+          "lines": 50
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": -1,
+          "coverageBranchesDelta": -3,
+          "coverageFunctionsDelta": -1,
+          "coverageLinesDelta": 0,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": null
+        }
+      },
+      {
+        "generated": "2026-02-17T22:53:29.273Z",
+        "tests": {
+          "total": 205,
+          "passed": 205
+        },
+        "coverage": {
+          "statements": 49,
+          "branches": 29,
+          "functions": 43,
+          "lines": 50
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": -1,
+          "coverageBranchesDelta": -3,
+          "coverageFunctionsDelta": -1,
+          "coverageLinesDelta": 0,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": null
+        }
+      },
+      {
+        "generated": "2026-02-18T07:18:58.670Z",
+        "tests": {
+          "total": 226,
+          "passed": 226
+        },
+        "coverage": {
+          "statements": 48,
+          "branches": 29,
+          "functions": 42,
+          "lines": 48
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": -2,
+          "coverageBranchesDelta": -3,
+          "coverageFunctionsDelta": -2,
+          "coverageLinesDelta": -2,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": null
+        }
+      },
+      {
+        "generated": "2026-02-18T07:30:12.871Z",
+        "tests": {
+          "total": 226,
+          "passed": 226
+        },
+        "coverage": {
+          "statements": 48,
+          "branches": 29,
+          "functions": 42,
+          "lines": 48
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": -2,
+          "coverageBranchesDelta": -3,
+          "coverageFunctionsDelta": -2,
+          "coverageLinesDelta": -2,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": null
+        }
+      },
+      {
+        "generated": "2026-02-23T09:58:11.861Z",
+        "tests": {
+          "total": 270,
+          "passed": 270
+        },
+        "coverage": {
+          "statements": 48,
+          "branches": 28,
+          "functions": 42,
+          "lines": 49
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 63,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": 0,
+          "coverageBranchesDelta": 0,
+          "coverageFunctionsDelta": 0,
+          "coverageLinesDelta": 0,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": 0
+        }
+      },
+      {
+        "generated": "2026-02-28T13:53:44.645Z",
+        "tests": {
+          "total": 284,
+          "passed": 284
+        },
+        "coverage": {
+          "statements": 59,
+          "branches": 42,
+          "functions": 51,
+          "lines": 60
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": 11,
+          "coverageBranchesDelta": 14,
+          "coverageFunctionsDelta": 9,
+          "coverageLinesDelta": 11,
+          "lhPerformanceDelta": 37,
+          "runtimeCoverageDelta": 0
+        }
+      }
+    ]
   },
   "build": {
     "pages": 44,

@@ -4,10 +4,10 @@ import { resolve } from 'node:path';
 
 const root = resolve(__dirname, '../../../');
 const readme = readFileSync(resolve(root, 'README.md'), 'utf-8');
-const lighthouseRc = readFileSync(resolve(root, 'lighthouserc.cjs'), 'utf-8');
+const lighthouseRc = readFileSync(resolve(root, '.config/lighthouserc.cjs'), 'utf-8');
 const workflow = readFileSync(resolve(root, '.github/workflows/quality.yml'), 'utf-8');
 const securityDriftWorkflow = readFileSync(resolve(root, '.github/workflows/security-drift.yml'), 'utf-8');
-const vitestConfig = readFileSync(resolve(root, 'vitest.config.ts'), 'utf-8');
+const vitestConfig = readFileSync(resolve(root, '.config/vitest.config.ts'), 'utf-8');
 const typecheckScript = readFileSync(resolve(root, 'scripts/check-typecheck-hints.mjs'), 'utf-8');
 const runtimeCoverageScript = readFileSync(resolve(root, 'scripts/check-runtime-a11y-coverage.mjs'), 'utf-8');
 const policy = JSON.parse(readFileSync(resolve(root, '.quality/ratchet-policy.json'), 'utf-8'));

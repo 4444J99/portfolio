@@ -21,6 +21,7 @@ const paths = {
   e2eSmoke: resolve('.quality/e2e-smoke-summary.json'),
   runtimeErrors: resolve('.quality/runtime-errors-summary.json'),
   greenRuns: resolve('.quality/green-run-history.json'),
+  qualityLedger: resolve('.quality/quality-ledger.json'),
   perfSummary: resolve('.quality/perf-summary.json'),
   perfBudget: resolve('.quality/perf-budget-summary.json'),
   lighthouseDir: resolve('.lighthouseci'),
@@ -330,6 +331,17 @@ if (metrics.stability.consecutiveSuccess !== toNullableNumber(greenRuns.consecut
 }
 if (metrics.stability.requiredConsecutive !== toNullableNumber(greenRuns.requiredConsecutive)) {
   fail(`stability.requiredConsecutive mismatch: metrics=${metrics.stability.requiredConsecutive}, summary=${toNullableNumber(greenRuns.requiredConsecutive)}`);
+}
+if (metrics.stability.history.length !== (Array.isArray(greenRuns.runs) ? greenRuns.runs.length : 0)) {
+  fail('stability.history length mismatch');
+}
+
+const qualityLedger = readJson(paths.qualityLedger);
+if (metrics.ledger.generated !== qualityLedger.generated) {
+  fail(`ledger.generated mismatch: metrics=${metrics.ledger.generated}, ledger=${qualityLedger.generated}`);
+}
+if (metrics.ledger.snapshots.length !== (Array.isArray(qualityLedger.snapshots) ? qualityLedger.snapshots.length : 0)) {
+  fail('ledger.snapshots length mismatch');
 }
 
 if (metrics.performance.routeBudgetsStatus !== perfBudget.routeBudgetsStatus) {

@@ -39,12 +39,31 @@ async function runPSI(route) {
   const url = `${BASE_URL}${route}`;
   const apiUrl = `${PSI_API}?url=${encodeURIComponent(url)}&strategy=${strategy}&category=performance&category=accessibility${API_KEY ? `&key=${API_KEY}` : ''}`;
 
-  const res = await fetch(apiUrl);
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`PSI API error for ${url}: ${res.status} ${text.slice(0, 200)}`);
+  let retries = 3;
+  let delay = 2000;
+
+  while (retries >= 0) {
+    try {
+      const res = await fetch(apiUrl);
+      if (res.status === 429 && retries > 0) {
+        console.log(`\u23F3 429 Too Many Requests. Retrying in ${delay}ms... (${retries} left)`);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        retries--;
+        delay *= 2;
+        continue;
+      }
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`PSI API error for ${url}: ${res.status} ${text.slice(0, 200)}`);
+      }
+      return res.json();
+    } catch (err) {
+      if (retries === 0) throw err;
+      console.log(`\u23F3 ${err.message}. Retrying... (${retries} left)`);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      retries--;
+    }
   }
-  return res.json();
 }
 
 function formatScore(score) {
