@@ -4,3 +4,7 @@ tier: flagship
 status: CANDIDATE
 produces: []
 consumes: []
+metadata:
+  deployment_url: "https://4444j99-portfolio.netlify.app"
+  promotion_status: PUBLIC_PROCESS
+  last_validated: "2026-02-28"
