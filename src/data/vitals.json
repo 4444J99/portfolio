@@ -5,15 +5,22 @@
     "orgs": 8
   },
   "substance": {
-    "code_files": 3586,
-    "test_files": 736,
-    "automated_tests": 56,
+    "code_files": 0,
+    "test_files": 0,
+    "automated_tests": 0,
     "ci_passing": 94,
     "ci_coverage_pct": 91
   },
   "logos": {
     "essays": 0,
-    "words": 404000
+    "words": 809812,
+    "word_breakdown": {
+      "readmes": 267147,
+      "essays": 133769,
+      "corpus": 402865,
+      "org_profiles": 6031,
+      "total": 809812
+    }
   },
-  "timestamp": "2026-02-24T17:18:00.967690+00:00"
+  "timestamp": "2026-02-24T20:10:10.913618+00:00"
 }

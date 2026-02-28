@@ -4,12 +4,8 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import { dirname, join, resolve } from 'node:path';
 import { parseOption } from './lib/cli-utils.mjs';
 
-const BASELINE_MIN_COVERAGE = 75;
-const COVERAGE_CHECKPOINTS = [
-  { date: '2026-02-25', minCoveragePct: 85 },
-  { date: '2026-03-04', minCoveragePct: 95 },
-  { date: '2026-03-18', minCoveragePct: 100 },
-];
+const BASELINE_MIN_COVERAGE = 100;
+const COVERAGE_CHECKPOINTS = [];
 
 function countHtmlFiles(dir) {
   let total = 0;

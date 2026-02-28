@@ -57,19 +57,35 @@ describe('check-runtime-a11y-coverage', () => {
     writeFileSync(
       summaryPath,
       JSON.stringify(
-        { pagesAudited: 18, status: 'pass', critical: 0, serious: 0, focusChecks: 0, focusFailures: 0 },
+        { pagesAudited: 19, status: 'pass', critical: 0, serious: 0, focusChecks: 0, focusFailures: 0 },
         null,
         2
-      ) + '\n'
+      )
     );
 
-    const result = runNode(
+    const resultFail = runNode(
       ['--runtime-summary', summaryPath, '--dist', distDir, '--json-out', outputPath, '--date', '2026-03-04'],
       dir
     );
 
-    expect(result.status).toBe(1);
-    expect(result.stderr).toContain('below required 95%');
+    expect(resultFail.status).toBe(1);
+    expect(resultFail.stderr).toContain('below required 100%');
+
+    writeFileSync(
+      summaryPath,
+      JSON.stringify(
+        { pagesAudited: 20, status: 'pass', critical: 0, serious: 0, focusChecks: 0, focusFailures: 0 },
+        null,
+        2
+      )
+    );
+
+    const resultPass = runNode(
+      ['--runtime-summary', summaryPath, '--dist', distDir, '--json-out', outputPath, '--date', '2026-03-04'],
+      dir
+    );
+
+    expect(resultPass.status).toBe(0);
   });
 
   it('supports explicit min-coverage override', () => {

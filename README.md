@@ -28,13 +28,13 @@ Every push runs automated quality gates via [GitHub Actions](.github/workflows/q
 | Security audit | `npm audit` (contract scripts) | Unsuppressed Critical = 0, High = 0, policy-ratcheted Moderate/Low |
 | GitHub advisory delta | Dependabot Alerts API contract | Open alerts = 0 (critical/high/moderate/low) |
 | Unit & integration tests | [Vitest](https://vitest.dev/) | All pass |
-| Coverage floor (ratcheted) | [Vitest Coverage](https://vitest.dev/guide/coverage) | Statements ≥ 25, Branches ≥ 18, Functions ≥ 18, Lines ≥ 25 (phase `W6`) |
+| Coverage floor (ratcheted) | [Vitest Coverage](https://vitest.dev/guide/coverage) | Statements ≥ 45, Branches ≥ 32, Functions ≥ 32, Lines ≥ 45 (phase `W10`) |
 | Accessibility audit | [axe-core](https://github.com/dequelabs/axe-core) | Zero critical/serious (static + runtime browser audit) |
 | Runtime a11y coverage | Custom script | Policy-ratcheted route coverage, target 100% by 2026-03-18 |
 | E2E navigation smoke | [Playwright](https://playwright.dev/) | Zero unexpected failures, zero flaky tests |
 | Runtime error telemetry | Playwright browser telemetry | Zero uncategorized `console.error` / `pageerror` |
 | JS budget gates | Custom scripts | Route + chunk + interaction gzip budgets enforced |
-| Performance budgets | [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) | Perf ≥ 85, A11y ≥ 90, SEO ≥ 90 |
+| Performance budgets | [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) | Perf ≥ 98, A11y ≥ 91, BP ≥ 93, SEO ≥ 92 |
 | HTML validation | [html-validate](https://html-validate.org/) | Zero errors |
 | Link checking | Custom script | All internal links valid |
 
@@ -56,9 +56,9 @@ Every push runs automated quality gates via [GitHub Actions](.github/workflows/q
   - Added repo-level optional fields: `probeMethod`, `probeLatencyMs`, `lastError`.
   - Existing `v2` consumers remain compatible because all `v2.1` additions are optional.
 
-Coverage ratchet policy: W2 `12/8/8/12`, W4 `18/12/12/18`, W6 `25/18/18/25` (Statements/Branches/Functions/Lines).  
+Coverage ratchet policy: W2 `12/8/8/12`, W4 `18/12/12/18`, W6 `25/18/18/25`, W8 `35/25/25/35`, W10 `45/32/32/45` (Statements/Branches/Functions/Lines).  
 Typecheck hint budget policy: W2 `<=20`, W4 `<=8`, W6 `=0`.
-Runtime a11y coverage ratchet: `2026-02-25` `>=85%`, `2026-03-04` `>=95%`, `2026-03-18` `=100%`.
+Runtime a11y coverage ratchet: 100% enforcement (reached).
 Security ratchet checkpoints: `2026-02-21` `moderate<=5, low<=4`, `2026-02-28` `moderate<=2, low<=2`, `2026-03-07` `moderate<=1, low<=1`, `2026-03-14` `moderate<=0, low<=0`, `2026-03-18` `moderate<=0, low<=0`.
 
 ```bash

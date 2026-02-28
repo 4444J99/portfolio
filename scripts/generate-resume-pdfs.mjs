@@ -14,73 +14,59 @@ const OUTPUT_DIR = path.join(__dirname, '../public/resume');
 const BASE_URL = 'http://localhost:4321/portfolio';
 
 async function generatePDFs() {
-  console.log('🚀 Starting Colossal PDF Generation Factory...');
+  console.log('🚀 Starting Colossal Concurrent PDF Generation Factory...');
   
   if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   }
 
   const browser = await chromium.launch();
-  const page = await browser.newPage();
 
-  // 1. Generate Persona PDFs
+  // Create an array of tasks to execute in parallel
+  const generationTasks = [];
+
+  // Helper function to process a single URL
+  const generateSinglePDF = async (url, outputPath, logPrefix) => {
+    const page = await browser.newPage();
+    try {
+      await page.goto(url, { waitUntil: 'networkidle' });
+      await page.pdf({
+        path: outputPath,
+        format: 'Letter',
+        printBackground: true,
+        margin: { top: '1cm', right: '1cm', bottom: '1cm', left: '1cm' }
+      });
+      console.log(`✅ [${logPrefix}] Saved to ${outputPath}`);
+    } catch (err) {
+      console.error(`❌ [${logPrefix}] Failed to generate PDF:`, err.message);
+    } finally {
+      await page.close();
+    }
+  };
+
+  // 1. Queue Persona PDFs
   for (const persona of personas) {
     const url = `${BASE_URL}/resume/${persona.slug}/`;
-    const outputPath = path.join(OUTPUT_DIR, `Anthony_James_Padavano_${persona.title.replace(/\s+/g, '_')}.pdf`);
-    
-    console.log(`📄 Generating PDF for Persona: ${persona.title}...`);
-    try {
-      await page.goto(url, { waitUntil: 'networkidle' });
-      await page.pdf({
-        path: outputPath,
-        format: 'Letter',
-        printBackground: true,
-        margin: { top: '1cm', right: '1cm', bottom: '1cm', left: '1cm' }
-      });
-      console.log(`✅ Saved to ${outputPath}`);
-    } catch (err) {
-      console.error(`❌ Failed to generate PDF for ${persona.title}:`, err.message);
-    }
+    const outputPath = path.join(OUTPUT_DIR, `Anthony_James_Padavano_${persona.pdfName}.pdf`);
+    generationTasks.push(generateSinglePDF(url, outputPath, `Persona: ${persona.title}`));
   }
 
-  // 2. Generate Targeted Application Bundles
+  // 2. Queue Targeted Application Bundles
   for (const target of targets) {
     const url = `${BASE_URL}/for/${target.slug}/`;
-    const outputPath = path.join(OUTPUT_DIR, `Anthony_James_Padavano_App_${target.company.replace(/\s+/g, '_')}.pdf`);
-    
-    console.log(`🎯 Generating Application Bundle for: ${target.company}...`);
-    try {
-      await page.goto(url, { waitUntil: 'networkidle' });
-      await page.pdf({
-        path: outputPath,
-        format: 'Letter',
-        printBackground: true,
-        margin: { top: '1cm', right: '1cm', bottom: '1cm', left: '1cm' }
-      });
-      console.log(`✅ Saved to ${outputPath}`);
-    } catch (err) {
-      console.error(`❌ Failed to generate PDF for ${target.company}:`, err.message);
-    }
+    const outputPath = path.join(OUTPUT_DIR, `Anthony_James_Padavano_App_${target.company.replace(/\\s+/g, '_')}.pdf`);
+    generationTasks.push(generateSinglePDF(url, outputPath, `Target: ${target.company}`));
   }
 
-  // 3. Generate Full Polymath PDF
-  console.log('📄 Generating PDF for Visionary Polymath...');
-  try {
-    const polymathPath = path.join(OUTPUT_DIR, 'Anthony_James_Padavano_CV_Polymath.pdf');
-    await page.goto(`${BASE_URL}/resume/polymath/`, { waitUntil: 'networkidle' });
-    await page.pdf({
-      path: polymathPath,
-      format: 'Letter',
-      printBackground: true,
-      margin: { top: '1cm', right: '1cm', bottom: '1cm', left: '1cm' }
-    });
-    console.log(`✅ Saved to ${polymathPath}`);
-  } catch (err) {
-    console.error('❌ Failed to generate Polymath PDF:', err.message);
-  }
+  // 3. Queue Full Polymath PDF
+  const polymathPath = path.join(OUTPUT_DIR, 'Anthony_James_Padavano_CV_Polymath.pdf');
+  generationTasks.push(generateSinglePDF(`${BASE_URL}/resume/polymath/`, polymathPath, `Polymath CV`));
+
+  // Await all parallel tasks
+  await Promise.all(generationTasks);
 
   await browser.close();
-  console.log('🏁 PDF Generation Factory Complete.');
+  console.log('🏁 Colossal PDF Generation Factory Complete in record time!');
 }
 
 generatePDFs().catch(console.error);

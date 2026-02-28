@@ -1,17 +1,52 @@
 {
-  "generated": "2026-02-24",
+  "generated": "2026-02-28",
   "summary": {
     "met": 2,
-    "in_progress": 3,
-    "not_started": 12,
+    "in_progress": 4,
+    "not_started": 11,
     "total": 17
   },
   "horizons": [
-    { "id": "H1", "name": "Prove It Works", "timeline": "Days 1-30", "met": 0, "in_progress": 3, "not_started": 2 },
-    { "id": "H2", "name": "Validate Externally", "timeline": "Days 15-90", "met": 2, "in_progress": 0, "not_started": 1 },
-    { "id": "H3", "name": "Generate Revenue", "timeline": "Days 30-180", "met": 0, "in_progress": 0, "not_started": 3 },
-    { "id": "H4", "name": "Build Community", "timeline": "Days 60-365", "met": 0, "in_progress": 0, "not_started": 3 },
-    { "id": "H5", "name": "Achieve Recognition", "timeline": "Days 90-730", "met": 0, "in_progress": 0, "not_started": 2 }
+    {
+      "id": "H1",
+      "name": "Prove It Works",
+      "timeline": "Days 1-30",
+      "met": 0,
+      "in_progress": 3,
+      "not_started": 2
+    },
+    {
+      "id": "H2",
+      "name": "Validate Externally",
+      "timeline": "Days 15-90",
+      "met": 2,
+      "in_progress": 0,
+      "not_started": 1
+    },
+    {
+      "id": "H3",
+      "name": "Generate Revenue",
+      "timeline": "Days 30-180",
+      "met": 0,
+      "in_progress": 0,
+      "not_started": 3
+    },
+    {
+      "id": "H4",
+      "name": "Build Community",
+      "timeline": "Days 60-365",
+      "met": 0,
+      "in_progress": 0,
+      "not_started": 3
+    },
+    {
+      "id": "H5",
+      "name": "Achieve Recognition",
+      "timeline": "Days 90-730",
+      "met": 0,
+      "in_progress": 0,
+      "not_started": 2
+    }
   ],
   "criteria": [
     {
@@ -60,7 +95,7 @@
       "measurement": "Grant, job, or fellowship application submitted",
       "horizon": "H2",
       "status": "met",
-      "evidence": "Doris Duke / Mozilla Artists Make Technology Lab submitted 2026-02-24. 27 additional applications staged, 9 drafting.",
+      "evidence": "Doris Duke / Mozilla Artists Make Technology Lab submitted 2026-02-24. 4 strategic AI-generated targeted applications deployed.",
       "evidenceUrl": "https://www.dorisduke.org/grants/projects/artists-make-technology-lab",
       "dateMet": "2026-02-24"
     },
@@ -185,4 +220,4 @@
       "target": "March 18, 2026"
     }
   ]
-}
+}\n

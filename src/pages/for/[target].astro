@@ -46,6 +46,9 @@ const featuredProjects = persona.featured_projects.map(fp => {
         <div class="target-badge">Strategic Technical Proposal &middot; {target.company}</div>
         <h1 class="target-role">{target.role}</h1>
         <p class="target-intro">{target.intro}</p>
+        {target.proposal && (
+          <div class="target-proposal" set:html={target.proposal} />
+        )}
         <div class="target-actions">
           <a class="action-btn primary" href={`${base}resume/Anthony_James_Padavano_App_${target.company.replace(/\s+/g, '_')}.pdf`} download aria-label={`Download tailored application bundle for ${target.company}`}>
             Download PDF Bundle
@@ -219,6 +222,35 @@ const featuredProjects = persona.featured_projects.map(fp => {
     line-height: 1.6;
     border-left: 3px solid var(--accent-text);
     padding-left: var(--space-md);
+  }
+
+  .target-proposal {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    max-width: 75ch;
+    margin-bottom: var(--space-xl);
+    line-height: 1.7;
+    background: var(--bg-card);
+    padding: var(--space-xl);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .target-proposal :global(p) {
+    margin-bottom: var(--space-md);
+  }
+  
+  .target-proposal :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .target-proposal :global(ul) {
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-xl);
+  }
+
+  .target-proposal :global(li) {
+    margin-bottom: var(--space-2xs);
   }
 
   .target-actions {

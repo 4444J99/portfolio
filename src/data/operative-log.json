@@ -22,13 +22,45 @@
     }
   ],
   "persona_performance": {
-    "ai-systems-engineer": { "sent": 1, "replies": 0, "interviews": 0 },
-    "systems-architect": { "sent": 1, "replies": 0, "interviews": 0 },
-    "creative-technologist": { "sent": 0, "replies": 0, "interviews": 0 },
-    "technical-pm": { "sent": 0, "replies": 0, "interviews": 0 }
+    "ai-systems-engineer": {
+      "sent": 1,
+      "replies": 0,
+      "interviews": 0
+    },
+    "systems-architect": {
+      "sent": 1,
+      "replies": 0,
+      "interviews": 0
+    },
+    "creative-technologist": {
+      "sent": 0,
+      "replies": 0,
+      "interviews": 0
+    },
+    "technical-pm": {
+      "sent": 0,
+      "replies": 0,
+      "interviews": 0
+    }
   },
   "global_stats": {
     "total_strikes": 2,
     "conversion_rate": 0
+  },
+  "channel_performance": {
+    "Direct Outreach (LinkedIn)": {
+      "sent": 1,
+      "replies": 0
+    },
+    "Direct Application": {
+      "sent": 1,
+      "replies": 0
+    }
+  },
+  "tier_performance": {
+    "Unknown": {
+      "sent": 2,
+      "replies": 0
+    }
   }
 }

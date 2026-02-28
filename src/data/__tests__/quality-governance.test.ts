@@ -51,15 +51,9 @@ function parseHintRatchetFromReadme() {
 }
 
 function parseRuntimeCoverageRatchetFromReadme() {
-  const match = readme.match(
-    /Runtime a11y coverage ratchet:\s*`([0-9-]+)` `>=([0-9]+)%`, `([0-9-]+)` `>=([0-9]+)%`, `([0-9-]+)` `=([0-9]+)%`/
-  );
+  const match = readme.match(/Runtime a11y coverage ratchet: 100% enforcement \(reached\)\./);
   expect(match).not.toBeNull();
-  return [
-    { date: match![1], coverage: Number(match![2]) },
-    { date: match![3], coverage: Number(match![4]) },
-    { date: match![5], coverage: Number(match![6]) },
-  ];
+  return true;
 }
 
 describe('quality governance drift checks', () => {
@@ -91,15 +85,9 @@ describe('quality governance drift checks', () => {
     });
 
     const runtimeCoverageRatchet = parseRuntimeCoverageRatchetFromReadme();
-    expect(runtimeCoverageRatchet).toEqual([
-      { date: '2026-02-25', coverage: 85 },
-      { date: '2026-03-04', coverage: 95 },
-      { date: '2026-03-18', coverage: 100 },
-    ]);
+    expect(runtimeCoverageRatchet).toBe(true);
 
-    expect(runtimeCoverageScript).toContain(`{ date: '2026-02-25', minCoveragePct: 85 }`);
-    expect(runtimeCoverageScript).toContain(`{ date: '2026-03-04', minCoveragePct: 95 }`);
-    expect(runtimeCoverageScript).toContain(`{ date: '2026-03-18', minCoveragePct: 100 }`);
+    expect(runtimeCoverageScript).toContain(`const BASELINE_MIN_COVERAGE = 100;`);
   });
 
   it('README security ratchet schedule matches security policy file', () => {

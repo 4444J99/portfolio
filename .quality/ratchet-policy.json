@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "defaultPhase": "W6",
+  "defaultPhase": "W10",
   "phases": {
     "W2": {
       "typecheck": {

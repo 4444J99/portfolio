@@ -1,13 +1,45 @@
 {
   "targets": [
     {
+      "slug": "palantir",
+      "company": "Palantir",
+      "role": "Principal Systems Engineer",
+      "tier": "Strategic",
+      "channel": "Direct",
+      "persona_id": "ai-systems-engineer",
+      "keyword_focus": [
+        "Architecture",
+        "System Design"
+      ],
+      "intro": "[DRAFT] Put your high-value synthesis here linking Palantir's mission to your proven capabilities.",
+      "proposal": "<p>[DRAFT PROPOSAL] Detailed architectural proposal goes here.</p>"
+    },
+    {
+      "slug": "openai",
+      "company": "OpenAI",
+      "role": "Staff Systems Architect",
+      "tier": "Strategic",
+      "channel": "Direct",
+      "persona_id": "systems-architect",
+      "keyword_focus": [
+        "Architecture",
+        "System Design"
+      ],
+      "intro": "[DRAFT] Put your high-value synthesis here linking OpenAI's mission to your proven capabilities."
+    },
+    {
       "slug": "anthropic",
       "company": "Anthropic",
       "role": "Prompt Engineer / Member of Technical Staff",
       "tier": "Staff",
       "channel": "Cold (LinkedIn Outreach)",
       "persona_id": "ai-systems-engineer",
-      "keyword_focus": ["Safety Invariants", "Orchestration", "Model-Agnostic", "Constitutional AI"],
+      "keyword_focus": [
+        "Safety Invariants",
+        "Orchestration",
+        "Model-Agnostic",
+        "Constitutional AI"
+      ],
       "intro": "Anthropic's focus on safe, steerable AI aligns directly with my work on Agentic Titan's safety invariants. I don't just prompt models; I build the orchestration machinery that ensures they operate within constitutional bounds at scale. My work on the Eight-Organ System demonstrates the capacity to manage complex, self-governing technical ecosystems."
     },
     {
@@ -17,7 +49,12 @@
       "tier": "Senior",
       "channel": "Direct Application",
       "persona_id": "systems-architect",
-      "keyword_focus": ["RSC", "Hexagonal Architecture", "Next.js 16", "Platform Infrastructure"],
+      "keyword_focus": [
+        "RSC",
+        "Hexagonal Architecture",
+        "Next.js 16",
+        "Platform Infrastructure"
+      ],
       "intro": "Vercel defines the modern web. My experience building 'in-midst-my-life' (Next.js 16 + RSC) and orchestrating 91 repos proves I understand the platform depth required to build tools for other developers. I specialize in the kind of high-reliability, hexagonal architecture that platform engineering demands."
     }
   ]
