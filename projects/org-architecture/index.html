@@ -1,0 +1,478 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Organization-wide infrastructure for CI/CD, AI agents, and community health — inherited by every repo in the org."><meta name="generator" content="Astro v5.17.2"><meta name="theme-color" content="#0a0a0b"><link rel="canonical" href="https://4444j99.github.io/portfolio/projects/org-architecture/"><link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg"><link rel="icon" type="image/x-icon" href="/portfolio/favicon.ico"><!-- RSS Feed --><link rel="alternate" type="application/rss+xml" title="Portfolio Feed" href="/portfolio/feed.xml"><!-- PWA --><link rel="manifest" href="/portfolio/manifest.json"><!-- Identity verification --><link rel="me" href="https://github.com/4444j99"><!-- Analytics (Plausible — privacy-friendly, no cookies) --><script defer data-domain="4444j99.github.io" src="https://plausible.io/js/script.js" integrity="sha384-TDBMBYT3vz715r8UIyVTB4AUTXubXmLI02DeDWgyDahvCXmPV4Vgx2m6yQvI19d/" crossorigin="anonymous"></script><!-- Global Metadata --><meta name="keywords" content="AI Orchestration, Systems Architect, Creative Technologist, Technical PM, MFA, Python, TypeScript, Multi-Agent Systems, Logocentric Architecture"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:locale" content="en_US"><meta property="og:url" content="https://4444j99.github.io/portfolio/projects/org-architecture/"><meta property="og:title" content="Org Architecture &#38; Community Health — 4444j"><meta property="og:description" content="Organization-wide infrastructure for CI/CD, AI agents, and community health — inherited by every repo in the org."><meta property="og:image" content="https://4444j99.github.io/portfolio/og/projects/org-architecture.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:site_name" content="Anthony James Padavano — Portfolio"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Org Architecture &#38; Community Health — 4444j"><meta name="twitter:description" content="Organization-wide infrastructure for CI/CD, AI agents, and community health — inherited by every repo in the org."><meta name="twitter:image" content="https://4444j99.github.io/portfolio/og/projects/org-architecture.png"><meta name="twitter:creator" content="@4444j99"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","mainEntity":{"@type":"CreativeWork","name":"Org Architecture & Community Health","description":"Organization-wide infrastructure for CI/CD, AI agents, and community health — inherited by every repo in the org.","creator":{"@type":"Person","name":"Anthony James Padavano","jobTitle":"Creative Technologist","address":{"@type":"PostalAddress","addressLocality":"New York City","addressRegion":"NY","addressCountry":"US"},"sameAs":["https://www.linkedin.com/in/anthony-james-padavano-98a40a186/","https://github.com/4444j99","https://github.com/meta-organvm","https://github.com/organvm-i-theoria","https://github.com/organvm-ii-poiesis","https://github.com/organvm-iii-ergon","https://github.com/organvm-iv-taxis","https://github.com/organvm-v-logos","https://github.com/organvm-vi-koinonia","https://github.com/organvm-vii-kerygma"],"alumniOf":[{"@type":"CollegeOrUniversity","name":"Florida Atlantic University","url":"https://www.fau.edu"},{"@type":"CollegeOrUniversity","name":"CUNY College of Staten Island","url":"https://www.csi.cuny.edu"}],"knowsAbout":["Python","TypeScript","JavaScript","Go","Rust","systems architecture","generative art","multi-agent AI systems","LLM orchestration","governance design","digital marketing","creative technology","audio synthesis","interactive installations"],"hasCredential":[{"@type":"EducationalOccupationalCredential","credentialCategory":"professional certification","name":"Full-Stack Developer","recognizedBy":{"@type":"Organization","name":"Meta"}},{"@type":"EducationalOccupationalCredential","credentialCategory":"professional certification","name":"UX Design","recognizedBy":{"@type":"Organization","name":"Google"}},{"@type":"EducationalOccupationalCredential","credentialCategory":"professional certification","name":"Digital Marketing & E-commerce","recognizedBy":{"@type":"Organization","name":"Google"}},{"@type":"EducationalOccupationalCredential","credentialCategory":"professional certification","name":"Project Management","recognizedBy":{"@type":"Organization","name":"Google"}}],"memberOf":{"@type":"Organization","name":"meta-organvm","url":"https://github.com/meta-organvm"}},"keywords":"DevSecOps, Platform Engineering, GitHub Actions, Governance","codeRepository":"https://github.com/organvm-i-theoria/.github","image":"https://4444j99.github.io/portfolio/og/projects/org-architecture.png"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Portfolio","item":"https://4444j99.github.io/portfolio"},{"@type":"ListItem","position":2,"name":"Org Architecture & Community Health","item":"https://4444j99.github.io/portfolio/projects/org-architecture/"}]}]}</script><link rel="preload" href="/portfolio/fonts/syne-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="prefetch" href="/portfolio/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin><style>
+  @font-face {
+    font-family: 'Syne';
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url('/portfolio/fonts/syne-latin.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('/portfolio/fonts/plus-jakarta-sans-latin.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400 500;
+    font-display: swap;
+    src: url('/portfolio/fonts/jetbrains-mono-latin.woff2') format('woff2');
+  }
+</style><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/portfolio/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js"></script><title>Org Architecture &amp; Community Health — 4444j</title><style>.cite[data-astro-cid-gudpzm6e]{font-size:.75em;vertical-align:super;line-height:0}.cite[data-astro-cid-gudpzm6e] a[data-astro-cid-gudpzm6e]{color:var(--text-primary);text-decoration:none;font-family:var(--font-mono);font-weight:500}.cite[data-astro-cid-gudpzm6e] a[data-astro-cid-gudpzm6e]:hover{text-decoration:underline}.references[data-astro-cid-wxl2vi4o]{margin-top:var(--space-3xl);padding-top:var(--space-xl);border-top:1px solid var(--border)}.references[data-astro-cid-wxl2vi4o] h2[data-astro-cid-wxl2vi4o]{font-size:1.25rem;margin-bottom:var(--space-lg)}.references[data-astro-cid-wxl2vi4o] ol[data-astro-cid-wxl2vi4o]{list-style:none;counter-reset:ref-counter;padding-left:0}.references[data-astro-cid-wxl2vi4o] li[data-astro-cid-wxl2vi4o]{counter-increment:ref-counter;padding-left:2.5em;text-indent:-2.5em;margin-bottom:var(--space-sm);font-size:.875rem;color:var(--text-secondary);line-height:1.6}.references[data-astro-cid-wxl2vi4o] li[data-astro-cid-wxl2vi4o]:before{content:"[" counter(ref-counter) "] ";font-family:var(--font-mono);font-weight:600;color:var(--text-primary)}.references[data-astro-cid-wxl2vi4o] li[data-astro-cid-wxl2vi4o] em[data-astro-cid-wxl2vi4o]{color:var(--text-primary)}.references[data-astro-cid-wxl2vi4o] li[data-astro-cid-wxl2vi4o] a[data-astro-cid-wxl2vi4o]{word-break:break-all;font-size:.8em}
+.sketch-wrapper[data-astro-cid-cn4uwenb]{margin:0;display:flex;flex-direction:column;gap:var(--space-sm)}.sketch-title[data-astro-cid-cn4uwenb]{font-size:.85rem;font-weight:700;color:var(--text-primary);text-transform:uppercase;letter-spacing:.1em;opacity:.9}.sketch-container[data-astro-cid-cn4uwenb]{width:100%;height:var(--sketch-height);position:relative;overflow:hidden;border-radius:8px;border:1px solid var(--border);background:var(--bg-card)}.sketch-caption[data-astro-cid-cn4uwenb]{font-size:.75rem;color:var(--text-secondary);line-height:1.5;display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-md);opacity:.8}.sketch-source[data-astro-cid-cn4uwenb]{font-family:var(--font-mono);opacity:.8;white-space:nowrap}.sketch-container[data-astro-cid-cn4uwenb] canvas{display:block}.sketch-fallback[data-astro-cid-cn4uwenb]{padding:var(--space-xl);color:var(--text-muted);font-style:italic;text-align:center}.sketch-controls[data-astro-cid-cn4uwenb]{position:absolute;top:var(--space-sm);right:var(--space-sm);display:flex;gap:4px;z-index:5;opacity:0;transition:opacity .2s ease}.sketch-container[data-astro-cid-cn4uwenb]:hover .sketch-controls[data-astro-cid-cn4uwenb],.sketch-container[data-astro-cid-cn4uwenb]:focus-within .sketch-controls[data-astro-cid-cn4uwenb]{opacity:1}.sketch-ctrl[data-astro-cid-cn4uwenb]{width:32px;height:32px;border-radius:6px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--transition-fast)}.sketch-ctrl[data-astro-cid-cn4uwenb]:hover{border-color:var(--accent);color:var(--accent-text)}.ctrl-icon--play[data-astro-cid-cn4uwenb],.sketch-container[data-astro-cid-cn4uwenb][data-paused] .ctrl-icon--pause[data-astro-cid-cn4uwenb]{display:none}.sketch-container[data-astro-cid-cn4uwenb][data-paused] .ctrl-icon--play[data-astro-cid-cn4uwenb]{display:block}.sketch-container[data-astro-cid-cn4uwenb]:fullscreen{background:#000;border:none;border-radius:0;display:flex;align-items:center;justify-content:center}.sketch-container[data-astro-cid-cn4uwenb]:fullscreen .sketch-controls[data-astro-cid-cn4uwenb]{opacity:1;top:var(--space-md);right:var(--space-md)}.sketch-container[data-astro-cid-cn4uwenb][data-paused]:after{content:"PAUSED";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.1em;color:var(--text-muted);background:#0000004d;pointer-events:none}@media(max-width:768px){.sketch-container[data-astro-cid-cn4uwenb]{height:var(--sketch-mobile-height)}}
+</style>
+<link rel="stylesheet" href="/portfolio/_astro/aetheria-rpg.DGdtIVVw.css">
+<link rel="stylesheet" href="/portfolio/_astro/aetheria-rpg.TyMfVJhD.css">
+<style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media(prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+</style><style>[data-astro-transition-scope="astro-j55cbpbw-1"] { view-transition-name: project-org-architecture; }</style></head> <body> <a href="#main-content" class="skip-to-content">Skip to main content</a> <div id="bg-canvas" aria-hidden="true" data-astro-transition-persist="astro-7k4xbl3z-2"></div> <header class="header" data-astro-cid-3ef6ksr2> <div class="container header__inner" data-astro-cid-3ef6ksr2> <a href="/portfolio/" class="header__logo" data-astro-cid-3ef6ksr2> <span class="header__name" data-astro-cid-3ef6ksr2>4444j99</span> </a> <button class="header__toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav" data-astro-cid-3ef6ksr2> <span class="header__toggle-bar" data-astro-cid-3ef6ksr2></span> <span class="header__toggle-bar" data-astro-cid-3ef6ksr2></span> <span class="header__toggle-bar" data-astro-cid-3ef6ksr2></span> </button> <nav class="header__nav" id="main-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2>  <div class="header__dropdown" data-dropdown-group="0" data-astro-cid-3ef6ksr2> <button class="header__link header__dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-0" type="button" data-astro-cid-3ef6ksr2> Work <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <path d="M3 5l3 3 3-3" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="header__dropdown-menu" id="dropdown-0" data-astro-cid-3ef6ksr2> <a href="/portfolio/#work" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Projects </a><a href="/portfolio/resume/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Resume </a><a href="/portfolio/dashboard/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Dashboard </a><a href="/portfolio/products/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Products </a> </div> </div><div class="header__dropdown" data-dropdown-group="1" data-astro-cid-3ef6ksr2> <button class="header__link header__dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-1" type="button" data-astro-cid-3ef6ksr2> Explore <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <path d="M3 5l3 3 3-3" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="header__dropdown-menu" id="dropdown-1" data-astro-cid-3ef6ksr2> <a href="/portfolio/gallery/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Gallery </a><a href="/portfolio/essays/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Essays </a><a href="/portfolio/philosophy/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Philosophy </a><a href="/portfolio/architecture/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Architecture </a><a href="/portfolio/omega/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Omega </a> </div> </div><div class="header__dropdown" data-dropdown-group="2" data-astro-cid-3ef6ksr2> <button class="header__link header__dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-2" type="button" data-astro-cid-3ef6ksr2> About <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <path d="M3 5l3 3 3-3" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="header__dropdown-menu" id="dropdown-2" data-astro-cid-3ef6ksr2> <a href="/portfolio/about/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> About </a><a href="/portfolio/community/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Community </a><a href="/portfolio/consult/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Consult </a><a href="/portfolio/github-pages/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> GitHub Pages </a> </div> </div><div class="header__dropdown" data-dropdown-group="3" data-astro-cid-3ef6ksr2> <button class="header__link header__dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-3" type="button" data-astro-cid-3ef6ksr2> Connect <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <path d="M3 5l3 3 3-3" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="header__dropdown-menu" id="dropdown-3" data-astro-cid-3ef6ksr2> <a href="mailto:padavano.anthony@gmail.com" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Contact </a><a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="noopener noreferrer" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> LinkedIn<span class="header__external" aria-hidden="true" data-astro-cid-3ef6ksr2> &#8599;</span> </a><a href="https://github.com/4444j99" target="_blank" rel="noopener noreferrer" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> GitHub<span class="header__external" aria-hidden="true" data-astro-cid-3ef6ksr2> &#8599;</span> </a> </div> </div>  <div class="header__mobile-group" data-astro-cid-3ef6ksr2> <span class="header__mobile-label" data-astro-cid-3ef6ksr2>Work</span> <a href="/portfolio/#work" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Projects </a><a href="/portfolio/resume/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Resume </a><a href="/portfolio/dashboard/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Dashboard </a><a href="/portfolio/products/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Products </a> </div><div class="header__mobile-group" data-astro-cid-3ef6ksr2> <span class="header__mobile-label" data-astro-cid-3ef6ksr2>Explore</span> <a href="/portfolio/gallery/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Gallery </a><a href="/portfolio/essays/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Essays </a><a href="/portfolio/philosophy/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Philosophy </a><a href="/portfolio/architecture/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Architecture </a><a href="/portfolio/omega/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Omega </a> </div><div class="header__mobile-group" data-astro-cid-3ef6ksr2> <span class="header__mobile-label" data-astro-cid-3ef6ksr2>About</span> <a href="/portfolio/about/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> About </a><a href="/portfolio/community/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Community </a><a href="/portfolio/consult/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Consult </a><a href="/portfolio/github-pages/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> GitHub Pages </a> </div><div class="header__mobile-group" data-astro-cid-3ef6ksr2> <span class="header__mobile-label" data-astro-cid-3ef6ksr2>Connect</span> <a href="mailto:padavano.anthony@gmail.com" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Contact </a><a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" class="header__link header__link--mobile" target="_blank" rel="noopener noreferrer" data-astro-cid-3ef6ksr2> LinkedIn<span class="header__external" aria-hidden="true" data-astro-cid-3ef6ksr2> &#8599;</span> </a><a href="https://github.com/4444j99" class="header__link header__link--mobile" target="_blank" rel="noopener noreferrer" data-astro-cid-3ef6ksr2> GitHub<span class="header__external" aria-hidden="true" data-astro-cid-3ef6ksr2> &#8599;</span> </a> </div> <button class="search-trigger" aria-label="Search (Cmd+K)" type="button" data-astro-cid-otpdt6jm> <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="6.5" cy="6.5" r="5" data-astro-cid-otpdt6jm></circle> <path d="M10.5 10.5L15 15" data-astro-cid-otpdt6jm></path> </svg> <kbd class="search-trigger__kbd" data-astro-cid-otpdt6jm> <span class="search-trigger__kbd-symbol" data-astro-cid-otpdt6jm>⌘</span>K
+</kbd> </button> <dialog class="search-dialog" aria-label="Site search" data-base="/portfolio/" data-astro-cid-otpdt6jm> <div class="search-dialog__inner" data-astro-cid-otpdt6jm> <div id="pagefind-container" data-astro-cid-otpdt6jm></div> <button class="search-dialog__close" aria-label="Close search" type="button" data-astro-cid-otpdt6jm> <kbd data-astro-cid-otpdt6jm>Esc</kbd> </button> </div> </dialog> <script>
+  (function () {
+    var BASE = '/portfolio/';
+    var globalScope = globalThis;
+    var state = globalScope.__portfolioSearchState;
+    if (!state) {
+      state = {
+        controller: null,
+        pagefindLoaded: false,
+      };
+      globalScope.__portfolioSearchState = state;
+    }
+
+    function initSearch() {
+      if (state.controller) state.controller.abort();
+      var controller = new AbortController();
+      var signal = controller.signal;
+      state.controller = controller;
+
+      var trigger = document.querySelector('.search-trigger');
+      var dialog = document.querySelector('.search-dialog');
+      var closeBtn = document.querySelector('.search-dialog__close');
+      if (!trigger || !dialog) return;
+      BASE = dialog.dataset.base || BASE;
+
+      function focusSearchInput() {
+        var input = document.querySelector('#pagefind-container input');
+        if (input) input.focus();
+      }
+
+      function openSearch() {
+        if (!dialog.open) dialog.showModal();
+        loadPagefind();
+        focusSearchInput();
+      }
+
+      function closeSearch() {
+        if (dialog.open) dialog.close();
+      }
+
+      trigger.addEventListener('click', openSearch, { signal });
+      if (closeBtn) closeBtn.addEventListener('click', closeSearch, { signal });
+
+      // Click outside to close
+      dialog.addEventListener('click', function (e) {
+        if (e.target === dialog) closeSearch();
+      }, { signal });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && dialog.open) {
+          closeSearch();
+          return;
+        }
+
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          if (dialog.open) {
+            closeSearch();
+          } else {
+            openSearch();
+          }
+        }
+      }, { signal });
+
+      document.addEventListener('astro:before-swap', function () {
+        controller.abort();
+      }, { once: true, signal });
+    }
+
+    function loadPagefind() {
+      if (state.pagefindLoaded) return;
+      state.pagefindLoaded = true;
+
+      var container = document.getElementById('pagefind-container');
+      if (!container) return;
+
+      // Load Pagefind UI CSS
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = BASE + 'pagefind/pagefind-ui.css';
+      document.head.appendChild(link);
+
+      // Load Pagefind UI JS via script tag (no ES module import in is:inline)
+      try {
+        var script = document.createElement('script');
+        script.src = BASE + 'pagefind/pagefind-ui.js';
+        script.onload = function () {
+          if (window.PagefindUI) {
+            new window.PagefindUI({
+              element: container,
+              showSubResults: true,
+              showImages: false,
+              baseUrl: BASE,
+            });
+            setTimeout(function () {
+              var input = container.querySelector('input');
+              if (input) input.focus();
+            }, 50);
+          }
+        };
+        script.onerror = function () {
+          container.textContent = 'Search unavailable \u2014 run a production build to enable Pagefind.';
+        };
+        document.head.appendChild(script);
+      } catch (err) {
+        container.textContent = 'Search unavailable.';
+      }
+    }
+
+    // Dual init: covers initial load + View Transition navigations
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSearch);
+    } else {
+      initSearch();
+    }
+    document.addEventListener('astro:page-load', initSearch);
+  })();
+</script>   <button class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme" data-astro-cid-3ef6ksr2> <svg class="theme-icon theme-icon--sun" width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <circle cx="9" cy="9" r="4" data-astro-cid-3ef6ksr2></circle> <path d="M9 1v2M9 15v2M1 9h2M15 9h2M3.3 3.3l1.4 1.4M13.3 13.3l1.4 1.4M3.3 14.7l1.4-1.4M13.3 4.7l1.4-1.4" data-astro-cid-3ef6ksr2></path> </svg> <svg class="theme-icon theme-icon--moon" width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <path d="M15.1 9.9A6 6 0 1 1 8.1 2.9a7 7 0 0 0 7 7z" data-astro-cid-3ef6ksr2></path> </svg> </button> </nav> </div> </header> <script type="module">function y(){const c=window;return c.__headerState||(c.__headerState={}),c.__headerState}function h(){const c=y();c.controller?.abort();const f=new AbortController,{signal:a}=f;c.controller=f;const d=document.querySelector(".header"),s=document.querySelector(".header__toggle"),l=document.querySelector(".header__nav");if(!d||!s||!l)return;d.classList.remove("header--open"),s.setAttribute("aria-expanded","false"),document.body.style.overflow="";function u(){document.querySelectorAll("[data-dropdown-group]").forEach(e=>{const o=e.querySelector(".header__dropdown-menu"),t=e.querySelector(".header__dropdown-trigger");o&&o.removeAttribute("data-open"),t&&t.setAttribute("aria-expanded","false")})}function g(){s.setAttribute("aria-expanded","true"),d.classList.add("header--open"),document.body.style.overflow="hidden",u()}function p(){s.setAttribute("aria-expanded","false"),d.classList.remove("header--open"),document.body.style.overflow="",s.focus()}s.addEventListener("click",()=>{s.getAttribute("aria-expanded")==="true"?p():g()},{signal:a}),l.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{d.classList.contains("header--open")&&p()},{signal:a})}),document.addEventListener("keydown",e=>{e.key==="Escape"&&d.classList.contains("header--open")&&p()},{signal:a}),l.addEventListener("keydown",e=>{if(e.key!=="Tab"||!d.classList.contains("header--open"))return;const o=l.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');if(o.length===0)return;const t=o[0],n=o[o.length-1];e.shiftKey&&document.activeElement===t?(e.preventDefault(),n.focus()):!e.shiftKey&&document.activeElement===n&&(e.preventDefault(),t.focus())},{signal:a}),document.querySelectorAll("[data-dropdown-group]").forEach(e=>{const o=e.querySelector(".header__dropdown-trigger"),t=e.querySelector(".header__dropdown-menu");!o||!t||(o.addEventListener("click",n=>{n.stopPropagation();const r=t.hasAttribute("data-open");if(u(),!r){t.setAttribute("data-open",""),o.setAttribute("aria-expanded","true");const i=t.querySelectorAll("a");i.length&&i[0].focus()}},{signal:a}),t.addEventListener("keydown",n=>{const r=[...t.querySelectorAll("a")],i=r.indexOf(document.activeElement);n.key==="ArrowDown"?(n.preventDefault(),r[(i+1)%r.length].focus()):n.key==="ArrowUp"?(n.preventDefault(),r[(i-1+r.length)%r.length].focus()):n.key==="Home"?(n.preventDefault(),r[0].focus()):n.key==="End"&&(n.preventDefault(),r[r.length-1].focus())},{signal:a}),t.querySelectorAll("a").forEach(n=>{n.addEventListener("click",()=>{t.removeAttribute("data-open"),o.setAttribute("aria-expanded","false")},{signal:a})}))}),document.addEventListener("click",e=>{e.target.closest?.("[data-dropdown-group]")||u()},{signal:a}),document.addEventListener("keydown",e=>{if(e.key==="Escape"){const o=document.querySelector(".header__dropdown-menu[data-open]");if(o){const t=o.closest("[data-dropdown-group]")?.querySelector(".header__dropdown-trigger");u(),t?.focus()}}},{signal:a}),document.addEventListener("astro:before-swap",()=>{f.abort()},{once:!0,signal:a})}document.addEventListener("astro:page-load",h);</script>  <main id="main-content">  <article class="project" data-astro-cid-ovdrvj3f> <header class="project__header" data-astro-cid-ovdrvj3f> <a href="/portfolio/" class="project__back" data-astro-cid-ovdrvj3f>&larr; All projects</a> <div class="project__tags" data-astro-cid-ovdrvj3f> <span class="tag" data-astro-cid-ovdrvj3f>DevSecOps</span><span class="tag" data-astro-cid-ovdrvj3f>Platform Engineering</span><span class="tag" data-astro-cid-ovdrvj3f>GitHub Actions</span><span class="tag" data-astro-cid-ovdrvj3f>Governance</span> </div> <h1 class="project__title" data-astro-cid-ovdrvj3f data-astro-transition-scope="astro-j55cbpbw-1">Org Architecture &amp; Community Health</h1> <p class="project__tagline" data-astro-cid-ovdrvj3f>Enterprise-grade governance for 91 repositories</p>  <div class="project__links" data-astro-cid-ovdrvj3f> <a href="https://github.com/organvm-i-theoria/.github" target="_blank" rel="noopener noreferrer" class="project__link" data-astro-cid-ovdrvj3f>GitHub &rarr;</a>  </div> <section class="project__pages" aria-label="Related GitHub Pages links" data-astro-cid-ovdrvj3f> <h2 class="project__pages-heading" data-astro-cid-ovdrvj3f>Related Live Sites</h2> <ul class="project__pages-list" data-astro-cid-ovdrvj3f> <li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/.github/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo=".github" data-track-target="page" data-astro-cid-ovdrvj3f> organvm-i-theoria/.github </a> <a href="https://github.com/organvm-i-theoria/.github" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo=".github" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li><li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/my-knowledge-base/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="my-knowledge-base" data-track-target="page" data-astro-cid-ovdrvj3f> Knowledge Base </a> <a href="https://github.com/organvm-i-theoria/my-knowledge-base" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="my-knowledge-base" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li><li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/4-ivi374-F0Rivi4/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="4-ivi374-F0Rivi4" data-track-target="page" data-astro-cid-ovdrvj3f> organvm-i-theoria/4-ivi374-F0Rivi4 </a> <a href="https://github.com/organvm-i-theoria/4-ivi374-F0Rivi4" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="4-ivi374-F0Rivi4" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li><li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/a-recursive-root/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="a-recursive-root" data-track-target="page" data-astro-cid-ovdrvj3f> organvm-i-theoria/a-recursive-root </a> <a href="https://github.com/organvm-i-theoria/a-recursive-root" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="a-recursive-root" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li><li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/auto-revision-epistemic-engine/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="auto-revision-epistemic-engine" data-track-target="page" data-astro-cid-ovdrvj3f> organvm-i-theoria/auto-revision-epistemic-engine </a> <a href="https://github.com/organvm-i-theoria/auto-revision-epistemic-engine" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="auto-revision-epistemic-engine" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li><li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/call-function--ontological/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="call-function--ontological" data-track-target="page" data-astro-cid-ovdrvj3f> organvm-i-theoria/call-function--ontological </a> <a href="https://github.com/organvm-i-theoria/call-function--ontological" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="call-function--ontological" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li> </ul> </section> </header>  <div class="sketch-accent" data-astro-cid-ovdrvj3f> <figure class="sketch-wrapper" data-astro-cid-cn4uwenb> <h3 class="sketch-title" data-astro-cid-cn4uwenb>Org Architecture &amp; Community Health Concept Sketch</h3> <div class="sketch-container" data-sketch="hierarchy" data-height="250px" data-mobile-height="180px" style="--sketch-height:250px;--sketch-mobile-height:180px;height:var(--sketch-height);" role="img" aria-label="Generative sketch: hierarchy" tabindex="0" data-tags="DevSecOps,Platform Engineering,GitHub Actions,Governance" data-astro-cid-ovdrvj3f="true" data-astro-cid-cn4uwenb>  <noscript> <p class="sketch-fallback" data-astro-cid-cn4uwenb>Generative sketch: hierarchy</p> </noscript> </div> <figcaption class="sketch-caption" data-astro-cid-cn4uwenb> <span data-astro-cid-cn4uwenb>Algorithmic visualization representing the underlying logic of Org Architecture &amp; Community Health.</span> <span class="sketch-source" data-astro-cid-cn4uwenb>Source: Dynamic Generation</span> </figcaption> </figure>  </div> <div class="project__content-grid" data-astro-cid-ovdrvj3f> <aside class="toc" aria-label="Table of contents" data-astro-cid-xvrfupwn> <button class="toc__toggle" aria-expanded="false" aria-controls="toc-nav" type="button" data-astro-cid-xvrfupwn> <span class="toc__toggle-label" data-astro-cid-xvrfupwn>On this page</span> <svg class="toc__toggle-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-xvrfupwn> <path d="M3 5l3 3 3-3" data-astro-cid-xvrfupwn></path> </svg> </button> <nav class="toc__nav" id="toc-nav" data-astro-cid-xvrfupwn> <span class="toc__heading" data-astro-cid-xvrfupwn>On this page</span> <ol class="toc__list" role="list" data-astro-cid-xvrfupwn></ol> </nav> </aside> <script type="module">function v(){const r=document.querySelector(".toc"),n=r?.querySelector(".toc__list"),d=document.querySelector(".project__body.prose");if(!r||!n||!d)return;const u=new AbortController,{signal:s}=u,c=d.querySelectorAll("h2, h3");if(c.length<2){r.style.display="none";return}for(c.forEach((e,t)=>{e.id||(e.id=e.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||`heading-${t}`)});n.firstChild;)n.removeChild(n.firstChild);c.forEach(e=>{const t=document.createElement("li");t.className=e.tagName==="H3"?"toc__item toc__item--sub":"toc__item";const o=document.createElement("a");o.href=`#${e.id}`,o.className="toc__link",o.textContent=e.textContent.trim(),o.addEventListener("click",f=>{f.preventDefault();const g=window.matchMedia("(prefers-reduced-motion: reduce)").matches;e.scrollIntoView({behavior:g?"instant":"smooth"}),history.replaceState(null,"",`#${e.id}`)},{signal:s}),t.appendChild(o),n.appendChild(t)});const a=n.querySelectorAll(".toc__link");let i=0;function m(e){e!==i&&(a[i]?.classList.remove("toc__link--active"),i=e,a[i]?.classList.add("toc__link--active"))}a[0]?.classList.add("toc__link--active");const _=new IntersectionObserver(e=>{e.forEach(t=>{if(t.isIntersecting){const o=Array.from(c).indexOf(t.target);o!==-1&&m(o)}})},{rootMargin:"-80px 0px -70% 0px",threshold:0});c.forEach(e=>_.observe(e));const l=r.querySelector(".toc__toggle"),p=r.querySelector(".toc__nav");l?.addEventListener("click",()=>{const e=l.getAttribute("aria-expanded")==="true";l.setAttribute("aria-expanded",String(!e)),p?.classList.toggle("toc__nav--open",!e)},{signal:s}),document.addEventListener("astro:before-swap",()=>{_.disconnect(),u.abort()},{once:!0,signal:s})}document.addEventListener("astro:page-load",v);</script>  <div class="project__body prose" data-astro-cid-ovdrvj3f>   <h2>The Problem: Standards at Scale</h2> <figure class="sketch-wrapper" data-astro-cid-cn4uwenb>  <div class="sketch-container" data-sketch="hierarchy" data-height="var(--space-4xl)" data-mobile-height="var(--space-3xl)" style="--sketch-height:var(--space-4xl);--sketch-mobile-height:var(--space-3xl);height:var(--sketch-height);" role="img" aria-label="Self-building organization tree" tabindex="0" data-astro-cid-cn4uwenb>  <noscript> <p class="sketch-fallback" data-astro-cid-cn4uwenb>Self-building organization tree</p> </noscript> </div>  </figure>  <p>
+Every multi-repository organization faces the same entropy: standards drift, security configurations diverge, and contributor onboarding becomes a per-repo archaeology exercise. Conway's law predicts this — organizations that design systems are constrained to produce designs which mirror their communication structures, and when those structures are fragmented across dozens of repositories, fragmentation is the inevitable output.<sup class="cite" data-ref-id="1" data-ref-author="Conway, Melvin E." data-ref-title="How Do Committees Invent?" data-ref-source="Datamation" data-ref-year="1968" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-1" data-astro-cid-gudpzm6e>[1]</a></sup>  The open-source world has known this for decades. Raymond's analysis of the bazaar model revealed that even decentralized projects require institutional infrastructure — mailing list conventions, patch formats, release protocols — to avoid collapsing under their own coordination costs.<sup class="cite" data-ref-id="2" data-ref-author="Raymond, Eric S." data-ref-title="The Cathedral and the Bazaar" data-ref-source="O'Reilly Media" data-ref-year="1999" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-2" data-astro-cid-gudpzm6e>[2]</a></sup>  GitHub's special <code>.github</code> repository mechanism offers a solution: a single repository whose contents — workflows, templates, governance documents, AI configurations — are inherited by every other repository in the organization. This project takes that mechanism and builds a comprehensive organizational operating system on top of it, governing 91 repositories across 8 organizations from a single source of truth.
+</p> <div class="mermaid-container" data-astro-cid-2r2ppsi5> <div class="mermaid" data-chart="graph TD
+    GH[&#34;.github Repository<br/>(Single Source of Truth)&#34;] --> HF[&#34;Community Health Files<br/>CODE_OF_CONDUCT.md<br/>CONTRIBUTING.md<br/>SECURITY.md<br/>SUPPORT.md&#34;]
+    GH --> WF[&#34;Reusable Workflows<br/>CI Pipelines<br/>Security Scanning<br/>PR Automation&#34;]
+    GH --> AI[&#34;AI Framework<br/>Production Agents<br/>Chatmodes<br/>Copilot Config&#34;]
+    HF --> R1[&#34;Repo A&#34;]
+    HF --> R2[&#34;Repo B&#34;]
+    HF --> RN[&#34;Repo N&#34;]
+    WF --> R1
+    WF --> R2
+    WF --> RN
+    AI --> R1
+    AI --> R2
+    AI --> RN
+    style GH fill:#1a1a2e,stroke:#e94560,color:#fff
+    style HF fill:#16213e,stroke:#0f3460,color:#fff
+    style WF fill:#16213e,stroke:#0f3460,color:#fff
+    style AI fill:#16213e,stroke:#0f3460,color:#fff" data-astro-cid-2r2ppsi5> graph TD
+    GH[&quot;.github Repository&lt;br/&gt;(Single Source of Truth)&quot;] --&gt; HF[&quot;Community Health Files&lt;br/&gt;CODE_OF_CONDUCT.md&lt;br/&gt;CONTRIBUTING.md&lt;br/&gt;SECURITY.md&lt;br/&gt;SUPPORT.md&quot;]
+    GH --&gt; WF[&quot;Reusable Workflows&lt;br/&gt;CI Pipelines&lt;br/&gt;Security Scanning&lt;br/&gt;PR Automation&quot;]
+    GH --&gt; AI[&quot;AI Framework&lt;br/&gt;Production Agents&lt;br/&gt;Chatmodes&lt;br/&gt;Copilot Config&quot;]
+    HF --&gt; R1[&quot;Repo A&quot;]
+    HF --&gt; R2[&quot;Repo B&quot;]
+    HF --&gt; RN[&quot;Repo N&quot;]
+    WF --&gt; R1
+    WF --&gt; R2
+    WF --&gt; RN
+    AI --&gt; R1
+    AI --&gt; R2
+    AI --&gt; RN
+    style GH fill:#1a1a2e,stroke:#e94560,color:#fff
+    style HF fill:#16213e,stroke:#0f3460,color:#fff
+    style WF fill:#16213e,stroke:#0f3460,color:#fff
+    style AI fill:#16213e,stroke:#0f3460,color:#fff </div> <div class="mermaid-caption" data-astro-cid-2r2ppsi5>Inheritance flow — the .github repository propagates governance, CI/CD, and AI configurations to every org repository that does not define its own</div> <noscript> <pre class="mermaid-fallback" data-astro-cid-2r2ppsi5><code data-astro-cid-2r2ppsi5>graph TD
+    GH[&quot;.github Repository&lt;br/&gt;(Single Source of Truth)&quot;] --&gt; HF[&quot;Community Health Files&lt;br/&gt;CODE_OF_CONDUCT.md&lt;br/&gt;CONTRIBUTING.md&lt;br/&gt;SECURITY.md&lt;br/&gt;SUPPORT.md&quot;]
+    GH --&gt; WF[&quot;Reusable Workflows&lt;br/&gt;CI Pipelines&lt;br/&gt;Security Scanning&lt;br/&gt;PR Automation&quot;]
+    GH --&gt; AI[&quot;AI Framework&lt;br/&gt;Production Agents&lt;br/&gt;Chatmodes&lt;br/&gt;Copilot Config&quot;]
+    HF --&gt; R1[&quot;Repo A&quot;]
+    HF --&gt; R2[&quot;Repo B&quot;]
+    HF --&gt; RN[&quot;Repo N&quot;]
+    WF --&gt; R1
+    WF --&gt; R2
+    WF --&gt; RN
+    AI --&gt; R1
+    AI --&gt; R2
+    AI --&gt; RN
+    style GH fill:#1a1a2e,stroke:#e94560,color:#fff
+    style HF fill:#16213e,stroke:#0f3460,color:#fff
+    style WF fill:#16213e,stroke:#0f3460,color:#fff
+    style AI fill:#16213e,stroke:#0f3460,color:#fff</code></pre> </noscript> </div>  <script type="module" src="/portfolio/_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js"></script> <h2>Community Health Layer</h2> <p>
+The foundation of any collaborative software project is not its code but its social contracts. GitHub's community health file inheritance means that a <code>CODE_OF_CONDUCT.md</code>, <code>CONTRIBUTING.md</code>, <code>SECURITY.md</code>, and <code>SUPPORT.md</code> placed in the <code>.github</code> repository appear on every repository in the organization that has not defined its own — creating a baseline of contributor experience without requiring any per-repo configuration.<sup class="cite" data-ref-id="3" data-ref-author="Eghbal, Nadia" data-ref-title="Working in Public: The Making and Maintenance of Open Source Software" data-ref-source="Stripe Press" data-ref-year="2020" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-3" data-astro-cid-gudpzm6e>[3]</a></sup>  Eghbal's research into the maintenance burden of open-source projects demonstrates that community health files are not bureaucratic overhead but essential load-bearing infrastructure: projects without clear contribution guidelines see higher friction in first-time contributions and higher maintainer burnout. Fogel extends this argument to the operational level, showing that explicit governance documents reduce "bike-shedding" — endless procedural debates — by providing authoritative answers to common questions before they are asked.<sup class="cite" data-ref-id="4" data-ref-author="Fogel, Karl" data-ref-title="Producing Open Source Software: How to Run a Successful Free Software Project" data-ref-source="O'Reilly Media" data-ref-year="2005" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-4" data-astro-cid-gudpzm6e>[4]</a></sup>  In this system, the four health files are not boilerplate templates but carefully authored documents reflecting the specific governance philosophy of the eight-organ architecture: the Code of Conduct references the system's values, the Contributing guide maps onto the promotion state machine, and the Security policy defines responsible disclosure procedures tailored to the project's threat model.
+</p> <div class="code-structure" data-astro-cid-pbr2my35> <div class="code-structure__filename" data-astro-cid-pbr2my35>.github/workflows/ci-pipeline.yml</div> <pre tabindex="0" role="region" aria-label="Code example: .github/workflows/ci-pipeline.yml" data-astro-cid-pbr2my35><code class="language-yaml" data-astro-cid-pbr2my35>name: CI Pipeline
+on:
+  workflow_call:
+    inputs:
+      language:
+        required: true
+        type: string
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup environment
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8  # v4.0.2
+        if: inputs.language == &#39;typescript&#39;
+        with:
+          node-version: &#39;22&#39;
+
+      - name: Security scan — Gitleaks
+        uses: gitleaks/gitleaks-action@1f2d10fb689bc07a5f56f48e6c6b8ee4a47c1dab  # v2.3.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Security scan — CodeQL
+        uses: github/codeql-action/analyze@c4fb451437765abf5018c6571834e2c3c6a21745  # v3.24.6
+        with:
+          languages: ${{ inputs.language }}
+
+      - name: Run tests
+        run: |
+          if [ &quot;${{ inputs.language }}&quot; = &quot;typescript&quot; ]; then
+            npm ci &amp;&amp; npm test
+          elif [ &quot;${{ inputs.language }}&quot; = &quot;python&quot; ]; then
+            pip install -r requirements.txt &amp;&amp; pytest
+          fi</code></pre> <div class="code-structure__caption" data-astro-cid-pbr2my35>Reusable CI workflow with SHA-pinned actions for supply-chain security — called by every repository in the organization</div> </div>  <h2>CI/CD Infrastructure</h2> <p>
+The second layer transforms GitHub Actions from per-repository configuration files into an organizational platform. Every workflow uses <code>workflow_call</code> to expose itself as a reusable component — individual repositories call these shared workflows with parameters rather than duplicating pipeline logic.<sup class="cite" data-ref-id="5" data-ref-author="Humble, Jez and David Farley" data-ref-title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation" data-ref-source="Addison-Wesley" data-ref-year="2010" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-5" data-astro-cid-gudpzm6e>[5]</a></sup>  Humble and Farley's core insight — that the deployment pipeline should be a first-class artifact, versioned and tested like application code — applies doubly at the organizational level, where pipeline drift across repositories creates silent security gaps and inconsistent quality gates. The critical security decision is SHA-pinning: every GitHub Action reference uses a full commit SHA rather than a mutable tag, preventing supply-chain attacks where a compromised action tag is silently replaced with malicious code.<sup class="cite" data-ref-id="6" data-ref-author="Bass, Len, Ingo Weber, and Liming Zhu" data-ref-title="DevOps: A Software Architect's Perspective" data-ref-source="Addison-Wesley" data-ref-year="2015" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-6" data-astro-cid-gudpzm6e>[6]</a></sup>  Bass et al. identify supply-chain integrity as a DevOps architectural concern — this repository implements that concern at the organizational boundary, ensuring that no repository in the system can accidentally reference an unvetted action version.
+</p> <figure class="academic-figure" data-astro-cid-wa2vzzqt> <div class="figure-content" data-astro-cid-wa2vzzqt>  <div class="table-wrap"> <table> <thead> <tr><th>Tool</th><th>Purpose</th><th>Integration Method</th><th>Scope</th></tr> </thead> <tbody> <tr><td><strong>CodeQL</strong></td><td>Static analysis &amp; vulnerability detection</td><td>GitHub-native, SHA-pinned action</td><td>Language-aware semantic queries</td></tr> <tr><td><strong>Gitleaks</strong></td><td>Secrets detection in git history</td><td>Pre-commit hook + CI action</td><td>Full repository history scan</td></tr> <tr><td><strong>TruffleHog</strong></td><td>High-entropy string &amp; credential scanning</td><td>CI action with custom regexes</td><td>Commit diffs + full scans</td></tr> </tbody> </table> </div>  </div> <figcaption data-astro-cid-wa2vzzqt>Security scanning tool matrix — three complementary tools covering secrets detection, static analysis, and dependency vulnerabilities</figcaption> </figure>  <p>
+The three scanning tools form a defense-in-depth strategy. CodeQL operates at the semantic level, understanding language-specific vulnerability patterns — SQL injection, cross-site scripting, insecure deserialization — by modeling code as a queryable database. Gitleaks works at the git layer, scanning every commit in repository history for patterns matching API keys, tokens, and credentials, catching secrets that were committed and later "deleted" but remain in git history. TruffleHog complements both with high-entropy string detection and custom regex patterns, catching credential formats that Gitleaks' built-in patterns miss.<sup class="cite" data-ref-id="5" data-ref-author="Humble, Jez and David Farley" data-ref-title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation" data-ref-source="Addison-Wesley" data-ref-year="2010" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-5" data-astro-cid-gudpzm6e>[5]</a></sup>  Together, they implement what Humble and Farley call the "quality gate" pattern: no code reaches production without passing all three scans. The organizational inheritance model means this gate is not opt-in — every repository inherits it by default, and opting out requires an explicit, reviewable override.
+</p> <div class="mermaid-container" data-astro-cid-2r2ppsi5> <div class="mermaid" data-chart="graph TB
+    subgraph L1[&#34;Layer 1: Community Health&#34;]
+        COC[&#34;Code of Conduct&#34;] --- CONT[&#34;Contributing Guide&#34;]
+        CONT --- SEC[&#34;Security Policy&#34;]
+        SEC --- SUP[&#34;Support Docs&#34;]
+    end
+    subgraph L2[&#34;Layer 2: CI/CD Infrastructure&#34;]
+        PIPE[&#34;CI Pipelines&#34;] --- SCAN[&#34;Security Scanning<br/>CodeQL + Gitleaks + TruffleHog&#34;]
+        SCAN --- PR[&#34;PR Automation<br/>Conventional Commits&#34;]
+        PR --- MON[&#34;Health Monitoring<br/>&#38; Metrics&#34;]
+    end
+    subgraph L3[&#34;Layer 3: AI Framework&#34;]
+        AGENTS[&#34;Production Agents<br/>Security, Infra, Dev, Docs&#34;] --- CHAT[&#34;Chatmodes<br/>Specialized Personas&#34;]
+        CHAT --- COP[&#34;GitHub Copilot<br/>Integration&#34;]
+    end
+    L1 -->|&#34;social contracts govern&#34;| L2
+    L2 -->|&#34;quality gates inform&#34;| L3
+    L3 -->|&#34;AI assists compliance with&#34;| L1
+    style L1 fill:#0d1117,stroke:#238636,color:#fff
+    style L2 fill:#0d1117,stroke:#1f6feb,color:#fff
+    style L3 fill:#0d1117,stroke:#a371f7,color:#fff" data-astro-cid-2r2ppsi5> graph TB
+    subgraph L1[&quot;Layer 1: Community Health&quot;]
+        COC[&quot;Code of Conduct&quot;] --- CONT[&quot;Contributing Guide&quot;]
+        CONT --- SEC[&quot;Security Policy&quot;]
+        SEC --- SUP[&quot;Support Docs&quot;]
+    end
+    subgraph L2[&quot;Layer 2: CI/CD Infrastructure&quot;]
+        PIPE[&quot;CI Pipelines&quot;] --- SCAN[&quot;Security Scanning&lt;br/&gt;CodeQL + Gitleaks + TruffleHog&quot;]
+        SCAN --- PR[&quot;PR Automation&lt;br/&gt;Conventional Commits&quot;]
+        PR --- MON[&quot;Health Monitoring&lt;br/&gt;&amp; Metrics&quot;]
+    end
+    subgraph L3[&quot;Layer 3: AI Framework&quot;]
+        AGENTS[&quot;Production Agents&lt;br/&gt;Security, Infra, Dev, Docs&quot;] --- CHAT[&quot;Chatmodes&lt;br/&gt;Specialized Personas&quot;]
+        CHAT --- COP[&quot;GitHub Copilot&lt;br/&gt;Integration&quot;]
+    end
+    L1 --&gt;|&quot;social contracts govern&quot;| L2
+    L2 --&gt;|&quot;quality gates inform&quot;| L3
+    L3 --&gt;|&quot;AI assists compliance with&quot;| L1
+    style L1 fill:#0d1117,stroke:#238636,color:#fff
+    style L2 fill:#0d1117,stroke:#1f6feb,color:#fff
+    style L3 fill:#0d1117,stroke:#a371f7,color:#fff </div> <div class="mermaid-caption" data-astro-cid-2r2ppsi5>Three-layer architecture — Community Health provides the social foundation, CI/CD enforces technical quality, and the AI Framework augments development workflows</div> <noscript> <pre class="mermaid-fallback" data-astro-cid-2r2ppsi5><code data-astro-cid-2r2ppsi5>graph TB
+    subgraph L1[&quot;Layer 1: Community Health&quot;]
+        COC[&quot;Code of Conduct&quot;] --- CONT[&quot;Contributing Guide&quot;]
+        CONT --- SEC[&quot;Security Policy&quot;]
+        SEC --- SUP[&quot;Support Docs&quot;]
+    end
+    subgraph L2[&quot;Layer 2: CI/CD Infrastructure&quot;]
+        PIPE[&quot;CI Pipelines&quot;] --- SCAN[&quot;Security Scanning&lt;br/&gt;CodeQL + Gitleaks + TruffleHog&quot;]
+        SCAN --- PR[&quot;PR Automation&lt;br/&gt;Conventional Commits&quot;]
+        PR --- MON[&quot;Health Monitoring&lt;br/&gt;&amp; Metrics&quot;]
+    end
+    subgraph L3[&quot;Layer 3: AI Framework&quot;]
+        AGENTS[&quot;Production Agents&lt;br/&gt;Security, Infra, Dev, Docs&quot;] --- CHAT[&quot;Chatmodes&lt;br/&gt;Specialized Personas&quot;]
+        CHAT --- COP[&quot;GitHub Copilot&lt;br/&gt;Integration&quot;]
+    end
+    L1 --&gt;|&quot;social contracts govern&quot;| L2
+    L2 --&gt;|&quot;quality gates inform&quot;| L3
+    L3 --&gt;|&quot;AI assists compliance with&quot;| L1
+    style L1 fill:#0d1117,stroke:#238636,color:#fff
+    style L2 fill:#0d1117,stroke:#1f6feb,color:#fff
+    style L3 fill:#0d1117,stroke:#a371f7,color:#fff</code></pre> </noscript> </div>   <h2>AI Agent Framework</h2> <p>
+The third layer is the most forward-looking: a framework of production AI agents, each specialized for a domain within the organizational workflow. Security agents review pull requests for vulnerability patterns, infrastructure agents validate workflow configurations and dependency graphs, development agents assist with code generation within the established patterns, and documentation agents enforce consistency across the 91 repositories' README files and changelogs.<sup class="cite" data-ref-id="7" data-ref-author="Wooldridge, Michael" data-ref-title="An Introduction to MultiAgent Systems" data-ref-source="John Wiley &#38; Sons" data-ref-year="2009" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-7" data-astro-cid-gudpzm6e>[7]</a></sup>  Wooldridge's taxonomy of agent architectures — reactive, deliberative, and hybrid — maps onto the framework's design: security agents are reactive (trigger on PR events), documentation agents are deliberative (analyze repository state and generate updates), and development agents are hybrid (respond to immediate requests while maintaining context across sessions). The agents are implemented as GitHub Copilot-compatible configurations, meaning they integrate with the developer's existing IDE workflow rather than requiring a separate toolchain.<sup class="cite" data-ref-id="8" data-ref-author="Russell, Stuart and Peter Norvig" data-ref-title="Artificial Intelligence: A Modern Approach" data-ref-source="Pearson" data-ref-year="2020" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-8" data-astro-cid-gudpzm6e>[8]</a></sup>  Russell and Norvig's framework for rational agents — perceive, reason, act — is realized concretely: each agent perceives through GitHub event webhooks, reasons through its specialized prompt context, and acts through the GitHub API. The chatmodes layer adds specialized personas — a security auditor, a documentation editor, a dependency analyst — each with tailored system prompts and tool access policies.
+</p> <div class="code-structure" data-astro-cid-pbr2my35> <div class="code-structure__filename" data-astro-cid-pbr2my35>.github/agents/security-reviewer.yml</div> <pre tabindex="0" role="region" aria-label="Code example: .github/agents/security-reviewer.yml" data-astro-cid-pbr2my35><code class="language-yaml" data-astro-cid-pbr2my35>name: security-reviewer
+description: Reviews PRs for security vulnerabilities and compliance
+triggers:
+  - pull_request.opened
+  - pull_request.synchronize
+
+context:
+  files:
+    - SECURITY.md
+    - .github/workflows/security-scan.yml
+  instructions: |
+    You are a security reviewer for the organvm ecosystem.
+    Check for: hardcoded secrets, unsafe dependencies,
+    missing input validation, SQL injection vectors,
+    and OWASP Top 10 patterns.
+
+permissions:
+  contents: read
+  pull-requests: write
+  security-events: read
+
+copilot:
+  compatible: true
+  slash-commands:
+    - /security-review
+    - /threat-model
+  model-preference: claude-sonnet</code></pre> <div class="code-structure__caption" data-astro-cid-pbr2my35>AI agent configuration — production security agent with scoped permissions and Copilot integration</div> </div>  <h2>Design Philosophy: Infrastructure as Culture</h2> <p>
+The deeper claim of this project is that organizational culture can be encoded as versionable, reviewable, inheritable artifacts. This is infrastructure-as-code thinking applied not to servers or networks but to governance, contributor experience, and development methodology.<sup class="cite" data-ref-id="9" data-ref-author="Morris, Kief" data-ref-title="Infrastructure as Code: Managing Servers in the Cloud" data-ref-source="O'Reilly Media" data-ref-year="2016" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-9" data-astro-cid-gudpzm6e>[9]</a></sup>  Morris argues that treating infrastructure as code provides four benefits — reproducibility, consistency, auditability, and recoverability — and every one of these applies to organizational standards. When the Code of Conduct is a file in a Git repository, it has a commit history, a blame log, a review trail. When CI policy changes, the diff is visible and the rollback path is clear. This transforms governance from an implicit social agreement into an explicit, testable system.<sup class="cite" data-ref-id="10" data-ref-author="Ostrom, Elinor" data-ref-title="Governing the Commons: The Evolution of Institutions for Collective Action" data-ref-source="Cambridge University Press" data-ref-year="1990" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-10" data-astro-cid-gudpzm6e>[10]</a></sup>  Ostrom's Nobel Prize-winning research on institutional governance demonstrated that successful commons management requires clear boundaries, proportional rules, collective-choice arrangements, and monitoring — all of which this repository implements through GitHub's access controls, inherited workflow rules, PR-based governance changes, and automated health monitoring respectively.
+</p> <figure class="academic-figure" data-astro-cid-wa2vzzqt> <div class="figure-content" data-astro-cid-wa2vzzqt>  <div class="table-wrap"> <table> <thead> <tr><th>Ostrom Principle</th><th>Repository Implementation</th></tr> </thead> <tbody> <tr><td>Clearly defined boundaries</td><td>Organization membership + CODEOWNERS files</td></tr> <tr><td>Proportional rules</td><td>Tiered CI templates (minimal, standard, full)</td></tr> <tr><td>Collective-choice arrangements</td><td>PR-based governance changes with review requirements</td></tr> <tr><td>Monitoring</td><td>Automated health audits + monthly metrics workflows</td></tr> <tr><td>Graduated sanctions</td><td>Warning comments → required reviews → branch protection</td></tr> <tr><td>Conflict resolution</td><td>Code of Conduct with escalation procedures</td></tr> </tbody> </table> </div>  </div> <figcaption data-astro-cid-wa2vzzqt>Mapping Ostrom&#39;s eight institutional design principles to the .github repository&#39;s governance implementation</figcaption> </figure>  <p>
+The decision to make AI agents part of this governance layer — rather than a separate system — reflects a deliberate architectural position: AI tooling should be subject to the same review, versioning, and access control processes as any other piece of organizational infrastructure. An agent's prompt is as consequential as a CI pipeline's configuration, and should be governed accordingly.<sup class="cite" data-ref-id="7" data-ref-author="Wooldridge, Michael" data-ref-title="An Introduction to MultiAgent Systems" data-ref-source="John Wiley &#38; Sons" data-ref-year="2009" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-7" data-astro-cid-gudpzm6e>[7]</a></sup>  Wooldridge identifies trust and delegation as the central challenges of multi-agent systems; by placing agent configurations within the same governance framework as security policies and contribution guidelines, the system makes agent capabilities visible, auditable, and revocable through familiar Git-based workflows rather than opaque administrative interfaces.
+</p> <div class="mermaid-container" data-astro-cid-2r2ppsi5> <div class="mermaid" data-chart="graph TD
+    NEW[&#34;New Repository Created&#34;] --> INH[&#34;Inherits All Defaults<br/>Health Files + CI + AI&#34;]
+    INH --> Q{&#34;Needs Custom<br/>Behavior?&#34;}
+    Q -->|No| STD[&#34;Standard Repo<br/>Full Inheritance&#34;]
+    Q -->|Yes| OVR[&#34;Define Local Override<br/>(Explicit File)&#34;]
+    OVR --> AUDIT[&#34;Monthly Health Audit<br/>Tracks Override&#34;]
+    AUDIT --> DRIFT{&#34;Override Still<br/>Justified?&#34;}
+    DRIFT -->|Yes| KEEP[&#34;Maintain Override<br/>Document Rationale&#34;]
+    DRIFT -->|No| REMOVE[&#34;Remove Override<br/>Return to Inheritance&#34;]
+    REMOVE --> STD
+    style NEW fill:#1a1a2e,stroke:#e94560,color:#fff
+    style STD fill:#0d1117,stroke:#238636,color:#fff
+    style AUDIT fill:#0d1117,stroke:#1f6feb,color:#fff" data-astro-cid-2r2ppsi5> graph TD
+    NEW[&quot;New Repository Created&quot;] --&gt; INH[&quot;Inherits All Defaults&lt;br/&gt;Health Files + CI + AI&quot;]
+    INH --&gt; Q{&quot;Needs Custom&lt;br/&gt;Behavior?&quot;}
+    Q --&gt;|No| STD[&quot;Standard Repo&lt;br/&gt;Full Inheritance&quot;]
+    Q --&gt;|Yes| OVR[&quot;Define Local Override&lt;br/&gt;(Explicit File)&quot;]
+    OVR --&gt; AUDIT[&quot;Monthly Health Audit&lt;br/&gt;Tracks Override&quot;]
+    AUDIT --&gt; DRIFT{&quot;Override Still&lt;br/&gt;Justified?&quot;}
+    DRIFT --&gt;|Yes| KEEP[&quot;Maintain Override&lt;br/&gt;Document Rationale&quot;]
+    DRIFT --&gt;|No| REMOVE[&quot;Remove Override&lt;br/&gt;Return to Inheritance&quot;]
+    REMOVE --&gt; STD
+    style NEW fill:#1a1a2e,stroke:#e94560,color:#fff
+    style STD fill:#0d1117,stroke:#238636,color:#fff
+    style AUDIT fill:#0d1117,stroke:#1f6feb,color:#fff </div> <div class="mermaid-caption" data-astro-cid-2r2ppsi5>Inheritance override decision tree — repositories inherit all organizational defaults unless they define explicit overrides, which are tracked by the monthly health audit</div> <noscript> <pre class="mermaid-fallback" data-astro-cid-2r2ppsi5><code data-astro-cid-2r2ppsi5>graph TD
+    NEW[&quot;New Repository Created&quot;] --&gt; INH[&quot;Inherits All Defaults&lt;br/&gt;Health Files + CI + AI&quot;]
+    INH --&gt; Q{&quot;Needs Custom&lt;br/&gt;Behavior?&quot;}
+    Q --&gt;|No| STD[&quot;Standard Repo&lt;br/&gt;Full Inheritance&quot;]
+    Q --&gt;|Yes| OVR[&quot;Define Local Override&lt;br/&gt;(Explicit File)&quot;]
+    OVR --&gt; AUDIT[&quot;Monthly Health Audit&lt;br/&gt;Tracks Override&quot;]
+    AUDIT --&gt; DRIFT{&quot;Override Still&lt;br/&gt;Justified?&quot;}
+    DRIFT --&gt;|Yes| KEEP[&quot;Maintain Override&lt;br/&gt;Document Rationale&quot;]
+    DRIFT --&gt;|No| REMOVE[&quot;Remove Override&lt;br/&gt;Return to Inheritance&quot;]
+    REMOVE --&gt; STD
+    style NEW fill:#1a1a2e,stroke:#e94560,color:#fff
+    style STD fill:#0d1117,stroke:#238636,color:#fff
+    style AUDIT fill:#0d1117,stroke:#1f6feb,color:#fff</code></pre> </noscript> </div>   <h2>Tradeoffs and Limitations</h2> <p>
+The inheritance model has a fundamental tension: uniformity versus autonomy. A repository that needs a custom CI pipeline must explicitly override the inherited one, creating a maintenance burden at the repository level and a coordination cost at the organizational level — every override is a potential drift point that the monthly health audit must track.<sup class="cite" data-ref-id="2" data-ref-author="Raymond, Eric S." data-ref-title="The Cathedral and the Bazaar" data-ref-source="O'Reilly Media" data-ref-year="1999" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-2" data-astro-cid-gudpzm6e>[2]</a></sup>  Raymond's observation that open-source governance must balance centralized standards with decentralized innovation applies directly: too much inheritance and repositories become constrained; too little and the organizational operating system loses its coherence. The current design errs toward inheritance, with escape hatches for repositories that genuinely need custom behavior — a choice that reflects the system's scale (91 repositories) and its need for auditable consistency over per-repo flexibility.
+</p> <figure class="academic-figure" data-astro-cid-wa2vzzqt> <div class="figure-content" data-astro-cid-wa2vzzqt>  <div class="stat-grid"> <div class="stat"> <div class="stat-value">81</div> <div class="stat-label">Repos Inheriting</div> </div><div class="stat"> <div class="stat-value">3</div> <div class="stat-label">Security Tools</div> </div><div class="stat"> <div class="stat-value">4</div> <div class="stat-label">Health Files</div> </div><div class="stat"> <div class="stat-value">5+</div> <div class="stat-label">AI Agents</div> </div><div class="stat"> <div class="stat-value">8</div> <div class="stat-label">Organizations</div> </div><div class="stat"> <div class="stat-value">SHA</div> <div class="stat-label">Pinned Actions</div> </div> </div>  </div> <figcaption data-astro-cid-wa2vzzqt>Figure 1. Organizational infrastructure metrics — a single repository governing 81 downstream repositories across 8 organizations</figcaption> </figure>  <section class="references" aria-label="References" data-astro-cid-wxl2vi4o> <h2 data-astro-cid-wxl2vi4o>References</h2> <ol data-astro-cid-wxl2vi4o> <li id="ref-1" data-astro-cid-wxl2vi4o> Conway, Melvin E.. <em data-astro-cid-wxl2vi4o>How Do Committees Invent?</em>. Datamation, 1968.
+ </li><li id="ref-2" data-astro-cid-wxl2vi4o> Raymond, Eric S.. <em data-astro-cid-wxl2vi4o>The Cathedral and the Bazaar</em>. O&#39;Reilly Media, 1999.
+ </li><li id="ref-3" data-astro-cid-wxl2vi4o> Eghbal, Nadia. <em data-astro-cid-wxl2vi4o>Working in Public: The Making and Maintenance of Open Source Software</em>. Stripe Press, 2020.
+ </li><li id="ref-4" data-astro-cid-wxl2vi4o> Fogel, Karl. <em data-astro-cid-wxl2vi4o>Producing Open Source Software: How to Run a Successful Free Software Project</em>. O&#39;Reilly Media, 2005.
+ </li><li id="ref-5" data-astro-cid-wxl2vi4o> Humble, Jez and David Farley. <em data-astro-cid-wxl2vi4o>Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation</em>. Addison-Wesley, 2010.
+ </li><li id="ref-6" data-astro-cid-wxl2vi4o> Bass, Len, Ingo Weber, and Liming Zhu. <em data-astro-cid-wxl2vi4o>DevOps: A Software Architect&#39;s Perspective</em>. Addison-Wesley, 2015.
+ </li><li id="ref-7" data-astro-cid-wxl2vi4o> Wooldridge, Michael. <em data-astro-cid-wxl2vi4o>An Introduction to MultiAgent Systems</em>. John Wiley &amp; Sons, 2009.
+ </li><li id="ref-8" data-astro-cid-wxl2vi4o> Russell, Stuart and Peter Norvig. <em data-astro-cid-wxl2vi4o>Artificial Intelligence: A Modern Approach</em>. Pearson, 2020.
+ </li><li id="ref-9" data-astro-cid-wxl2vi4o> Morris, Kief. <em data-astro-cid-wxl2vi4o>Infrastructure as Code: Managing Servers in the Cloud</em>. O&#39;Reilly Media, 2016.
+ </li><li id="ref-10" data-astro-cid-wxl2vi4o> Ostrom, Elinor. <em data-astro-cid-wxl2vi4o>Governing the Commons: The Evolution of Institutions for Collective Action</em>. Cambridge University Press, 1990.
+ </li> </ol> </section>    </div> </div> <nav class="related" aria-label="Related projects" data-astro-cid-ovdrvj3f> <h2 class="related__heading" data-astro-cid-ovdrvj3f>Related Projects</h2> <ul class="related__list" data-astro-cid-ovdrvj3f> <li class="related__item" data-astro-cid-ovdrvj3f> <a href="/portfolio/projects/eight-organ-system/" class="related__link" data-astro-cid-ovdrvj3f> <span class="related__title" data-astro-cid-ovdrvj3f>The Eight-Organ System</span> <span class="related__tags" data-astro-cid-ovdrvj3f>Governance</span> </a> </li><li class="related__item" data-astro-cid-ovdrvj3f> <a href="/portfolio/projects/orchestration-hub/" class="related__link" data-astro-cid-ovdrvj3f> <span class="related__title" data-astro-cid-ovdrvj3f>Orchestration Hub</span> <span class="related__tags" data-astro-cid-ovdrvj3f>Governance</span> </a> </li> </ul> </nav> <nav class="project-nav" aria-label="Project navigation" data-astro-cid-ovdrvj3f> <a href="/portfolio/projects/orchestration-hub/" class="project-nav__link project-nav__link--prev" data-astro-cid-ovdrvj3f> <span class="project-nav__arrow" aria-hidden="true" data-astro-cid-ovdrvj3f>&larr;</span> <span class="project-nav__meta" data-astro-cid-ovdrvj3f> <span class="project-nav__label" data-astro-cid-ovdrvj3f>Previous</span> <span class="project-nav__title" data-astro-cid-ovdrvj3f>Orchestration Hub</span> </span> </a> <a href="/portfolio/projects/public-process/" class="project-nav__link project-nav__link--next" data-astro-cid-ovdrvj3f> <span class="project-nav__meta" data-astro-cid-ovdrvj3f> <span class="project-nav__label" data-astro-cid-ovdrvj3f>Next</span> <span class="project-nav__title" data-astro-cid-ovdrvj3f>Public Process</span> </span> <span class="project-nav__arrow" aria-hidden="true" data-astro-cid-ovdrvj3f>&rarr;</span> </a> </nav> </article>  <script>
+  (function () {
+    if (window.__ghPagesTrackingInit) return;
+    window.__ghPagesTrackingInit = true;
+
+    function trackGithubPagesClick(link) {
+      const owner = link.dataset.trackOwner || 'unknown';
+      const repo = link.dataset.trackRepo || 'unknown';
+      const target = link.dataset.trackTarget || 'unknown';
+      const surface = link.dataset.trackSurface || 'unknown';
+      const fullName = `${owner}/${repo}`;
+
+      if (typeof window.plausible === 'function') {
+        window.plausible('github_pages_click', {
+          props: { owner, repo, target, surface },
+        });
+      }
+
+      try {
+        const key = 'portfolio_github_pages_clicks';
+        const raw = localStorage.getItem(key);
+        const parsedCandidate = raw ? JSON.parse(raw) : {};
+        const parsed =
+          parsedCandidate && typeof parsedCandidate === 'object' && !Array.isArray(parsedCandidate)
+            ? parsedCandidate
+            : {};
+        const bucketKey = `${fullName}:${target}`;
+        const previous = parsed[bucketKey] || { count: 0, lastClickedAt: null, surface };
+        parsed[bucketKey] = {
+          owner,
+          repo,
+          fullName,
+          target,
+          surface,
+          count: Number(previous.count || 0) + 1,
+          lastClickedAt: new Date().toISOString(),
+        };
+        localStorage.setItem(key, JSON.stringify(parsed));
+      } catch {}
+    }
+
+    function bindGithubPagesTracking() {
+      document.querySelectorAll('a[data-gh-pages-track]').forEach((link) => {
+        if (link.dataset.trackBound === '1') return;
+        link.dataset.trackBound = '1';
+        link.addEventListener('click', () => trackGithubPagesClick(link));
+      });
+    }
+
+    document.addEventListener('astro:page-load', bindGithubPagesTracking);
+  })();
+</script>  </main> <footer class="footer" data-astro-cid-sz7xmlte> <div class="container footer__inner" data-astro-cid-sz7xmlte> <div class="footer__links" data-astro-cid-sz7xmlte> <a href="https://github.com/meta-organvm" target="_blank" rel="me noopener noreferrer" data-astro-cid-sz7xmlte>GitHub</a> <span class="footer__sep" aria-hidden="true" data-astro-cid-sz7xmlte>/</span> <a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="me noopener noreferrer" data-astro-cid-sz7xmlte>LinkedIn</a> <span class="footer__sep" aria-hidden="true" data-astro-cid-sz7xmlte>/</span> <a href="mailto:padavano.anthony@gmail.com" data-astro-cid-sz7xmlte>Contact</a> </div> <div class="footer__right" data-astro-cid-sz7xmlte> <button class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme" data-astro-cid-sz7xmlte> <svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-sz7xmlte> <circle cx="9" cy="9" r="4" data-astro-cid-sz7xmlte></circle> <path d="M9 1v2M9 15v2M1 9h2M15 9h2M3.3 3.3l1.4 1.4M13.3 13.3l1.4 1.4M3.3 14.7l1.4-1.4M13.3 4.7l1.4-1.4" data-astro-cid-sz7xmlte></path> </svg> <svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-sz7xmlte> <path d="M15.1 9.9A6 6 0 1 1 8.1 2.9a7 7 0 0 0 7 7z" data-astro-cid-sz7xmlte></path> </svg> </button> <p class="footer__copy" data-astro-cid-sz7xmlte>
+&copy; 2026 Anthony James Padavano · Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte>Astro</a> </p> <div class="footer__build" data-astro-cid-sz7xmlte> <span class="build-dot" aria-hidden="true" data-astro-cid-sz7xmlte></span> <span class="build-text" data-astro-cid-sz7xmlte>Deployed: Feb 28, 05:20 PM</span> </div> </div> </div> </footer>  <script type="module">function g(){const e=window;return e.__themeToggleState||(e.__themeToggleState={}),e.__themeToggleState}function l(){const e=window;return e.__themeStorageFallback||(e.__themeStorageFallback={preference:"system"}),e.__themeStorageFallback}function u(e){try{return window.localStorage.getItem(e)}catch{return null}}function h(e,r){try{return window.localStorage.setItem(e,r),!0}catch{return!1}}function d(e){try{return window.localStorage.removeItem(e),!0}catch{return!1}}function a(){const e=u("theme-preference");return e==="system"||e==="light"||e==="dark"?(l().preference=e,e):l().preference}function S(e){l().preference=e,h("theme-preference",e)}function c(e){document.documentElement.dataset.theme=e;const r=document.querySelector('meta[name="theme-color"]');r&&(r.content=e==="light"?"#f5f5f0":"#0a0a0b")}function f(){return window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}function w(){const e=g();e.controller?.abort();const r=new AbortController,{signal:i}=r;e.controller=r;const m=document.querySelectorAll(".theme-toggle");if(!m.length)return;function s(){const n=a(),o=n==="system"?"Theme: System (click for Light)":n==="light"?"Theme: Light (click for Dark)":"Theme: Dark (click for System)";document.querySelectorAll(".theme-toggle").forEach(t=>t.setAttribute("aria-label",o))}m.forEach(n=>{n.addEventListener("click",()=>{const o=a();let t;o==="system"?t="light":o==="light"?t="dark":t="system",S(t),t==="system"?(d("theme"),c(f())):(h("theme",t),c(t)),s()},{signal:i})}),s(),e.mediaListener||(e.mediaQuery=window.matchMedia("(prefers-color-scheme: light)"),e.mediaListener=()=>{a()==="system"&&c(f())},e.mediaQuery.addEventListener("change",e.mediaListener)),document.addEventListener("astro:before-swap",()=>{r.abort()},{once:!0,signal:i})}document.addEventListener("astro:page-load",w);</script> <div class="btt-sentinel" aria-hidden="true" data-astro-cid-wlspcwf4></div> <button class="btt" aria-label="Back to top" type="button" hidden data-astro-cid-wlspcwf4> <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M9 14V4" data-astro-cid-wlspcwf4></path> <path d="M4 8l5-5 5 5" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function c(){const e=document.querySelector(".btt"),n=document.querySelector(".btt-sentinel");if(!e||!n)return;const o=new AbortController,{signal:r}=o,s=new IntersectionObserver(([t])=>{e.hidden=t.isIntersecting},{threshold:0});s.observe(n),e.addEventListener("click",()=>{const t=window.matchMedia("(prefers-reduced-motion: reduce)").matches;window.scrollTo({top:0,behavior:t?"instant":"smooth"})},{signal:r}),document.addEventListener("astro:before-swap",()=>{s.disconnect(),o.abort()},{once:!0,signal:r})}document.addEventListener("astro:page-load",c);</script>  <script type="module" src="/portfolio/_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"></script> <script type="module">let e=null;function n(){e?.disconnect(),e=null;const a=document.querySelectorAll("[data-reveal]:not(.revealed)");if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){a.forEach(t=>t.classList.add("revealed"));return}e=new IntersectionObserver(t=>{t.forEach(r=>{r.isIntersecting&&(r.target.classList.add("revealed"),e?.unobserve(r.target))})},{rootMargin:"0px 0px -50px 0px",threshold:.1}),a.forEach(t=>e.observe(t))}document.addEventListener("astro:page-load",n);document.addEventListener("astro:before-swap",()=>{e?.disconnect(),e=null},{once:!1});</script> <script type="module">const i=globalThis,e=i.__portfolioBootstrapState??={listenersAttached:!1};function a(){document.querySelectorAll(".table-wrap").forEach((t,r)=>{if(t.hasAttribute("tabindex")||t.setAttribute("tabindex","0"),t.hasAttribute("role")||t.setAttribute("role","region"),!t.hasAttribute("aria-label")){const o=t.closest("figure")?.querySelector("figcaption")?.textContent?.trim();t.setAttribute("aria-label",o||`Scrollable data table ${r+1}`)}})}e.listenersAttached||("serviceWorker"in navigator&&navigator.serviceWorker.register("/portfolio/sw.js").catch(()=>{}),document.addEventListener("astro:after-swap",()=>{const t=document.getElementById("main-content");t&&(t.setAttribute("tabindex","-1"),t.focus({preventScroll:!0}))}),document.addEventListener("astro:page-load",a),e.listenersAttached=!0);a();</script> <script>
+  // Theme restore — must be inline to avoid FOUC (runs before first paint)
+  (function() {
+    // Storage can throw in privacy-restricted environments; keep a memory fallback.
+    var w = window;
+    if (!w.__themeStorageFallback || typeof w.__themeStorageFallback !== 'object') {
+      w.__themeStorageFallback = { preference: 'system' };
+    }
+
+    function readPreference() {
+      var stored = null;
+      try {
+        stored = w.localStorage.getItem('theme-preference');
+      } catch {}
+
+      if (stored === 'system' || stored === 'light' || stored === 'dark') {
+        w.__themeStorageFallback.preference = stored;
+        return stored;
+      }
+      return w.__themeStorageFallback.preference || 'system';
+    }
+
+    // Theme: 3-state (system/light/dark) with system as default
+    var pref = readPreference();
+    var theme = pref === 'system'
+      ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+      : pref;
+    document.documentElement.dataset.theme = theme;
+
+    // Update theme-color meta
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = theme === 'light' ? '#f5f5f0' : '#0a0a0b';
+  })();
+</script> </body></html>

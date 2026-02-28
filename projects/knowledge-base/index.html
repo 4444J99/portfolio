@@ -1,0 +1,472 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Epistemological infrastructure for converting AI conversations into durable, searchable, interconnected knowledge with multi-modal retrieval."><meta name="generator" content="Astro v5.17.2"><meta name="theme-color" content="#0a0a0b"><link rel="canonical" href="https://4444j99.github.io/portfolio/projects/knowledge-base/"><link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg"><link rel="icon" type="image/x-icon" href="/portfolio/favicon.ico"><!-- RSS Feed --><link rel="alternate" type="application/rss+xml" title="Portfolio Feed" href="/portfolio/feed.xml"><!-- PWA --><link rel="manifest" href="/portfolio/manifest.json"><!-- Identity verification --><link rel="me" href="https://github.com/4444j99"><!-- Analytics (Plausible — privacy-friendly, no cookies) --><script defer data-domain="4444j99.github.io" src="https://plausible.io/js/script.js" integrity="sha384-TDBMBYT3vz715r8UIyVTB4AUTXubXmLI02DeDWgyDahvCXmPV4Vgx2m6yQvI19d/" crossorigin="anonymous"></script><!-- Global Metadata --><meta name="keywords" content="AI Orchestration, Systems Architect, Creative Technologist, Technical PM, MFA, Python, TypeScript, Multi-Agent Systems, Logocentric Architecture"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:locale" content="en_US"><meta property="og:url" content="https://4444j99.github.io/portfolio/projects/knowledge-base/"><meta property="og:title" content="My Knowledge Base — 4444j"><meta property="og:description" content="Epistemological infrastructure for converting AI conversations into durable, searchable, interconnected knowledge with multi-modal retrieval."><meta property="og:image" content="https://4444j99.github.io/portfolio/og/projects/knowledge-base.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:site_name" content="Anthony James Padavano — Portfolio"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="My Knowledge Base — 4444j"><meta name="twitter:description" content="Epistemological infrastructure for converting AI conversations into durable, searchable, interconnected knowledge with multi-modal retrieval."><meta name="twitter:image" content="https://4444j99.github.io/portfolio/og/projects/knowledge-base.png"><meta name="twitter:creator" content="@4444j99"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","mainEntity":{"@type":"CreativeWork","name":"My Knowledge Base","description":"Epistemological infrastructure for converting AI conversations into durable, searchable, interconnected knowledge with multi-modal retrieval.","creator":{"@type":"Person","name":"Anthony James Padavano","jobTitle":"Creative Technologist","address":{"@type":"PostalAddress","addressLocality":"New York City","addressRegion":"NY","addressCountry":"US"},"sameAs":["https://www.linkedin.com/in/anthony-james-padavano-98a40a186/","https://github.com/4444j99","https://github.com/meta-organvm","https://github.com/organvm-i-theoria","https://github.com/organvm-ii-poiesis","https://github.com/organvm-iii-ergon","https://github.com/organvm-iv-taxis","https://github.com/organvm-v-logos","https://github.com/organvm-vi-koinonia","https://github.com/organvm-vii-kerygma"],"alumniOf":[{"@type":"CollegeOrUniversity","name":"Florida Atlantic University","url":"https://www.fau.edu"},{"@type":"CollegeOrUniversity","name":"CUNY College of Staten Island","url":"https://www.csi.cuny.edu"}],"knowsAbout":["Python","TypeScript","JavaScript","Go","Rust","systems architecture","generative art","multi-agent AI systems","LLM orchestration","governance design","digital marketing","creative technology","audio synthesis","interactive installations"],"hasCredential":[{"@type":"EducationalOccupationalCredential","credentialCategory":"professional certification","name":"Full-Stack Developer","recognizedBy":{"@type":"Organization","name":"Meta"}},{"@type":"EducationalOccupationalCredential","credentialCategory":"professional certification","name":"UX Design","recognizedBy":{"@type":"Organization","name":"Google"}},{"@type":"EducationalOccupationalCredential","credentialCategory":"professional certification","name":"Digital Marketing & E-commerce","recognizedBy":{"@type":"Organization","name":"Google"}},{"@type":"EducationalOccupationalCredential","credentialCategory":"professional certification","name":"Project Management","recognizedBy":{"@type":"Organization","name":"Google"}}],"memberOf":{"@type":"Organization","name":"meta-organvm","url":"https://github.com/meta-organvm"}},"keywords":"Theory, Knowledge","codeRepository":"https://github.com/organvm-i-theoria/my-knowledge-base","image":"https://4444j99.github.io/portfolio/og/projects/knowledge-base.png"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Portfolio","item":"https://4444j99.github.io/portfolio"},{"@type":"ListItem","position":2,"name":"My Knowledge Base","item":"https://4444j99.github.io/portfolio/projects/knowledge-base/"}]}]}</script><link rel="preload" href="/portfolio/fonts/syne-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="prefetch" href="/portfolio/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin><style>
+  @font-face {
+    font-family: 'Syne';
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url('/portfolio/fonts/syne-latin.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('/portfolio/fonts/plus-jakarta-sans-latin.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400 500;
+    font-display: swap;
+    src: url('/portfolio/fonts/jetbrains-mono-latin.woff2') format('woff2');
+  }
+</style><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/portfolio/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js"></script><title>My Knowledge Base — 4444j</title><style>.cite[data-astro-cid-gudpzm6e]{font-size:.75em;vertical-align:super;line-height:0}.cite[data-astro-cid-gudpzm6e] a[data-astro-cid-gudpzm6e]{color:var(--text-primary);text-decoration:none;font-family:var(--font-mono);font-weight:500}.cite[data-astro-cid-gudpzm6e] a[data-astro-cid-gudpzm6e]:hover{text-decoration:underline}.references[data-astro-cid-wxl2vi4o]{margin-top:var(--space-3xl);padding-top:var(--space-xl);border-top:1px solid var(--border)}.references[data-astro-cid-wxl2vi4o] h2[data-astro-cid-wxl2vi4o]{font-size:1.25rem;margin-bottom:var(--space-lg)}.references[data-astro-cid-wxl2vi4o] ol[data-astro-cid-wxl2vi4o]{list-style:none;counter-reset:ref-counter;padding-left:0}.references[data-astro-cid-wxl2vi4o] li[data-astro-cid-wxl2vi4o]{counter-increment:ref-counter;padding-left:2.5em;text-indent:-2.5em;margin-bottom:var(--space-sm);font-size:.875rem;color:var(--text-secondary);line-height:1.6}.references[data-astro-cid-wxl2vi4o] li[data-astro-cid-wxl2vi4o]:before{content:"[" counter(ref-counter) "] ";font-family:var(--font-mono);font-weight:600;color:var(--text-primary)}.references[data-astro-cid-wxl2vi4o] li[data-astro-cid-wxl2vi4o] em[data-astro-cid-wxl2vi4o]{color:var(--text-primary)}.references[data-astro-cid-wxl2vi4o] li[data-astro-cid-wxl2vi4o] a[data-astro-cid-wxl2vi4o]{word-break:break-all;font-size:.8em}
+.sketch-wrapper[data-astro-cid-cn4uwenb]{margin:0;display:flex;flex-direction:column;gap:var(--space-sm)}.sketch-title[data-astro-cid-cn4uwenb]{font-size:.85rem;font-weight:700;color:var(--text-primary);text-transform:uppercase;letter-spacing:.1em;opacity:.9}.sketch-container[data-astro-cid-cn4uwenb]{width:100%;height:var(--sketch-height);position:relative;overflow:hidden;border-radius:8px;border:1px solid var(--border);background:var(--bg-card)}.sketch-caption[data-astro-cid-cn4uwenb]{font-size:.75rem;color:var(--text-secondary);line-height:1.5;display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-md);opacity:.8}.sketch-source[data-astro-cid-cn4uwenb]{font-family:var(--font-mono);opacity:.8;white-space:nowrap}.sketch-container[data-astro-cid-cn4uwenb] canvas{display:block}.sketch-fallback[data-astro-cid-cn4uwenb]{padding:var(--space-xl);color:var(--text-muted);font-style:italic;text-align:center}.sketch-controls[data-astro-cid-cn4uwenb]{position:absolute;top:var(--space-sm);right:var(--space-sm);display:flex;gap:4px;z-index:5;opacity:0;transition:opacity .2s ease}.sketch-container[data-astro-cid-cn4uwenb]:hover .sketch-controls[data-astro-cid-cn4uwenb],.sketch-container[data-astro-cid-cn4uwenb]:focus-within .sketch-controls[data-astro-cid-cn4uwenb]{opacity:1}.sketch-ctrl[data-astro-cid-cn4uwenb]{width:32px;height:32px;border-radius:6px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--transition-fast)}.sketch-ctrl[data-astro-cid-cn4uwenb]:hover{border-color:var(--accent);color:var(--accent-text)}.ctrl-icon--play[data-astro-cid-cn4uwenb],.sketch-container[data-astro-cid-cn4uwenb][data-paused] .ctrl-icon--pause[data-astro-cid-cn4uwenb]{display:none}.sketch-container[data-astro-cid-cn4uwenb][data-paused] .ctrl-icon--play[data-astro-cid-cn4uwenb]{display:block}.sketch-container[data-astro-cid-cn4uwenb]:fullscreen{background:#000;border:none;border-radius:0;display:flex;align-items:center;justify-content:center}.sketch-container[data-astro-cid-cn4uwenb]:fullscreen .sketch-controls[data-astro-cid-cn4uwenb]{opacity:1;top:var(--space-md);right:var(--space-md)}.sketch-container[data-astro-cid-cn4uwenb][data-paused]:after{content:"PAUSED";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.1em;color:var(--text-muted);background:#0000004d;pointer-events:none}@media(max-width:768px){.sketch-container[data-astro-cid-cn4uwenb]{height:var(--sketch-mobile-height)}}
+</style>
+<link rel="stylesheet" href="/portfolio/_astro/aetheria-rpg.DGdtIVVw.css">
+<link rel="stylesheet" href="/portfolio/_astro/aetheria-rpg.TyMfVJhD.css">
+<style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media(prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+</style><style>[data-astro-transition-scope="astro-j55cbpbw-1"] { view-transition-name: project-knowledge-base; }</style></head> <body> <a href="#main-content" class="skip-to-content">Skip to main content</a> <div id="bg-canvas" aria-hidden="true" data-astro-transition-persist="astro-7k4xbl3z-2"></div> <header class="header" data-astro-cid-3ef6ksr2> <div class="container header__inner" data-astro-cid-3ef6ksr2> <a href="/portfolio/" class="header__logo" data-astro-cid-3ef6ksr2> <span class="header__name" data-astro-cid-3ef6ksr2>4444j99</span> </a> <button class="header__toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav" data-astro-cid-3ef6ksr2> <span class="header__toggle-bar" data-astro-cid-3ef6ksr2></span> <span class="header__toggle-bar" data-astro-cid-3ef6ksr2></span> <span class="header__toggle-bar" data-astro-cid-3ef6ksr2></span> </button> <nav class="header__nav" id="main-nav" aria-label="Main navigation" data-astro-cid-3ef6ksr2>  <div class="header__dropdown" data-dropdown-group="0" data-astro-cid-3ef6ksr2> <button class="header__link header__dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-0" type="button" data-astro-cid-3ef6ksr2> Work <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <path d="M3 5l3 3 3-3" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="header__dropdown-menu" id="dropdown-0" data-astro-cid-3ef6ksr2> <a href="/portfolio/#work" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Projects </a><a href="/portfolio/resume/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Resume </a><a href="/portfolio/dashboard/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Dashboard </a><a href="/portfolio/products/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Products </a> </div> </div><div class="header__dropdown" data-dropdown-group="1" data-astro-cid-3ef6ksr2> <button class="header__link header__dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-1" type="button" data-astro-cid-3ef6ksr2> Explore <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <path d="M3 5l3 3 3-3" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="header__dropdown-menu" id="dropdown-1" data-astro-cid-3ef6ksr2> <a href="/portfolio/gallery/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Gallery </a><a href="/portfolio/essays/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Essays </a><a href="/portfolio/philosophy/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Philosophy </a><a href="/portfolio/architecture/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Architecture </a><a href="/portfolio/omega/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Omega </a> </div> </div><div class="header__dropdown" data-dropdown-group="2" data-astro-cid-3ef6ksr2> <button class="header__link header__dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-2" type="button" data-astro-cid-3ef6ksr2> About <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <path d="M3 5l3 3 3-3" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="header__dropdown-menu" id="dropdown-2" data-astro-cid-3ef6ksr2> <a href="/portfolio/about/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> About </a><a href="/portfolio/community/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Community </a><a href="/portfolio/consult/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Consult </a><a href="/portfolio/github-pages/" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> GitHub Pages </a> </div> </div><div class="header__dropdown" data-dropdown-group="3" data-astro-cid-3ef6ksr2> <button class="header__link header__dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdown-3" type="button" data-astro-cid-3ef6ksr2> Connect <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <path d="M3 5l3 3 3-3" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="header__dropdown-menu" id="dropdown-3" data-astro-cid-3ef6ksr2> <a href="mailto:padavano.anthony@gmail.com" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> Contact </a><a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="noopener noreferrer" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> LinkedIn<span class="header__external" aria-hidden="true" data-astro-cid-3ef6ksr2> &#8599;</span> </a><a href="https://github.com/4444j99" target="_blank" rel="noopener noreferrer" class="astro-3ef6ksr2" data-astro-cid-3ef6ksr2> GitHub<span class="header__external" aria-hidden="true" data-astro-cid-3ef6ksr2> &#8599;</span> </a> </div> </div>  <div class="header__mobile-group" data-astro-cid-3ef6ksr2> <span class="header__mobile-label" data-astro-cid-3ef6ksr2>Work</span> <a href="/portfolio/#work" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Projects </a><a href="/portfolio/resume/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Resume </a><a href="/portfolio/dashboard/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Dashboard </a><a href="/portfolio/products/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Products </a> </div><div class="header__mobile-group" data-astro-cid-3ef6ksr2> <span class="header__mobile-label" data-astro-cid-3ef6ksr2>Explore</span> <a href="/portfolio/gallery/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Gallery </a><a href="/portfolio/essays/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Essays </a><a href="/portfolio/philosophy/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Philosophy </a><a href="/portfolio/architecture/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Architecture </a><a href="/portfolio/omega/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Omega </a> </div><div class="header__mobile-group" data-astro-cid-3ef6ksr2> <span class="header__mobile-label" data-astro-cid-3ef6ksr2>About</span> <a href="/portfolio/about/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> About </a><a href="/portfolio/community/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Community </a><a href="/portfolio/consult/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Consult </a><a href="/portfolio/github-pages/" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> GitHub Pages </a> </div><div class="header__mobile-group" data-astro-cid-3ef6ksr2> <span class="header__mobile-label" data-astro-cid-3ef6ksr2>Connect</span> <a href="mailto:padavano.anthony@gmail.com" class="header__link header__link--mobile" data-astro-cid-3ef6ksr2> Contact </a><a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" class="header__link header__link--mobile" target="_blank" rel="noopener noreferrer" data-astro-cid-3ef6ksr2> LinkedIn<span class="header__external" aria-hidden="true" data-astro-cid-3ef6ksr2> &#8599;</span> </a><a href="https://github.com/4444j99" class="header__link header__link--mobile" target="_blank" rel="noopener noreferrer" data-astro-cid-3ef6ksr2> GitHub<span class="header__external" aria-hidden="true" data-astro-cid-3ef6ksr2> &#8599;</span> </a> </div> <button class="search-trigger" aria-label="Search (Cmd+K)" type="button" data-astro-cid-otpdt6jm> <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-otpdt6jm> <circle cx="6.5" cy="6.5" r="5" data-astro-cid-otpdt6jm></circle> <path d="M10.5 10.5L15 15" data-astro-cid-otpdt6jm></path> </svg> <kbd class="search-trigger__kbd" data-astro-cid-otpdt6jm> <span class="search-trigger__kbd-symbol" data-astro-cid-otpdt6jm>⌘</span>K
+</kbd> </button> <dialog class="search-dialog" aria-label="Site search" data-base="/portfolio/" data-astro-cid-otpdt6jm> <div class="search-dialog__inner" data-astro-cid-otpdt6jm> <div id="pagefind-container" data-astro-cid-otpdt6jm></div> <button class="search-dialog__close" aria-label="Close search" type="button" data-astro-cid-otpdt6jm> <kbd data-astro-cid-otpdt6jm>Esc</kbd> </button> </div> </dialog> <script>
+  (function () {
+    var BASE = '/portfolio/';
+    var globalScope = globalThis;
+    var state = globalScope.__portfolioSearchState;
+    if (!state) {
+      state = {
+        controller: null,
+        pagefindLoaded: false,
+      };
+      globalScope.__portfolioSearchState = state;
+    }
+
+    function initSearch() {
+      if (state.controller) state.controller.abort();
+      var controller = new AbortController();
+      var signal = controller.signal;
+      state.controller = controller;
+
+      var trigger = document.querySelector('.search-trigger');
+      var dialog = document.querySelector('.search-dialog');
+      var closeBtn = document.querySelector('.search-dialog__close');
+      if (!trigger || !dialog) return;
+      BASE = dialog.dataset.base || BASE;
+
+      function focusSearchInput() {
+        var input = document.querySelector('#pagefind-container input');
+        if (input) input.focus();
+      }
+
+      function openSearch() {
+        if (!dialog.open) dialog.showModal();
+        loadPagefind();
+        focusSearchInput();
+      }
+
+      function closeSearch() {
+        if (dialog.open) dialog.close();
+      }
+
+      trigger.addEventListener('click', openSearch, { signal });
+      if (closeBtn) closeBtn.addEventListener('click', closeSearch, { signal });
+
+      // Click outside to close
+      dialog.addEventListener('click', function (e) {
+        if (e.target === dialog) closeSearch();
+      }, { signal });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && dialog.open) {
+          closeSearch();
+          return;
+        }
+
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          if (dialog.open) {
+            closeSearch();
+          } else {
+            openSearch();
+          }
+        }
+      }, { signal });
+
+      document.addEventListener('astro:before-swap', function () {
+        controller.abort();
+      }, { once: true, signal });
+    }
+
+    function loadPagefind() {
+      if (state.pagefindLoaded) return;
+      state.pagefindLoaded = true;
+
+      var container = document.getElementById('pagefind-container');
+      if (!container) return;
+
+      // Load Pagefind UI CSS
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = BASE + 'pagefind/pagefind-ui.css';
+      document.head.appendChild(link);
+
+      // Load Pagefind UI JS via script tag (no ES module import in is:inline)
+      try {
+        var script = document.createElement('script');
+        script.src = BASE + 'pagefind/pagefind-ui.js';
+        script.onload = function () {
+          if (window.PagefindUI) {
+            new window.PagefindUI({
+              element: container,
+              showSubResults: true,
+              showImages: false,
+              baseUrl: BASE,
+            });
+            setTimeout(function () {
+              var input = container.querySelector('input');
+              if (input) input.focus();
+            }, 50);
+          }
+        };
+        script.onerror = function () {
+          container.textContent = 'Search unavailable \u2014 run a production build to enable Pagefind.';
+        };
+        document.head.appendChild(script);
+      } catch (err) {
+        container.textContent = 'Search unavailable.';
+      }
+    }
+
+    // Dual init: covers initial load + View Transition navigations
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSearch);
+    } else {
+      initSearch();
+    }
+    document.addEventListener('astro:page-load', initSearch);
+  })();
+</script>   <button class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme" data-astro-cid-3ef6ksr2> <svg class="theme-icon theme-icon--sun" width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <circle cx="9" cy="9" r="4" data-astro-cid-3ef6ksr2></circle> <path d="M9 1v2M9 15v2M1 9h2M15 9h2M3.3 3.3l1.4 1.4M13.3 13.3l1.4 1.4M3.3 14.7l1.4-1.4M13.3 4.7l1.4-1.4" data-astro-cid-3ef6ksr2></path> </svg> <svg class="theme-icon theme-icon--moon" width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-3ef6ksr2> <path d="M15.1 9.9A6 6 0 1 1 8.1 2.9a7 7 0 0 0 7 7z" data-astro-cid-3ef6ksr2></path> </svg> </button> </nav> </div> </header> <script type="module">function y(){const c=window;return c.__headerState||(c.__headerState={}),c.__headerState}function h(){const c=y();c.controller?.abort();const f=new AbortController,{signal:a}=f;c.controller=f;const d=document.querySelector(".header"),s=document.querySelector(".header__toggle"),l=document.querySelector(".header__nav");if(!d||!s||!l)return;d.classList.remove("header--open"),s.setAttribute("aria-expanded","false"),document.body.style.overflow="";function u(){document.querySelectorAll("[data-dropdown-group]").forEach(e=>{const o=e.querySelector(".header__dropdown-menu"),t=e.querySelector(".header__dropdown-trigger");o&&o.removeAttribute("data-open"),t&&t.setAttribute("aria-expanded","false")})}function g(){s.setAttribute("aria-expanded","true"),d.classList.add("header--open"),document.body.style.overflow="hidden",u()}function p(){s.setAttribute("aria-expanded","false"),d.classList.remove("header--open"),document.body.style.overflow="",s.focus()}s.addEventListener("click",()=>{s.getAttribute("aria-expanded")==="true"?p():g()},{signal:a}),l.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{d.classList.contains("header--open")&&p()},{signal:a})}),document.addEventListener("keydown",e=>{e.key==="Escape"&&d.classList.contains("header--open")&&p()},{signal:a}),l.addEventListener("keydown",e=>{if(e.key!=="Tab"||!d.classList.contains("header--open"))return;const o=l.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');if(o.length===0)return;const t=o[0],n=o[o.length-1];e.shiftKey&&document.activeElement===t?(e.preventDefault(),n.focus()):!e.shiftKey&&document.activeElement===n&&(e.preventDefault(),t.focus())},{signal:a}),document.querySelectorAll("[data-dropdown-group]").forEach(e=>{const o=e.querySelector(".header__dropdown-trigger"),t=e.querySelector(".header__dropdown-menu");!o||!t||(o.addEventListener("click",n=>{n.stopPropagation();const r=t.hasAttribute("data-open");if(u(),!r){t.setAttribute("data-open",""),o.setAttribute("aria-expanded","true");const i=t.querySelectorAll("a");i.length&&i[0].focus()}},{signal:a}),t.addEventListener("keydown",n=>{const r=[...t.querySelectorAll("a")],i=r.indexOf(document.activeElement);n.key==="ArrowDown"?(n.preventDefault(),r[(i+1)%r.length].focus()):n.key==="ArrowUp"?(n.preventDefault(),r[(i-1+r.length)%r.length].focus()):n.key==="Home"?(n.preventDefault(),r[0].focus()):n.key==="End"&&(n.preventDefault(),r[r.length-1].focus())},{signal:a}),t.querySelectorAll("a").forEach(n=>{n.addEventListener("click",()=>{t.removeAttribute("data-open"),o.setAttribute("aria-expanded","false")},{signal:a})}))}),document.addEventListener("click",e=>{e.target.closest?.("[data-dropdown-group]")||u()},{signal:a}),document.addEventListener("keydown",e=>{if(e.key==="Escape"){const o=document.querySelector(".header__dropdown-menu[data-open]");if(o){const t=o.closest("[data-dropdown-group]")?.querySelector(".header__dropdown-trigger");u(),t?.focus()}}},{signal:a}),document.addEventListener("astro:before-swap",()=>{f.abort()},{once:!0,signal:a})}document.addEventListener("astro:page-load",h);</script>  <main id="main-content">  <article class="project" data-astro-cid-ovdrvj3f> <header class="project__header" data-astro-cid-ovdrvj3f> <a href="/portfolio/" class="project__back" data-astro-cid-ovdrvj3f>&larr; All projects</a> <div class="project__tags" data-astro-cid-ovdrvj3f> <span class="tag" data-astro-cid-ovdrvj3f>Theory</span><span class="tag" data-astro-cid-ovdrvj3f>Knowledge</span> </div> <h1 class="project__title" data-astro-cid-ovdrvj3f data-astro-transition-scope="astro-j55cbpbw-1">My Knowledge Base</h1> <p class="project__tagline" data-astro-cid-ovdrvj3f>Turning AI conversations into durable, interconnected knowledge</p> <div class="project__badges" data-astro-cid-ovdrvj3f> <img src="https://img.shields.io/github/languages/top/organvm-i-theoria/my-knowledge-base" alt="Top language" loading="lazy" data-astro-cid-ovdrvj3f><img src="https://img.shields.io/github/last-commit/organvm-i-theoria/my-knowledge-base" alt="Last commit" loading="lazy" data-astro-cid-ovdrvj3f> </div> <div class="project__links" data-astro-cid-ovdrvj3f> <a href="https://github.com/organvm-i-theoria/my-knowledge-base" target="_blank" rel="noopener noreferrer" class="project__link" data-astro-cid-ovdrvj3f>GitHub &rarr;</a>  </div> <section class="project__pages" aria-label="Related GitHub Pages links" data-astro-cid-ovdrvj3f> <h2 class="project__pages-heading" data-astro-cid-ovdrvj3f>Related Live Sites</h2> <ul class="project__pages-list" data-astro-cid-ovdrvj3f> <li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/my-knowledge-base/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="my-knowledge-base" data-track-target="page" data-astro-cid-ovdrvj3f> Knowledge Base </a> <a href="https://github.com/organvm-i-theoria/my-knowledge-base" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="my-knowledge-base" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li><li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/.github/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo=".github" data-track-target="page" data-astro-cid-ovdrvj3f> organvm-i-theoria/.github </a> <a href="https://github.com/organvm-i-theoria/.github" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo=".github" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li><li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/4-ivi374-F0Rivi4/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="4-ivi374-F0Rivi4" data-track-target="page" data-astro-cid-ovdrvj3f> organvm-i-theoria/4-ivi374-F0Rivi4 </a> <a href="https://github.com/organvm-i-theoria/4-ivi374-F0Rivi4" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="4-ivi374-F0Rivi4" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li><li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/a-recursive-root/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="a-recursive-root" data-track-target="page" data-astro-cid-ovdrvj3f> organvm-i-theoria/a-recursive-root </a> <a href="https://github.com/organvm-i-theoria/a-recursive-root" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="a-recursive-root" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li><li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/auto-revision-epistemic-engine/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="auto-revision-epistemic-engine" data-track-target="page" data-astro-cid-ovdrvj3f> organvm-i-theoria/auto-revision-epistemic-engine </a> <a href="https://github.com/organvm-i-theoria/auto-revision-epistemic-engine" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="auto-revision-epistemic-engine" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li><li class="project__pages-item" data-astro-cid-ovdrvj3f> <a href="https://organvm-i-theoria.github.io/call-function--ontological/" target="_blank" rel="noopener noreferrer" class="project__pages-link" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="call-function--ontological" data-track-target="page" data-astro-cid-ovdrvj3f> organvm-i-theoria/call-function--ontological </a> <a href="https://github.com/organvm-i-theoria/call-function--ontological" target="_blank" rel="noopener noreferrer" class="project__pages-repo" data-gh-pages-track data-track-surface="project-related" data-track-owner="organvm-i-theoria" data-track-repo="call-function--ontological" data-track-target="repo" data-astro-cid-ovdrvj3f>
+repo
+</a> </li> </ul> </section> </header>  <div class="sketch-accent" data-astro-cid-ovdrvj3f> <figure class="sketch-wrapper" data-astro-cid-cn4uwenb> <h3 class="sketch-title" data-astro-cid-cn4uwenb>My Knowledge Base Concept Sketch</h3> <div class="sketch-container" data-sketch="spiral" data-height="250px" data-mobile-height="180px" style="--sketch-height:250px;--sketch-mobile-height:180px;height:var(--sketch-height);" role="img" aria-label="Generative sketch: spiral" tabindex="0" data-tags="Theory,Knowledge" data-astro-cid-ovdrvj3f="true" data-astro-cid-cn4uwenb>  <noscript> <p class="sketch-fallback" data-astro-cid-cn4uwenb>Generative sketch: spiral</p> </noscript> </div> <figcaption class="sketch-caption" data-astro-cid-cn4uwenb> <span data-astro-cid-cn4uwenb>Algorithmic visualization representing the underlying logic of My Knowledge Base.</span> <span class="sketch-source" data-astro-cid-cn4uwenb>Source: Dynamic Generation</span> </figcaption> </figure>  </div> <div class="project__content-grid" data-astro-cid-ovdrvj3f> <aside class="toc" aria-label="Table of contents" data-astro-cid-xvrfupwn> <button class="toc__toggle" aria-expanded="false" aria-controls="toc-nav" type="button" data-astro-cid-xvrfupwn> <span class="toc__toggle-label" data-astro-cid-xvrfupwn>On this page</span> <svg class="toc__toggle-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-xvrfupwn> <path d="M3 5l3 3 3-3" data-astro-cid-xvrfupwn></path> </svg> </button> <nav class="toc__nav" id="toc-nav" data-astro-cid-xvrfupwn> <span class="toc__heading" data-astro-cid-xvrfupwn>On this page</span> <ol class="toc__list" role="list" data-astro-cid-xvrfupwn></ol> </nav> </aside> <script type="module">function v(){const r=document.querySelector(".toc"),n=r?.querySelector(".toc__list"),d=document.querySelector(".project__body.prose");if(!r||!n||!d)return;const u=new AbortController,{signal:s}=u,c=d.querySelectorAll("h2, h3");if(c.length<2){r.style.display="none";return}for(c.forEach((e,t)=>{e.id||(e.id=e.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||`heading-${t}`)});n.firstChild;)n.removeChild(n.firstChild);c.forEach(e=>{const t=document.createElement("li");t.className=e.tagName==="H3"?"toc__item toc__item--sub":"toc__item";const o=document.createElement("a");o.href=`#${e.id}`,o.className="toc__link",o.textContent=e.textContent.trim(),o.addEventListener("click",f=>{f.preventDefault();const g=window.matchMedia("(prefers-reduced-motion: reduce)").matches;e.scrollIntoView({behavior:g?"instant":"smooth"}),history.replaceState(null,"",`#${e.id}`)},{signal:s}),t.appendChild(o),n.appendChild(t)});const a=n.querySelectorAll(".toc__link");let i=0;function m(e){e!==i&&(a[i]?.classList.remove("toc__link--active"),i=e,a[i]?.classList.add("toc__link--active"))}a[0]?.classList.add("toc__link--active");const _=new IntersectionObserver(e=>{e.forEach(t=>{if(t.isIntersecting){const o=Array.from(c).indexOf(t.target);o!==-1&&m(o)}})},{rootMargin:"-80px 0px -70% 0px",threshold:0});c.forEach(e=>_.observe(e));const l=r.querySelector(".toc__toggle"),p=r.querySelector(".toc__nav");l?.addEventListener("click",()=>{const e=l.getAttribute("aria-expanded")==="true";l.setAttribute("aria-expanded",String(!e)),p?.classList.toggle("toc__nav--open",!e)},{signal:s}),document.addEventListener("astro:before-swap",()=>{_.disconnect(),u.abort()},{once:!0,signal:s})}document.addEventListener("astro:page-load",v);</script>  <div class="project__body prose" data-astro-cid-ovdrvj3f>   <h2>The Evaporation Problem</h2> <figure class="sketch-wrapper" data-astro-cid-cn4uwenb>  <div class="sketch-container" data-sketch="spiral" data-height="250px" data-mobile-height="180px" style="--sketch-height:250px;--sketch-mobile-height:180px;height:var(--sketch-height);" role="img" aria-label="Golden spiral knowledge growth" tabindex="0" data-astro-cid-cn4uwenb>  <noscript> <p class="sketch-fallback" data-astro-cid-cn4uwenb>Golden spiral knowledge growth</p> </noscript> </div>  </figure>  <p>
+Every meaningful AI conversation generates knowledge that evaporates. You spend ninety minutes with Claude working through a recursive data structure design, and afterward that knowledge exists only inside a vendor-specific chat interface — unsearchable, unstructured, disconnected from every other conversation you have ever had. No export pathway, no atomization, no cross-conversation search, no intelligence extraction. This is not a new problem but an intensified form of an old one.<sup class="cite" data-ref-id="1" data-ref-author="Polanyi, Michael" data-ref-title="The Tacit Dimension" data-ref-source="University of Chicago Press" data-ref-year="1966" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-1" data-astro-cid-gudpzm6e>[1]</a></sup>  Polanyi observed that we know more than we can tell — tacit knowledge resists codification. AI conversations produce a hybrid form: the dialogue itself is explicit text, but the understanding it generates often remains tacit, trapped in the user's memory and the chat log's inaccessible architecture. Vannevar Bush anticipated this crisis of intellectual record-keeping in 1945, proposing a "memex" — a device for storing, linking, and retrieving the trails of one's intellectual work.<sup class="cite" data-ref-id="2" data-ref-author="Bush, Vannevar" data-ref-title="As We May Think" data-ref-source="The Atlantic Monthly" data-ref-year="1945" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-2" data-astro-cid-gudpzm6e>[2]</a></sup>  My Knowledge Base is the memex for the AI conversation era: a system that ingests from nine sources, decomposes conversations into atomic knowledge units, indexes them across three search modalities, and extracts intelligence that the original conversations only implied.
+</p> <div class="mermaid-container" data-astro-cid-2r2ppsi5> <div class="mermaid" data-chart="graph TD
+    S1[Claude] --> E[Multi-Source Export Engine]
+    S2[ChatGPT] --> E
+    S3[Gemini] --> E
+    S4[Local Files] --> E
+    S5[Google Docs] --> E
+    S6[Apple Notes] --> E
+    S7[Perplexity] --> E
+    S8[Grok] --> E
+    S9[DeepSeek] --> E
+    E -->|raw conversations| A[Five-Strategy Atomizer]
+    A -->|atomic units| I[Triple-Modal Index]
+    I -->|FTS5 + ChromaDB + RRF| IL[Intelligence Layer]
+    IL -->|insights + tags + relations| KG[Knowledge Graph]
+    KG -->|BFS traversal + vis.js| O[Downstream Organs]
+    style E fill:#1b4332,color:#fff
+    style A fill:#2d6a4f,color:#fff
+    style I fill:#40916c,color:#fff
+    style IL fill:#52b788,color:#000
+    style KG fill:#74c69d,color:#000" data-astro-cid-2r2ppsi5> graph TD
+    S1[Claude] --&gt; E[Multi-Source Export Engine]
+    S2[ChatGPT] --&gt; E
+    S3[Gemini] --&gt; E
+    S4[Local Files] --&gt; E
+    S5[Google Docs] --&gt; E
+    S6[Apple Notes] --&gt; E
+    S7[Perplexity] --&gt; E
+    S8[Grok] --&gt; E
+    S9[DeepSeek] --&gt; E
+    E --&gt;|raw conversations| A[Five-Strategy Atomizer]
+    A --&gt;|atomic units| I[Triple-Modal Index]
+    I --&gt;|FTS5 + ChromaDB + RRF| IL[Intelligence Layer]
+    IL --&gt;|insights + tags + relations| KG[Knowledge Graph]
+    KG --&gt;|BFS traversal + vis.js| O[Downstream Organs]
+    style E fill:#1b4332,color:#fff
+    style A fill:#2d6a4f,color:#fff
+    style I fill:#40916c,color:#fff
+    style IL fill:#52b788,color:#000
+    style KG fill:#74c69d,color:#000 </div> <div class="mermaid-caption" data-astro-cid-2r2ppsi5>End-to-end knowledge pipeline — nine sources converge through export, atomization, and indexing into a unified intelligence layer</div> <noscript> <pre class="mermaid-fallback" data-astro-cid-2r2ppsi5><code data-astro-cid-2r2ppsi5>graph TD
+    S1[Claude] --&gt; E[Multi-Source Export Engine]
+    S2[ChatGPT] --&gt; E
+    S3[Gemini] --&gt; E
+    S4[Local Files] --&gt; E
+    S5[Google Docs] --&gt; E
+    S6[Apple Notes] --&gt; E
+    S7[Perplexity] --&gt; E
+    S8[Grok] --&gt; E
+    S9[DeepSeek] --&gt; E
+    E --&gt;|raw conversations| A[Five-Strategy Atomizer]
+    A --&gt;|atomic units| I[Triple-Modal Index]
+    I --&gt;|FTS5 + ChromaDB + RRF| IL[Intelligence Layer]
+    IL --&gt;|insights + tags + relations| KG[Knowledge Graph]
+    KG --&gt;|BFS traversal + vis.js| O[Downstream Organs]
+    style E fill:#1b4332,color:#fff
+    style A fill:#2d6a4f,color:#fff
+    style I fill:#40916c,color:#fff
+    style IL fill:#52b788,color:#000
+    style KG fill:#74c69d,color:#000</code></pre> </noscript> </div>  <script type="module" src="/portfolio/_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js"></script> <h2>Multi-Source Export</h2> <p>
+The first subsystem solves the ingestion problem: AI platforms do not offer robust export APIs, so the system uses browser automation (Playwright) to extract conversations. I directed the implementation of the <a href="https://github.com/organvm-i-theoria/my-knowledge-base/tree/main/src/adapters" target="_blank">source adapters</a> to normalize conversations from nine disparate platforms into a common intermediate representation.<sup class="cite" data-ref-id="3" data-ref-author="Engelbart, Douglas C." data-ref-title="Augmenting Human Intellect: A Conceptual Framework" data-ref-source="Stanford Research Institute" data-ref-year="1962" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-3" data-astro-cid-gudpzm6e>[3]</a></sup>  </p> <div class="code-structure" data-astro-cid-pbr2my35> <div class="code-structure__filename" data-astro-cid-pbr2my35>atomizer-pipeline.ts</div> <pre tabindex="0" role="region" aria-label="Code example: atomizer-pipeline.ts" data-astro-cid-pbr2my35><code class="language-typescript" data-astro-cid-pbr2my35>interface SourceAdapter {
+  readonly sourceId: SourcePlatform;
+  authenticate(): Promise&lt;AuthSession&gt;;
+  listConversations(since?: Date): Promise&lt;ConversationMeta[]&gt;;
+  extractConversation(id: string): Promise&lt;RawConversation&gt;;
+}
+
+interface RawConversation {
+  id: string;
+  source: SourcePlatform;
+  title: string;
+  turns: ConversationTurn[];
+  metadata: {
+    createdAt: Date;
+    model: string;
+    tokenCount: number;
+    tags: string[];
+  };
+}
+
+interface AtomizationResult {
+  atoms: KnowledgeAtom[];
+  strategy: AtomizationStrategy;
+  parentConversation: string;
+  confidence: number;
+}
+
+type AtomizationStrategy =
+  | &#39;topic-boundary&#39;
+  | &#39;question-answer&#39;
+  | &#39;code-explanation&#39;
+  | &#39;decision-rationale&#39;
+  | &#39;concept-definition&#39;;</code></pre> <div class="code-structure__caption" data-astro-cid-pbr2my35>Source adapter interface and atomizer pipeline — the contract every ingestion source must satisfy</div> </div>  <h2>Five-Strategy Atomizer</h2> <p>
+Raw conversations are not knowledge — they are transcripts of a knowledge-generating process, filled with false starts, clarifications, and tangential exploration. The atomizer decomposes these transcripts into the smallest self-contained knowledge units using five distinct strategies, each tuned for a different conversational pattern.<sup class="cite" data-ref-id="5" data-ref-author="Sowa, John F." data-ref-title="Knowledge Representation: Logical, Philosophical, and Computational Foundations" data-ref-source="Brooks/Cole" data-ref-year="2000" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-5" data-astro-cid-gudpzm6e>[5]</a></sup>  Sowa's framework for knowledge representation emphasizes that the granularity of representation determines what can be retrieved and reasoned about — too coarse and connections are lost, too fine and context evaporates. The atomizer navigates this tension by applying the appropriate strategy based on conversational structure: topic-boundary detection splits at natural subject transitions, question-answer extraction pairs explicit queries with their resolutions, code-explanation pairing links implementation to rationale, decision-rationale extraction captures the reasoning behind choices, and concept-definition isolation identifies when a new term or framework is being established. Each strategy produces atoms at a different granularity level, and the system indexes all of them — a query can match at the concept level, the decision level, or the code level depending on what the user is searching for.<sup class="cite" data-ref-id="6" data-ref-author="Minsky, Marvin" data-ref-title="The Society of Mind" data-ref-source="Simon &#38; Schuster" data-ref-year="1986" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-6" data-astro-cid-gudpzm6e>[6]</a></sup>  Minsky's thesis that intelligence emerges from the interaction of many simple agents maps onto the atomizer architecture: no single strategy captures all knowledge, but their collective output covers the full spectrum of what a conversation contains.
+</p> <figure class="academic-figure" data-astro-cid-wa2vzzqt> <div class="figure-content" data-astro-cid-wa2vzzqt>  <div class="table-wrap"> <table> <thead> <tr> <th>Strategy</th> <th>Trigger Pattern</th> <th>Granularity</th> <th>Typical Atom Size</th> <th>Example Output</th> </tr> </thead> <tbody> <tr> <td>Topic Boundary</td> <td>Subject shift detected via embedding distance</td> <td>Section-level</td> <td>200-500 tokens</td> <td>Complete discussion of a single architectural decision</td> </tr> <tr> <td>Question-Answer</td> <td>Explicit question followed by substantive response</td> <td>Exchange-level</td> <td>100-300 tokens</td> <td>Q: "How does BFS handle cycles?" A: [explanation]</td> </tr> <tr> <td>Code-Explanation</td> <td>Code block adjacent to natural language description</td> <td>Snippet-level</td> <td>150-400 tokens</td> <td>TypeScript function + rationale for design choices</td> </tr> <tr> <td>Decision-Rationale</td> <td>Comparison of alternatives with explicit selection</td> <td>Decision-level</td> <td>200-600 tokens</td> <td>"Chose SQLite over Postgres because..." with tradeoff analysis</td> </tr> <tr> <td>Concept-Definition</td> <td>New term introduced with explanation or formal definition</td> <td>Term-level</td> <td>50-200 tokens</td> <td>"Atomization: decomposing conversations into..." </td> </tr> </tbody> </table> </div>  </div> <figcaption data-astro-cid-wa2vzzqt>Figure 1. Each atomization strategy targets a distinct conversational pattern, producing knowledge units at different levels of granularity</figcaption> </figure>  <h2>Triple-Modal Search</h2> <p>
+Search is the system's primary interface — the mechanism by which stored knowledge becomes accessible knowledge. The index operates in three modes simultaneously: SQLite FTS5 for exact keyword matching with BM25 ranking, ChromaDB for semantic vector search using sentence embeddings, and Reciprocal Rank Fusion (RRF) to merge results from both modalities into a single ranked list.<sup class="cite" data-ref-id="7" data-ref-author="Croft, W. Bruce, Donald Metzler, and Trevor Strohl" data-ref-title="Search Engines: Information Retrieval in Practice" data-ref-source="Addison-Wesley" data-ref-year="2010" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-7" data-astro-cid-gudpzm6e>[7]</a></sup>  Croft's analysis of information retrieval demonstrates that keyword and semantic search fail in complementary ways: keyword search misses synonyms and paraphrases, while vector search can lose precision on specific technical terms. The triple-modal architecture exploits this complementarity. When a user searches for "BFS cycle detection," FTS5 surfaces atoms containing those exact terms while ChromaDB retrieves semantically related atoms about graph traversal, depth-first alternatives, and visited-set implementations. RRF then interleaves these result sets using reciprocal rank weighting — an atom that ranks highly in both modalities scores higher than one that dominates a single modality.<sup class="cite" data-ref-id="8" data-ref-author="Manning, Christopher D., Prabhakar Raghavan, and Hinrich Schutze" data-ref-title="Introduction to Information Retrieval" data-ref-source="Cambridge University Press" data-ref-year="2008" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-8" data-astro-cid-gudpzm6e>[8]</a></sup>  Manning's treatment of evaluation metrics — precision, recall, mean reciprocal rank — informed the decision to use RRF specifically: it requires no training data, no weight tuning, and produces stable rankings even when the underlying modalities have different score distributions.
+</p> <div class="mermaid-container" data-astro-cid-2r2ppsi5> <div class="mermaid" data-chart="graph TD
+    Q[User Query] --> P[Query Processor]
+    P -->|tokenized query| FTS[SQLite FTS5]
+    P -->|embedding vector| VEC[ChromaDB Vectors]
+    FTS -->|BM25 ranked list| RRF[Reciprocal Rank Fusion]
+    VEC -->|cosine similarity ranked list| RRF
+    RRF -->|merged ranking| R[Ranked Results]
+    R -->|top K atoms| D[Display with Context]
+    D -->|source links| KG[Knowledge Graph Navigation]
+    FTS -.->|exact term matches| M1[Precision Mode]
+    VEC -.->|semantic neighbors| M2[Discovery Mode]
+    style Q fill:#1b4332,color:#fff
+    style RRF fill:#2d6a4f,color:#fff
+    style R fill:#40916c,color:#fff" data-astro-cid-2r2ppsi5> graph TD
+    Q[User Query] --&gt; P[Query Processor]
+    P --&gt;|tokenized query| FTS[SQLite FTS5]
+    P --&gt;|embedding vector| VEC[ChromaDB Vectors]
+    FTS --&gt;|BM25 ranked list| RRF[Reciprocal Rank Fusion]
+    VEC --&gt;|cosine similarity ranked list| RRF
+    RRF --&gt;|merged ranking| R[Ranked Results]
+    R --&gt;|top K atoms| D[Display with Context]
+    D --&gt;|source links| KG[Knowledge Graph Navigation]
+    FTS -.-&gt;|exact term matches| M1[Precision Mode]
+    VEC -.-&gt;|semantic neighbors| M2[Discovery Mode]
+    style Q fill:#1b4332,color:#fff
+    style RRF fill:#2d6a4f,color:#fff
+    style R fill:#40916c,color:#fff </div> <div class="mermaid-caption" data-astro-cid-2r2ppsi5>Search architecture — parallel keyword and semantic retrieval fused through Reciprocal Rank Fusion</div> <noscript> <pre class="mermaid-fallback" data-astro-cid-2r2ppsi5><code data-astro-cid-2r2ppsi5>graph TD
+    Q[User Query] --&gt; P[Query Processor]
+    P --&gt;|tokenized query| FTS[SQLite FTS5]
+    P --&gt;|embedding vector| VEC[ChromaDB Vectors]
+    FTS --&gt;|BM25 ranked list| RRF[Reciprocal Rank Fusion]
+    VEC --&gt;|cosine similarity ranked list| RRF
+    RRF --&gt;|merged ranking| R[Ranked Results]
+    R --&gt;|top K atoms| D[Display with Context]
+    D --&gt;|source links| KG[Knowledge Graph Navigation]
+    FTS -.-&gt;|exact term matches| M1[Precision Mode]
+    VEC -.-&gt;|semantic neighbors| M2[Discovery Mode]
+    style Q fill:#1b4332,color:#fff
+    style RRF fill:#2d6a4f,color:#fff
+    style R fill:#40916c,color:#fff</code></pre> </noscript> </div>   <h2>Intelligence Layer</h2> <p>
+Search retrieves what you already know to look for. The intelligence layer surfaces what you did not know you knew. Three LLM-powered processes run over the indexed atoms: insight extraction identifies patterns and principles that span multiple conversations, smart tagging generates a controlled vocabulary that normalizes terminology across sources, and relationship detection discovers connections between atoms that were never explicitly linked in the original conversations.<sup class="cite" data-ref-id="9" data-ref-author="Berners-Lee, Tim" data-ref-title="Linked Data" data-ref-source="W3C Design Issues" data-ref-year="2006" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-9" data-astro-cid-gudpzm6e>[9]</a></sup>  Berners-Lee's linked data principles — use URIs to name things, use HTTP URIs so people can look them up, provide useful information, include links to other URIs — translate directly into the knowledge graph's architecture: every atom has a stable identifier, every relationship is typed and traversable, and the graph is exportable via vis.js for visual exploration. The system supports three LLM backends interchangeably — Anthropic, OpenAI, and Ollama — meaning the intelligence layer can operate fully locally with zero API keys when privacy or cost constraints require it.<sup class="cite" data-ref-id="10" data-ref-author="Meadows, Donella H." data-ref-title="Thinking in Systems: A Primer" data-ref-source="Chelsea Green Publishing" data-ref-year="2008" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-10" data-astro-cid-gudpzm6e>[10]</a></sup>  Meadows's systems thinking framework reveals why the intelligence layer matters: knowledge is not a stock to be accumulated but a flow to be maintained. The intelligence layer converts static atoms into a dynamic system where new connections emerge as the graph grows, feedback loops between search behavior and tagging quality tighten over time, and the system's utility increases superlinearly with the volume of ingested material.
+</p> <div class="code-structure" data-astro-cid-pbr2my35> <div class="code-structure__filename" data-astro-cid-pbr2my35>search-fusion.ts</div> <pre tabindex="0" role="region" aria-label="Code example: search-fusion.ts" data-astro-cid-pbr2my35><code class="language-typescript" data-astro-cid-pbr2my35>// View implementation at:
+// github.com/organvm-i-theoria/my-knowledge-base/src/search/fusion.ts
+
+interface SearchResult {
+  atomId: string;
+  score: number;
+  source: &#39;fts5&#39; | &#39;chromadb&#39; | &#39;fused&#39;;
+  snippet: string;
+  metadata: AtomMetadata;
+}
+
+function reciprocalRankFusion(
+  ftsResults: SearchResult[],
+  vectorResults: SearchResult[],
+  k: number = 60
+): SearchResult[] {
+  const scores = new Map&lt;string, number&gt;();
+
+  ftsResults.forEach((result, rank) =&gt; {
+    const current = scores.get(result.atomId) ?? 0;
+    scores.set(result.atomId, current + 1 / (k + rank + 1));
+  });
+
+  vectorResults.forEach((result, rank) =&gt; {
+    const current = scores.get(result.atomId) ?? 0;
+    scores.set(result.atomId, current + 1 / (k + rank + 1));
+  });
+
+  return Array.from(scores.entries())
+    .sort(([, a], [, b]) =&gt; b - a)
+    .map(([atomId, score]) =&gt; ({
+      atomId,
+      score,
+      source: &#39;fused&#39; as const,
+      snippet: findSnippet(atomId, ftsResults, vectorResults),
+      metadata: getAtomMetadata(atomId),
+    }));
+}</code></pre> <div class="code-structure__caption" data-astro-cid-pbr2my35>Search fusion algorithm — Reciprocal Rank Fusion merges keyword and semantic results without weight tuning</div> </div>  <h2>Knowledge Graph and Downstream Integration</h2> <p>
+The knowledge graph is the system's connective tissue — a directed graph where nodes are atoms and edges are typed relationships (supports, contradicts, extends, exemplifies, depends-on). BFS traversal from any atom reveals its neighborhood of related knowledge, and the graph is exportable to vis.js for interactive visual exploration in the browser.<sup class="cite" data-ref-id="9" data-ref-author="Berners-Lee, Tim" data-ref-title="Linked Data" data-ref-source="W3C Design Issues" data-ref-year="2006" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-9" data-astro-cid-gudpzm6e>[9]</a></sup>  The graph is not a static index but a living structure that grows with every ingestion cycle. When the intelligence layer detects a new relationship between atoms from different conversations — perhaps a design pattern discussed with Claude in January connects to an implementation strategy explored with Gemini in March — it adds an edge, and the graph's topology shifts. This is where the system transcends individual conversation recovery and becomes genuine epistemological infrastructure: it reveals the structure of your thinking across time, platforms, and contexts. The knowledge base feeds downstream organs in the eight-organ system: extracted patterns seed generative art experiments in ORGAN-II, search architecture decisions inform ORGAN-III product specifications, and intelligence outputs become raw material for ORGAN-V public essays.<sup class="cite" data-ref-id="10" data-ref-author="Meadows, Donella H." data-ref-title="Thinking in Systems: A Primer" data-ref-source="Chelsea Green Publishing" data-ref-year="2008" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-10" data-astro-cid-gudpzm6e>[10]</a></sup>  This cross-organ feeding is not metaphorical — the export pipeline produces structured JSON that other systems consume programmatically, closing the loop between knowledge capture and creative production.
+</p> <div class="mermaid-container" data-astro-cid-2r2ppsi5> <div class="mermaid" data-chart="graph TD
+    A1[Atom: BFS Traversal] -->|extends| A2[Atom: Graph Theory Basics]
+    A1 -->|exemplifies| A3[Atom: Knowledge Graph Design]
+    A2 -->|supports| A4[Atom: Cycle Detection]
+    A3 -->|depends-on| A5[Atom: SQLite Schema Design]
+    A3 -->|depends-on| A6[Atom: ChromaDB Embedding Model]
+    A4 -->|contradicts| A7[Atom: DFS vs BFS Tradeoffs]
+    A5 -->|extends| A8[Atom: FTS5 Index Configuration]
+    A6 -->|supports| A9[Atom: Semantic Search Accuracy]
+    A7 -->|supports| A1
+    style A1 fill:#2d6a4f,color:#fff
+    style A3 fill:#2d6a4f,color:#fff
+    style A5 fill:#40916c,color:#fff
+    style A6 fill:#40916c,color:#fff" data-astro-cid-2r2ppsi5> graph TD
+    A1[Atom: BFS Traversal] --&gt;|extends| A2[Atom: Graph Theory Basics]
+    A1 --&gt;|exemplifies| A3[Atom: Knowledge Graph Design]
+    A2 --&gt;|supports| A4[Atom: Cycle Detection]
+    A3 --&gt;|depends-on| A5[Atom: SQLite Schema Design]
+    A3 --&gt;|depends-on| A6[Atom: ChromaDB Embedding Model]
+    A4 --&gt;|contradicts| A7[Atom: DFS vs BFS Tradeoffs]
+    A5 --&gt;|extends| A8[Atom: FTS5 Index Configuration]
+    A6 --&gt;|supports| A9[Atom: Semantic Search Accuracy]
+    A7 --&gt;|supports| A1
+    style A1 fill:#2d6a4f,color:#fff
+    style A3 fill:#2d6a4f,color:#fff
+    style A5 fill:#40916c,color:#fff
+    style A6 fill:#40916c,color:#fff </div> <div class="mermaid-caption" data-astro-cid-2r2ppsi5>Knowledge graph structure — atoms connected by typed relationships, traversable via BFS and exportable to vis.js</div> <noscript> <pre class="mermaid-fallback" data-astro-cid-2r2ppsi5><code data-astro-cid-2r2ppsi5>graph TD
+    A1[Atom: BFS Traversal] --&gt;|extends| A2[Atom: Graph Theory Basics]
+    A1 --&gt;|exemplifies| A3[Atom: Knowledge Graph Design]
+    A2 --&gt;|supports| A4[Atom: Cycle Detection]
+    A3 --&gt;|depends-on| A5[Atom: SQLite Schema Design]
+    A3 --&gt;|depends-on| A6[Atom: ChromaDB Embedding Model]
+    A4 --&gt;|contradicts| A7[Atom: DFS vs BFS Tradeoffs]
+    A5 --&gt;|extends| A8[Atom: FTS5 Index Configuration]
+    A6 --&gt;|supports| A9[Atom: Semantic Search Accuracy]
+    A7 --&gt;|supports| A1
+    style A1 fill:#2d6a4f,color:#fff
+    style A3 fill:#2d6a4f,color:#fff
+    style A5 fill:#40916c,color:#fff
+    style A6 fill:#40916c,color:#fff</code></pre> </noscript> </div>   <h2>Architecture and Testing</h2> <p>
+The system is implemented in TypeScript with strict mode enabled, backed by SQLite for structured storage and full-text search, ChromaDB for vector embeddings, and a knowledge graph with BFS traversal and vis.js export. The test suite exceeds 200 tests covering the full pipeline: source adapter mocking, atomization strategy correctness, search ranking quality (measured by mean reciprocal rank against hand-labeled relevance judgments), intelligence layer output validation, and graph traversal properties.<sup class="cite" data-ref-id="7" data-ref-author="Croft, W. Bruce, Donald Metzler, and Trevor Strohl" data-ref-title="Search Engines: Information Retrieval in Practice" data-ref-source="Addison-Wesley" data-ref-year="2010" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-7" data-astro-cid-gudpzm6e>[7]</a></sup>  Croft's emphasis on evaluation-driven development — measuring retrieval quality against ground truth before and after each system change — shaped the testing methodology. The architecture supports three LLM backends (Anthropic, OpenAI, Ollama) interchangeably through a provider abstraction layer, which means the entire system can operate fully locally with Ollama, requiring zero API keys and sending no data to external services. This is not merely a deployment convenience but an architectural commitment: knowledge infrastructure should not depend on the continued availability or pricing of any single vendor.<sup class="cite" data-ref-id="8" data-ref-author="Manning, Christopher D., Prabhakar Raghavan, and Hinrich Schutze" data-ref-title="Introduction to Information Retrieval" data-ref-source="Cambridge University Press" data-ref-year="2008" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-8" data-astro-cid-gudpzm6e>[8]</a></sup>  </p> <figure class="academic-figure" data-astro-cid-wa2vzzqt> <div class="figure-content" data-astro-cid-wa2vzzqt>  <div class="table-wrap"> <table> <thead> <tr> <th>Layer</th> <th>Technology</th> <th>Responsibility</th> <th>Test Coverage</th> </tr> </thead> <tbody> <tr> <td>Export</td> <td>Playwright + platform APIs</td> <td>Ingest from 9 sources into common format</td> <td>Adapter contract tests</td> </tr> <tr> <td>Atomization</td> <td>TypeScript + LLM-assisted splitting</td> <td>Decompose conversations into atomic units</td> <td>Strategy correctness + boundary detection</td> </tr> <tr> <td>Search</td> <td>SQLite FTS5 + ChromaDB + RRF</td> <td>Triple-modal retrieval with rank fusion</td> <td>MRR against labeled relevance judgments</td> </tr> <tr> <td>Intelligence</td> <td>Anthropic / OpenAI / Ollama</td> <td>Insight extraction, tagging, relationship detection</td> <td>Output schema validation + consistency checks</td> </tr> </tbody> </table> </div>  </div> <figcaption data-astro-cid-wa2vzzqt>Figure 2. Four architectural layers with their storage, search, and intelligence technologies</figcaption> </figure>  <h2>Tradeoffs and Design Decisions</h2> <p>
+The system makes several deliberate tradeoffs. Browser automation for export is fragile — platform UI changes can break extraction — but it is the only path when APIs do not exist, and the adapter interface isolates this fragility from the rest of the system. The five atomization strategies were chosen empirically by analyzing 500 conversations and identifying the most common structural patterns; a sixth strategy (narrative-arc detection for long-form discussions) was prototyped but deferred because its precision was insufficient to justify the complexity.<sup class="cite" data-ref-id="5" data-ref-author="Sowa, John F." data-ref-title="Knowledge Representation: Logical, Philosophical, and Computational Foundations" data-ref-source="Brooks/Cole" data-ref-year="2000" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-5" data-astro-cid-gudpzm6e>[5]</a></sup>  Sowa's principle that representation fidelity must be balanced against computational tractability guided this decision. The choice to implement RRF rather than a learned fusion model reflects the system's scale: with hundreds to low thousands of atoms, the training data for a supervised ranker would be insufficient, and RRF's parameter-free design eliminates a tuning burden that would not pay dividends at this volume.<sup class="cite" data-ref-id="3" data-ref-author="Engelbart, Douglas C." data-ref-title="Augmenting Human Intellect: A Conceptual Framework" data-ref-source="Stanford Research Institute" data-ref-year="1962" data-ref-url data-astro-cid-gudpzm6e><a href="#ref-3" data-astro-cid-gudpzm6e>[3]</a></sup>  Engelbart's framework reminds us that augmentation tools must reduce cognitive overhead, not merely shift it — a system that requires constant tuning to maintain quality fails this criterion. The knowledge base is designed to improve passively as it ingests more material, without demanding ongoing maintenance from its operator.
+</p> <h2>By the Numbers</h2> <figure class="academic-figure" data-astro-cid-wa2vzzqt> <div class="figure-content" data-astro-cid-wa2vzzqt>  <div class="stat-grid"> <div class="stat"> <div class="stat-value">200+</div> <div class="stat-label">Tests</div> </div><div class="stat"> <div class="stat-value">9</div> <div class="stat-label">Ingestion Sources</div> </div><div class="stat"> <div class="stat-value">5</div> <div class="stat-label">Atomization Strategies</div> </div><div class="stat"> <div class="stat-value">3</div> <div class="stat-label">Search Modalities</div> </div><div class="stat"> <div class="stat-value">3</div> <div class="stat-label">LLM Backends</div> </div><div class="stat"> <div class="stat-value">BFS</div> <div class="stat-label">Graph Traversal</div> </div> </div>  </div> <figcaption data-astro-cid-wa2vzzqt>Figure 3. System scope — nine sources feeding through five strategies into a triple-modal search index with LLM intelligence extraction</figcaption> </figure>  <section class="references" aria-label="References" data-astro-cid-wxl2vi4o> <h2 data-astro-cid-wxl2vi4o>References</h2> <ol data-astro-cid-wxl2vi4o> <li id="ref-1" data-astro-cid-wxl2vi4o> Polanyi, Michael. <em data-astro-cid-wxl2vi4o>The Tacit Dimension</em>. University of Chicago Press, 1966.
+ </li><li id="ref-2" data-astro-cid-wxl2vi4o> Bush, Vannevar. <em data-astro-cid-wxl2vi4o>As We May Think</em>. The Atlantic Monthly, 1945.
+ </li><li id="ref-3" data-astro-cid-wxl2vi4o> Engelbart, Douglas C.. <em data-astro-cid-wxl2vi4o>Augmenting Human Intellect: A Conceptual Framework</em>. Stanford Research Institute, 1962.
+ </li><li id="ref-4" data-astro-cid-wxl2vi4o> Nelson, Ted. <em data-astro-cid-wxl2vi4o>Computer Lib/Dream Machines</em>. Self-published, 1974.
+ </li><li id="ref-5" data-astro-cid-wxl2vi4o> Sowa, John F.. <em data-astro-cid-wxl2vi4o>Knowledge Representation: Logical, Philosophical, and Computational Foundations</em>. Brooks/Cole, 2000.
+ </li><li id="ref-6" data-astro-cid-wxl2vi4o> Minsky, Marvin. <em data-astro-cid-wxl2vi4o>The Society of Mind</em>. Simon &amp; Schuster, 1986.
+ </li><li id="ref-7" data-astro-cid-wxl2vi4o> Croft, W. Bruce, Donald Metzler, and Trevor Strohl. <em data-astro-cid-wxl2vi4o>Search Engines: Information Retrieval in Practice</em>. Addison-Wesley, 2010.
+ </li><li id="ref-8" data-astro-cid-wxl2vi4o> Manning, Christopher D., Prabhakar Raghavan, and Hinrich Schutze. <em data-astro-cid-wxl2vi4o>Introduction to Information Retrieval</em>. Cambridge University Press, 2008.
+ </li><li id="ref-9" data-astro-cid-wxl2vi4o> Berners-Lee, Tim. <em data-astro-cid-wxl2vi4o>Linked Data</em>. W3C Design Issues, 2006.
+ </li><li id="ref-10" data-astro-cid-wxl2vi4o> Meadows, Donella H.. <em data-astro-cid-wxl2vi4o>Thinking in Systems: A Primer</em>. Chelsea Green Publishing, 2008.
+ </li> </ol> </section>    </div> </div> <nav class="related" aria-label="Related projects" data-astro-cid-ovdrvj3f> <h2 class="related__heading" data-astro-cid-ovdrvj3f>Related Projects</h2> <ul class="related__list" data-astro-cid-ovdrvj3f> <li class="related__item" data-astro-cid-ovdrvj3f> <a href="/portfolio/projects/linguistic-atomization/" class="related__link" data-astro-cid-ovdrvj3f> <span class="related__title" data-astro-cid-ovdrvj3f>LingFrame — Linguistic Atomization Framework</span> <span class="related__tags" data-astro-cid-ovdrvj3f>Theory</span> </a> </li><li class="related__item" data-astro-cid-ovdrvj3f> <a href="/portfolio/projects/narratological-lenses/" class="related__link" data-astro-cid-ovdrvj3f> <span class="related__title" data-astro-cid-ovdrvj3f>Narratological Algorithmic Lenses</span> <span class="related__tags" data-astro-cid-ovdrvj3f>Theory</span> </a> </li><li class="related__item" data-astro-cid-ovdrvj3f> <a href="/portfolio/projects/recursive-engine/" class="related__link" data-astro-cid-ovdrvj3f> <span class="related__title" data-astro-cid-ovdrvj3f>Recursive Engine (RE:GE)</span> <span class="related__tags" data-astro-cid-ovdrvj3f>Theory</span> </a> </li> </ul> </nav> <nav class="project-nav" aria-label="Project navigation" data-astro-cid-ovdrvj3f> <a href="/portfolio/projects/generative-music/" class="project-nav__link project-nav__link--prev" data-astro-cid-ovdrvj3f> <span class="project-nav__arrow" aria-hidden="true" data-astro-cid-ovdrvj3f>&larr;</span> <span class="project-nav__meta" data-astro-cid-ovdrvj3f> <span class="project-nav__label" data-astro-cid-ovdrvj3f>Previous</span> <span class="project-nav__title" data-astro-cid-ovdrvj3f>Generative Music System</span> </span> </a> <a href="/portfolio/projects/life-my-midst-in/" class="project-nav__link project-nav__link--next" data-astro-cid-ovdrvj3f> <span class="project-nav__meta" data-astro-cid-ovdrvj3f> <span class="project-nav__label" data-astro-cid-ovdrvj3f>Next</span> <span class="project-nav__title" data-astro-cid-ovdrvj3f>in-midst-my-life</span> </span> <span class="project-nav__arrow" aria-hidden="true" data-astro-cid-ovdrvj3f>&rarr;</span> </a> </nav> </article>  <script>
+  (function () {
+    if (window.__ghPagesTrackingInit) return;
+    window.__ghPagesTrackingInit = true;
+
+    function trackGithubPagesClick(link) {
+      const owner = link.dataset.trackOwner || 'unknown';
+      const repo = link.dataset.trackRepo || 'unknown';
+      const target = link.dataset.trackTarget || 'unknown';
+      const surface = link.dataset.trackSurface || 'unknown';
+      const fullName = `${owner}/${repo}`;
+
+      if (typeof window.plausible === 'function') {
+        window.plausible('github_pages_click', {
+          props: { owner, repo, target, surface },
+        });
+      }
+
+      try {
+        const key = 'portfolio_github_pages_clicks';
+        const raw = localStorage.getItem(key);
+        const parsedCandidate = raw ? JSON.parse(raw) : {};
+        const parsed =
+          parsedCandidate && typeof parsedCandidate === 'object' && !Array.isArray(parsedCandidate)
+            ? parsedCandidate
+            : {};
+        const bucketKey = `${fullName}:${target}`;
+        const previous = parsed[bucketKey] || { count: 0, lastClickedAt: null, surface };
+        parsed[bucketKey] = {
+          owner,
+          repo,
+          fullName,
+          target,
+          surface,
+          count: Number(previous.count || 0) + 1,
+          lastClickedAt: new Date().toISOString(),
+        };
+        localStorage.setItem(key, JSON.stringify(parsed));
+      } catch {}
+    }
+
+    function bindGithubPagesTracking() {
+      document.querySelectorAll('a[data-gh-pages-track]').forEach((link) => {
+        if (link.dataset.trackBound === '1') return;
+        link.dataset.trackBound = '1';
+        link.addEventListener('click', () => trackGithubPagesClick(link));
+      });
+    }
+
+    document.addEventListener('astro:page-load', bindGithubPagesTracking);
+  })();
+</script>  </main> <footer class="footer" data-astro-cid-sz7xmlte> <div class="container footer__inner" data-astro-cid-sz7xmlte> <div class="footer__links" data-astro-cid-sz7xmlte> <a href="https://github.com/meta-organvm" target="_blank" rel="me noopener noreferrer" data-astro-cid-sz7xmlte>GitHub</a> <span class="footer__sep" aria-hidden="true" data-astro-cid-sz7xmlte>/</span> <a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="me noopener noreferrer" data-astro-cid-sz7xmlte>LinkedIn</a> <span class="footer__sep" aria-hidden="true" data-astro-cid-sz7xmlte>/</span> <a href="mailto:padavano.anthony@gmail.com" data-astro-cid-sz7xmlte>Contact</a> </div> <div class="footer__right" data-astro-cid-sz7xmlte> <button class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme" data-astro-cid-sz7xmlte> <svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-sz7xmlte> <circle cx="9" cy="9" r="4" data-astro-cid-sz7xmlte></circle> <path d="M9 1v2M9 15v2M1 9h2M15 9h2M3.3 3.3l1.4 1.4M13.3 13.3l1.4 1.4M3.3 14.7l1.4-1.4M13.3 4.7l1.4-1.4" data-astro-cid-sz7xmlte></path> </svg> <svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-sz7xmlte> <path d="M15.1 9.9A6 6 0 1 1 8.1 2.9a7 7 0 0 0 7 7z" data-astro-cid-sz7xmlte></path> </svg> </button> <p class="footer__copy" data-astro-cid-sz7xmlte>
+&copy; 2026 Anthony James Padavano · Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" data-astro-cid-sz7xmlte>Astro</a> </p> <div class="footer__build" data-astro-cid-sz7xmlte> <span class="build-dot" aria-hidden="true" data-astro-cid-sz7xmlte></span> <span class="build-text" data-astro-cid-sz7xmlte>Deployed: Feb 28, 05:20 PM</span> </div> </div> </div> </footer>  <script type="module">function g(){const e=window;return e.__themeToggleState||(e.__themeToggleState={}),e.__themeToggleState}function l(){const e=window;return e.__themeStorageFallback||(e.__themeStorageFallback={preference:"system"}),e.__themeStorageFallback}function u(e){try{return window.localStorage.getItem(e)}catch{return null}}function h(e,r){try{return window.localStorage.setItem(e,r),!0}catch{return!1}}function d(e){try{return window.localStorage.removeItem(e),!0}catch{return!1}}function a(){const e=u("theme-preference");return e==="system"||e==="light"||e==="dark"?(l().preference=e,e):l().preference}function S(e){l().preference=e,h("theme-preference",e)}function c(e){document.documentElement.dataset.theme=e;const r=document.querySelector('meta[name="theme-color"]');r&&(r.content=e==="light"?"#f5f5f0":"#0a0a0b")}function f(){return window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}function w(){const e=g();e.controller?.abort();const r=new AbortController,{signal:i}=r;e.controller=r;const m=document.querySelectorAll(".theme-toggle");if(!m.length)return;function s(){const n=a(),o=n==="system"?"Theme: System (click for Light)":n==="light"?"Theme: Light (click for Dark)":"Theme: Dark (click for System)";document.querySelectorAll(".theme-toggle").forEach(t=>t.setAttribute("aria-label",o))}m.forEach(n=>{n.addEventListener("click",()=>{const o=a();let t;o==="system"?t="light":o==="light"?t="dark":t="system",S(t),t==="system"?(d("theme"),c(f())):(h("theme",t),c(t)),s()},{signal:i})}),s(),e.mediaListener||(e.mediaQuery=window.matchMedia("(prefers-color-scheme: light)"),e.mediaListener=()=>{a()==="system"&&c(f())},e.mediaQuery.addEventListener("change",e.mediaListener)),document.addEventListener("astro:before-swap",()=>{r.abort()},{once:!0,signal:i})}document.addEventListener("astro:page-load",w);</script> <div class="btt-sentinel" aria-hidden="true" data-astro-cid-wlspcwf4></div> <button class="btt" aria-label="Back to top" type="button" hidden data-astro-cid-wlspcwf4> <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="M9 14V4" data-astro-cid-wlspcwf4></path> <path d="M4 8l5-5 5 5" data-astro-cid-wlspcwf4></path> </svg> </button> <script type="module">function c(){const e=document.querySelector(".btt"),n=document.querySelector(".btt-sentinel");if(!e||!n)return;const o=new AbortController,{signal:r}=o,s=new IntersectionObserver(([t])=>{e.hidden=t.isIntersecting},{threshold:0});s.observe(n),e.addEventListener("click",()=>{const t=window.matchMedia("(prefers-reduced-motion: reduce)").matches;window.scrollTo({top:0,behavior:t?"instant":"smooth"})},{signal:r}),document.addEventListener("astro:before-swap",()=>{s.disconnect(),o.abort()},{once:!0,signal:r})}document.addEventListener("astro:page-load",c);</script>  <script type="module" src="/portfolio/_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"></script> <script type="module">let e=null;function n(){e?.disconnect(),e=null;const a=document.querySelectorAll("[data-reveal]:not(.revealed)");if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){a.forEach(t=>t.classList.add("revealed"));return}e=new IntersectionObserver(t=>{t.forEach(r=>{r.isIntersecting&&(r.target.classList.add("revealed"),e?.unobserve(r.target))})},{rootMargin:"0px 0px -50px 0px",threshold:.1}),a.forEach(t=>e.observe(t))}document.addEventListener("astro:page-load",n);document.addEventListener("astro:before-swap",()=>{e?.disconnect(),e=null},{once:!1});</script> <script type="module">const i=globalThis,e=i.__portfolioBootstrapState??={listenersAttached:!1};function a(){document.querySelectorAll(".table-wrap").forEach((t,r)=>{if(t.hasAttribute("tabindex")||t.setAttribute("tabindex","0"),t.hasAttribute("role")||t.setAttribute("role","region"),!t.hasAttribute("aria-label")){const o=t.closest("figure")?.querySelector("figcaption")?.textContent?.trim();t.setAttribute("aria-label",o||`Scrollable data table ${r+1}`)}})}e.listenersAttached||("serviceWorker"in navigator&&navigator.serviceWorker.register("/portfolio/sw.js").catch(()=>{}),document.addEventListener("astro:after-swap",()=>{const t=document.getElementById("main-content");t&&(t.setAttribute("tabindex","-1"),t.focus({preventScroll:!0}))}),document.addEventListener("astro:page-load",a),e.listenersAttached=!0);a();</script> <script>
+  // Theme restore — must be inline to avoid FOUC (runs before first paint)
+  (function() {
+    // Storage can throw in privacy-restricted environments; keep a memory fallback.
+    var w = window;
+    if (!w.__themeStorageFallback || typeof w.__themeStorageFallback !== 'object') {
+      w.__themeStorageFallback = { preference: 'system' };
+    }
+
+    function readPreference() {
+      var stored = null;
+      try {
+        stored = w.localStorage.getItem('theme-preference');
+      } catch {}
+
+      if (stored === 'system' || stored === 'light' || stored === 'dark') {
+        w.__themeStorageFallback.preference = stored;
+        return stored;
+      }
+      return w.__themeStorageFallback.preference || 'system';
+    }
+
+    // Theme: 3-state (system/light/dark) with system as default
+    var pref = readPreference();
+    var theme = pref === 'system'
+      ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+      : pref;
+    document.documentElement.dataset.theme = theme;
+
+    // Update theme-color meta
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = theme === 'light' ? '#f5f5f0' : '#0a0a0b';
+  })();
+</script> </body></html>
