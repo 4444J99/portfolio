@@ -47,9 +47,6 @@ const featuredProjects = persona.featured_projects.map(fp => {
         <div class="target-badge">Strategic Technical Proposal &middot; {target.company}</div>
         <h1 class="target-role">{target.role}</h1>
         <p class="target-intro">{target.intro}</p>
-        {target.proposal && (
-          <div class="target-proposal" set:html={target.proposal} />
-        )}
         <div class="target-actions">
           <a class="action-btn primary" href={`${base}resume/Anthony_James_Padavano_App_${target.company.replace(/\s+/g, '_')}.pdf`} download aria-label={`Download tailored application bundle for ${target.company}`}>
             Download PDF Bundle

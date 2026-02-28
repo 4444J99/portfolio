@@ -14,7 +14,7 @@ const projects = projectCatalog.map(p => ({
     <div id="repo-info" class="repo-info-card hidden">
       <div class="repo-info-header">
         <span id="repo-organ" class="repo-organ-badge"></span>
-        <h3 id="repo-title"></h3>
+        <h3 id="repo-title">Select a node</h3>
       </div>
       <p id="repo-summary"></p>
       <div id="repo-tags" class="repo-tags"></div>
@@ -362,7 +362,7 @@ const projects = projectCatalog.map(p => ({
   }
 </style>
 
-<script define:vars={{ projects }}>
+<script is:inline define:vars={{ projects }}>
   // Inject data into container for client script
   document.getElementById('omega-galaxy-container').dataset.projects = JSON.stringify(projects);
 </script>

@@ -67,11 +67,11 @@ const displaySnapshots = snapshots.slice(-5); // Last 5 weeks/snapshots
               {displaySnapshots.length > 0 ? (
                 displaySnapshots.map((snap) => (
                   <tr>
-                    <td>{new Date(snap.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
+                    <td>{new Date(snap.generated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
                     <td>{snap.coverage.lines}%</td>
                     <td class:list={[{ 'text-success': snap.lighthouse.performance >= 90 }]}>{snap.lighthouse.performance}</td>
-                    <td>{snap.securityStatus}</td>
-                    <td>{snap.a11yCoverage}%</td>
+                    <td>{snap.security.status}</td>
+                    <td>{snap.a11y.runtimeCoveragePct}%</td>
                   </tr>
                 ))
               ) : (

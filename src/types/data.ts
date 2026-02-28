@@ -170,6 +170,7 @@ export interface QualityMetrics {
     consecutiveSuccess: number | null;
     requiredConsecutive: number | null;
     source: string | null;
+    history?: GreenRun[];
   };
   build: { pages: number; bundleFiles: number };
   sources: {
@@ -190,51 +191,81 @@ export interface QualityMetrics {
     policyGovernance: string;
     performance: string;
     build: string;
-    }
+  };
+  ledger?: QualityLedger;
+}
 
-    export interface QualityLedgerEntry {
-    timestamp: string;
-    securityStatus: string;
-    a11yCoverage: number;
-    perfBudgets: string;
-    coverage: {
-      statements: number;
-      branches: number;
-      functions: number;
-      lines: number;
-    };
-    lighthouse: {
-      performance: number;
-      accessibility: number;
-      bestPractices: number;
-      seo: number;
-    };
-    }
-
-    export interface QualityLedger {
-    generated: string;
-    snapshots: QualityLedgerEntry[];
-    }
-
-    export interface GreenRun {
-    id: number;
-    runNumber: number;
-    event: string;
+export interface QualityLedgerEntry {
+  generated: string;
+  tests: { total: number; passed: number };
+  coverage: {
+    statements: number;
+    branches: number;
+    functions: number;
+    lines: number;
+  };
+  security: {
     status: string;
-    conclusion: string;
-    htmlUrl: string;
-    createdAt: string;
-    updatedAt: string;
-    }
-
-    export interface GreenRunHistory {
-    generated: string;
+    critical: number;
+    high: number;
+    moderate: number;
+    low: number;
+    allowlistActive: number;
+  };
+  a11y: {
+    status: string;
+    runtimeCoveragePct: number;
+  };
+  performance: {
+    routeBudgetsStatus: string;
+    chunkBudgetsStatus: string;
+    interactionBudgetsStatus: string;
+  };
+  lighthouse: {
+    performance: number;
+    accessibility: number;
+    bestPractices: number;
+    seo: number;
+  };
+  stability: {
     consecutiveSuccess: number | null;
     requiredConsecutive: number;
-    status: string;
-    runs: GreenRun[];
-    }
-;
+    greenStatus: string;
+  };
+  drift: {
+    securityDriftStatus: string;
+    securityDriftFailures: number;
+    coverageStatementsDelta: number;
+    coverageBranchesDelta: number;
+    coverageFunctionsDelta: number;
+    coverageLinesDelta: number;
+    lhPerformanceDelta: number;
+    runtimeCoverageDelta: number | null;
+  };
+}
+
+export interface QualityLedger {
+  generated: string;
+  snapshots: QualityLedgerEntry[];
+}
+
+export interface GreenRun {
+  id: number;
+  runNumber: number;
+  event: string;
+  status: string;
+  conclusion: string;
+  htmlUrl: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface GreenRunHistory {
+  generated: string;
+  consecutiveSuccess: number | null;
+  requiredConsecutive: number;
+  status: string;
+  runs: GreenRun[];
 }
 
 export interface GitHubPagesRepo {
