@@ -2,7 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 
-import omegaData from '../data/omega.json';
+interface OmegaData {
+  generated: string;
+  summary: { met: number; in_progress: number; not_started: number; total: number };
+  horizons: Array<{ id: string; name: string; timeline: string; met: number; in_progress: number; not_started: number }>;
+  criteria: Array<{ id: number; criterion: string; measurement: string; horizon: string; status: string; evidence: string; evidenceUrl?: string; target?: string }>;
+}
+
+import rawOmegaData from '../data/omega.json' assert { type: 'json' };
+const omegaData = (Array.isArray(rawOmegaData) ? rawOmegaData[0] : rawOmegaData) as OmegaData;
 
 const { summary, horizons, criteria } = omegaData;
 

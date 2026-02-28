@@ -45,7 +45,7 @@ async function syncOmega() {
 
   omega.generated = new Date().toISOString().split('T')[0];
 
-  fs.writeFileSync(OMEGA_PATH, JSON.stringify(omega, null, 2) + "\\n");
+  fs.writeFileSync(OMEGA_PATH, JSON.stringify(omega, null, 2) + "\n");
   console.log(`✅ Omega Scorecard synchronized. Horizon 2 (Criterion 5) linked to ${targetCount} active strike targets.`);
 }
 
