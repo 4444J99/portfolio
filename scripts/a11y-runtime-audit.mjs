@@ -68,10 +68,10 @@ async function waitForServer(url, timeoutMs = 30000) {
 }
 
 function startPreviewServer() {
-  const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+  
   const server = spawn(
-    npmCmd,
-    ['exec', '--', 'astro', 'preview', '--', '--host', PREVIEW_HOST, '--port', String(PREVIEW_PORT)],
+    'node',
+    ['node_modules/astro/astro.js', 'preview', '--', '--host', PREVIEW_HOST, '--port', String(PREVIEW_PORT)],
     {
       stdio: verbose ? 'inherit' : ['ignore', 'pipe', 'pipe'],
       env: process.env,
