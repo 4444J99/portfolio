@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-24T20:10:01.888440+00:00",
+  "generated": "2026-03-04T21:04:00.547224+00:00",
   "sprint": "PROPULSIO_MAXIMA",
   "system": {
     "name": "ORGANVM",
@@ -11,8 +11,9 @@
     "total_organs": 8,
     "operational_organs": 8,
     "implementation_status": {
-      "ACTIVE": 94,
-      "ARCHIVED": 9
+      "ACTIVE": 93,
+      "ARCHIVED": 9,
+      "PRODUCTION": 1
     },
     "tier_distribution": {
       "flagship": 9,
@@ -153,7 +154,7 @@
     "note": "CI status check skipped (--skip-ci)"
   },
   "essays": {
-    "total": 36,
+    "total": 46,
     "timeline": [
       {
         "date": "2026-02-10",
