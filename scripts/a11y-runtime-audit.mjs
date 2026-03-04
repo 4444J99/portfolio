@@ -71,7 +71,7 @@ function startPreviewServer() {
   const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
   const server = spawn(
     npmCmd,
-    ['run', 'preview', '--', '--host', PREVIEW_HOST, '--port', String(PREVIEW_PORT)],
+    ['exec', '--', 'astro', 'preview', '--', '--host', PREVIEW_HOST, '--port', String(PREVIEW_PORT)],
     {
       stdio: verbose ? 'inherit' : ['ignore', 'pipe', 'pipe'],
       env: process.env,

@@ -110,7 +110,7 @@ function startPreviewServer() {
   const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
   return spawn(
     npmCmd,
-    ['run', 'preview', '--', '--host', host, '--port', String(port)],
+    ['exec', '--', 'astro', 'preview', '--', '--host', host, '--port', String(port)],
     {
       stdio: ['ignore', 'pipe', 'pipe'],
       env: process.env,
