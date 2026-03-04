@@ -24,14 +24,14 @@ jobs:
 
       - name: Fetch system-metrics.json from corpus
         env:
-          GH_TOKEN: ${{ secrets.CROSS_ORG_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh api repos/meta-organvm/organvm-corpvs-testamentvm/contents/system-metrics.json \
             --jq '.content' | base64 -d > /tmp/system-metrics.json
 
       - name: Fetch registry-v2.json from corpus
         env:
-          GH_TOKEN: ${{ secrets.CROSS_ORG_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh api repos/meta-organvm/organvm-corpvs-testamentvm/contents/registry-v2.json \
             --jq '.content' | base64 -d > /tmp/registry-v2.json
