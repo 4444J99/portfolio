@@ -82,6 +82,8 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
       - run: npm run build
+        env:
+          PUBLIC_CONSULT_API_BASE: https://portfolio-consult-api.ivixivi.workers.dev
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

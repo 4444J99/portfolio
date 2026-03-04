@@ -111,6 +111,16 @@ npm run build
 npm run preview
 ```
 
+### Consult API (Cloudflare Worker)
+
+The consult page now uses a Cloudflare Worker endpoint instead of browser-side third-party SDK calls.
+
+1. Set up and deploy the worker in [`workers/consult-api/README.md`](workers/consult-api/README.md).
+2. Set `PUBLIC_CONSULT_API_BASE` to your worker origin (for example, `https://portfolio-consult-api.<subdomain>.workers.dev`).
+3. Redeploy the Astro site.
+
+If `PUBLIC_CONSULT_API_BASE` is not set, the consult page still works using deterministic fallback analysis.
+
 ---
 
 ## 📜 Documentation

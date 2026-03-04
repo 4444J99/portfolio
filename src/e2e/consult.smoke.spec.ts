@@ -20,12 +20,18 @@ test('consult page form and global controls handle navigation', async ({ page })
   const submitBtn = page.locator('#submit-btn');
   await expect(submitBtn).toBeEnabled();
   
-  // Click submit
+  // Click submit and wait for either result area or error area.
   await submitBtn.click();
-  
-  // Verify loading state triggers
-  await expect(submitBtn).toHaveClass(/loading/);
-  
-  // It should eventually stop loading (either success or failure in CI environment)
-  await expect(submitBtn).not.toHaveClass(/loading/, { timeout: 30000 });
+
+  const responseArea = page.locator('#response-area');
+  const errorArea = page.locator('#error-area');
+  await expect.poll(async () => {
+    const responseHidden = await responseArea.evaluate((el) => (el as HTMLDivElement).hidden);
+    const errorHidden = await errorArea.evaluate((el) => (el as HTMLDivElement).hidden);
+    return !responseHidden || !errorHidden;
+  }, { timeout: 30000 }).toBeTruthy();
+
+  // Submit button should always recover from loading state.
+  await expect(submitBtn).not.toHaveClass(/loading/);
+  await expect(submitBtn).toBeEnabled();
 });

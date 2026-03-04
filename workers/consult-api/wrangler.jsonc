@@ -1,0 +1,22 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "portfolio-consult-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-03-04",
+  "workers_dev": true,
+  "preview_urls": false,
+  "ai": {
+    "binding": "AI"
+  },
+  "d1_databases": [
+    {
+      "binding": "CONSULT_DB",
+      "database_name": "portfolio-consult-logs",
+      "database_id": "95f58139-f78b-4f23-9cd7-515d215a58b2",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "ALLOWED_ORIGINS": "https://4444j99.github.io,http://localhost:4321,http://127.0.0.1:4321"
+  }
+}

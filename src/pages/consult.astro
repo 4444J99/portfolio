@@ -92,7 +92,11 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
         </form>
 
         <div id="response-area" class="response-area" aria-live="polite" hidden>
-          <h2 class="response-heading">Capability Analysis</h2>
+          <h2 class="response-heading">
+            Capability Analysis
+            <span id="response-mode" class="response-mode" hidden></span>
+          </h2>
+          <div id="response-telemetry" class="response-telemetry" hidden></div>
           <div id="response-content" class="response-content prose"></div>
           <button id="reset-btn" class="btn-reset">Start Over</button>
         </div>
@@ -105,222 +109,386 @@ import SketchContainer from '../components/sketches/SketchContainer.astro';
 </Layout>
 
 <script>
-  const SYSTEM_PROMPT = `You are the ORGANVM Capability Advisor. You help prospective collaborators, clients, and partners understand how the eight-organ creative-institutional system can address their specific needs.
+  type ConsultMode = 'ai' | 'fallback';
+  type AnalysisSource = 'worker' | 'local-fallback';
 
-THE EIGHT-ORGAN SYSTEM:
-
-ORGAN I — THEORIA (Theory & Epistemology)
-Capabilities: Recursive symbolic engines, ontological frameworks, epistemological infrastructure, computational narrative analysis, linguistic atomization, knowledge graph construction.
-Flagship: RE:GE — a symbolic operating system for myth, identity, and recursive structures (1,254 tests, 85% coverage, pure Python).
-Key repos: auto-revision-epistemic-engine, call-function--ontological, organon-noumenon, system-governance-framework.
-
-ORGAN II — POIESIS (Art & Creative Production)
-Capabilities: Real-time audience-participatory performance systems, generative music, interactive installations, AI-human collaborative art, modular synthesis, creative portfolio sites.
-Flagship: metasystem-master (Omni-Dromenon Engine) — canonical monorepo for real-time performance with 12 consolidated modules.
-Key repos: universal-waveform-explorer (3D web synth), showcase-portfolio, case-studies-methodology.
-
-ORGAN III — ERGON (Commerce & Products)
-Capabilities: SaaS platforms, B2B data aggregation, gamified learning systems, social matching platforms, subscription services, inverted-interview hiring systems.
-Flagship: public-record-data-scrapper — 50-state UCC records aggregation, live Vercel deployment, tiered B2B subscriptions, 2,055 tests.
-Key repos: classroom-rpg-aetheria, gamified-coach-interface, fetch-familiar-friends, life-my--midst--in.
-
-ORGAN IV — TAXIS (Orchestration & Governance)
-Capabilities: Multi-agent AI orchestration, registry-driven development, dependency graph enforcement, promotion state machines, automated audits, cross-org workflow coordination.
-Flagship: agentic-titan — polymorphic agent swarm with 9 topologies, 22 archetypes, 1,095+ tests.
-Key repos: orchestration-start-here (central nervous system), registry-v2.json (single source of truth for 91 repos).
-
-ORGAN V — LOGOS (Public Process & Narrative)
-Capabilities: Long-form technical writing, sprint narratives, methodology documentation, RSS-syndicated essays, building-in-public practice.
-Output: 29 essays (~111K words) documenting architectural decisions, honest post-mortems, and creative methodology.
-
-ORGAN VI — KOINONIA (Community)
-Capabilities: Facilitated salons, reading group curricula, adaptive personal syllabi, community-driven sense-making sessions.
-
-ORGAN VII — KERYGMA (Marketing & Distribution)
-Capabilities: POSSE distribution strategy, audience segmentation, channel-specific content adaptation, newsletter integration.
-
-META-ORGANVM (Infrastructure)
-Capabilities: Cross-org governance, CI/CD workflows (82+), community health files, system-wide documentation (~386K words), Astro portfolio site.
-
-RESPONSE FORMAT:
-1. Start with a brief acknowledgment of the user's challenge.
-2. For each relevant organ (typically 2-4), create a section with the organ name as heading.
-3. Under each organ, explain specifically how its capabilities address the stated challenge.
-4. End with a "Recommended Next Steps" section suggesting concrete actions.
-5. Use markdown formatting. Be specific, not generic — reference actual repos and capabilities.
-6. Keep the total response concise (300-500 words).`;
-
-  let puterLoaderPromise: Promise<boolean> | null = null;
-
-  // Puter.js SDK has no TypeScript declarations; window.puter is dynamically injected
-  function loadPuterScript(): Promise<boolean> {
-    if (typeof (window as any).puter !== 'undefined' && (window as any).puter.ai) return Promise.resolve(true);
-    if (puterLoaderPromise) return puterLoaderPromise;
-
-    puterLoaderPromise = new Promise((resolve) => {
-      const existing = document.querySelector<HTMLScriptElement>('script[data-puter-sdk]');
-      if (existing) {
-        // If it exists but puter is not defined, it might still be loading
-        resolve(true);
-        return;
-      }
-
-      const script = document.createElement('script');
-      script.src = 'https://js.puter.com/v2/';
-      script.defer = true;
-      script.crossOrigin = 'anonymous';
-      script.dataset.puterSdk = 'true';
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        console.error('Puter SDK failed to load');
-        resolve(false);
-      };
-      document.head.appendChild(script);
-    });
-
-    return puterLoaderPromise;
+  interface ConsultApiSuccess {
+    ok: true;
+    mode: ConsultMode;
+    analysisHtml?: string;
+    analysisText?: string;
+    requestId: string;
+    durationMs: number;
+    note?: string;
   }
 
-  // Check for Puter API availability with timeout
-  function waitForPuter(timeout: number): Promise<boolean> {
-    return new Promise((resolve) => {
-      if (typeof (window as any).puter !== 'undefined' && (window as any).puter.ai) { resolve(true); return; }
-      const start = Date.now();
-      const check = setInterval(() => {
-        if (typeof (window as any).puter !== 'undefined' && (window as any).puter.ai) { 
-          clearInterval(check); 
-          resolve(true); 
-        } else if (Date.now() - start > timeout) { 
-          clearInterval(check); 
-          resolve(false); 
-        }
-      }, 200);
+  interface ConsultApiFailure {
+    ok: false;
+    code: string;
+    message: string;
+    requestId?: string;
+  }
+
+  interface RenderAnalysis {
+    mode: ConsultMode;
+    html: string;
+    note?: string;
+    requestId: string;
+    source: AnalysisSource;
+    durationMs?: number;
+  }
+
+  interface OrganProfile {
+    id: string;
+    title: string;
+    summary: string;
+    capabilities: string[];
+    repos: string[];
+    keywords: string[];
+  }
+
+  const REQUEST_TIMEOUT_MS = 12000;
+  const CONSULT_API_BASE = (import.meta.env.PUBLIC_CONSULT_API_BASE ?? '').trim();
+  const CONSULT_API_URL = CONSULT_API_BASE
+    ? `${CONSULT_API_BASE.replace(/\/+$/, '')}/api/consult`
+    : null;
+
+  const INDUSTRY_LABELS: Record<string, string> = {
+    education: 'Education & EdTech',
+    arts: 'Arts & Culture',
+    saas: 'SaaS & B2B Software',
+    media: 'Media & Publishing',
+    nonprofit: 'Nonprofit & Social Impact',
+    research: 'Research & Academia',
+    gaming: 'Gaming & Interactive',
+    finance: 'Finance & Data',
+    healthcare: 'Healthcare & Wellness',
+    other: 'Cross-domain',
+  };
+
+  const INDUSTRY_ORGAN_HINTS: Record<string, string[]> = {
+    education: ['III', 'IV', 'VI'],
+    arts: ['II', 'V', 'VII'],
+    saas: ['III', 'IV'],
+    media: ['V', 'VII', 'III'],
+    nonprofit: ['VI', 'V', 'III'],
+    research: ['I', 'IV', 'V'],
+    gaming: ['II', 'III', 'IV'],
+    finance: ['I', 'III', 'IV'],
+    healthcare: ['III', 'IV', 'VI'],
+    other: ['III', 'IV'],
+  };
+
+  const ORGAN_PROFILES: OrganProfile[] = [
+    {
+      id: 'I',
+      title: 'THEORIA',
+      summary: 'Theory, ontology, and recursive analysis infrastructure.',
+      capabilities: [
+        'Recursive symbolic engines for narrative and requirements modeling.',
+        'Computational ontology design for complex domain vocabularies.',
+        'Knowledge graph construction for long-horizon reasoning.',
+      ],
+      repos: ['auto-revision-epistemic-engine', 'call-function--ontological', 'organon-noumenon'],
+      keywords: ['ontology', 'knowledge graph', 'semantic', 'analysis', 'taxonomy', 'classification'],
+    },
+    {
+      id: 'II',
+      title: 'POIESIS',
+      summary: 'Generative art, real-time performance, and experiential interfaces.',
+      capabilities: [
+        'Audience-participatory performance systems with real-time feedback loops.',
+        'Interactive installations and generative media tooling.',
+        'AI-human collaborative creative production pipelines.',
+      ],
+      repos: ['metasystem-master', 'universal-waveform-explorer', 'showcase-portfolio'],
+      keywords: ['art', 'creative', 'installation', 'music', 'experience', 'interactive', 'performance'],
+    },
+    {
+      id: 'III',
+      title: 'ERGON',
+      summary: 'Product architecture, platform delivery, and commercial systems.',
+      capabilities: [
+        'SaaS platform architecture with subscription and operations workflows.',
+        'B2B data aggregation pipelines and API delivery systems.',
+        'Gamified learning and social-product implementation patterns.',
+      ],
+      repos: ['public-record-data-scrapper', 'classroom-rpg-aetheria', 'gamified-coach-interface'],
+      keywords: ['saas', 'platform', 'product', 'b2b', 'subscription', 'workflow', 'pipeline'],
+    },
+    {
+      id: 'IV',
+      title: 'TAXIS',
+      summary: 'Orchestration, agent governance, and quality-controlled automation.',
+      capabilities: [
+        'Multi-agent orchestration with topology and role constraints.',
+        'Registry-driven dependency governance across large repo surfaces.',
+        'Automated auditing and promotion state-machine enforcement.',
+      ],
+      repos: ['agentic-titan', 'orchestration-start-here', 'registry-v2.json'],
+      keywords: ['agent', 'orchestration', 'automation', 'governance', 'compliance', 'coordination'],
+    },
+    {
+      id: 'V',
+      title: 'LOGOS',
+      summary: 'Public process, documentation strategy, and narrative execution.',
+      capabilities: [
+        'Long-form technical writing and transparent methodology publication.',
+        'Decision-led sprint narratives and implementation runbooks.',
+        'Editorial systems for sustained knowledge dissemination.',
+      ],
+      repos: ['public-process', 'portfolio', 'case-studies-methodology'],
+      keywords: ['documentation', 'writing', 'narrative', 'content', 'editorial', 'publishing'],
+    },
+    {
+      id: 'VI',
+      title: 'KOINONIA',
+      summary: 'Community curriculum design and collaborative sense-making.',
+      capabilities: [
+        'Facilitated reading groups and structured collaborative learning.',
+        'Adaptive syllabi aligned to domain and team maturity.',
+        'Community operating models for sustained participation.',
+      ],
+      repos: ['community-infrastructure', 'reading-groups', 'curriculum-ops'],
+      keywords: ['community', 'curriculum', 'learning', 'cohort', 'workshop', 'education'],
+    },
+    {
+      id: 'VII',
+      title: 'KERYGMA',
+      summary: 'Distribution systems, audience segmentation, and outreach loops.',
+      capabilities: [
+        'Channel-specific publication and adaptation strategies.',
+        'Audience segmentation and demand-shaping content programs.',
+        'POSSE-style distribution pipelines for owned-media resilience.',
+      ],
+      repos: ['distribution-engine', 'newsletter-integration', 'audience-segmentation'],
+      keywords: ['marketing', 'distribution', 'audience', 'newsletter', 'reach', 'acquisition'],
+    },
+  ];
+
+  const ALLOWED_TAGS = ['h2', 'h3', 'p', 'strong', 'em', 'code', 'ul', 'li', 'br'];
+  const ALLOWED_ATTRS: Record<string, string[]> = {
+    h2: ['class'],
+    p: ['class'],
+  };
+
+  function escapeHtml(str: string): string {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function sanitizeHtml(html: string): string {
+    return html.replace(/<\/?([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>/g, (tag: string, name: string, attrs: string) => {
+      const lowerName = name.toLowerCase();
+      if (!ALLOWED_TAGS.includes(lowerName)) return '';
+      if (tag.startsWith('</')) return `</${lowerName}>`;
+      const allowedAttrs = ALLOWED_ATTRS[lowerName] || [];
+      const safeAttrs = (attrs.match(/\s[\w-]+="[^"]*"/g) || [])
+        .filter((attr: string) => allowedAttrs.some((allowed: string) => attr.trimStart().startsWith(`${allowed}=`)));
+      return `<${lowerName}${safeAttrs.join('')}>`;
     });
+  }
+
+  function markdownToHtml(markdown: string): string {
+    const safeText = escapeHtml(markdown);
+    let html = safeText
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h2 class="organ-heading">$1</h2>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/\`(.+?)\`/g, '<code>$1</code>')
+      .replace(/^[*-] (.+)$/gm, '<li>$1</li>');
+    html = html.replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul>${match}</ul>`);
+    html = html.split(/\n\n+/).map((block) => {
+      if (block.startsWith('<h') || block.startsWith('<ul')) return block;
+      return `<p>${block.replace(/\n/g, '<br>')}</p>`;
+    }).join('');
+    return sanitizeHtml(html);
+  }
+
+  function titleCaseIndustry(industry: string): string {
+    return INDUSTRY_LABELS[industry] ?? industry;
+  }
+
+  function scoreOrgans(challenge: string, industry: string): OrganProfile[] {
+    const normalized = challenge.toLowerCase();
+    const industryHints = new Set(INDUSTRY_ORGAN_HINTS[industry] || []);
+    const scored = ORGAN_PROFILES.map((organ) => {
+      let score = 0;
+      if (industryHints.has(organ.id)) score += 3;
+      for (const keyword of organ.keywords) {
+        if (normalized.includes(keyword)) score += 2;
+      }
+      return { organ, score };
+    }).sort((a, b) => b.score - a.score);
+
+    const selected = scored
+      .filter((entry) => entry.score > 0)
+      .slice(0, 3)
+      .map((entry) => entry.organ);
+
+    if (selected.length > 0) return selected;
+    return ORGAN_PROFILES.filter((organ) => ['IV', 'III', 'II'].includes(organ.id));
+  }
+
+  function buildFallbackAnalysis(challenge: string, industry: string, note: string, requestId: string): RenderAnalysis {
+    const selectedOrgans = scoreOrgans(challenge, industry);
+    const challengePreview = challenge.length > 240 ? `${challenge.slice(0, 237)}...` : challenge;
+    const industryLabel = industry ? titleCaseIndustry(industry) : 'cross-domain';
+
+    let html = `<p>${escapeHtml(`You are working on a ${industryLabel} challenge. Based on the details you provided, the highest-leverage path is to combine orchestration and product execution with targeted organ capabilities.`)}</p>`;
+    html += `<p><strong>Challenge signal:</strong> ${escapeHtml(challengePreview)}</p>`;
+
+    for (const organ of selectedOrgans) {
+      html += `<h2 class="organ-heading">ORGAN ${escapeHtml(organ.id)} — ${escapeHtml(organ.title)}</h2>`;
+      html += `<p>${escapeHtml(organ.summary)}</p>`;
+      html += '<ul>';
+      for (const capability of organ.capabilities) {
+        html += `<li>${escapeHtml(capability)}</li>`;
+      }
+      html += '</ul>';
+      html += `<p><strong>Key repos:</strong> <code>${escapeHtml(organ.repos.join(', '))}</code></p>`;
+    }
+
+    html += '<h2 class="organ-heading">Recommended Next Steps</h2>';
+    html += '<ul>';
+    html += '<li>Prioritize one pilot slice with measurable delivery outcomes in 2-3 weeks.</li>';
+    html += '<li>Map that slice to the listed organ capabilities and lock a governance workflow before implementation.</li>';
+    html += '<li>Email <code>padavano.anthony@gmail.com</code> with your challenge context for an architecture review.</li>';
+    html += '</ul>';
+
+    return {
+      mode: 'fallback',
+      html: sanitizeHtml(html),
+      note,
+      requestId,
+      source: 'local-fallback',
+    };
+  }
+
+  async function callConsultApi(challenge: string, industry: string, requestId: string): Promise<RenderAnalysis> {
+    if (!CONSULT_API_URL) {
+      throw new Error('Consult API endpoint is not configured.');
+    }
+
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+    try {
+      const response = await fetch(CONSULT_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          challenge,
+          industry: industry || null,
+          page: window.location.pathname,
+          requestId,
+        }),
+        signal: controller.signal,
+      });
+
+      const payload = await response.json() as ConsultApiSuccess | ConsultApiFailure;
+      if (!response.ok || !payload || payload.ok !== true) {
+        const failure = payload as ConsultApiFailure;
+        const message = failure?.message || `Consult API returned ${response.status}`;
+        throw new Error(message);
+      }
+
+      const html = payload.analysisHtml && payload.analysisHtml.trim().length > 0
+        ? payload.analysisHtml
+        : markdownToHtml(payload.analysisText || '');
+
+      return {
+        mode: payload.mode,
+        html: sanitizeHtml(html),
+        note: payload.note,
+        requestId: payload.requestId || requestId,
+        source: 'worker',
+        durationMs: payload.durationMs,
+      };
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
   }
 
   function initConsultForm() {
-    const form = document.getElementById('consult-form');
-    if (!form) return;
+    const form = document.getElementById('consult-form') as HTMLFormElement | null;
+    if (!form || form.dataset.initialized === 'true') return;
+    form.dataset.initialized = 'true';
 
-    const submitBtn = document.getElementById('submit-btn')! as HTMLButtonElement;
-    const responseArea = document.getElementById('response-area')!;
-    const responseContent = document.getElementById('response-content')!;
-    const errorArea = document.getElementById('error-area')!;
-    const resetBtn = document.getElementById('reset-btn')!;
-    const challengeInput = document.getElementById('challenge')! as HTMLTextAreaElement;
-    const industrySelect = document.getElementById('industry')! as HTMLSelectElement;
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const responseArea = document.getElementById('response-area') as HTMLDivElement;
+    const responseMode = document.getElementById('response-mode') as HTMLSpanElement;
+    const responseTelemetry = document.getElementById('response-telemetry') as HTMLDivElement;
+    const responseContent = document.getElementById('response-content') as HTMLDivElement;
+    const errorArea = document.getElementById('error-area') as HTMLDivElement;
+    const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement;
+    const challengeInput = document.getElementById('challenge') as HTMLTextAreaElement;
+    const industrySelect = document.getElementById('industry') as HTMLSelectElement;
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    function renderResult(result: RenderAnalysis): void {
+      const modeLabel = result.mode === 'ai' ? 'AI analysis' : 'Fallback analysis';
+      const sourceLabel = result.source === 'worker' ? 'worker-api' : 'local-fallback';
+      const latencyLabel = typeof result.durationMs === 'number' ? `${result.durationMs}ms` : 'n/a';
+      responseMode.textContent = modeLabel;
+      responseMode.hidden = false;
+      responseTelemetry.textContent = `requestId: ${result.requestId} | mode: ${result.mode} | source: ${sourceLabel} | latency: ${latencyLabel}`;
+      responseTelemetry.hidden = false;
+      const noteHtml = result.note ? `<p class="response-note">${escapeHtml(result.note)}</p>` : '';
+      responseContent.innerHTML = sanitizeHtml(`${noteHtml}${result.html}`);
+      responseArea.hidden = false;
+      responseArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
       const challenge = challengeInput.value.trim();
       if (!challenge) return;
 
       const industry = industrySelect.value;
-      const userMessage = industry
-        ? `Industry: ${industry}\n\nChallenge: ${challenge}`
-        : challenge;
+      const requestId = crypto.randomUUID();
+      const startedAt = performance.now();
 
-      // UI state: loading
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
       responseArea.hidden = true;
+      responseMode.hidden = true;
       errorArea.hidden = true;
 
       try {
-        await loadPuterScript();
-        const puterReady = await waitForPuter(15000); // Increased timeout to 15s
-        
-        if (!puterReady) {
-          throw new Error('AI service initialization timed out');
-        }
-
-        // Use array of messages for more robust system prompt handling
-        const response = await (window as any).puter.ai.chat([
-          { role: 'system', content: SYSTEM_PROMPT },
-          { role: 'user', content: userMessage }
-        ], {
-          model: 'claude-3-5-sonnet'
-        });
-
-        // Handle different possible response structures from Puter.js
-        let text = '';
-        if (typeof response === 'string') {
-          text = response;
-        } else if (response?.message?.content) {
-          // Puter v2 returns content directly or as array of blocks
-          text = typeof response.message.content === 'string' 
-            ? response.message.content 
-            : Array.isArray(response.message.content)
-              ? response.message.content.map((c: any) => c.text || '').join('')
-              : JSON.stringify(response.message.content);
-        } else if (response?.text) {
-          text = response.text;
-        } else if (typeof response?.toString === 'function') {
-          text = response.toString();
+        let result: RenderAnalysis;
+        if (!CONSULT_API_URL) {
+          result = buildFallbackAnalysis(
+            challenge,
+            industry,
+            'Live AI endpoint is not configured. Showing deterministic capability mapping.',
+            requestId,
+          );
         } else {
-          text = JSON.stringify(response);
+          try {
+            result = await callConsultApi(challenge, industry, requestId);
+          } catch (apiError) {
+            console.warn('Consult API unavailable, using deterministic fallback:', apiError);
+            result = buildFallbackAnalysis(
+              challenge,
+              industry,
+              'Live AI service is unavailable right now. Showing deterministic capability mapping.',
+              requestId,
+            );
+          }
         }
 
-        if (!text || text === '{}' || text === 'null') {
-          throw new Error('Empty response from AI service');
+        if (typeof result.durationMs !== 'number') {
+          result.durationMs = Math.round(performance.now() - startedAt);
         }
 
-        // Escape HTML entities before markdown conversion to prevent XSS.
-        function escapeHtml(str: string): string {
-          return str
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-        }
-
-        // Allowlist of tags we produce — strip anything else as defense-in-depth
-        const ALLOWED_TAGS = ['h1','h2','h3','p','strong','em','code','ul','li','br'];
-        const ALLOWED_ATTRS: Record<string, string[]> = {'h2': ['class']};
-        function sanitizeHtml(html: string): string {
-          return html.replace(/<\/?([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>/g, (tag: string, name: string, attrs: string) => {
-            const lowerName = name.toLowerCase();
-            if (!ALLOWED_TAGS.includes(lowerName)) return '';
-            if (tag.startsWith('</')) return '</' + lowerName + '>';
-            const allowedAttrs = ALLOWED_ATTRS[lowerName] || [];
-            const safeAttrs = (attrs.match(/\s[\w-]+="[^"]*"/g) || [])
-              .filter((a: string) => allowedAttrs.some((al: string) => a.trimStart().startsWith(al + '=')));
-            return '<' + lowerName + safeAttrs.join('') + '>';
-          });
-        }
-
-        const safeText = escapeHtml(text);
-
-        // Markdown-to-HTML conversion (safe: operates on pre-escaped text)
-        // Improved version to handle lists and spacing better
-        let html = safeText
-          .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-          .replace(/^## (.+)$/gm, '<h2 class="organ-heading">$1</h2>')
-          .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-          .replace(/\*(.+?)\*/g, '<em>$1</em>')
-          .replace(/\`(.+?)\`/g, '<code>$1</code>')
-          .replace(/^[*-] (.+)$/gm, '<li>$1</li>');
-        
-        // Wrap adjacent list items in <ul>
-        html = html.replace(/(<li>.*<\/li>\n?)+/g, (match) => '<ul>' + match + '</ul>');
-        
-        // Handle paragraphs (double newlines)
-        html = html.split(/\n\n+/).map(p => {
-          if (p.startsWith('<h') || p.startsWith('<ul')) return p;
-          return `<p>${p.replace(/\n/g, '<br>')}</p>`;
-        }).join('');
-
-        // Final sanitization pass — only allow our known-safe tags
-        responseContent.innerHTML = sanitizeHtml(html);
-        responseArea.hidden = false;
-        responseArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } catch (err) {
-        console.error('Puter AI error:', err);
+        renderResult(result);
+      } catch (error) {
+        console.error('Consult form render error:', error);
         errorArea.hidden = false;
       } finally {
         submitBtn.classList.remove('loading');
@@ -330,6 +498,8 @@ RESPONSE FORMAT:
 
     resetBtn.addEventListener('click', () => {
       responseArea.hidden = true;
+      responseMode.hidden = true;
+      responseTelemetry.hidden = true;
       errorArea.hidden = true;
       challengeInput.value = '';
       industrySelect.value = '';
@@ -337,7 +507,6 @@ RESPONSE FORMAT:
     });
   }
 
-  // Initialize on page load and re-initialize on view transitions
   document.addEventListener('astro:page-load', initConsultForm);
 </script>
 
@@ -474,6 +643,42 @@ RESPONSE FORMAT:
     margin-bottom: var(--space-lg);
     padding-bottom: var(--space-sm);
     border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .response-mode {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-primary);
+    background: var(--accent-muted);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    padding: 0.2rem 0.55rem;
+  }
+
+  .response-telemetry {
+    margin-bottom: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 0.45rem 0.6rem;
+    background: color-mix(in srgb, var(--bg-card) 78%, transparent);
+    overflow-wrap: anywhere;
+  }
+
+  .response-content :global(.response-note) {
+    margin-bottom: var(--space-md);
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    border-left: 2px solid var(--accent);
+    padding-left: var(--space-sm);
   }
 
   .response-content :global(h2.organ-heading) {
