@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-28T22:05:04.540Z",
+  "generated": "2026-03-04T00:32:35.998Z",
   "tests": {
     "total": 289,
     "passed": 289,
@@ -612,7 +612,7 @@
     "history": []
   },
   "ledger": {
-    "generated": "2026-02-28T13:53:45.341Z",
+    "generated": "2026-02-28T22:05:05.509Z",
     "snapshots": [
       {
         "generated": "2026-02-17T22:46:04.353Z",
@@ -964,6 +964,57 @@
           "securityDriftStatus": "pass",
           "securityDriftFailures": 0,
           "coverageStatementsDelta": 11,
+          "coverageBranchesDelta": 14,
+          "coverageFunctionsDelta": 9,
+          "coverageLinesDelta": 11,
+          "lhPerformanceDelta": 37,
+          "runtimeCoverageDelta": 0
+        }
+      },
+      {
+        "generated": "2026-02-28T22:05:04.540Z",
+        "tests": {
+          "total": 289,
+          "passed": 289
+        },
+        "coverage": {
+          "statements": 60,
+          "branches": 42,
+          "functions": 51,
+          "lines": 60
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": 12,
           "coverageBranchesDelta": 14,
           "coverageFunctionsDelta": 9,
           "coverageLinesDelta": 11,
