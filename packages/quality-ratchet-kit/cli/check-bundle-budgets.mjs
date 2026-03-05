@@ -2,7 +2,7 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import { parseOption } from './lib/cli-utils.mjs';
+import { parseOption } from './cli-utils.mjs';
 
 function parseDateOrNull(value) {
   if (!value || typeof value !== 'string') return null;
