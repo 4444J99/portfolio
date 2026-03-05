@@ -1,19 +1,18 @@
 {
-  "generated": "2026-03-04T21:04:00.547224+00:00",
-  "sprint": "PROPULSIO_MAXIMA",
+  "generated": "2026-03-04T22:00:00.000Z",
+  "sprint": "PROPULSIO_TERTIA",
   "system": {
     "name": "ORGANVM",
     "launch_date": "2026-02-11",
-    "project_status": "PROPULSIO MAXIMA Sprint 2026-02-24. 103 repos (94 ACTIVE, 9 ARCHIVED), 36 essays (~132K words), ~410K+ total words. Batch promotion: 48 repos LOCAL\u2192CANDIDATE. organvm-engine: 192 tests, 15 MCP tools, pitch deck generator (83 decks). 1 application submitted (Doris Duke / Mozilla AMT). Omega scorecard: 2/17 MET, 3 IN_PROGRESS. Soak test: 9/30 days, 0 incidents."
+    "project_status": "PROPULSIO TERTIA Sprint 2026-03-04. 103 repos (94 ACTIVE, 9 ARCHIVED), 46 essays (~165K words), ~410K+ total words. Omega scorecard: 4/17 MET, 3 IN_PROGRESS. Soak test: 17/30 days, 0 incidents. 66 GitHub issues tracking, 33 sprints completed, schema v1.0.0, governance v2.0. GitHub Discussions + community onboarding active."
   },
   "registry": {
     "total_repos": 103,
     "total_organs": 8,
     "operational_organs": 8,
     "implementation_status": {
-      "ACTIVE": 93,
-      "ARCHIVED": 9,
-      "PRODUCTION": 1
+      "ACTIVE": 94,
+      "ARCHIVED": 9
     },
     "tier_distribution": {
       "flagship": 9,
@@ -22,682 +21,142 @@
       "archive": 7
     },
     "promotion_status": {
-      "PUBLIC_PROCESS": 12,
-      "CANDIDATE": 66,
-      "LOCAL": 12,
       "GRADUATED": 4,
+      "PUBLIC_PROCESS": 29,
+      "CANDIDATE": 55,
+      "LOCAL": 6,
       "ARCHIVED": 9
     },
-    "ci_coverage": 94,
+    "ci_coverage": 102,
     "dependency_edges": 43,
+    "schema_version": "1.0.0",
+    "governance_version": "2.0",
     "organs": {
       "ORGAN-I": {
         "name": "Theory",
         "status": "OPERATIONAL",
         "total_repos": 20,
-        "implementation_status": {
-          "ACTIVE": 17,
-          "ARCHIVED": 3
-        },
-        "tier_distribution": {
-          "flagship": 1,
-          "standard": 17,
-          "infrastructure": 1
-        },
+        "implementation_status": { "ACTIVE": 17, "ARCHIVED": 3 },
         "ci_coverage": 18
       },
       "ORGAN-II": {
         "name": "Art",
         "status": "OPERATIONAL",
         "total_repos": 30,
-        "implementation_status": {
-          "ARCHIVED": 4,
-          "ACTIVE": 26
-        },
-        "tier_distribution": {
-          "archive": 4,
-          "standard": 23,
-          "flagship": 2,
-          "infrastructure": 1
-        },
+        "implementation_status": { "ACTIVE": 26, "ARCHIVED": 4 },
         "ci_coverage": 25
       },
       "ORGAN-III": {
         "name": "Commerce",
         "status": "OPERATIONAL",
         "total_repos": 27,
-        "implementation_status": {
-          "ARCHIVED": 2,
-          "ACTIVE": 25
-        },
-        "tier_distribution": {
-          "standard": 23,
-          "flagship": 1,
-          "archive": 2,
-          "infrastructure": 1
-        },
+        "implementation_status": { "ACTIVE": 25, "ARCHIVED": 2 },
         "ci_coverage": 26
       },
       "ORGAN-IV": {
         "name": "Orchestration",
         "status": "OPERATIONAL",
         "total_repos": 7,
-        "implementation_status": {
-          "ACTIVE": 7
-        },
-        "tier_distribution": {
-          "flagship": 2,
-          "standard": 4,
-          "infrastructure": 1
-        },
+        "implementation_status": { "ACTIVE": 7 },
         "ci_coverage": 6
       },
       "ORGAN-V": {
         "name": "Public Process",
         "status": "OPERATIONAL",
-        "total_repos": 2,
-        "implementation_status": {
-          "ACTIVE": 2
-        },
-        "tier_distribution": {
-          "flagship": 1,
-          "infrastructure": 1
-        },
-        "ci_coverage": 1
+        "total_repos": 6,
+        "implementation_status": { "ACTIVE": 6 },
+        "ci_coverage": 5
       },
       "ORGAN-VI": {
         "name": "Community",
         "status": "OPERATIONAL",
         "total_repos": 6,
-        "implementation_status": {
-          "ACTIVE": 4
-        },
-        "tier_distribution": {
-          "standard": 3,
-          "infrastructure": 1
-        },
-        "ci_coverage": 3
+        "implementation_status": { "ACTIVE": 6 },
+        "ci_coverage": 5
       },
       "ORGAN-VII": {
-        "name": "Marketing",
+        "name": "Distribution",
         "status": "OPERATIONAL",
-        "total_repos": 4,
-        "implementation_status": {
-          "ARCHIVED": 1,
-          "ACTIVE": 3
-        },
-        "tier_distribution": {
-          "archive": 1,
-          "standard": 2,
-          "infrastructure": 1
-        },
-        "ci_coverage": 3
+        "total_repos": 6,
+        "implementation_status": { "ACTIVE": 5, "ARCHIVED": 1 },
+        "ci_coverage": 5
       },
       "META-ORGANVM": {
         "name": "Meta",
         "status": "OPERATIONAL",
         "total_repos": 7,
-        "implementation_status": {
-          "ACTIVE": 3
-        },
-        "tier_distribution": {
-          "infrastructure": 1,
-          "flagship": 1,
-          "standard": 1
-        },
-        "ci_coverage": 2
+        "implementation_status": { "ACTIVE": 7 },
+        "ci_coverage": 5
       }
     }
   },
-  "ci": {
-    "skipped": true,
-    "note": "CI status check skipped (--skip-ci)"
+  "omega": {
+    "met": 4,
+    "in_progress": 3,
+    "not_met": 10,
+    "total": 17,
+    "soak_streak": 17,
+    "soak_target": 30,
+    "soak_incidents": 0,
+    "next_auto_flip": "2026-03-18"
   },
   "essays": {
     "total": 46,
-    "timeline": [
-      {
-        "date": "2026-02-10",
-        "slug": "building-in-public"
-      },
-      {
-        "date": "2026-02-10",
-        "slug": "five-years-autonomous-creative"
-      },
-      {
-        "date": "2026-02-10",
-        "slug": "governance-as-creative-practice"
-      },
-      {
-        "date": "2026-02-10",
-        "slug": "how-we-orchestrate-eight-organs"
-      },
-      {
-        "date": "2026-02-10",
-        "slug": "meta-system-as-portfolio-asset"
-      },
-      {
-        "date": "2026-02-11",
-        "slug": "aetheria-rpg-post-mortem"
-      },
-      {
-        "date": "2026-02-11",
-        "slug": "ai-conductor-methodology"
-      },
-      {
-        "date": "2026-02-11",
-        "slug": "bronze-to-platinum"
-      },
-      {
-        "date": "2026-02-11",
-        "slug": "choreographic-interface"
-      },
-      {
-        "date": "2026-02-11",
-        "slug": "coaching-platform-metrics"
-      },
-      {
-        "date": "2026-02-11",
-        "slug": "documentation-implementation-gap"
-      },
-      {
-        "date": "2026-02-11",
-        "slug": "epistemic-tuning-explained"
-      },
-      {
-        "date": "2026-02-11",
-        "slug": "generative-music-case-study"
-      },
-      {
-        "date": "2026-02-11",
-        "slug": "recursive-engines-at-scale"
-      },
-      {
-        "date": "2026-02-11",
-        "slug": "testing-the-meta-system"
-      },
-      {
-        "date": "2026-02-11",
-        "slug": "uniform-quality-at-scale"
-      },
-      {
-        "date": "2026-02-12",
-        "slug": "the-parallel-launch"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "registry-driven-development"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "why-ai-function-calling-needs-ontological-grounding"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "the-promotion-pipeline"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "deploying-the-portfolio"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "bootstrap-to-scale"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "aesthetic-nervous-system"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "seed-contracts"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "provenance-as-practice"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "archive-paradox"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "dependency-graph"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "the-convergence"
-      },
-      {
-        "date": "2026-02-13",
-        "slug": "how-this-was-built"
-      },
-      {
-        "date": "2026-02-16",
-        "slug": "governance-frameworks-for-artists"
-      },
-      {
-        "date": "2026-02-16",
-        "slug": "how-to-think-about-autonomous-systems"
-      },
-      {
-        "date": "2026-02-16",
-        "slug": "promotions-in-practice"
-      },
-      {
-        "date": "2026-02-16",
-        "slug": "twenty-six-sprints-in-six-days"
-      },
-      {
-        "date": "2026-02-16",
-        "slug": "what-it-takes-to-ship-a-product-from-inside-an-organ-system"
-      },
-      {
-        "date": "2026-02-16",
-        "slug": "why-the-organ-model-separates-commerce-from-theory"
-      },
-      {
-        "date": "2026-02-17",
-        "slug": "construction-addiction"
-      }
-    ]
+    "word_count_estimate": 165000
   },
-  "flagship_vivification": {
-    "audit_date": "2026-02-14T18:39:00.000000+00:00",
-    "note": "MANIFESTATIO Sprint corrected audit. Previous PRAXIS audit undercounted due to: (1) agentic-titan misclassified as TypeScript (actually Python), (2) code files under docs/ directories counted as docs, (3) .ci/ scripts excluded by dotfile filter.",
-    "classifications": {
-      "SUBSTANTIAL": 5,
-      "PARTIAL": 2,
-      "MINIMAL": 1,
-      "SKELETON": 0,
-      "ERROR": 0
-    },
-    "total_audited": 8,
-    "repos": [
-      {
-        "repo": "recursive-engine--generative-entity",
-        "org": "organvm-i-theoria",
-        "classification": "SUBSTANTIAL",
-        "code_files": 60,
-        "test_files": 34
-      },
-      {
-        "repo": "auto-revision-epistemic-engine",
-        "org": "organvm-i-theoria",
-        "classification": "PARTIAL",
-        "code_files": 23,
-        "test_files": 3
-      },
-      {
-        "repo": "metasystem-master",
-        "org": "organvm-ii-poiesis",
-        "classification": "SUBSTANTIAL",
-        "code_files": 62,
-        "test_files": 12
-      },
-      {
-        "repo": "example-generative-music",
-        "org": "organvm-ii-poiesis",
-        "classification": "PARTIAL",
-        "code_files": 7,
-        "test_files": 2
-      },
-      {
-        "repo": "gamified-coach-interface",
-        "org": "organvm-iii-ergon",
-        "classification": "SUBSTANTIAL",
-        "code_files": 37,
-        "test_files": 5
-      },
-      {
-        "repo": "classroom-rpg-aetheria",
-        "org": "organvm-iii-ergon",
-        "classification": "SUBSTANTIAL",
-        "code_files": 192,
-        "test_files": 16
-      },
-      {
-        "repo": "agentic-titan",
-        "org": "organvm-iv-taxis",
-        "classification": "SUBSTANTIAL",
-        "code_files": 219,
-        "test_files": 93
-      },
-      {
-        "repo": "public-process",
-        "org": "organvm-v-logos",
-        "classification": "MINIMAL",
-        "code_files": 6,
-        "test_files": 0
-      }
-    ]
+  "sprints": {
+    "completed": 33,
+    "cataloged": 76,
+    "latest": "PROPULSIO_TERTIA"
   },
-  "code_substance": {
-    "audit_date": "2026-02-14T18:39:58.092848+00:00",
-    "sprint": "MANIFESTATIO",
-    "total_repos_audited": 76,
-    "classifications": {
-      "SUBSTANTIAL": 19,
-      "PARTIAL": 28,
-      "MINIMAL": 25,
-      "SKELETON": 4
-    },
-    "repos_with_10_plus_code_files": 38,
-    "repos_with_test_directories": 56,
-    "total_code_files": 3586,
-    "total_test_files": 736,
-    "ci_passing": 58,
-    "ci_failing": 13,
-    "ci_none": 0,
-    "correction_note": "Previous PRAXIS audit reported 6 repos with code and 4 with tests. MANIFESTATIO re-audit with fixed classification logic found 38 repos with 10+ code files and 56 with test directories. The 'code substance gap' identified in E2G review was a measurement error."
+  "github_issues": {
+    "corpus": 66,
+    "engine": 4,
+    "total": 70
   },
+  "adrs": 16,
+  "schemas": 6,
+  "ci_workflows": 102,
+  "automated_tests": 2349,
+  "documentation_words": 410000,
   "sprint_history": [
-    {
-      "name": "IGNITION",
-      "date": "2026-02-09",
-      "focus": "Org architecture",
-      "deliverables": "8 GitHub orgs created"
-    },
-    {
-      "name": "PROPULSION",
-      "date": "2026-02-10",
-      "focus": "Documentation",
-      "deliverables": "Bronze/Silver/Gold sprints"
-    },
-    {
-      "name": "ASCENSION",
-      "date": "2026-02-10",
-      "focus": "Validation",
-      "deliverables": "1,267 links audited"
-    },
-    {
-      "name": "EXODUS",
-      "date": "2026-02-11",
-      "focus": "Launch",
-      "deliverables": "9/9 criteria met"
-    },
-    {
-      "name": "PERFECTION",
-      "date": "2026-02-11",
-      "focus": "Gap-fill",
-      "deliverables": "11 repos, 14 promotions"
-    },
-    {
-      "name": "AUTONOMY",
-      "date": "2026-02-12",
-      "focus": "Automation",
-      "deliverables": "seed.yaml, 5 agents, 11 workflows"
-    },
-    {
-      "name": "GENESIS",
-      "date": "2026-02-12",
-      "focus": "Creation",
-      "deliverables": "7 new repos from local materials"
-    },
-    {
-      "name": "ALCHEMIA",
-      "date": "2026-02-12",
-      "focus": "Aesthetics",
-      "deliverables": "2,012 files, taste.yaml cascading"
-    },
-    {
-      "name": "CONVERGENCE",
-      "date": "2026-02-13",
-      "focus": "Coherence",
-      "deliverables": "82 ACTIVE, zero gaps"
-    },
-    {
-      "name": "PRAXIS",
-      "date": "2026-02-13",
-      "focus": "Impact",
-      "deliverables": "Portfolio, distribution, revenue"
-    },
-    {
-      "name": "VERITAS",
-      "date": "2026-02-13",
-      "focus": "Credibility",
-      "deliverables": "PRODUCTION\u2192ACTIVE, revenue split, essay dates, honesty essay"
-    },
-    {
-      "name": "MANIFESTATIO",
-      "date": "2026-02-14",
-      "focus": "Outward-facing",
-      "deliverables": "Re-audit (3,586 code files, 38 repos with 10+ code), 3 CI fixes, E2G items closed, workflow validation, application prep, engagement baseline"
-    },
-    {
-      "name": "ILLUSTRATIO",
-      "date": "2026-02-14",
-      "focus": "Portfolio polish",
-      "deliverables": "Billing fix (14 cron workflows disabled), portfolio data regeneration, CMYK design system, p5.js on every page, LLM consultation page"
-    },
-    {
-      "name": "SUBMISSIO",
-      "date": "2026-02-14",
-      "focus": "Applications",
-      "deliverables": "5 application packages, qualification assessment, submission bundles"
-    },
-    {
-      "name": "OPERATIO-I",
-      "date": "2026-02-16",
-      "focus": "Governance",
-      "deliverables": "Post-construction governance, monitoring, runbooks, operational readiness"
-    },
-    {
-      "name": "GAP-FILL",
-      "date": "2026-02-11",
-      "focus": "Coverage",
-      "deliverables": "Coverage completion across all eight organs"
-    },
-    {
-      "name": "PLATINUM",
-      "date": "2026-02-11",
-      "focus": "Standardization",
-      "deliverables": "CI/CD and health file standardization across 77 repos"
-    },
-    {
-      "name": "REMEDIUM",
-      "date": "2026-02-16",
-      "focus": "Metrics repair",
-      "deliverables": "13 files updated with current metrics"
-    },
-    {
-      "name": "SYNCHRONIUM",
-      "date": "2026-02-16",
-      "focus": "Infrastructure",
-      "deliverables": "Workspace restructure, flat 2-level layout, 68 repos moved"
-    },
-    {
-      "name": "CONCORDIA",
-      "date": "2026-02-16",
-      "focus": "Reconciliation",
-      "deliverables": "Registry reconciliation, 6 orphan repos registered (91\u219297)"
-    },
-    {
-      "name": "TRIPARTITUM",
-      "date": "2026-02-16",
-      "focus": "Documentation",
-      "deliverables": "19 sprint specs written, all active docs aligned with registry"
-    },
-    {
-      "name": "METRICUM",
-      "date": "2026-02-16",
-      "focus": "Automation",
-      "deliverables": "Automated metrics calculation and propagation pipeline"
-    },
-    {
-      "name": "PUBLICATIO",
-      "date": "2026-02-16",
-      "focus": "Essays",
-      "deliverables": "4 essays deployed, 3 new essays written (29\u219233)"
-    },
-    {
-      "name": "CANON",
-      "date": "2026-02-16",
-      "focus": "Reconciliation",
-      "deliverables": "Catalog reconciliation, 4 numbering collisions fixed"
-    },
-    {
-      "name": "INSPECTIO",
-      "date": "2026-02-16",
-      "focus": "Assessment",
-      "deliverables": "Product assessment, life-my--midst--in identified as beta candidate"
-    },
-    {
-      "name": "PROPAGATIO",
-      "date": "2026-02-16",
-      "focus": "Propagation",
-      "deliverables": "Stale data corrected across 20+ files, portfolio brief updated"
-    },
-    {
-      "name": "BETA-VITAE",
-      "date": "2026-02-16",
-      "focus": "Deployment",
-      "deliverables": "Neon DB provisioned, 291 tests pass, DEPLOY.md, render.yaml fixed"
-    },
-    {
-      "name": "RECOGNITIO",
-      "date": "2026-02-17",
-      "focus": "Review",
-      "deliverables": "E2G-II post-construction review, omega scorecard (1/17), P0 gate"
-    },
-    {
-      "name": "AUTOMATA",
-      "date": "2026-02-17",
-      "focus": "Autonomy",
-      "deliverables": "3 cron workflows, auto-deploy, system-pulse, organ-cli"
-    },
-    {
-      "name": "DISTRIBUTIO",
-      "date": "2026-02-17",
-      "focus": "Distribution",
-      "deliverables": "Backfill pipeline, rich metadata parsing, 3/week drip-feed"
-    },
-    {
-      "name": "FUNDAMEN",
-      "date": "2026-02-17",
-      "focus": "Hardening",
-      "deliverables": "6 repos synced, 25+ new tests, social-automation HTTP POST"
-    },
-    {
-      "name": "SENSORIA",
-      "date": "2026-02-17",
-      "focus": "Perception",
-      "deliverables": "100% seed.yaml coverage, stale-detector, propagation fixes"
-    },
-    {
-      "name": "OPERATIO",
-      "date": "2026-02-17",
-      "focus": "Operations",
-      "deliverables": "Essay-deploy, organ-cli (8 subcommands), health dashboard, TODO housekeeping"
-    },
-    {
-      "name": "PROPULSIO",
-      "date": "2026-02-23",
-      "focus": "Forward motion",
-      "deliverables": "Pitch deck generator, omega scorecard live, MCP server (15 tools), context sync"
-    },
-    {
-      "name": "PROPULSIO_MAXIMA",
-      "date": "2026-02-24",
-      "focus": "Multi-front sprint",
-      "deliverables": "48 repos promoted, 83 pitch decks, 192 engine tests, Doris Duke AMT submitted, omega 1\u21922/17"
-    }
-  ],
-  "praxis_targets": {
-    "portfolio_site": {
-      "target": "Live",
-      "current": "Live at 4444j99.github.io/portfolio/ \u2014 Jost+CMYK redesign, p5.js on all pages, LLM consult page",
-      "met": true
-    },
-    "flagship_repos_with_code": {
-      "target": "30+",
-      "current": "38 (MANIFESTATIO corrected \u2014 was 6)",
-      "met": true
-    },
-    "distribution_channels": {
-      "target": "4+",
-      "current": "3 (RSS, Mastodon, Discord)",
-      "met": false
-    },
-    "applications_submitted": {
-      "target": "3-5",
-      "current": "1 (Doris Duke / Mozilla AMT)",
-      "next_deadline": "Prix Ars Electronica \u2014 2026-03-04",
-      "note": "Doris Duke AMT submitted 2026-02-24. 27 staged, 9 drafting. Prix Ars Electronica and S+T+ARTS Prize both due Mar 4."
-    },
-    "community_events": {
-      "target": "Salon launched",
-      "current": "0"
-    },
-    "production_ready_products": {
-      "target": "3-5",
-      "current": "3 (Coach Interface, Public Record Scrapper, Livestream Framework)"
-    },
-    "real_test_suites": {
-      "target": "30+",
-      "current": "56 (MANIFESTATIO corrected \u2014 was 4)",
-      "met": true
-    }
-  },
-  "engagement_baseline": {
-    "snapshot_date": "2026-02-14",
-    "sprint": "MANIFESTATIO",
-    "note": "First engagement measurement. Clone numbers likely inflated by system's own CI workflows (11 autonomous workflows clone repos for validation, audit, graph-building). Page views are the more honest external engagement signal.",
-    "top_repos": {
-      "public-process": {
-        "stars": 0,
-        "forks": 0,
-        "views_14d": 1,
-        "unique_visitors_14d": 1,
-        "clones_14d": 608,
-        "unique_cloners_14d": 243
-      },
-      "recursive-engine--generative-entity": {
-        "stars": 1,
-        "forks": 0,
-        "views_14d": 6,
-        "unique_visitors_14d": 6,
-        "clones_14d": 902,
-        "unique_cloners_14d": 230
-      },
-      "orchestration-start-here": {
-        "stars": 0,
-        "forks": 0,
-        "views_14d": 0,
-        "unique_visitors_14d": 0,
-        "clones_14d": 365,
-        "unique_cloners_14d": 163
-      },
-      "metasystem-master": {
-        "stars": 0,
-        "forks": 0,
-        "views_14d": 6,
-        "unique_visitors_14d": 2,
-        "clones_14d": 1516,
-        "unique_cloners_14d": 306
-      },
-      "agentic-titan": {
-        "stars": 1,
-        "forks": 0,
-        "views_14d": 11,
-        "unique_visitors_14d": 5,
-        "clones_14d": 873,
-        "unique_cloners_14d": 149
-      }
-    },
-    "totals": {
-      "total_stars": 31,
-      "total_forks": 6,
-      "total_views_14d": 24,
-      "total_unique_visitors_14d": 14,
-      "total_clones_14d": 4264,
-      "total_unique_cloners_14d": 1091
-    },
-    "discussions_enabled": {
-      "salon-archive": true
-    },
-    "analytics": {
-      "public_process_jekyll": "GoatCounter config in _config.yml but commented out. Account organvm.goatcounter.com returns 400 \u2014 needs signup at goatcounter.com/signup first. Then uncomment goatcounter_url in _config.yml."
-    }
-  }
+    { "name": "IGNITION", "date": "2026-02-09", "focus": "Org architecture", "deliverables": "8 GitHub orgs created" },
+    { "name": "PROPULSION", "date": "2026-02-10", "focus": "Documentation", "deliverables": "Bronze/Silver/Gold sprints" },
+    { "name": "ASCENSION", "date": "2026-02-10", "focus": "Validation", "deliverables": "1,267 links audited" },
+    { "name": "EXODUS", "date": "2026-02-11", "focus": "Launch", "deliverables": "9/9 criteria met" },
+    { "name": "PERFECTION", "date": "2026-02-11", "focus": "Gap-fill", "deliverables": "11 repos, 14 promotions" },
+    { "name": "AUTONOMY", "date": "2026-02-12", "focus": "Automation", "deliverables": "seed.yaml, 5 agents, 11 workflows" },
+    { "name": "GENESIS", "date": "2026-02-12", "focus": "Creation", "deliverables": "7 new repos from local materials" },
+    { "name": "ALCHEMIA", "date": "2026-02-12", "focus": "Aesthetics", "deliverables": "2,012 files, taste.yaml cascading" },
+    { "name": "CONVERGENCE", "date": "2026-02-13", "focus": "Coherence", "deliverables": "82 ACTIVE, zero gaps" },
+    { "name": "PRAXIS", "date": "2026-02-13", "focus": "Impact", "deliverables": "Portfolio, distribution, revenue" },
+    { "name": "VERITAS", "date": "2026-02-13", "focus": "Credibility", "deliverables": "PRODUCTION→ACTIVE, revenue split" },
+    { "name": "MANIFESTATIO", "date": "2026-02-14", "focus": "Outward-facing", "deliverables": "Re-audit (3,586 code files), engagement baseline" },
+    { "name": "ILLUSTRATIO", "date": "2026-02-14", "focus": "Portfolio polish", "deliverables": "CMYK design system, p5.js, LLM consultation page" },
+    { "name": "SUBMISSIO", "date": "2026-02-14", "focus": "Applications", "deliverables": "5 application packages" },
+    { "name": "OPERATIO-I", "date": "2026-02-16", "focus": "Governance", "deliverables": "Post-construction governance, runbooks" },
+    { "name": "GAP-FILL", "date": "2026-02-11", "focus": "Coverage", "deliverables": "Coverage completion across all organs" },
+    { "name": "PLATINUM", "date": "2026-02-11", "focus": "Standardization", "deliverables": "CI/CD across 77 repos" },
+    { "name": "REMEDIUM", "date": "2026-02-16", "focus": "Metrics repair", "deliverables": "13 files updated" },
+    { "name": "SYNCHRONIUM", "date": "2026-02-16", "focus": "Infrastructure", "deliverables": "68 repos moved, flat layout" },
+    { "name": "CONCORDIA", "date": "2026-02-16", "focus": "Reconciliation", "deliverables": "6 orphan repos registered" },
+    { "name": "TRIPARTITUM", "date": "2026-02-16", "focus": "Documentation", "deliverables": "19 sprint specs written" },
+    { "name": "METRICUM", "date": "2026-02-16", "focus": "Automation", "deliverables": "Automated metrics pipeline" },
+    { "name": "PUBLICATIO", "date": "2026-02-16", "focus": "Essays", "deliverables": "4 essays deployed, 3 new" },
+    { "name": "CANON", "date": "2026-02-16", "focus": "Reconciliation", "deliverables": "4 numbering collisions fixed" },
+    { "name": "INSPECTIO", "date": "2026-02-16", "focus": "Assessment", "deliverables": "Product assessment" },
+    { "name": "PROPAGATIO", "date": "2026-02-16", "focus": "Propagation", "deliverables": "20+ files corrected" },
+    { "name": "BETA-VITAE", "date": "2026-02-16", "focus": "Deployment", "deliverables": "Neon DB, 291 tests, render.yaml" },
+    { "name": "RECOGNITIO", "date": "2026-02-17", "focus": "Review", "deliverables": "E2G-II, omega scorecard (1/17)" },
+    { "name": "AUTOMATA", "date": "2026-02-17", "focus": "Autonomy", "deliverables": "3 cron workflows, auto-deploy" },
+    { "name": "DISTRIBUTIO", "date": "2026-02-17", "focus": "Distribution", "deliverables": "Backfill pipeline, drip-feed" },
+    { "name": "FUNDAMEN", "date": "2026-02-17", "focus": "Hardening", "deliverables": "6 repos synced, 25+ tests" },
+    { "name": "SENSORIA", "date": "2026-02-17", "focus": "Perception", "deliverables": "100% seed.yaml coverage" },
+    { "name": "OPERATIO", "date": "2026-02-17", "focus": "Operations", "deliverables": "Essay-deploy, organ-cli, health dashboard" },
+    { "name": "PROPULSIO", "date": "2026-02-23", "focus": "Forward motion", "deliverables": "Pitch decks, omega live, MCP server, context sync" },
+    { "name": "PROPULSIO_MAXIMA", "date": "2026-02-24", "focus": "Multi-front", "deliverables": "48 repos promoted, 83 decks, Doris Duke submitted, omega 1→2" },
+    { "name": "ERUPTIO", "date": "2026-02-28", "focus": "Deployment sprint", "deliverables": "12 products deployed, schema v1.0.0, omega 2→4" },
+    { "name": "ERUPTIO_SECUNDA", "date": "2026-03-04", "focus": "Outreach + community", "deliverables": "58 issues, governance v2.0, HOSPITIUM, FORUM, evidence portfolio" },
+    { "name": "PROPULSIO_TERTIA", "date": "2026-03-04", "focus": "Portfolio + hardening", "deliverables": "Portfolio refresh, PROBATIO, VIVIFICATIO, conference proposals" }
+  ]
 }
