@@ -305,7 +305,7 @@
       "name": "ERUPTIO_SECUNDA",
       "date": "2026-03-04",
       "focus": "Outreach + community",
-      "deliverables": "58 issues, governance v2.0, HOSPITIUM, FORUM, evidence portfolio"
+      "deliverables": "58 issues, governance v2.0, HOSPITIUM, FORUM, evidence portfolio, security audit, accessibility audit"
     },
     {
       "name": "PROPULSIO_TERTIA",
@@ -314,5 +314,5 @@
       "deliverables": "Portfolio refresh, PROBATIO, VIVIFICATIO, conference proposals"
     }
   ],
-  "generated": "2026-03-05T00:50:53.377912+00:00"
+  "generated": "2026-03-05T06:46:10.058770+00:00"
 }
