@@ -15,7 +15,7 @@ const BASE_URL = 'http://localhost:4321/portfolio';
 
 async function generatePDFs() {
   console.log('🚀 Starting Colossal Concurrent PDF Generation Factory...');
-  
+
   if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   }
@@ -34,6 +34,8 @@ async function generatePDFs() {
         path: outputPath,
         format: 'Letter',
         printBackground: true,
+        tagged: true,
+        outline: true,
         margin: { top: '1cm', right: '1cm', bottom: '1cm', left: '1cm' }
       });
       console.log(`✅ [${logPrefix}] Saved to ${outputPath}`);

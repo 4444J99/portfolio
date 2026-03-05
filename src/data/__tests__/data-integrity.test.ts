@@ -134,10 +134,11 @@ describe('system-metrics.json', () => {
   it('has top-level required sections', () => {
     expect(systemMetrics.system).toBeTruthy();
     expect(systemMetrics.registry).toBeTruthy();
-    expect(systemMetrics.code_substance).toBeTruthy();
-    expect(systemMetrics.flagship_vivification).toBeTruthy();
+    expect(systemMetrics.omega).toBeTruthy();
+    expect(systemMetrics.essays).toBeTruthy();
+    expect(systemMetrics.sprints).toBeTruthy();
+    expect(systemMetrics.github_issues).toBeTruthy();
     expect(systemMetrics.sprint_history).toBeTruthy();
-    expect(systemMetrics.praxis_targets).toBeTruthy();
   });
 
   it('registry totals are positive', () => {
@@ -157,5 +158,10 @@ describe('system-metrics.json', () => {
       expect(s.name).toBeTruthy();
       expect(s.date).toBeTruthy();
     }
+  });
+
+  it('contains documentation and test metrics', () => {
+    expect(systemMetrics.automated_tests).toBeGreaterThan(0);
+    expect(systemMetrics.documentation_words).toBeGreaterThan(0);
   });
 });
