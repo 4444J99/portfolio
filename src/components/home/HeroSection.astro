@@ -57,7 +57,10 @@ function splitWords(text: string) {
             <span class="hero__word" style={`animation-delay: ${100 + i * 40}ms`}>{word}&nbsp;</span>
           ))}
         </h1>
-        <p class="hero__sub" data-reveal style="animation-delay: 200ms">15 years of strategic delivery. Lead Architect for a {vitals.repos.total}-repo orchestration ecosystem. Expert in autonomous governance, multi-agent topologies, and hexagonal reliability. {vitals.substance.automated_tests.toLocaleString()} tests and {vitals.substance.ci_coverage_pct}% coverage across the production fleet.</p>
+        <p class="hero__sub" data-reveal style="animation-delay: 200ms">
+          <strong>Translating complex requirements into resilient software.</strong><br/>
+          15 years of strategic delivery. Lead Architect for a {vitals.repos.total}-repo <abbr title="A unified portfolio architecture spanning multiple organizations and systems" style="text-decoration: underline dotted; cursor: help; color: inherit;">orchestration ecosystem</abbr>. Expert in <abbr title="Self-regulating CI/CD and deployment pipelines" style="text-decoration: underline dotted; cursor: help; color: inherit;">autonomous governance</abbr>, multi-agent topologies, and hexagonal reliability. {vitals.substance.automated_tests.toLocaleString()} tests and {vitals.substance.ci_coverage_pct}% coverage across the production fleet.
+        </p>
       </div>
 
       <div class="hero__view" data-hero-view="creative" style="display: none;">
@@ -67,7 +70,10 @@ function splitWords(text: string) {
             <span class="hero__word" style={`animation-delay: ${i * 40}ms`}>{word}&nbsp;</span>
           ))}
         </h1>
-        <p class="hero__sub">Directing the intersection of rhetoric and code. Coordinating {vitals.repos.total} repositories and {vitals.repos.orgs} organizations as a unified artistic ecosystem — ~{Math.floor(vitals.logos.words / 1000)}K words of architectural planning and public process documentation.</p>
+        <p class="hero__sub">
+          <strong>Combining rigorous systems design with narrative strategy.</strong><br/>
+          Directing the intersection of rhetoric and code. Coordinating {vitals.repos.total} repositories and {vitals.repos.orgs} organizations as a unified artistic ecosystem — ~{Math.floor(vitals.logos.words / 1000)}K words of architectural planning and public process documentation.
+        </p>
       </div>
 
       <div class="hero__credentials" data-reveal style="animation-delay: 280ms">

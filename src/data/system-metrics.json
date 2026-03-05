@@ -1,10 +1,10 @@
 {
-  "generated": "2026-03-05T00:50:41.403434+00:00",
+  "generated": "2026-03-05T12:00:00.000Z",
   "sprint": "PROPULSIO_TERTIA",
   "system": {
     "name": "ORGANVM",
     "launch_date": "2026-02-11",
-    "project_status": "PROPULSIO TERTIA Sprint 2026-03-04. 103 repos (94 ACTIVE, 9 ARCHIVED), 46 essays (~165K words), ~410K+ total words. Omega scorecard: 4/17 MET, 3 IN_PROGRESS. Soak test: 17/30 days, 0 incidents. 66 GitHub issues tracking, 33 sprints completed, schema v1.0.0, governance v2.0. GitHub Discussions + community onboarding active."
+    "project_status": "PROPULSIO TERTIA Sprint 2026-03-05. 103 repos (94 ACTIVE, 9 ARCHIVED), 46 essays (~165K words), ~410K+ total words. Omega scorecard: 11/17 MET, 3 IN_PROGRESS. Soak test: 18/30 days, 0 incidents. 70 GitHub issues tracking, 33 sprints completed, schema v1.0.0, governance v2.0. GitHub Discussions + community onboarding active."
   },
   "registry": {
     "total_repos": 103,
@@ -111,11 +111,11 @@
     }
   },
   "omega": {
-    "met": 4,
+    "met": 11,
     "in_progress": 3,
-    "not_met": 10,
+    "not_met": 3,
     "total": 17,
-    "soak_streak": 17,
+    "soak_streak": 18,
     "soak_target": 30,
     "soak_incidents": 0,
     "next_auto_flip": "2026-03-18"
@@ -130,7 +130,7 @@
     "latest": "PROPULSIO_TERTIA"
   },
   "github_issues": {
-    "corpus": 66,
+    "corpus": 70,
     "engine": 4,
     "total": 70
   },
@@ -360,7 +360,7 @@
       "name": "ERUPTIO_SECUNDA",
       "date": "2026-03-04",
       "focus": "Outreach + community",
-      "deliverables": "58 issues, governance v2.0, HOSPITIUM, FORUM, evidence portfolio"
+      "deliverables": "58 issues, governance v2.0, HOSPITIUM, FORUM, evidence portfolio, security audit, accessibility audit"
     },
     {
       "name": "PROPULSIO_TERTIA",

@@ -43,7 +43,7 @@ const paddedNumber = String(number).padStart(2, '0');
         <div class="flip-card__tags flip-card__tags--engineering">
           {skills.map(s => <span class="tag tag--skill">{s}</span>)}
         </div>
-        <a href={href} class="flip-card__cta">View project &rarr;</a>
+        <a href={href} class="flip-card__cta" aria-label={`View project: ${title}`}>View project &rarr;</a>
       </div>
     </div>
   </div>

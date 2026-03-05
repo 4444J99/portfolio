@@ -121,7 +121,10 @@ import { base } from '../utils/paths';
             });
             setTimeout(function () {
               var input = container.querySelector('input');
-              if (input) input.focus();
+              if (input) {
+                input.setAttribute('aria-label', 'Search this site');
+                input.focus();
+              }
             }, 50);
           }
         };

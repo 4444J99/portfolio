@@ -8,6 +8,11 @@
       "import": "./src/index.mjs"
     }
   },
+  "bin": {
+    "check-quality-deltas": "./cli/check-quality-deltas.mjs",
+    "verify-quality-contracts": "./cli/verify-quality-contracts.mjs",
+    "check-bundle-budgets": "./cli/check-bundle-budgets.mjs"
+  },
   "scripts": {
     "test": "node --test test/ratchet-kit.test.mjs"
   }
