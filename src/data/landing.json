@@ -3,7 +3,7 @@
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
     "total_repos": 103,
-    "active_repos": 93,
+    "active_repos": 94,
     "archived_repos": 9,
     "dependency_edges": 43,
     "ci_workflows": 94,
@@ -149,152 +149,170 @@
       "name": "VERITAS",
       "date": "2026-02-13",
       "focus": "Credibility",
-      "deliverables": "PRODUCTION\u2192ACTIVE, revenue split, essay dates, honesty essay"
+      "deliverables": "PRODUCTION\u2192ACTIVE, revenue split"
     },
     {
       "name": "MANIFESTATIO",
       "date": "2026-02-14",
       "focus": "Outward-facing",
-      "deliverables": "Re-audit (3,586 code files, 38 repos with 10+ code), 3 CI fixes, E2G items closed, workflow validation, application prep, engagement baseline"
+      "deliverables": "Re-audit (3,586 code files), engagement baseline"
     },
     {
       "name": "ILLUSTRATIO",
       "date": "2026-02-14",
       "focus": "Portfolio polish",
-      "deliverables": "Billing fix (14 cron workflows disabled), portfolio data regeneration, CMYK design system, p5.js on every page, LLM consultation page"
+      "deliverables": "CMYK design system, p5.js, LLM consultation page"
     },
     {
       "name": "SUBMISSIO",
       "date": "2026-02-14",
       "focus": "Applications",
-      "deliverables": "5 application packages, qualification assessment, submission bundles"
+      "deliverables": "5 application packages"
     },
     {
       "name": "OPERATIO-I",
       "date": "2026-02-16",
       "focus": "Governance",
-      "deliverables": "Post-construction governance, monitoring, runbooks, operational readiness"
+      "deliverables": "Post-construction governance, runbooks"
     },
     {
       "name": "GAP-FILL",
       "date": "2026-02-11",
       "focus": "Coverage",
-      "deliverables": "Coverage completion across all eight organs"
+      "deliverables": "Coverage completion across all organs"
     },
     {
       "name": "PLATINUM",
       "date": "2026-02-11",
       "focus": "Standardization",
-      "deliverables": "CI/CD and health file standardization across 77 repos"
+      "deliverables": "CI/CD across 77 repos"
     },
     {
       "name": "REMEDIUM",
       "date": "2026-02-16",
       "focus": "Metrics repair",
-      "deliverables": "13 files updated with current metrics"
+      "deliverables": "13 files updated"
     },
     {
       "name": "SYNCHRONIUM",
       "date": "2026-02-16",
       "focus": "Infrastructure",
-      "deliverables": "Workspace restructure, flat 2-level layout, 68 repos moved"
+      "deliverables": "68 repos moved, flat layout"
     },
     {
       "name": "CONCORDIA",
       "date": "2026-02-16",
       "focus": "Reconciliation",
-      "deliverables": "Registry reconciliation, 6 orphan repos registered (91\u219297)"
+      "deliverables": "6 orphan repos registered"
     },
     {
       "name": "TRIPARTITUM",
       "date": "2026-02-16",
       "focus": "Documentation",
-      "deliverables": "19 sprint specs written, all active docs aligned with registry"
+      "deliverables": "19 sprint specs written"
     },
     {
       "name": "METRICUM",
       "date": "2026-02-16",
       "focus": "Automation",
-      "deliverables": "Automated metrics calculation and propagation pipeline"
+      "deliverables": "Automated metrics pipeline"
     },
     {
       "name": "PUBLICATIO",
       "date": "2026-02-16",
       "focus": "Essays",
-      "deliverables": "4 essays deployed, 3 new essays written (29\u219233)"
+      "deliverables": "4 essays deployed, 3 new"
     },
     {
       "name": "CANON",
       "date": "2026-02-16",
       "focus": "Reconciliation",
-      "deliverables": "Catalog reconciliation, 4 numbering collisions fixed"
+      "deliverables": "4 numbering collisions fixed"
     },
     {
       "name": "INSPECTIO",
       "date": "2026-02-16",
       "focus": "Assessment",
-      "deliverables": "Product assessment, life-my--midst--in identified as beta candidate"
+      "deliverables": "Product assessment"
     },
     {
       "name": "PROPAGATIO",
       "date": "2026-02-16",
       "focus": "Propagation",
-      "deliverables": "Stale data corrected across 20+ files, portfolio brief updated"
+      "deliverables": "20+ files corrected"
     },
     {
       "name": "BETA-VITAE",
       "date": "2026-02-16",
       "focus": "Deployment",
-      "deliverables": "Neon DB provisioned, 291 tests pass, DEPLOY.md, render.yaml fixed"
+      "deliverables": "Neon DB, 291 tests, render.yaml"
     },
     {
       "name": "RECOGNITIO",
       "date": "2026-02-17",
       "focus": "Review",
-      "deliverables": "E2G-II post-construction review, omega scorecard (1/17), P0 gate"
+      "deliverables": "E2G-II, omega scorecard (1/17)"
     },
     {
       "name": "AUTOMATA",
       "date": "2026-02-17",
       "focus": "Autonomy",
-      "deliverables": "3 cron workflows, auto-deploy, system-pulse, organ-cli"
+      "deliverables": "3 cron workflows, auto-deploy"
     },
     {
       "name": "DISTRIBUTIO",
       "date": "2026-02-17",
       "focus": "Distribution",
-      "deliverables": "Backfill pipeline, rich metadata parsing, 3/week drip-feed"
+      "deliverables": "Backfill pipeline, drip-feed"
     },
     {
       "name": "FUNDAMEN",
       "date": "2026-02-17",
       "focus": "Hardening",
-      "deliverables": "6 repos synced, 25+ new tests, social-automation HTTP POST"
+      "deliverables": "6 repos synced, 25+ tests"
     },
     {
       "name": "SENSORIA",
       "date": "2026-02-17",
       "focus": "Perception",
-      "deliverables": "100% seed.yaml coverage, stale-detector, propagation fixes"
+      "deliverables": "100% seed.yaml coverage"
     },
     {
       "name": "OPERATIO",
       "date": "2026-02-17",
       "focus": "Operations",
-      "deliverables": "Essay-deploy, organ-cli (8 subcommands), health dashboard, TODO housekeeping"
+      "deliverables": "Essay-deploy, organ-cli, health dashboard"
     },
     {
       "name": "PROPULSIO",
       "date": "2026-02-23",
       "focus": "Forward motion",
-      "deliverables": "Pitch deck generator, omega scorecard live, MCP server (15 tools), context sync"
+      "deliverables": "Pitch decks, omega live, MCP server, context sync"
     },
     {
       "name": "PROPULSIO_MAXIMA",
       "date": "2026-02-24",
-      "focus": "Multi-front sprint",
-      "deliverables": "48 repos promoted, 83 pitch decks, 192 engine tests, Doris Duke AMT submitted, omega 1\u21922/17"
+      "focus": "Multi-front",
+      "deliverables": "48 repos promoted, 83 decks, Doris Duke submitted, omega 1\u21922"
+    },
+    {
+      "name": "ERUPTIO",
+      "date": "2026-02-28",
+      "focus": "Deployment sprint",
+      "deliverables": "12 products deployed, schema v1.0.0, omega 2\u21924"
+    },
+    {
+      "name": "ERUPTIO_SECUNDA",
+      "date": "2026-03-04",
+      "focus": "Outreach + community",
+      "deliverables": "58 issues, governance v2.0, HOSPITIUM, FORUM, evidence portfolio"
+    },
+    {
+      "name": "PROPULSIO_TERTIA",
+      "date": "2026-03-04",
+      "focus": "Portfolio + hardening",
+      "deliverables": "Portfolio refresh, PROBATIO, VIVIFICATIO, conference proposals"
     }
   ],
-  "generated": "2026-03-04T21:04:16.092762+00:00"
+  "generated": "2026-03-05T00:50:53.377912+00:00"
 }
