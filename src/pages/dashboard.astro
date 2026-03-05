@@ -38,14 +38,14 @@ const organChartData = {
 };
 
 const classificationChartData = {
-  classifications: typedMetrics.flagship_vivification.classifications,
-  total: typedMetrics.flagship_vivification.total_audited,
+  classifications: typedMetrics.flagship_vivification?.classifications || {},
+  total: typedMetrics.flagship_vivification?.total_audited || 0,
 };
 
-const sprintChartData = { sprints: typedMetrics.sprint_history };
+const sprintChartData = { sprints: typedMetrics.sprint_history || [] };
 
 const treemapData = {
-  organs: Object.entries(typedMetrics.registry.organs).map(([key, organ]: [string, Organ]) => ({
+  organs: Object.entries(typedMetrics.registry?.organs || {}).map(([key, organ]: [string, Organ]) => ({
     key,
     name: organ.name,
     total_repos: organ.total_repos,
@@ -53,7 +53,7 @@ const treemapData = {
 };
 
 const praxisChartData = {
-  targets: Object.entries(typedMetrics.praxis_targets).map(([key, target]: [string, PraxisTarget]) => ({
+  targets: Object.entries(typedMetrics.praxis_targets || {}).map(([key, target]: [string, PraxisTarget]) => ({
     key,
     label: key.replace(/_/g, ' '),
     current: String(target.current).replace(/[^0-9.]/g, '') || '0',
@@ -62,21 +62,21 @@ const praxisChartData = {
   })),
 };
 
-const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
+const flagshipChartData = { repos: typedMetrics.flagship_vivification?.repos || [] };
 ---
 
 <Layout title="Operative Dashboard — System Command" description={`Live technical and strategic vitals for the ${vitals.repos.total}-repository creative-institutional system.`}>
     <div class="sketch-accent">
-      <SketchContainer 
-        sketchId="data-bars" 
-        height="var(--space-4xl)" 
-        mobileHeight="var(--space-3xl)" 
-        ariaLabel="Animated data bar visualization representing system metrics" 
+      <SketchContainer
+        sketchId="data-bars"
+        height="var(--space-4xl)"
+        mobileHeight="var(--space-3xl)"
+        ariaLabel="Animated data bar visualization representing system metrics"
         title="Metric Pulse"
         caption="Real-time distribution of repositories across the system architecture."
         dataSource="System Metrics JSON"
-        data-values={repoCounts.join(',')} 
-        data-labels={organNames.join(',')} 
+        data-values={repoCounts.join(',')}
+        data-labels={organNames.join(',')}
       />
     </div>
     <section class="section">
@@ -85,12 +85,12 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
         <p class="page-sub">Live orchestration vitals from {vitals.repos.total} repositories across {vitals.repos.orgs} organs.</p>
 
         <StatGrid stats={[
-          { value: typedMetrics.code_substance.total_code_files.toLocaleString(), label: 'Code Files' },
-          { value: typedMetrics.code_substance.total_test_files, label: 'Test Files' },
-          { value: typedMetrics.code_substance.ci_passing, label: 'Passing CI Workflows' },
-          { value: typedMetrics.registry.total_repos, label: 'Repositories' },
-          { value: typedMetrics.registry.implementation_status.ACTIVE, label: 'Active' },
-          { value: typedMetrics.essays.total, label: 'Essays' },
+          { value: typedMetrics.code_substance?.total_code_files?.toLocaleString() || '0', label: 'Code Files' },
+          { value: typedMetrics.code_substance?.total_test_files || 0, label: 'Test Files' },
+          { value: typedMetrics.code_substance?.ci_passing || 0, label: 'Passing CI Workflows' },
+          { value: typedMetrics.registry?.total_repos || 0, label: 'Repositories' },
+          { value: typedMetrics.registry?.implementation_status?.ACTIVE || 0, label: 'Active' },
+          { value: typedMetrics.essays?.total || 0, label: 'Essays' },
         ]} />
 
         <div class="stack-badges">
@@ -119,20 +119,20 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
       <div class="container">
         <h2 class="section__heading">Repositories by Organ</h2>
         <div class="chart-pair">
-          <ChartContainer 
-            chartId="organ-bar" 
-            data={organChartData} 
-            ariaLabel="Bar chart showing repository count per organ" 
-            height="var(--space-5xl)" 
+          <ChartContainer
+            chartId="organ-bar"
+            data={organChartData}
+            ariaLabel="Bar chart showing repository count per organ"
+            height="var(--space-5xl)"
             title="Repository Counts"
             caption="Comparison of total active repositories managed by each functional Organ."
             dataSource="Registry Data"
           />
-          <ChartContainer 
-            chartId="code-treemap" 
-            data={treemapData} 
-            ariaLabel="Treemap showing repository distribution by organ" 
-            height="var(--space-5xl)" 
+          <ChartContainer
+            chartId="code-treemap"
+            data={treemapData}
+            ariaLabel="Treemap showing repository distribution by organ"
+            height="var(--space-5xl)"
             title="Structural Density"
             caption="Volume-based mapping of the repository landscape."
             dataSource="Registry Data"
@@ -141,26 +141,26 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
       </div>
     </section>
 
-    <OrganStatus organs={typedMetrics.registry.organs} organColors={organColors} />
+    <OrganStatus organs={typedMetrics.registry?.organs || {}} organColors={organColors} />
 
     <FlagshipTable
-      repos={typedMetrics.flagship_vivification.repos}
-      classifications={typedMetrics.flagship_vivification.classifications}
-      totalAudited={typedMetrics.flagship_vivification.total_audited}
+      repos={typedMetrics.flagship_vivification?.repos || []}
+      classifications={typedMetrics.flagship_vivification?.classifications || {}}
+      totalAudited={typedMetrics.flagship_vivification?.total_audited || 0}
       classificationChartData={classificationChartData}
       flagshipChartData={flagshipChartData}
     />
 
-    <SprintTimeline sprints={typedMetrics.sprint_history} sprintChartData={sprintChartData} />
+    <SprintTimeline sprints={typedMetrics.sprint_history || []} sprintChartData={sprintChartData} />
 
     <section class="section">
       <div class="container">
         <h2 class="section__heading">Dependency Graph</h2>
-        <ChartContainer 
-          chartId="dependency-graph" 
-          data={graphData} 
-          ariaLabel="Force-directed graph showing repository dependencies" 
-          height="var(--space-6xl)" 
+        <ChartContainer
+          chartId="dependency-graph"
+          data={graphData}
+          ariaLabel="Force-directed graph showing repository dependencies"
+          height="var(--space-6xl)"
           title="Internal Dependencies"
           caption="Validated relationship mapping between system components."
           dataSource="Repository Manifests"
@@ -168,7 +168,7 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification.repos };
       </div>
     </section>
 
-    <PraxisTargets targets={typedMetrics.praxis_targets} praxisChartData={praxisChartData} />
+    <PraxisTargets targets={typedMetrics.praxis_targets || {}} praxisChartData={praxisChartData} />
 
     <section class="section">
       <div class="container">

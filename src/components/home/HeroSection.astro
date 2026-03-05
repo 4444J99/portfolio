@@ -116,9 +116,27 @@ function splitWords(text: string) {
 
   .hero__text {
     min-width: 0;
-    background: var(--bg-secondary);
+    background: var(--bg-card);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-bright);
     border-radius: var(--radius-xl);
     padding: var(--space-2xl);
+    box-shadow:
+      0 12px 64px rgba(0, 0, 0, 0.5),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: background var(--transition-normal);
+  }
+
+  /* Glow effect based on current spectrum */
+  .hero__text::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    background: linear-gradient(135deg, rgba(var(--spectrum-current, 212, 168, 83), 0.2), transparent 40%);
+    border-radius: inherit;
+    opacity: 0.6;
   }
 
   .hero__canvas {
@@ -127,24 +145,28 @@ function splitWords(text: string) {
 
   .view-toggle {
     display: inline-flex;
+    position: relative;
     gap: 0;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-bright);
     border-radius: 100px;
-    overflow: hidden;
+    padding: 2px;
     margin-bottom: var(--space-xl);
-    background: var(--bg-card);
+    background: rgba(0, 0, 0, 0.3);
   }
 
   .view-toggle__btn {
+    position: relative;
+    z-index: 2;
     font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: var(--space-xs) var(--space-md);
+    letter-spacing: 0.08em;
+    padding: var(--space-xs) var(--space-lg);
     border: none;
     background: transparent;
     color: var(--text-muted);
     cursor: pointer;
-    transition: background var(--transition-fast), color var(--transition-fast);
+    transition: color var(--transition-base);
   }
 
   .view-toggle__btn:hover {
@@ -152,16 +174,37 @@ function splitWords(text: string) {
   }
 
   .view-toggle__btn--active {
-    background: var(--accent-muted);
-    color: var(--accent-text);
+    color: var(--text-primary);
+  }
+
+  /* New sliding pill background */
+  .view-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: calc(100% - 4px);
+    width: calc(50% - 2px);
+    background: var(--accent);
+    border-radius: 100px;
+    z-index: 1;
+    transition: transform var(--transition-normal), background var(--transition-normal);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  [data-portfolio-view="creative"] .view-toggle::after {
+    transform: translateX(100%);
+    background: var(--accent-hover);
   }
 
   .hero__label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     color: var(--accent-text);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
+    opacity: 0.8;
   }
 
   .hero__title {

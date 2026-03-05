@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const logos = await getCollection('logos');
+  return logos.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout
+  title={`${entry.data.title} — Logos`}
+  description={entry.data.description}
+>
+  <article class="essay-article">
+    <div class="container essay-container">
+      <header class="essay-header">
+        <a href="/portfolio/logos/" class="back-link">← Back to Logos</a>
+        <h1 class="essay-title">{entry.data.title}</h1>
+        <div class="essay-meta">
+          <time datetime={entry.data.pubDate.toISOString()}>
+            {entry.data.pubDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </time>
+          <span class="sep">•</span>
+          <span class="author">{entry.data.author}</span>
+        </div>
+      </header>
+
+      <div class="essay-content markdown-body">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .essay-article {
+    padding: var(--space-3xl) 0;
+  }
+
+  .essay-container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: var(--space-xl);
+    transition: color var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .essay-title {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.02em;
+  }
+
+  .essay-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .sep {
+    color: var(--border);
+  }
+
+  /* Basic Markdown styling scoped to the essay content */
+  .markdown-body {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+  }
+
+  .markdown-body :global(h2) {
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+    font-size: 1.8rem;
+    letter-spacing: -0.01em;
+  }
+
+  .markdown-body :global(p) {
+    margin-bottom: 1.5em;
+  }
+
+  .markdown-body :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .markdown-body :global(a:hover) {
+    text-decoration-color: var(--accent);
+  }
+</style>

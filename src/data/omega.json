@@ -1,9 +1,9 @@
 {
-  "generated": "2026-03-04",
+  "generated": "2026-03-05",
   "summary": {
-    "met": 11,
-    "in_progress": 3,
-    "not_started": 3,
+    "met": 4,
+    "in_progress": 4,
+    "not_started": 9,
     "total": 17
   },
   "horizons": [
@@ -95,7 +95,7 @@
       "measurement": "Grant, job, or fellowship application submitted",
       "horizon": "H2",
       "status": "met",
-      "evidence": "Doris Duke / Mozilla Artists Make Technology Lab submitted 2026-02-24. 7 additional applications staged.",
+      "evidence": "Doris Duke / Mozilla Artists Make Technology Lab submitted 2026-02-24. 4 strategic AI-generated targeted applications deployed.",
       "evidenceUrl": "https://www.dorisduke.org/grants/projects/artists-make-technology-lab",
       "dateMet": "2026-02-24"
     },

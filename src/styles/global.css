@@ -643,7 +643,8 @@ img {
   .sketch-accent,
   .sketch-controls,
   .theme-toggle,
-  .gallery-filters {
+  .gallery-filters,
+  .print-hide {
     display: none !important;
   }
 

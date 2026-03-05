@@ -1,0 +1,109 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allLogos = await getCollection('logos');
+const sortedLogos = allLogos.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout
+  title="Logos — Architecture & Essays"
+  description="Essays on system theory, creative technology, and highly rigorous architecture."
+>
+  <section class="section">
+    <div class="container">
+      <header class="logos-header">
+        <h1 class="page-title">Logos</h1>
+        <p class="page-sub">The theoretical underpinnings, strategies, and architectural discourses driving the orchestration.</p>
+      </header>
+
+      <div class="essay-list">
+        {sortedLogos.map(post => (
+          <article class="essay-card">
+            <a href={`/portfolio/logos/${post.slug}/`} class="essay-card__link">
+              <h2 class="essay-card__title">{post.data.title}</h2>
+              <time class="essay-card__date" datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+              {post.data.description && <p class="essay-card__desc">{post.data.description}</p>}
+              {post.data.tags && (
+                <div class="essay-card__tags">
+                  {post.data.tags.map(tag => <span class="tag">{tag}</span>)}
+                </div>
+              )}
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .logos-header {
+    margin-bottom: var(--space-4xl);
+  }
+
+  .essay-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .essay-card {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--space-xl);
+  }
+
+  .essay-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform var(--transition-fast);
+  }
+
+  .essay-card__link:hover .essay-card__title {
+    color: var(--accent);
+  }
+
+  .essay-card__title {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+    transition: color var(--transition-fast);
+  }
+
+  .essay-card__date {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-bottom: var(--space-sm);
+  }
+
+  .essay-card__desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .essay-card__tags {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.3em 0.8em;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+  }
+</style>

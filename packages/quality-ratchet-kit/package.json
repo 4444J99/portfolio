@@ -1,6 +1,16 @@
 {
   "name": "@4444j99/quality-ratchet-kit",
   "version": "0.1.0",
+  "description": "A reusable quality ratchet toolkit for enforcing progressive test and performance thresholds",
+  "author": "Anthony James Padavano",
+  "license": "MIT",
+  "keywords": [
+    "quality",
+    "ratchet",
+    "testing",
+    "metrics",
+    "ci"
+  ],
   "type": "module",
   "private": true,
   "exports": {

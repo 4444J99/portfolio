@@ -7,13 +7,13 @@
   "substance": {
     "code_files": 2060,
     "test_files": 400,
-    "automated_tests": 2000,
+    "automated_tests": 2349,
     "ci_passing": 94,
     "ci_coverage_pct": 91
   },
   "logos": {
     "essays": 48,
-    "words": 300000
+    "words": 410000
   },
   "timestamp": "2026-03-05T12:17:10.150870+00:00"
 }

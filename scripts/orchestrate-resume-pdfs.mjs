@@ -4,7 +4,7 @@ import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const PREVIEW_HOST = '127.0.0.1';
+const PREVIEW_HOST = 'localhost';
 const PREVIEW_PORT = 4321;
 const PREVIEW_URL = `http://${PREVIEW_HOST}:${PREVIEW_PORT}/portfolio/`;
 
@@ -43,9 +43,9 @@ async function main() {
     const hasDist = existsSync(resolve('dist'));
     const command = process.platform === 'win32' ? 'npm.cmd' : 'npm';
     const args = hasDist ? ['run', 'preview'] : ['run', 'dev'];
-    
+
     serverProcess = startServer(command, args);
-    
+
     console.log('⏳ Waiting for server to stabilize...');
     const ready = await waitForServer(PREVIEW_URL);
     if (!ready) {
