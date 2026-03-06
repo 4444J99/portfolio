@@ -79,7 +79,6 @@ function startPreviewServer() {
 		[
 			'node_modules/astro/astro.js',
 			'preview',
-			'--',
 			'--host',
 			PREVIEW_HOST,
 			'--port',
