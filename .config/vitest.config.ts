@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vitest/config';
 
@@ -57,6 +57,7 @@ export default defineConfig({
     include: [
       'src/**/__tests__/**/*.test.ts',
       'scripts/**/__tests__/**/*.test.ts',
+      'workers/**/__tests__/**/*.test.ts',
     ],
     setupFiles: ['src/test/setup.ts'],
     coverage: {

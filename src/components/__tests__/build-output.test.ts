@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { readFileSync, existsSync, readdirSync } from 'fs';
-import { resolve, join } from 'path';
 import * as cheerio from 'cheerio';
+import { existsSync, readdirSync, readFileSync } from 'fs';
+import { join, resolve } from 'path';
+import { describe, expect, it } from 'vitest';
 
 const DIST = resolve(process.cwd(), 'dist');
 const SERVICE_WORKER_PATH = resolve(process.cwd(), 'public/sw.js');
@@ -120,6 +120,16 @@ describe('resume page', () => {
 
   it('has a <title> containing Resume', () => {
     expect($!('title').text().toLowerCase()).toContain('resume');
+  });
+});
+
+describe('consult page', () => {
+  const $ = loadPage('consult/index.html');
+
+  it('exists and has form', () => {
+    expect($).not.toBeNull();
+    expect($!('#consult-form').length).toBe(1);
+    expect($!('#challenge').length).toBe(1);
   });
 });
 

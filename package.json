@@ -30,6 +30,7 @@
     "strike:scout": "node scripts/scout-agent.mjs",
     "strike:sweep": "node scripts/operative-sweep.mjs",
     "check:fit": "node scripts/check-market-fit.mjs",
+    "advance-ratchet-phase": "node scripts/advance-ratchet-phase.mjs",
     "analyze:strikes": "node scripts/analyze-operative-data.mjs",
     "preview": "astro preview",
     "astro": "astro",

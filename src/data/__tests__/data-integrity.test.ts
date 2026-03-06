@@ -1,10 +1,11 @@
-import { describe, it, expect } from 'vitest';
-import projects from '../projects.json';
-import essays from '../essays.json';
-import landing from '../landing.json';
+import { describe, expect, it } from 'vitest';
 import about from '../about.json';
+import essays from '../essays.json';
 import graph from '../graph.json';
+import landing from '../landing.json';
+import projects from '../projects.json';
 import systemMetrics from '../system-metrics.json';
+import targets from '../targets.json';
 import vitals from '../vitals.json';
 
 describe('projects.json', () => {
@@ -108,6 +109,14 @@ describe('graph.json', () => {
     for (const e of graph.edges) {
       expect(nodeIds.has(e.source)).toBe(true);
       expect(nodeIds.has(e.target)).toBe(true);
+    }
+  });
+});
+
+describe('targets.json', () => {
+  it('no strike target has [DRAFT] placeholder in intro', () => {
+    for (const t of targets.targets) {
+      expect(t.intro, `target ${t.slug} has [DRAFT]`).not.toContain('[DRAFT]');
     }
   });
 });

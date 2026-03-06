@@ -1,9 +1,9 @@
 {
-  "generated": "2026-03-05T02:31:26.542Z",
+  "generated": "2026-03-06T00:38:56.196Z",
   "tests": {
     "total": 289,
     "passed": 289,
-    "files": 31
+    "files": 32
   },
   "security": {
     "critical": 0,
@@ -1076,7 +1076,7 @@
     ]
   },
   "build": {
-    "pages": 44,
+    "pages": 15,
     "bundleFiles": 64
   },
   "sources": {

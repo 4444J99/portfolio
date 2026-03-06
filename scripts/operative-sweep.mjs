@@ -1,7 +1,8 @@
+import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { execSync } from 'node:child_process';
+import { parseTargetJson } from './lib/parse-gemini-target.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const INTAKE_DIR = path.join(__dirname, '../intake/job-descriptions');
@@ -35,7 +36,7 @@ async function sweep() {
     const filePath = path.join(INTAKE_DIR, file);
     console.log(`
 📡 Analyzing target file: ${file}...`);
-    
+
     const content = fs.readFileSync(filePath, 'utf8').substring(0, 3000); // cap size to prevent token explosion
 
     const prompt = `
@@ -60,25 +61,10 @@ ${content}
     try {
       console.log(`🧠 AI extracting metadata and matching persona...`);
       const output = execSync(`gemini -p ${JSON.stringify(prompt)} 2>/dev/null`, { encoding: 'utf8' });
-      
-      const lines = output.replace(/\\u001b\\[[0-9;]*m/g, '').split('\\n').map(l => l.trim()).filter(l => l.length > 0);
-      const cleanOutput = lines.filter(l => !l.startsWith('Loading ') && !l.startsWith('Server ') && !l.startsWith('Tools ') && !l.startsWith('Loaded ') && !l.includes('tool update notification')).join('').trim();
-      
-      // Attempt to parse JSON from the clean output
-      const jsonMatch = cleanOutput.match(/{\\s*[\\s\\S]*\\s*}/);
-      if (!jsonMatch) {
-        console.error("Clean Output was: ", cleanOutput);
-        throw new Error("Failed to extract JSON from AI output.");
-      }
-
-      const parsed = JSON.parse(jsonMatch[0]);
-      
-      if (!parsed.company || !parsed.role || !parsed.persona_id) {
-        throw new Error("Parsed JSON missing required fields.");
-      }
+      const parsed = parseTargetJson(output);
 
       console.log(`🎯 Target Locked: ${parsed.company} | ${parsed.role} | Persona: ${parsed.persona_id}`);
-      
+
       console.log(`🚀 Executing Strike Protocol...`);
       // Execute the strike command synchronously
       execSync(`npm run strike:new "${parsed.company}" "${parsed.role}" "${parsed.persona_id}"`, { stdio: 'inherit' });

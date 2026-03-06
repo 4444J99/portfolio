@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { describe, expect, it } from 'vitest';
 
 const root = resolve(__dirname, '../../../');
 const readme = readFileSync(resolve(root, 'README.md'), 'utf-8');
@@ -130,7 +130,7 @@ describe('quality governance drift checks', () => {
   });
 
   it('CI workflow explicitly sets the phase and runs the parity pipeline', () => {
-    expect(workflow).toContain('QUALITY_PHASE: W10');
+    expect(workflow).toContain(`QUALITY_PHASE: ${policy.defaultPhase}`);
     expect(workflow).toContain('npm run test:security:prod');
     expect(workflow).toContain('npm run test:security:github');
     expect(workflow).toContain('npm run test:security:drift');
