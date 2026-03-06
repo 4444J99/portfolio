@@ -53,6 +53,7 @@ coverage/
 !.quality/security-register.json
 !.quality/security-baseline.json
 !.quality/runtime-error-allowlist.json
+!.quality/GOVERNANCE-COUPLING.md
 
 # Playwright artifacts
 test-results/

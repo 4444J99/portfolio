@@ -2,7 +2,7 @@
   "basePath": "/portfolio",
   "routes": [
     {
-      "path": "/",
+      "path": "/404.html",
       "checks": [
         "nav-menu",
         "dropdown-menu",
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "path": "/resume",
+      "path": "/architecture",
       "checks": [
         "nav-menu",
         "dropdown-menu",
@@ -29,7 +29,16 @@
       ]
     },
     {
-      "path": "/resume/polymath",
+      "path": "/community",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/consult",
       "checks": [
         "nav-menu",
         "dropdown-menu",
@@ -71,88 +80,7 @@
       ]
     },
     {
-      "path": "/architecture",
-      "checks": [
-        "nav-menu",
-        "dropdown-menu",
-        "search-dialog",
-        "theme-toggle"
-      ]
-    },
-    {
-      "path": "/community",
-      "checks": [
-        "nav-menu",
-        "dropdown-menu",
-        "search-dialog",
-        "theme-toggle"
-      ]
-    },
-    {
-      "path": "/consult",
-      "checks": [
-        "nav-menu",
-        "dropdown-menu",
-        "search-dialog",
-        "theme-toggle"
-      ]
-    },
-    {
-      "path": "/products",
-      "checks": [
-        "nav-menu",
-        "dropdown-menu",
-        "search-dialog",
-        "theme-toggle"
-      ]
-    },
-    {
-      "path": "/omega",
-      "checks": [
-        "nav-menu",
-        "dropdown-menu",
-        "search-dialog",
-        "theme-toggle"
-      ]
-    },
-    {
       "path": "/github-pages",
-      "checks": [
-        "nav-menu",
-        "dropdown-menu",
-        "search-dialog",
-        "theme-toggle"
-      ]
-    },
-    {
-      "path": "/404.html",
-      "checks": [
-        "nav-menu",
-        "dropdown-menu",
-        "search-dialog",
-        "theme-toggle"
-      ]
-    },
-    {
-      "path": "/philosophy",
-      "checks": [
-        "nav-menu",
-        "dropdown-menu",
-        "search-dialog",
-        "theme-toggle"
-      ]
-    },
-    {
-      "path": "/testimonials",
-      "checks": [
-        "nav-menu",
-        "dropdown-menu",
-        "search-dialog",
-        "theme-toggle"
-      ]
-    },
-    {
-      "path": "/roadmap",
       "checks": [
         "nav-menu",
         "dropdown-menu",
@@ -170,7 +98,52 @@
       ]
     },
     {
+      "path": "/",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/omega",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/philosophy",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
       "path": "/press",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/products",
       "checks": [
         "nav-menu",
         "dropdown-menu",
@@ -368,6 +341,42 @@
       ]
     },
     {
+      "path": "/resume/polymath",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/resume",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/roadmap",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/testimonials",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
       "path": "/resume/ai-systems-engineer",
       "checks": [
         "nav-menu",
@@ -396,15 +405,6 @@
     },
     {
       "path": "/resume/technical-pm",
-      "checks": [
-        "nav-menu",
-        "dropdown-menu",
-        "search-dialog",
-        "theme-toggle"
-      ]
-    },
-    {
-      "path": "/logos",
       "checks": [
         "nav-menu",
         "dropdown-menu",

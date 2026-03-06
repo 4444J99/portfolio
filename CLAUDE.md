@@ -26,6 +26,7 @@ npm run test:perf:budgets       # Date-ratcheted gzip chunk/route budgets
 # Quality gates
 npm run typecheck               # Astro check (type diagnostics)
 npm run typecheck:strict        # Ratcheted hint budget (fails if hints > threshold)
+npm run preflight              # Fast pre-push check (~80% of CI failures). Run before pushing
 npm run quality:local:no-lh    # Full CI-parity quality pipeline, skips Lighthouse (recommended locally)
 npm run quality:local           # Same + Lighthouse (resource-heavy, needs Chrome)
 npm run validate                # HTML validation + internal link check

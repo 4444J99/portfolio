@@ -69,6 +69,7 @@
 		"quality:local": "npm run test:security:prod && npm run test:security && npm run test:security:github && npm run test:security:drift && npm run quality:core",
 		"quality:local:no-lh": "npm run test:security:prod && npm run test:security && npm run test:security:github && npm run test:security:drift && npm run quality:core:no-lh",
 		"lighthouse:cloud": "node scripts/lighthouse-cloud.mjs",
+		"preflight": "npm run lint && npm run typecheck && npm run build && npm run validate && npm run sync:a11y-routes && npm run check:runtime-route-manifest && npm run test",
 		"test:ci": "npm run quality:local"
 	},
 	"dependencies": {
