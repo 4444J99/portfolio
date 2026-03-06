@@ -51,6 +51,12 @@
 	},
 	"overrides": [
 		{
+			"includes": ["src/data/*.json"],
+			"formatter": {
+				"enabled": false
+			}
+		},
+		{
 			"includes": ["*.astro"],
 			"linter": {
 				"rules": {
