@@ -72,7 +72,7 @@ We enforce a rigorous **Quality Ratchet** system via custom automation.
 <summary><b>View Detailed Quality Policy</b></summary>
 
 ### Performance Budgets
-Lighthouse CI enforcement: Perf ≥ 98, A11y ≥ 91, BP ≥ 93, SEO ≥ 92.
+Lighthouse CI enforcement: Perf ≥ 90, A11y ≥ 91, BP ≥ 93, SEO ≥ 92.
 
 ### Ratchet Schedules
 Coverage ratchet policy: W2 `12/8/8/12`, W4 `18/12/12/18`, W6 `25/18/18/25`, W8 `35/25/25/35`, W10 `45/32/32/45` (Statements/Branches/Functions/Lines).
