@@ -59,7 +59,7 @@ describe('chart-loader lifecycle', () => {
 
 	it('observes charts without IntersectionObserver', async () => {
 		const originalObserver = window.IntersectionObserver;
-		// @ts-ignore
+		// @ts-expect-error
 		delete window.IntersectionObserver;
 
 		const container = document.createElement('div');

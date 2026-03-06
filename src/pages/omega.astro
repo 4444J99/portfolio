@@ -26,6 +26,7 @@ interface OmegaData {
 }
 
 import omegaDataRaw from '../data/omega.json';
+
 const omegaData = (Array.isArray(omegaDataRaw) ? omegaDataRaw[0] : omegaDataRaw) as OmegaData;
 
 const { summary, horizons, criteria } = omegaData;

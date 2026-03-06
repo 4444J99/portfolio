@@ -1,26 +1,26 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import omegaData from '../data/omega.json';
+import Layout from '../layouts/Layout.astro';
 
 const soakDay = omegaData.soak.streak_days;
 const targetDay = omegaData.soak.target_days;
 
 const feedbackCriteria = [
-	{ 
-    title: 'Architectural Coherence', 
-    description: 'Does the system maintain logical consistency across all 91 repositories?',
-    target: 'Stranger Test Score >= 80%'
-  },
-	{ 
-    title: 'Operational Runbooks', 
-    description: 'Can a second operator maintain the system using existing documentation?',
-    target: 'Validated by independent audit'
-  },
-	{ 
-    title: 'External Utility', 
-    description: 'Do the products in Organ III solve real-world B2B challenges?',
-    target: '>= 3 feedback pieces logged'
-  },
+	{
+		title: 'Architectural Coherence',
+		description: 'Does the system maintain logical consistency across all 91 repositories?',
+		target: 'Stranger Test Score >= 80%',
+	},
+	{
+		title: 'Operational Runbooks',
+		description: 'Can a second operator maintain the system using existing documentation?',
+		target: 'Validated by independent audit',
+	},
+	{
+		title: 'External Utility',
+		description: 'Do the products in Organ III solve real-world B2B challenges?',
+		target: '>= 3 feedback pieces logged',
+	},
 ];
 ---
 

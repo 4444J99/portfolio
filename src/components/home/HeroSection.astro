@@ -19,16 +19,6 @@ interface ResolvedGroup {
 }
 
 interface Props {
-	metrics: {
-		code_substance: {
-			total_code_files: number;
-			total_test_files: number;
-			ci_passing: number;
-		};
-		registry: {
-			total_repos: number;
-		};
-	};
 	resolvedGroups: ResolvedGroup[];
 }
 

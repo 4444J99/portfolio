@@ -45,18 +45,18 @@ export interface SystemMetrics {
 		dependency_edges: number;
 		organs: Record<string, Organ>;
 	};
-	code_substance: {
+	code_substance?: {
 		total_code_files: number;
 		total_test_files: number;
 		ci_passing: number;
 	};
-	flagship_vivification: {
+	flagship_vivification?: {
 		total_audited: number;
 		classifications: Record<string, number>;
 		repos: FlagshipRepo[];
 	};
 	sprint_history: Sprint[];
-	praxis_targets: Record<string, PraxisTarget>;
+	praxis_targets?: Record<string, PraxisTarget>;
 	essays: { total: number };
 }
 

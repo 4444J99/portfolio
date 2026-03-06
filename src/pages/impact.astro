@@ -1,8 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import StatGrid from '../components/StatGrid.astro';
 import MermaidDiagram from '../components/academic/MermaidDiagram.astro';
+import StatGrid from '../components/StatGrid.astro';
 import systemMetrics from '../data/system-metrics.json';
+import Layout from '../layouts/Layout.astro';
 
 const impactMetrics = [
 	{ value: systemMetrics.registry.total_repos.toString(), label: 'Repos Managed' },

@@ -1,19 +1,19 @@
 {
-  "repos": {
-    "total": 103,
-    "active": 94,
-    "orgs": 8
-  },
-  "substance": {
-    "code_files": 2060,
-    "test_files": 470,
-    "automated_tests": 2349,
-    "ci_passing": 94,
-    "ci_coverage_pct": 91
-  },
-  "logos": {
-    "essays": 48,
-    "words": 410000
-  },
-  "timestamp": "2026-03-05T12:16:56.438991+00:00"
+	"repos": {
+		"total": 103,
+		"active": 94,
+		"orgs": 8
+	},
+	"substance": {
+		"code_files": 2060,
+		"test_files": 470,
+		"automated_tests": 2349,
+		"ci_passing": 94,
+		"ci_coverage_pct": 91
+	},
+	"logos": {
+		"essays": 48,
+		"words": 410000
+	},
+	"timestamp": "2026-03-05T12:16:56.438991+00:00"
 }

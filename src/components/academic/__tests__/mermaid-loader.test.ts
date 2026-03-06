@@ -1,7 +1,6 @@
 // @vitest-environment jsdom
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { teardown } from '../mermaid-loader';
 
 // Mock mermaid at top level
 vi.mock('mermaid', () => ({
@@ -10,12 +9,6 @@ vi.mock('mermaid', () => ({
 		render: vi.fn().mockResolvedValue({ svg: '<svg>mock-mermaid</svg>' }),
 	},
 }));
-
-class MockIntersectionObserver {
-	observe() {}
-	unobserve() {}
-	disconnect() {}
-}
 
 describe('mermaid-loader runtime', () => {
 	let observerCallback: (entries: any[]) => void;
@@ -79,7 +72,7 @@ describe('mermaid-loader runtime', () => {
 
 	it('observes mermaid diagrams without IntersectionObserver', async () => {
 		const originalObserver = window.IntersectionObserver;
-		// @ts-ignore
+		// @ts-expect-error
 		delete window.IntersectionObserver;
 
 		const container = document.createElement('div');
@@ -122,7 +115,7 @@ describe('mermaid-loader runtime', () => {
 	});
 
 	it('cleans up on astro:before-swap', async () => {
-		const { teardown } = await import('../mermaid-loader');
+		await import('../mermaid-loader');
 		document.dispatchEvent(new Event('astro:page-load'));
 		document.dispatchEvent(new Event('astro:before-swap'));
 

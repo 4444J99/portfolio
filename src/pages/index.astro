@@ -5,7 +5,6 @@ import IndexFilters from '../components/home/IndexFilters.astro';
 import ProjectGrid from '../components/home/ProjectGrid.astro';
 import { organColorMap } from '../data/organ-colors';
 import { categoryFilters, featuredNumbers, organGroups, skillFilters } from '../data/organ-groups';
-import metrics from '../data/system-metrics.json';
 import vitals from '../data/vitals.json';
 import Layout from '../layouts/Layout.astro';
 import { base } from '../utils/paths';
@@ -22,7 +21,7 @@ const resolvedGroups = organGroups.map((group) => ({
   mainAttrs={{ "data-portfolio-view": "engineering" }}
   keywords={["AI Orchestration", "Systems Architect", "Platform Governance", "Logocentric Architecture", "Staff Engineer", "Multi-Agent Systems", "Python", "TypeScript", "CI/CD Automation"]}
 >
-    <HeroSection metrics={metrics} resolvedGroups={resolvedGroups} />
+    <HeroSection resolvedGroups={resolvedGroups} />
 
     <ProjectGrid
       resolvedGroups={resolvedGroups}

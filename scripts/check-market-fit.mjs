@@ -90,7 +90,7 @@ STRATEGIC ADVICE: [1 sentence of advice on how to tailor the application/resume 
 		console.error('\n⚠️  AI semantic analysis failed. Falling back to ontological bridge matching.');
 		// Fallback logic using local ontology
 		const results = { matched: [], missing: [], score: 0 };
-		
+
 		// 1. Direct stack matching
 		persona.stack.forEach((tech) => {
 			if (jobDesc.toLowerCase().includes(tech.toLowerCase())) {
@@ -102,16 +102,20 @@ STRATEGIC ADVICE: [1 sentence of advice on how to tailor the application/resume 
 
 		// 2. Ontological abstraction matching (Soft Skills / Architectural alignment)
 		const matchedAbstractions = [];
-		ontology.forEach(m => {
+		ontology.forEach((m) => {
 			const techTerms = m.technical_abstraction.split(' & ');
-			techTerms.forEach(term => {
-				if (jobDesc.toLowerCase().includes(term.toLowerCase()) && !matchedAbstractions.includes(term)) {
+			techTerms.forEach((term) => {
+				if (
+					jobDesc.toLowerCase().includes(term.toLowerCase()) &&
+					!matchedAbstractions.includes(term)
+				) {
 					matchedAbstractions.push(term);
 				}
 			});
 		});
 
-		results.score = ((results.matched.length + (matchedAbstractions.length * 0.5)) / persona.stack.length) * 100;
+		results.score =
+			((results.matched.length + matchedAbstractions.length * 0.5) / persona.stack.length) * 100;
 
 		console.log('\n--- ONTOLOGICAL FALLBACK REPORT ---');
 		console.log(`MATCHED STACK: ${results.matched.join(', ')}`);

@@ -164,12 +164,12 @@ describe('quality governance drift checks', () => {
 	});
 
 	it('CI workflow explicitly sets the phase and runs the parity pipeline', () => {
-	  expect(workflow).toContain(`QUALITY_PHASE: ${policy.defaultPhase}`);
-	  expect(workflow).toContain('npm run test:security:prod');
-	  expect(workflow).toContain('npm run test:security:github');
-	  expect(workflow).toContain('npm run test:security:drift');
-	  expect(workflow).toContain('cron: "17 9 * * *"');
-	  expect(workflow).toContain('npm run quality:summary -- --allow-missing');
+		expect(workflow).toContain(`QUALITY_PHASE: ${policy.defaultPhase}`);
+		expect(workflow).toContain('npm run test:security:prod');
+		expect(workflow).toContain('npm run test:security:github');
+		expect(workflow).toContain('npm run test:security:drift');
+		expect(workflow).toContain('cron: "17 9 * * *"');
+		expect(workflow).toContain('npm run quality:summary -- --allow-missing');
 	});
 	it('daily security drift monitor workflow is scheduled and blocking', () => {
 		expect(securityDriftWorkflow).toContain('name: Security Drift Monitor');

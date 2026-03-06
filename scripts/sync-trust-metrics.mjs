@@ -37,7 +37,7 @@ async function syncVitals() {
 			const logData = JSON.parse(fs.readFileSync(OPERATIVE_LOG_PATH, 'utf8'));
 			trustVitals.strikes = {
 				total: logData.global_stats.total_strikes,
-				conversionRate: logData.global_stats.conversion_rate
+				conversionRate: logData.global_stats.conversion_rate,
 			};
 		}
 	} catch (e) {
@@ -94,25 +94,27 @@ async function syncVitals() {
 	// 4. Derive vitals.json from system-metrics.json
 	try {
 		const metrics = JSON.parse(fs.readFileSync(SYSTEM_METRICS_PATH, 'utf8'));
-		
+
 		const vitals = {
 			repos: {
 				total: metrics.registry.total_repos,
 				active: metrics.registry.implementation_status.ACTIVE,
-				orgs: metrics.registry.total_organs
+				orgs: metrics.registry.total_organs,
 			},
 			substance: {
-				code_files: metrics.substance?.code_files || (metrics.registry.total_repos * 20),
+				code_files: metrics.substance?.code_files || metrics.registry.total_repos * 20,
 				test_files: metrics.substance?.test_files || Math.round(metrics.automated_tests / 5),
 				automated_tests: metrics.automated_tests,
 				ci_passing: metrics.registry.ci_coverage,
-				ci_coverage_pct: Math.round((metrics.registry.ci_coverage / metrics.registry.total_repos) * 100)
+				ci_coverage_pct: Math.round(
+					(metrics.registry.ci_coverage / metrics.registry.total_repos) * 100,
+				),
 			},
 			logos: {
 				essays: metrics.essays.total,
-				words: metrics.documentation_words
+				words: metrics.documentation_words,
 			},
-			timestamp: metrics.generated
+			timestamp: metrics.generated,
 		};
 
 		fs.writeFileSync(VITALS_PATH, JSON.stringify(vitals, null, 2));
@@ -129,7 +131,7 @@ async function syncVitals() {
 				dependency_edges: metrics.registry.dependency_edges,
 				ci_workflows: metrics.ci_workflows,
 				operational_organs: metrics.registry.operational_organs,
-				sprints_completed: metrics.sprints.completed
+				sprints_completed: metrics.sprints.completed,
 			};
 			landing.generated = metrics.generated;
 			fs.writeFileSync(LANDING_PATH, JSON.stringify(landing, null, 2));

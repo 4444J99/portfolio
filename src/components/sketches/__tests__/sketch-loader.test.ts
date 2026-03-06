@@ -88,7 +88,10 @@ describe('sketch-loader runtime', () => {
 		}
 
 		vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
-		vi.stubGlobal('requestIdleCallback', vi.fn((cb) => cb({ didTimeout: false, timeRemaining: () => 10 })));
+		vi.stubGlobal(
+			'requestIdleCallback',
+			vi.fn((cb) => cb({ didTimeout: false, timeRemaining: () => 10 })),
+		);
 		vi.stubGlobal('cancelIdleCallback', vi.fn());
 	});
 
@@ -147,7 +150,7 @@ describe('sketch-loader runtime', () => {
 		initSketches();
 
 		observerCallback([{ isIntersecting: true, target: container }]);
-		
+
 		for (let i = 0; i < 10; i++) {
 			await new Promise((resolve) => setTimeout(resolve, 10));
 		}
@@ -166,7 +169,7 @@ describe('sketch-loader runtime', () => {
 		const { initSketches, getSketchInstance, teardown } = await import('../sketch-loader');
 		initSketches();
 		observerCallback([{ isIntersecting: true, target: container }]);
-		
+
 		for (let i = 0; i < 10; i++) {
 			await new Promise((resolve) => setTimeout(resolve, 10));
 		}
@@ -187,7 +190,7 @@ describe('sketch-loader runtime', () => {
 		const { initSketches, pauseSketch, resumeSketch } = await import('../sketch-loader');
 		initSketches();
 		observerCallback([{ isIntersecting: true, target: container }]);
-		
+
 		for (let i = 0; i < 10; i++) {
 			await new Promise((resolve) => setTimeout(resolve, 10));
 		}
@@ -212,7 +215,7 @@ describe('sketch-loader runtime', () => {
 
 		// Trigger resize event
 		window.dispatchEvent(new Event('resize'));
-		
+
 		for (let i = 0; i < 15; i++) {
 			await new Promise((resolve) => setTimeout(resolve, 10));
 		}
@@ -227,7 +230,7 @@ describe('sketch-loader runtime', () => {
 
 		const { reinitPage, teardownPage } = await import('../sketch-loader');
 		reinitPage();
-		
+
 		for (let i = 0; i < 25; i++) {
 			await new Promise((resolve) => setTimeout(resolve, 10));
 		}
@@ -249,7 +252,7 @@ describe('sketch-loader runtime', () => {
 		initSketches();
 
 		observerCallback([{ isIntersecting: true, target: container }]);
-		
+
 		for (let i = 0; i < 20; i++) {
 			await new Promise((resolve) => setTimeout(resolve, 10));
 		}
@@ -267,16 +270,18 @@ describe('sketch-loader runtime', () => {
 		const { initSketches, teardown, getSketchInstance } = await import('../sketch-loader');
 		initSketches();
 		observerCallback([{ isIntersecting: true, target: container }]);
-		
+
 		for (let i = 0; i < 10; i++) {
 			await new Promise((resolve) => setTimeout(resolve, 10));
 		}
 
 		const instance = getSketchInstance(container);
 		if (instance) {
-			instance.remove = () => { throw new Error('already removed'); };
+			instance.remove = () => {
+				throw new Error('already removed');
+			};
 		}
-		
+
 		expect(() => teardown()).not.toThrow();
 	});
 
@@ -289,23 +294,27 @@ describe('sketch-loader runtime', () => {
 		const { initSketches, teardownPage, getSketchInstance } = await import('../sketch-loader');
 		initSketches();
 		observerCallback([{ isIntersecting: true, target: container }]);
-		
+
 		for (let i = 0; i < 10; i++) {
 			await new Promise((resolve) => setTimeout(resolve, 10));
 		}
 
 		const instance = getSketchInstance(container);
 		if (instance) {
-			instance.remove = () => { throw new Error('already removed'); };
+			instance.remove = () => {
+				throw new Error('already removed');
+			};
 		}
-		
+
 		expect(() => teardownPage()).not.toThrow();
 	});
 
 	it('scheduleBackgroundInit handles PerformanceObserver errors', async () => {
 		class FailingPerformanceObserver {
 			disconnect = vi.fn();
-			observe() { throw new Error('Mock error'); }
+			observe() {
+				throw new Error('Mock error');
+			}
 		}
 		vi.stubGlobal('PerformanceObserver', FailingPerformanceObserver);
 
