@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-06T15:21:51.452Z",
+  "generated": "2026-03-06T16:59:15.654Z",
   "tests": {
     "total": 289,
     "passed": 289,
@@ -64,8 +64,8 @@
       "focusChecks": 2,
       "focusFailures": 0,
       "routesCovered": 44,
-      "totalRoutes": 44,
-      "coveragePct": 100,
+      "totalRoutes": 50,
+      "coveragePct": 88,
       "status": "pass"
     }
   },

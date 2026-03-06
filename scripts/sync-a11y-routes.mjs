@@ -61,10 +61,11 @@ async function generateA11yRoutes() {
 		routes.push({ path: `/resume/${persona.id}`, checks: DEFAULT_CHECKS });
 	});
 
-	// Inject Logos Routes
-	routes.push({ path: '/logos', checks: DEFAULT_CHECKS });
+	// Inject Logos Routes (slugs derived from filenames — must match Astro content collection defaults;
+	// will break if a logos entry adds a frontmatter `slug` override)
 	const logosContentDir = path.join(__dirname, '../src/content/logos');
 	if (fs.existsSync(logosContentDir)) {
+		routes.push({ path: '/logos', checks: DEFAULT_CHECKS });
 		for (const entry of fs.readdirSync(logosContentDir)) {
 			if (entry.endsWith('.md') || entry.endsWith('.mdx')) {
 				const slug = entry.replace(/\.(md|mdx)$/, '');

@@ -1,44 +1,34 @@
+const { readdirSync, statSync } = require('node:fs');
+const { join } = require('node:path');
+
+function collectHtmlUrls(dir, base = '') {
+	const urls = [];
+	for (const entry of readdirSync(dir, { withFileTypes: true })) {
+		const rel = base ? `${base}/${entry.name}` : entry.name;
+		if (entry.isDirectory()) {
+			urls.push(...collectHtmlUrls(join(dir, entry.name), rel));
+		} else if (entry.name.endsWith('.html')) {
+			urls.push(`http://localhost/${rel}`);
+		}
+	}
+	return urls.sort();
+}
+
+const distDir = join(__dirname, '..', 'dist');
+let urls;
+try {
+	urls = collectHtmlUrls(distDir);
+} catch {
+	// dist/ may not exist yet during install; fall back to index only
+	urls = ['http://localhost/index.html'];
+}
+
 /** @type {import('@lhci/cli').Config} */
 module.exports = {
 	ci: {
 		collect: {
 			staticDistDir: './dist',
-			url: [
-				'http://localhost/index.html',
-				'http://localhost/about/index.html',
-				'http://localhost/dashboard/index.html',
-				'http://localhost/resume/index.html',
-				'http://localhost/projects/recursive-engine/index.html',
-				'http://localhost/gallery/index.html',
-				'http://localhost/consult/index.html',
-				'http://localhost/architecture/index.html',
-				'http://localhost/omega/index.html',
-				'http://localhost/github-pages/index.html',
-				'http://localhost/products/index.html',
-				'http://localhost/community/index.html',
-				'http://localhost/essays/index.html',
-				'http://localhost/404.html',
-				'http://localhost/projects/aetheria-rpg/index.html',
-				'http://localhost/projects/agentic-titan/index.html',
-				'http://localhost/projects/ai-conductor/index.html',
-				'http://localhost/projects/ai-council/index.html',
-				'http://localhost/projects/block-warfare/index.html',
-				'http://localhost/projects/community-infrastructure/index.html',
-				'http://localhost/projects/distribution-strategy/index.html',
-				'http://localhost/projects/eight-organ-system/index.html',
-				'http://localhost/projects/generative-music/index.html',
-				'http://localhost/projects/knowledge-base/index.html',
-				'http://localhost/projects/life-my-midst-in/index.html',
-				'http://localhost/projects/linguistic-atomization/index.html',
-				'http://localhost/projects/metasystem-master/index.html',
-				'http://localhost/projects/narratological-lenses/index.html',
-				'http://localhost/projects/orchestration-hub/index.html',
-				'http://localhost/projects/org-architecture/index.html',
-				'http://localhost/projects/public-process/index.html',
-				'http://localhost/projects/public-record-data-scrapper/index.html',
-				'http://localhost/projects/the-actual-news/index.html',
-				'http://localhost/projects/your-fit-tailored/index.html',
-			],
+			url: urls,
 			numberOfRuns: 1,
 		},
 		assert: {
