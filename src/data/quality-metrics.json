@@ -1,1101 +1,1101 @@
 {
-	"generated": "2026-03-06T05:02:40.369Z",
-	"tests": {
-		"total": 289,
-		"passed": 289,
-		"files": 32
-	},
-	"security": {
-		"critical": 0,
-		"high": 0,
-		"moderate": 0,
-		"low": 0,
-		"total": 0,
-		"githubOpenAlerts": 0,
-		"githubAdvisoryStatus": "skipped",
-		"prodCounts": {
-			"critical": 0,
-			"high": 1,
-			"moderate": 2,
-			"low": 0,
-			"total": 3
-		},
-		"devCounts": {
-			"critical": 0,
-			"high": 0,
-			"moderate": 0,
-			"low": 0,
-			"total": 0
-		},
-		"allowlistActive": 0,
-		"policyCheckpoint": {
-			"date": "2026-02-28",
-			"maxModerate": 2,
-			"maxLow": 2
-		},
-		"status": "pass",
-		"source": ".quality/security-summary.json",
-		"githubSource": ".quality/github-advisory-summary.json"
-	},
-	"coverage": {
-		"statements": 81,
-		"branches": 70,
-		"functions": 70,
-		"lines": 81
-	},
-	"lighthouse": {
-		"performance": 100,
-		"accessibility": 96,
-		"bestPractices": 96,
-		"seo": 92
-	},
-	"a11y": {
-		"status": "pass",
-		"static": {
-			"pagesAudited": 44,
-			"critical": 0,
-			"serious": 0,
-			"status": "pass"
-		},
-		"runtime": {
-			"pagesAudited": 44,
-			"critical": 0,
-			"serious": 0,
-			"focusChecks": 2,
-			"focusFailures": 0,
-			"routesCovered": 44,
-			"totalRoutes": 44,
-			"coveragePct": 100,
-			"status": "pass"
-		}
-	},
-	"performance": {
-		"routeBudgetsStatus": "pass",
-		"chunkBudgetsStatus": "pass",
-		"interactionBudgetsStatus": "pass",
-		"routeBudgetCheckpoint": {
-			"date": "2026-02-17"
-		},
-		"chunkBudgetCheckpoint": {
-			"date": "2026-02-17"
-		},
-		"interactionBudgetCheckpoint": {
-			"date": "2026-02-17"
-		},
-		"largestChunks": [
-			{
-				"chunk": "_astro/vendor-mermaid.C_f1ZiXj.js",
-				"gzipBytes": 466212
-			},
-			{
-				"chunk": "_astro/vendor-p5.Ca8ta-ah.js",
-				"gzipBytes": 315021
-			},
-			{
-				"chunk": "_astro/vendor-cytoscape.C5TakKzA.js",
-				"gzipBytes": 194868
-			},
-			{
-				"chunk": "_astro/OmegaGalaxy.astro_astro_type_script_index_0_lang.Lo6SkHY_.js",
-				"gzipBytes": 130142
-			},
-			{
-				"chunk": "_astro/vendor-katex.DhXJpUyf.js",
-				"gzipBytes": 76838
-			},
-			{
-				"chunk": "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-				"gzipBytes": 4509
-			},
-			{
-				"chunk": "_astro/consult.astro_astro_type_script_index_0_lang.BtXONChT.js",
-				"gzipBytes": 3228
-			},
-			{
-				"chunk": "_astro/sketch-loader.Bh75n9qb.js",
-				"gzipBytes": 2477
-			},
-			{
-				"chunk": "_astro/pipeline-sketch.oAJiLEeY.js",
-				"gzipBytes": 1879
-			},
-			{
-				"chunk": "_astro/token-stream-sketch.j4VcfyS-.js",
-				"gzipBytes": 1586
-			}
-		],
-		"interactiveRouteJsTotals": {
-			"/portfolio/architecture": {
-				"scenario": "architecture-interaction",
-				"rawBytes": 3448220,
-				"gzipBytes": 985528,
-				"assetCount": 9,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
-					"_astro/architecture.astro_astro_type_script_index_0_lang.CCpSZ2rq.js",
-					"_astro/network-graph-sketch.D2hxAWy7.js",
-					"_astro/palette.CGBEHDds.js",
-					"_astro/sketch-loader.Bh75n9qb.js",
-					"_astro/vendor-cytoscape.C5TakKzA.js",
-					"_astro/vendor-mermaid.C_f1ZiXj.js",
-					"_astro/vendor-p5.Ca8ta-ah.js"
-				]
-			},
-			"/portfolio/gallery": {
-				"scenario": "gallery-interaction",
-				"rawBytes": 3473262,
-				"gzipBytes": 997119,
-				"assetCount": 19,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
-					"_astro/atoms-sketch.PufMKsIk.js",
-					"_astro/conductor-sketch.CsNW48Wi.js",
-					"_astro/counterpoint-sketch.DlCnKgU-.js",
-					"_astro/gallery.astro_astro_type_script_index_0_lang.yrM-CrK8.js",
-					"_astro/hero-sketch.Dr8pd6OK.js",
-					"_astro/lenses-sketch.DbVWqYtg.js",
-					"_astro/network-graph-sketch.D2hxAWy7.js",
-					"_astro/organ-system-sketch.CSltSgkr.js",
-					"_astro/palette.CGBEHDds.js",
-					"_astro/pipeline-sketch.oAJiLEeY.js",
-					"_astro/recursive-tree-sketch.E1g6A3ux.js",
-					"_astro/sketch-loader.Bh75n9qb.js",
-					"_astro/spiral-sketch.C_SjJ2Wj.js",
-					"_astro/token-stream-sketch.j4VcfyS-.js",
-					"_astro/vendor-cytoscape.C5TakKzA.js",
-					"_astro/vendor-mermaid.C_f1ZiXj.js",
-					"_astro/vendor-p5.Ca8ta-ah.js"
-				]
-			}
-		},
-		"routeJsTotals": {
-			"/portfolio/404.html": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/about": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/architecture": {
-				"rawBytes": 15353,
-				"gzipBytes": 5763,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
-					"_astro/architecture.astro_astro_type_script_index_0_lang.CCpSZ2rq.js"
-				]
-			},
-			"/portfolio/community": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/consult": {
-				"rawBytes": 19946,
-				"gzipBytes": 7929,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
-					"_astro/consult.astro_astro_type_script_index_0_lang.BtXONChT.js"
-				]
-			},
-			"/portfolio/dashboard": {
-				"rawBytes": 16310,
-				"gzipBytes": 5894,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
-					"_astro/dashboard.astro_astro_type_script_index_0_lang.Q5byfygL.js"
-				]
-			},
-			"/portfolio/essays": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/for/anthropic": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/for/openai": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/for/palantir": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/for/vercel": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/gallery": {
-				"rawBytes": 15317,
-				"gzipBytes": 5514,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
-					"_astro/gallery.astro_astro_type_script_index_0_lang.yrM-CrK8.js"
-				]
-			},
-			"/portfolio/github-pages": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/": {
-				"rawBytes": 18812,
-				"gzipBytes": 6203,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/IndexFilters.astro_astro_type_script_index_0_lang.BmlTGqXR.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/omega": {
-				"rawBytes": 535495,
-				"gzipBytes": 134843,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/OmegaGalaxy.astro_astro_type_script_index_0_lang.Lo6SkHY_.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/philosophy": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/products": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/aetheria-rpg": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/agentic-titan": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/ai-conductor": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/ai-council": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/block-warfare": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/community-infrastructure": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/distribution-strategy": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/eight-organ-system": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/generative-music": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/knowledge-base": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/life-my-midst-in": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/linguistic-atomization": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/metasystem-master": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/narratological-lenses": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/orchestration-hub": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/org-architecture": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/public-process": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/public-record-data-scrapper": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/recursive-engine": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/the-actual-news": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/projects/your-fit-tailored": {
-				"rawBytes": 15825,
-				"gzipBytes": 5760,
-				"assetCount": 3,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/resume/ai-systems-engineer": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/resume/creative-technologist": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/resume": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/resume/polymath": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/resume/systems-architect": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			},
-			"/portfolio/resume/technical-pm": {
-				"rawBytes": 13321,
-				"gzipBytes": 4701,
-				"assetCount": 2,
-				"assets": [
-					"_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
-					"_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
-				]
-			}
-		},
-		"source": ".quality/perf-summary.json + .quality/perf-budget-summary.json"
-	},
-	"runtimeErrors": {
-		"status": "pass",
-		"total": 8,
-		"uncategorized": 0,
-		"allowlisted": 8,
-		"source": ".quality/runtime-errors-summary.json"
-	},
-	"stability": {
-		"status": "skipped",
-		"consecutiveSuccess": null,
-		"requiredConsecutive": 5,
-		"source": ".quality/green-run-history.json",
-		"history": []
-	},
-	"ledger": {
-		"generated": "2026-03-04T00:46:40.047Z",
-		"snapshots": [
-			{
-				"generated": "2026-02-17T22:46:04.353Z",
-				"tests": {
-					"total": 205,
-					"passed": 205
-				},
-				"coverage": {
-					"statements": 49,
-					"branches": 29,
-					"functions": 43,
-					"lines": 50
-				},
-				"security": {
-					"status": "pass",
-					"critical": 0,
-					"high": 0,
-					"moderate": 0,
-					"low": 0,
-					"allowlistActive": 0
-				},
-				"a11y": {
-					"status": "pass",
-					"runtimeCoveragePct": 96.97
-				},
-				"performance": {
-					"routeBudgetsStatus": "pass",
-					"chunkBudgetsStatus": "pass",
-					"interactionBudgetsStatus": "pass"
-				},
-				"lighthouse": {
-					"performance": 100,
-					"accessibility": 96,
-					"bestPractices": 96,
-					"seo": 92
-				},
-				"stability": {
-					"consecutiveSuccess": null,
-					"requiredConsecutive": 5,
-					"greenStatus": "skipped"
-				},
-				"drift": {
-					"securityDriftStatus": "pass",
-					"securityDriftFailures": 0,
-					"coverageStatementsDelta": -1,
-					"coverageBranchesDelta": -3,
-					"coverageFunctionsDelta": -1,
-					"coverageLinesDelta": 0,
-					"lhPerformanceDelta": 0,
-					"runtimeCoverageDelta": null
-				}
-			},
-			{
-				"generated": "2026-02-17T22:47:32.595Z",
-				"tests": {
-					"total": 205,
-					"passed": 205
-				},
-				"coverage": {
-					"statements": 49,
-					"branches": 29,
-					"functions": 43,
-					"lines": 50
-				},
-				"security": {
-					"status": "pass",
-					"critical": 0,
-					"high": 0,
-					"moderate": 0,
-					"low": 0,
-					"allowlistActive": 0
-				},
-				"a11y": {
-					"status": "pass",
-					"runtimeCoveragePct": 100
-				},
-				"performance": {
-					"routeBudgetsStatus": "pass",
-					"chunkBudgetsStatus": "pass",
-					"interactionBudgetsStatus": "pass"
-				},
-				"lighthouse": {
-					"performance": 100,
-					"accessibility": 96,
-					"bestPractices": 96,
-					"seo": 92
-				},
-				"stability": {
-					"consecutiveSuccess": null,
-					"requiredConsecutive": 5,
-					"greenStatus": "skipped"
-				},
-				"drift": {
-					"securityDriftStatus": "pass",
-					"securityDriftFailures": 0,
-					"coverageStatementsDelta": -1,
-					"coverageBranchesDelta": -3,
-					"coverageFunctionsDelta": -1,
-					"coverageLinesDelta": 0,
-					"lhPerformanceDelta": 0,
-					"runtimeCoverageDelta": null
-				}
-			},
-			{
-				"generated": "2026-02-17T22:53:29.273Z",
-				"tests": {
-					"total": 205,
-					"passed": 205
-				},
-				"coverage": {
-					"statements": 49,
-					"branches": 29,
-					"functions": 43,
-					"lines": 50
-				},
-				"security": {
-					"status": "pass",
-					"critical": 0,
-					"high": 0,
-					"moderate": 0,
-					"low": 0,
-					"allowlistActive": 0
-				},
-				"a11y": {
-					"status": "pass",
-					"runtimeCoveragePct": 100
-				},
-				"performance": {
-					"routeBudgetsStatus": "pass",
-					"chunkBudgetsStatus": "pass",
-					"interactionBudgetsStatus": "pass"
-				},
-				"lighthouse": {
-					"performance": 100,
-					"accessibility": 96,
-					"bestPractices": 96,
-					"seo": 92
-				},
-				"stability": {
-					"consecutiveSuccess": null,
-					"requiredConsecutive": 5,
-					"greenStatus": "skipped"
-				},
-				"drift": {
-					"securityDriftStatus": "pass",
-					"securityDriftFailures": 0,
-					"coverageStatementsDelta": -1,
-					"coverageBranchesDelta": -3,
-					"coverageFunctionsDelta": -1,
-					"coverageLinesDelta": 0,
-					"lhPerformanceDelta": 0,
-					"runtimeCoverageDelta": null
-				}
-			},
-			{
-				"generated": "2026-02-18T07:18:58.670Z",
-				"tests": {
-					"total": 226,
-					"passed": 226
-				},
-				"coverage": {
-					"statements": 48,
-					"branches": 29,
-					"functions": 42,
-					"lines": 48
-				},
-				"security": {
-					"status": "pass",
-					"critical": 0,
-					"high": 0,
-					"moderate": 0,
-					"low": 0,
-					"allowlistActive": 0
-				},
-				"a11y": {
-					"status": "pass",
-					"runtimeCoveragePct": 100
-				},
-				"performance": {
-					"routeBudgetsStatus": "pass",
-					"chunkBudgetsStatus": "pass",
-					"interactionBudgetsStatus": "pass"
-				},
-				"lighthouse": {
-					"performance": 100,
-					"accessibility": 96,
-					"bestPractices": 96,
-					"seo": 92
-				},
-				"stability": {
-					"consecutiveSuccess": null,
-					"requiredConsecutive": 5,
-					"greenStatus": "skipped"
-				},
-				"drift": {
-					"securityDriftStatus": "pass",
-					"securityDriftFailures": 0,
-					"coverageStatementsDelta": -2,
-					"coverageBranchesDelta": -3,
-					"coverageFunctionsDelta": -2,
-					"coverageLinesDelta": -2,
-					"lhPerformanceDelta": 0,
-					"runtimeCoverageDelta": null
-				}
-			},
-			{
-				"generated": "2026-02-18T07:30:12.871Z",
-				"tests": {
-					"total": 226,
-					"passed": 226
-				},
-				"coverage": {
-					"statements": 48,
-					"branches": 29,
-					"functions": 42,
-					"lines": 48
-				},
-				"security": {
-					"status": "pass",
-					"critical": 0,
-					"high": 0,
-					"moderate": 0,
-					"low": 0,
-					"allowlistActive": 0
-				},
-				"a11y": {
-					"status": "pass",
-					"runtimeCoveragePct": 100
-				},
-				"performance": {
-					"routeBudgetsStatus": "pass",
-					"chunkBudgetsStatus": "pass",
-					"interactionBudgetsStatus": "pass"
-				},
-				"lighthouse": {
-					"performance": 100,
-					"accessibility": 96,
-					"bestPractices": 96,
-					"seo": 92
-				},
-				"stability": {
-					"consecutiveSuccess": null,
-					"requiredConsecutive": 5,
-					"greenStatus": "skipped"
-				},
-				"drift": {
-					"securityDriftStatus": "pass",
-					"securityDriftFailures": 0,
-					"coverageStatementsDelta": -2,
-					"coverageBranchesDelta": -3,
-					"coverageFunctionsDelta": -2,
-					"coverageLinesDelta": -2,
-					"lhPerformanceDelta": 0,
-					"runtimeCoverageDelta": null
-				}
-			},
-			{
-				"generated": "2026-02-23T09:58:11.861Z",
-				"tests": {
-					"total": 270,
-					"passed": 270
-				},
-				"coverage": {
-					"statements": 48,
-					"branches": 28,
-					"functions": 42,
-					"lines": 49
-				},
-				"security": {
-					"status": "pass",
-					"critical": 0,
-					"high": 0,
-					"moderate": 0,
-					"low": 0,
-					"allowlistActive": 0
-				},
-				"a11y": {
-					"status": "pass",
-					"runtimeCoveragePct": 100
-				},
-				"performance": {
-					"routeBudgetsStatus": "pass",
-					"chunkBudgetsStatus": "pass",
-					"interactionBudgetsStatus": "pass"
-				},
-				"lighthouse": {
-					"performance": 63,
-					"accessibility": 96,
-					"bestPractices": 96,
-					"seo": 92
-				},
-				"stability": {
-					"consecutiveSuccess": null,
-					"requiredConsecutive": 5,
-					"greenStatus": "skipped"
-				},
-				"drift": {
-					"securityDriftStatus": "pass",
-					"securityDriftFailures": 0,
-					"coverageStatementsDelta": 0,
-					"coverageBranchesDelta": 0,
-					"coverageFunctionsDelta": 0,
-					"coverageLinesDelta": 0,
-					"lhPerformanceDelta": 0,
-					"runtimeCoverageDelta": 0
-				}
-			},
-			{
-				"generated": "2026-02-28T13:53:44.645Z",
-				"tests": {
-					"total": 284,
-					"passed": 284
-				},
-				"coverage": {
-					"statements": 59,
-					"branches": 42,
-					"functions": 51,
-					"lines": 60
-				},
-				"security": {
-					"status": "pass",
-					"critical": 0,
-					"high": 0,
-					"moderate": 0,
-					"low": 0,
-					"allowlistActive": 0
-				},
-				"a11y": {
-					"status": "pass",
-					"runtimeCoveragePct": 100
-				},
-				"performance": {
-					"routeBudgetsStatus": "pass",
-					"chunkBudgetsStatus": "pass",
-					"interactionBudgetsStatus": "pass"
-				},
-				"lighthouse": {
-					"performance": 100,
-					"accessibility": 96,
-					"bestPractices": 96,
-					"seo": 92
-				},
-				"stability": {
-					"consecutiveSuccess": null,
-					"requiredConsecutive": 5,
-					"greenStatus": "skipped"
-				},
-				"drift": {
-					"securityDriftStatus": "pass",
-					"securityDriftFailures": 0,
-					"coverageStatementsDelta": 11,
-					"coverageBranchesDelta": 14,
-					"coverageFunctionsDelta": 9,
-					"coverageLinesDelta": 11,
-					"lhPerformanceDelta": 37,
-					"runtimeCoverageDelta": 0
-				}
-			},
-			{
-				"generated": "2026-02-28T22:05:04.540Z",
-				"tests": {
-					"total": 289,
-					"passed": 289
-				},
-				"coverage": {
-					"statements": 60,
-					"branches": 42,
-					"functions": 51,
-					"lines": 60
-				},
-				"security": {
-					"status": "pass",
-					"critical": 0,
-					"high": 0,
-					"moderate": 0,
-					"low": 0,
-					"allowlistActive": 0
-				},
-				"a11y": {
-					"status": "pass",
-					"runtimeCoveragePct": 100
-				},
-				"performance": {
-					"routeBudgetsStatus": "pass",
-					"chunkBudgetsStatus": "pass",
-					"interactionBudgetsStatus": "pass"
-				},
-				"lighthouse": {
-					"performance": 100,
-					"accessibility": 96,
-					"bestPractices": 96,
-					"seo": 92
-				},
-				"stability": {
-					"consecutiveSuccess": null,
-					"requiredConsecutive": 5,
-					"greenStatus": "skipped"
-				},
-				"drift": {
-					"securityDriftStatus": "pass",
-					"securityDriftFailures": 0,
-					"coverageStatementsDelta": 12,
-					"coverageBranchesDelta": 14,
-					"coverageFunctionsDelta": 9,
-					"coverageLinesDelta": 11,
-					"lhPerformanceDelta": 37,
-					"runtimeCoverageDelta": 0
-				}
-			},
-			{
-				"generated": "2026-03-04T00:46:39.257Z",
-				"tests": {
-					"total": 289,
-					"passed": 289
-				},
-				"coverage": {
-					"statements": 60,
-					"branches": 42,
-					"functions": 51,
-					"lines": 60
-				},
-				"security": {
-					"status": "pass",
-					"critical": 0,
-					"high": 0,
-					"moderate": 0,
-					"low": 0,
-					"allowlistActive": 0
-				},
-				"a11y": {
-					"status": "pass",
-					"runtimeCoveragePct": 100
-				},
-				"performance": {
-					"routeBudgetsStatus": "pass",
-					"chunkBudgetsStatus": "pass",
-					"interactionBudgetsStatus": "pass"
-				},
-				"lighthouse": {
-					"performance": 100,
-					"accessibility": 96,
-					"bestPractices": 96,
-					"seo": 92
-				},
-				"stability": {
-					"consecutiveSuccess": null,
-					"requiredConsecutive": 5,
-					"greenStatus": "skipped"
-				},
-				"drift": {
-					"securityDriftStatus": "pass",
-					"securityDriftFailures": 0,
-					"coverageStatementsDelta": 12,
-					"coverageBranchesDelta": 14,
-					"coverageFunctionsDelta": 9,
-					"coverageLinesDelta": 11,
-					"lhPerformanceDelta": 37,
-					"runtimeCoverageDelta": 0
-				}
-			}
-		]
-	},
-	"build": {
-		"pages": 50,
-		"bundleFiles": 64
-	},
-	"sources": {
-		"tests": ".quality/vitest-report.json",
-		"security": ".quality/security-summary.json",
-		"securityProd": ".quality/security-summary-prod.json",
-		"securityGithub": ".quality/github-advisory-summary.json",
-		"securityDrift": ".quality/security-drift-summary.json",
-		"coverage": "coverage/coverage-summary.json",
-		"lighthouse": ".lighthouseci/lhr-*.json",
-		"a11yStatic": ".a11y/a11y-summary.json",
-		"a11yRuntime": ".a11y/runtime-summary.json",
-		"runtimeCoverage": ".quality/runtime-coverage-summary.json",
-		"e2eSmoke": ".quality/e2e-smoke-summary.json",
-		"runtimeErrors": ".quality/runtime-errors-summary.json",
-		"greenRuns": ".quality/green-run-history.json",
-		"ledger": ".quality/quality-ledger.json",
-		"policyGovernance": ".quality/policy-governance-summary.json",
-		"performance": ".quality/perf-summary.json + .quality/perf-budget-summary.json",
-		"build": "dist/**/*.html and dist/_astro/**/*"
-	}
+  "generated": "2026-03-06T15:21:51.452Z",
+  "tests": {
+    "total": 289,
+    "passed": 289,
+    "files": 32
+  },
+  "security": {
+    "critical": 0,
+    "high": 0,
+    "moderate": 0,
+    "low": 0,
+    "total": 0,
+    "githubOpenAlerts": 0,
+    "githubAdvisoryStatus": "skipped",
+    "prodCounts": {
+      "critical": 0,
+      "high": 1,
+      "moderate": 2,
+      "low": 0,
+      "total": 3
+    },
+    "devCounts": {
+      "critical": 0,
+      "high": 0,
+      "moderate": 0,
+      "low": 0,
+      "total": 0
+    },
+    "allowlistActive": 0,
+    "policyCheckpoint": {
+      "date": "2026-02-28",
+      "maxModerate": 2,
+      "maxLow": 2
+    },
+    "status": "pass",
+    "source": ".quality/security-summary.json",
+    "githubSource": ".quality/github-advisory-summary.json"
+  },
+  "coverage": {
+    "statements": 81,
+    "branches": 70,
+    "functions": 70,
+    "lines": 81
+  },
+  "lighthouse": {
+    "performance": 100,
+    "accessibility": 96,
+    "bestPractices": 96,
+    "seo": 92
+  },
+  "a11y": {
+    "status": "pass",
+    "static": {
+      "pagesAudited": 44,
+      "critical": 0,
+      "serious": 0,
+      "status": "pass"
+    },
+    "runtime": {
+      "pagesAudited": 44,
+      "critical": 0,
+      "serious": 0,
+      "focusChecks": 2,
+      "focusFailures": 0,
+      "routesCovered": 44,
+      "totalRoutes": 44,
+      "coveragePct": 100,
+      "status": "pass"
+    }
+  },
+  "performance": {
+    "routeBudgetsStatus": "pass",
+    "chunkBudgetsStatus": "pass",
+    "interactionBudgetsStatus": "pass",
+    "routeBudgetCheckpoint": {
+      "date": "2026-02-17"
+    },
+    "chunkBudgetCheckpoint": {
+      "date": "2026-02-17"
+    },
+    "interactionBudgetCheckpoint": {
+      "date": "2026-02-17"
+    },
+    "largestChunks": [
+      {
+        "chunk": "_astro/vendor-mermaid.C_f1ZiXj.js",
+        "gzipBytes": 466212
+      },
+      {
+        "chunk": "_astro/vendor-p5.Ca8ta-ah.js",
+        "gzipBytes": 315021
+      },
+      {
+        "chunk": "_astro/vendor-cytoscape.C5TakKzA.js",
+        "gzipBytes": 194868
+      },
+      {
+        "chunk": "_astro/OmegaGalaxy.astro_astro_type_script_index_0_lang.Lo6SkHY_.js",
+        "gzipBytes": 130142
+      },
+      {
+        "chunk": "_astro/vendor-katex.DhXJpUyf.js",
+        "gzipBytes": 76838
+      },
+      {
+        "chunk": "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+        "gzipBytes": 4509
+      },
+      {
+        "chunk": "_astro/consult.astro_astro_type_script_index_0_lang.BtXONChT.js",
+        "gzipBytes": 3228
+      },
+      {
+        "chunk": "_astro/sketch-loader.Bh75n9qb.js",
+        "gzipBytes": 2477
+      },
+      {
+        "chunk": "_astro/pipeline-sketch.oAJiLEeY.js",
+        "gzipBytes": 1879
+      },
+      {
+        "chunk": "_astro/token-stream-sketch.j4VcfyS-.js",
+        "gzipBytes": 1586
+      }
+    ],
+    "interactiveRouteJsTotals": {
+      "/portfolio/architecture": {
+        "scenario": "architecture-interaction",
+        "rawBytes": 3448220,
+        "gzipBytes": 985528,
+        "assetCount": 9,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
+          "_astro/architecture.astro_astro_type_script_index_0_lang.CCpSZ2rq.js",
+          "_astro/network-graph-sketch.D2hxAWy7.js",
+          "_astro/palette.CGBEHDds.js",
+          "_astro/sketch-loader.Bh75n9qb.js",
+          "_astro/vendor-cytoscape.C5TakKzA.js",
+          "_astro/vendor-mermaid.C_f1ZiXj.js",
+          "_astro/vendor-p5.Ca8ta-ah.js"
+        ]
+      },
+      "/portfolio/gallery": {
+        "scenario": "gallery-interaction",
+        "rawBytes": 3473262,
+        "gzipBytes": 997119,
+        "assetCount": 19,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
+          "_astro/atoms-sketch.PufMKsIk.js",
+          "_astro/conductor-sketch.CsNW48Wi.js",
+          "_astro/counterpoint-sketch.DlCnKgU-.js",
+          "_astro/gallery.astro_astro_type_script_index_0_lang.yrM-CrK8.js",
+          "_astro/hero-sketch.Dr8pd6OK.js",
+          "_astro/lenses-sketch.DbVWqYtg.js",
+          "_astro/network-graph-sketch.D2hxAWy7.js",
+          "_astro/organ-system-sketch.CSltSgkr.js",
+          "_astro/palette.CGBEHDds.js",
+          "_astro/pipeline-sketch.oAJiLEeY.js",
+          "_astro/recursive-tree-sketch.E1g6A3ux.js",
+          "_astro/sketch-loader.Bh75n9qb.js",
+          "_astro/spiral-sketch.C_SjJ2Wj.js",
+          "_astro/token-stream-sketch.j4VcfyS-.js",
+          "_astro/vendor-cytoscape.C5TakKzA.js",
+          "_astro/vendor-mermaid.C_f1ZiXj.js",
+          "_astro/vendor-p5.Ca8ta-ah.js"
+        ]
+      }
+    },
+    "routeJsTotals": {
+      "/portfolio/404.html": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/about": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/architecture": {
+        "rawBytes": 15353,
+        "gzipBytes": 5763,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
+          "_astro/architecture.astro_astro_type_script_index_0_lang.CCpSZ2rq.js"
+        ]
+      },
+      "/portfolio/community": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/consult": {
+        "rawBytes": 19946,
+        "gzipBytes": 7929,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
+          "_astro/consult.astro_astro_type_script_index_0_lang.BtXONChT.js"
+        ]
+      },
+      "/portfolio/dashboard": {
+        "rawBytes": 16310,
+        "gzipBytes": 5894,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
+          "_astro/dashboard.astro_astro_type_script_index_0_lang.Q5byfygL.js"
+        ]
+      },
+      "/portfolio/essays": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/for/anthropic": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/for/openai": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/for/palantir": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/for/vercel": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/gallery": {
+        "rawBytes": 15317,
+        "gzipBytes": 5514,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js",
+          "_astro/gallery.astro_astro_type_script_index_0_lang.yrM-CrK8.js"
+        ]
+      },
+      "/portfolio/github-pages": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/": {
+        "rawBytes": 18812,
+        "gzipBytes": 6203,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/IndexFilters.astro_astro_type_script_index_0_lang.BmlTGqXR.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/omega": {
+        "rawBytes": 535495,
+        "gzipBytes": 134843,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/OmegaGalaxy.astro_astro_type_script_index_0_lang.Lo6SkHY_.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/philosophy": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/products": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/aetheria-rpg": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/agentic-titan": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/ai-conductor": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/ai-council": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/block-warfare": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/community-infrastructure": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/distribution-strategy": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/eight-organ-system": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/generative-music": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/knowledge-base": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/life-my-midst-in": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/linguistic-atomization": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/metasystem-master": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/narratological-lenses": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/orchestration-hub": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/org-architecture": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/public-process": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/public-record-data-scrapper": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/recursive-engine": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/the-actual-news": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/projects/your-fit-tailored": {
+        "rawBytes": 15825,
+        "gzipBytes": 5760,
+        "assetCount": 3,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/MermaidDiagram.astro_astro_type_script_index_0_lang.CHoZ7wKv.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/resume/ai-systems-engineer": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/resume/creative-technologist": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/resume": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/resume/polymath": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/resume/systems-architect": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      },
+      "/portfolio/resume/technical-pm": {
+        "rawBytes": 13321,
+        "gzipBytes": 4701,
+        "assetCount": 2,
+        "assets": [
+          "_astro/ClientRouter.astro_astro_type_script_index_0_lang.CWs-ObRl.js",
+          "_astro/SketchLifecycle.astro_astro_type_script_index_0_lang.B0KIfx0R.js"
+        ]
+      }
+    },
+    "source": ".quality/perf-summary.json + .quality/perf-budget-summary.json"
+  },
+  "runtimeErrors": {
+    "status": "pass",
+    "total": 8,
+    "uncategorized": 0,
+    "allowlisted": 8,
+    "source": ".quality/runtime-errors-summary.json"
+  },
+  "stability": {
+    "status": "skipped",
+    "consecutiveSuccess": null,
+    "requiredConsecutive": 5,
+    "source": ".quality/green-run-history.json",
+    "history": []
+  },
+  "ledger": {
+    "generated": "2026-03-04T00:46:40.047Z",
+    "snapshots": [
+      {
+        "generated": "2026-02-17T22:46:04.353Z",
+        "tests": {
+          "total": 205,
+          "passed": 205
+        },
+        "coverage": {
+          "statements": 49,
+          "branches": 29,
+          "functions": 43,
+          "lines": 50
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 96.97
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": -1,
+          "coverageBranchesDelta": -3,
+          "coverageFunctionsDelta": -1,
+          "coverageLinesDelta": 0,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": null
+        }
+      },
+      {
+        "generated": "2026-02-17T22:47:32.595Z",
+        "tests": {
+          "total": 205,
+          "passed": 205
+        },
+        "coverage": {
+          "statements": 49,
+          "branches": 29,
+          "functions": 43,
+          "lines": 50
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": -1,
+          "coverageBranchesDelta": -3,
+          "coverageFunctionsDelta": -1,
+          "coverageLinesDelta": 0,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": null
+        }
+      },
+      {
+        "generated": "2026-02-17T22:53:29.273Z",
+        "tests": {
+          "total": 205,
+          "passed": 205
+        },
+        "coverage": {
+          "statements": 49,
+          "branches": 29,
+          "functions": 43,
+          "lines": 50
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": -1,
+          "coverageBranchesDelta": -3,
+          "coverageFunctionsDelta": -1,
+          "coverageLinesDelta": 0,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": null
+        }
+      },
+      {
+        "generated": "2026-02-18T07:18:58.670Z",
+        "tests": {
+          "total": 226,
+          "passed": 226
+        },
+        "coverage": {
+          "statements": 48,
+          "branches": 29,
+          "functions": 42,
+          "lines": 48
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": -2,
+          "coverageBranchesDelta": -3,
+          "coverageFunctionsDelta": -2,
+          "coverageLinesDelta": -2,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": null
+        }
+      },
+      {
+        "generated": "2026-02-18T07:30:12.871Z",
+        "tests": {
+          "total": 226,
+          "passed": 226
+        },
+        "coverage": {
+          "statements": 48,
+          "branches": 29,
+          "functions": 42,
+          "lines": 48
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": -2,
+          "coverageBranchesDelta": -3,
+          "coverageFunctionsDelta": -2,
+          "coverageLinesDelta": -2,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": null
+        }
+      },
+      {
+        "generated": "2026-02-23T09:58:11.861Z",
+        "tests": {
+          "total": 270,
+          "passed": 270
+        },
+        "coverage": {
+          "statements": 48,
+          "branches": 28,
+          "functions": 42,
+          "lines": 49
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 63,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": 0,
+          "coverageBranchesDelta": 0,
+          "coverageFunctionsDelta": 0,
+          "coverageLinesDelta": 0,
+          "lhPerformanceDelta": 0,
+          "runtimeCoverageDelta": 0
+        }
+      },
+      {
+        "generated": "2026-02-28T13:53:44.645Z",
+        "tests": {
+          "total": 284,
+          "passed": 284
+        },
+        "coverage": {
+          "statements": 59,
+          "branches": 42,
+          "functions": 51,
+          "lines": 60
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": 11,
+          "coverageBranchesDelta": 14,
+          "coverageFunctionsDelta": 9,
+          "coverageLinesDelta": 11,
+          "lhPerformanceDelta": 37,
+          "runtimeCoverageDelta": 0
+        }
+      },
+      {
+        "generated": "2026-02-28T22:05:04.540Z",
+        "tests": {
+          "total": 289,
+          "passed": 289
+        },
+        "coverage": {
+          "statements": 60,
+          "branches": 42,
+          "functions": 51,
+          "lines": 60
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": 12,
+          "coverageBranchesDelta": 14,
+          "coverageFunctionsDelta": 9,
+          "coverageLinesDelta": 11,
+          "lhPerformanceDelta": 37,
+          "runtimeCoverageDelta": 0
+        }
+      },
+      {
+        "generated": "2026-03-04T00:46:39.257Z",
+        "tests": {
+          "total": 289,
+          "passed": 289
+        },
+        "coverage": {
+          "statements": 60,
+          "branches": 42,
+          "functions": 51,
+          "lines": 60
+        },
+        "security": {
+          "status": "pass",
+          "critical": 0,
+          "high": 0,
+          "moderate": 0,
+          "low": 0,
+          "allowlistActive": 0
+        },
+        "a11y": {
+          "status": "pass",
+          "runtimeCoveragePct": 100
+        },
+        "performance": {
+          "routeBudgetsStatus": "pass",
+          "chunkBudgetsStatus": "pass",
+          "interactionBudgetsStatus": "pass"
+        },
+        "lighthouse": {
+          "performance": 100,
+          "accessibility": 96,
+          "bestPractices": 96,
+          "seo": 92
+        },
+        "stability": {
+          "consecutiveSuccess": null,
+          "requiredConsecutive": 5,
+          "greenStatus": "skipped"
+        },
+        "drift": {
+          "securityDriftStatus": "pass",
+          "securityDriftFailures": 0,
+          "coverageStatementsDelta": 12,
+          "coverageBranchesDelta": 14,
+          "coverageFunctionsDelta": 9,
+          "coverageLinesDelta": 11,
+          "lhPerformanceDelta": 37,
+          "runtimeCoverageDelta": 0
+        }
+      }
+    ]
+  },
+  "build": {
+    "pages": 50,
+    "bundleFiles": 64
+  },
+  "sources": {
+    "tests": ".quality/vitest-report.json",
+    "security": ".quality/security-summary.json",
+    "securityProd": ".quality/security-summary-prod.json",
+    "securityGithub": ".quality/github-advisory-summary.json",
+    "securityDrift": ".quality/security-drift-summary.json",
+    "coverage": "coverage/coverage-summary.json",
+    "lighthouse": ".lighthouseci/lhr-*.json",
+    "a11yStatic": ".a11y/a11y-summary.json",
+    "a11yRuntime": ".a11y/runtime-summary.json",
+    "runtimeCoverage": ".quality/runtime-coverage-summary.json",
+    "e2eSmoke": ".quality/e2e-smoke-summary.json",
+    "runtimeErrors": ".quality/runtime-errors-summary.json",
+    "greenRuns": ".quality/green-run-history.json",
+    "ledger": ".quality/quality-ledger.json",
+    "policyGovernance": ".quality/policy-governance-summary.json",
+    "performance": ".quality/perf-summary.json + .quality/perf-budget-summary.json",
+    "build": "dist/**/*.html and dist/_astro/**/*"
+  }
 }

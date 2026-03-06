@@ -143,6 +143,42 @@
       ]
     },
     {
+      "path": "/testimonials",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/roadmap",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/impact",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/press",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
       "path": "/projects/aetheria-rpg",
       "checks": [
         "nav-menu",
@@ -360,6 +396,24 @@
     },
     {
       "path": "/resume/technical-pm",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/logocentric-architecture",
       "checks": [
         "nav-menu",
         "dropdown-menu",

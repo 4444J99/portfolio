@@ -45,6 +45,10 @@ async function generateA11yRoutes() {
 		{ path: '/github-pages', checks: DEFAULT_CHECKS },
 		{ path: '/404.html', checks: DEFAULT_CHECKS },
 		{ path: '/philosophy', checks: DEFAULT_CHECKS },
+		{ path: '/testimonials', checks: DEFAULT_CHECKS },
+		{ path: '/roadmap', checks: DEFAULT_CHECKS },
+		{ path: '/impact', checks: DEFAULT_CHECKS },
+		{ path: '/press', checks: DEFAULT_CHECKS },
 	];
 
 	// Inject Project Routes
@@ -56,6 +60,18 @@ async function generateA11yRoutes() {
 	personas.forEach((persona) => {
 		routes.push({ path: `/resume/${persona.id}`, checks: DEFAULT_CHECKS });
 	});
+
+	// Inject Logos Routes
+	routes.push({ path: '/logos', checks: DEFAULT_CHECKS });
+	const logosContentDir = path.join(__dirname, '../src/content/logos');
+	if (fs.existsSync(logosContentDir)) {
+		for (const entry of fs.readdirSync(logosContentDir)) {
+			if (entry.endsWith('.md') || entry.endsWith('.mdx')) {
+				const slug = entry.replace(/\.(md|mdx)$/, '');
+				routes.push({ path: `/logos/${slug}`, checks: DEFAULT_CHECKS });
+			}
+		}
+	}
 
 	// Inject Dynamic Target Routes
 	targets.forEach((target) => {
