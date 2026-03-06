@@ -76,6 +76,7 @@ jobs:
           npm run sync:github-pages
           npm run sync:vitals
           npm run sync:omega
+          npm run sync:identity
       - name: Build
         run: npm run build
       - name: Upload dist

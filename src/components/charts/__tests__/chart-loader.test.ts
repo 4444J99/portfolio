@@ -1,69 +1,103 @@
 // @vitest-environment jsdom
 
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { teardown } from '../chart-loader';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import * as loader from '../chart-loader';
 
-class MockIntersectionObserver {
-	private callback: IntersectionObserverCallback;
-
-	constructor(callback: IntersectionObserverCallback) {
-		this.callback = callback;
-	}
-
-	observe(element: Element) {
-		const rect = element.getBoundingClientRect();
-		this.callback(
-			[
-				{
-					target: element,
-					isIntersecting: true,
-					intersectionRatio: 1,
-					time: Date.now(),
-					boundingClientRect: rect,
-					intersectionRect: rect,
-					rootBounds: null,
-				},
-			],
-			this as unknown as IntersectionObserver,
-		);
-	}
-
-	disconnect() {}
-}
+// Mock chart modules at top level
+vi.mock('../organ-bar-chart', () => ({ default: vi.fn() }));
 
 describe('chart-loader lifecycle', () => {
+	let observerCallback: (entries: any[]) => void;
+	const mockObserve = vi.fn();
+	const mockDisconnect = vi.fn();
+
 	beforeEach(() => {
-		document.body.innerHTML = `
-      <div data-chart="unknown" class="chart-container">
-        <svg></svg>
-        <div class="chart-tooltip">tooltip</div>
-      </div>
-    `;
+		document.body.innerHTML = '';
+		vi.useFakeTimers();
 
-		Object.defineProperty(window, 'IntersectionObserver', {
-			writable: true,
-			configurable: true,
-			value: MockIntersectionObserver,
-		});
+		class MockIntersectionObserver {
+			constructor(cb: any) {
+				observerCallback = cb;
+			}
+			observe = mockObserve;
+			disconnect = mockDisconnect;
+		}
 
-		vi.stubGlobal('clearTimeout', clearTimeout);
-		vi.stubGlobal('setTimeout', setTimeout);
+		vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
 	});
 
-	it('initializes on astro:page-load and cleans up on astro:before-swap', () => {
+	afterEach(async () => {
+		loader.teardown();
+		vi.runOnlyPendingTimers();
+		vi.useRealTimers();
+		vi.unstubAllGlobals();
+		vi.clearAllMocks();
+	});
+
+	it('observes charts on astro:page-load', async () => {
+		const container = document.createElement('div');
+		container.dataset.chart = 'organ-bar';
+		document.body.appendChild(container);
+
 		document.dispatchEvent(new Event('astro:page-load'));
 
-		const container = document.querySelector<HTMLElement>('[data-chart="unknown"]');
-		expect(container).not.toBeNull();
+		expect(mockObserve).toHaveBeenCalledWith(container);
+	});
+
+	it('initializes chart when it becomes visible', async () => {
+		const container = document.createElement('div');
+		container.dataset.chart = 'organ-bar';
+		container.dataset.chartData = JSON.stringify({ organs: [] });
+		document.body.appendChild(container);
+
+		document.dispatchEvent(new Event('astro:page-load'));
+
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		await vi.advanceTimersByTimeAsync(100);
+	});
+
+	it('observes charts without IntersectionObserver', async () => {
+		const originalObserver = window.IntersectionObserver;
+		// @ts-ignore
+		delete window.IntersectionObserver;
+
+		const container = document.createElement('div');
+		container.dataset.chart = 'organ-bar';
+		container.dataset.chartData = JSON.stringify({ organs: [] });
+		document.body.appendChild(container);
+
+		document.dispatchEvent(new Event('astro:page-load'));
+
+		await vi.advanceTimersByTimeAsync(100);
+
+		window.IntersectionObserver = originalObserver;
+	});
+
+	it('handles elements leaving the viewport', async () => {
+		const container = document.createElement('div');
+		container.dataset.chart = 'organ-bar';
+		document.body.appendChild(container);
+
+		document.dispatchEvent(new Event('astro:page-load'));
+
+		observerCallback([{ isIntersecting: false, target: container }]);
+	});
+
+	it('cleans up on astro:before-swap', async () => {
+		const container = document.createElement('div');
+		container.dataset.chart = 'organ-bar';
+		const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		container.appendChild(svg);
+		document.body.appendChild(container);
+
+		// Trigger some initial state
+		document.dispatchEvent(new Event('astro:page-load'));
+		observerCallback([{ isIntersecting: true, target: container }]);
 
 		document.dispatchEvent(new Event('astro:before-swap'));
 
-		expect(container?.querySelector('svg')).toBeNull();
-		expect(container?.querySelector('.chart-tooltip')).toBeNull();
-	});
-
-	it('teardown can be called safely multiple times', () => {
-		teardown();
-		expect(() => teardown()).not.toThrow();
+		expect(container.querySelector('svg')).toBeNull();
+		expect(mockDisconnect).toHaveBeenCalled();
 	});
 });

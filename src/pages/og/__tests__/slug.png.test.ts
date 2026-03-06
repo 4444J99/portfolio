@@ -27,4 +27,12 @@ describe('[...slug].png.ts', () => {
 		const buffer = await response.arrayBuffer();
 		expect(buffer.byteLength).toBe(4);
 	});
+
+	it('should return a PNG image response with fallback accent', async () => {
+		const props = { title: 'Test', subtitle: 'Sub', accent: undefined };
+		const response = (await GET({ props } as any)) as Response;
+
+		expect(response).toBeInstanceOf(Response);
+		expect(response.headers.get('Content-Type')).toBe('image/png');
+	});
 });

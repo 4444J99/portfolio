@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import omegaData from '../data/omega.json';
+
+const soakDay = omegaData.soak.streak_days;
+const targetDay = omegaData.soak.target_days;
+
+const feedbackCriteria = [
+	{ 
+    title: 'Architectural Coherence', 
+    description: 'Does the system maintain logical consistency across all 91 repositories?',
+    target: 'Stranger Test Score >= 80%'
+  },
+	{ 
+    title: 'Operational Runbooks', 
+    description: 'Can a second operator maintain the system using existing documentation?',
+    target: 'Validated by independent audit'
+  },
+	{ 
+    title: 'External Utility', 
+    description: 'Do the products in Organ III solve real-world B2B challenges?',
+    target: '>= 3 feedback pieces logged'
+  },
+];
+---
+
+<Layout title="Testimonials & Validation — The Stranger Test" description="Protocol and logs for external system validation and community feedback.">
+  <section class="section">
+    <div class="container">
+      <h1 class="page-title">Testimonials & Validation</h1>
+      <p class="page-sub">
+        The "Stranger Test" is our primary protocol for external validation. A project isn't finished until an uninvolved person can navigate, understand, and operate it.
+      </p>
+
+      <div class="callout">
+        <h3>📢 Seeking External Validators</h3>
+        <p>
+          We are currently in the <strong>Soak Test Phase (Day {soakDay}/{targetDay})</strong>. We are actively seeking technical auditors and systems engineers to perform "Stranger Tests" on the ORGANVM architecture.
+        </p>
+        <a href="/portfolio/consult" class="btn">Apply to Validate</a>
+      </div>
+
+      <h2 class="section__heading" data-reveal>Validation Protocol</h2>
+      <div class="protocol-grid">
+        {feedbackCriteria.map(c => (
+          <div class="protocol-card" data-reveal>
+            <div class="protocol-card__header">
+              <span class="protocol-card__target">{c.target}</span>
+            </div>
+            <h3>{c.title}</h3>
+            <p>{c.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="section__heading" data-reveal>Current Feedback Logs</h2>
+      <div class="empty-state">
+        <p>No external testimonials logged yet. System is currently in autonomous soak mode.</p>
+        <p class="small">Refer to Omega Criterion #7 for tracking status.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .callout {
+    background: var(--bg-secondary);
+    border: 2px solid var(--accent);
+    padding: var(--space-xl);
+    border-radius: 12px;
+    margin: var(--space-2xl) 0;
+    text-align: center;
+  }
+  .callout h3 {
+    margin-top: 0;
+    color: var(--accent);
+  }
+  .protocol-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+  }
+  .protocol-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    border-radius: 8px;
+  }
+  .protocol-card__target {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--cmyk-yellow);
+    text-transform: uppercase;
+  }
+  .empty-state {
+    text-align: center;
+    padding: var(--space-3xl);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+  }
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg-primary);
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: var(--space-md);
+  }
+</style>

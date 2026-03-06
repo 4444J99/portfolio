@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StatGrid from '../components/StatGrid.astro';
+import MermaidDiagram from '../components/academic/MermaidDiagram.astro';
+import systemMetrics from '../data/system-metrics.json';
+
+const impactMetrics = [
+	{ value: systemMetrics.registry.total_repos.toString(), label: 'Repos Managed' },
+	{ value: systemMetrics.automated_tests.toLocaleString(), label: 'Automated Tests' },
+	{ value: `${Math.round(systemMetrics.documentation_words / 1000)}K+`, label: 'Words Written' },
+	{ value: systemMetrics.ci_workflows.toString(), label: 'CI Workflows' },
+	{ value: `${systemMetrics.registry.ci_coverage}%`, label: 'Avg. Coverage' },
+	{ value: systemMetrics.omega.soak_streak.toString(), label: 'Soak Days' },
+];
+---
+
+<Layout title="System Impact — Evidence of Reach" description="Real-world metrics, API usage, and structural influence of the ORGANVM system.">
+  <section class="section">
+    <div class="container">
+      <h1 class="page-title">System Impact</h1>
+      <p class="page-sub">
+        Quantitative evidence of architectural performance and structural depth across the eight-organ ecosystem.
+      </p>
+
+      <StatGrid stats={impactMetrics} />
+
+      <h2 class="section__heading" data-reveal>Data Flow & Orchestration</h2>
+      <p>
+        The system serves as a central intelligence hub, coordinating state transitions across 91 leaf nodes. 
+        Each organ produces and consumes discrete data artifacts, ensuring that "impact" is measurable at the protocol level.
+      </p>
+
+      <MermaidDiagram
+        caption="Inter-Organ Impact Graph: How data artifacts flow from theoretical foundations to public distribution."
+        chart={`graph LR
+    I[Theory] -->|Ontology| II[Art]
+    II -->|Media| III[Commerce]
+    III -->|Revenue| IV[Orchestration]
+    IV -->|Registry| V[Logos]
+    V -->|Vitals| VI[Community]
+    VI -->|Feedback| VII[Distribution]
+    VII -->|Reach| VIII[Meta]
+    style V fill:#00bcd4,stroke:#333,stroke-width:4px`}
+      />
+
+      <h2 class="section__heading" data-reveal>Structural Proof</h2>
+      <div class="grid">
+        <div class="card" data-reveal>
+          <h3>Adversarial Extraction</h3>
+          <p>Successful normalization of 50-state public record data schemas through the Ergon data pipeline.</p>
+        </div>
+        <div class="card" data-reveal>
+          <h3>Linguistic Scaling</h3>
+          <p>Processing of 46 canonical works in 15+ languages using the Linguistic Atomization Framework.</p>
+        </div>
+        <div class="card" data-reveal>
+          <h3>Autonomous Governance</h3>
+          <p>18 consecutive days of zero-incident operations under the fully automated quality ratchet system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    border-radius: 8px;
+  }
+  .card h3 {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 1.25rem;
+  }
+</style>

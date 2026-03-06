@@ -1,10 +1,13 @@
 ---
+import { base } from '../utils/paths';
 const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__links">
+      <a href={`${base}roadmap/`}>Roadmap</a>
+      <span class="footer__sep" aria-hidden="true">/</span>
       <a href="https://github.com/meta-organvm" target="_blank" rel="me noopener noreferrer">GitHub</a>
       <span class="footer__sep" aria-hidden="true">/</span>
       <a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>

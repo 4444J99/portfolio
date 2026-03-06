@@ -7,9 +7,18 @@ vi.mock('@astrojs/rss', () => ({
 }));
 
 describe('feed.xml.ts', () => {
-	it('should generate an RSS feed response', () => {
+	it('should generate an RSS feed response with site from context', () => {
 		const context = {
-			site: new URL('https://4444j99.github.io/portfolio/'),
+			site: new URL('https://example.com/'),
+		} as any;
+
+		const response = GET(context);
+		expect(response).toBeInstanceOf(Response);
+	});
+
+	it('should generate an RSS feed response with fallback site', () => {
+		const context = {
+			site: undefined,
 		} as any;
 
 		const response = GET(context);

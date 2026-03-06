@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PERSONAS_PATH = path.join(__dirname, '../src/data/personas.json');
+const ONTOLOGY_PATH = path.join(__dirname, '../src/data/ontology.json');
 
 /**
  * Tactical Tool: Semantic AI Market Fit Check
@@ -20,6 +21,7 @@ async function checkFit() {
 	}
 
 	const personas = JSON.parse(fs.readFileSync(PERSONAS_PATH, 'utf8')).personas;
+	const ontology = JSON.parse(fs.readFileSync(ONTOLOGY_PATH, 'utf8')).mappings;
 	const persona = personas.find((p) => p.id === personaId);
 
 	if (!persona) {
@@ -44,6 +46,9 @@ Candidate Persona: "${persona.title}"
 Core Thesis: "${persona.thesis}"
 Tech Stack: ${persona.stack.join(', ')}
 Featured Projects: ${persona.featured_projects.map((p) => p.slug).join(', ')}
+
+System Ontology (Bridging Humanities & Tech):
+${ontology.map((m) => `- ${m.humanities_concept} -> ${m.technical_abstraction}`).join('\n')}
 
 Target Job Description:
 """
@@ -82,9 +87,11 @@ STRATEGIC ADVICE: [1 sentence of advice on how to tailor the application/resume 
 		console.log(cleanOutput.join('\n'));
 		console.log('--------------------------------\n');
 	} catch (error) {
-		console.error('\n⚠️  AI semantic analysis failed. Falling back to primitive string matching.');
-		// Fallback logic
+		console.error('\n⚠️  AI semantic analysis failed. Falling back to ontological bridge matching.');
+		// Fallback logic using local ontology
 		const results = { matched: [], missing: [], score: 0 };
+		
+		// 1. Direct stack matching
 		persona.stack.forEach((tech) => {
 			if (jobDesc.toLowerCase().includes(tech.toLowerCase())) {
 				results.matched.push(tech);
@@ -92,12 +99,25 @@ STRATEGIC ADVICE: [1 sentence of advice on how to tailor the application/resume 
 				results.missing.push(tech);
 			}
 		});
-		results.score = (results.matched.length / persona.stack.length) * 100;
 
-		console.log('\n--- PRIMITIVE MATCH REPORT ---');
-		console.log(`MATCHED KEYWORDS: ${results.matched.join(', ')}`);
+		// 2. Ontological abstraction matching (Soft Skills / Architectural alignment)
+		const matchedAbstractions = [];
+		ontology.forEach(m => {
+			const techTerms = m.technical_abstraction.split(' & ');
+			techTerms.forEach(term => {
+				if (jobDesc.toLowerCase().includes(term.toLowerCase()) && !matchedAbstractions.includes(term)) {
+					matchedAbstractions.push(term);
+				}
+			});
+		});
+
+		results.score = ((results.matched.length + (matchedAbstractions.length * 0.5)) / persona.stack.length) * 100;
+
+		console.log('\n--- ONTOLOGICAL FALLBACK REPORT ---');
+		console.log(`MATCHED STACK: ${results.matched.join(', ')}`);
+		console.log(`MATCHED ABSTRACTIONS: ${matchedAbstractions.join(', ')}`);
 		console.log(`MISSING KEYWORDS: ${results.missing.join(', ')}`);
-		console.log(`RAW SIGNAL SCORE: ${results.score.toFixed(2)}%`);
+		console.log(`HYBRID SIGNAL SCORE: ${Math.min(results.score, 100).toFixed(2)}%`);
 	}
 }
 

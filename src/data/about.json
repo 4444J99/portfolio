@@ -3,9 +3,9 @@
 	"subtitle": "Eight-Organ Creative-Institutional System",
 	"owner": "@4444j99 / @4444J99",
 	"launch_date": "2026-02-11",
-	"system_summary": "33 SPRINTS COMPLETE \u2014 97 repos (all on GitHub), 87 ACTIVE + 10 ARCHIVED, 36 published essays (~132K words), 33 named sprints in 9 days, 8 flagship repos (5 SUBSTANTIAL, 2 PARTIAL), community health files across 8 orgs, POSSE distribution live (Mastodon + Discord + RSS), Jekyll site with RSS, 77 CI/CD workflows, Astro portfolio site with CMYK design + p5.js animations, 19 curated projects in gallery, 5 application packages, organ-cli tooling, autonomous perception layer (stale-detector, system-pulse, essay-deploy), life-my--midst--in beta-ready (44 tables, 291 tests), ~404K+ total words, full provenance tracking (1,901 files classified), 100% seed.yaml coverage, 31 stars, 6 forks.",
-	"strategic_context": "Meta-system documentation (governance, orchestration, infrastructure) strengthens applications across: (1) AI systems engineering roles at research labs, (2) Creative/technical grants (NSF, NEA, Mellon, Knight Foundation), (3) Technology residencies and fellowships. This registry demonstrates orchestration capacity, architectural reasoning, and systemic sustainability\u2014competitive differentiators in 2026 funding landscape.",
-	"supporting_evidence": "Artists like Julian Oliver, Nicky Case, and Hundred Rabbits (Devine Lu Linvega & Rekka Bellum) treat protocols and governance structures as primary artistic output, demonstrating that small-scale sustainable creative infrastructure with extensive documentation receives institutional recognition (updated per 08-CANONICAL-ACTION-PLAN.md \u00a77). Programs like Knight Foundation Art+Tech Expansion Fund, Processing Foundation Fellowship, Google Creative Fellowship explicitly evaluate infrastructure contribution and organizational capacity.",
+	"system_summary": "33 SPRINTS COMPLETE — 103 repos (94 ACTIVE, 9 ARCHIVED), 48 published essays (~165K words), 33 named sprints, 9 flagship repos, 102 CI/CD workflows, ~410K+ total words, full provenance tracking, 100% seed.yaml coverage. Omega status: 11/17 met.",
+	"strategic_context": "Meta-system documentation (governance, orchestration, infrastructure) strengthens applications across: (1) AI systems engineering roles at research labs, (2) Creative/technical grants (NSF, NEA, Mellon, Knight Foundation), (3) Technology residencies and fellowships. This registry demonstrates orchestration capacity, architectural reasoning, and systemic sustainability—competitive differentiators in 2026 funding landscape.",
+	"supporting_evidence": "Artists like Julian Oliver, Nicky Case, and Hundred Rabbits (Devine Lu Linvega & Rekka Bellum) treat protocols and governance structures as primary artistic output, demonstrating that small-scale sustainable creative infrastructure with extensive documentation receives institutional recognition (updated per 08-CANONICAL-ACTION-PLAN.md §7). Programs like Knight Foundation Art+Tech Expansion Fund, Processing Foundation Fellowship, Google Creative Fellowship explicitly evaluate infrastructure contribution and organizational capacity.",
 	"strategic_opportunity": "Position the eight-organ system as evidence of: (a) production-ready thinking (hiring), (b) long-term digital capacity and sustainability (grants), (c) community contribution and reusable infrastructure (residencies). All organs launch simultaneously to demonstrate integrated systems thinking.",
 	"application_targets": [
 		{
@@ -14,16 +14,16 @@
 		},
 		{
 			"category": "Creative/Technical Grants",
-			"description": "NSF, NEA, Mellon, Knight Foundation \u2014 infrastructure as art"
+			"description": "NSF, NEA, Mellon, Knight Foundation — infrastructure as art"
 		},
 		{
 			"category": "Technology Residencies",
-			"description": "Eyebeam, Recurse Center \u2014 equitable systems, community infrastructure"
+			"description": "Eyebeam, Recurse Center — equitable systems, community infrastructure"
 		},
 		{
 			"category": "Fellowships",
-			"description": "Processing Foundation, Google Creative \u2014 artist-engineer hybrid"
+			"description": "Processing Foundation, Google Creative — artist-engineer hybrid"
 		}
 	],
-	"generated": "2026-02-17T22:00:00.000000+00:00"
+	"generated": "2026-03-06T03:30:57.541Z"
 }

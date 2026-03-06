@@ -128,6 +128,8 @@ function doInitSketch(container: HTMLElement) {
 	const mobileHeight = container.dataset.mobileHeight || '350px';
 
 	if (!sketchId || !sketchModules[sketchId]) {
+		console.error('[sketch] unknown sketch id:', sketchId);
+		showFallback(container, sketchId || 'unknown');
 		activeInits--;
 		processQueue();
 		return;

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-06T01:39:12.855Z",
+  "generated": "2026-03-06T04:23:17.488Z",
   "tests": {
     "total": 289,
     "passed": 289,
@@ -38,10 +38,10 @@
     "githubSource": ".quality/github-advisory-summary.json"
   },
   "coverage": {
-    "statements": 60,
-    "branches": 42,
-    "functions": 51,
-    "lines": 60
+    "statements": 81,
+    "branches": 70,
+    "functions": 70,
+    "lines": 81
   },
   "lighthouse": {
     "performance": 100,
@@ -1076,7 +1076,7 @@
     ]
   },
   "build": {
-    "pages": 15,
+    "pages": 0,
     "bundleFiles": 64
   },
   "sources": {

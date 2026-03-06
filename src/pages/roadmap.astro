@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const roadmapMd = readFileSync(path.join(__dirname, '../../ROADMAP.md'), 'utf8');
+
+// Very simple markdown-to-html transformation for the roadmap
+const roadmapHtml = roadmapMd
+  .replace(/^# (.*$)/gm, '<h1 class="page-title">$1</h1>')
+  .replace(/^## (.*$)/gm, '<h2 class="section__heading">$1</h2>')
+  .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+  .replace(/^- \[x\] (.*$)/gm, '<li class="task--done">✅ $1</li>')
+  .replace(/^- \[ \] (.*$)/gm, '<li class="task--todo">⭕ $1</li>')
+  .replace(/^\* (.*$)/gm, '<li>$1</li>')
+  .replace(/\*\*(.*)\*\*/g, '<strong>$1</strong>')
+  .replace(/\[(.*)\]\((.*)\)/g, '<a href="$2">$1</a>')
+  .replace(/\n\n/g, '<p></p>')
+  .replace(/---/g, '<hr />');
+
+// Wrap groups of <li> in <ul>
+const wrappedHtml = roadmapHtml.replace(/(<li.*<\/li>(\n<li.*<\/li>)*)/g, '<ul>$1</ul>');
+---
+
+<Layout title="Roadmap — Alpha to Omega" description="The architectural and operational path from Ignition to Autonomous Grace.">
+  <section class="section">
+    <div class="container">
+      <div class="roadmap-content" set:html={wrappedHtml}></div>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  .roadmap-content h3 {
+    margin-top: var(--space-xl);
+    color: var(--accent);
+  }
+  .roadmap-content ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .roadmap-content li {
+    margin-bottom: var(--space-xs);
+    line-height: 1.6;
+  }
+  .task--done {
+    color: var(--text-secondary);
+  }
+  .task--todo {
+    font-weight: 600;
+  }
+</style>

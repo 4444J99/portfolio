@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const mentions = [
+	{
+		date: '2026-02-28',
+		outlet: 'LobeHub',
+		title: 'Organic Indexing of ORGAN-IV System Skills',
+		url: null,
+		type: 'Unsolicited Reference'
+	},
+	{
+		date: '2026-02-24',
+		outlet: 'Doris Duke Foundation',
+		title: 'Artists Make Technology Lab Application Submitted',
+		url: 'https://www.dorisduke.org/grants/projects/artists-make-technology-lab',
+		type: 'Grant Submission'
+	}
+];
+---
+
+<Layout title="Press & Recognition — System Citations" description="Public mentions, grant submissions, and external recognition of the ORGANVM system.">
+  <section class="section">
+    <div class="container">
+      <h1 class="page-title">Press & Recognition</h1>
+      <p class="page-sub">
+        Tracking the system's "Reach" (Organ VII) through public citations, grant submissions, and external adoptions.
+      </p>
+
+      <div class="mentions-list">
+        {mentions.map(m => (
+          <div class="mention-item" data-reveal>
+            <div class="mention-meta">
+              <span class="mention-date">{m.date}</span>
+              <span class="mention-type">{m.type}</span>
+            </div>
+            <h3 class="mention-title">
+              {m.url ? <a href={m.url} target="_blank" rel="noopener noreferrer">{m.title}</a> : m.title}
+            </h3>
+            <p class="mention-outlet">{m.outlet}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="press-kit" data-reveal>
+        <h2>Press Resources</h2>
+        <p>Interested in covering the eight-organ system or performing a technical audit?</p>
+        <div class="grid">
+          <a href="/portfolio/docs/social-launch-kit" class="card">
+            <h3>Social Launch Kit</h3>
+            <p>Templates and assets for distribution.</p>
+          </a>
+          <a href="/portfolio/docs/the-operative-handbook" class="card">
+            <h3>Operative Handbook</h3>
+            <p>Full architectural specifications.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .mentions-list {
+    margin: var(--space-2xl) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+  .mention-item {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--space-lg);
+  }
+  .mention-meta {
+    display: flex;
+    gap: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    margin-bottom: var(--space-xs);
+  }
+  .mention-date { color: var(--text-muted); }
+  .mention-type { color: var(--cmyk-cyan); text-transform: uppercase; }
+  .mention-title { margin: 0; font-size: 1.4rem; }
+  .mention-title a { color: inherit; text-decoration: none; }
+  .mention-title a:hover { color: var(--accent); }
+  .mention-outlet { 
+    margin: var(--space-xs) 0 0 0; 
+    font-weight: 600; 
+    color: var(--text-secondary);
+  }
+  .press-kit {
+    margin-top: var(--space-3xl);
+    padding: var(--space-2xl);
+    background: var(--bg-secondary);
+    border-radius: 12px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+  .card h3 { margin-top: 0; color: var(--accent); }
+</style>
