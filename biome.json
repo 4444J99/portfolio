@@ -51,7 +51,7 @@
 	},
 	"overrides": [
 		{
-			"includes": ["src/data/*.json"],
+			"includes": ["src/data/*.json", "scripts/runtime-a11y-routes.json"],
 			"formatter": {
 				"enabled": false
 			}
