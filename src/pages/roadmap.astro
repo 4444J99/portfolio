@@ -18,7 +18,7 @@ const roadmapHtml = roadmapMd
 	.replace(/\*\*(.*)\*\*/g, '<strong>$1</strong>')
 	.replace(/\[(.*)\]\((.*)\)/g, '<a href="$2">$1</a>')
 	.replace(/\n\n/g, '<p></p>')
-	.replace(/---/g, '<hr />');
+	.replace(/---/g, '<hr>');
 
 // Wrap groups of <li> in <ul>
 const wrappedHtml = roadmapHtml.replace(/(<li.*<\/li>(\n<li.*<\/li>)*)/g, '<ul>$1</ul>');
