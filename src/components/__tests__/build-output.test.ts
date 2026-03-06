@@ -7,157 +7,168 @@ const DIST = resolve(process.cwd(), 'dist');
 const SERVICE_WORKER_PATH = resolve(process.cwd(), 'public/sw.js');
 
 function loadPage(path: string) {
-  const file = resolve(DIST, path);
-  if (!existsSync(file)) return null;
-  const html = readFileSync(file, 'utf-8');
-  return cheerio.load(html);
+	// Try direct path first (common for local builds)
+	const file = resolve(DIST, path);
+	if (existsSync(file)) {
+		const html = readFileSync(file, 'utf-8');
+		return cheerio.load(html);
+	}
+
+	// Try with base path prefix (common for CI/production layout expectations)
+	const nestedFile = resolve(DIST, 'portfolio', path);
+	if (existsSync(nestedFile)) {
+		const html = readFileSync(nestedFile, 'utf-8');
+		return cheerio.load(html);
+	}
+
+	return null;
 }
 
 function countHtmlFiles(dir: string): number {
-  let count = 0;
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    const fullPath = join(dir, entry.name);
-    if (entry.isDirectory()) {
-      count += countHtmlFiles(fullPath);
-    } else if (entry.name.endsWith('.html')) {
-      count++;
-    }
-  }
-  return count;
+	let count = 0;
+	for (const entry of readdirSync(dir, { withFileTypes: true })) {
+		const fullPath = join(dir, entry.name);
+		if (entry.isDirectory()) {
+			count += countHtmlFiles(fullPath);
+		} else if (entry.name.endsWith('.html')) {
+			count++;
+		}
+	}
+	return count;
 }
 
 describe('build output', () => {
-  it('dist/ directory exists', () => {
-    expect(existsSync(DIST)).toBe(true);
-  });
+	it('dist/ directory exists', () => {
+		expect(existsSync(DIST)).toBe(true);
+	});
 
-  it('produces at least the baseline HTML page count', () => {
-    expect(countHtmlFiles(DIST)).toBeGreaterThanOrEqual(42);
-  });
+	it('produces at least the baseline HTML page count', () => {
+		expect(countHtmlFiles(DIST)).toBeGreaterThanOrEqual(42);
+	});
 });
 
 describe('service worker contracts', () => {
-  it('precache list includes the 404 fallback route', () => {
-    const sw = readFileSync(SERVICE_WORKER_PATH, 'utf-8');
-    expect(sw).toContain('`${BASE}/404.html`');
-    expect(sw).toContain('caches.match(`${BASE}/404.html`)');
-  });
+	it('precache list includes the 404 fallback route', () => {
+		const sw = readFileSync(SERVICE_WORKER_PATH, 'utf-8');
+		expect(sw).toContain('`${BASE}/404.html`');
+		expect(sw).toContain('caches.match(`${BASE}/404.html`)');
+	});
 });
 
 describe('index page', () => {
-  const $ = loadPage('index.html');
+	const $ = loadPage('index.html');
 
-  it('exists', () => {
-    expect($).not.toBeNull();
-  });
+	it('exists', () => {
+		expect($).not.toBeNull();
+	});
 
-  it('has a <title> tag', () => {
-    expect($!('title').length).toBe(1);
-    expect($!('title').text()).toBeTruthy();
-  });
+	it('has a <title> tag', () => {
+		expect($!('title').length).toBe(1);
+		expect($!('title').text()).toBeTruthy();
+	});
 
-  it('has Open Graph meta tags', () => {
-    expect($!('meta[property="og:title"]').length).toBe(1);
-    expect($!('meta[property="og:description"]').length).toBe(1);
-  });
+	it('has Open Graph meta tags', () => {
+		expect($!('meta[property="og:title"]').length).toBe(1);
+		expect($!('meta[property="og:description"]').length).toBe(1);
+	});
 
-  it('has a <main> element', () => {
-    expect($!('main').length).toBeGreaterThanOrEqual(1);
-  });
+	it('has a <main> element', () => {
+		expect($!('main').length).toBeGreaterThanOrEqual(1);
+	});
 
-  it('has a <nav> or header element', () => {
-    const hasNav = $!('nav').length > 0 || $!('header').length > 0;
-    expect(hasNav).toBe(true);
-  });
+	it('has a <nav> or header element', () => {
+		const hasNav = $!('nav').length > 0 || $!('header').length > 0;
+		expect(hasNav).toBe(true);
+	});
 });
 
 describe('dashboard page', () => {
-  const $ = loadPage('dashboard/index.html');
+	const $ = loadPage('dashboard/index.html');
 
-  it('exists', () => {
-    expect($).not.toBeNull();
-  });
+	it('exists', () => {
+		expect($).not.toBeNull();
+	});
 
-  it('contains system metrics content', () => {
-    const text = $!('body').text();
-    expect(text).toContain('Dashboard');
-  });
+	it('contains system metrics content', () => {
+		const text = $!('body').text();
+		expect(text).toContain('Dashboard');
+	});
 });
 
 describe('project pages', () => {
-  const projectsDir = join(DIST, 'projects');
-  const projectSlugs = existsSync(projectsDir)
-    ? readdirSync(projectsDir, { withFileTypes: true })
-        .filter(d => d.isDirectory())
-        .map(d => d.name)
-    : [];
+	const projectsDir = join(DIST, 'projects');
+	const projectSlugs = existsSync(projectsDir)
+		? readdirSync(projectsDir, { withFileTypes: true })
+				.filter((d) => d.isDirectory())
+				.map((d) => d.name)
+		: [];
 
-  it('has at least 21 project directories', () => {
-    expect(projectSlugs.length).toBeGreaterThanOrEqual(21);
-  });
+	it('has at least 21 project directories', () => {
+		expect(projectSlugs.length).toBeGreaterThanOrEqual(21);
+	});
 
-  for (const slug of projectSlugs) {
-    it(`projects/${slug} exists and has title`, () => {
-      const $ = loadPage(`projects/${slug}/index.html`);
-      expect($).not.toBeNull();
-      expect($!('title').text()).toBeTruthy();
-    });
-  }
+	for (const slug of projectSlugs) {
+		it(`projects/${slug} exists and has title`, () => {
+			const $ = loadPage(`projects/${slug}/index.html`);
+			expect($).not.toBeNull();
+			expect($!('title').text()).toBeTruthy();
+		});
+	}
 
-  it('project pages have article element', () => {
-    const $ = loadPage(`projects/${projectSlugs[0]}/index.html`);
-    expect($).not.toBeNull();
-    expect($!('article').length).toBeGreaterThanOrEqual(1);
-  });
+	it('project pages have article element', () => {
+		const $ = loadPage(`projects/${projectSlugs[0]}/index.html`);
+		expect($).not.toBeNull();
+		expect($!('article').length).toBeGreaterThanOrEqual(1);
+	});
 });
 
 describe('resume page', () => {
-  const $ = loadPage('resume/index.html');
+	const $ = loadPage('resume/index.html');
 
-  it('exists', () => {
-    expect($).not.toBeNull();
-  });
+	it('exists', () => {
+		expect($).not.toBeNull();
+	});
 
-  it('has a <title> containing Resume', () => {
-    expect($!('title').text().toLowerCase()).toContain('resume');
-  });
+	it('has a <title> containing Resume', () => {
+		expect($!('title').text().toLowerCase()).toContain('resume');
+	});
 });
 
 describe('consult page', () => {
-  const $ = loadPage('consult/index.html');
+	const $ = loadPage('consult/index.html');
 
-  it('exists and has form', () => {
-    expect($).not.toBeNull();
-    expect($!('#consult-form').length).toBe(1);
-    expect($!('#challenge').length).toBe(1);
-  });
+	it('exists and has form', () => {
+		expect($).not.toBeNull();
+		expect($!('#consult-form').length).toBe(1);
+		expect($!('#challenge').length).toBe(1);
+	});
 });
 
 describe('404 page', () => {
-  const $ = loadPage('404.html');
+	const $ = loadPage('404.html');
 
-  it('exists', () => {
-    expect($).not.toBeNull();
-  });
+	it('exists', () => {
+		expect($).not.toBeNull();
+	});
 });
 
 describe('HTML structure conventions', () => {
-  const pages = ['index.html', 'about/index.html', 'dashboard/index.html'];
+	const pages = ['index.html', 'about/index.html', 'dashboard/index.html'];
 
-  for (const page of pages) {
-    it(`${page} has lang attribute on <html>`, () => {
-      const $ = loadPage(page);
-      expect($!('html').attr('lang')).toBeTruthy();
-    });
+	for (const page of pages) {
+		it(`${page} has lang attribute on <html>`, () => {
+			const $ = loadPage(page);
+			expect($!('html').attr('lang')).toBeTruthy();
+		});
 
-    it(`${page} has viewport meta tag`, () => {
-      const $ = loadPage(page);
-      expect($!('meta[name="viewport"]').length).toBe(1);
-    });
+		it(`${page} has viewport meta tag`, () => {
+			const $ = loadPage(page);
+			expect($!('meta[name="viewport"]').length).toBe(1);
+		});
 
-    it(`${page} has charset meta tag`, () => {
-      const $ = loadPage(page);
-      expect($!('meta[charset]').length).toBe(1);
-    });
-  }
+		it(`${page} has charset meta tag`, () => {
+			const $ = loadPage(page);
+			expect($!('meta[charset]').length).toBe(1);
+		});
+	}
 });

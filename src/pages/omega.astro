@@ -1,33 +1,55 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import OmegaGalaxy from '../components/galaxy/OmegaGalaxy.astro';
+import Layout from '../layouts/Layout.astro';
 
 interface OmegaData {
-  generated: string;
-  summary: { met: number; in_progress: number; not_started: number; total: number };
-  horizons: Array<{ id: string; name: string; timeline: string; met: number; in_progress: number; not_started: number }>;
-  criteria: Array<{ id: number; criterion: string; measurement: string; horizon: string; status: string; evidence: string; evidenceUrl?: string; target?: string }>;
+	generated: string;
+	summary: { met: number; in_progress: number; not_started: number; total: number };
+	horizons: Array<{
+		id: string;
+		name: string;
+		timeline: string;
+		met: number;
+		in_progress: number;
+		not_started: number;
+	}>;
+	criteria: Array<{
+		id: number;
+		criterion: string;
+		measurement: string;
+		horizon: string;
+		status: string;
+		evidence: string;
+		evidenceUrl?: string;
+		target?: string;
+	}>;
 }
 
-import rawOmegaData from '../data/omega.json' assert { type: 'json' };
-const omegaData = (Array.isArray(rawOmegaData) ? rawOmegaData[0] : rawOmegaData) as OmegaData;
+import omegaDataRaw from '../data/omega.json';
+const omegaData = (Array.isArray(omegaDataRaw) ? omegaDataRaw[0] : omegaDataRaw) as OmegaData;
 
 const { summary, horizons, criteria } = omegaData;
 
 const statusColor = (status: string) => {
-  switch (status) {
-    case 'met': return 'var(--cmyk-cyan, #00bcd4)';
-    case 'in_progress': return 'var(--cmyk-yellow, #ffc107)';
-    default: return 'var(--cmyk-magenta, #e91e63)';
-  }
+	switch (status) {
+		case 'met':
+			return 'var(--cmyk-cyan, #00bcd4)';
+		case 'in_progress':
+			return 'var(--cmyk-yellow, #ffc107)';
+		default:
+			return 'var(--cmyk-magenta, #e91e63)';
+	}
 };
 
 const statusLabel = (status: string) => {
-  switch (status) {
-    case 'met': return 'Met';
-    case 'in_progress': return 'In Progress';
-    default: return 'Not Started';
-  }
+	switch (status) {
+		case 'met':
+			return 'Met';
+		case 'in_progress':
+			return 'In Progress';
+		default:
+			return 'Not Started';
+	}
 };
 ---
 

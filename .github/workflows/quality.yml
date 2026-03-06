@@ -15,117 +15,227 @@ permissions:
   security-events: read
   issues: write
 
+env:
+  QUALITY_PHASE: W10
+
 concurrency:
   group: quality-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build-and-test:
+  security:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-    env:
-      QUALITY_PHASE: W10
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-
       - run: npm ci
-
-      - name: Guard GitHub Pages core drift
-        run: npm run check:github-pages-core
-
-      - name: Dry-run GitHub Pages fallback/stale fixture tests
-        run: npm run test:github-pages-core
-
-      - name: Sync GitHub Pages index
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: npm run sync:github-pages
-
-      - name: Validate GitHub Pages data contract
-        run: npm run validate:github-pages -- --max-age-hours 72 --max-errored 8 --max-unreachable 5
-
-      - name: Emit GitHub Pages telemetry
-        run: npm run telemetry:github-pages
-
-      - name: Evaluate GitHub Pages alert rules
-        if: github.event_name != 'pull_request'
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: npm run alerts:github-pages
-
-      - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
-
-      - name: Policy governance guard
-        if: github.event_name == 'pull_request'
-        env:
-          GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          GITHUB_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-          PR_BODY: ${{ github.event.pull_request.body }}
-        run: node scripts/check-policy-change-governance.mjs --json-out .quality/policy-governance-summary.json
-
-      - name: Security gates (prod + full tree)
+      - name: Security gates
         run: |
           npm run test:security:prod
           npm run test:security
           npm run test:security:github
           npm run test:security:drift
-
-      - name: Quality parity pipeline
-        run: npm run quality:core:no-lh
-
-      - name: Quality summary
+      - name: Upload security artifacts
         if: always()
-        run: npm run quality:summary -- --allow-missing
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-artifacts
+          path: .quality/security-*.json
+          include-hidden-files: true
 
+  lint-and-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck:strict
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Sync Data
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          npm run sync:github-pages
+          npm run sync:vitals
+          npm run sync:omega
+      - name: Build
+        run: npm run build
+      - name: Upload dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-dist
+          path: dist/
+          retention-days: 1
+      - name: Upload data
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-data
+          path: src/data/
+          retention-days: 1
+
+  test-unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Unit Tests & Coverage
+        run: npm run test:coverage
       - name: Upload coverage
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage/
-          retention-days: 14
 
-      - name: Upload Lighthouse reports
+  test-a11y:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: build-dist
+          path: dist
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: A11y Static Audit
+        run: npm run test:a11y
+      - name: A11y Runtime Audit
+        run: npm run test:a11y:runtime
+      - name: A11y Coverage
+        run: npm run test:a11y:coverage
+      - name: Upload a11y artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: lighthouse-reports
-          path: .lighthouseci/
-          include-hidden-files: true
-          retention-days: 14
+          name: a11y-artifacts
+          path: .a11y/
 
-      - name: Upload quality artifacts
+  test-e2e:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: build-dist
+          path: dist
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: E2E Smoke Tests
+        run: npm run test:e2e:smoke
+      - name: Runtime Errors
+        run: npm run test:runtime:errors
+      - name: Validate Build Links
+        run: npm run validate
+      - name: Upload e2e artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: quality-artifacts
+          name: e2e-artifacts
+          path: .quality/e2e-*.json
+
+  performance:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: build-dist
+          path: dist
+      - name: Collect Perf Metrics
+        run: npm run collect:perf
+      - name: Perf Budgets
+        run: npm run test:perf:budgets
+      - name: Lighthouse (no-upload)
+        run: npm run lighthouse
+      - name: Upload perf artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-artifacts
           path: |
-            .quality/
-            .a11y/
-            src/data/quality-metrics.json
-          include-hidden-files: true
-          retention-days: 14
+            .quality/perf-*.json
+            .lighthouseci/
 
-      - name: Upload security artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
+  finalize:
+    needs: [security, lint-and-typecheck, test-unit, test-a11y, test-e2e, performance]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          name: security-artifacts
-          path: |
-            .quality/security-summary.json
-            .quality/security-summary-prod.json
-            .quality/security-audit-raw.json
-            .quality/security-audit-prod-raw.json
-            .quality/github-advisory-summary.json
-            .quality/security-drift-summary.json
-            .quality/green-run-history.json
-          include-hidden-files: true
-          retention-days: 14
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Consolidate artifacts
+        run: |
+          mkdir -p .quality .a11y src/data
+          cp -r artifacts/security-artifacts/* .quality/ 2>/dev/null || true
+          cp -r artifacts/e2e-artifacts/* .quality/ 2>/dev/null || true
+          cp -r artifacts/perf-artifacts/.quality/* .quality/ 2>/dev/null || true
+          cp -r artifacts/a11y-artifacts/* .a11y/ 2>/dev/null || true
+          cp -r artifacts/built-data/* src/data/ 2>/dev/null || true
+      - name: Quality summary
+        run: npm run quality:summary -- --allow-missing
+      - name: Generate Badges
+        run: npm run generate-badges
+      - name: Quality Ledger
+        run: npm run quality:ledger
+      - name: Check Overall Status
+        run: |
+          if [[ "${{ needs.security.result }}" != "success" ]] || \
+             [[ "${{ needs.lint-and-typecheck.result }}" != "success" ]] || \
+             [[ "${{ needs.test-unit.result }}" != "success" ]] || \
+             [[ "${{ needs.test-a11y.result }}" != "success" ]] || \
+             [[ "${{ needs.test-e2e.result }}" != "success" ]] || \
+             [[ "${{ needs.performance.result }}" != "success" ]]; then
+            echo "One or more quality gates failed."
+            exit 1
+          fi

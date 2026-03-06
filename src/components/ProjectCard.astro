@@ -1,19 +1,31 @@
 ---
 interface Props {
-  title: string;
-  tagline: string;
-  description: string;
-  href: string;
-  tags: string[];
-  number: number;
-  featured?: boolean;
-  skills?: string[];
-  organ?: string;
-  'data-skills'?: string;
-  'data-tags'?: string;
+	title: string;
+	tagline: string;
+	description: string;
+	href: string;
+	tags: string[];
+	number: number;
+	featured?: boolean;
+	skills?: string[];
+	organ?: string;
+	'data-skills'?: string;
+	'data-tags'?: string;
 }
 
-const { title, tagline, description, href, tags, number, featured, skills = [], organ, 'data-skills': dataSkills, 'data-tags': dataTags } = Astro.props;
+const {
+	title,
+	tagline,
+	description,
+	href,
+	tags,
+	number,
+	featured,
+	skills = [],
+	organ,
+	'data-skills': dataSkills,
+	'data-tags': dataTags,
+} = Astro.props;
 
 // Derive slug from href for named view transition
 const slug = href.replace(/\/$/, '').split('/').pop();

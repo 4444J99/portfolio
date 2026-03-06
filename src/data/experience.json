@@ -1,69 +1,69 @@
 {
-  "history": [
-    {
-      "role": "Independent Creative Technologist",
-      "date": "2021 — Present",
-      "description": "Designed and launched the eight-organ orchestration system coordinating 91 repositories across 8 GitHub organizations. Built recursive-engine (1,254 tests, 85% coverage) — a symbolic operating system translating epistemological frameworks into executable Python. Developed generative art/music systems and AI-conductor workflow."
-    },
-    {
-      "role": "Digital Marketing Manager",
-      "company": "Miami Dade College Foundation",
-      "date": "2023 — 2024",
-      "highlights": [
-        "Designed and executed digital campaigns increasing donor engagement by 32%.",
-        "Rebuilt foundation website — 38% traffic growth, 22% improvement in donation conversions.",
-        "Produced multimedia storytelling content driving 28% increase in click-through rates.",
-        "Developed social media strategy boosting engagement rates across platforms by 23%."
-      ]
-    },
-    {
-      "role": "Multimedia Specialist & Lead Developer",
-      "company": "AJP Media Arts",
-      "date": "2011 — Present",
-      "highlights": [
-        "Architected and deployed video, audio, and visual systems achieving 17.5M+ views and $2M in revenue.",
-        "Integrated high-performance SEO and paid media strategies achieving 290% ROI.",
-        "Developed and managed client web infrastructure with 42% engagement increase.",
-        "Engineered intuitive UI/UX patterns — 26% satisfaction increase, 35% retention improvement."
-      ]
-    },
-    {
-      "role": "Instructor (Systems & Rhetoric)",
-      "company": "Various Institutions (MDC, FAU, Nova)",
-      "date": "2015 — Present",
-      "highlights": [
-        "Designed and delivered 100+ courses to 2,000+ students, applying UX principles to pedagogical architecture.",
-        "Translated complex theoretical frameworks into actionable learning protocols with a 92% approval rating.",
-        "Optimized student retention by 24% through performance-data-driven instructional iterations."
-      ]
-    },
-    {
-      "role": "Project Manager",
-      "company": "Majestic Design",
-      "date": "2007 — 2018",
-      "highlights": [
-        "Led 50 commercial and residential construction projects from concept to completion.",
-        "90% on-time and within budget delivery.",
-        "Collaborated with marketing teams on 3D renderings and video walkthroughs."
-      ]
-    }
-  ],
-  "education": [
-    {
-      "degree": "M.F.A. Creative Writing",
-      "institution": "Florida Atlantic University",
-      "date": "2015 — 2018"
-    },
-    {
-      "degree": "B.A. English Literature",
-      "institution": "CUNY College of Staten Island",
-      "date": "2010 — 2014"
-    }
-  ],
-  "certifications": [
-    { "name": "Full-Stack Developer", "issuer": "Meta", "date": "2023 — 2024" },
-    { "name": "UX Design", "issuer": "Google", "date": "2022 — 2023" },
-    { "name": "Digital Marketing & E-commerce", "issuer": "Google", "date": "2022 — 2023" },
-    { "name": "Project Management", "issuer": "Google", "date": "2022 — 2023" }
-  ]
+	"history": [
+		{
+			"role": "Independent Creative Technologist",
+			"date": "2021 — Present",
+			"description": "Designed and launched the eight-organ orchestration system coordinating 91 repositories across 8 GitHub organizations. Built recursive-engine (1,254 tests, 85% coverage) — a symbolic operating system translating epistemological frameworks into executable Python. Developed generative art/music systems and AI-conductor workflow."
+		},
+		{
+			"role": "Digital Marketing Manager",
+			"company": "Miami Dade College Foundation",
+			"date": "2023 — 2024",
+			"highlights": [
+				"Designed and executed digital campaigns increasing donor engagement by 32%.",
+				"Rebuilt foundation website — 38% traffic growth, 22% improvement in donation conversions.",
+				"Produced multimedia storytelling content driving 28% increase in click-through rates.",
+				"Developed social media strategy boosting engagement rates across platforms by 23%."
+			]
+		},
+		{
+			"role": "Multimedia Specialist & Lead Developer",
+			"company": "AJP Media Arts",
+			"date": "2011 — Present",
+			"highlights": [
+				"Architected and deployed video, audio, and visual systems achieving 17.5M+ views and $2M in revenue.",
+				"Integrated high-performance SEO and paid media strategies achieving 290% ROI.",
+				"Developed and managed client web infrastructure with 42% engagement increase.",
+				"Engineered intuitive UI/UX patterns — 26% satisfaction increase, 35% retention improvement."
+			]
+		},
+		{
+			"role": "Instructor (Systems & Rhetoric)",
+			"company": "Various Institutions (MDC, FAU, Nova)",
+			"date": "2015 — Present",
+			"highlights": [
+				"Designed and delivered 100+ courses to 2,000+ students, applying UX principles to pedagogical architecture.",
+				"Translated complex theoretical frameworks into actionable learning protocols with a 92% approval rating.",
+				"Optimized student retention by 24% through performance-data-driven instructional iterations."
+			]
+		},
+		{
+			"role": "Project Manager",
+			"company": "Majestic Design",
+			"date": "2007 — 2018",
+			"highlights": [
+				"Led 50 commercial and residential construction projects from concept to completion.",
+				"90% on-time and within budget delivery.",
+				"Collaborated with marketing teams on 3D renderings and video walkthroughs."
+			]
+		}
+	],
+	"education": [
+		{
+			"degree": "M.F.A. Creative Writing",
+			"institution": "Florida Atlantic University",
+			"date": "2015 — 2018"
+		},
+		{
+			"degree": "B.A. English Literature",
+			"institution": "CUNY College of Staten Island",
+			"date": "2010 — 2014"
+		}
+	],
+	"certifications": [
+		{ "name": "Full-Stack Developer", "issuer": "Meta", "date": "2023 — 2024" },
+		{ "name": "UX Design", "issuer": "Google", "date": "2022 — 2023" },
+		{ "name": "Digital Marketing & E-commerce", "issuer": "Google", "date": "2022 — 2023" },
+		{ "name": "Project Management", "issuer": "Google", "date": "2022 — 2023" }
+	]
 }

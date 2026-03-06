@@ -1,29 +1,29 @@
 {
-  "name": "@4444j99/quality-ratchet-kit",
-  "version": "0.1.0",
-  "description": "A reusable quality ratchet toolkit for enforcing progressive test and performance thresholds",
-  "author": "Anthony James Padavano",
-  "license": "MIT",
-  "keywords": [
-    "quality",
-    "ratchet",
-    "testing",
-    "metrics",
-    "ci"
-  ],
-  "type": "module",
-  "private": true,
-  "exports": {
-    ".": {
-      "import": "./src/index.mjs"
-    }
-  },
-  "bin": {
-    "check-quality-deltas": "./cli/check-quality-deltas.mjs",
-    "verify-quality-contracts": "./cli/verify-quality-contracts.mjs",
-    "check-bundle-budgets": "./cli/check-bundle-budgets.mjs"
-  },
-  "scripts": {
-    "test": "node --test test/ratchet-kit.test.mjs"
-  }
+	"name": "@4444j99/quality-ratchet-kit",
+	"version": "0.1.0",
+	"description": "A reusable quality ratchet toolkit for enforcing progressive test and performance thresholds",
+	"author": "Anthony James Padavano",
+	"license": "MIT",
+	"keywords": [
+		"quality",
+		"ratchet",
+		"testing",
+		"metrics",
+		"ci"
+	],
+	"type": "module",
+	"private": true,
+	"exports": {
+		".": {
+			"import": "./src/index.mjs"
+		}
+	},
+	"bin": {
+		"check-quality-deltas": "./cli/check-quality-deltas.mjs",
+		"verify-quality-contracts": "./cli/verify-quality-contracts.mjs",
+		"check-bundle-budgets": "./cli/check-bundle-budgets.mjs"
+	},
+	"scripts": {
+		"test": "node --test test/ratchet-kit.test.mjs"
+	}
 }

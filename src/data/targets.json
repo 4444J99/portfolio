@@ -1,60 +1,49 @@
 {
-  "targets": [
-    {
-      "slug": "palantir",
-      "company": "Palantir",
-      "role": "Principal Systems Engineer",
-      "tier": "Strategic",
-      "channel": "Direct",
-      "persona_id": "ai-systems-engineer",
-      "keyword_focus": [
-        "Architecture",
-        "System Design"
-      ],
-      "intro": "Palantir builds the operating system for decisions at civilizational scale. My work on Agentic Titan — a polymorphic orchestration framework with 9 communication topologies, 22 agent archetypes, and mandatory safety sandboxing — demonstrates the exact architectural discipline required to build reliable systems where autonomous agents must operate within strict governance bounds. I've managed the end-to-end lifecycle of a 91-repository ecosystem with automated dependency validation and machine-readable promotion criteria, proving I can ship complex infrastructure at the intersection of AI autonomy and institutional trust."
-    },
-    {
-      "slug": "openai",
-      "company": "OpenAI",
-      "role": "Staff Systems Architect",
-      "tier": "Strategic",
-      "channel": "Direct",
-      "persona_id": "systems-architect",
-      "keyword_focus": [
-        "Architecture",
-        "System Design"
-      ],
-      "intro": "OpenAI is defining the frontier of what AI systems can do; my focus is ensuring that frontier is architecturally sound. I've built a symbolic OS with a custom DSL and interpreter (85% coverage across 1,254 tests), engineered the governance layer for a 91-repo ecosystem with zero back-edge violations, and designed hexagonal architectures that cleanly separate domain logic from infrastructure concerns. My background in systems thinking — from Terraform-managed data pipelines to multi-agent coordination frameworks — maps directly to the challenge of building reliable, scalable infrastructure for models that are growing faster than the systems that serve them."
-    },
-    {
-      "slug": "anthropic",
-      "company": "Anthropic",
-      "role": "Prompt Engineer / Member of Technical Staff",
-      "tier": "Staff",
-      "channel": "Cold (LinkedIn Outreach)",
-      "persona_id": "ai-systems-engineer",
-      "keyword_focus": [
-        "Safety Invariants",
-        "Orchestration",
-        "Model-Agnostic",
-        "Constitutional AI"
-      ],
-      "intro": "Anthropic's focus on safe, steerable AI aligns directly with my work on Agentic Titan's safety invariants. I don't just prompt models; I build the orchestration machinery that ensures they operate within constitutional bounds at scale. My work on the Eight-Organ System demonstrates the capacity to manage complex, self-governing technical ecosystems."
-    },
-    {
-      "slug": "vercel",
-      "company": "Vercel",
-      "role": "Product Engineer (Platform)",
-      "tier": "Senior",
-      "channel": "Direct Application",
-      "persona_id": "systems-architect",
-      "keyword_focus": [
-        "RSC",
-        "Hexagonal Architecture",
-        "Next.js 16",
-        "Platform Infrastructure"
-      ],
-      "intro": "Vercel defines the modern web. My experience building 'in-midst-my-life' (Next.js 16 + RSC) and orchestrating 91 repos proves I understand the platform depth required to build tools for other developers. I specialize in the kind of high-reliability, hexagonal architecture that platform engineering demands."
-    }
-  ]
+	"targets": [
+		{
+			"slug": "palantir",
+			"company": "Palantir",
+			"role": "Principal Systems Engineer",
+			"tier": "Strategic",
+			"channel": "Direct",
+			"persona_id": "ai-systems-engineer",
+			"keyword_focus": ["Architecture", "System Design"],
+			"intro": "Palantir builds the operating system for decisions at civilizational scale. My work on Agentic Titan — a polymorphic orchestration framework with 9 communication topologies, 22 agent archetypes, and mandatory safety sandboxing — demonstrates the exact architectural discipline required to build reliable systems where autonomous agents must operate within strict governance bounds. I've managed the end-to-end lifecycle of a 91-repository ecosystem with automated dependency validation and machine-readable promotion criteria, proving I can ship complex infrastructure at the intersection of AI autonomy and institutional trust."
+		},
+		{
+			"slug": "openai",
+			"company": "OpenAI",
+			"role": "Staff Systems Architect",
+			"tier": "Strategic",
+			"channel": "Direct",
+			"persona_id": "systems-architect",
+			"keyword_focus": ["Architecture", "System Design"],
+			"intro": "OpenAI is defining the frontier of what AI systems can do; my focus is ensuring that frontier is architecturally sound. I've built a symbolic OS with a custom DSL and interpreter (85% coverage across 1,254 tests), engineered the governance layer for a 91-repo ecosystem with zero back-edge violations, and designed hexagonal architectures that cleanly separate domain logic from infrastructure concerns. My background in systems thinking — from Terraform-managed data pipelines to multi-agent coordination frameworks — maps directly to the challenge of building reliable, scalable infrastructure for models that are growing faster than the systems that serve them."
+		},
+		{
+			"slug": "anthropic",
+			"company": "Anthropic",
+			"role": "Prompt Engineer / Member of Technical Staff",
+			"tier": "Staff",
+			"channel": "Cold (LinkedIn Outreach)",
+			"persona_id": "ai-systems-engineer",
+			"keyword_focus": [
+				"Safety Invariants",
+				"Orchestration",
+				"Model-Agnostic",
+				"Constitutional AI"
+			],
+			"intro": "Anthropic's focus on safe, steerable AI aligns directly with my work on Agentic Titan's safety invariants. I don't just prompt models; I build the orchestration machinery that ensures they operate within constitutional bounds at scale. My work on the Eight-Organ System demonstrates the capacity to manage complex, self-governing technical ecosystems."
+		},
+		{
+			"slug": "vercel",
+			"company": "Vercel",
+			"role": "Product Engineer (Platform)",
+			"tier": "Senior",
+			"channel": "Direct Application",
+			"persona_id": "systems-architect",
+			"keyword_focus": ["RSC", "Hexagonal Architecture", "Next.js 16", "Platform Infrastructure"],
+			"intro": "Vercel defines the modern web. My experience building 'in-midst-my-life' (Next.js 16 + RSC) and orchestrating 91 repos proves I understand the platform depth required to build tools for other developers. I specialize in the kind of high-reliability, hexagonal architecture that platform engineering demands."
+		}
+	]
 }

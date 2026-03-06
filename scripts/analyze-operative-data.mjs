@@ -6,66 +6,67 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const LOG_PATH = path.join(__dirname, '../src/data/operative-log.json');
 
 async function analyze() {
-  console.log('🧐 Analyzing Operative Intelligence...');
-  
-  const data = JSON.parse(fs.readFileSync(LOG_PATH, 'utf8'));
-  const strikes = data.strikes;
+	console.log('🧐 Analyzing Operative Intelligence...');
 
-  // Reset performance metrics
-  const perf = {
-    "ai-systems-engineer": { "sent": 0, "replies": 0, "interviews": 0 },
-    "systems-architect": { "sent": 0, "replies": 0, "interviews": 0 },
-    "creative-technologist": { "sent": 0, "replies": 0, "interviews": 0 },
-    "technical-pm": { "sent": 0, "replies": 0, "interviews": 0 }
-  };
+	const data = JSON.parse(fs.readFileSync(LOG_PATH, 'utf8'));
+	const strikes = data.strikes;
 
-  // 1. Persona Analysis
-  strikes.forEach(s => {
-    if (perf[s.persona]) {
-      perf[s.persona].sent++;
-      if (s.response_received) perf[s.persona].replies++;
-      if (s.status === 'INTERVIEW') perf[s.persona].interviews++;
-    }
-  });
+	// Reset performance metrics
+	const perf = {
+		'ai-systems-engineer': { sent: 0, replies: 0, interviews: 0 },
+		'systems-architect': { sent: 0, replies: 0, interviews: 0 },
+		'creative-technologist': { sent: 0, replies: 0, interviews: 0 },
+		'technical-pm': { sent: 0, replies: 0, interviews: 0 },
+	};
 
-  // 2. Channel & Tier Analysis
-  const channels = {};
-  const tiers = {};
+	// 1. Persona Analysis
+	strikes.forEach((s) => {
+		if (perf[s.persona]) {
+			perf[s.persona].sent++;
+			if (s.response_received) perf[s.persona].replies++;
+			if (s.status === 'INTERVIEW') perf[s.persona].interviews++;
+		}
+	});
 
-  strikes.forEach(s => {
-    // Channel Analysis
-    const channel = s.channel || 'Unknown';
-    if (!channels[channel]) channels[channel] = { sent: 0, replies: 0 };
-    channels[channel].sent++;
-    if (s.response_received) channels[channel].replies++;
+	// 2. Channel & Tier Analysis
+	const channels = {};
+	const tiers = {};
 
-    // Tier Analysis
-    const tier = s.tier || 'Unknown';
-    if (!tiers[tier]) tiers[tier] = { sent: 0, replies: 0 };
-    tiers[tier].sent++;
-    if (s.response_received) tiers[tier].replies++;
-  });
+	strikes.forEach((s) => {
+		// Channel Analysis
+		const channel = s.channel || 'Unknown';
+		if (!channels[channel]) channels[channel] = { sent: 0, replies: 0 };
+		channels[channel].sent++;
+		if (s.response_received) channels[channel].replies++;
 
-  data.persona_performance = perf;
-  data.channel_performance = channels;
-  data.tier_performance = tiers;
-  data.global_stats.total_strikes = strikes.length;
-  data.global_stats.conversion_rate = strikes.length > 0 
-    ? (strikes.filter(s => s.response_received).length / strikes.length) * 100 
-    : 0;
+		// Tier Analysis
+		const tier = s.tier || 'Unknown';
+		if (!tiers[tier]) tiers[tier] = { sent: 0, replies: 0 };
+		tiers[tier].sent++;
+		if (s.response_received) tiers[tier].replies++;
+	});
 
-  fs.writeFileSync(LOG_PATH, JSON.stringify(data, null, 2));
-  
-  console.log('\n--- PERSONA PERFORMANCE ---');
-  console.table(perf);
+	data.persona_performance = perf;
+	data.channel_performance = channels;
+	data.tier_performance = tiers;
+	data.global_stats.total_strikes = strikes.length;
+	data.global_stats.conversion_rate =
+		strikes.length > 0
+			? (strikes.filter((s) => s.response_received).length / strikes.length) * 100
+			: 0;
 
-  console.log('\n--- CHANNEL PERFORMANCE ---');
-  console.table(channels);
+	fs.writeFileSync(LOG_PATH, JSON.stringify(data, null, 2));
 
-  console.log('\n--- TIER PERFORMANCE ---');
-  console.table(tiers);
+	console.log('\n--- PERSONA PERFORMANCE ---');
+	console.table(perf);
 
-  console.log(`\n🚀 Global Conversion Rate: ${data.global_stats.conversion_rate.toFixed(2)}%`);
+	console.log('\n--- CHANNEL PERFORMANCE ---');
+	console.table(channels);
+
+	console.log('\n--- TIER PERFORMANCE ---');
+	console.table(tiers);
+
+	console.log(`\n🚀 Global Conversion Rate: ${data.global_stats.conversion_rate.toFixed(2)}%`);
 }
 
 analyze().catch(console.error);

@@ -1,67 +1,79 @@
 ---
-import Search from './Search.astro';
 import { base } from '../utils/paths';
+import Search from './Search.astro';
 
 interface NavItem {
-  label: string;
-  href: string;
-  external?: boolean;
+	label: string;
+	href: string;
+	external?: boolean;
 }
 
 interface NavGroup {
-  label: string;
-  items: NavItem[];
+	label: string;
+	items: NavItem[];
 }
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 function isActive(href: string): boolean {
-  if (href.includes('#') || href.startsWith('mailto:') || href.startsWith('http')) return false;
-  const normalized = href.replace(/\/$/, '') || '/';
-  return currentPath === normalized;
+	if (href.includes('#') || href.startsWith('mailto:') || href.startsWith('http')) return false;
+	const normalized = href.replace(/\/$/, '') || '/';
+	return currentPath === normalized;
 }
 
 function groupContainsActive(group: NavGroup): boolean {
-  return group.items.some(item => isActive(item.href));
+	return group.items.some((item) => isActive(item.href));
 }
 
 const navGroups: NavGroup[] = [
-  {
-    label: 'Work',
-    items: [
-      { label: 'Projects', href: `${base}#work` },
-      { label: 'Resume', href: `${base}resume/` },
-      { label: 'Dashboard', href: `${base}dashboard/` },
-      { label: 'Products', href: `${base}products/` },
-    ],
-  },
-  {
-    label: 'Explore',
-    items: [
-      { label: 'Gallery', href: `${base}gallery/` },
-      { label: 'Logos', href: `${base}logos/` },
-      { label: 'Philosophy', href: `${base}philosophy/` },
-      { label: 'Architecture', href: `${base}architecture/` },
-      { label: 'Omega', href: `${base}omega/` },
-    ],
-  },
-  {
-    label: 'About',
-    items: [
-      { label: 'About', href: `${base}about/` },
-      { label: 'Community', href: `${base}community/` },
-      { label: 'Consult', href: `${base}consult/` },
-      { label: 'GitHub Pages', href: `${base}github-pages/` },
-    ],
-  },
-  {
-    label: 'Connect',
-    items: [
-      { label: 'Contact', href: 'mailto:padavano.anthony@gmail.com' },
-      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/anthony-james-padavano-98a40a186/', external: true },
-      { label: 'GitHub', href: 'https://github.com/4444j99', external: true },
-    ],
-  },
+	{
+		label: 'Work',
+		items: [
+			{ label: 'Projects', href: `${base}#work` },
+			{ label: 'Resume', href: `${base}resume/` },
+			{ label: 'Dashboard', href: `${base}dashboard/` },
+			{ label: 'Products', href: `${base}products/` },
+		],
+	},
+	{
+		label: 'Explore',
+		items: [
+			{ label: 'Gallery', href: `${base}gallery/` },
+			{ label: 'Logos', href: `${base}logos/` },
+			{ label: 'Philosophy', href: `${base}philosophy/` },
+			{ label: 'Architecture', href: `${base}architecture/` },
+			{ label: 'Omega', href: `${base}omega/` },
+		],
+	},
+	{
+		label: 'Docs',
+		items: [
+			{ label: 'Operative Handbook', href: 'https://github.com/4444j99/portfolio/blob/main/docs/the-operative-handbook.md', external: true },
+			{ label: 'Evaluation to Growth', href: 'https://github.com/4444j99/portfolio/blob/main/docs/evaluation-to-growth-report-v2.md', external: true },
+			{ label: 'Social Launch Kit', href: 'https://github.com/4444j99/portfolio/blob/main/docs/social-launch-kit.md', external: true },
+		],
+	},
+	{
+		label: 'About',
+		items: [
+			{ label: 'About', href: `${base}about/` },
+			{ label: 'Community', href: `${base}community/` },
+			{ label: 'Consult', href: `${base}consult/` },
+			{ label: 'GitHub Pages', href: `${base}github-pages/` },
+		],
+	},
+	{
+		label: 'Connect',
+		items: [
+			{ label: 'Contact', href: 'mailto:padavano.anthony@gmail.com' },
+			{
+				label: 'LinkedIn',
+				href: 'https://www.linkedin.com/in/anthony-james-padavano-98a40a186/',
+				external: true,
+			},
+			{ label: 'GitHub', href: 'https://github.com/4444j99', external: true },
+		],
+	},
 ];
 ---
 

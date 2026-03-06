@@ -1,24 +1,23 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SketchContainer from '../components/sketches/SketchContainer.astro';
 import ChartContainer from '../components/charts/ChartContainer.astro';
-import StatGrid from '../components/StatGrid.astro';
+import FlagshipTable from '../components/dashboard/FlagshipTable.astro';
+import OrganStatus from '../components/dashboard/OrganStatus.astro';
+import PraxisTargets from '../components/dashboard/PraxisTargets.astro';
 import QualityGates from '../components/dashboard/QualityGates.astro';
 import QualityScoreboard from '../components/dashboard/QualityScoreboard.astro';
-import OrganStatus from '../components/dashboard/OrganStatus.astro';
-import SprintTimeline from '../components/dashboard/SprintTimeline.astro';
-import PraxisTargets from '../components/dashboard/PraxisTargets.astro';
-import FlagshipTable from '../components/dashboard/FlagshipTable.astro';
-import StrikeLog from '../components/dashboard/StrikeLog.astro';
 import ScoutTriage from '../components/dashboard/ScoutTriage.astro';
+import SprintTimeline from '../components/dashboard/SprintTimeline.astro';
+import StrikeLog from '../components/dashboard/StrikeLog.astro';
 import WorkspaceHealth from '../components/dashboard/WorkspaceHealth.astro';
-
-import type { SystemMetrics, Organ, PraxisTarget, QualityMetrics } from '../types/data';
+import StatGrid from '../components/StatGrid.astro';
+import SketchContainer from '../components/sketches/SketchContainer.astro';
+import graphData from '../data/graph.json';
+import { organColors } from '../data/organ-colors';
+import qualityData from '../data/quality-metrics.json';
 import metrics from '../data/system-metrics.json';
 import vitals from '../data/vitals.json';
-import graphData from '../data/graph.json';
-import qualityData from '../data/quality-metrics.json';
-import { organColors } from '../data/organ-colors';
+import Layout from '../layouts/Layout.astro';
+import type { Organ, PraxisTarget, QualityMetrics, SystemMetrics } from '../types/data';
 import { base } from '../utils/paths';
 
 const quality = qualityData as QualityMetrics;
@@ -29,37 +28,41 @@ const organNames = Object.keys(typedMetrics.registry.organs);
 const repoCounts = Object.values(typedMetrics.registry.organs).map((o: Organ) => o.total_repos);
 
 const organChartData = {
-  organs: Object.entries(typedMetrics.registry.organs).map(([key, organ]: [string, Organ]) => ({
-    key,
-    name: organ.name,
-    total_repos: organ.total_repos,
-    ci_coverage: organ.ci_coverage,
-  })),
+	organs: Object.entries(typedMetrics.registry.organs).map(([key, organ]: [string, Organ]) => ({
+		key,
+		name: organ.name,
+		total_repos: organ.total_repos,
+		ci_coverage: organ.ci_coverage,
+	})),
 };
 
 const classificationChartData = {
-  classifications: typedMetrics.flagship_vivification?.classifications || {},
-  total: typedMetrics.flagship_vivification?.total_audited || 0,
+	classifications: typedMetrics.flagship_vivification?.classifications || {},
+	total: typedMetrics.flagship_vivification?.total_audited || 0,
 };
 
 const sprintChartData = { sprints: typedMetrics.sprint_history || [] };
 
 const treemapData = {
-  organs: Object.entries(typedMetrics.registry?.organs || {}).map(([key, organ]: [string, Organ]) => ({
-    key,
-    name: organ.name,
-    total_repos: organ.total_repos,
-  })),
+	organs: Object.entries(typedMetrics.registry?.organs || {}).map(
+		([key, organ]: [string, Organ]) => ({
+			key,
+			name: organ.name,
+			total_repos: organ.total_repos,
+		}),
+	),
 };
 
 const praxisChartData = {
-  targets: Object.entries(typedMetrics.praxis_targets || {}).map(([key, target]: [string, PraxisTarget]) => ({
-    key,
-    label: key.replace(/_/g, ' '),
-    current: String(target.current).replace(/[^0-9.]/g, '') || '0',
-    target: String(target.target).replace(/[^0-9.]/g, '') || '1',
-    met: !!target.met,
-  })),
+	targets: Object.entries(typedMetrics.praxis_targets || {}).map(
+		([key, target]: [string, PraxisTarget]) => ({
+			key,
+			label: key.replace(/_/g, ' '),
+			current: String(target.current).replace(/[^0-9.]/g, '') || '0',
+			target: String(target.target).replace(/[^0-9.]/g, '') || '1',
+			met: !!target.met,
+		}),
+	),
 };
 
 const flagshipChartData = { repos: typedMetrics.flagship_vivification?.repos || [] };

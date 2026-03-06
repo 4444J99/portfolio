@@ -2,32 +2,33 @@
 import ProjectCard from '../ProjectCard.astro';
 
 interface ResolvedProject {
-  title: string;
-  tagline: string;
-  description: string;
-  slug: string;
-  href: string;
-  tags: string[];
-  skills: string[];
-  number: number;
+	title: string;
+	tagline: string;
+	description: string;
+	slug: string;
+	href: string;
+	tags: string[];
+	skills: string[];
+	number: number;
 }
 
 interface ResolvedGroup {
-  organ: string;
-  name: string;
-  domain: string;
-  projects: ResolvedProject[];
+	organ: string;
+	name: string;
+	domain: string;
+	projects: ResolvedProject[];
 }
 
 interface Props {
-  resolvedGroups: ResolvedGroup[];
-  skillFilters: string[];
-  categoryFilters: string[];
-  featuredNumbers: Set<number>;
-  organColorMap: Record<string, string>;
+	resolvedGroups: ResolvedGroup[];
+	skillFilters: string[];
+	categoryFilters: string[];
+	featuredNumbers: Set<number>;
+	organColorMap: Record<string, string>;
 }
 
-const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organColorMap } = Astro.props;
+const { resolvedGroups, skillFilters, categoryFilters, featuredNumbers, organColorMap } =
+	Astro.props;
 ---
 
 <section class="section" id="work">

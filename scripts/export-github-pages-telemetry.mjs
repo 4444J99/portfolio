@@ -12,10 +12,10 @@ const maxErrored = Number.parseInt(parseOption('max-errored', '8'), 10);
 const maxUnreachable = Number.parseInt(parseOption('max-unreachable', '5'), 10);
 
 const telemetry = buildGitHubPagesTelemetry({
-  inputPath,
-  maxAgeHours: Number.isFinite(maxAgeHours) ? maxAgeHours : 72,
-  maxErrored: Number.isFinite(maxErrored) ? maxErrored : 8,
-  maxUnreachable: Number.isFinite(maxUnreachable) ? maxUnreachable : 5,
+	inputPath,
+	maxAgeHours: Number.isFinite(maxAgeHours) ? maxAgeHours : 72,
+	maxErrored: Number.isFinite(maxErrored) ? maxErrored : 8,
+	maxUnreachable: Number.isFinite(maxUnreachable) ? maxUnreachable : 5,
 });
 
 mkdirSync(dirname(outputPath), { recursive: true });
@@ -27,5 +27,5 @@ console.log(`- repos: ${telemetry.totals.repos}`);
 console.log(`- errored: ${telemetry.totals.errored}`);
 console.log(`- unreachable: ${telemetry.totals.unreachable}`);
 if (typeof telemetry.ageHours === 'number') {
-  console.log(`- ageHours: ${telemetry.ageHours.toFixed(2)}`);
+	console.log(`- ageHours: ${telemetry.ageHours.toFixed(2)}`);
 }

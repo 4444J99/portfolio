@@ -1,29 +1,29 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import EngineeringVitals from '../../components/resume/EngineeringVitals.astro';
+import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import { certifications, education, history } from '../../data/experience.json';
 import { personas } from '../../data/personas.json';
-import { history, education, certifications } from '../../data/experience.json';
 import { projectCatalogBySlug } from '../../data/project-catalog';
+import Layout from '../../layouts/Layout.astro';
 import { base } from '../../utils/paths';
 
 export async function getStaticPaths() {
-  return personas.map((persona) => ({
-    params: { slug: persona.slug },
-    props: { persona },
-  }));
+	return personas.map((persona) => ({
+		params: { slug: persona.slug },
+		props: { persona },
+	}));
 }
 
 const { persona } = Astro.props;
 
 // Enrich featured projects with catalog data
-const featuredProjects = persona.featured_projects.map(fp => {
-  const catalogEntry = projectCatalogBySlug.get(fp.slug);
-  if (!catalogEntry) throw new Error(`Featured slug "${fp.slug}" not found in project catalog`);
-  return {
-    ...catalogEntry,
-    market_impact: fp.impact
-  };
+const featuredProjects = persona.featured_projects.map((fp) => {
+	const catalogEntry = projectCatalogBySlug.get(fp.slug);
+	if (!catalogEntry) throw new Error(`Featured slug "${fp.slug}" not found in project catalog`);
+	return {
+		...catalogEntry,
+		market_impact: fp.impact,
+	};
 });
 ---
 

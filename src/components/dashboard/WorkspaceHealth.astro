@@ -2,36 +2,36 @@
 import healthData from '../../data/workspace-health.json';
 
 interface RepoHealth {
-  name: string;
-  owner: string;
-  lastCommit: string | null;
-  buildStatus: string | null;
-  testCount: number | null;
-  coverage: number | null;
-  url: string;
+	name: string;
+	owner: string;
+	lastCommit: string | null;
+	buildStatus: string | null;
+	testCount: number | null;
+	coverage: number | null;
+	url: string;
 }
 
 const repos = healthData.repos as RepoHealth[];
 const lastSync = healthData.lastSync;
 
 function formatDate(iso: string | null): string {
-  if (!iso) return '—';
-  const d = new Date(iso);
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+	if (!iso) return '—';
+	const d = new Date(iso);
+	return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
 function statusBadge(status: string | null): string {
-  if (!status) return '○ unknown';
-  if (status === 'success') return '● passing';
-  if (status === 'failure') return '● failing';
-  return `○ ${status}`;
+	if (!status) return '○ unknown';
+	if (status === 'success') return '● passing';
+	if (status === 'failure') return '● failing';
+	return `○ ${status}`;
 }
 
 function statusClass(status: string | null): string {
-  if (!status) return 'status--unknown';
-  if (status === 'success') return 'status--pass';
-  if (status === 'failure') return 'status--fail';
-  return 'status--unknown';
+	if (!status) return 'status--unknown';
+	if (status === 'success') return 'status--pass';
+	if (status === 'failure') return 'status--fail';
+	return 'status--unknown';
 }
 ---
 

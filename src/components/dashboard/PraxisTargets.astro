@@ -1,10 +1,10 @@
 ---
-import ChartContainer from '../charts/ChartContainer.astro';
 import type { PraxisTarget } from '../../types/data';
+import ChartContainer from '../charts/ChartContainer.astro';
 
 interface Props {
-  targets: Record<string, PraxisTarget>;
-  praxisChartData: Record<string, unknown>;
+	targets: Record<string, PraxisTarget>;
+	praxisChartData: Record<string, unknown>;
 }
 
 const { targets, praxisChartData } = Astro.props;

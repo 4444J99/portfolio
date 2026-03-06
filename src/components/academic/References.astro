@@ -1,15 +1,15 @@
 ---
 interface RefEntry {
-  id: number;
-  author: string;
-  title: string;
-  source: string;
-  year: string | number;
-  url?: string;
+	id: number;
+	author: string;
+	title: string;
+	source: string;
+	year: string | number;
+	url?: string;
 }
 
 interface Props {
-  entries: RefEntry[];
+	entries: RefEntry[];
 }
 
 const { entries } = Astro.props;

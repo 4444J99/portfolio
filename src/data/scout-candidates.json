@@ -1,101 +1,101 @@
 {
-  "last_scout": "2026-02-28T14:51:28.408Z",
-  "candidates": [
-    {
-      "company": "Anthropic",
-      "role": "Senior AI Engineer (Agentic Swarms)",
-      "reason": "Anthropic’s focus on 'safe, steerable swarms' and their orchestration of multi-agent workflows aligns perfectly with your use of narrative theory to direct structural code execution.",
-      "persona_id": "ai-systems-engineer",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:49:57.171Z"
-    },
-    {
-      "company": "Vercel",
-      "role": "Lead AI Architect (Agent Platform)",
-      "reason": "As Vercel builds the infrastructure for the 'Agentic Web,' this role allows you to manifest high-level intentions into scalable production systems using their AI SDK and Agent Gateway.",
-      "persona_id": "ai-systems-engineer",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:49:57.172Z"
-    },
-    {
-      "company": "Palantir",
-      "role": "Forward Deployed AI Architect (AIP Agentic Solutions)",
-      "reason": "Palantir’s ontology-driven approach treats data and code as a structural medium, providing the ideal environment for an architect to bridge abstract intent with mission-critical autonomous execution.",
-      "persona_id": "ai-systems-engineer",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:49:57.172Z"
-    },
-    {
-      "company": "OpenAI",
-      "role": "Enterprise Systems Architect",
-      "reason": "This role focuses on building the 'connective tissue' between LLMs and enterprise systems through custom DSLs, tool schemas, and automated governance frameworks for agentic orchestration.",
-      "persona_id": "systems-architect",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:50:57.454Z"
-    },
-    {
-      "company": "Anthropic",
-      "role": "Training Content and Systems Architect",
-      "reason": "This position requires designing modular content architectures and automated quality loops to govern massive data ecosystems, directly applying linguistic structure and narrative theory to AI training systems.",
-      "persona_id": "systems-architect",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:50:57.455Z"
-    },
-    {
-      "company": "Palantir",
-      "role": "Ontology Data Architect",
-      "reason": "This role centers on 'semantic design' and enterprise ontologies, requiring the translation of complex organizational narratives into technical governance frameworks within the Palantir Foundry ecosystem.",
-      "persona_id": "systems-architect",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:50:57.455Z"
-    },
-    {
-      "company": "OpenAI",
-      "role": "Creative Technologist at OpenAI Design",
-      "reason": "This role requires the intersection of frontier model engineering and high-fidelity storytelling to prototype the future of human-AI creative interfaces.",
-      "persona_id": "creative-technologist",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:51:13.420Z"
-    },
-    {
-      "company": "Anthropic",
-      "role": "Member of Technical Staff, Creative & Content",
-      "reason": "Anthropic's focus on Constitutional AI and narrative alignment aligns with an MFA-level understanding of language as a formal, performative system.",
-      "persona_id": "creative-technologist",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:51:13.420Z"
-    },
-    {
-      "company": "IDEO",
-      "role": "Lead Creative Technologist (AI & Emerging Media)",
-      "reason": "Your background in bridging narrative theory with Meta-certified technical execution fits IDEO’s mission to build human-centric, performance-grade tools for complex exploration.",
-      "persona_id": "creative-technologist",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:51:13.420Z"
-    },
-    {
-      "company": "Anthropic",
-      "role": "Technical Program Manager, Developer Experience",
-      "reason": "Your focus on managing complex technical ecosystems is ideal for orchestrating the infrastructure and high-impact tooling required for AI developers building on the Claude platform.",
-      "persona_id": "technical-pm",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:51:28.408Z"
-    },
-    {
-      "company": "Vercel",
-      "reason": "As a leader in modern web infrastructure, your unique blend of high-impact project management and engineering depth aligns perfectly with their mission to optimize the developer experience at scale.",
-      "role": "Senior Technical Program Manager, Platform Strategy",
-      "persona_id": "technical-pm",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:51:28.408Z"
-    },
-    {
-      "company": "OpenAI",
-      "role": "Technical Program Manager, Developer Platform",
-      "reason": "Your expertise in strategic alignment between product and infrastructure is a perfect match for scaling OpenAI's API ecosystem and managing the developer experience for the next generation of AI applications.",
-      "persona_id": "technical-pm",
-      "status": "triage",
-      "discovered_at": "2026-02-28T14:51:28.408Z"
-    }
-  ]
+	"last_scout": "2026-02-28T14:51:28.408Z",
+	"candidates": [
+		{
+			"company": "Anthropic",
+			"role": "Senior AI Engineer (Agentic Swarms)",
+			"reason": "Anthropic’s focus on 'safe, steerable swarms' and their orchestration of multi-agent workflows aligns perfectly with your use of narrative theory to direct structural code execution.",
+			"persona_id": "ai-systems-engineer",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:49:57.171Z"
+		},
+		{
+			"company": "Vercel",
+			"role": "Lead AI Architect (Agent Platform)",
+			"reason": "As Vercel builds the infrastructure for the 'Agentic Web,' this role allows you to manifest high-level intentions into scalable production systems using their AI SDK and Agent Gateway.",
+			"persona_id": "ai-systems-engineer",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:49:57.172Z"
+		},
+		{
+			"company": "Palantir",
+			"role": "Forward Deployed AI Architect (AIP Agentic Solutions)",
+			"reason": "Palantir’s ontology-driven approach treats data and code as a structural medium, providing the ideal environment for an architect to bridge abstract intent with mission-critical autonomous execution.",
+			"persona_id": "ai-systems-engineer",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:49:57.172Z"
+		},
+		{
+			"company": "OpenAI",
+			"role": "Enterprise Systems Architect",
+			"reason": "This role focuses on building the 'connective tissue' between LLMs and enterprise systems through custom DSLs, tool schemas, and automated governance frameworks for agentic orchestration.",
+			"persona_id": "systems-architect",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:50:57.454Z"
+		},
+		{
+			"company": "Anthropic",
+			"role": "Training Content and Systems Architect",
+			"reason": "This position requires designing modular content architectures and automated quality loops to govern massive data ecosystems, directly applying linguistic structure and narrative theory to AI training systems.",
+			"persona_id": "systems-architect",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:50:57.455Z"
+		},
+		{
+			"company": "Palantir",
+			"role": "Ontology Data Architect",
+			"reason": "This role centers on 'semantic design' and enterprise ontologies, requiring the translation of complex organizational narratives into technical governance frameworks within the Palantir Foundry ecosystem.",
+			"persona_id": "systems-architect",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:50:57.455Z"
+		},
+		{
+			"company": "OpenAI",
+			"role": "Creative Technologist at OpenAI Design",
+			"reason": "This role requires the intersection of frontier model engineering and high-fidelity storytelling to prototype the future of human-AI creative interfaces.",
+			"persona_id": "creative-technologist",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:51:13.420Z"
+		},
+		{
+			"company": "Anthropic",
+			"role": "Member of Technical Staff, Creative & Content",
+			"reason": "Anthropic's focus on Constitutional AI and narrative alignment aligns with an MFA-level understanding of language as a formal, performative system.",
+			"persona_id": "creative-technologist",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:51:13.420Z"
+		},
+		{
+			"company": "IDEO",
+			"role": "Lead Creative Technologist (AI & Emerging Media)",
+			"reason": "Your background in bridging narrative theory with Meta-certified technical execution fits IDEO’s mission to build human-centric, performance-grade tools for complex exploration.",
+			"persona_id": "creative-technologist",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:51:13.420Z"
+		},
+		{
+			"company": "Anthropic",
+			"role": "Technical Program Manager, Developer Experience",
+			"reason": "Your focus on managing complex technical ecosystems is ideal for orchestrating the infrastructure and high-impact tooling required for AI developers building on the Claude platform.",
+			"persona_id": "technical-pm",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:51:28.408Z"
+		},
+		{
+			"company": "Vercel",
+			"reason": "As a leader in modern web infrastructure, your unique blend of high-impact project management and engineering depth aligns perfectly with their mission to optimize the developer experience at scale.",
+			"role": "Senior Technical Program Manager, Platform Strategy",
+			"persona_id": "technical-pm",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:51:28.408Z"
+		},
+		{
+			"company": "OpenAI",
+			"role": "Technical Program Manager, Developer Platform",
+			"reason": "Your expertise in strategic alignment between product and infrastructure is a perfect match for scaling OpenAI's API ecosystem and managing the developer experience for the next generation of AI applications.",
+			"persona_id": "technical-pm",
+			"status": "triage",
+			"discovered_at": "2026-02-28T14:51:28.408Z"
+		}
+	]
 }

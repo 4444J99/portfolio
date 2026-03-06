@@ -1,30 +1,28 @@
 ---
 interface Props {
-  sketchId: string;
-  height?: string;
-  mobileHeight?: string;
-  ariaLabel: string;
-  interactive?: boolean;
-  title?: string;
-  caption?: string;
-  dataSource?: string;
-  [key: string]: unknown;
+	sketchId: string;
+	height?: string;
+	mobileHeight?: string;
+	ariaLabel: string;
+	interactive?: boolean;
+	title?: string;
+	caption?: string;
+	dataSource?: string;
+	[key: string]: unknown;
 }
 
-const { 
-  sketchId, 
-  height = '500px', 
-  mobileHeight = '350px', 
-  ariaLabel, 
-  interactive = false, 
-  title,
-  caption,
-  dataSource,
-  ...rest 
+const {
+	sketchId,
+	height = '500px',
+	mobileHeight = '350px',
+	ariaLabel,
+	interactive = false,
+	title,
+	caption,
+	dataSource,
+	...rest
 } = Astro.props;
-const dataAttrs = Object.fromEntries(
-  Object.entries(rest).filter(([k]) => k.startsWith('data-'))
-);
+const dataAttrs = Object.fromEntries(Object.entries(rest).filter(([k]) => k.startsWith('data-')));
 ---
 
 <figure class="sketch-wrapper">

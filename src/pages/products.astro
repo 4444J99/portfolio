@@ -1,123 +1,137 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
+import Layout from '../layouts/Layout.astro';
 
 const products = [
-  {
-    name: 'Gamified Coach Interface',
-    repo: 'organvm-iii-ergon/gamified-coach-interface',
-    type: 'SaaS',
-    status: 'Production-Ready',
-    description: 'Holographic 3D fitness coaching visualization built with Three.js and Vite. Interactive orbital node system for strategy mapping and progress tracking.',
-    stack: ['Three.js', 'Vite', 'TypeScript'],
-    demo: 'https://organvm-iii-ergon.github.io/gamified-coach-interface/',
-    featured: true,
-  },
-  {
-    name: 'Public Record Data Scrapper',
-    repo: 'organvm-iii-ergon/public-record-data-scrapper',
-    type: 'B2B',
-    status: 'Production-Ready',
-    description: 'Automated public records aggregation and analysis platform. React 19 frontend, Express API, PostgreSQL, Tauri desktop app (Rust), Terraform AWS infrastructure. 2,055 tests.',
-    stack: ['React', 'Express', 'PostgreSQL', 'Rust/Tauri', 'Terraform', 'Docker'],
-  },
-  {
-    name: 'Trade Perpetual Future',
-    repo: 'organvm-iii-ergon/trade-perpetual-future',
-    type: 'B2B',
-    status: 'In Development',
-    description: 'Perpetual futures trading interface with React 19, Solana/Drift Protocol integration, and real-time analytics. 53 Vitest tests, Cloudflare Pages deployment.',
-    stack: ['Python', 'React', 'Solana', 'Vitest', 'Cloudflare'],
-  },
-  {
-    name: 'Sovereign Ecosystem — Real Estate Luxury',
-    repo: 'organvm-iii-ergon/sovereign-ecosystem--real-estate-luxury',
-    type: 'B2B2C',
-    status: 'Prototype',
-    description: 'Luxury real estate marketplace with React frontend, Tailwind CSS, and multi-party transaction orchestration.',
-    stack: ['TypeScript', 'React', 'Tailwind'],
-  },
-  {
-    name: 'Universal Mail Automation',
-    repo: 'organvm-iii-ergon/universal-mail--automation',
-    type: 'B2B',
-    status: 'Prototype',
-    description: 'Cross-platform mail automation engine with Python backend, AppleScript macOS integration, and scheduling.',
-    stack: ['Python', 'AppleScript', 'Shell'],
-  },
-  {
-    name: 'Search Local — Happy Hour',
-    repo: 'organvm-iii-ergon/search-local--happy-hour',
-    type: 'B2C',
-    status: 'Prototype',
-    description: 'Location-aware discovery platform for local dining and nightlife. React frontend with Tailwind CSS.',
-    stack: ['TypeScript', 'React', 'Tailwind'],
-  },
-  {
-    name: 'Fetch Familiar Friends',
-    repo: 'organvm-iii-ergon/fetch-familiar-friends',
-    type: 'B2C',
-    status: 'In Development',
-    description: 'Social pet adoption and community platform. JavaScript frontend, PostgreSQL database with PLpgSQL schemas.',
-    stack: ['JavaScript', 'PostgreSQL', 'React'],
-  },
-  {
-    name: 'Multi-Camera Livestream Framework',
-    repo: 'organvm-iii-ergon/multi-camera--livestream--framework',
-    type: 'B2B2C',
-    status: 'Production-Ready',
-    description: 'Multi-source 4K livestream orchestration with Dante audio networking, scene switching, and audience interaction.',
-    stack: ['Shell', 'FFmpeg', 'Dante'],
-  },
-  {
-    name: 'Tab Bookmark Manager',
-    repo: 'organvm-iii-ergon/tab-bookmark-manager',
-    type: 'SaaS',
-    status: 'In Development',
-    description: 'Browser extension with Python ML backend, PostgreSQL, Redis, Puppeteer scraping, and Docker deployment.',
-    stack: ['JavaScript', 'Python', 'PostgreSQL', 'Redis', 'Docker'],
-  },
-  {
-    name: 'The Actual News',
-    repo: 'organvm-iii-ergon/the-actual-news',
-    type: 'B2C',
-    status: 'In Development',
-    description: 'Verifiable news platform with Express microservices architecture (4 services), Docker Compose orchestration, and source transparency scoring.',
-    stack: ['Express', 'Docker', 'TypeScript'],
-  },
-  {
-    name: 'Your Fit Tailored',
-    repo: 'organvm-iii-ergon/your-fit-tailored',
-    type: 'B2C',
-    status: 'Prototype',
-    description: 'Circular apparel platform seed with personalized fit algorithms and subscription-based delivery.',
-    stack: ['JavaScript'],
-  },
-  {
-    name: 'Classroom RPG Aetheria',
-    repo: 'organvm-iii-ergon/classroom-rpg-aetheria',
-    type: 'SaaS',
-    status: 'In Development',
-    description: 'Gamified classroom management RPG. Next.js + React frontend, Python backend. 192 code files, 16 test files.',
-    stack: ['Next.js', 'React', 'Python', 'Tailwind'],
-  },
+	{
+		name: 'Gamified Coach Interface',
+		repo: 'organvm-iii-ergon/gamified-coach-interface',
+		type: 'SaaS',
+		status: 'Production-Ready',
+		description:
+			'Holographic 3D fitness coaching visualization built with Three.js and Vite. Interactive orbital node system for strategy mapping and progress tracking.',
+		stack: ['Three.js', 'Vite', 'TypeScript'],
+		demo: 'https://organvm-iii-ergon.github.io/gamified-coach-interface/',
+		featured: true,
+	},
+	{
+		name: 'Public Record Data Scrapper',
+		repo: 'organvm-iii-ergon/public-record-data-scrapper',
+		type: 'B2B',
+		status: 'Production-Ready',
+		description:
+			'Automated public records aggregation and analysis platform. React 19 frontend, Express API, PostgreSQL, Tauri desktop app (Rust), Terraform AWS infrastructure. 2,055 tests.',
+		stack: ['React', 'Express', 'PostgreSQL', 'Rust/Tauri', 'Terraform', 'Docker'],
+	},
+	{
+		name: 'Trade Perpetual Future',
+		repo: 'organvm-iii-ergon/trade-perpetual-future',
+		type: 'B2B',
+		status: 'In Development',
+		description:
+			'Perpetual futures trading interface with React 19, Solana/Drift Protocol integration, and real-time analytics. 53 Vitest tests, Cloudflare Pages deployment.',
+		stack: ['Python', 'React', 'Solana', 'Vitest', 'Cloudflare'],
+	},
+	{
+		name: 'Sovereign Ecosystem — Real Estate Luxury',
+		repo: 'organvm-iii-ergon/sovereign-ecosystem--real-estate-luxury',
+		type: 'B2B2C',
+		status: 'Prototype',
+		description:
+			'Luxury real estate marketplace with React frontend, Tailwind CSS, and multi-party transaction orchestration.',
+		stack: ['TypeScript', 'React', 'Tailwind'],
+	},
+	{
+		name: 'Universal Mail Automation',
+		repo: 'organvm-iii-ergon/universal-mail--automation',
+		type: 'B2B',
+		status: 'Prototype',
+		description:
+			'Cross-platform mail automation engine with Python backend, AppleScript macOS integration, and scheduling.',
+		stack: ['Python', 'AppleScript', 'Shell'],
+	},
+	{
+		name: 'Search Local — Happy Hour',
+		repo: 'organvm-iii-ergon/search-local--happy-hour',
+		type: 'B2C',
+		status: 'Prototype',
+		description:
+			'Location-aware discovery platform for local dining and nightlife. React frontend with Tailwind CSS.',
+		stack: ['TypeScript', 'React', 'Tailwind'],
+	},
+	{
+		name: 'Fetch Familiar Friends',
+		repo: 'organvm-iii-ergon/fetch-familiar-friends',
+		type: 'B2C',
+		status: 'In Development',
+		description:
+			'Social pet adoption and community platform. JavaScript frontend, PostgreSQL database with PLpgSQL schemas.',
+		stack: ['JavaScript', 'PostgreSQL', 'React'],
+	},
+	{
+		name: 'Multi-Camera Livestream Framework',
+		repo: 'organvm-iii-ergon/multi-camera--livestream--framework',
+		type: 'B2B2C',
+		status: 'Production-Ready',
+		description:
+			'Multi-source 4K livestream orchestration with Dante audio networking, scene switching, and audience interaction.',
+		stack: ['Shell', 'FFmpeg', 'Dante'],
+	},
+	{
+		name: 'Tab Bookmark Manager',
+		repo: 'organvm-iii-ergon/tab-bookmark-manager',
+		type: 'SaaS',
+		status: 'In Development',
+		description:
+			'Browser extension with Python ML backend, PostgreSQL, Redis, Puppeteer scraping, and Docker deployment.',
+		stack: ['JavaScript', 'Python', 'PostgreSQL', 'Redis', 'Docker'],
+	},
+	{
+		name: 'The Actual News',
+		repo: 'organvm-iii-ergon/the-actual-news',
+		type: 'B2C',
+		status: 'In Development',
+		description:
+			'Verifiable news platform with Express microservices architecture (4 services), Docker Compose orchestration, and source transparency scoring.',
+		stack: ['Express', 'Docker', 'TypeScript'],
+	},
+	{
+		name: 'Your Fit Tailored',
+		repo: 'organvm-iii-ergon/your-fit-tailored',
+		type: 'B2C',
+		status: 'Prototype',
+		description:
+			'Circular apparel platform seed with personalized fit algorithms and subscription-based delivery.',
+		stack: ['JavaScript'],
+	},
+	{
+		name: 'Classroom RPG Aetheria',
+		repo: 'organvm-iii-ergon/classroom-rpg-aetheria',
+		type: 'SaaS',
+		status: 'In Development',
+		description:
+			'Gamified classroom management RPG. Next.js + React frontend, Python backend. 192 code files, 16 test files.',
+		stack: ['Next.js', 'React', 'Python', 'Tailwind'],
+	},
 ];
 
 const typeBadgeColors: Record<string, string> = {
-  SaaS: '#6366f1',
-  B2B: '#0891b2',
-  B2C: '#16a34a',
-  B2B2C: '#ca8a04',
+	SaaS: '#6366f1',
+	B2B: '#0891b2',
+	B2C: '#16a34a',
+	B2B2C: '#ca8a04',
 };
 
 const statusColors: Record<string, string> = {
-  'Production-Ready': '#4CAF50',
-  'In Development': '#FF9800',
-  'Prototype': '#9E9E9E',
+	'Production-Ready': '#4CAF50',
+	'In Development': '#FF9800',
+	Prototype: '#9E9E9E',
 };
 
 const typeGroups: Record<string, number> = { SaaS: 0, B2B: 0, B2C: 0, B2B2C: 0 };
-products.forEach(p => { if (typeGroups[p.type] !== undefined) typeGroups[p.type]++; });
+products.forEach((p) => {
+	if (typeGroups[p.type] !== undefined) typeGroups[p.type]++;
+});
 ---
 
 <Layout title="Products & Platforms — Solution Catalog" description="A catalog of 12 production-ready and prototype platforms across SaaS, B2B, and B2C domains, showcasing architecture-first delivery.">

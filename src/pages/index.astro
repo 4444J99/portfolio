@@ -1,19 +1,19 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import { SKETCH_NAMES } from '@4444j99/sketches';
 import HeroSection from '../components/home/HeroSection.astro';
-import ProjectGrid from '../components/home/ProjectGrid.astro';
 import IndexFilters from '../components/home/IndexFilters.astro';
+import ProjectGrid from '../components/home/ProjectGrid.astro';
+import { organColorMap } from '../data/organ-colors';
+import { categoryFilters, featuredNumbers, organGroups, skillFilters } from '../data/organ-groups';
 import metrics from '../data/system-metrics.json';
 import vitals from '../data/vitals.json';
-import { organColorMap } from '../data/organ-colors';
+import Layout from '../layouts/Layout.astro';
 import { base } from '../utils/paths';
-import { organGroups, skillFilters, categoryFilters, featuredNumbers } from '../data/organ-groups';
-import { SKETCH_NAMES } from '@4444j99/sketches';
 
 // Resolve slugs to full hrefs at build time
-const resolvedGroups = organGroups.map(group => ({
-  ...group,
-  projects: group.projects.map(p => ({ ...p, href: `${base}projects/${p.slug}/` })),
+const resolvedGroups = organGroups.map((group) => ({
+	...group,
+	projects: group.projects.map((p) => ({ ...p, href: `${base}projects/${p.slug}/` })),
 }));
 ---
 

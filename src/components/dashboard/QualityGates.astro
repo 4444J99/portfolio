@@ -2,123 +2,135 @@
 import type { QualityMetrics } from '../../types/data';
 
 interface Props {
-  quality: QualityMetrics;
-  base: string;
+	quality: QualityMetrics;
+	base: string;
 }
 
 const { quality, base } = Astro.props;
 const security = quality.security ?? {
-  critical: null,
-  high: null,
-  moderate: null,
-  low: null,
-  total: null,
-  githubOpenAlerts: null,
-  githubAdvisoryStatus: 'unknown',
-  prodCounts: { critical: null, high: null, moderate: null, low: null, total: null },
-  devCounts: { critical: null, high: null, moderate: null, low: null, total: null },
-  allowlistActive: 0,
-  policyCheckpoint: null,
-  status: 'unknown',
-  source: null,
-  githubSource: null,
+	critical: null,
+	high: null,
+	moderate: null,
+	low: null,
+	total: null,
+	githubOpenAlerts: null,
+	githubAdvisoryStatus: 'unknown',
+	prodCounts: { critical: null, high: null, moderate: null, low: null, total: null },
+	devCounts: { critical: null, high: null, moderate: null, low: null, total: null },
+	allowlistActive: 0,
+	policyCheckpoint: null,
+	status: 'unknown',
+	source: null,
+	githubSource: null,
 };
 const performance = quality.performance ?? {
-  routeBudgetsStatus: 'unknown',
-  chunkBudgetsStatus: 'unknown',
-  interactionBudgetsStatus: 'unknown',
-  routeBudgetCheckpoint: null,
-  chunkBudgetCheckpoint: null,
-  interactionBudgetCheckpoint: null,
-  largestChunks: [],
-  interactiveRouteJsTotals: {},
-  routeJsTotals: {},
-  source: null,
+	routeBudgetsStatus: 'unknown',
+	chunkBudgetsStatus: 'unknown',
+	interactionBudgetsStatus: 'unknown',
+	routeBudgetCheckpoint: null,
+	chunkBudgetCheckpoint: null,
+	interactionBudgetCheckpoint: null,
+	largestChunks: [],
+	interactiveRouteJsTotals: {},
+	routeJsTotals: {},
+	source: null,
 };
 const runtimeErrors = quality.runtimeErrors ?? {
-  status: 'unknown',
-  total: null,
-  uncategorized: null,
-  allowlisted: null,
-  source: null,
+	status: 'unknown',
+	total: null,
+	uncategorized: null,
+	allowlisted: null,
+	source: null,
 };
 const stability = quality.stability ?? {
-  status: 'unknown',
-  consecutiveSuccess: null,
-  requiredConsecutive: null,
-  source: null,
+	status: 'unknown',
+	consecutiveSuccess: null,
+	requiredConsecutive: null,
+	source: null,
 };
 const sources = quality.sources ?? {
-  tests: 'unavailable',
-  security: 'unavailable',
-  securityProd: 'unavailable',
-  securityGithub: 'unavailable',
-  securityDrift: 'unavailable',
-  coverage: 'unavailable',
-  lighthouse: 'unavailable',
-  a11yStatic: 'unavailable',
-  a11yRuntime: 'unavailable',
-  runtimeCoverage: 'unavailable',
-  e2eSmoke: 'unavailable',
-  runtimeErrors: 'unavailable',
-  greenRuns: 'unavailable',
-  ledger: 'unavailable',
-  policyGovernance: 'unavailable',
-  performance: 'unavailable',
-  build: 'unavailable',
+	tests: 'unavailable',
+	security: 'unavailable',
+	securityProd: 'unavailable',
+	securityGithub: 'unavailable',
+	securityDrift: 'unavailable',
+	coverage: 'unavailable',
+	lighthouse: 'unavailable',
+	a11yStatic: 'unavailable',
+	a11yRuntime: 'unavailable',
+	runtimeCoverage: 'unavailable',
+	e2eSmoke: 'unavailable',
+	runtimeErrors: 'unavailable',
+	greenRuns: 'unavailable',
+	ledger: 'unavailable',
+	policyGovernance: 'unavailable',
+	performance: 'unavailable',
+	build: 'unavailable',
 };
 
-const perfValue = quality.lighthouse.performance === null ? 'n/a' : String(quality.lighthouse.performance);
-const a11yValue = quality.lighthouse.accessibility === null ? 'n/a' : String(quality.lighthouse.accessibility);
+const perfValue =
+	quality.lighthouse.performance === null ? 'n/a' : String(quality.lighthouse.performance);
+const a11yValue =
+	quality.lighthouse.accessibility === null ? 'n/a' : String(quality.lighthouse.accessibility);
 const seoValue = quality.lighthouse.seo === null ? 'n/a' : String(quality.lighthouse.seo);
 const testsDetail = quality.tests.total === null ? 'Tests: n/a' : `${quality.tests.total} tests`;
-const staticA11yIssueCount = quality.a11y.static.critical !== null && quality.a11y.static.serious !== null
-  ? quality.a11y.static.critical + quality.a11y.static.serious
-  : null;
-const runtimeA11yIssueCount = quality.a11y.runtime.critical !== null && quality.a11y.runtime.serious !== null
-  ? quality.a11y.runtime.critical + quality.a11y.runtime.serious
-  : null;
+const staticA11yIssueCount =
+	quality.a11y.static.critical !== null && quality.a11y.static.serious !== null
+		? quality.a11y.static.critical + quality.a11y.static.serious
+		: null;
+const runtimeA11yIssueCount =
+	quality.a11y.runtime.critical !== null && quality.a11y.runtime.serious !== null
+		? quality.a11y.runtime.critical + quality.a11y.runtime.serious
+		: null;
 const combinedA11yPages =
-  (quality.a11y.static.pagesAudited ?? 0) + (quality.a11y.runtime.pagesAudited ?? 0);
-const runtimeFocusDetail = quality.a11y.runtime.focusChecks === null
-  ? 'focus n/a'
-  : `${quality.a11y.runtime.focusChecks} focus checks`;
-const runtimeCoverageDetail = quality.a11y.runtime.coveragePct === null
-  ? 'coverage n/a'
-  : `${quality.a11y.runtime.coveragePct}% route coverage`;
-const securityDetail = security.total === null
-  ? 'critical n/a · high n/a'
-  : `critical ${security.critical ?? 0} · high ${security.high ?? 0} · moderate ${security.moderate ?? 0} · low ${security.low ?? 0}`;
-const securityBreakdown = security.prodCounts.total === null
-  ? 'prod/dev split n/a'
-  : `prod ${security.prodCounts.total ?? 0} · dev ${security.devCounts.total ?? 0}`;
+	(quality.a11y.static.pagesAudited ?? 0) + (quality.a11y.runtime.pagesAudited ?? 0);
+const runtimeFocusDetail =
+	quality.a11y.runtime.focusChecks === null
+		? 'focus n/a'
+		: `${quality.a11y.runtime.focusChecks} focus checks`;
+const runtimeCoverageDetail =
+	quality.a11y.runtime.coveragePct === null
+		? 'coverage n/a'
+		: `${quality.a11y.runtime.coveragePct}% route coverage`;
+const securityDetail =
+	security.total === null
+		? 'critical n/a · high n/a'
+		: `critical ${security.critical ?? 0} · high ${security.high ?? 0} · moderate ${security.moderate ?? 0} · low ${security.low ?? 0}`;
+const securityBreakdown =
+	security.prodCounts.total === null
+		? 'prod/dev split n/a'
+		: `prod ${security.prodCounts.total ?? 0} · dev ${security.devCounts.total ?? 0}`;
 const securityCheckpointDetail = security.policyCheckpoint
-  ? `checkpoint ${security.policyCheckpoint.date} (moderate<=${security.policyCheckpoint.maxModerate}, low<=${security.policyCheckpoint.maxLow})`
-  : 'checkpoint n/a';
+	? `checkpoint ${security.policyCheckpoint.date} (moderate<=${security.policyCheckpoint.maxModerate}, low<=${security.policyCheckpoint.maxLow})`
+	: 'checkpoint n/a';
 const securityAllowlistDetail = `allowlist active ${security.allowlistActive ?? 0}`;
 const securityGithubDetail = `github alerts ${security.githubOpenAlerts ?? 'n/a'} (${security.githubAdvisoryStatus})`;
 const perfBudgetDetail = performance.routeBudgetsStatus;
 const perfBudgetCompositeDetail = `route ${performance.routeBudgetsStatus} · chunk ${performance.chunkBudgetsStatus} · interaction ${performance.interactionBudgetsStatus}`;
-const runtimeErrorDetail = runtimeErrors.total === null
-  ? 'runtime telemetry n/a'
-  : `events ${runtimeErrors.total} · uncategorized ${runtimeErrors.uncategorized ?? 0}`;
-const greenRunDetail = stability.consecutiveSuccess === null
-  ? 'green run history n/a'
-  : `${stability.consecutiveSuccess}/${stability.requiredConsecutive ?? 'n/a'} consecutive`;
+const runtimeErrorDetail =
+	runtimeErrors.total === null
+		? 'runtime telemetry n/a'
+		: `events ${runtimeErrors.total} · uncategorized ${runtimeErrors.uncategorized ?? 0}`;
+const greenRunDetail =
+	stability.consecutiveSuccess === null
+		? 'green run history n/a'
+		: `${stability.consecutiveSuccess}/${stability.requiredConsecutive ?? 'n/a'} consecutive`;
 const generatedTime = Date.parse(quality.generated);
 const freshnessHours = Number.isFinite(generatedTime)
-  ? Math.max(0, (Date.now() - generatedTime) / 3_600_000)
-  : null;
-const freshnessStatus = freshnessHours === null
-  ? 'unknown'
-  : freshnessHours <= 24
-    ? 'fresh'
-    : freshnessHours <= 48
-      ? 'aging'
-      : 'stale';
-const freshnessDetail = freshnessHours === null
-  ? 'Metrics freshness: unavailable'
-  : `Metrics freshness: ${freshnessStatus} (${freshnessHours.toFixed(1)}h old)`;
+	? Math.max(0, (Date.now() - generatedTime) / 3_600_000)
+	: null;
+const freshnessStatus =
+	freshnessHours === null
+		? 'unknown'
+		: freshnessHours <= 24
+			? 'fresh'
+			: freshnessHours <= 48
+				? 'aging'
+				: 'stale';
+const freshnessDetail =
+	freshnessHours === null
+		? 'Metrics freshness: unavailable'
+		: `Metrics freshness: ${freshnessStatus} (${freshnessHours.toFixed(1)}h old)`;
 ---
 
 <section class="section">

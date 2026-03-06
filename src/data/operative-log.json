@@ -1,66 +1,66 @@
 {
-  "strikes": [
-    {
-      "date": "2026-02-20",
-      "target": "Anthropic",
-      "persona": "ai-systems-engineer",
-      "variable_tested": "safety-invariants-intro",
-      "status": "SHIPPED",
-      "channel": "Direct Outreach (LinkedIn)",
-      "response_received": false,
-      "notes": "Testing the 'Safe Orchestration' signal vs. generic MTS signal."
-    },
-    {
-      "date": "2026-02-20",
-      "target": "Vercel",
-      "persona": "systems-architect",
-      "variable_tested": "91-repo-orchestration-depth",
-      "status": "SHIPPED",
-      "channel": "Direct Application",
-      "response_received": false,
-      "notes": "Testing if 91-repo scale is a differentiator for platform roles."
-    }
-  ],
-  "persona_performance": {
-    "ai-systems-engineer": {
-      "sent": 1,
-      "replies": 0,
-      "interviews": 0
-    },
-    "systems-architect": {
-      "sent": 1,
-      "replies": 0,
-      "interviews": 0
-    },
-    "creative-technologist": {
-      "sent": 0,
-      "replies": 0,
-      "interviews": 0
-    },
-    "technical-pm": {
-      "sent": 0,
-      "replies": 0,
-      "interviews": 0
-    }
-  },
-  "global_stats": {
-    "total_strikes": 2,
-    "conversion_rate": 0
-  },
-  "channel_performance": {
-    "Direct Outreach (LinkedIn)": {
-      "sent": 1,
-      "replies": 0
-    },
-    "Direct Application": {
-      "sent": 1,
-      "replies": 0
-    }
-  },
-  "tier_performance": {
-    "Unknown": {
-      "sent": 2,
-      "replies": 0
-    }
-  }
+	"strikes": [
+		{
+			"date": "2026-02-20",
+			"target": "Anthropic",
+			"persona": "ai-systems-engineer",
+			"variable_tested": "safety-invariants-intro",
+			"status": "SHIPPED",
+			"channel": "Direct Outreach (LinkedIn)",
+			"response_received": false,
+			"notes": "Testing the 'Safe Orchestration' signal vs. generic MTS signal."
+		},
+		{
+			"date": "2026-02-20",
+			"target": "Vercel",
+			"persona": "systems-architect",
+			"variable_tested": "91-repo-orchestration-depth",
+			"status": "SHIPPED",
+			"channel": "Direct Application",
+			"response_received": false,
+			"notes": "Testing if 91-repo scale is a differentiator for platform roles."
+		}
+	],
+	"persona_performance": {
+		"ai-systems-engineer": {
+			"sent": 1,
+			"replies": 0,
+			"interviews": 0
+		},
+		"systems-architect": {
+			"sent": 1,
+			"replies": 0,
+			"interviews": 0
+		},
+		"creative-technologist": {
+			"sent": 0,
+			"replies": 0,
+			"interviews": 0
+		},
+		"technical-pm": {
+			"sent": 0,
+			"replies": 0,
+			"interviews": 0
+		}
+	},
+	"global_stats": {
+		"total_strikes": 2,
+		"conversion_rate": 0
+	},
+	"channel_performance": {
+		"Direct Outreach (LinkedIn)": {
+			"sent": 1,
+			"replies": 0
+		},
+		"Direct Application": {
+			"sent": 1,
+			"replies": 0
+		}
+	},
+	"tier_performance": {
+		"Unknown": {
+			"sent": 2,
+			"replies": 0
+		}
+	}
 }

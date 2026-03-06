@@ -2,13 +2,13 @@
 import { candidates, last_scout } from '../../data/scout-candidates.json';
 
 const personaColors = {
-  'ai-systems-engineer': 'var(--cmyk-cyan)',
-  'systems-architect': 'var(--cmyk-yellow)',
-  'creative-technologist': 'var(--cmyk-magenta)',
-  'technical-pm': 'var(--accent-purple)'
+	'ai-systems-engineer': 'var(--cmyk-cyan)',
+	'systems-architect': 'var(--cmyk-yellow)',
+	'creative-technologist': 'var(--cmyk-magenta)',
+	'technical-pm': 'var(--accent-purple)',
 };
 
-const triageCandidates = candidates.filter(c => c.status === 'triage');
+const triageCandidates = candidates.filter((c) => c.status === 'triage');
 ---
 
 <div class="scout-triage">

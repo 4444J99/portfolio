@@ -1,0 +1,64 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"lineWidth": 100
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"complexity": {
+				"noForEach": "off",
+				"useOptionalChain": "off",
+				"noImportantStyles": "off",
+				"noUselessLoneBlockStatements": "off",
+				"useLiteralKeys": "off"
+			},
+			"style": {
+				"useTemplate": "off",
+				"noNonNullAssertion": "off",
+				"useNodejsImportProtocol": "off"
+			},
+			"suspicious": {
+				"useIterableCallbackReturn": "off",
+				"noControlCharactersInRegex": "off",
+				"noAssignInExpressions": "off",
+				"noConfusingVoidType": "off",
+				"noTemplateCurlyInString": "off",
+				"noDuplicateProperties": "off",
+				"noGlobalIsNan": "off",
+				"noExplicitAny": "off",
+				"noConfusingLabels": "off"
+			},
+			"correctness": {
+				"noUnusedVariables": "off",
+				"noUnusedImports": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single",
+			"trailingCommas": "all"
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["*.astro"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off"
+					}
+				}
+			}
+		}
+	]
+}

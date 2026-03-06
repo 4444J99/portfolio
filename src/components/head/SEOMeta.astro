@@ -1,17 +1,25 @@
 ---
 interface Props {
-  title: string;
-  description: string;
-  canonicalURL: string;
-  ogImage: string;
-  ogType?: string;
-  keywords?: string[];
+	title: string;
+	description: string;
+	canonicalURL: string;
+	ogImage: string;
+	ogType?: string;
+	keywords?: string[];
 }
 
-const { title, description, canonicalURL, ogImage, ogType = 'website', keywords = [] } = Astro.props;
-const keywordString = keywords.length > 0 
-  ? keywords.join(', ') 
-  : "AI Orchestration, Systems Architect, Creative Technologist, Technical PM, MFA, Python, TypeScript, Multi-Agent Systems, Logocentric Architecture";
+const {
+	title,
+	description,
+	canonicalURL,
+	ogImage,
+	ogType = 'website',
+	keywords = [],
+} = Astro.props;
+const keywordString =
+	keywords.length > 0
+		? keywords.join(', ')
+		: 'AI Orchestration, Systems Architect, Creative Technologist, Technical PM, MFA, Python, TypeScript, Multi-Agent Systems, Logocentric Architecture';
 ---
 
 <!-- Global Metadata -->

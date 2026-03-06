@@ -1,8 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
-import type { EssayData, Essay } from '../types/data';
 import essayData from '../data/essays.json';
+import Layout from '../layouts/Layout.astro';
+import type { Essay, EssayData } from '../types/data';
 
 const typedEssayData = essayData as EssayData;
 const essayTitles = typedEssayData.essays.slice(0, 12).map((e: Essay) => e.title);

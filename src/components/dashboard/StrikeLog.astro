@@ -1,11 +1,12 @@
 ---
-import { strikes, global_stats } from '../../data/operative-log.json';
+import { strikes as strikeList } from '../../data/operative-log.json';
+import { strikes as globalStats } from '../../data/trust-vitals.json';
 
 const statusColors = {
-  SHIPPED: 'var(--color-substantial)',
-  PENDING: 'var(--color-partial)',
-  REJECTED: 'var(--color-minimal)',
-  INTERVIEW: 'var(--accent-purple)'
+	SHIPPED: 'var(--color-substantial)',
+	PENDING: 'var(--color-partial)',
+	REJECTED: 'var(--color-minimal)',
+	INTERVIEW: 'var(--accent-purple)',
 };
 ---
 
@@ -13,8 +14,8 @@ const statusColors = {
   <div class="strike-log__header">
     <h3>Operative Intelligence</h3>
     <div class="strike-stats">
-      <span class="stat-pill">Strikes: {global_stats.total_strikes}</span>
-      <span class="stat-pill">Conversion: {global_stats.conversion_rate.toFixed(1)}%</span>
+      <span class="stat-pill">Strikes: {globalStats.total}</span>
+      <span class="stat-pill">Conversion: {globalStats.conversionRate.toFixed(1)}%</span>
     </div>
   </div>
 
@@ -30,7 +31,7 @@ const statusColors = {
         </tr>
       </thead>
       <tbody>
-        {strikes.map(strike => (
+        {strikeList.map(strike => (
           <tr>
             <td class="col-date">{strike.date}</td>
             <td class="col-target"><strong>{strike.target}</strong></td>

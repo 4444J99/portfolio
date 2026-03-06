@@ -1,23 +1,15 @@
 ---
 interface Props {
-  chartId: string;
-  data?: unknown;
-  ariaLabel: string;
-  height?: string;
-  title?: string;
-  caption?: string;
-  dataSource?: string;
+	chartId: string;
+	data?: unknown;
+	ariaLabel: string;
+	height?: string;
+	title?: string;
+	caption?: string;
+	dataSource?: string;
 }
 
-const { 
-  chartId, 
-  data, 
-  ariaLabel, 
-  height = '300px',
-  title,
-  caption,
-  dataSource
-} = Astro.props;
+const { chartId, data, ariaLabel, height = '300px', title, caption, dataSource } = Astro.props;
 ---
 
 <figure class="chart-wrapper">

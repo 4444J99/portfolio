@@ -1,16 +1,17 @@
 ---
-import ChartContainer from '../charts/ChartContainer.astro';
 import type { FlagshipRepo } from '../../types/data';
+import ChartContainer from '../charts/ChartContainer.astro';
 
 interface Props {
-  repos: FlagshipRepo[];
-  classifications: Record<string, number>;
-  totalAudited: number;
-  classificationChartData: Record<string, unknown>;
-  flagshipChartData: Record<string, unknown>;
+	repos: FlagshipRepo[];
+	classifications: Record<string, number>;
+	totalAudited: number;
+	classificationChartData: Record<string, unknown>;
+	flagshipChartData: Record<string, unknown>;
 }
 
-const { repos, classifications, totalAudited, classificationChartData, flagshipChartData } = Astro.props;
+const { repos, classifications, totalAudited, classificationChartData, flagshipChartData } =
+	Astro.props;
 ---
 
 <section class="section">

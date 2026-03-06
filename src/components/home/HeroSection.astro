@@ -1,44 +1,46 @@
 ---
-import SketchContainer from '../sketches/SketchContainer.astro';
 import vitals from '../../data/vitals.json';
+import SketchContainer from '../sketches/SketchContainer.astro';
 
 interface ResolvedGroup {
-  organ: string;
-  name: string;
-  domain: string;
-  projects: Array<{
-    title: string;
-    tagline: string;
-    description: string;
-    slug: string;
-    href: string;
-    tags: string[];
-    skills: string[];
-    number: number;
-  }>;
+	organ: string;
+	name: string;
+	domain: string;
+	projects: Array<{
+		title: string;
+		tagline: string;
+		description: string;
+		slug: string;
+		href: string;
+		tags: string[];
+		skills: string[];
+		number: number;
+	}>;
 }
 
 interface Props {
-  metrics: {
-    code_substance: {
-      total_code_files: number;
-      total_test_files: number;
-      ci_passing: number;
-    };
-    registry: {
-      total_repos: number;
-    };
-  };
-  resolvedGroups: ResolvedGroup[];
+	metrics: {
+		code_substance: {
+			total_code_files: number;
+			total_test_files: number;
+			ci_passing: number;
+		};
+		registry: {
+			total_repos: number;
+		};
+	};
+	resolvedGroups: ResolvedGroup[];
 }
 
 const { resolvedGroups } = Astro.props;
 
-const engineeringTitle = 'AI Orchestration Architect building model-agnostic swarms and enterprise-grade distributed backends.';
-const creativeTitle = 'Bridging MFA-level narrative theory with meta-certified engineering to build living, logocentric systems.';
+const engineeringTitle =
+	'AI Orchestration Architect building model-agnostic swarms and enterprise-grade distributed backends.';
+const creativeTitle =
+	'Bridging MFA-level narrative theory with meta-certified engineering to build living, logocentric systems.';
 
 function splitWords(text: string) {
-  return text.split(/\s+/);
+	return text.split(/\s+/);
 }
 ---
 

@@ -1,53 +1,62 @@
 ---
+import pagesDirectory from '../data/github-pages.json';
+import { projectIndex } from '../data/project-index';
+import { base } from '../utils/paths';
+import GithubPagesTracking from './scripts/GithubPagesTracking.astro';
 import SketchContainer from './sketches/SketchContainer.astro';
 import TableOfContents from './TableOfContents.astro';
-import GithubPagesTracking from './scripts/GithubPagesTracking.astro';
-import { projectIndex } from '../data/project-index';
-import pagesDirectory from '../data/github-pages.json';
-import { base } from '../utils/paths';
 
 interface Badge {
-  src: string;
-  alt: string;
-  href?: string;
+	src: string;
+	alt: string;
+	href?: string;
 }
 
 interface Props {
-  title: string;
-  tagline: string;
-  tags: string[];
-  repo?: string;
-  liveUrl?: string;
-  badges?: Badge[];
-  heroImage?: { src: string; alt: string };
-  sketchId?: string;
+	title: string;
+	tagline: string;
+	tags: string[];
+	repo?: string;
+	liveUrl?: string;
+	badges?: Badge[];
+	heroImage?: { src: string; alt: string };
+	sketchId?: string;
 }
 
-const { title, tagline, tags, repo, liveUrl, badges, heroImage, sketchId = 'recursive-tree' } = Astro.props;
+const {
+	title,
+	tagline,
+	tags,
+	repo,
+	liveUrl,
+	badges,
+	heroImage,
+	sketchId = 'recursive-tree',
+} = Astro.props;
 
 interface PagesRepo {
-  owner: string;
-  repo: string;
-  fullName: string;
-  pageUrl: string;
-  repoUrl: string;
-  featured: boolean;
-  priority: number;
-  hidden: boolean;
-  label: string | null;
-  probeMethod?: string | null;
-  probeLatencyMs?: number | null;
-  lastError?: string | null;
+	owner: string;
+	repo: string;
+	fullName: string;
+	pageUrl: string;
+	repoUrl: string;
+	featured: boolean;
+	priority: number;
+	hidden: boolean;
+	label: string | null;
+	probeMethod?: string | null;
+	probeLatencyMs?: number | null;
+	lastError?: string | null;
 }
 
 function parseGitHubRepo(url?: string) {
-  if (!url) return null;
-  const match = url.match(/^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)/i);
-  if (!match) return null;
-  return {
-    owner: match[1].toLowerCase(),
-    repo: match[2].replace(/\.git$/i, '').toLowerCase(),
-  };
+	if (!url) return null;
+	const match = url.match(/^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)/i);
+	if (!match) return null;
+	return {
+		owner: match[1].toLowerCase(),
+		repo: match[2].replace(/\.git$/i, '').toLowerCase(),
+	};
 }
 
 // Derive current slug from URL and find related projects by shared tags
@@ -55,59 +64,56 @@ const segments = Astro.url.pathname.replace(/\/$/, '').split('/');
 const currentSlug = segments[segments.length - 1];
 const tagSet = new Set(tags);
 const related = projectIndex
-  .filter(p => p.slug !== currentSlug)
-  .map(p => ({ ...p, shared: p.tags.filter(t => tagSet.has(t)).length }))
-  .filter(p => p.shared > 0)
-  .sort((a, b) => b.shared - a.shared)
-  .slice(0, 3);
+	.filter((p) => p.slug !== currentSlug)
+	.map((p) => ({ ...p, shared: p.tags.filter((t) => tagSet.has(t)).length }))
+	.filter((p) => p.shared > 0)
+	.sort((a, b) => b.shared - a.shared)
+	.slice(0, 3);
 
 // Prev/next sequential navigation
-const currentIdx = projectIndex.findIndex(p => p.slug === currentSlug);
+const currentIdx = projectIndex.findIndex((p) => p.slug === currentSlug);
 const prevProject = currentIdx > 0 ? projectIndex[currentIdx - 1] : null;
 const nextProject = currentIdx < projectIndex.length - 1 ? projectIndex[currentIdx + 1] : null;
 
 const repoRef = parseGitHubRepo(repo);
-const pagesRepos = ((pagesDirectory as { repos?: PagesRepo[] }).repos ?? []).filter((entry) => !entry.hidden);
+const pagesRepos = ((pagesDirectory as { repos?: PagesRepo[] }).repos ?? []).filter(
+	(entry) => !entry.hidden,
+);
 const relatedPages = repoRef
-  ? (() => {
-      const exact = pagesRepos.find(
-        (entry) =>
-          entry.owner.toLowerCase() === repoRef.owner &&
-          entry.repo.toLowerCase() === repoRef.repo
-      );
+	? (() => {
+			const exact = pagesRepos.find(
+				(entry) =>
+					entry.owner.toLowerCase() === repoRef.owner && entry.repo.toLowerCase() === repoRef.repo,
+			);
 
-      const ownerPool = pagesRepos
-        .filter((entry) => entry.owner.toLowerCase() === repoRef.owner && entry !== exact)
-        .sort(
-          (a, b) =>
-            Number(b.featured) - Number(a.featured) ||
-            b.priority - a.priority ||
-            a.repo.localeCompare(b.repo, undefined, { sensitivity: 'base' })
-        );
+			const ownerPool = pagesRepos
+				.filter((entry) => entry.owner.toLowerCase() === repoRef.owner && entry !== exact)
+				.sort(
+					(a, b) =>
+						Number(b.featured) - Number(a.featured) ||
+						b.priority - a.priority ||
+						a.repo.localeCompare(b.repo, undefined, { sensitivity: 'base' }),
+				);
 
-      const familyTokens = repoRef.repo.split(/[-_]+/).filter((token) => token.length >= 4);
-      const familyMatches = ownerPool.filter((entry) =>
-        familyTokens.some((token) => entry.repo.toLowerCase().includes(token))
-      );
+			const familyTokens = repoRef.repo.split(/[-_]+/).filter((token) => token.length >= 4);
+			const familyMatches = ownerPool.filter((entry) =>
+				familyTokens.some((token) => entry.repo.toLowerCase().includes(token)),
+			);
 
-      const combined = [
-        ...(exact ? [exact] : []),
-        ...familyMatches,
-        ...ownerPool,
-      ];
+			const combined = [...(exact ? [exact] : []), ...familyMatches, ...ownerPool];
 
-      const deduped = [];
-      const seen = new Set();
-      for (const entry of combined) {
-        const key = entry.fullName.toLowerCase();
-        if (seen.has(key)) continue;
-        seen.add(key);
-        deduped.push(entry);
-      }
+			const deduped = [];
+			const seen = new Set();
+			for (const entry of combined) {
+				const key = entry.fullName.toLowerCase();
+				if (seen.has(key)) continue;
+				seen.add(key);
+				deduped.push(entry);
+			}
 
-      return deduped.slice(0, 6);
-    })()
-  : [];
+			return deduped.slice(0, 6);
+		})()
+	: [];
 ---
 
 <article class="project">

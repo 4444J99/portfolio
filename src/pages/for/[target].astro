@@ -1,35 +1,35 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { targets } from '../../data/targets.json';
-import { personas } from '../../data/personas.json';
 import EngineeringVitals from '../../components/resume/EngineeringVitals.astro';
 import GovernancePreview from '../../components/resume/GovernancePreview.astro';
-import { history, education, certifications } from '../../data/experience.json';
-import { projectCatalogBySlug } from '../../data/project-catalog';
-import { base } from '../../utils/paths';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import { certifications, education, history } from '../../data/experience.json';
+import { personas } from '../../data/personas.json';
+import { projectCatalogBySlug } from '../../data/project-catalog';
+import { targets } from '../../data/targets.json';
+import Layout from '../../layouts/Layout.astro';
+import { base } from '../../utils/paths';
 
 export async function getStaticPaths() {
-  return targets.map((target) => {
-    const persona = personas.find(p => p.id === target.persona_id);
-    return {
-      params: { target: target.slug },
-      props: { target, persona },
-    };
-  });
+	return targets.map((target) => {
+		const persona = personas.find((p) => p.id === target.persona_id);
+		return {
+			params: { target: target.slug },
+			props: { target, persona },
+		};
+	});
 }
 
 const { target, persona } = Astro.props;
 if (!persona) throw new Error(`Persona not found for target "${target.slug}"`);
 
 // Enrich featured projects
-const featuredProjects = persona.featured_projects.map(fp => {
-  const catalogEntry = projectCatalogBySlug.get(fp.slug);
-  if (!catalogEntry) throw new Error(`Featured slug "${fp.slug}" not found in project catalog`);
-  return {
-    ...catalogEntry,
-    market_impact: fp.impact
-  };
+const featuredProjects = persona.featured_projects.map((fp) => {
+	const catalogEntry = projectCatalogBySlug.get(fp.slug);
+	if (!catalogEntry) throw new Error(`Featured slug "${fp.slug}" not found in project catalog`);
+	return {
+		...catalogEntry,
+		market_impact: fp.impact,
+	};
 });
 ---
 

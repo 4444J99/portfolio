@@ -1,23 +1,27 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SketchContainer from '../components/sketches/SketchContainer.astro';
 import ChartContainer from '../components/charts/ChartContainer.astro';
-
-import type { GraphData, GraphNode, GraphEdge } from '../types/data';
+import SketchContainer from '../components/sketches/SketchContainer.astro';
 import graphData from '../data/graph.json';
-import vitals from '../data/vitals.json';
 import { organColors } from '../data/organ-colors';
+import vitals from '../data/vitals.json';
+import Layout from '../layouts/Layout.astro';
+import type { GraphData, GraphEdge, GraphNode } from '../types/data';
 import { buildArchitectureNavigatorData } from '../utils/architecture-data';
 
 const navigatorData = buildArchitectureNavigatorData();
 
 const typedGraph = graphData as GraphData;
 const organNodes = [...new Set(typedGraph.nodes.map((n: GraphNode) => n.organ))];
-const organEdges = typedGraph.edges.map((e: GraphEdge) => {
-  const srcOrgan = typedGraph.nodes.find((n: GraphNode) => n.id === e.source)?.organ;
-  const tgtOrgan = typedGraph.nodes.find((n: GraphNode) => n.id === e.target)?.organ;
-  return `${organNodes.indexOf(srcOrgan!)}-${organNodes.indexOf(tgtOrgan!)}`;
-}).filter((e: string) => { const [a, b] = e.split('-'); return a !== b; });
+const organEdges = typedGraph.edges
+	.map((e: GraphEdge) => {
+		const srcOrgan = typedGraph.nodes.find((n: GraphNode) => n.id === e.source)?.organ;
+		const tgtOrgan = typedGraph.nodes.find((n: GraphNode) => n.id === e.target)?.organ;
+		return `${organNodes.indexOf(srcOrgan!)}-${organNodes.indexOf(tgtOrgan!)}`;
+	})
+	.filter((e: string) => {
+		const [a, b] = e.split('-');
+		return a !== b;
+	});
 const uniqueEdges = [...new Set(organEdges)] as string[];
 ---
 

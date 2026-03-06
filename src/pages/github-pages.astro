@@ -1,53 +1,53 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import GithubPagesTracking from '../components/scripts/GithubPagesTracking.astro';
 import pagesDirectory from '../data/github-pages.json';
 import vitals from '../data/vitals.json';
+import Layout from '../layouts/Layout.astro';
 import { base } from '../utils/paths';
 
 interface PagesRepo {
-  owner: string;
-  repo: string;
-  fullName: string;
-  repoUrl: string;
-  pageUrl: string;
-  status: string | null;
-  buildType: string | null;
-  cname: string | null;
-  sourceBranch: string | null;
-  sourcePath: string | null;
-  updatedAt: string | null;
-  featured: boolean;
-  priority: number;
-  hidden: boolean;
-  label: string | null;
-  httpStatus: number | null;
-  reachable: boolean;
-  redirectTarget: string | null;
-  lastCheckedAt: string;
-  probeMethod?: string | null;
-  probeLatencyMs?: number | null;
-  lastError?: string | null;
+	owner: string;
+	repo: string;
+	fullName: string;
+	repoUrl: string;
+	pageUrl: string;
+	status: string | null;
+	buildType: string | null;
+	cname: string | null;
+	sourceBranch: string | null;
+	sourcePath: string | null;
+	updatedAt: string | null;
+	featured: boolean;
+	priority: number;
+	hidden: boolean;
+	label: string | null;
+	httpStatus: number | null;
+	reachable: boolean;
+	redirectTarget: string | null;
+	lastCheckedAt: string;
+	probeMethod?: string | null;
+	probeLatencyMs?: number | null;
+	lastError?: string | null;
 }
 
 interface PagesDirectory {
-  generatedAt: string;
-  owners: string[];
-  totalRepos: number;
-  repos: PagesRepo[];
+	generatedAt: string;
+	owners: string[];
+	totalRepos: number;
+	repos: PagesRepo[];
 }
 
 const directory = pagesDirectory as PagesDirectory;
 const generatedAtMs = Number.isFinite(Date.parse(directory.generatedAt))
-  ? Date.parse(directory.generatedAt)
-  : null;
+	? Date.parse(directory.generatedAt)
+	: null;
 const generatedLabel =
-  generatedAtMs === null
-    ? directory.generatedAt
-    : new Date(generatedAtMs).toLocaleString('en-US', {
-        dateStyle: 'medium',
-        timeStyle: 'short',
-      });
+	generatedAtMs === null
+		? directory.generatedAt
+		: new Date(generatedAtMs).toLocaleString('en-US', {
+				dateStyle: 'medium',
+				timeStyle: 'short',
+			});
 
 const ageHours = generatedAtMs === null ? null : (Date.now() - generatedAtMs) / (1000 * 60 * 60);
 const isStale = ageHours !== null && ageHours > 48;
@@ -59,43 +59,43 @@ const erroredCount = visibleRepos.filter((repo) => repo.status === 'errored').le
 const unreachableCount = visibleRepos.filter((repo) => repo.reachable === false).length;
 const erroredRepos = visibleRepos.filter((repo) => repo.status === 'errored');
 const recentlyChangedCount = visibleRepos.filter((repo) => {
-  if (!repo.updatedAt || !Number.isFinite(Date.parse(repo.updatedAt))) return false;
-  const ageMs = Date.now() - Date.parse(repo.updatedAt);
-  return ageMs <= 7 * 24 * 60 * 60 * 1000;
+	if (!repo.updatedAt || !Number.isFinite(Date.parse(repo.updatedAt))) return false;
+	const ageMs = Date.now() - Date.parse(repo.updatedAt);
+	return ageMs <= 7 * 24 * 60 * 60 * 1000;
 }).length;
 
 const featuredRepos = visibleRepos
-  .filter((repo) => repo.featured)
-  .sort((a, b) => b.priority - a.priority || a.fullName.localeCompare(b.fullName))
-  .slice(0, 12);
+	.filter((repo) => repo.featured)
+	.sort((a, b) => b.priority - a.priority || a.fullName.localeCompare(b.fullName))
+	.slice(0, 12);
 
 const ownerOrder = new Map(directory.owners.map((owner, index) => [owner.toLowerCase(), index]));
 const grouped = new Map<string, PagesRepo[]>();
 
 for (const repo of visibleRepos) {
-  if (!grouped.has(repo.owner)) grouped.set(repo.owner, []);
-  grouped.get(repo.owner)?.push(repo);
+	if (!grouped.has(repo.owner)) grouped.set(repo.owner, []);
+	grouped.get(repo.owner)?.push(repo);
 }
 
 for (const [owner, repos] of grouped) {
-  grouped.set(
-    owner,
-    repos.sort(
-      (a, b) =>
-        Number(b.featured) - Number(a.featured) ||
-        b.priority - a.priority ||
-        a.repo.localeCompare(b.repo, undefined, { sensitivity: 'base' })
-    )
-  );
+	grouped.set(
+		owner,
+		repos.sort(
+			(a, b) =>
+				Number(b.featured) - Number(a.featured) ||
+				b.priority - a.priority ||
+				a.repo.localeCompare(b.repo, undefined, { sensitivity: 'base' }),
+		),
+	);
 }
 
 const groups = Array.from(grouped.entries()).sort((a, b) => {
-  const aIdx = ownerOrder.get(a[0].toLowerCase());
-  const bIdx = ownerOrder.get(b[0].toLowerCase());
-  if (aIdx !== undefined && bIdx !== undefined) return aIdx - bIdx;
-  if (aIdx !== undefined) return -1;
-  if (bIdx !== undefined) return 1;
-  return a[0].localeCompare(b[0], undefined, { sensitivity: 'base' });
+	const aIdx = ownerOrder.get(a[0].toLowerCase());
+	const bIdx = ownerOrder.get(b[0].toLowerCase());
+	if (aIdx !== undefined && bIdx !== undefined) return aIdx - bIdx;
+	if (aIdx !== undefined) return -1;
+	if (bIdx !== undefined) return 1;
+	return a[0].localeCompare(b[0], undefined, { sensitivity: 'base' });
 });
 ---
 

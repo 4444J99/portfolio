@@ -3,14 +3,14 @@
  * Keys use hyphenated format (ORGAN-I, ORGAN-II, etc.) matching chart-theme.ts.
  */
 export const organColors: Record<string, string> = {
-  'ORGAN-I': '#7c9bf5',
-  'ORGAN-II': '#e87c7c',
-  'ORGAN-III': '#7ce8a6',
-  'ORGAN-IV': '#c9a84c',
-  'ORGAN-V': '#c97ce8',
-  'ORGAN-VI': '#7ce8e8',
-  'ORGAN-VII': '#e8c87c',
-  'META-ORGANVM': '#a0a0a0',
+	'ORGAN-I': '#7c9bf5',
+	'ORGAN-II': '#e87c7c',
+	'ORGAN-III': '#7ce8a6',
+	'ORGAN-IV': '#c9a84c',
+	'ORGAN-V': '#c97ce8',
+	'ORGAN-VI': '#7ce8e8',
+	'ORGAN-VII': '#e8c87c',
+	'META-ORGANVM': '#a0a0a0',
 };
 
 /**
@@ -18,8 +18,8 @@ export const organColors: Record<string, string> = {
  * Handles space-separated ("ORGAN I"), hyphenated ("ORGAN-I"), and "Meta" shorthand.
  */
 export function normalizeOrganKey(key: string): string {
-  if (key === 'Meta') return 'META-ORGANVM';
-  return key.replace(/^(ORGAN)\s+/i, '$1-');
+	if (key === 'Meta') return 'META-ORGANVM';
+	return key.replace(/^(ORGAN)\s+/i, '$1-');
 }
 
 /**
@@ -27,7 +27,7 @@ export function normalizeOrganKey(key: string): string {
  * Accepts both "ORGAN I" (space) and "ORGAN-I" (hyphen) formats.
  */
 export function getOrganColor(key: string, fallback = '#888'): string {
-  return organColors[normalizeOrganKey(key)] ?? fallback;
+	return organColors[normalizeOrganKey(key)] ?? fallback;
 }
 
 /**
@@ -36,12 +36,12 @@ export function getOrganColor(key: string, fallback = '#888'): string {
  * Prefer getOrganColor() for new code.
  */
 export const organColorMap: Record<string, string> = {
-  'ORGAN I': '#7c9bf5',
-  'ORGAN II': '#e87c7c',
-  'ORGAN III': '#7ce8a6',
-  'ORGAN IV': '#c9a84c',
-  'ORGAN V': '#c97ce8',
-  'ORGAN VI': '#7ce8e8',
-  'ORGAN VII': '#e8c87c',
-  'Meta': '#a0a0a0',
+	'ORGAN I': '#7c9bf5',
+	'ORGAN II': '#e87c7c',
+	'ORGAN III': '#7ce8a6',
+	'ORGAN IV': '#c9a84c',
+	'ORGAN V': '#c97ce8',
+	'ORGAN VI': '#7ce8e8',
+	'ORGAN VII': '#e8c87c',
+	Meta: '#a0a0a0',
 };

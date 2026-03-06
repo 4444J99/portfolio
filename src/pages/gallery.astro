@@ -1,50 +1,52 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
+import Layout from '../layouts/Layout.astro';
 
 interface Sketch {
-  id: string;
-  label: string;
-  context: string;
-  organ: string;
+	id: string;
+	label: string;
+	context: string;
+	organ: string;
 }
 
 const sketches: Sketch[] = [
-  { id: 'hero', label: 'Organ Breathing', context: 'Homepage', organ: 'META' },
-  { id: 'organ-system', label: 'Organ System', context: 'Architecture', organ: 'META' },
-  { id: 'recursive-tree', label: 'Recursive Tree', context: 'RE:GE', organ: 'ORGAN-I' },
-  { id: 'counterpoint', label: 'Counterpoint', context: 'Generative Music', organ: 'ORGAN-II' },
-  { id: 'pipeline', label: 'Pipeline Flow', context: 'Orchestration', organ: 'ORGAN-III' },
-  { id: 'token-stream', label: 'Token Stream', context: 'AI Conductor', organ: 'ORGAN-I' },
-  { id: 'network-graph', label: 'Network Graph', context: 'Knowledge Base', organ: 'ORGAN-I' },
-  { id: 'flow-diagram', label: 'Flow Diagram', context: 'Agentic Titan', organ: 'ORGAN-III' },
-  { id: 'data-bars', label: 'Data Bars', context: 'Dashboard', organ: 'META' },
-  { id: 'particle-field', label: 'Particle Field', context: 'About', organ: 'META' },
-  { id: 'terrain', label: 'Terrain', context: 'TurfSynth AR', organ: 'ORGAN-IV' },
-  { id: 'conductor', label: 'Conductor', context: 'AI Conductor', organ: 'ORGAN-I' },
-  { id: 'octagon', label: 'Octagon', context: 'Eight-Organ System', organ: 'META' },
-  { id: 'waveform', label: 'Waveform', context: 'Generative Music', organ: 'ORGAN-II' },
-  { id: 'swarm', label: 'Swarm', context: 'Agentic Titan', organ: 'ORGAN-III' },
-  { id: 'deliberation', label: 'Deliberation', context: 'AI Council', organ: 'ORGAN-II' },
-  { id: 'blocks', label: 'Blocks', context: 'TurfSynth AR', organ: 'ORGAN-IV' },
-  { id: 'constellation', label: 'Constellation', context: 'Community', organ: 'ORGAN-VI' },
-  { id: 'scatter', label: 'Scatter', context: 'Dashboard', organ: 'META' },
-  { id: 'spiral', label: 'Spiral', context: 'Recursive Engine', organ: 'ORGAN-I' },
-  { id: 'orbits', label: 'Orbits', context: 'Orchestration Hub', organ: 'ORGAN-III' },
-  { id: 'atoms', label: 'Atoms', context: 'LingFrame', organ: 'ORGAN-I' },
-  { id: 'kaleidoscope', label: 'Kaleidoscope', context: 'Metasystem Master', organ: 'ORGAN-II' },
-  { id: 'lenses', label: 'Lenses', context: 'Narratological Lenses', organ: 'ORGAN-I' },
-  { id: 'routing', label: 'Routing', context: 'Distribution', organ: 'ORGAN-VII' },
-  { id: 'hierarchy', label: 'Hierarchy', context: 'Org Architecture', organ: 'ORGAN-VI' },
-  { id: 'typewriter', label: 'Typewriter', context: 'Public Process', organ: 'ORGAN-V' },
-  { id: 'ticker', label: 'Ticker', context: 'The Actual News', organ: 'ORGAN-IV' },
-  { id: 'weave', label: 'Weave', context: 'Your Fit Tailored', organ: 'ORGAN-IV' },
+	{ id: 'hero', label: 'Organ Breathing', context: 'Homepage', organ: 'META' },
+	{ id: 'organ-system', label: 'Organ System', context: 'Architecture', organ: 'META' },
+	{ id: 'recursive-tree', label: 'Recursive Tree', context: 'RE:GE', organ: 'ORGAN-I' },
+	{ id: 'counterpoint', label: 'Counterpoint', context: 'Generative Music', organ: 'ORGAN-II' },
+	{ id: 'pipeline', label: 'Pipeline Flow', context: 'Orchestration', organ: 'ORGAN-III' },
+	{ id: 'token-stream', label: 'Token Stream', context: 'AI Conductor', organ: 'ORGAN-I' },
+	{ id: 'network-graph', label: 'Network Graph', context: 'Knowledge Base', organ: 'ORGAN-I' },
+	{ id: 'flow-diagram', label: 'Flow Diagram', context: 'Agentic Titan', organ: 'ORGAN-III' },
+	{ id: 'data-bars', label: 'Data Bars', context: 'Dashboard', organ: 'META' },
+	{ id: 'particle-field', label: 'Particle Field', context: 'About', organ: 'META' },
+	{ id: 'terrain', label: 'Terrain', context: 'TurfSynth AR', organ: 'ORGAN-IV' },
+	{ id: 'conductor', label: 'Conductor', context: 'AI Conductor', organ: 'ORGAN-I' },
+	{ id: 'octagon', label: 'Octagon', context: 'Eight-Organ System', organ: 'META' },
+	{ id: 'waveform', label: 'Waveform', context: 'Generative Music', organ: 'ORGAN-II' },
+	{ id: 'swarm', label: 'Swarm', context: 'Agentic Titan', organ: 'ORGAN-III' },
+	{ id: 'deliberation', label: 'Deliberation', context: 'AI Council', organ: 'ORGAN-II' },
+	{ id: 'blocks', label: 'Blocks', context: 'TurfSynth AR', organ: 'ORGAN-IV' },
+	{ id: 'constellation', label: 'Constellation', context: 'Community', organ: 'ORGAN-VI' },
+	{ id: 'scatter', label: 'Scatter', context: 'Dashboard', organ: 'META' },
+	{ id: 'spiral', label: 'Spiral', context: 'Recursive Engine', organ: 'ORGAN-I' },
+	{ id: 'orbits', label: 'Orbits', context: 'Orchestration Hub', organ: 'ORGAN-III' },
+	{ id: 'atoms', label: 'Atoms', context: 'LingFrame', organ: 'ORGAN-I' },
+	{ id: 'kaleidoscope', label: 'Kaleidoscope', context: 'Metasystem Master', organ: 'ORGAN-II' },
+	{ id: 'lenses', label: 'Lenses', context: 'Narratological Lenses', organ: 'ORGAN-I' },
+	{ id: 'routing', label: 'Routing', context: 'Distribution', organ: 'ORGAN-VII' },
+	{ id: 'hierarchy', label: 'Hierarchy', context: 'Org Architecture', organ: 'ORGAN-VI' },
+	{ id: 'typewriter', label: 'Typewriter', context: 'Public Process', organ: 'ORGAN-V' },
+	{ id: 'ticker', label: 'Ticker', context: 'The Actual News', organ: 'ORGAN-IV' },
+	{ id: 'weave', label: 'Weave', context: 'Your Fit Tailored', organ: 'ORGAN-IV' },
 ];
 
 const organs = [...new Set(sketches.map((s) => s.organ))];
 
 // Deterministic "featured" sketch based on the day of the year
-const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+const dayOfYear = Math.floor(
+	(Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000,
+);
 const featured = sketches[dayOfYear % sketches.length];
 ---
 

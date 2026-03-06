@@ -1,10 +1,10 @@
 ---
-import { projectCatalog } from '../../data/project-catalog';
 import { organColors } from '../../data/organ-colors';
+import { projectCatalog } from '../../data/project-catalog';
 
-const projects = projectCatalog.map(p => ({
-  ...p,
-  color: organColors[p.organ] || '#888888'
+const projects = projectCatalog.map((p) => ({
+	...p,
+	color: organColors[p.organ] || '#888888',
 }));
 ---
 

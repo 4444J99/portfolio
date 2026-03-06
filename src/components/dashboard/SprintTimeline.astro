@@ -1,10 +1,10 @@
 ---
-import ChartContainer from '../charts/ChartContainer.astro';
 import type { Sprint } from '../../types/data';
+import ChartContainer from '../charts/ChartContainer.astro';
 
 interface Props {
-  sprints: Sprint[];
-  sprintChartData: Record<string, unknown>;
+	sprints: Sprint[];
+	sprintChartData: Record<string, unknown>;
 }
 
 const { sprints, sprintChartData } = Astro.props;

@@ -1,11 +1,11 @@
-import { readFileSync, existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const FALLBACK_THRESHOLDS = {
-  statements: 25,
-  branches: 18,
-  functions: 18,
-  lines: 25,
+	statements: 25,
+	branches: 18,
+	functions: 18,
+	lines: 25,
 };
 
 /**
@@ -14,11 +14,11 @@ const FALLBACK_THRESHOLDS = {
  * @returns {object} The parsed ratchet policy
  */
 export function loadRatchetPolicy(qualityDir) {
-  const policyPath = resolve(qualityDir, 'ratchet-policy.json');
-  if (!existsSync(policyPath)) {
-    throw new Error(`Missing ratchet policy at ${policyPath}`);
-  }
-  return JSON.parse(readFileSync(policyPath, 'utf-8'));
+	const policyPath = resolve(qualityDir, 'ratchet-policy.json');
+	if (!existsSync(policyPath)) {
+		throw new Error(`Missing ratchet policy at ${policyPath}`);
+	}
+	return JSON.parse(readFileSync(policyPath, 'utf-8'));
 }
 
 /**
@@ -28,7 +28,7 @@ export function loadRatchetPolicy(qualityDir) {
  * @returns {string} The resolved phase name
  */
 export function resolvePhase(policy, envPhase) {
-  return envPhase || policy.defaultPhase;
+	return envPhase || policy.defaultPhase;
 }
 
 /**
@@ -38,12 +38,12 @@ export function resolvePhase(policy, envPhase) {
  * @returns {{ phase: string, coverage: object }}
  */
 export function resolveCoverageThresholds(policy, envPhase) {
-  const phase = resolvePhase(policy, envPhase);
-  const phasePolicy = policy.phases?.[phase];
+	const phase = resolvePhase(policy, envPhase);
+	const phasePolicy = policy.phases?.[phase];
 
-  if (!phasePolicy?.coverage) {
-    return { phase, coverage: { ...FALLBACK_THRESHOLDS } };
-  }
+	if (!phasePolicy?.coverage) {
+		return { phase, coverage: { ...FALLBACK_THRESHOLDS } };
+	}
 
-  return { phase, coverage: phasePolicy.coverage };
+	return { phase, coverage: phasePolicy.coverage };
 }
