@@ -95,8 +95,10 @@ export async function assertFullscreenSingleFire(page: Page) {
 	await page.keyboard.press('Escape');
 	// In some CI environments, Escape might not fire correctly if focus is lost.
 	// We'll also try explicit exit as a fallback to ensure the test can proceed.
-	await page.evaluate(() => document.fullscreenElement && document.exitFullscreen().catch(() => {}));
-	
+	await page.evaluate(
+		() => document.fullscreenElement && document.exitFullscreen().catch(() => {}),
+	);
+
 	await expect
 		.poll(async () => page.evaluate(() => Boolean(document.fullscreenElement)), { timeout: 5000 })
 		.toBe(false);
