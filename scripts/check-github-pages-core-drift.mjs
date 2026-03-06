@@ -5,10 +5,10 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const EXPECTED = {
-	sync: 'd038249851a9f9c3f2a062227f450d8b592154451fe0c0524cb474d53aa4167d',
-	validate: 'a70a47fc1ff7ace9bb550a7a8ba380e599eb533051ed3072878cc7f2e2c5c613',
-	telemetry: '5fea553026f3160a1afad0efe2d37d097363ffee4f4ee790abe1745eeef59f14',
-	entrypoint: '872764a6f92bada5c323115e144a9b55eff7c17aae25465a9de212db6fed826a',
+	sync: 'f6b475c8ba5941e3837b8439f907ae1721dd5b0f7cf6498360093b836689a53d',
+	validate: '0f6348dbeb2b6e57549b406db1deda2e84cc2391f16c42c5677038d0def0d7ac',
+	telemetry: '4a047d66bf9332d01bf2467c4150bf9f50f6646e351115f07db6de3dc271ae3b',
+	entrypoint: 'e77da7fc486fe70f6a30a7d8fded0a883beeb0dfaa4229d7ff8cf9222b3e6380',
 };
 
 function sha256(filePath) {
