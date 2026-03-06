@@ -1,12 +1,12 @@
 {
-  "title": "ORGANVM — Eight-Organ Creative-Institutional System",
+  "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
-    "total_repos": 103,
-    "active_repos": 94,
+    "total_repos": 105,
+    "active_repos": 96,
     "archived_repos": 9,
-    "dependency_edges": 43,
-    "ci_workflows": 102,
+    "dependency_edges": 44,
+    "ci_workflows": 96,
     "operational_organs": 8,
     "sprints_completed": 33
   },
@@ -34,7 +34,7 @@
       "name": "Commerce",
       "greek": "Ergon",
       "org": "organvm-iii-ergon",
-      "repo_count": 27,
+      "repo_count": 28,
       "status": "OPERATIONAL",
       "description": "Product platforms, deployed systems, customer-facing tools, B2B/B2C applications"
     },
@@ -79,7 +79,7 @@
       "name": "META-ORGANVM",
       "greek": "META-ORGANVM",
       "org": "",
-      "repo_count": 7,
+      "repo_count": 8,
       "status": "OPERATIONAL",
       "description": "Umbrella organization coordinating all 7 organ orgs. System-wide governance, cross-organ visibility, and institutional identity."
     }
@@ -149,7 +149,7 @@
       "name": "VERITAS",
       "date": "2026-02-13",
       "focus": "Credibility",
-      "deliverables": "PRODUCTION→ACTIVE, revenue split"
+      "deliverables": "PRODUCTION\u2192ACTIVE, revenue split"
     },
     {
       "name": "MANIFESTATIO",
@@ -293,13 +293,13 @@
       "name": "PROPULSIO_MAXIMA",
       "date": "2026-02-24",
       "focus": "Multi-front",
-      "deliverables": "48 repos promoted, 83 decks, Doris Duke submitted, omega 1→2"
+      "deliverables": "48 repos promoted, 83 decks, Doris Duke submitted, omega 1\u21922"
     },
     {
       "name": "ERUPTIO",
       "date": "2026-02-28",
       "focus": "Deployment sprint",
-      "deliverables": "12 products deployed, schema v1.0.0, omega 2→4"
+      "deliverables": "12 products deployed, schema v1.0.0, omega 2\u21924"
     },
     {
       "name": "ERUPTIO_SECUNDA",
@@ -314,5 +314,5 @@
       "deliverables": "Portfolio refresh, PROBATIO, VIVIFICATIO, conference proposals"
     }
   ],
-  "generated": "2026-03-06T06:42:11.210152+00:00"
+  "generated": "2026-03-06T20:47:05.829273+00:00"
 }
