@@ -1,189 +1,407 @@
 {
-	"basePath": "/portfolio",
-	"routes": [
-		{
-			"path": "/",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/about",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/resume",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/resume/polymath",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/dashboard",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/essays",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/gallery",
-			"checks": [
-				"nav-menu",
-				"dropdown-menu",
-				"search-dialog",
-				"theme-toggle",
-				"gallery-filter",
-				"fullscreen"
-			],
-			"requiredFocusSelectors": [".sketch-ctrl--pause", ".sketch-ctrl--fullscreen"]
-		},
-		{
-			"path": "/architecture",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/community",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/consult",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/products",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/omega",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/github-pages",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/404.html",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/philosophy",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/aetheria-rpg",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/agentic-titan",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/ai-conductor",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/ai-council",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/block-warfare",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/community-infrastructure",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/distribution-strategy",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/eight-organ-system",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/generative-music",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/knowledge-base",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/life-my-midst-in",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/linguistic-atomization",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/metasystem-master",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/narratological-lenses",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/orchestration-hub",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/org-architecture",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/public-process",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/public-record-data-scrapper",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/recursive-engine",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/the-actual-news",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/projects/your-fit-tailored",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/resume/ai-systems-engineer",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/resume/systems-architect",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/resume/creative-technologist",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/resume/technical-pm",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/for/palantir",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/for/openai",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/for/anthropic",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		},
-		{
-			"path": "/for/vercel",
-			"checks": ["nav-menu", "dropdown-menu", "search-dialog", "theme-toggle"]
-		}
-	]
+  "basePath": "/portfolio",
+  "routes": [
+    {
+      "path": "/",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/about",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/resume",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/resume/polymath",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/dashboard",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/essays",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/gallery",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle",
+        "gallery-filter",
+        "fullscreen"
+      ],
+      "requiredFocusSelectors": [
+        ".sketch-ctrl--pause",
+        ".sketch-ctrl--fullscreen"
+      ]
+    },
+    {
+      "path": "/architecture",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/community",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/consult",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/products",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/omega",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/github-pages",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/404.html",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/philosophy",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/aetheria-rpg",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/agentic-titan",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/ai-conductor",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/ai-council",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/block-warfare",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/community-infrastructure",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/distribution-strategy",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/eight-organ-system",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/generative-music",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/knowledge-base",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/life-my-midst-in",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/linguistic-atomization",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/metasystem-master",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/narratological-lenses",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/orchestration-hub",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/org-architecture",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/public-process",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/public-record-data-scrapper",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/recursive-engine",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/the-actual-news",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/your-fit-tailored",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/resume/ai-systems-engineer",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/resume/systems-architect",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/resume/creative-technologist",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/resume/technical-pm",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/for/palantir",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/for/openai",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/for/anthropic",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/for/vercel",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    }
+  ]
 }
