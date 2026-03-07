@@ -1,200 +1,306 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Astro 5 static site. GitHub Pages at `https://4444j99.github.io/portfolio/`. Node >= 22.
 
 ## Commands
 
 ```bash
-npm run dev            # Dev server at localhost:4321/portfolio/ (auto-runs sync:vitals)
-npm run build          # Production build → dist/ (auto-runs generate-badges, sync:vitals, sync:omega, pagefind)
-npm run preview        # Preview production build
+# Daily workflow
+npm run dev              # Dev server → localhost:4321/portfolio/
+npm run build            # Full build chain → dist/
+npm run preflight        # Pre-push gate (~80% of CI failures). Run before every push.
+npm run lint:fix         # Biome autofix (tabs, single quotes, trailing commas, width 100)
+npm run test             # Vitest unit + integration (-c .config/vitest.config.ts)
+npm run typecheck:strict # Ratcheted hint budget (fails if hints > threshold)
+npm run quality:local:no-lh  # Full CI-parity quality pipeline, no Lighthouse
 
-# Linting (Biome, not ESLint)
-npm run lint           # biome check . (tabs, single quotes, trailing commas)
-npm run lint:fix       # biome check --write .
-
-# Testing
-npm run test                    # Unit + integration tests (vitest, config at .config/vitest.config.ts)
-npm run test:coverage           # Coverage report (V8)
-npm run test:a11y               # Static accessibility audit (axe-core on built HTML)
-npm run test:a11y:runtime       # Runtime browser a11y (Playwright + axe)
-npm run test:e2e:smoke          # Playwright smoke suite (mobile + desktop)
-npm run test:runtime:errors     # Runtime error telemetry (desktop + mobile viewports)
-npm run test:security           # npm audit + allowlist contract
-npm run test:perf:budgets       # Date-ratcheted gzip chunk/route budgets
-
-# Quality gates
-npm run typecheck               # Astro check (type diagnostics)
-npm run typecheck:strict        # Ratcheted hint budget (fails if hints > threshold)
-npm run preflight              # Fast pre-push check (~80% of CI failures). Run before pushing
-npm run quality:local:no-lh    # Full CI-parity quality pipeline, skips Lighthouse (recommended locally)
-npm run quality:local           # Same + Lighthouse (resource-heavy, needs Chrome)
-npm run validate                # HTML validation + internal link check
-npm run generate-badges         # Regenerate quality badges + metrics JSON
-
-# Data sync
-npm run sync:vitals             # Sync trust metrics (auto-run by dev/build)
-npm run sync:omega              # Sync omega maturity scorecard from targets.json
-npm run sync:github-pages       # Sync GitHub Pages index data
-npm run generate-data           # Regenerate src/data/ from sibling repo (requires ../ingesting-organ-document-structure/)
-
-# Strike Intelligence Engine
-npm run strike:new "Company" "Role" ["persona-id"]  # Create strike target with AI-generated content
-npm run strike:scout            # AI discovers candidates matching personas via gemini CLI
-npm run strike:sweep            # Batch-process intake/job-descriptions/ into strike targets
-
-# Workspace package tests (Node built-in test runner, NOT vitest)
-npm run test:github-pages-core  # packages/github-pages-index-core/
-npm run test:quality-ratchet-kit # packages/quality-ratchet-kit/
-npm run test:sketches           # packages/sketches/
-
-# Consult Worker (Cloudflare Worker at workers/consult-api/)
-npm run consult:worker:dev              # Local dev via wrangler --remote
-npm run consult:worker:deploy           # Deploy to Cloudflare
-npm run consult:worker:migrate:local    # Apply D1 migrations locally
-npm run consult:worker:migrate:remote   # Apply D1 migrations to prod
-```
-
-**Running single vitest tests:**
-```bash
+# Single test
 npx vitest run src/data/__tests__/data-integrity.test.ts -c .config/vitest.config.ts
 npx vitest run -t "test name pattern" -c .config/vitest.config.ts
+
+# Build-first tests (require npm run build)
+npm run test:a11y        # axe-core on built HTML
+npm run test:e2e:smoke   # Playwright smoke (mobile + desktop)
+npm run test:runtime:errors  # Runtime error telemetry
+
+# Data sync
+npm run sync:vitals      # Trust metrics → vitals.json, trust-vitals.json, landing.json
+npm run sync:omega       # Maturity scorecard → omega.json
+npm run sync:identity    # Identity data → about.json
+npm run generate-data    # Regenerate src/data/ from sibling Python repo
 ```
 
-**Build-first tests:** a11y, E2E smoke, runtime errors, and build-output tests all require `npm run build` first.
+Full command catalog: [`docs/claude/command-reference.md`](docs/claude/command-reference.md)
+
+## Invariants
+
+**If you violate these, CI breaks.** Every row is enforced; there are no warnings-only.
+
+| If you change... | You MUST also... | Enforced by |
+|---|---|---|
+| Coverage thresholds in `.quality/ratchet-policy.json` | Update `README.md` coverage ratchet line (exact regex) | `quality-governance.test.ts` |
+| Lighthouse scores in `.config/lighthouserc.cjs` | Update `README.md` `Perf >= N` line | `quality-governance.test.ts` |
+| Security checkpoints in `.quality/security-policy.json` | Update `README.md` security ratchet line | `quality-governance.test.ts` |
+| Hint budgets in `.quality/ratchet-policy.json` | Update `README.md` hint budget line | `quality-governance.test.ts` |
+| `defaultPhase` in `ratchet-policy.json` | Update `QUALITY_PHASE` in `quality.yml` line 19 | `quality-governance.test.ts` |
+| Add/remove page in `src/pages/` | Run `npm run sync:a11y-routes` | `check-runtime-route-manifest.mjs` |
+| Add/remove persona in `personas.json` | Run `npm run sync:a11y-routes` | `check-runtime-route-manifest.mjs` |
+| Add/remove target in `targets.json` | Run `npm run sync:a11y-routes` | `check-runtime-route-manifest.mjs` |
+| Add/remove essay in `src/content/logos/` | Run `npm run sync:a11y-routes` | `check-runtime-route-manifest.mjs` |
+| `base` in `astro.config.mjs` (currently `/portfolio`) | ALL links, `canonicalBase` in `src/utils/paths.ts`, GitHub Pages config | **Nothing automated** — total breakage |
+| Remove `src/test/setup.ts` | Fix `setupFiles` in `.config/vitest.config.ts` | **Nothing** — all sketch tests fail silently |
+| Set `QUALITY_PHASE` to unknown phase | Ensure phase exists in `ratchet-policy.json` | `vitest.config.ts` crashes at startup |
+
+**Governance test mechanics**: `quality-governance.test.ts` parses `README.md` with regexes and asserts exact numeric match against `.quality/*.json` and `.config/lighthouserc.cjs`. Both sides must be changed **in the same commit**.
+
+## Build & Data Pipeline
+
+### Build chain (sequential — any failure stops all)
+
+```
+generate-badges → sync:vitals → sync:omega → sync:identity → astro build → pagefind
+```
+
+Defined in `package.json` line 23. The `dev` script only runs `sync:vitals` before `astro dev`.
+
+### Reactive data couplings
+
+1. `targets.json` count > 0 → `sync:omega` marks omega criterion 5 as `"met"`
+2. `.quality/*.json` → `sync:vitals` → `vitals.json` + `trust-vitals.json` + `landing.json`
+3. `system-metrics.json` → `sync:identity` → `about.json` system_summary
+
+### Data producers (who writes `src/data/`)
+
+| Script | Writes to |
+|--------|-----------|
+| `generate-data` | projects.json, essays.json, graph.json, experience.json, system-metrics.json |
+| `sync:vitals` | vitals.json, trust-vitals.json, landing.json |
+| `sync:omega` | omega.json |
+| `sync:identity` | about.json |
+| `strike:new` / `strike:sweep` | targets.json |
+| `scout-agent` | scout-candidates.json |
+| `sync:github-pages` | github-pages.json |
+| `generate-badges` | .quality/quality-metrics.json |
+
+**Safe to hand-edit**: `personas.json`, `targets.json`, `github-pages-curation.json`. All others are generated — edits will be overwritten.
+
+Full coupling graph with line numbers: [`docs/claude/data-coupling-graph.md`](docs/claude/data-coupling-graph.md)
+
+## House Style
+
+### Component anatomy
+
+```astro
+---
+interface Props {
+  title: string;
+  items: Item[];
+}
+const { title, items } = Astro.props;
+---
+
+<section class="my-block">
+  <h2 class="my-block__title">{title}</h2>
+  {items.map((item) => (
+    <div class="my-block__item">{item.name}</div>
+  ))}
+</section>
+
+<style>
+  .my-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    transition: all var(--transition-base);
+  }
+  .my-block__title {
+    font-family: var(--font-heading);
+    color: var(--accent-text);
+  }
+</style>
+```
+
+**Rules**:
+- Props interface at top of frontmatter, single destructure from `Astro.props`
+- Scoped `<style>` block, BEM naming (`.block`, `.block__element`, `.block--modifier`)
+- All values from CSS custom properties — never hardcode colors, spacing, fonts, transitions
+- Data attributes for state-driven CSS: `data-portfolio-view`, `data-active`, etc.
+- `:global([data-portfolio-view="..."])` for cross-component view switching
+
+### CSS design tokens (never hardcode)
+
+```
+Colors:    --bg-primary (#0a0a0b), --bg-card (#181818), --border (#2a2a2a)
+           --text-primary (#fff), --text-secondary (#b0b0b0), --text-muted (#707070)
+           --accent (#d4a853 gold), --accent-hover (#c4463a burnt sienna)
+           --success (#10b981), --failure (#ef4444), --warning (#f59e0b)
+Fonts:     --font-heading (Syne), --font-body (Plus Jakarta Sans), --font-mono (JetBrains Mono)
+Spacing:   --space-2xs (0.25rem) through --space-4xl (6rem), Fibonacci-influenced
+Layout:    --max-width (1100px), --max-width-narrow (740px), 768px mobile breakpoint
+Radius:    --radius-sm (0.25rem), --radius-md (0.5rem), --radius-lg (1rem)
+Motion:    --transition-fast (150ms), --transition-base (250ms), --transition-slow (400ms)
+Z-index:   --z-hidden (-1), --z-base (0), --z-dropdown (100), --z-sticky (200), --z-modal (1000)
+Shadows:   --shadow-sm through --shadow-2xl
+```
+
+Self-hosted fonts (woff2) in `public/fonts/`. Fluid typography via `clamp()`.
+
+### Client-side patterns
+
+- **View transitions**: `astro:page-load` → init, `astro:before-swap` → teardown. Background canvas persists via `transition:persist`.
+- **Cleanup**: AbortController for event listeners; `teardownPage()` removes per-page p5/D3 instances but preserves `#bg-canvas`.
+- **Lazy loading**: IntersectionObserver (200px rootMargin), unobserve after init.
+- **Throttling**: MAX_CONCURRENT=4 for p5.js sketch init, queue-based.
+- **Deferred init**: RequestIdleCallback for above-fold, PerformanceObserver for post-LCP background sketch.
+- **Reduced motion**: 60 warmup frames then `noLoop()` when `prefers-reduced-motion: reduce`.
+- **State**: Singleton pattern via localStorage + data attributes on `<main>` for CSS-driven view switching.
+
+### Import conventions
+
+- `@/` alias → `src/` (Astro built-in, also configured in vitest)
+- `{ base }` from `src/utils/paths.ts` for ALL dynamic URLs: `` `${base}projects/${slug}/` ``
+- Workspace packages: `@4444j99/sketches`, `@4444j99/quality-ratchet-kit`, `@meta-organvm/github-pages-index-core`
+- Import order: Astro utilities → components (alphabetical) → data → utilities
+- Static JSON imports processed at build time; dynamic imports for lazy modules
+
+Full annotated examples: [`docs/claude/house-style.md`](docs/claude/house-style.md)
 
 ## Architecture
 
-**Astro 5** static site deployed to GitHub Pages at `https://4444j99.github.io/portfolio/`. Requires **Node >= 22**.
+### File tree
 
-### Key Constraint: Base Path
+```
+src/
+  pages/           # Astro file-based routing
+    index.astro    # Homepage with dual engineering/creative view
+    about.astro, resume.astro, dashboard.astro, omega.astro, ...
+    projects/      # 21 case-study pages
+    for/[target].astro     # Strike target landing pages (from targets.json + personas.json)
+    resume/[slug].astro    # Per-persona resumes (from personas.json, sketchId binds bg art)
+    logos/[slug].astro     # Essay pages (from src/content/logos/)
+    og/[...slug].png.ts    # OG image generation (satori + resvg-js)
+    feed.xml.ts, github-pages.json.ts  # API/RSS endpoints
+  components/      # Astro components, scoped styles
+    charts/        # D3 chart system (chart-loader.ts, chart-theme.ts, 8+ modules)
+    scripts/       # Client lifecycle (SketchLifecycle, ClientBootstrap, ScrollReveal)
+  layouts/Layout.astro  # All pages wrap this. Provides head, nav, footer, bg canvas, view transitions.
+  data/            # Generated JSON (see Data Pipeline above). Hand-edit only personas/targets/curation.
+  styles/global.css     # Design system (791 lines of custom properties). THE source of truth for tokens.
+  utils/paths.ts        # Exports base, canonicalBase. Use for all dynamic URLs.
+  test/setup.ts         # Canvas API stubs for jsdom. Required by vitest config.
+packages/
+  sketches/        # 30 named p5.js sketches, typed registry (SketchName), shared PALETTE
+  quality-ratchet-kit/  # Policy loading, phase resolution, governance sync
+  github-pages-index-core/  # GitHub Pages indexing + telemetry
+.quality/          # Committed policy JSONs + CI artifacts
+.config/           # Vitest, Playwright, Lighthouse configs (NOT project root)
+workers/consult-api/  # Cloudflare Worker + D1 (consultation request API)
+scripts/           # Build/sync/quality/strike scripts (all .mjs)
+```
 
-All internal links and assets must account for the `/portfolio` base path configured in `astro.config.mjs`. Use relative paths or Astro's built-in path handling.
+### Key subsystems (one-liner each)
 
-### Routing
+- **Dual portfolio view**: `data-portfolio-view` attribute on `<main>` toggles engineering/creative tags via CSS `:global()` selectors
+- **p5.js canvas**: Full-page `#bg-canvas` (z-index -1, pointer-events none) with 30 sketches; resume pages bind via `persona.sketchId`
+- **Chart system**: D3 charts in `src/components/charts/`, loaded via `chart-loader.ts` dynamic imports, themed via `chart-theme.ts`
+- **Persona system**: `personas.json` drives resume pages, strike targets, scout prompts, and sketch bindings
+- **Strike engine**: Three scripts (strike-new, scout-agent, operative-sweep) using gemini CLI; graceful `[DRAFT]` fallback if unavailable
+- **Omega scorecard**: `omega.json` tracks maturity criteria; `sync-omega.mjs` reactively updates from targets.json counts
+- **Quality ratchet**: Phase-based thresholds in `.quality/ratchet-policy.json`; vitest config reads coverage floors at startup
+- **Consult worker**: Cloudflare Worker at `workers/consult-api/` backed by D1, own wrangler config and migrations
 
-Pages in `src/pages/` map to URLs via Astro file-based routing. ~20 project case-study pages under `src/pages/projects/` plus top-level pages (index, about, resume, dashboard, essays, omega, gallery, etc.).
+### Manual chunks (astro.config.mjs)
 
-**Dynamic routes:**
-- `src/pages/for/[target].astro` — persona-targeted application pages (driven by `targets.json` + `personas.json`)
-- `src/pages/resume/[slug].astro` — per-persona resume pages with data enrichment from project catalog
-- `src/pages/og/[...slug].png.ts` — OG image generation at build time (satori + resvg-js)
-- `src/pages/logos/[slug].astro` — individual essay/logos pages
-- `src/pages/feed.xml.ts`, `github-pages.json.ts`, `github-pages.xml.ts` — API/RSS endpoints
+`vendor-p5`, `vendor-mermaid`, `vendor-cytoscape`, `vendor-katex`. Chunk warning limit 1800kB. New large vendors need their own chunk definition.
 
-### Persona System
+## CI/CD
 
-`src/data/personas.json` defines career personas (e.g., `ai-systems-engineer`, `systems-architect`). Each persona has: `id`, `title`, `thesis`, `stack`, `featured_projects`, `market_summary`, `sketchId`. Personas drive:
-- **Resume pages** (`/resume/[slug]`) — each persona renders a tailored resume with enriched project data
-- **Strike targets** (`/for/[target]`) — persona-specific application landing pages
-- **AI content generation** — scout/strike scripts use persona context in gemini prompts
+### Pipeline topology
 
-### Strike Intelligence Engine
+```
+quality.yml (push/PR/daily 9:17 UTC)
+  ├─ security          (npm audit + allowlist)
+  ├─ lint-and-typecheck (biome + astro check + hint budget)
+  ├─ build             (full chain → uploads dist/ + src/data/ artifacts)
+  │   ├─ test-unit     (vitest, downloads artifacts)
+  │   ├─ test-a11y     (axe-core + runtime a11y, downloads dist/)
+  │   ├─ test-e2e      (Playwright smoke, downloads dist/)
+  │   └─ performance   (bundle budgets + Lighthouse)
+  └─ finalize          (if: always(), consolidates all artifacts, runs governance test)
 
-Three-component AI recruitment system using the `gemini` CLI for content generation:
-1. **Scout** (`scripts/scout-agent.mjs`) — discovers candidates per persona, writes to `src/data/scout-candidates.json`
-2. **Strike** (`scripts/strike-new.mjs`) — creates a target in `src/data/targets.json` + generates OG image at `public/og/strikes/`
-3. **Operative Sweep** (`scripts/operative-sweep.mjs`) — batch-processes `intake/job-descriptions/*.txt` into strike targets
+deploy.yml (workflow_run on quality success | schedule | manual)
+  └─ build + deploy to gh-pages branch
+```
 
-All three gracefully degrade with `[DRAFT]` templates if gemini is unavailable.
+### CI failure modes
 
-### Omega System (Maturity Scorecard)
+- **Empty artifact cascade**: If `npm run build` fails, `dist/` artifact is empty. All downstream jobs fail with 404s/import errors.
+- **Silent schedule disable**: Malformed cron in quality.yml silently stops scheduled runs. No alert.
+- **Artifact retention**: 1-day retention. Manual retry after 24h finds deleted artifacts.
+- **Finalize consolidation**: `cp -r ... 2>/dev/null || true` silences errors. Failed consolidation goes undetected.
+- **Deploy bypass**: `workflow_dispatch` always deploys regardless of quality status (intentional manual override).
+- **Secret dependency**: `PUBLIC_CONSULT_API_BASE` secret required for deploy build. Deleted secret = silent build failure. <!-- allow-secret -->
 
-`src/data/omega.json` tracks system maturity across horizons and criteria (met/in_progress/not_started). `sync-omega.mjs` reactively updates omega criteria from `targets.json` counts. `src/pages/omega.astro` renders a color-coded scorecard with progress bars.
+### Environment variables
 
-### Styling
+- `QUALITY_PHASE=W10` (quality.yml line 19) — must match a phase in `ratchet-policy.json`
+- `PUBLIC_CONSULT_API_BASE` (deploy.yml secret) — Cloudflare Worker URL
 
-**No CSS framework.** Global design system via CSS custom properties in `src/styles/global.css`. Components add scoped styles.
+## Testing
 
-- Colors: dark theme (`#0a0a0b` base), gold (`--accent: #d4a853`) / burnt sienna (`--accent-hover: #c4463a`)
-- Typography: `--font-heading: 'Syne'`, `--font-body: 'Plus Jakarta Sans'`, `--font-mono: 'JetBrains Mono'`
-- Spacing: Fibonacci-influenced rem scale (`--space-2xs` through `--space-4xl`)
-- Layout: `--max-width: 1100px`, `--max-width-narrow: 740px`
-- Responsive: 768px mobile breakpoint, `clamp()` fluid typography
+### Configuration
 
-Self-hosted fonts (woff2) in `public/fonts/`. Use existing custom properties rather than hardcoding values.
+All configs in `.config/` (not project root):
+- **Vitest** — `.config/vitest.config.ts`: jsdom environment, `@` → `src/`, setup file `src/test/setup.ts` (canvas stubs), coverage excludes `.astro` and sketch implementations. Coverage thresholds loaded from `.quality/ratchet-policy.json` at config parse time.
+- **Playwright** — `.config/playwright.smoke.config.ts`: mobile + desktop viewports
+- **Lighthouse** — `.config/lighthouserc.cjs`: perf/a11y/best-practices thresholds
 
-### Quality Ratchet System
+### Current phase: W10
 
-`.quality/` is a committed directory with policy JSONs and runtime artifacts.
+Coverage floors: 45/32/32/45 (stmt/branch/func/line). Hint budget: 0.
 
-- `ratchet-policy.json` — phase-based coverage/typecheck thresholds (currently **W10**: 45/32/32/45 stmt/branch/func/line). `.config/vitest.config.ts` reads coverage floors from this file at config time. Override with `QUALITY_PHASE` env var.
-- `security-policy.json` — date-based security ratchet checkpoints with allowlist contract (max 14-day entries).
-- `scripts/check-bundle-budgets.mjs` — date-ratcheted chunk/route gzip budgets.
-- Regression guards in `ratchet-policy.json` prevent metric drops: max 3% coverage drop, max 5pt Lighthouse perf drop, zero security severity increases.
-- **Critical**: `quality-governance.test.ts` parses `README.md` ratchet values and asserts they match the JSON policy files. Changing thresholds in JSON without updating README (or vice versa) fails tests.
-- CODEOWNERS protects policy files.
+### Workspace package tests
 
-### Dual Portfolio View
+Use Node's built-in test runner (`node --test`), NOT vitest:
+```bash
+npm run test:github-pages-core
+npm run test:quality-ratchet-kit
+npm run test:sketches
+```
 
-`data-portfolio-view="engineering"|"creative"` attribute on `<main>` controls tag/tagline visibility. `IndexFilters.astro` handles the client-side toggle (AbortController pattern for cleanup). `ProjectCard.astro` uses `:global([data-portfolio-view="..."]) .card__tags--creative` scoped CSS selectors to show/hide per-view content.
+### Data integrity tests
 
-### View Transition Lifecycle
-
-`Layout.astro` uses Astro's `<ClientRouter />` for view transitions. Pattern: `astro:page-load` → initialize, `astro:before-swap` → teardown. Background sketch canvas persists via `transition:persist`.
-
-### p5.js Generative Art
-
-Full-page canvas (`#bg-canvas`, z-index -1, `pointer-events: none`) renders generative art behind all content. The `packages/sketches/` package exports 30 named sketches (atoms, conductor, hero, spiral, swarm, etc.) with a typed registry (`SketchName` type) and shared `PALETTE` color system. Resume pages bind specific sketches via `persona.sketchId`.
-
-### Chart System (D3)
-
-Separate from p5.js. Lives in `src/components/charts/` with `chart-loader.ts` (dynamic imports), `chart-theme.ts` (design-system tokens), and 8+ chart modules. Own test suite in `src/components/charts/__tests__/`.
-
-### Workspace Packages
-
-Three local npm workspace packages in `packages/`:
-
-| Package | Import Name | Test Runner | Purpose |
-|---------|-------------|-------------|---------|
-| `github-pages-index-core` | `@meta-organvm/github-pages-index-core` | Node built-in | GitHub Pages indexing + telemetry |
-| `quality-ratchet-kit` | `@4444j99/quality-ratchet-kit` | Node built-in | Ratchet policy loading, phase resolution, governance sync validation |
-| `sketches` | `@4444j99/sketches` | Node built-in | p5.js sketch registry, palette, typed exports |
-
-### Vitest Configuration
-
-Config lives at `.config/vitest.config.ts` (not project root). Key details:
-- Path alias: `@` → `src/`
-- Test pattern: `src/**/__tests__/**/*.test.ts` and `scripts/**/__tests__/**/*.test.ts`
-- Setup file: `src/test/setup.ts` (stubs canvas APIs for jsdom)
-- Coverage excludes `.astro` files and sketch implementations
-
-### Build: Manual Chunks
-
-`astro.config.mjs` splits large vendors: `vendor-p5`, `vendor-mermaid`, `vendor-cytoscape`, `vendor-katex`. Chunk warning limit is 1800kB.
-
-### CI/CD
-
-Three GitHub Actions workflows in `.github/workflows/`:
-- **quality.yml** — all quality gates on push/PR (security, vitest, a11y, Playwright E2E, validation, budgets, Lighthouse)
-- **deploy.yml** — builds and deploys to GitHub Pages (gated on quality.yml success via `workflow_run`)
-- **build-resume.yml** — renders resume YAML → PDF/DOCX via RenderCV + Pandoc, creates GitHub Release
-
-### Consult Worker
-
-Cloudflare Worker at `workers/consult-api/` — a consultation request API backed by D1 (SQLite). Has its own wrangler config, migrations in `workers/consult-api/migrations/`, and contract tests in `workers/consult-api/__tests__/`.
-
-### Data Pipeline
-
-`src/data/` contains JSON files generated by `npm run generate-data` from `../ingesting-organ-document-structure/`. Key data files: `personas.json`, `targets.json`, `omega.json`, `scout-candidates.json`, `projects.json`, `github-pages.json`. `src/data/schema-person.ts` exports Schema.org person data.
-
-## Conventions
-
-- **TypeScript strict mode** via `astro/tsconfigs/strict`
-- **ESM only** (`"type": "module"`)
-- Components use TypeScript Props interfaces and component-scoped `<style>` blocks
-- Astro directives: `class:list` for conditional classes, `is:inline` for client-side scripts
-- Commit messages: imperative mood, conventional prefixes (`feat:`, `fix:`, `chore:`)
-- **Biome** for linting/formatting (tabs, single quotes, trailing commas, line width 100). Config at `biome.json`
-- `lodash-es` pinned to 4.17.23 in overrides (prototype pollution fix)
+`src/data/__tests__/data-integrity.test.ts` validates JSON shape invariants: project fields, essay dates, graph edge referential integrity, no `[DRAFT]` in targets, system-metrics status counts sum to total. If `generate-data` produces malformed JSON, these catch it.
 
 ## Debugging
 
-- **Styles not applying**: CSS is component-scoped by default. Shared styles go in `global.css`; use custom properties.
-- **Base path issues**: All routes and assets live under `/portfolio`. Check relative paths.
-- **Mobile menu broken**: Header uses `is:inline` script — check it's not accidentally bundled.
-- **Build chunk warnings**: Vite chunk limit is 1800kB. Monitor `npm run build` output.
-- **Tests failing on build output**: a11y, E2E smoke, and runtime error tests require `npm run build` first.
-- **Lighthouse fails locally**: Needs Chrome. Check `.config/lighthouserc.cjs` for thresholds.
-- **Governance test failures**: Changed a threshold in `.quality/*.json` without updating `README.md` (or vice versa). Both must stay in sync.
-- **Strike scripts fail**: Require `gemini` CLI installed and accessible. Scripts fall back to `[DRAFT]` templates on failure.
+| Symptom | Root cause | Fix |
+|---------|-----------|-----|
+| Governance test fails | Changed threshold in `.quality/*.json` OR `README.md` but not both | Update both in same commit. Check exact regex in `quality-governance.test.ts` |
+| Vitest crashes before running | `.quality/ratchet-policy.json` missing/malformed OR `QUALITY_PHASE` set to nonexistent phase | Verify file exists and phase name matches |
+| Routes 404 in dev/preview | Base path mismatch | All URLs must use `${base}` from `src/utils/paths.ts`. Check `astro.config.mjs` line 9. |
+| Styles not applying | CSS is component-scoped | Shared styles in `global.css`. Use custom properties. Cross-component: `:global()` |
+| Sketch tests fail silently | `src/test/setup.ts` not loaded | Verify `setupFiles` in `.config/vitest.config.ts` points to it |
+| Build-output tests fail | No `dist/` directory | Run `npm run build` first (a11y, E2E, runtime tests need built HTML) |
+| Mobile menu broken | Header uses `is:inline` script | Check it's not accidentally bundled by Astro |
+| Chunk size warnings | Large vendor without manual chunk | Add chunk definition in `astro.config.mjs` `manualChunks` |
+| Strike scripts produce `[DRAFT]` | gemini CLI unavailable or API error | Install gemini CLI, or manually edit the intro before committing |
+| Route manifest mismatch | Added/removed page without syncing | Run `npm run sync:a11y-routes` |
+| Lighthouse fails locally | Needs Chrome | Run `npm run quality:local:no-lh` instead |
+| CI passes but deploy blocked | quality.yml failed on a previous run | Check `workflow_run` trigger; manual deploy via `workflow_dispatch` |
+
+## Conventions
+
+- **TypeScript strict mode** (`astro/tsconfigs/strict`), **ESM only** (`"type": "module"`)
+- **Biome** (not ESLint): tabs, single quotes, trailing commas, line width 100. Config at `biome.json`.
+- **Commit messages**: imperative mood, conventional prefixes (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`)
+- **Astro directives**: `class:list` for conditional classes, `is:inline` for client-side scripts
+- `lodash-es` pinned to 4.17.23 in overrides (prototype pollution fix)
+
+## Companion References
+
+- [`docs/claude/data-coupling-graph.md`](docs/claude/data-coupling-graph.md) — full producer/consumer map with line numbers
+- [`docs/claude/command-reference.md`](docs/claude/command-reference.md) — complete npm script catalog by category
+- [`docs/claude/house-style.md`](docs/claude/house-style.md) — annotated component, page, sketch, and chart patterns
+- [`.quality/GOVERNANCE-COUPLING.md`](.quality/GOVERNANCE-COUPLING.md) — CI-specific coupling map and environment thresholds
