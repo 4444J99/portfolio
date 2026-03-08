@@ -55,7 +55,7 @@
       "measurement": "<=3 critical incidents over 30 days",
       "horizon": "H1",
       "status": "in_progress",
-      "evidence": "18 consecutive snapshots (Feb 16 – Mar 5). 0 critical incidents. Daily cron automation active.",
+      "evidence": "21 consecutive snapshots (Feb 16 – Mar 8). 0 critical incidents. Daily cron automation active.",
       "evidenceUrl": null,
       "target": "March 18, 2026"
     },
@@ -75,7 +75,7 @@
       "measurement": "30 consecutive days of engagement data",
       "horizon": "H1",
       "status": "in_progress",
-      "evidence": "18 snapshots with engagement data. Daily automation operational since Feb 16.",
+      "evidence": "21 snapshots with engagement data. Daily automation operational since Feb 16.",
       "evidenceUrl": null,
       "target": "March 18, 2026"
     },
@@ -195,7 +195,7 @@
       "measurement": "Portfolio reflects testimonials, acceptances, or user counts",
       "horizon": "H5",
       "status": "in_progress",
-      "evidence": "Portfolio live with omega scorecard, system metrics, and quality data. Pending external validation events.",
+      "evidence": "Portfolio live with omega scorecard, system metrics, quality data, and validated system numbers: 105 repos, 96 active, 853+ automated tests, 12 products deployed, 96 CI workflows, 44 dependency edges, 16 revenue-modeled repos. Pending external validation events.",
       "evidenceUrl": "https://4444j99.github.io/portfolio/omega",
       "target": "Pending external validation"
     },
@@ -215,18 +215,18 @@
       "measurement": "System runs without primary operator intervention",
       "horizon": "H1",
       "status": "in_progress",
-      "evidence": "12 cron workflows active. Autonomous since Feb 16. 18/30 days with 0 critical incidents.",
+      "evidence": "12 cron workflows active. Autonomous since Feb 16. 21/30 days with 0 critical incidents.",
       "evidenceUrl": null,
       "target": "March 18, 2026"
     }
   ],
   "soak": {
-    "streak_days": 18,
+    "streak_days": 21,
     "target_days": 30,
     "critical_incidents": 0,
     "first_date": "2026-02-16",
-    "last_date": "2026-03-05",
-    "days_remaining": 13,
+    "last_date": "2026-03-08",
+    "days_remaining": 10,
     "target_met": false
   },
   "community": {
