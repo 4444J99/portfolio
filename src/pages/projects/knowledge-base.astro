@@ -7,6 +7,7 @@ import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import PrismNav from '../../components/PrismNav.astro';
 ---
 
 <ProjectLayout pageTitle="My Knowledge Base — 4444j" description="Epistemological infrastructure for converting AI conversations into durable, searchable, interconnected knowledge with multi-modal retrieval."
@@ -317,4 +318,5 @@ function reciprocalRankFusion(
         { id: 10, author: "Meadows, Donella H.", title: "Thinking in Systems: A Primer", source: "Chelsea Green Publishing", year: 2008 },
       ]} />
 
+<PrismNav context="projects.knowledge-base" repoSlug="my-knowledge-base" />
 </ProjectLayout>

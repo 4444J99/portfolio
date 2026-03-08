@@ -7,6 +7,7 @@ import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import PrismNav from '../../components/PrismNav.astro';
 ---
 
 <ProjectLayout pageTitle="Generative Music System — 4444j" description="Translating recursive narrative principles into real-time generative music — from symbolic events to live sound."
@@ -175,4 +176,5 @@ function sonify(event: SymbolicEvent): MusicalParams {
         { id: 11, author: "Galanter, Philip", title: "What is Generative Art? Complexity Theory as a Context for Art Theory", source: "International Conference on Generative Art", year: 2003 },
       ]} />
 
+<PrismNav context="projects.generative-music" repoSlug="generative-music-pipeline" />
 </ProjectLayout>

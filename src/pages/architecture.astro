@@ -1,4 +1,5 @@
 ---
+import PrismNav from '../components/PrismNav.astro';
 import ChartContainer from '../components/charts/ChartContainer.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import graphData from '../data/graph.json';
@@ -121,6 +122,8 @@ const uniqueEdges = [...new Set(organEdges)] as string[];
         </div>
       </div>
     </section>
+
+    <PrismNav context="architecture" repoSlug="organvm-engine" />
 </Layout>
 
 <script>

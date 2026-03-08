@@ -7,6 +7,7 @@ import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import PrismNav from '../../components/PrismNav.astro';
 ---
 
 <ProjectLayout pageTitle="Metasystem Master — 4444j" description="A real-time audience-participatory performance engine where collective input shapes live art through weighted consensus algorithms."
@@ -215,6 +216,7 @@ function computeConsensus(
         { id: 12, author: "Bourriaud, Nicolas", title: "Relational Aesthetics", source: "Les Presses du R\u00e9el", year: 2002 }
       ]} />
 
+<PrismNav context="projects.metasystem-master" repoSlug="organvm-corpvs-testamentvm" />
 </ProjectLayout>
 
 <style>

@@ -7,6 +7,7 @@ import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import PrismNav from '../../components/PrismNav.astro';
 ---
 
 <ProjectLayout pageTitle="Orchestration Hub — 4444j" description="The central nervous system of eight GitHub organizations — a machine-readable registry, validation scripts, and governance rules coordinating 91 repositories."
@@ -202,6 +203,7 @@ Hub validates all 31 dependency edges.`}</code></pre>
         { id: 12, author: "McConnell, Steve", title: "Code Complete: A Practical Handbook of Software Construction", source: "Microsoft Press", year: 2004 },
       ]} />
 
+<PrismNav context="projects.orchestration-hub" repoSlug="orchestration-start-here" />
 </ProjectLayout>
 
 <style>

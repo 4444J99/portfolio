@@ -7,6 +7,7 @@ import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import PrismNav from '../../components/PrismNav.astro';
 ---
 
 <ProjectLayout pageTitle="The Eight-Organ System — 4444j" description="An orchestration system coordinating 91 repositories across 8 GitHub organizations, treating governance as creative infrastructure."
@@ -209,6 +210,7 @@ jobs:
         { id: 16, author: "Shneiderman, Ben", title: "Human-Centered AI", source: "Oxford University Press", year: 2022 },
       ]} />
 
+<PrismNav context="projects.eight-organ-system" repoSlug="organvm-engine" />
 </ProjectLayout>
 
 <style>

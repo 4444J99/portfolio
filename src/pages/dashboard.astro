@@ -1,4 +1,5 @@
 ---
+import PrismNav from '../components/PrismNav.astro';
 import ChartContainer from '../components/charts/ChartContainer.astro';
 import FlagshipTable from '../components/dashboard/FlagshipTable.astro';
 import OrganStatus from '../components/dashboard/OrganStatus.astro';
@@ -179,6 +180,8 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification?.repos || 
         <WorkspaceHealth />
       </div>
     </section>
+
+    <PrismNav context="dashboard" />
 </Layout>
 
 <script>

@@ -1,0 +1,155 @@
+---
+/**
+ * PrismNav — depth gradient indicator linking to other ORGANVM facets.
+ * Renders a quiet line with cross-site links carrying ?prism= context.
+ *
+ * At build time, fetches facet metadata from the Hermeneus prism API.
+ * Falls back to hardcoded data if the API is unreachable.
+ */
+
+interface Props {
+  /** Current page identifier for prism param (e.g. "projects.orchestration-hub") */
+  context: string;
+  /** If set, link Intelligence to this specific repo page */
+  repoSlug?: string;
+}
+
+const { context, repoSlug } = Astro.props;
+
+interface ApiFacet {
+  id: string;
+  name: string;
+  role: string;
+  url: string | null;
+  live: boolean;
+}
+
+const FALLBACK_FACETS: ApiFacet[] = [
+  { id: 'hermeneus', name: 'Hermeneus', role: 'intelligence', url: 'https://stakeholder-portal-ten.vercel.app', live: true },
+  { id: 'knowledge-base', name: 'Knowledge Base', role: 'memory', url: null, live: false },
+  { id: 'nexus', name: 'Nexus Babel Alexandria', role: 'laboratory', url: null, live: false },
+];
+
+const ROLE_LABELS: Record<string, string> = {
+  intelligence: 'Intelligence',
+  memory: 'Library',
+  laboratory: 'Laboratory',
+};
+
+let apiFacets: ApiFacet[] = FALLBACK_FACETS;
+try {
+  const res = await fetch('https://stakeholder-portal-ten.vercel.app/api/knowledge?endpoint=prism', {
+    signal: AbortSignal.timeout(5000),
+  });
+  if (res.ok) {
+    const data = await res.json();
+    if (data.ok && Array.isArray(data.facets)) {
+      // Exclude portfolio itself — we're on it
+      apiFacets = data.facets.filter((f: ApiFacet) => f.id !== 'portfolio');
+    }
+  }
+} catch {
+  // Build-time fetch failed — use fallback
+}
+
+const prism = `portfolio.${context}`;
+
+interface Facet {
+  label: string;
+  href: string;
+  live: boolean;
+}
+
+const facets: Facet[] = apiFacets.map((f) => {
+  const label = ROLE_LABELS[f.role] || f.name;
+  if (!f.live || !f.url) {
+    return { label, href: '#', live: false };
+  }
+  const href = f.id === 'hermeneus' && repoSlug
+    ? `${f.url}/repos/${repoSlug}?prism=${prism}`
+    : `${f.url}/?prism=${prism}`;
+  return { label, href, live: true };
+});
+---
+
+<nav class="prism-nav" aria-label="Deeper exploration">
+  <span class="prism-nav__rule" aria-hidden="true"></span>
+  <span class="prism-nav__label">deeper</span>
+  <span class="prism-nav__rule prism-nav__rule--long" aria-hidden="true"></span>
+  <span class="prism-nav__links">
+    {facets.map((f, i) => (
+      <>
+        {i > 0 && <span class="prism-nav__dot" aria-hidden="true">&middot;</span>}
+        {f.live ? (
+          <a href={f.href} class="prism-nav__link" target="_blank" rel="noopener noreferrer">
+            {f.label}<span class="prism-nav__external" aria-hidden="true"> &#8599;</span>
+          </a>
+        ) : (
+          <span class="prism-nav__link prism-nav__link--dormant" title="Coming soon">{f.label}</span>
+        )}
+      </>
+    ))}
+  </span>
+</nav>
+
+<style>
+  .prism-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin: var(--space-2xl) 0 var(--space-lg);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    user-select: none;
+  }
+
+  .prism-nav__rule {
+    flex: 0 0 2rem;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .prism-nav__rule--long {
+    flex: 1 1 auto;
+  }
+
+  .prism-nav__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: lowercase;
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  .prism-nav__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-shrink: 0;
+  }
+
+  .prism-nav__dot {
+    color: var(--border);
+  }
+
+  .prism-nav__link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  a.prism-nav__link:hover {
+    color: var(--text-primary);
+  }
+
+  .prism-nav__link--dormant {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .prism-nav__external {
+    font-size: 0.75em;
+    opacity: 0.5;
+  }
+</style>

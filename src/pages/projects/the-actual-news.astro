@@ -7,6 +7,7 @@ import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import PrismNav from '../../components/PrismNav.astro';
 ---
 
 <ProjectLayout pageTitle="The Actual News — 4444j" description="A verifiable news ledger platform where truthfulness is the product and every claim ships with a machine-readable evidence graph."
@@ -267,4 +268,5 @@ async function correctClaim(
         { id: 10, author: "Benkler, Yochai", title: "The Wealth of Networks: How Social Production Transforms Markets and Freedom", source: "Yale University Press", year: 2006 },
       ]} />
 
+<PrismNav context="projects.the-actual-news" repoSlug="the-actual-news" />
 </ProjectLayout>

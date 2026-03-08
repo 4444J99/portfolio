@@ -7,6 +7,7 @@ import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import PrismNav from '../../components/PrismNav.astro';
 ---
 
 <ProjectLayout pageTitle="Agentic Titan — Anthony James Padavano" description="A polymorphic, model-agnostic multi-agent orchestration framework with nine topology patterns, 22 agent archetypes, and 1,095+ tests."
@@ -192,6 +193,7 @@ result = pipeline.run(task="Analyze dataset", safety=policy)`}
         { id: 12, author: "Shoham, Yoav and Kevin Leyton-Brown", title: "Multiagent Systems: Algorithmic, Game-Theoretic, and Logical Foundations", source: "Cambridge University Press", year: 2008 },
       ]} />
 
+<PrismNav context="projects.agentic-titan" repoSlug="agentic-titan" />
 </ProjectLayout>
 
 <style>

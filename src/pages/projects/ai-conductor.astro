@@ -7,6 +7,7 @@ import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import PrismNav from '../../components/PrismNav.astro';
 ---
 
 <ProjectLayout pageTitle="AI-Conductor Model — 4444j" description="The methodology for human-AI co-creation that produced ~404K words of documentation — AI generates volume, human directs and refines."
@@ -188,4 +189,5 @@ Efficiency multiplier:   ~5x over manual authoring`}
         { id: 12, author: "Zuboff, Shoshana", title: "The Age of Surveillance Capitalism", source: "PublicAffairs", year: 2019 },
       ]} />
 
+<PrismNav context="projects.ai-conductor" repoSlug="tool-interaction-design" />
 </ProjectLayout>
