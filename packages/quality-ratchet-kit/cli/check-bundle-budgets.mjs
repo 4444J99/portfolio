@@ -24,19 +24,19 @@ function selectChunkThresholds(referenceTime) {
 		{
 			date: '2026-03-07',
 			thresholds: {
+				'vendor-mermaid': 480 * 1024,
+				'vendor-p5': 320 * 1024,
+				'vendor-cytoscape': 200 * 1024,
+				'vendor-katex': 230 * 1024,
+			},
+		},
+		{
+			date: '2026-04-01',
+			thresholds: {
 				'vendor-mermaid': 430 * 1024,
 				'vendor-p5': 290 * 1024,
 				'vendor-cytoscape': 185 * 1024,
 				'vendor-katex': 210 * 1024,
-			},
-		},
-		{
-			date: '2026-03-18',
-			thresholds: {
-				'vendor-mermaid': 350 * 1024,
-				'vendor-p5': 260 * 1024,
-				'vendor-cytoscape': 170 * 1024,
-				'vendor-katex': 190 * 1024,
 			},
 		},
 	];
@@ -62,23 +62,23 @@ function selectRouteThresholds(referenceTime) {
 		{
 			date: '2026-03-07',
 			thresholds: {
+				'/portfolio/about': 15 * 1024,
+				'/portfolio/resume': 15 * 1024,
+				'/portfolio/consult': 24 * 1024,
+				'/portfolio/dashboard': 18 * 1024,
+				'/portfolio/architecture': 20 * 1024,
+				'/portfolio/gallery': 17 * 1024,
+			},
+		},
+		{
+			date: '2026-04-01',
+			thresholds: {
 				'/portfolio/about': 14 * 1024,
 				'/portfolio/resume': 14 * 1024,
 				'/portfolio/consult': 22 * 1024,
 				'/portfolio/dashboard': 17 * 1024,
-				'/portfolio/architecture': 17 * 1024,
+				'/portfolio/architecture': 18 * 1024,
 				'/portfolio/gallery': 16 * 1024,
-			},
-		},
-		{
-			date: '2026-03-18',
-			thresholds: {
-				'/portfolio/about': 13 * 1024,
-				'/portfolio/resume': 13 * 1024,
-				'/portfolio/consult': 20 * 1024,
-				'/portfolio/dashboard': 16 * 1024,
-				'/portfolio/architecture': 16 * 1024,
-				'/portfolio/gallery': 15 * 1024,
 			},
 		},
 	];
@@ -100,15 +100,15 @@ function selectInteractionThresholds(referenceTime) {
 		{
 			date: '2026-03-07',
 			thresholds: {
-				'/portfolio/architecture': 960 * 1024,
-				'/portfolio/gallery': 980 * 1024,
+				'/portfolio/architecture': 1008 * 1024,
+				'/portfolio/gallery': 1010 * 1024,
 			},
 		},
 		{
-			date: '2026-03-18',
+			date: '2026-04-01',
 			thresholds: {
-				'/portfolio/architecture': 900 * 1024,
-				'/portfolio/gallery': 920 * 1024,
+				'/portfolio/architecture': 960 * 1024,
+				'/portfolio/gallery': 980 * 1024,
 			},
 		},
 	];

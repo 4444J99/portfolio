@@ -8,67 +8,77 @@
  */
 
 interface Props {
-  /** Current page identifier for prism param (e.g. "projects.orchestration-hub") */
-  context: string;
-  /** If set, link Intelligence to this specific repo page */
-  repoSlug?: string;
+	/** Current page identifier for prism param (e.g. "projects.orchestration-hub") */
+	context: string;
+	/** If set, link Intelligence to this specific repo page */
+	repoSlug?: string;
 }
 
 const { context, repoSlug } = Astro.props;
 
 interface ApiFacet {
-  id: string;
-  name: string;
-  role: string;
-  url: string | null;
-  live: boolean;
+	id: string;
+	name: string;
+	role: string;
+	url: string | null;
+	live: boolean;
 }
 
 const FALLBACK_FACETS: ApiFacet[] = [
-  { id: 'hermeneus', name: 'Hermeneus', role: 'intelligence', url: 'https://stakeholder-portal-ten.vercel.app', live: true },
-  { id: 'knowledge-base', name: 'Knowledge Base', role: 'memory', url: null, live: false },
-  { id: 'nexus', name: 'Nexus Babel Alexandria', role: 'laboratory', url: null, live: false },
+	{
+		id: 'hermeneus',
+		name: 'Hermeneus',
+		role: 'intelligence',
+		url: 'https://stakeholder-portal-ten.vercel.app',
+		live: true,
+	},
+	{ id: 'knowledge-base', name: 'Knowledge Base', role: 'memory', url: null, live: false },
+	{ id: 'nexus', name: 'Nexus Babel Alexandria', role: 'laboratory', url: null, live: false },
 ];
 
 const ROLE_LABELS: Record<string, string> = {
-  intelligence: 'Intelligence',
-  memory: 'Library',
-  laboratory: 'Laboratory',
+	intelligence: 'Intelligence',
+	memory: 'Library',
+	laboratory: 'Laboratory',
 };
 
 let apiFacets: ApiFacet[] = FALLBACK_FACETS;
 try {
-  const res = await fetch('https://stakeholder-portal-ten.vercel.app/api/knowledge?endpoint=prism', {
-    signal: AbortSignal.timeout(5000),
-  });
-  if (res.ok) {
-    const data = await res.json();
-    if (data.ok && Array.isArray(data.facets)) {
-      // Exclude portfolio itself — we're on it
-      apiFacets = data.facets.filter((f: ApiFacet) => f.id !== 'portfolio');
-    }
-  }
+	const res = await fetch(
+		'https://stakeholder-portal-ten.vercel.app/api/knowledge?endpoint=prism',
+		{
+			signal: AbortSignal.timeout(5000),
+		},
+	);
+	if (res.ok) {
+		const data = await res.json();
+		if (data.ok && Array.isArray(data.facets)) {
+			// Exclude portfolio itself — we're on it
+			apiFacets = data.facets.filter((f: ApiFacet) => f.id !== 'portfolio');
+		}
+	}
 } catch {
-  // Build-time fetch failed — use fallback
+	// Build-time fetch failed — use fallback
 }
 
 const prism = `portfolio.${context}`;
 
 interface Facet {
-  label: string;
-  href: string;
-  live: boolean;
+	label: string;
+	href: string;
+	live: boolean;
 }
 
 const facets: Facet[] = apiFacets.map((f) => {
-  const label = ROLE_LABELS[f.role] || f.name;
-  if (!f.live || !f.url) {
-    return { label, href: '#', live: false };
-  }
-  const href = f.id === 'hermeneus' && repoSlug
-    ? `${f.url}/repos/${repoSlug}?prism=${prism}`
-    : `${f.url}/?prism=${prism}`;
-  return { label, href, live: true };
+	const label = ROLE_LABELS[f.role] || f.name;
+	if (!f.live || !f.url) {
+		return { label, href: '#', live: false };
+	}
+	const href =
+		f.id === 'hermeneus' && repoSlug
+			? `${f.url}/repos/${repoSlug}?prism=${prism}`
+			: `${f.url}/?prism=${prism}`;
+	return { label, href, live: true };
 });
 ---
 
