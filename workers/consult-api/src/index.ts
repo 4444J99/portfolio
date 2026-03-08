@@ -3,6 +3,7 @@ interface Env {
 	CONSULT_DB?: D1Database;
 	ALLOWED_ORIGINS?: string;
 	LOG_HASH_SALT?: string;
+	KNOWLEDGE_API_URL?: string;
 }
 
 interface ConsultRequestBody {
@@ -29,6 +30,32 @@ interface ConsultErrorResponse {
 	requestId: string;
 }
 
+interface KnowledgeOrgan {
+	key: string;
+	name: string;
+	greek: string;
+	domain: string;
+	description: string;
+	repo_count: number;
+	capabilities: string[];
+	repos: Array<{
+		name: string;
+		display_name: string;
+		tier: string;
+		description: string;
+		tech_stack: string[];
+	}>;
+	tech_stacks: string[];
+}
+
+interface KnowledgeContextSource {
+	name: string;
+	display_name: string;
+	relevance: number;
+	snippet: string;
+	source_type: string;
+}
+
 interface FallbackOrgan {
 	id: string;
 	title: string;
@@ -41,31 +68,12 @@ interface FallbackOrgan {
 const MODEL = '@cf/meta/llama-3.1-8b-instruct';
 const AI_TIMEOUT_MS = 8000;
 const MAX_CHALLENGE_LENGTH = 4000;
+const DEFAULT_KNOWLEDGE_API_URL = 'https://stakeholder-portal-ten.vercel.app/api/knowledge';
 const DEFAULT_ALLOWED_ORIGINS = [
 	'https://4444j99.github.io',
 	'http://localhost:4321',
 	'http://127.0.0.1:4321',
 ];
-
-const SYSTEM_PROMPT = `You are the ORGANVM Capability Advisor.
-
-Write a concise, high-signal capability analysis (300-500 words).
-Use markdown with this shape:
-1) One short opening acknowledgment.
-2) 2-4 organ sections with "## ORGAN X — NAME".
-3) A "## Recommended Next Steps" section with concrete actions.
-
-Reference concrete capabilities and repositories from the eight-organ system:
-- I THEORIA: recursive symbolic engines, ontology, knowledge graphs.
-- II POIESIS: generative art, participatory performance, interactive installations.
-- III ERGON: SaaS platforms, B2B data systems, gamified products.
-- IV TAXIS: multi-agent orchestration, registry governance, promotion state machines.
-- V LOGOS: technical writing, public process, methodology narratives.
-- VI KOINONIA: facilitated community curriculum and adaptive learning pathways.
-- VII KERYGMA: distribution strategy, audience segmentation, channel adaptation.
-- META: cross-org governance and CI/CD orchestration.
-
-Be specific, practical, and implementation-oriented.`;
 
 const INDUSTRY_HINTS: Record<string, string[]> = {
 	education: ['III', 'IV', 'VI'],
@@ -93,90 +101,42 @@ const INDUSTRY_LABELS: Record<string, string> = {
 	other: 'Cross-domain',
 };
 
-const ORGANS: FallbackOrgan[] = [
+// Minimal fallback data — used only when Knowledge API is unreachable
+const FALLBACK_ORGANS: FallbackOrgan[] = [
 	{
-		id: 'I',
-		title: 'THEORIA',
-		summary: 'Theory, ontology, and recursive analysis infrastructure.',
-		capabilities: [
-			'Recursive symbolic engines for requirement and narrative modeling.',
-			'Computational ontology construction for domain alignment.',
-			'Knowledge graph structures for long-horizon reasoning.',
-		],
-		repos: ['auto-revision-epistemic-engine', 'call-function--ontological', 'organon-noumenon'],
-		keywords: ['ontology', 'knowledge graph', 'taxonomy', 'semantic', 'classification', 'analysis'],
+		id: 'I', title: 'THEORIA', summary: 'Theory, ontology, and recursive analysis.',
+		capabilities: ['Recursive symbolic engines', 'Computational ontology', 'Knowledge graphs'],
+		repos: [], keywords: ['ontology', 'knowledge graph', 'semantic', 'analysis'],
 	},
 	{
-		id: 'II',
-		title: 'POIESIS',
-		summary: 'Generative art, performance systems, and interactive media.',
-		capabilities: [
-			'Real-time participatory performance frameworks.',
-			'Interactive installation and generative media tooling.',
-			'AI-human collaborative creative pipelines.',
-		],
-		repos: ['metasystem-master', 'universal-waveform-explorer', 'showcase-portfolio'],
-		keywords: ['art', 'creative', 'installation', 'music', 'interactive', 'performance'],
+		id: 'II', title: 'POIESIS', summary: 'Generative art, performance, interactive media.',
+		capabilities: ['Participatory performance', 'Generative media tooling', 'AI-human creative pipelines'],
+		repos: [], keywords: ['art', 'creative', 'interactive', 'performance'],
 	},
 	{
-		id: 'III',
-		title: 'ERGON',
-		summary: 'Product architecture, platform delivery, and commercial systems.',
-		capabilities: [
-			'SaaS architecture and subscription operations patterns.',
-			'B2B data ingestion and API productization workflows.',
-			'Gamified product and education platform implementation.',
-		],
-		repos: ['public-record-data-scrapper', 'classroom-rpg-aetheria', 'gamified-coach-interface'],
-		keywords: ['saas', 'platform', 'product', 'b2b', 'subscription', 'pipeline', 'workflow'],
+		id: 'III', title: 'ERGON', summary: 'Product architecture, platforms, commercial systems.',
+		capabilities: ['SaaS architecture', 'B2B data systems', 'Gamified product platforms'],
+		repos: [], keywords: ['saas', 'platform', 'product', 'b2b', 'pipeline'],
 	},
 	{
-		id: 'IV',
-		title: 'TAXIS',
-		summary: 'Orchestration, governance, and quality-enforced automation.',
-		capabilities: [
-			'Multi-agent orchestration with role and topology controls.',
-			'Registry-driven dependency governance at scale.',
-			'Automated audits and promotion-state enforcement.',
-		],
-		repos: ['agentic-titan', 'orchestration-start-here', 'registry-v2.json'],
-		keywords: ['agent', 'orchestration', 'governance', 'automation', 'compliance', 'coordination'],
+		id: 'IV', title: 'TAXIS', summary: 'Orchestration, governance, automation.',
+		capabilities: ['Multi-agent orchestration', 'Registry governance', 'Automated audits'],
+		repos: [], keywords: ['agent', 'orchestration', 'governance', 'automation'],
 	},
 	{
-		id: 'V',
-		title: 'LOGOS',
-		summary: 'Public process, strategic narrative, and technical documentation.',
-		capabilities: [
-			'Long-form technical writing and methodology publication.',
-			'Decision narratives and implementation runbooks.',
-			'Editorial systems for sustained public process.',
-		],
-		repos: ['public-process', 'portfolio', 'case-studies-methodology'],
-		keywords: ['documentation', 'narrative', 'writing', 'content', 'editorial', 'publishing'],
+		id: 'V', title: 'LOGOS', summary: 'Public process, narrative, documentation.',
+		capabilities: ['Technical writing', 'Decision narratives', 'Editorial systems'],
+		repos: [], keywords: ['documentation', 'narrative', 'writing', 'editorial'],
 	},
 	{
-		id: 'VI',
-		title: 'KOINONIA',
-		summary: 'Community operating models and adaptive curriculum systems.',
-		capabilities: [
-			'Facilitated cohorts, salons, and reading groups.',
-			'Adaptive syllabi aligned to stakeholder maturity.',
-			'Community-driven collaborative sense-making infrastructure.',
-		],
-		repos: ['community-infrastructure', 'reading-groups', 'curriculum-ops'],
-		keywords: ['community', 'curriculum', 'learning', 'cohort', 'workshop', 'education'],
+		id: 'VI', title: 'KOINONIA', summary: 'Community operating models and curriculum.',
+		capabilities: ['Facilitated cohorts', 'Adaptive syllabi', 'Collaborative sense-making'],
+		repos: [], keywords: ['community', 'curriculum', 'learning', 'workshop'],
 	},
 	{
-		id: 'VII',
-		title: 'KERYGMA',
-		summary: 'Distribution systems, channel adaptation, and audience growth.',
-		capabilities: [
-			'Channel-specific publication and adaptation workflows.',
-			'Audience segmentation and campaign design strategy.',
-			'POSSE-style distribution with owned-media resilience.',
-		],
-		repos: ['distribution-engine', 'newsletter-integration', 'audience-segmentation'],
-		keywords: ['distribution', 'audience', 'marketing', 'newsletter', 'acquisition', 'reach'],
+		id: 'VII', title: 'KERYGMA', summary: 'Distribution, channels, audience growth.',
+		capabilities: ['Channel adaptation', 'Audience segmentation', 'POSSE distribution'],
+		repos: [], keywords: ['distribution', 'audience', 'marketing', 'newsletter'],
 	},
 ];
 
@@ -185,6 +145,98 @@ const ALLOWED_ATTRS: Record<string, string[]> = {
 	h2: ['class'],
 	p: ['class'],
 };
+
+// ---------------------------------------------------------------------------
+// Knowledge API integration
+// ---------------------------------------------------------------------------
+
+async function fetchOrgansFromKnowledge(env: Env): Promise<KnowledgeOrgan[] | null> {
+	const baseUrl = env.KNOWLEDGE_API_URL || DEFAULT_KNOWLEDGE_API_URL;
+	try {
+		// Use Cloudflare Cache API for 1-hour TTL
+		const cacheUrl = `${baseUrl}?endpoint=organs`;
+		const cache = caches.default;
+		const cached = await cache.match(cacheUrl);
+		if (cached) {
+			const data = await cached.json() as { ok: boolean; organs: KnowledgeOrgan[] };
+			if (data.ok && data.organs) return data.organs;
+		}
+
+		const res = await fetch(cacheUrl, {
+			headers: { Accept: 'application/json' },
+			signal: AbortSignal.timeout(3000),
+		});
+		if (!res.ok) return null;
+
+		// Clone and cache for 1 hour
+		const cloned = new Response(res.clone().body, {
+			headers: { ...Object.fromEntries(res.headers), 'Cache-Control': 'public, max-age=3600' },
+		});
+		await cache.put(cacheUrl, cloned);
+
+		const data = await res.json() as { ok: boolean; organs: KnowledgeOrgan[] };
+		return data.ok ? data.organs : null;
+	} catch {
+		return null;
+	}
+}
+
+async function fetchContextFromKnowledge(
+	challenge: string,
+	env: Env,
+): Promise<KnowledgeContextSource[]> {
+	const baseUrl = env.KNOWLEDGE_API_URL || DEFAULT_KNOWLEDGE_API_URL;
+	try {
+		const url = `${baseUrl}?endpoint=context&q=${encodeURIComponent(challenge)}&limit=5`;
+		const res = await fetch(url, {
+			headers: { Accept: 'application/json' },
+			signal: AbortSignal.timeout(4000),
+		});
+		if (!res.ok) return [];
+
+		const data = await res.json() as { ok: boolean; sources: KnowledgeContextSource[] };
+		return data.ok ? data.sources : [];
+	} catch {
+		return [];
+	}
+}
+
+function buildSystemPrompt(organs: KnowledgeOrgan[] | null, contextSources: KnowledgeContextSource[]): string {
+	let organSection: string;
+	if (organs && organs.length > 0) {
+		organSection = organs.map((o) => {
+			const caps = o.capabilities.slice(0, 3).join('; ');
+			const repoNames = o.repos.slice(0, 3).map((r) => r.name).join(', ');
+			return `- ${o.key.replace('ORGAN-', '')} ${o.greek.toUpperCase()}: ${o.domain}. Capabilities: ${caps}. Key repos: ${repoNames || 'various'}.`;
+		}).join('\n');
+	} else {
+		organSection = FALLBACK_ORGANS.map((o) =>
+			`- ${o.id} ${o.title}: ${o.summary}`
+		).join('\n');
+	}
+
+	let contextSection = '';
+	if (contextSources.length > 0) {
+		contextSection = '\n\nGROUNDED CONTEXT (from live retrieval — cite these when relevant):\n' +
+			contextSources.map((s, i) =>
+				`[${i + 1}] ${s.display_name} (relevance: ${(s.relevance * 100).toFixed(0)}%): ${s.snippet.slice(0, 300)}`
+			).join('\n');
+	}
+
+	return `You are the ORGANVM Capability Advisor.
+
+Write a concise, high-signal capability analysis (300-500 words).
+Use markdown with this shape:
+1) One short opening acknowledgment.
+2) 2-4 organ sections with "## ORGAN X — NAME".
+3) A "## Recommended Next Steps" section with concrete actions.
+
+Reference concrete capabilities and repositories from the eight-organ system:
+${organSection}
+${contextSection}
+
+Be specific, practical, and implementation-oriented. When grounded context is available, reference specific repos and capabilities by name.`;
+}
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
@@ -307,8 +359,16 @@ async function runAiWithFallback(
 	industry: string | null,
 	env: Env,
 ): Promise<{ mode: 'ai' | 'fallback'; analysisHtml: string; analysisText: string; note?: string }> {
+	// Fetch live organ data and grounded context in parallel
+	const [organs, contextSources] = await Promise.all([
+		fetchOrgansFromKnowledge(env),
+		fetchContextFromKnowledge(challenge, env),
+	]);
+
+	const systemPrompt = buildSystemPrompt(organs, contextSources);
+
 	if (!env.AI) {
-		const fallback = buildDeterministicFallback(challenge, industry);
+		const fallback = buildDeterministicFallback(challenge, industry, organs);
 		return {
 			mode: 'fallback',
 			analysisHtml: fallback.analysisHtml,
@@ -323,7 +383,7 @@ async function runAiWithFallback(
 		const aiRawResult = await withTimeout(
 			env.AI.run(MODEL, {
 				messages: [
-					{ role: 'system', content: SYSTEM_PROMPT },
+					{ role: 'system', content: systemPrompt },
 					{ role: 'user', content: userPrompt },
 				],
 				max_tokens: 900,
@@ -343,7 +403,7 @@ async function runAiWithFallback(
 			analysisText: aiText,
 		};
 	} catch (error) {
-		const fallback = buildDeterministicFallback(challenge, industry);
+		const fallback = buildDeterministicFallback(challenge, industry, organs);
 		const note =
 			error instanceof Error && error.message === 'AI_TIMEOUT'
 				? 'Workers AI timed out. Showing deterministic capability mapping.'
@@ -360,8 +420,9 @@ async function runAiWithFallback(
 function buildDeterministicFallback(
 	challenge: string,
 	industry: string | null,
+	liveOrgans: KnowledgeOrgan[] | null,
 ): { analysisHtml: string; analysisText: string } {
-	const selected = scoreOrgans(challenge, industry);
+	const selected = scoreOrgans(challenge, industry, liveOrgans);
 	const challengePreview = trimForStorage(challenge, 260);
 	const industryLabel = industry ? INDUSTRY_LABELS[industry] || industry : 'cross-domain';
 
@@ -376,7 +437,9 @@ function buildDeterministicFallback(
 			html += `<li>${escapeHtml(capability)}</li>`;
 		}
 		html += '</ul>';
-		html += `<p><strong>Key repos:</strong> <code>${escapeHtml(organ.repos.join(', '))}</code></p>`;
+		if (organ.repos.length > 0) {
+			html += `<p><strong>Key repos:</strong> <code>${escapeHtml(organ.repos.join(', '))}</code></p>`;
+		}
 	}
 
 	html += '<h2 class="organ-heading">Recommended Next Steps</h2>';
@@ -397,13 +460,29 @@ function buildDeterministicFallback(
 	};
 }
 
-function scoreOrgans(challenge: string, industry: string | null): FallbackOrgan[] {
+function scoreOrgans(
+	challenge: string,
+	industry: string | null,
+	liveOrgans: KnowledgeOrgan[] | null,
+): FallbackOrgan[] {
+	// Convert live organs to fallback format if available
+	const organs: FallbackOrgan[] = liveOrgans
+		? liveOrgans.map((o) => ({
+			id: o.key.replace('ORGAN-', '').replace('META-ORGANVM', 'META'),
+			title: o.greek.toUpperCase(),
+			summary: o.domain,
+			capabilities: o.capabilities.slice(0, 3),
+			repos: o.repos.slice(0, 3).map((r) => r.name),
+			keywords: o.domain.toLowerCase().split(/[\s,]+/).filter((w) => w.length > 3),
+		}))
+		: FALLBACK_ORGANS;
+
 	const normalized = challenge.toLowerCase();
 	const industryBoosts = new Set(
 		industry && INDUSTRY_HINTS[industry] ? INDUSTRY_HINTS[industry] : [],
 	);
 
-	const scored = ORGANS.map((organ) => {
+	const scored = organs.map((organ) => {
 		let score = 0;
 		if (industryBoosts.has(organ.id)) score += 3;
 		for (const keyword of organ.keywords) {
@@ -418,7 +497,7 @@ function scoreOrgans(challenge: string, industry: string | null): FallbackOrgan[
 		.map((row) => row.organ);
 
 	if (selected.length > 0) return selected;
-	return ORGANS.filter((organ) => ['IV', 'III', 'II'].includes(organ.id));
+	return organs.filter((organ) => ['IV', 'III', 'II'].includes(organ.id)).slice(0, 3);
 }
 
 function normalizeIndustry(value: unknown): string | null {

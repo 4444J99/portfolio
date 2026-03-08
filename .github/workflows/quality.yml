@@ -16,7 +16,7 @@ permissions:
   issues: write
 
 env:
-  QUALITY_PHASE: W10
+  QUALITY_PHASE: W12
 
 concurrency:
   group: quality-${{ github.ref }}
@@ -179,6 +179,7 @@ jobs:
   performance:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

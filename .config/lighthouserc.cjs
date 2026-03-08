@@ -1,27 +1,13 @@
-const { readdirSync, statSync } = require('node:fs');
-const { join } = require('node:path');
-
-function collectHtmlUrls(dir, base = '') {
-	const urls = [];
-	for (const entry of readdirSync(dir, { withFileTypes: true })) {
-		const rel = base ? `${base}/${entry.name}` : entry.name;
-		if (entry.isDirectory()) {
-			urls.push(...collectHtmlUrls(join(dir, entry.name), rel));
-		} else if (entry.name.endsWith('.html')) {
-			urls.push(`http://localhost/${rel}`);
-		}
-	}
-	return urls.sort();
-}
-
-const distDir = join(__dirname, '..', 'dist');
-let urls;
-try {
-	urls = collectHtmlUrls(distDir);
-} catch {
-	// dist/ may not exist yet during install; fall back to index only
-	urls = ['http://localhost/index.html'];
-}
+// Representative sample of page archetypes (6 pages instead of all ~50).
+// Keeps Lighthouse CI under 3 minutes on GitHub Actions free runners.
+const urls = [
+	'http://localhost/index.html',                                    // landing
+	'http://localhost/about/index.html',                              // content page
+	'http://localhost/dashboard/index.html',                          // data-heavy
+	'http://localhost/projects/orchestration-hub/index.html',         // project detail
+	'http://localhost/gallery/index.html',                            // media-heavy
+	'http://localhost/consult/index.html',                            // interactive form
+];
 
 /** @type {import('@lhci/cli').Config} */
 module.exports = {

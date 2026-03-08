@@ -1,6 +1,6 @@
 {
 	"version": 1,
-	"defaultPhase": "W10",
+	"defaultPhase": "W12",
 	"phases": {
 		"W2": {
 			"typecheck": {
@@ -55,6 +55,17 @@
 				"branches": 32,
 				"functions": 32,
 				"lines": 45
+			}
+		},
+		"W12": {
+			"typecheck": {
+				"hintsMax": 0
+			},
+			"coverage": {
+				"statements": 55,
+				"branches": 40,
+				"functions": 40,
+				"lines": 55
 			}
 		}
 	},
