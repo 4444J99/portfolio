@@ -8,7 +8,7 @@
     "dependency_edges": 44,
     "ci_workflows": 96,
     "operational_organs": 8,
-    "sprints_completed": 0
+    "sprints_completed": 33
   },
   "organs": [
     {
@@ -36,7 +36,7 @@
       "org": "organvm-iii-ergon",
       "repo_count": 28,
       "status": "OPERATIONAL",
-      "description": "Revenue-generating products, deployed systems, customer-facing tools, B2B/B2C applications"
+      "description": "Product platforms, deployed systems, customer-facing tools, B2B/B2C applications"
     },
     {
       "key": "ORGAN-IV",
@@ -63,7 +63,7 @@
       "org": "organvm-vi-koinonia",
       "repo_count": 6,
       "status": "OPERATIONAL",
-      "description": "Community infrastructure \u2014 salon archives, reading group curricula, adaptive syllabi, contributor profiles, shared PostgreSQL layer, FastAPI portal with full-text search, Atom feeds, and WebSocket live rooms"
+      "description": "Community infrastructure, member management, governance, forums, shared resources, collaborative spaces"
     },
     {
       "key": "ORGAN-VII",
@@ -72,7 +72,7 @@
       "org": "organvm-vii-kerygma",
       "repo_count": 4,
       "status": "OPERATIONAL",
-      "description": "Marketing & Distribution \u2014 POSSE distribution pipeline with Ghost newsletter hub, Mastodon, Discord, Bluesky adapters, cross-organ event wiring, autonomous RSS polling, bidirectional analytics, Ghost Handlebars theme, 15 announcement templates"
+      "description": "Content distribution, social amplification, audience building, POSSE automation, release coordination, press/announcement strategy"
     },
     {
       "key": "META-ORGANVM",
@@ -314,5 +314,5 @@
       "deliverables": "Portfolio refresh, PROBATIO, VIVIFICATIO, conference proposals"
     }
   ],
-  "generated": "2026-03-08T20:11:13.948673+00:00"
+  "generated": "2026-03-08T20:57:45.863951+00:00"
 }
