@@ -104,39 +104,64 @@ const INDUSTRY_LABELS: Record<string, string> = {
 // Minimal fallback data — used only when Knowledge API is unreachable
 const FALLBACK_ORGANS: FallbackOrgan[] = [
 	{
-		id: 'I', title: 'THEORIA', summary: 'Theory, ontology, and recursive analysis.',
+		id: 'I',
+		title: 'THEORIA',
+		summary: 'Theory, ontology, and recursive analysis.',
 		capabilities: ['Recursive symbolic engines', 'Computational ontology', 'Knowledge graphs'],
-		repos: [], keywords: ['ontology', 'knowledge graph', 'semantic', 'analysis'],
+		repos: [],
+		keywords: ['ontology', 'knowledge graph', 'semantic', 'analysis'],
 	},
 	{
-		id: 'II', title: 'POIESIS', summary: 'Generative art, performance, interactive media.',
-		capabilities: ['Participatory performance', 'Generative media tooling', 'AI-human creative pipelines'],
-		repos: [], keywords: ['art', 'creative', 'interactive', 'performance'],
+		id: 'II',
+		title: 'POIESIS',
+		summary: 'Generative art, performance, interactive media.',
+		capabilities: [
+			'Participatory performance',
+			'Generative media tooling',
+			'AI-human creative pipelines',
+		],
+		repos: [],
+		keywords: ['art', 'creative', 'interactive', 'performance'],
 	},
 	{
-		id: 'III', title: 'ERGON', summary: 'Product architecture, platforms, commercial systems.',
+		id: 'III',
+		title: 'ERGON',
+		summary: 'Product architecture, platforms, commercial systems.',
 		capabilities: ['SaaS architecture', 'B2B data systems', 'Gamified product platforms'],
-		repos: [], keywords: ['saas', 'platform', 'product', 'b2b', 'pipeline'],
+		repos: [],
+		keywords: ['saas', 'platform', 'product', 'b2b', 'pipeline'],
 	},
 	{
-		id: 'IV', title: 'TAXIS', summary: 'Orchestration, governance, automation.',
+		id: 'IV',
+		title: 'TAXIS',
+		summary: 'Orchestration, governance, automation.',
 		capabilities: ['Multi-agent orchestration', 'Registry governance', 'Automated audits'],
-		repos: [], keywords: ['agent', 'orchestration', 'governance', 'automation'],
+		repos: [],
+		keywords: ['agent', 'orchestration', 'governance', 'automation'],
 	},
 	{
-		id: 'V', title: 'LOGOS', summary: 'Public process, narrative, documentation.',
+		id: 'V',
+		title: 'LOGOS',
+		summary: 'Public process, narrative, documentation.',
 		capabilities: ['Technical writing', 'Decision narratives', 'Editorial systems'],
-		repos: [], keywords: ['documentation', 'narrative', 'writing', 'editorial'],
+		repos: [],
+		keywords: ['documentation', 'narrative', 'writing', 'editorial'],
 	},
 	{
-		id: 'VI', title: 'KOINONIA', summary: 'Community operating models and curriculum.',
+		id: 'VI',
+		title: 'KOINONIA',
+		summary: 'Community operating models and curriculum.',
 		capabilities: ['Facilitated cohorts', 'Adaptive syllabi', 'Collaborative sense-making'],
-		repos: [], keywords: ['community', 'curriculum', 'learning', 'workshop'],
+		repos: [],
+		keywords: ['community', 'curriculum', 'learning', 'workshop'],
 	},
 	{
-		id: 'VII', title: 'KERYGMA', summary: 'Distribution, channels, audience growth.',
+		id: 'VII',
+		title: 'KERYGMA',
+		summary: 'Distribution, channels, audience growth.',
 		capabilities: ['Channel adaptation', 'Audience segmentation', 'POSSE distribution'],
-		repos: [], keywords: ['distribution', 'audience', 'marketing', 'newsletter'],
+		repos: [],
+		keywords: ['distribution', 'audience', 'marketing', 'newsletter'],
 	},
 ];
 
@@ -158,7 +183,7 @@ async function fetchOrgansFromKnowledge(env: Env): Promise<KnowledgeOrgan[] | nu
 		const cache = caches.default;
 		const cached = await cache.match(cacheUrl);
 		if (cached) {
-			const data = await cached.json() as { ok: boolean; organs: KnowledgeOrgan[] };
+			const data = (await cached.json()) as { ok: boolean; organs: KnowledgeOrgan[] };
 			if (data.ok && data.organs) return data.organs;
 		}
 
@@ -174,7 +199,7 @@ async function fetchOrgansFromKnowledge(env: Env): Promise<KnowledgeOrgan[] | nu
 		});
 		await cache.put(cacheUrl, cloned);
 
-		const data = await res.json() as { ok: boolean; organs: KnowledgeOrgan[] };
+		const data = (await res.json()) as { ok: boolean; organs: KnowledgeOrgan[] };
 		return data.ok ? data.organs : null;
 	} catch {
 		return null;
@@ -194,33 +219,43 @@ async function fetchContextFromKnowledge(
 		});
 		if (!res.ok) return [];
 
-		const data = await res.json() as { ok: boolean; sources: KnowledgeContextSource[] };
+		const data = (await res.json()) as { ok: boolean; sources: KnowledgeContextSource[] };
 		return data.ok ? data.sources : [];
 	} catch {
 		return [];
 	}
 }
 
-function buildSystemPrompt(organs: KnowledgeOrgan[] | null, contextSources: KnowledgeContextSource[]): string {
+function buildSystemPrompt(
+	organs: KnowledgeOrgan[] | null,
+	contextSources: KnowledgeContextSource[],
+): string {
 	let organSection: string;
 	if (organs && organs.length > 0) {
-		organSection = organs.map((o) => {
-			const caps = o.capabilities.slice(0, 3).join('; ');
-			const repoNames = o.repos.slice(0, 3).map((r) => r.name).join(', ');
-			return `- ${o.key.replace('ORGAN-', '')} ${o.greek.toUpperCase()}: ${o.domain}. Capabilities: ${caps}. Key repos: ${repoNames || 'various'}.`;
-		}).join('\n');
+		organSection = organs
+			.map((o) => {
+				const caps = o.capabilities.slice(0, 3).join('; ');
+				const repoNames = o.repos
+					.slice(0, 3)
+					.map((r) => r.name)
+					.join(', ');
+				return `- ${o.key.replace('ORGAN-', '')} ${o.greek.toUpperCase()}: ${o.domain}. Capabilities: ${caps}. Key repos: ${repoNames || 'various'}.`;
+			})
+			.join('\n');
 	} else {
-		organSection = FALLBACK_ORGANS.map((o) =>
-			`- ${o.id} ${o.title}: ${o.summary}`
-		).join('\n');
+		organSection = FALLBACK_ORGANS.map((o) => `- ${o.id} ${o.title}: ${o.summary}`).join('\n');
 	}
 
 	let contextSection = '';
 	if (contextSources.length > 0) {
-		contextSection = '\n\nGROUNDED CONTEXT (from live retrieval — cite these when relevant):\n' +
-			contextSources.map((s, i) =>
-				`[${i + 1}] ${s.display_name} (relevance: ${(s.relevance * 100).toFixed(0)}%): ${s.snippet.slice(0, 300)}`
-			).join('\n');
+		contextSection =
+			'\n\nGROUNDED CONTEXT (from live retrieval — cite these when relevant):\n' +
+			contextSources
+				.map(
+					(s, i) =>
+						`[${i + 1}] ${s.display_name} (relevance: ${(s.relevance * 100).toFixed(0)}%): ${s.snippet.slice(0, 300)}`,
+				)
+				.join('\n');
 	}
 
 	return `You are the ORGANVM Capability Advisor.
@@ -468,13 +503,16 @@ function scoreOrgans(
 	// Convert live organs to fallback format if available
 	const organs: FallbackOrgan[] = liveOrgans
 		? liveOrgans.map((o) => ({
-			id: o.key.replace('ORGAN-', '').replace('META-ORGANVM', 'META'),
-			title: o.greek.toUpperCase(),
-			summary: o.domain,
-			capabilities: o.capabilities.slice(0, 3),
-			repos: o.repos.slice(0, 3).map((r) => r.name),
-			keywords: o.domain.toLowerCase().split(/[\s,]+/).filter((w) => w.length > 3),
-		}))
+				id: o.key.replace('ORGAN-', '').replace('META-ORGANVM', 'META'),
+				title: o.greek.toUpperCase(),
+				summary: o.domain,
+				capabilities: o.capabilities.slice(0, 3),
+				repos: o.repos.slice(0, 3).map((r) => r.name),
+				keywords: o.domain
+					.toLowerCase()
+					.split(/[\s,]+/)
+					.filter((w) => w.length > 3),
+			}))
 		: FALLBACK_ORGANS;
 
 	const normalized = challenge.toLowerCase();
@@ -482,14 +520,16 @@ function scoreOrgans(
 		industry && INDUSTRY_HINTS[industry] ? INDUSTRY_HINTS[industry] : [],
 	);
 
-	const scored = organs.map((organ) => {
-		let score = 0;
-		if (industryBoosts.has(organ.id)) score += 3;
-		for (const keyword of organ.keywords) {
-			if (normalized.includes(keyword)) score += 2;
-		}
-		return { organ, score };
-	}).sort((a, b) => b.score - a.score);
+	const scored = organs
+		.map((organ) => {
+			let score = 0;
+			if (industryBoosts.has(organ.id)) score += 3;
+			for (const keyword of organ.keywords) {
+				if (normalized.includes(keyword)) score += 2;
+			}
+			return { organ, score };
+		})
+		.sort((a, b) => b.score - a.score);
 
 	const selected = scored
 		.filter((row) => row.score > 0)

@@ -1,12 +1,12 @@
 // Representative sample of page archetypes (6 pages instead of all ~50).
 // Keeps Lighthouse CI under 3 minutes on GitHub Actions free runners.
 const urls = [
-	'http://localhost/index.html',                                    // landing
-	'http://localhost/about/index.html',                              // content page
-	'http://localhost/dashboard/index.html',                          // data-heavy
-	'http://localhost/projects/orchestration-hub/index.html',         // project detail
-	'http://localhost/gallery/index.html',                            // media-heavy
-	'http://localhost/consult/index.html',                            // interactive form
+	'http://localhost/index.html', // landing
+	'http://localhost/about/index.html', // content page
+	'http://localhost/dashboard/index.html', // data-heavy
+	'http://localhost/projects/orchestration-hub/index.html', // project detail
+	'http://localhost/gallery/index.html', // media-heavy
+	'http://localhost/consult/index.html', // interactive form
 ];
 
 /** @type {import('@lhci/cli').Config} */
