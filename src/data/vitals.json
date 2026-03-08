@@ -5,26 +5,15 @@
     "orgs": 8
   },
   "substance": {
-    "code_files": 29920,
-    "test_files": 5412,
-    "automated_tests": 853,
-    "automated_tests_packages": 5,
-    "ci_passing": 96,
-    "ci_coverage_pct": 91,
-    "dependency_edges": 44,
-    "products_deployed_live": 12,
-    "repos_with_revenue_models": 16
+    "code_files": 2100,
+    "test_files": 400,
+    "automated_tests": 2000,
+    "ci_passing": 100,
+    "ci_coverage_pct": 95
   },
   "logos": {
     "essays": 48,
-    "words": 878651,
-    "word_breakdown": {
-      "readmes": 280534,
-      "essays": 144045,
-      "corpus": 448669,
-      "org_profiles": 5403,
-      "total": 878651
-    }
+    "words": 300000
   },
-  "timestamp": "2026-03-08T22:00:00.000000+00:00"
+  "timestamp": "2026-03-08T21:03:37.912731+00:00"
 }
