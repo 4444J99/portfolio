@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-11T07:47:45.626292+00:00",
+  "generated": "2026-03-11T10:01:38.487709+00:00",
   "sprint": "PROPULSIO_TERTIA",
   "system": {
     "name": "ORGANVM",
@@ -7,13 +7,13 @@
     "project_status": "PROPULSIO TERTIA Sprint 2026-03-08. 105 repos (96 ACTIVE, 9 ARCHIVED), 48 essays (~165K words), ~410K+ total words. Omega scorecard: 4/17 MET, 3 IN_PROGRESS. Soak test: 21/30 days, 0 incidents. 70 GitHub issues tracking, 33 sprints completed, schema v1.0.0, governance v2.0. 853+ automated tests across 5 packages. 12 products deployed live. 16 repos with revenue models. GitHub Discussions + community onboarding active."
   },
   "registry": {
-    "total_repos": 111,
+    "total_repos": 112,
     "total_organs": 8,
     "operational_organs": 8,
     "implementation_status": {
       "ACTIVE": 57,
       "ARCHIVED": 53,
-      "PROTOTYPE": 1
+      "PROTOTYPE": 2
     },
     "tier_distribution": {
       "flagship": 9,
@@ -29,7 +29,7 @@
       "ARCHIVED": 9
     },
     "ci_coverage": 100,
-    "dependency_edges": 47,
+    "dependency_edges": 49,
     "schema_version": "1.0.0",
     "governance_version": "2.0",
     "organs": {
@@ -56,7 +56,7 @@
       "ORGAN-III": {
         "name": "Commerce",
         "status": "OPERATIONAL",
-        "total_repos": 28,
+        "total_repos": 29,
         "implementation_status": {
           "ACTIVE": 25,
           "ARCHIVED": 2

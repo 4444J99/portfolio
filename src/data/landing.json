@@ -2,10 +2,10 @@
   "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
-    "total_repos": 111,
+    "total_repos": 112,
     "active_repos": 57,
     "archived_repos": 53,
-    "dependency_edges": 47,
+    "dependency_edges": 49,
     "ci_workflows": 100,
     "operational_organs": 8,
     "sprints_completed": 33
@@ -34,7 +34,7 @@
       "name": "Commerce",
       "greek": "Ergon",
       "org": "organvm-iii-ergon",
-      "repo_count": 28,
+      "repo_count": 29,
       "status": "OPERATIONAL",
       "description": "Product platforms, deployed systems, customer-facing tools, B2B/B2C applications"
     },
@@ -314,5 +314,5 @@
       "deliverables": "Portfolio refresh, PROBATIO, VIVIFICATIO, conference proposals"
     }
   ],
-  "generated": "2026-03-11T07:47:57.827657+00:00"
+  "generated": "2026-03-11T10:01:50.330566+00:00"
 }
