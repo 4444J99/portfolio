@@ -2,10 +2,10 @@
   "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
-    "total_repos": 105,
-    "active_repos": 96,
-    "archived_repos": 9,
-    "dependency_edges": 44,
+    "total_repos": 111,
+    "active_repos": 57,
+    "archived_repos": 53,
+    "dependency_edges": 47,
     "ci_workflows": 100,
     "operational_organs": 8,
     "sprints_completed": 33
@@ -16,7 +16,7 @@
       "name": "Theory",
       "greek": "Theoria",
       "org": "organvm-i-theoria",
-      "repo_count": 20,
+      "repo_count": 19,
       "status": "OPERATIONAL",
       "description": "Epistemological frameworks, recursive engines, ontological systems, conceptual research"
     },
@@ -25,7 +25,7 @@
       "name": "Art",
       "greek": "Poiesis",
       "org": "organvm-ii-poiesis",
-      "repo_count": 30,
+      "repo_count": 31,
       "status": "OPERATIONAL",
       "description": "Generative art, interactive systems, performance frameworks, experiential work"
     },
@@ -43,7 +43,7 @@
       "name": "Orchestration",
       "greek": "Taxis",
       "org": "organvm-iv-taxis",
-      "repo_count": 7,
+      "repo_count": 11,
       "status": "OPERATIONAL",
       "description": "Cross-organ routing, governance, promotion automation, system coordination, dependency management"
     },
@@ -79,7 +79,7 @@
       "name": "META-ORGANVM",
       "greek": "META-ORGANVM",
       "org": "",
-      "repo_count": 8,
+      "repo_count": 10,
       "status": "OPERATIONAL",
       "description": "Umbrella organization coordinating all 7 organ orgs. System-wide governance, cross-organ visibility, and institutional identity."
     }
@@ -314,5 +314,5 @@
       "deliverables": "Portfolio refresh, PROBATIO, VIVIFICATIO, conference proposals"
     }
   ],
-  "generated": "2026-03-11T07:26:18.673946+00:00"
+  "generated": "2026-03-11T07:47:57.827657+00:00"
 }

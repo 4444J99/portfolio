@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-11T06:48:08.558545+00:00",
+  "generated": "2026-03-11T07:47:45.626292+00:00",
   "sprint": "PROPULSIO_TERTIA",
   "system": {
     "name": "ORGANVM",
@@ -7,12 +7,13 @@
     "project_status": "PROPULSIO TERTIA Sprint 2026-03-08. 105 repos (96 ACTIVE, 9 ARCHIVED), 48 essays (~165K words), ~410K+ total words. Omega scorecard: 4/17 MET, 3 IN_PROGRESS. Soak test: 21/30 days, 0 incidents. 70 GitHub issues tracking, 33 sprints completed, schema v1.0.0, governance v2.0. 853+ automated tests across 5 packages. 12 products deployed live. 16 repos with revenue models. GitHub Discussions + community onboarding active."
   },
   "registry": {
-    "total_repos": 105,
+    "total_repos": 111,
     "total_organs": 8,
     "operational_organs": 8,
     "implementation_status": {
-      "ACTIVE": 96,
-      "ARCHIVED": 9
+      "ACTIVE": 57,
+      "ARCHIVED": 53,
+      "PROTOTYPE": 1
     },
     "tier_distribution": {
       "flagship": 9,
@@ -28,14 +29,14 @@
       "ARCHIVED": 9
     },
     "ci_coverage": 100,
-    "dependency_edges": 44,
+    "dependency_edges": 47,
     "schema_version": "1.0.0",
     "governance_version": "2.0",
     "organs": {
       "ORGAN-I": {
         "name": "Theory",
         "status": "OPERATIONAL",
-        "total_repos": 20,
+        "total_repos": 19,
         "implementation_status": {
           "ACTIVE": 17,
           "ARCHIVED": 3
@@ -45,7 +46,7 @@
       "ORGAN-II": {
         "name": "Art",
         "status": "OPERATIONAL",
-        "total_repos": 30,
+        "total_repos": 31,
         "implementation_status": {
           "ACTIVE": 26,
           "ARCHIVED": 4
@@ -65,7 +66,7 @@
       "ORGAN-IV": {
         "name": "Orchestration",
         "status": "OPERATIONAL",
-        "total_repos": 7,
+        "total_repos": 11,
         "implementation_status": {
           "ACTIVE": 7
         },
@@ -102,7 +103,7 @@
       "META-ORGANVM": {
         "name": "Meta",
         "status": "OPERATIONAL",
-        "total_repos": 8,
+        "total_repos": 10,
         "implementation_status": {
           "ACTIVE": 7
         },
