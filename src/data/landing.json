@@ -3,10 +3,10 @@
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
     "total_repos": 113,
-    "active_repos": 58,
+    "active_repos": 59,
     "archived_repos": 53,
     "dependency_edges": 50,
-    "ci_workflows": 101,
+    "ci_workflows": 104,
     "operational_organs": 8,
     "sprints_completed": 33
   },
@@ -314,5 +314,5 @@
       "deliverables": "Portfolio refresh, PROBATIO, VIVIFICATIO, conference proposals"
     }
   ],
-  "generated": "2026-03-13T15:39:22.694311+00:00"
+  "generated": "2026-03-13T17:30:02.921741+00:00"
 }
