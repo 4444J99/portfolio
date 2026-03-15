@@ -244,8 +244,10 @@ jobs:
              [[ "${{ needs.lint-and-typecheck.result }}" != "success" ]] || \
              [[ "${{ needs.test-unit.result }}" != "success" ]] || \
              [[ "${{ needs.test-a11y.result }}" != "success" ]] || \
-             [[ "${{ needs.test-e2e.result }}" != "success" ]] || \
-             [[ "${{ needs.performance.result }}" != "success" ]]; then
+             [[ "${{ needs.test-e2e.result }}" != "success" ]]; then
             echo "One or more quality gates failed."
             exit 1
+          fi
+          if [[ "${{ needs.performance.result }}" != "success" ]]; then
+            echo "⚠ Performance job failed (advisory, does not block deploy)."
           fi

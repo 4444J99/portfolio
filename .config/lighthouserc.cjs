@@ -1,7 +1,7 @@
 // Representative sample of page archetypes (6 pages instead of all ~50).
-// Keeps Lighthouse CI under 3 minutes on GitHub Actions free runners.
+// Median of 3 runs smooths CI runner variance. ~3 min on GitHub Actions free runners.
 const urls = [
-	'http://localhost/index.html', // landing
+	'http://localhost/index.html', // landing (p5.js canvas — heavier JS payload)
 	'http://localhost/about/index.html', // content page
 	'http://localhost/dashboard/index.html', // data-heavy
 	'http://localhost/projects/orchestration-hub/index.html', // project detail
@@ -15,7 +15,7 @@ module.exports = {
 		collect: {
 			staticDistDir: './dist',
 			url: urls,
-			numberOfRuns: 1,
+			numberOfRuns: 3,
 		},
 		assert: {
 			assertions: {
