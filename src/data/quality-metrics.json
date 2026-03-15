@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-15T22:02:46.100Z",
+  "generated": "2026-03-15T22:55:42.830Z",
   "tests": {
     "total": 289,
     "passed": 289,
@@ -27,7 +27,7 @@
       "low": 0,
       "total": 0
     },
-    "allowlistActive": 8,
+    "allowlistActive": 6,
     "policyCheckpoint": {
       "date": "2026-03-14",
       "maxModerate": 0,
