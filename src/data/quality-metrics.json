@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-08T20:07:40.947Z",
+  "generated": "2026-03-15T22:02:46.100Z",
   "tests": {
     "total": 289,
     "passed": 289,
@@ -15,10 +15,10 @@
     "githubAdvisoryStatus": "skipped",
     "prodCounts": {
       "critical": 0,
-      "high": 1,
-      "moderate": 2,
+      "high": 0,
+      "moderate": 0,
       "low": 0,
-      "total": 3
+      "total": 0
     },
     "devCounts": {
       "critical": 0,
@@ -27,11 +27,11 @@
       "low": 0,
       "total": 0
     },
-    "allowlistActive": 0,
+    "allowlistActive": 8,
     "policyCheckpoint": {
-      "date": "2026-02-28",
-      "maxModerate": 2,
-      "maxLow": 2
+      "date": "2026-03-14",
+      "maxModerate": 0,
+      "maxLow": 0
     },
     "status": "pass",
     "source": ".quality/security-summary.json",
@@ -74,13 +74,13 @@
     "chunkBudgetsStatus": "pass",
     "interactionBudgetsStatus": "pass",
     "routeBudgetCheckpoint": {
-      "date": "2026-02-17"
+      "date": "2026-03-07"
     },
     "chunkBudgetCheckpoint": {
-      "date": "2026-02-17"
+      "date": "2026-03-07"
     },
     "interactionBudgetCheckpoint": {
-      "date": "2026-02-17"
+      "date": "2026-03-07"
     },
     "largestChunks": [
       {

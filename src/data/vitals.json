@@ -6,14 +6,14 @@
   },
   "substance": {
     "code_files": 2260,
-    "test_files": 400,
-    "automated_tests": 2000,
+    "test_files": 171,
+    "automated_tests": 853,
     "ci_passing": 104,
     "ci_coverage_pct": 92
   },
   "logos": {
     "essays": 48,
-    "words": 300000
+    "words": 410000
   },
-  "timestamp": "2026-03-15T07:27:20.618975+00:00"
+  "timestamp": "2026-03-13T17:29:48.774241+00:00"
 }

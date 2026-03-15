@@ -1,4 +1,77 @@
 {
 	"version": 1,
-	"entries": []
+	"entries": [
+		{
+			"package": "undici",
+			"severity": "high",
+			"reason": "Dev-only dependency (cheerio/jsdom/linkinator). Fix requires undici >= 7.24.0, latest is 7.22.0. Zero production exposure.",
+			"owner": "4444j99",
+			"created": "2026-03-15",
+			"expires": "2026-03-29",
+			"trackingIssue": "https://github.com/4444J99/portfolio/issues/47"
+		},
+		{
+			"package": "yauzl",
+			"severity": "moderate",
+			"reason": "Dev-only via @lhci/cli chain. Fix requires yauzl >= 3.2.1, latest is 3.2.0. Zero production exposure.",
+			"owner": "4444j99",
+			"created": "2026-03-15",
+			"expires": "2026-03-29",
+			"trackingIssue": "https://github.com/4444J99/portfolio/issues/47"
+		},
+		{
+			"package": "extract-zip",
+			"severity": "moderate",
+			"reason": "Transitive via yauzl in @lhci/cli chain. Dev-only, zero production exposure.",
+			"owner": "4444j99",
+			"created": "2026-03-15",
+			"expires": "2026-03-29",
+			"trackingIssue": "https://github.com/4444J99/portfolio/issues/47"
+		},
+		{
+			"package": "@puppeteer/browsers",
+			"severity": "moderate",
+			"reason": "Transitive via yauzl in @lhci/cli chain. Dev-only, zero production exposure.",
+			"owner": "4444j99",
+			"created": "2026-03-15",
+			"expires": "2026-03-29",
+			"trackingIssue": "https://github.com/4444J99/portfolio/issues/47"
+		},
+		{
+			"package": "puppeteer-core",
+			"severity": "moderate",
+			"reason": "Transitive via yauzl in @lhci/cli chain. Dev-only, zero production exposure.",
+			"owner": "4444j99",
+			"created": "2026-03-15",
+			"expires": "2026-03-29",
+			"trackingIssue": "https://github.com/4444J99/portfolio/issues/47"
+		},
+		{
+			"package": "lighthouse",
+			"severity": "moderate",
+			"reason": "Transitive via yauzl in @lhci/cli chain. Dev-only, zero production exposure.",
+			"owner": "4444j99",
+			"created": "2026-03-15",
+			"expires": "2026-03-29",
+			"trackingIssue": "https://github.com/4444J99/portfolio/issues/47"
+		},
+		{
+			"package": "@lhci/cli",
+			"severity": "moderate",
+			"reason": "Transitive via yauzl in @lhci/cli chain. Dev-only, zero production exposure.",
+			"owner": "4444j99",
+			"created": "2026-03-15",
+			"expires": "2026-03-29",
+			"trackingIssue": "https://github.com/4444J99/portfolio/issues/47"
+		},
+		{
+			"package": "@lhci/utils",
+			"severity": "moderate",
+			"reason": "Transitive via yauzl in @lhci/cli chain. Dev-only, zero production exposure.",
+			"owner": "4444j99",
+			"created": "2026-03-15",
+			"expires": "2026-03-29",
+			"trackingIssue": "https://github.com/4444J99/portfolio/issues/47"
+		}
+	]
 }

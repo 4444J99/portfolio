@@ -1,9 +1,9 @@
 {
-  "generated": "2026-03-13",
+  "generated": "2026-03-15",
   "summary": {
     "met": 4,
-    "in_progress": 3,
-    "not_started": 10,
+    "in_progress": 4,
+    "not_started": 9,
     "total": 17
   },
   "horizons": [
