@@ -98,3 +98,58 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  verify:
+    needs: deploy
+    if: always() && needs.deploy.result == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      smoke-passed: ${{ steps.smoke.outputs.passed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Post-deploy smoke test
+        id: smoke
+        run: |
+          if node scripts/post-deploy-smoke.mjs; then
+            echo "passed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "passed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  rollback:
+    needs: [deploy, verify]
+    if: always() && needs.verify.outputs.smoke-passed == 'false'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 2
+      - name: Revert to previous deploy
+        run: |
+          echo "Rolling back gh-pages to previous commit..."
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          prev_sha=$(git rev-parse HEAD~1)
+          git reset --hard "$prev_sha"
+          git push --force-with-lease origin gh-pages
+          echo "Rolled back to $prev_sha"
+      - name: Create rollback issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "Auto-rollback triggered — deploy smoke test failed" \
+            --body "Deploy from commit ${{ github.sha }} failed post-deploy smoke tests.
+
+          gh-pages was automatically rolled back to the previous deployment.
+
+          [Failed run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+          **Action required:** investigate the failure, fix, and re-deploy."
