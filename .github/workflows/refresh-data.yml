@@ -36,11 +36,19 @@ jobs:
           gh api repos/meta-organvm/organvm-corpvs-testamentvm/contents/registry-v2.json \
             --jq '.content' | base64 -d > /tmp/registry-v2.json
 
+      - name: Fetch system-snapshot.json from corpus
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/meta-organvm/organvm-corpvs-testamentvm/contents/system-snapshot.json \
+            --jq '.content' | base64 -d > /tmp/system-snapshot.json 2>/dev/null || echo "{}" > /tmp/system-snapshot.json
+
       - name: Generate data files
         run: |
           python3 scripts/generate-system-data.py \
             --metrics /tmp/system-metrics.json \
             --registry /tmp/registry-v2.json \
+            --snapshot /tmp/system-snapshot.json \
             --output-dir src/data/
 
       - name: Setup Node

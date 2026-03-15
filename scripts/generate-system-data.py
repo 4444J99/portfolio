@@ -13,6 +13,7 @@ Usage:
     python3 scripts/generate-system-data.py \
       --metrics /tmp/system-metrics.json \
       --registry /tmp/registry-v2.json \
+      --snapshot /tmp/system-snapshot.json \
       --output-dir src/data/
 """
 
@@ -84,8 +85,8 @@ def transform_for_portfolio(canonical: dict, portfolio_path: Path) -> dict:
 # ── Transform: vitals.json ──────────────────────────────────────────
 
 
-def compute_vitals(canonical: dict) -> dict:
-    """Build vitals.json from canonical system-metrics.json."""
+def compute_vitals(canonical: dict, snapshot: dict | None = None) -> dict:
+    """Build vitals.json from canonical system-metrics.json + snapshot."""
     c = canonical["computed"]
 
     total_repos = c["total_repos"]
@@ -122,6 +123,22 @@ def compute_vitals(canonical: dict) -> dict:
         },
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
+
+    # Enrich with snapshot data (density, entities, edges, AMMOI)
+    if snapshot and "system" in snapshot:
+        sys = snapshot["system"]
+        vitals["organism"] = {
+            "density": sys.get("density", 0),
+            "entities": sys.get("entities", 0),
+            "edges": sys.get("edges", 0),
+            "ammoi": sys.get("ammoi", ""),
+        }
+        if "omega" in snapshot:
+            vitals["omega"] = snapshot["omega"]
+        if "promotion_pipeline" in snapshot:
+            vitals["promotion_pipeline"] = snapshot["promotion_pipeline"]
+
+    return vitals
 
 
 # ── Transform: landing.json ─────────────────────────────────────────
@@ -217,6 +234,7 @@ def main():
     parser = argparse.ArgumentParser(description="Generate portfolio data files")
     parser.add_argument("--metrics", required=True, help="Path to canonical system-metrics.json")
     parser.add_argument("--registry", required=True, help="Path to registry-v2.json")
+    parser.add_argument("--snapshot", default=None, help="Path to system-snapshot.json (optional)")
     parser.add_argument("--output-dir", required=True, help="Output directory (e.g. src/data/)")
     args = parser.parse_args()
 
@@ -234,6 +252,13 @@ def main():
     canonical = load_json(metrics_path)
     registry = load_json(registry_path)
 
+    snapshot = None
+    if args.snapshot:
+        snapshot_path = Path(args.snapshot)
+        if snapshot_path.exists():
+            snapshot = load_json(snapshot_path)
+            print(f"  Snapshot loaded: {snapshot.get('generated_at', 'unknown')[:19]}")
+
     if "computed" not in canonical:
         print(f"ERROR: {metrics_path} missing 'computed' section", file=sys.stderr)
         sys.exit(1)
@@ -246,7 +271,7 @@ def main():
 
     # 2. vitals.json
     vitals_path = output_dir / "vitals.json"
-    vitals = compute_vitals(canonical)
+    vitals = compute_vitals(canonical, snapshot)
     write_json(vitals, vitals_path)
     print(f"  Written: {vitals_path}")
 
