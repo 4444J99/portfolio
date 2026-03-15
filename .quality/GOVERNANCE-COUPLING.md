@@ -6,7 +6,7 @@ Instantiation of [SOP: CI/CD Pipeline Resilience](~/Workspace/meta-organvm/organ
 
 | If you change... | Also update... | Enforced by |
 |-----------------|----------------|-------------|
-| `.config/lighthouserc.cjs` perf score | `README.md` Perf badge value | `quality-governance.test.ts` |
+| `scripts/lighthouse-ci.mjs` perf score | `README.md` Perf badge value | `quality-governance.test.ts` |
 | `.quality/ratchet-policy.json` coverage phases | `README.md` coverage ratchet table | `quality-governance.test.ts` |
 | `.quality/ratchet-policy.json` typecheck budgets | `README.md` typecheck hint budget line | `quality-governance.test.ts` |
 | `.quality/security-policy.json` checkpoints | `README.md` security ratchet checkpoints | `quality-governance.test.ts` |

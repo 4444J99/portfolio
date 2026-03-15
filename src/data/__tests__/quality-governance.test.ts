@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 const root = resolve(__dirname, '../../../');
 const readme = readFileSync(resolve(root, 'README.md'), 'utf-8');
-const lighthouseRc = readFileSync(resolve(root, '.config/lighthouserc.cjs'), 'utf-8');
+const lighthouseScript = readFileSync(resolve(root, 'scripts/lighthouse-ci.mjs'), 'utf-8');
 const workflow = readFileSync(resolve(root, '.github/workflows/quality.yml'), 'utf-8');
 const securityDriftWorkflow = readFileSync(
 	resolve(root, '.github/workflows/security-drift.yml'),
@@ -83,7 +83,7 @@ function parseRuntimeCoverageRatchetFromReadme() {
 describe('quality governance drift checks', () => {
 	it('README performance threshold matches Lighthouse enforcement', () => {
 		const readmePerf = readme.match(/Perf ≥ ([0-9]+)/);
-		const configPerf = lighthouseRc.match(
+		const configPerf = lighthouseScript.match(
 			/'categories:performance': \['error', \{ minScore: ([0-9.]+) \}\]/,
 		);
 

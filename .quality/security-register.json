@@ -77,10 +77,10 @@
 			"status": "open"
 		},
 		{
-			"family": "lhci-transitive-tmp",
-			"packages": ["@lhci/cli", "inquirer", "external-editor", "tmp"],
+			"family": "lighthouse-yauzl-chain",
+			"packages": ["lighthouse", "puppeteer-core", "@puppeteer/browsers", "extract-zip", "yauzl"],
 			"owner": "@4444j99",
-			"eta": "2026-03-07",
+			"eta": "2026-03-29",
 			"status": "open"
 		}
 	],

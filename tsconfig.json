@@ -6,7 +6,7 @@
 		"scripts/**/*",
 		"astro.config.mjs",
 		"vitest.config.ts",
-		"lighthouserc.cjs"
+		"scripts/lighthouse-ci.mjs"
 	],
 	"exclude": ["dist", "coverage", "intake", "node_modules"],
 	"compilerOptions": {
