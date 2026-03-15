@@ -1,0 +1,26 @@
+---
+// Core Web Vitals → Plausible custom events.
+// Captures LCP, CLS, FCP, TTFB from real users and sends
+// them as Plausible custom events for production monitoring.
+---
+
+<script>
+	import { onCLS, onFCP, onLCP, onTTFB } from 'web-vitals';
+
+	function sendToPlausible(metric) {
+		if (typeof window.plausible !== 'function') return;
+		window.plausible('Web Vitals', {
+			props: {
+				metric: metric.name,
+				value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+				rating: metric.rating,
+				page: window.location.pathname,
+			},
+		});
+	}
+
+	onLCP(sendToPlausible);
+	onFCP(sendToPlausible);
+	onCLS(sendToPlausible);
+	onTTFB(sendToPlausible);
+</script>

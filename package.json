@@ -84,7 +84,8 @@
 		"mermaid": "11.12.2",
 		"p5": "2.2.1",
 		"svgo": "4.0.1",
-		"three": "0.183.2"
+		"three": "0.183.2",
+		"web-vitals": "5.1.0"
 	},
 	"devDependencies": {
 		"@astrojs/check": "0.9.6",

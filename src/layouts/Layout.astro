@@ -13,6 +13,7 @@ import ClientBootstrap from '../components/scripts/ClientBootstrap.astro';
 import ScrollReveal from '../components/scripts/ScrollReveal.astro';
 import SketchLifecycle from '../components/scripts/SketchLifecycle.astro';
 import ThemeRestore from '../components/scripts/ThemeRestore.astro';
+import WebVitals from '../components/scripts/WebVitals.astro';
 import { canonicalBase } from '../utils/paths';
 
 interface Props {
@@ -71,6 +72,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
   <ScrollReveal />
   <ClientBootstrap />
   <ThemeRestore />
+  <WebVitals />
 </html>
 
 <style is:global>
