@@ -1,0 +1,58 @@
+name: Security Allowlist Lifecycle
+
+on:
+  schedule:
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  lifecycle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Run allowlist lifecycle check
+        id: lifecycle
+        run: |
+          set +e
+          output=$(node scripts/security-allowlist-lifecycle.mjs 2>&1)
+          exit_code=$?
+          echo "$output"
+          echo "changes=$exit_code" >> "$GITHUB_OUTPUT"
+          removed=$(echo "$output" | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf-8')); console.log(d.removed?.length ?? 0)")
+          renewed=$(echo "$output" | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf-8')); console.log(d.renewed?.length ?? 0)")
+          echo "removed=$removed" >> "$GITHUB_OUTPUT"
+          echo "renewed=$renewed" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push if changes
+        if: steps.lifecycle.outputs.changes == '1'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .quality/security-allowlist.json
+          msg="chore(security): auto-update allowlist"
+          if [[ "${{ steps.lifecycle.outputs.removed }}" -gt 0 ]]; then
+            msg="$msg — removed ${{ steps.lifecycle.outputs.removed }} resolved"
+          fi
+          if [[ "${{ steps.lifecycle.outputs.renewed }}" -gt 0 ]]; then
+            msg="$msg — renewed ${{ steps.lifecycle.outputs.renewed }} pending"
+          fi
+          git commit -m "$msg"
+          git push
+
+      - name: Comment on tracking issue
+        if: steps.lifecycle.outputs.changes == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          body="**Security Allowlist Lifecycle** ($(date -u +%Y-%m-%d))\n- Removed: ${{ steps.lifecycle.outputs.removed }}\n- Renewed: ${{ steps.lifecycle.outputs.renewed }}\n\n[Run details](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          gh issue comment 47 --body "$body"
