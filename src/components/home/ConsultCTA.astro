@@ -1,0 +1,83 @@
+---
+import { base } from '../../utils/paths';
+---
+
+<section class="consult-cta section">
+	<div class="container">
+		<h2 class="consult-cta__heading" data-reveal>Let's work together</h2>
+		<p class="consult-cta__subtext" data-reveal>
+			Available for consulting, architecture reviews, and strategic technical guidance.
+		</p>
+		<div class="consult-cta__actions" data-reveal>
+			<a href={`${base}consult/`} class="consult-cta__btn consult-cta__btn--primary">
+				Start a conversation
+			</a>
+			<a href="mailto:padavano.anthony@gmail.com" class="consult-cta__btn consult-cta__btn--secondary">
+				Email directly
+			</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.consult-cta {
+		padding: var(--space-3xl) 0;
+		text-align: center;
+	}
+
+	.consult-cta__heading {
+		font-family: var(--font-heading);
+		margin-bottom: var(--space-md);
+	}
+
+	.consult-cta__subtext {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: var(--text-secondary);
+		max-width: 50ch;
+		margin: 0 auto var(--space-xl);
+	}
+
+	.consult-cta__actions {
+		display: flex;
+		justify-content: center;
+		gap: var(--space-lg);
+		flex-wrap: wrap;
+	}
+
+	.consult-cta__btn {
+		display: inline-flex;
+		align-items: center;
+		padding: var(--space-sm) var(--space-xl);
+		font-size: 0.95rem;
+		font-weight: 600;
+		border-radius: var(--radius-md);
+		text-decoration: none;
+		transition:
+			background var(--transition-base),
+			border-color var(--transition-base),
+			color var(--transition-base);
+	}
+
+	.consult-cta__btn--primary {
+		background: var(--accent);
+		color: var(--bg-primary);
+		border: 1px solid var(--accent);
+	}
+
+	.consult-cta__btn--primary:hover {
+		background: var(--accent-hover);
+		border-color: var(--accent-hover);
+	}
+
+	.consult-cta__btn--secondary {
+		background: transparent;
+		color: var(--text-primary);
+		border: 1px solid var(--border);
+	}
+
+	.consult-cta__btn--secondary:hover {
+		border-color: var(--accent);
+		color: var(--accent-text);
+	}
+</style>
