@@ -413,7 +413,439 @@
       ]
     },
     {
-      "path": "/logos/logocentric-architecture",
+      "path": "/logos/aesthetic-nervous-system",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/aetheria-rpg-post-mortem",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/ai-conductor-methodology",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/archive-paradox",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/bootstrap-to-scale",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/bronze-to-platinum",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/building-in-public",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/choreographic-interface",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/coaching-platform-metrics",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/community-infrastructure-for-one",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/constraint-alchemy-workshop",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/construction-addiction",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/dependency-graph",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/deploying-the-portfolio",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/documentation-implementation-gap",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/epistemic-tuning-explained",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/five-years-autonomous-creative",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/generative-music-case-study",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/governance-as-creative-practice",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/governance-frameworks-for-artists",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/how-this-was-built",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/how-to-think-about-autonomous-systems",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/how-we-orchestrate-eight-organs",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/meta-system-as-portfolio-asset",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/performance-platform-methodology",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/precision-over-volume-doctoral-thesis",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/promotion-pipeline",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/promotions-in-practice",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/provenance-as-practice",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/recursive-engines-at-scale",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/registry-driven-development",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/seed-contracts",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/testing-the-meta-system",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/the-autonomous-sprint",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/the-convergence",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/the-distribution-problem",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/the-organ-chain-reset",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/the-parallel-launch",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/the-promotion-pipeline",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/the-solo-auteur-method",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/twelve-decisions",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/twenty-six-sprints-in-six-days",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/two-weeks-and-forty-six-essays",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/uniform-quality-at-scale",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/what-it-takes-to-ship-a-product-from-inside-an-organ-system",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/what-ive-done-is-what-i-am",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/why-ai-function-calling-needs-ontological-grounding",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/why-the-organ-model-separates-commerce-from-theory",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/logos/writing-as-system-architecture",
       "checks": [
         "nav-menu",
         "dropdown-menu",

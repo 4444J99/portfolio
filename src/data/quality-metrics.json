@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-15T22:55:42.830Z",
+  "generated": "2026-03-16T00:08:22.008Z",
   "tests": {
     "total": 289,
     "passed": 289,
@@ -1077,7 +1077,7 @@
   },
   "build": {
     "pages": 50,
-    "bundleFiles": 64
+    "bundleFiles": 65
   },
   "sources": {
     "tests": ".quality/vitest-report.json",

@@ -1,0 +1,31 @@
+---
+title: "Precision Over Volume: A Doctoral Thesis on Career Pipeline Optimization"
+description: "A ~50,000-word doctoral thesis applying multi-criteria decision analysis, social network theory, portfolio optimization, and five other research traditions to the problem of career application pipeline management. Includes formal mathematical proofs of optimality for precision-based strategies over volume-based approaches."
+pubDate: 2026-03-04
+featured: true
+tags: ["Dissertation", "Mcda", "Career-pipeline", "Network-theory", "Portfolio-optimization", "Precision-hiring", "Mathematical-proofs"]
+---
+
+# Precision Over Volume: A Doctoral Thesis
+
+**Full title:** *Precision Over Volume: A Multi-Criteria Decision Analysis Framework for Optimal Career Application Pipeline Management*
+
+This doctoral thesis presents the theoretical foundations, mathematical proofs, and empirical analysis behind the precision pipeline --- a production system for career application management that evolved from a volume-optimized tracker into a precision-optimized decision engine.
+
+## Key Contributions
+
+- **Six-tradition theoretical integration:** Multi-criteria decision analysis, social network theory, optimal stopping theory, portfolio optimization, information theory, and persuasion science --- unified for the first time in career pipeline literature
+- **Formal mathematical proofs:** WSM boundedness, network proximity optimality, portfolio concentration theorems, and more
+- **Systematic competitive analysis:** The precision pipeline compared against all existing alternatives
+- **Design science methodology:** Mixed-methods approach following Hevner et al. (2004) guidelines
+
+## Read the Full Dissertation
+
+The thesis is published chapter-by-chapter:
+
+{% assign chapters = site.dissertations | where: "dissertation", "precision-pipeline" | sort: "chapter" %}
+{% for chapter in chapters %}
+- [{{ chapter.title }}]({{ chapter.url | relative_url }}) ({{ chapter.word_count | divided_by: 1000.0 | round: 1 }}k words)
+{% endfor %}
+
+Or start from the [dissertations overview]({{ site.baseurl }}/dissertations/).
