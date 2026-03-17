@@ -14,6 +14,8 @@ interface Props {
 	repoSlug?: string;
 }
 
+import { base } from '../utils/paths';
+
 const { context, repoSlug } = Astro.props;
 
 interface ApiFacet {
@@ -39,12 +41,22 @@ const FALLBACK_FACETS: ApiFacet[] = [
 		url: 'https://organvm-i-theoria.github.io/my-knowledge-base',
 		live: true,
 	},
+	{
+		id: 'public-process',
+		name: 'Public Process',
+		role: 'discourse',
+		url: 'https://organvm-v-logos.github.io/public-process',
+		live: true,
+	},
+	{ id: 'directory', name: 'System Directory', role: 'directory', url: null, live: true },
 	{ id: 'nexus', name: 'Nexus Babel Alexandria', role: 'laboratory', url: null, live: false },
 ];
 
 const ROLE_LABELS: Record<string, string> = {
 	intelligence: 'Intelligence',
 	memory: 'Library',
+	discourse: 'Essays',
+	directory: 'Directory',
 	laboratory: 'Laboratory',
 };
 
@@ -73,18 +85,22 @@ interface Facet {
 	label: string;
 	href: string;
 	live: boolean;
+	internal: boolean;
 }
 
 const facets: Facet[] = apiFacets.map((f) => {
 	const label = ROLE_LABELS[f.role] || f.name;
+	if (f.id === 'directory') {
+		return { label, href: `${base}directory/`, live: true, internal: true };
+	}
 	if (!f.live || !f.url) {
-		return { label, href: '#', live: false };
+		return { label, href: '#', live: false, internal: false };
 	}
 	const href =
 		f.id === 'hermeneus' && repoSlug
 			? `${f.url}/repos/${repoSlug}?prism=${prism}`
 			: `${f.url}/?prism=${prism}`;
-	return { label, href, live: true };
+	return { label, href, live: true, internal: false };
 });
 ---
 
@@ -97,8 +113,12 @@ const facets: Facet[] = apiFacets.map((f) => {
       <>
         {i > 0 && <span class="prism-nav__dot" aria-hidden="true">&middot;</span>}
         {f.live ? (
-          <a href={f.href} class="prism-nav__link" target="_blank" rel="noopener noreferrer">
-            {f.label}<span class="prism-nav__external" aria-hidden="true"> &#8599;</span>
+          <a
+            href={f.href}
+            class="prism-nav__link"
+            {...(f.internal ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+          >
+            {f.label}{!f.internal && <span class="prism-nav__external" aria-hidden="true"> &#8599;</span>}
           </a>
         ) : (
           <span class="prism-nav__link prism-nav__link--dormant" title="Coming soon">{f.label}</span>

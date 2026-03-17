@@ -1,0 +1,372 @@
+---
+import PrismNav from '../components/PrismNav.astro';
+import pagesDirectory from '../data/github-pages.json';
+import Layout from '../layouts/Layout.astro';
+import { base } from '../utils/paths';
+
+interface PagesRepo {
+	owner: string;
+	repo: string;
+	fullName: string;
+	repoUrl: string;
+	pageUrl: string;
+	status: string | null;
+	featured: boolean;
+	priority: number;
+	hidden: boolean;
+	label: string | null;
+	reachable: boolean;
+}
+
+interface PagesDirectory {
+	generatedAt: string;
+	owners: string[];
+	totalRepos: number;
+	repos: PagesRepo[];
+}
+
+const ORGANS: Record<string, { name: string; icon: string; description: string }> = {
+	'4444J99': { name: 'Personal', icon: '\u25C6', description: 'Portfolio, profile, dotfiles' },
+	'meta-organvm': {
+		name: 'Meta',
+		icon: '\u25CE',
+		description: 'Cross-organ governance, registry, corpus',
+	},
+	'organvm-i-theoria': {
+		name: 'I \u00B7 Theoria',
+		icon: '\u2160',
+		description: 'Foundational theory, recursive engines, symbolic computing',
+	},
+	'organvm-ii-poiesis': {
+		name: 'II \u00B7 Poiesis',
+		icon: '\u2161',
+		description: 'Generative art, performance systems, creative coding',
+	},
+	'organvm-iii-ergon': {
+		name: 'III \u00B7 Ergon',
+		icon: '\u2162',
+		description: 'Commercial products, SaaS tools, developer utilities',
+	},
+	'organvm-iv-taxis': {
+		name: 'IV \u00B7 Taxis',
+		icon: '\u2163',
+		description: 'Orchestration, governance, AI agents, skills',
+	},
+	'organvm-v-logos': {
+		name: 'V \u00B7 Logos',
+		icon: '\u2164',
+		description: 'Public discourse, essays, editorial, analytics',
+	},
+	'organvm-vi-koinonia': {
+		name: 'VI \u00B7 Koinonia',
+		icon: '\u2165',
+		description: 'Community, reading groups, salons, learning',
+	},
+	'organvm-vii-kerygma': {
+		name: 'VII \u00B7 Kerygma',
+		icon: '\u2166',
+		description: 'Distribution, social automation, announcements',
+	},
+};
+
+const OWNER_ORDER = [
+	'4444J99',
+	'meta-organvm',
+	'organvm-i-theoria',
+	'organvm-ii-poiesis',
+	'organvm-iii-ergon',
+	'organvm-iv-taxis',
+	'organvm-v-logos',
+	'organvm-vi-koinonia',
+	'organvm-vii-kerygma',
+];
+
+const directory = pagesDirectory as PagesDirectory;
+
+const builtRepos = directory.repos.filter((r) => r.status === 'built' && !r.hidden);
+
+const grouped = new Map<string, PagesRepo[]>();
+for (const repo of builtRepos) {
+	if (!grouped.has(repo.owner)) grouped.set(repo.owner, []);
+	grouped.get(repo.owner)?.push(repo);
+}
+
+// Sort each group: .github.io landing page first, then featured, then alphabetical
+for (const [owner, repos] of grouped) {
+	grouped.set(
+		owner,
+		repos.sort((a, b) => {
+			const aIsLanding = a.repo.endsWith('.github.io') ? 1 : 0;
+			const bIsLanding = b.repo.endsWith('.github.io') ? 1 : 0;
+			if (bIsLanding !== aIsLanding) return bIsLanding - aIsLanding;
+			if (b.featured !== a.featured) return Number(b.featured) - Number(a.featured);
+			return a.repo.localeCompare(b.repo, undefined, { sensitivity: 'base' });
+		}),
+	);
+}
+
+const groups = OWNER_ORDER.filter((o) => grouped.has(o)).map((o) => [o, grouped.get(o)!] as const);
+
+const totalSites = builtRepos.length;
+const totalOrgs = groups.length;
+
+function displayName(repo: PagesRepo): string {
+	if (repo.label) return repo.label;
+	if (repo.repo.endsWith('.github.io')) return `${repo.owner} Hub`;
+	return repo.repo;
+}
+---
+
+<Layout
+	title="System Directory"
+	description={`A navigable index of ${totalSites} live GitHub Pages sites across ${totalOrgs} organs in the ORGANVM system.`}
+	keywords={['ORGANVM', 'system directory', 'GitHub Pages', 'constellation']}
+>
+	<section class="section">
+		<div class="container">
+			<h1 class="page-title">System Directory</h1>
+			<p class="directory__intro">
+				ORGANVM is an eight-organ creative-institutional system. Each organ is a
+				GitHub organization with its own constellation of repositories, many of
+				which are deployed as live GitHub Pages sites. This directory indexes
+				every built site, organized by organ.
+			</p>
+
+			<div class="directory__stats">
+				<span class="directory__stat">
+					<strong>{totalSites}</strong> live sites
+				</span>
+				<span class="directory__stat-sep" aria-hidden="true">/</span>
+				<span class="directory__stat">
+					<strong>{totalOrgs}</strong> organizations
+				</span>
+			</div>
+
+			<div class="directory__organs">
+				{groups.map(([owner, repos]) => {
+					const organ = ORGANS[owner];
+					const sectionId = `organ-${owner}`;
+					return (
+						<section class="directory__organ" aria-labelledby={sectionId}>
+							<div class="directory__organ-header">
+								<span class="directory__organ-icon" aria-hidden="true">
+									{organ?.icon ?? '\u25CB'}
+								</span>
+								<div class="directory__organ-info">
+									<h2 id={sectionId} class="directory__organ-name">
+										{organ?.name ?? owner}
+									</h2>
+									<p class="directory__organ-desc">
+										{organ?.description ?? ''}
+									</p>
+								</div>
+								<span class="directory__organ-count">
+									{repos.length} site{repos.length !== 1 ? 's' : ''}
+								</span>
+							</div>
+							<div class="directory__grid">
+								{repos.map((repo) => (
+									<div
+										class:list={[
+											'directory__card',
+											{ 'directory__card--featured': repo.featured },
+										]}
+									>
+										<a
+											class="directory__card-title"
+											href={repo.pageUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											{displayName(repo)}
+										</a>
+										<div class="directory__card-meta">
+											<a
+												class="directory__card-gh"
+												href={repo.repoUrl}
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												GitHub <span aria-hidden="true">&#8599;</span>
+											</a>
+											{repo.featured && (
+												<span class="directory__badge">Featured</span>
+											)}
+										</div>
+									</div>
+								))}
+							</div>
+						</section>
+					);
+				})}
+			</div>
+
+			<PrismNav context="directory" />
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.directory__intro {
+		max-width: var(--max-width-narrow);
+		color: var(--text-secondary);
+		font-size: 1rem;
+		line-height: 1.7;
+		margin-bottom: var(--space-lg);
+	}
+
+	.directory__stats {
+		display: flex;
+		align-items: center;
+		gap: var(--space-sm);
+		margin-bottom: var(--space-2xl);
+		font-size: 0.9rem;
+		color: var(--text-muted);
+	}
+
+	.directory__stat strong {
+		color: var(--text-primary);
+		font-size: 1.1rem;
+	}
+
+	.directory__stat-sep {
+		opacity: 0.3;
+	}
+
+	.directory__organs {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xl);
+	}
+
+	.directory__organ {
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		background: var(--bg-card);
+		overflow: hidden;
+	}
+
+	.directory__organ-header {
+		display: flex;
+		align-items: center;
+		gap: var(--space-md);
+		padding: var(--space-lg) var(--space-xl);
+		border-bottom: 1px solid var(--border);
+		background: rgba(var(--spectrum-current, 212, 168, 83), 0.06);
+	}
+
+	.directory__organ-icon {
+		font-size: 1.5rem;
+		line-height: 1;
+		color: var(--accent-text);
+		flex-shrink: 0;
+		width: 2rem;
+		text-align: center;
+	}
+
+	.directory__organ-info {
+		flex: 1 1 auto;
+		min-width: 0;
+	}
+
+	.directory__organ-name {
+		margin: 0;
+		font-size: 1.1rem;
+		font-family: var(--font-heading);
+		color: var(--text-primary);
+	}
+
+	.directory__organ-desc {
+		margin: 0.15rem 0 0;
+		font-size: 0.82rem;
+		color: var(--text-muted);
+	}
+
+	.directory__organ-count {
+		font-size: 0.8rem;
+		color: var(--text-muted);
+		flex-shrink: 0;
+		white-space: nowrap;
+	}
+
+	.directory__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 1px;
+		background: var(--border);
+	}
+
+	.directory__card {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xs);
+		padding: var(--space-md) var(--space-lg);
+		background: var(--bg-card);
+		transition: background var(--transition-fast);
+	}
+
+	.directory__card:hover {
+		background: var(--bg-card-hover);
+	}
+
+	.directory__card--featured {
+		border-left: 3px solid var(--accent);
+	}
+
+	.directory__card-title {
+		font-weight: 600;
+		font-size: 0.92rem;
+		color: var(--text-primary);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+		word-break: break-word;
+	}
+
+	.directory__card-title:hover {
+		color: var(--accent-text);
+	}
+
+	.directory__card-meta {
+		display: flex;
+		align-items: center;
+		gap: var(--space-sm);
+	}
+
+	.directory__card-gh {
+		font-size: 0.76rem;
+		color: var(--text-muted);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+
+	.directory__card-gh:hover {
+		color: var(--text-secondary);
+	}
+
+	.directory__badge {
+		font-size: 0.68rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--accent);
+		border: 1px solid var(--accent);
+		border-radius: 999px;
+		padding: 0.1rem 0.5rem;
+		line-height: 1.4;
+	}
+
+	@media (max-width: 768px) {
+		.directory__organ-header {
+			flex-wrap: wrap;
+			padding: var(--space-md) var(--space-lg);
+		}
+
+		.directory__organ-count {
+			width: 100%;
+			margin-top: var(--space-2xs);
+		}
+
+		.directory__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

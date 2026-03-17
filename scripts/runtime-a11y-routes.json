@@ -56,6 +56,15 @@
       ]
     },
     {
+      "path": "/directory",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
       "path": "/essays",
       "checks": [
         "nav-menu",
