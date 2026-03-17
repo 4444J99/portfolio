@@ -20,7 +20,7 @@ updates:
           - "@vitest/*"
           - "axe-core"
           - "html-validate"
-          - "jsdom"
+          - "happy-dom"
           - "@astrojs/check"
           - "typescript"
 

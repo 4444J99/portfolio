@@ -1,6 +1,5 @@
 /**
- * jsdom does not implement canvas rendering APIs by default and logs noisy
- * "Not implemented" errors when accessibility tooling probes canvas elements.
+ * Neither happy-dom nor jsdom implement canvas rendering APIs by default.
  * A minimal stub keeps tests deterministic and signal-rich.
  */
 

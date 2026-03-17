@@ -1,4 +1,5 @@
-import * as cheerio from 'cheerio';
+// @vitest-environment happy-dom
+
 import { existsSync, readdirSync, readFileSync } from 'fs';
 import { join, resolve } from 'path';
 import { describe, expect, it } from 'vitest';
@@ -6,19 +7,22 @@ import { describe, expect, it } from 'vitest';
 const DIST = resolve(process.cwd(), 'dist');
 const SERVICE_WORKER_PATH = resolve(process.cwd(), 'public/sw.js');
 
+function parseHTML(html: string) {
+	const parser = new DOMParser();
+	return parser.parseFromString(html, 'text/html');
+}
+
 function loadPage(path: string) {
 	// Try direct path first (common for local builds)
 	const file = resolve(DIST, path);
 	if (existsSync(file)) {
-		const html = readFileSync(file, 'utf-8');
-		return cheerio.load(html);
+		return parseHTML(readFileSync(file, 'utf-8'));
 	}
 
 	// Try with base path prefix (common for CI/production layout expectations)
 	const nestedFile = resolve(DIST, 'portfolio', path);
 	if (existsSync(nestedFile)) {
-		const html = readFileSync(nestedFile, 'utf-8');
-		return cheerio.load(html);
+		return parseHTML(readFileSync(nestedFile, 'utf-8'));
 	}
 
 	return null;
@@ -56,41 +60,42 @@ describe('service worker contracts', () => {
 });
 
 describe('index page', () => {
-	const $ = loadPage('index.html');
+	const doc = loadPage('index.html');
 
 	it('exists', () => {
-		expect($).not.toBeNull();
+		expect(doc).not.toBeNull();
 	});
 
 	it('has a <title> tag', () => {
-		expect($!('title').length).toBe(1);
-		expect($!('title').text()).toBeTruthy();
+		expect(doc!.querySelectorAll('title').length).toBe(1);
+		expect(doc!.querySelector('title')?.textContent).toBeTruthy();
 	});
 
 	it('has Open Graph meta tags', () => {
-		expect($!('meta[property="og:title"]').length).toBe(1);
-		expect($!('meta[property="og:description"]').length).toBe(1);
+		expect(doc!.querySelectorAll('meta[property="og:title"]').length).toBe(1);
+		expect(doc!.querySelectorAll('meta[property="og:description"]').length).toBe(1);
 	});
 
 	it('has a <main> element', () => {
-		expect($!('main').length).toBeGreaterThanOrEqual(1);
+		expect(doc!.querySelectorAll('main').length).toBeGreaterThanOrEqual(1);
 	});
 
 	it('has a <nav> or header element', () => {
-		const hasNav = $!('nav').length > 0 || $!('header').length > 0;
+		const hasNav =
+			doc!.querySelectorAll('nav').length > 0 || doc!.querySelectorAll('header').length > 0;
 		expect(hasNav).toBe(true);
 	});
 });
 
 describe('dashboard page', () => {
-	const $ = loadPage('dashboard/index.html');
+	const doc = loadPage('dashboard/index.html');
 
 	it('exists', () => {
-		expect($).not.toBeNull();
+		expect(doc).not.toBeNull();
 	});
 
 	it('contains system metrics content', () => {
-		const text = $!('body').text();
+		const text = doc!.querySelector('body')?.textContent;
 		expect(text).toContain('Dashboard');
 	});
 });
@@ -109,46 +114,46 @@ describe('project pages', () => {
 
 	for (const slug of projectSlugs) {
 		it(`projects/${slug} exists and has title`, () => {
-			const $ = loadPage(`projects/${slug}/index.html`);
-			expect($).not.toBeNull();
-			expect($!('title').text()).toBeTruthy();
+			const doc = loadPage(`projects/${slug}/index.html`);
+			expect(doc).not.toBeNull();
+			expect(doc!.querySelector('title')?.textContent).toBeTruthy();
 		});
 	}
 
 	it('project pages have article element', () => {
-		const $ = loadPage(`projects/${projectSlugs[0]}/index.html`);
-		expect($).not.toBeNull();
-		expect($!('article').length).toBeGreaterThanOrEqual(1);
+		const doc = loadPage(`projects/${projectSlugs[0]}/index.html`);
+		expect(doc).not.toBeNull();
+		expect(doc!.querySelectorAll('article').length).toBeGreaterThanOrEqual(1);
 	});
 });
 
 describe('resume page', () => {
-	const $ = loadPage('resume/index.html');
+	const doc = loadPage('resume/index.html');
 
 	it('exists', () => {
-		expect($).not.toBeNull();
+		expect(doc).not.toBeNull();
 	});
 
 	it('has a <title> containing Resume', () => {
-		expect($!('title').text().toLowerCase()).toContain('resume');
+		expect(doc!.querySelector('title')?.textContent?.toLowerCase()).toContain('resume');
 	});
 });
 
 describe('consult page', () => {
-	const $ = loadPage('consult/index.html');
+	const doc = loadPage('consult/index.html');
 
 	it('exists and has form', () => {
-		expect($).not.toBeNull();
-		expect($!('#consult-form').length).toBe(1);
-		expect($!('#challenge').length).toBe(1);
+		expect(doc).not.toBeNull();
+		expect(doc!.querySelectorAll('#consult-form').length).toBe(1);
+		expect(doc!.querySelectorAll('#challenge').length).toBe(1);
 	});
 });
 
 describe('404 page', () => {
-	const $ = loadPage('404.html');
+	const doc = loadPage('404.html');
 
 	it('exists', () => {
-		expect($).not.toBeNull();
+		expect(doc).not.toBeNull();
 	});
 });
 
@@ -157,18 +162,18 @@ describe('HTML structure conventions', () => {
 
 	for (const page of pages) {
 		it(`${page} has lang attribute on <html>`, () => {
-			const $ = loadPage(page);
-			expect($!('html').attr('lang')).toBeTruthy();
+			const doc = loadPage(page);
+			expect(doc!.querySelector('html')?.getAttribute('lang')).toBeTruthy();
 		});
 
 		it(`${page} has viewport meta tag`, () => {
-			const $ = loadPage(page);
-			expect($!('meta[name="viewport"]').length).toBe(1);
+			const doc = loadPage(page);
+			expect(doc!.querySelectorAll('meta[name="viewport"]').length).toBe(1);
 		});
 
 		it(`${page} has charset meta tag`, () => {
-			const $ = loadPage(page);
-			expect($!('meta[charset]').length).toBe(1);
+			const doc = loadPage(page);
+			expect(doc!.querySelectorAll('meta[charset]').length).toBe(1);
 		});
 	}
 });

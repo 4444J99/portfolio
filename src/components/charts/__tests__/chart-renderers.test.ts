@@ -1,6 +1,6 @@
-// @vitest-environment jsdom
+// @vitest-environment happy-dom
 
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import classificationDonut from '../classification-donut-chart';
 import codeTreemap from '../code-treemap-chart';
 import dependencyGraph from '../dependency-graph-chart';
@@ -23,14 +23,16 @@ describe('chart renderers', () => {
 	beforeEach(() => {
 		document.body.innerHTML = '';
 
-		Object.defineProperty(SVGElement.prototype, 'transform', {
+		// Stub SVG transform on both SVGElement and SVGGraphicsElement prototypes
+		// to cover happy-dom's prototype chain for <g>, <rect>, etc.
+		const transformStub = {
 			configurable: true,
-			value: {
-				baseVal: {
-					consolidate: () => null,
-				},
-			},
-		});
+			value: { baseVal: { consolidate: () => null } },
+		};
+		Object.defineProperty(SVGElement.prototype, 'transform', transformStub);
+		if (typeof SVGGraphicsElement !== 'undefined') {
+			Object.defineProperty(SVGGraphicsElement.prototype, 'transform', transformStub);
+		}
 
 		Object.defineProperty(window, 'matchMedia', {
 			writable: true,
@@ -45,6 +47,10 @@ describe('chart renderers', () => {
 				dispatchEvent: vi.fn(),
 			})),
 		});
+	});
+
+	afterEach(() => {
+		document.body.innerHTML = '';
 	});
 
 	it('renders organ bar chart', () => {

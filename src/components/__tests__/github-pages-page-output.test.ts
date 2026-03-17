@@ -1,6 +1,7 @@
+// @vitest-environment happy-dom
+
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import * as cheerio from 'cheerio';
 import { describe, expect, it } from 'vitest';
 
 const DIST = resolve(process.cwd(), 'dist');
@@ -17,24 +18,32 @@ describe('GitHub Pages directory output', () => {
 
 	it('renders health, diagnostics, and tracked outbound links', () => {
 		const html = readFileSync(PAGE, 'utf-8');
-		const $ = cheerio.load(html);
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(html, 'text/html');
 
-		expect($('h1').first().text().toLowerCase()).toContain('static fleet');
-		expect(
-			$('h2').filter((_index, node) => $(node).text().includes('System Pages Health')).length,
-		).toBeGreaterThan(0);
-		expect(
-			$('h2').filter((_index, node) => $(node).text().includes('Why this matters')).length,
-		).toBeGreaterThan(0);
-		expect($('a[data-gh-pages-track]').length).toBeGreaterThan(0);
+		expect(doc.querySelector('h1')?.textContent?.toLowerCase()).toContain('static fleet');
 
-		const jsonLink = $('a').filter(
-			(_index, node) => $(node).attr('href')?.includes('github-pages.json') ?? false,
-		);
-		const xmlLink = $('a').filter(
-			(_index, node) => $(node).attr('href')?.includes('github-pages.xml') ?? false,
-		);
-		expect(jsonLink.length).toBeGreaterThan(0);
-		expect(xmlLink.length).toBeGreaterThan(0);
+		const h2s = doc.querySelectorAll('h2');
+		let hasSystemPages = false;
+		let hasWhyMatters = false;
+		h2s.forEach((h2) => {
+			if (h2.textContent?.includes('System Pages Health')) hasSystemPages = true;
+			if (h2.textContent?.includes('Why this matters')) hasWhyMatters = true;
+		});
+		expect(hasSystemPages).toBe(true);
+		expect(hasWhyMatters).toBe(true);
+
+		expect(doc.querySelectorAll('a[data-gh-pages-track]').length).toBeGreaterThan(0);
+
+		const allLinks = doc.querySelectorAll('a');
+		let hasJsonLink = false;
+		let hasXmlLink = false;
+		allLinks.forEach((a) => {
+			const href = a.getAttribute('href') ?? '';
+			if (href.includes('github-pages.json')) hasJsonLink = true;
+			if (href.includes('github-pages.xml')) hasXmlLink = true;
+		});
+		expect(hasJsonLink).toBe(true);
+		expect(hasXmlLink).toBe(true);
 	});
 });
