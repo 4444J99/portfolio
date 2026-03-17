@@ -102,7 +102,7 @@
 		"lighthouse": "13.0.3",
 		"pagefind": "1.4.0",
 		"playwright": "1.58.2",
-		"satori": "0.19.2",
+		"satori": "0.25.0",
 		"typescript": "5.9.3",
 		"vitest": "4.1.0"
 	},
