@@ -1,12 +1,12 @@
 {
-  "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
+  "title": "ORGANVM — Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
     "total_repos": 113,
     "active_repos": 59,
     "archived_repos": 53,
     "dependency_edges": 50,
-    "ci_workflows": 104,
+    "ci_workflows": 96,
     "operational_organs": 8,
     "sprints_completed": 33
   },
@@ -149,7 +149,7 @@
       "name": "VERITAS",
       "date": "2026-02-13",
       "focus": "Credibility",
-      "deliverables": "PRODUCTION\u2192ACTIVE, revenue split"
+      "deliverables": "PRODUCTION→ACTIVE, revenue split"
     },
     {
       "name": "MANIFESTATIO",
@@ -293,13 +293,13 @@
       "name": "PROPULSIO_MAXIMA",
       "date": "2026-02-24",
       "focus": "Multi-front",
-      "deliverables": "48 repos promoted, 83 decks, Doris Duke submitted, omega 1\u21922"
+      "deliverables": "48 repos promoted, 83 decks, Doris Duke submitted, omega 1→2"
     },
     {
       "name": "ERUPTIO",
       "date": "2026-02-28",
       "focus": "Deployment sprint",
-      "deliverables": "12 products deployed, schema v1.0.0, omega 2\u21924"
+      "deliverables": "12 products deployed, schema v1.0.0, omega 2→4"
     },
     {
       "name": "ERUPTIO_SECUNDA",
@@ -314,5 +314,5 @@
       "deliverables": "Portfolio refresh, PROBATIO, VIVIFICATIO, conference proposals"
     }
   ],
-  "generated": "2026-03-17T07:35:20.541063+00:00"
+  "generated": "2026-03-15T20:49:28.883339+00:00"
 }
