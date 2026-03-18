@@ -26,18 +26,8 @@ const resolvedGroups = organGroups.map((group) => ({
 >
     <HeroSection resolvedGroups={resolvedGroups} />
 
-    <PersonaCards personas={personasData.personas} />
-
-    <ProjectGrid
-      resolvedGroups={resolvedGroups}
-      skillFilters={skillFilters}
-      categoryFilters={categoryFilters}
-      featuredNumbers={featuredNumbers}
-      organColorMap={organColorMap}
-    />
-
-    <section class="section stats-section stats-section--home">
-      <div class="container">
+    <div class="home-pair">
+      <section class="home-pair__stats">
         <div class="stat-grid" data-stats-view="engineering" data-reveal>
           <div class="stat">
             <div class="stat-value">{vitals.substance.code_files.toLocaleString()}</div>
@@ -49,46 +39,54 @@ const resolvedGroups = organGroups.map((group) => ({
           </div>
           <div class="stat">
             <div class="stat-value">{vitals.substance.ci_passing}</div>
-            <div class="stat-label">Passing CI Workflows</div>
+            <div class="stat-label">CI Passing</div>
           </div>
           <div class="stat">
             <div class="stat-value">{vitals.repos.total}</div>
-            <div class="stat-label">Repositories</div>
+            <div class="stat-label">Repos</div>
           </div>
           <div class="stat">
             <div class="stat-value">{vitals.substance.automated_tests.toLocaleString()}+</div>
-            <div class="stat-label">Automated Tests</div>
+            <div class="stat-label">Tests</div>
           </div>
         </div>
         <div class="stat-grid" data-stats-view="creative" style="display: none;">
           <div class="stat">
             <div class="stat-value">{vitals.repos.total}</div>
-            <div class="stat-label">Repositories</div>
+            <div class="stat-label">Repos</div>
           </div>
           <div class="stat">
             <div class="stat-value">{vitals.repos.orgs}</div>
-            <div class="stat-label">Organizations</div>
+            <div class="stat-label">Orgs</div>
           </div>
           <div class="stat">
             <div class="stat-value">{Math.floor(vitals.logos.words / 1000)}K</div>
-            <div class="stat-label">Words Documented</div>
+            <div class="stat-label">Words</div>
           </div>
           <div class="stat">
             <div class="stat-value">{vitals.logos.essays}</div>
-            <div class="stat-label">Published Essays</div>
+            <div class="stat-label">Essays</div>
           </div>
           <div class="stat">
             <div class="stat-value">{SKETCH_NAMES.length}</div>
-            <div class="stat-label">Generative Sketches</div>
+            <div class="stat-label">Sketches</div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <PersonaCards personas={personasData.personas} />
+    </div>
 
-    <ConsultCTA />
+    <ProjectGrid
+      resolvedGroups={resolvedGroups}
+      skillFilters={skillFilters}
+      categoryFilters={categoryFilters}
+      featuredNumbers={featuredNumbers}
+      organColorMap={organColorMap}
+    />
 
-    <section class="section contact-section contact-section--home" id="contact">
-      <div class="container">
+    <div class="home-pair home-pair--bottom">
+      <ConsultCTA />
+      <section class="home-pair__contact" id="contact">
         <h2 class="section__heading">Strategic Orchestration</h2>
         <p class="contact__text">
           I bridge 15 years of high-stakes delivery with modern system orchestration. I am available for Staff and Director-level roles in AI Infrastructure, Systems Architecture, and Creative R&D.
@@ -107,28 +105,85 @@ const resolvedGroups = organGroups.map((group) => ({
             GitHub
           </a>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 </Layout>
 
 <IndexFilters />
 
 <style>
-  .stats-section--home,
-  .contact-section--home {
-    padding: var(--space-4xl) 0;
-    margin-bottom: var(--space-2xl);
+  /* --- Paired sections: side-by-side bento --- */
+  .home-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    max-width: var(--max-width);
+    margin: 0 auto var(--space-md);
+    padding: 0 var(--space-lg);
+  }
+
+  .home-pair__stats {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    align-items: center;
+  }
+
+  .home-pair__stats .stat-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: center;
+    width: 100%;
+  }
+
+  .home-pair__stats .stat {
+    text-align: center;
+    flex: 1 1 auto;
+    min-width: 80px;
+  }
+
+  .home-pair__stats .stat-value {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .home-pair__stats .stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-top: var(--space-2xs);
+  }
+
+  .home-pair__contact {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
   }
 
   .section__heading {
-    margin-bottom: var(--space-2xl);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
   }
 
   .contact__text {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-bottom: var(--space-xl);
-    max-width: 50ch;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
   }
 
   .contact__links {
@@ -141,7 +196,7 @@ const resolvedGroups = organGroups.map((group) => ({
     display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
     text-decoration: none;
     transition: color var(--transition-fast);
@@ -149,5 +204,48 @@ const resolvedGroups = organGroups.map((group) => ({
 
   .contact__link:hover {
     color: var(--accent-text);
+  }
+
+  /* Override PersonaCards spacing when inside the pair */
+  .home-pair :global(.persona-cards) {
+    padding: 0;
+    border-bottom: none;
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+  }
+
+  .home-pair :global(.persona-cards__grid) {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .home-pair :global(.persona-cards__heading) {
+    font-size: 1rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .home-pair :global(.persona-cards__item) {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  /* Override ConsultCTA spacing when inside the pair */
+  .home-pair :global(.consult-cta) {
+    padding: var(--space-xl);
+    margin: 0;
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  @media (max-width: 768px) {
+    .home-pair {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
