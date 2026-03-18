@@ -110,7 +110,7 @@ async function waitForServer(url, timeoutMs = 60000) {
 function startPreviewServer() {
 	return spawn(
 		'node',
-		['node_modules/astro/astro.js', 'preview', '--host', '0.0.0.0', '--port', String(port)],
+		['node_modules/astro/bin/astro.mjs', 'preview', '--host', '0.0.0.0', '--port', String(port)],
 		{
 			stdio: ['ignore', 'pipe', 'pipe'],
 			env: process.env,

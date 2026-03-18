@@ -86,7 +86,7 @@ function startPreviewServer() {
 	const server = spawn(
 		'node',
 		[
-			'node_modules/astro/astro.js',
+			'node_modules/astro/bin/astro.mjs',
 			'preview',
 			'--host',
 			PREVIEW_HOST,
