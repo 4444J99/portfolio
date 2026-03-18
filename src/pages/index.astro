@@ -11,13 +11,14 @@ import vitals from '../data/vitals.json';
 import Layout from '../layouts/Layout.astro';
 import { base } from '../utils/paths';
 
-// Flatten all projects and take the first 8 for the bento grid
+// Flatten all projects with organ metadata for the expandable bento grid
 const allProjects = organGroups.flatMap((group) =>
-	group.projects.map((p) => ({ ...p, href: `${base}projects/${p.slug}/` })),
+	group.projects.map((p) => ({
+		...p,
+		href: `${base}projects/${p.slug}/`,
+		organ: group.name || group.organ,
+	})),
 );
-const featured = allProjects.slice(0, 8);
-const large = featured.slice(0, 2);
-const small = featured.slice(2, 8);
 ---
 
 <Layout
@@ -37,25 +38,16 @@ const small = featured.slice(2, 8);
 >
 	<BentoGrid>
 		<HeroBento vitals={vitals} />
-		{large.map((p) => (
-			<BentoProjectCard
-				title={p.title}
-				tagline={p.tagline}
-				href={p.href}
-				tags={p.tags}
-				size="large"
-				slug={p.slug}
-			/>
-		))}
 		<PersonaBento personas={personasData.personas} />
-		{small.map((p) => (
+		{allProjects.map((p) => (
 			<BentoProjectCard
 				title={p.title}
 				tagline={p.tagline}
+				description={p.description}
 				href={p.href}
 				tags={p.tags}
-				size="small"
 				slug={p.slug}
+				organ={p.organ}
 			/>
 		))}
 		<ContactBento />
