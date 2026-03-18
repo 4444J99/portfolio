@@ -15,7 +15,7 @@ const { Content } = await render(entry);
 ---
 
 <Layout
-  title={`${entry.data.title} — Logos`}
+  title={entry.data.title.length > 65 ? `${entry.data.title.slice(0, 62)}...` : entry.data.title}
   description={entry.data.description}
 >
   <article class="essay-article">
