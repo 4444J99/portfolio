@@ -1,5 +1,7 @@
 # build output
 dist/
+dist-org-pages/
+.tmp-org-deploy/
 # generated types
 .astro/
 

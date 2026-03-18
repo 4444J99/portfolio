@@ -59,6 +59,8 @@
 		"lighthouse": "node scripts/lighthouse-ci.mjs",
 		"validate": "node scripts/validate-build.mjs && node scripts/validate-persona-links.mjs",
 		"generate-badges": "node scripts/generate-quality-badges.mjs",
+		"generate:org-pages": "node scripts/generate-org-landing-pages.mjs",
+		"deploy:org-pages": "node scripts/generate-org-landing-pages.mjs && node scripts/deploy-org-landing-pages.mjs --push",
 		"verify:quality": "verify-quality-contracts",
 		"quality:delta": "check-quality-deltas",
 		"quality:summary": "node scripts/generate-quality-summary.mjs --out .quality/quality-summary.md",
