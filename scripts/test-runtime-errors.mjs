@@ -93,7 +93,7 @@ function readAllowlist() {
 		}));
 }
 
-async function waitForServer(url, timeoutMs = 30000) {
+async function waitForServer(url, timeoutMs = 60000) {
 	const start = Date.now();
 	while (Date.now() - start < timeoutMs) {
 		try {
@@ -110,7 +110,7 @@ async function waitForServer(url, timeoutMs = 30000) {
 function startPreviewServer() {
 	return spawn(
 		'node',
-		['node_modules/astro/astro.js', 'preview', '--host', host, '--port', String(port)],
+		['node_modules/astro/astro.js', 'preview', '--host', '0.0.0.0', '--port', String(port)],
 		{
 			stdio: ['ignore', 'pipe', 'pipe'],
 			env: process.env,
