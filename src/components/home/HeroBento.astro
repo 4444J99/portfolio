@@ -1,0 +1,264 @@
+---
+import { SKETCH_NAMES } from '@4444j99/sketches';
+
+interface Vitals {
+	repos: { total: number; orgs: number; active: number };
+	substance: {
+		code_files: number;
+		test_files: number;
+		automated_tests: number;
+		ci_passing: number;
+		ci_coverage_pct: number;
+	};
+	logos: { essays: number; words: number };
+}
+
+interface Props {
+	vitals: Vitals;
+}
+
+const { vitals } = Astro.props;
+---
+
+<div class="hero-bento">
+	<div class="hero-bento__toggle view-toggle" role="group" aria-label="Presentation mode">
+		<button
+			class="view-toggle__btn view-toggle__btn--active"
+			data-view="engineering"
+			aria-pressed="true"
+		>Engineering</button>
+		<button
+			class="view-toggle__btn"
+			data-view="creative"
+			aria-pressed="false"
+		>Creative Practice</button>
+	</div>
+
+	<p class="hero-bento__name" data-reveal>Anthony James Padavano</p>
+
+	<div class="hero-bento__view" data-hero-view="engineering">
+		<p class="hero-bento__label" data-reveal>AI Orchestration Architect</p>
+		<p class="hero-bento__subtitle" data-reveal>
+			Translating complex requirements into resilient software.
+			15 years of strategic delivery across {vitals.repos.total} repositories.
+		</p>
+	</div>
+
+	<div class="hero-bento__view" data-hero-view="creative" style="display: none;">
+		<p class="hero-bento__label">Creative Technologist</p>
+		<p class="hero-bento__subtitle">
+			Bridging MFA-level narrative theory with meta-certified engineering
+			to build living, logocentric systems.
+		</p>
+	</div>
+
+	<div class="hero-bento__metrics" data-reveal>
+		<span class="hero-bento__metric" data-stats-view="engineering">
+			{vitals.repos.total} repos
+		</span>
+		<span class="hero-bento__metric-sep" aria-hidden="true">&middot;</span>
+		<span class="hero-bento__metric" data-stats-view="engineering">
+			{vitals.substance.automated_tests.toLocaleString()}+ tests
+		</span>
+		<span class="hero-bento__metric-sep" aria-hidden="true">&middot;</span>
+		<span class="hero-bento__metric">15 years</span>
+
+		<span class="hero-bento__metric hero-bento__metric--creative" data-stats-view="creative" style="display: none;">
+			{vitals.repos.orgs} orgs
+		</span>
+		<span class="hero-bento__metric-sep hero-bento__metric--creative" data-stats-view="creative" style="display: none;" aria-hidden="true">&middot;</span>
+		<span class="hero-bento__metric hero-bento__metric--creative" data-stats-view="creative" style="display: none;">
+			{vitals.logos.essays} essays
+		</span>
+		<span class="hero-bento__metric-sep hero-bento__metric--creative" data-stats-view="creative" style="display: none;" aria-hidden="true">&middot;</span>
+		<span class="hero-bento__metric hero-bento__metric--creative" data-stats-view="creative" style="display: none;">
+			{SKETCH_NAMES.length} sketches
+		</span>
+	</div>
+
+	<div class="hero-bento__credentials" data-reveal>
+		<span class="hero-bento__credential">MFA</span>
+		<span class="hero-bento__credential">Meta Full-Stack</span>
+		<span class="hero-bento__credential">Google UX/PM</span>
+	</div>
+
+	<p class="hero-bento__available" data-reveal>
+		<span class="hero-bento__available-dot" aria-hidden="true"></span>
+		Open to opportunities — <a href="mailto:padavano.anthony@gmail.com">Get in touch</a>
+	</p>
+</div>
+
+<style>
+	.hero-bento {
+		grid-column: span 8;
+		background: var(--bg-card);
+		backdrop-filter: blur(24px);
+		-webkit-backdrop-filter: blur(24px);
+		border: 1px solid var(--border-bright);
+		border-radius: var(--radius-xl);
+		padding: var(--space-2xl);
+		box-shadow:
+			0 12px 64px rgba(0, 0, 0, 0.5),
+			inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+		position: relative;
+	}
+
+	.hero-bento__name {
+		font-family: var(--font-heading);
+		font-size: clamp(1.5rem, 3vw, 2.25rem);
+		font-weight: 700;
+		color: var(--text-primary);
+		margin-bottom: var(--space-sm);
+		line-height: 1.2;
+	}
+
+	.hero-bento__label {
+		font-size: 0.8rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		color: var(--accent-text);
+		margin-bottom: var(--space-xs);
+		opacity: 0.8;
+	}
+
+	.hero-bento__subtitle {
+		font-size: 1rem;
+		line-height: 1.6;
+		color: var(--text-secondary);
+		max-width: 50ch;
+		margin-bottom: var(--space-md);
+	}
+
+	.hero-bento__metrics {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-xs);
+		margin-bottom: var(--space-md);
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		color: var(--text-muted);
+	}
+
+	.hero-bento__metric {
+		white-space: nowrap;
+	}
+
+	.hero-bento__metric-sep {
+		color: var(--border-hover);
+	}
+
+	.hero-bento__credentials {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-sm);
+		margin-bottom: var(--space-md);
+	}
+
+	.hero-bento__credential {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		padding: 0.2em 0.7em;
+		border: 1px solid var(--border);
+		border-radius: 100px;
+		color: var(--text-secondary);
+	}
+
+	.hero-bento__available {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-sm);
+		font-size: 0.9rem;
+		color: var(--text-secondary);
+		padding: var(--space-xs) var(--space-md);
+		border: 1px solid var(--border);
+		border-radius: 100px;
+	}
+
+	.hero-bento__available a {
+		color: var(--accent-text);
+	}
+
+	.hero-bento__available-dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: #4caf50;
+		animation: hero-bento-pulse 2s ease-in-out infinite;
+	}
+
+	@keyframes hero-bento-pulse {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.4;
+		}
+	}
+
+	/* View toggle — same pattern as HeroSection */
+	.hero-bento__toggle {
+		margin-bottom: var(--space-lg);
+	}
+
+	.view-toggle {
+		display: inline-flex;
+		position: relative;
+		gap: 0;
+		border: 1px solid var(--border-bright);
+		border-radius: 100px;
+		padding: 2px;
+		background: rgba(0, 0, 0, 0.3);
+	}
+
+	.view-toggle__btn {
+		position: relative;
+		z-index: 2;
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		padding: var(--space-xs) var(--space-lg);
+		border: none;
+		background: transparent;
+		color: var(--text-muted);
+		cursor: pointer;
+		transition: color var(--transition-base);
+	}
+
+	.view-toggle__btn:hover {
+		color: var(--text-primary);
+	}
+
+	.view-toggle__btn--active {
+		color: var(--text-primary);
+	}
+
+	.view-toggle::after {
+		content: '';
+		position: absolute;
+		top: 2px;
+		left: 2px;
+		height: calc(100% - 4px);
+		width: calc(50% - 2px);
+		background: var(--accent);
+		border-radius: 100px;
+		z-index: 1;
+		transition: transform var(--transition-normal), background var(--transition-normal);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+	}
+
+	:global([data-portfolio-view='creative']) .view-toggle::after {
+		transform: translateX(100%);
+		background: var(--accent-hover);
+	}
+
+	@media (max-width: 768px) {
+		.hero-bento {
+			grid-column: span 1;
+		}
+	}
+</style>

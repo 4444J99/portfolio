@@ -1,0 +1,26 @@
+---
+// BentoGrid — CSS grid container for the homepage bento layout.
+// Children are placed as grid cells via their own grid-column/grid-row spans.
+---
+
+<section class="bento">
+	<slot />
+</section>
+
+<style>
+	.bento {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		gap: var(--space-sm);
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: var(--space-md) var(--space-lg);
+	}
+
+	@media (max-width: 768px) {
+		.bento {
+			grid-template-columns: 1fr;
+			padding: var(--space-md) var(--space-sm);
+		}
+	}
+</style>
