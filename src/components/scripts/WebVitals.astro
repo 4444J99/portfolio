@@ -5,18 +5,22 @@
 ---
 
 <script>
+	import type { Metric } from 'web-vitals';
 	import { onCLS, onFCP, onLCP, onTTFB } from 'web-vitals';
 
-	function sendToPlausible(metric) {
+	function sendToPlausible(metric: Metric) {
 		if (typeof window.plausible !== 'function') return;
-		window.plausible('Web Vitals', {
-			props: {
-				metric: metric.name,
-				value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
-				rating: metric.rating,
-				page: window.location.pathname,
+		(window.plausible as unknown as (event: string, options: Record<string, unknown>) => void)(
+			'Web Vitals',
+			{
+				props: {
+					metric: metric.name,
+					value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+					rating: metric.rating,
+					page: window.location.pathname,
+				},
 			},
-		});
+		);
 	}
 
 	onLCP(sendToPlausible);

@@ -15,7 +15,7 @@
  *   node scripts/generate-org-landing-pages.mjs --deploy  # also pushes to each org's .github.io repo
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const PAGES_JSON = resolve('src/data/github-pages.json');

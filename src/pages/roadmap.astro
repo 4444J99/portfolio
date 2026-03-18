@@ -1,11 +1,9 @@
 ---
 import { readFileSync } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 import Layout from '../layouts/Layout.astro';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const roadmapMd = readFileSync(path.join(__dirname, '../../ROADMAP.md'), 'utf8');
+const roadmapMd = readFileSync(resolve(process.cwd(), 'ROADMAP.md'), 'utf8');
 
 // Very simple markdown-to-html transformation for the roadmap
 const roadmapHtml = roadmapMd

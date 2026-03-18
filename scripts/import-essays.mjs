@@ -14,7 +14,7 @@
  */
 
 import { existsSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { basename, join } from 'node:path';
+import { join } from 'node:path';
 
 const SOURCE_DIR = join(
 	import.meta.dirname,

@@ -8,8 +8,11 @@ const DIST = resolve(process.cwd(), 'dist');
 const SERVICE_WORKER_PATH = resolve(process.cwd(), 'public/sw.js');
 
 function parseHTML(html: string) {
-	const parser = new DOMParser();
-	return parser.parseFromString(html, 'text/html');
+	// Use createHTMLDocument + innerHTML to avoid happy-dom's DOMParser
+	// triggering network requests for linked CSS/JS resources
+	const doc = document.implementation.createHTMLDocument('');
+	doc.documentElement.innerHTML = html;
+	return doc;
 }
 
 function loadPage(path: string) {

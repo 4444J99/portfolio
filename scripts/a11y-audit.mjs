@@ -90,10 +90,10 @@ async function auditPage(filePath) {
 		const results = await window.axe.run(document, {
 			runOnly: ['wcag2a', 'wcag2aa', 'best-practice'],
 		});
-		await window.close();
+		window.close();
 		return results;
 	} catch (err) {
-		await window.close();
+		window.close();
 		// happy-dom's querySelectorAll does not support all CSS escape sequences
 		// (e.g. numeric-prefixed IDs like #\37-...). Skip pages that trigger this.
 		// The error may come from a VM context, so check message via string coercion.

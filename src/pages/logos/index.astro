@@ -20,7 +20,7 @@ const sortedLogos = allLogos.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
       <div class="essay-list">
         {sortedLogos.map(post => (
           <article class="essay-card">
-            <a href={`/portfolio/logos/${post.slug}/`} class="essay-card__link">
+            <a href={`/portfolio/logos/${post.id}/`} class="essay-card__link">
               <h2 class="essay-card__title">{post.data.title}</h2>
               <time class="essay-card__date" datetime={post.data.pubDate.toISOString()}>
                 {post.data.pubDate.toLocaleDateString('en-US', {
