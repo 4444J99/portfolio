@@ -7,7 +7,7 @@ import process from 'node:process';
 import { chromium } from 'playwright';
 
 const DIST = resolve('dist');
-const PREVIEW_HOST = '127.0.0.1';
+const PREVIEW_HOST = 'localhost';
 const PREVIEW_PORT = 4321;
 const PREVIEW_URL = `http://${PREVIEW_HOST}:${PREVIEW_PORT}`;
 const DEFAULT_MANIFEST_PATH = resolve('scripts/runtime-a11y-routes.json');

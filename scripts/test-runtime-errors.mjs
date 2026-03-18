@@ -12,7 +12,7 @@ const outputPath = resolve(parseOption('json-out', '.quality/runtime-errors-summ
 const allowlistPath = resolve(parseOption('allowlist', '.quality/runtime-error-allowlist.json'));
 const manifestPath = resolve(parseOption('manifest', DEFAULT_MANIFEST_PATH));
 const routeLimitOption = parseOption('route-limit', null);
-const host = '127.0.0.1';
+const host = 'localhost';
 const port = Number(parseOption('port', '4322'));
 const previewUrl = `http://${host}:${port}`;
 
