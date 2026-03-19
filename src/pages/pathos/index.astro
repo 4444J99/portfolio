@@ -1,0 +1,136 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const allPathos = await getCollection('pathos');
+const sorted = allPathos.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout
+  title="Pathos — Excavated Conversations"
+  description="Unredacted conversation artifacts from real working sessions. Human-AI collaboration excavated, not manufactured."
+>
+  <section class="section">
+    <div class="container">
+      <header class="pathos-header">
+        <h1 class="page-title">Pathos</h1>
+        <p class="pathos-premise">
+          These are conversation artifacts excavated from real working sessions — not manufactured content, not chatbot screenshots. A human and an AI working together, and the moments where the work became something else.
+        </p>
+        <p class="pathos-note">
+          Each conversation exists in two versions. The redacted version lives on <a href="https://www.linkedin.com/in/anthony-james-padavano-98a40a186/" target="_blank" rel="noopener noreferrer">LinkedIn</a> with JFK-style black bars over anything that creates professional liability. What you see here is unredacted. The surrounding system — the repos, the architecture, the live infrastructure — is the labyrinth that defends anything vulnerable in the text.
+        </p>
+      </header>
+
+      <div class="pathos-list">
+        {sorted.map(post => (
+          <article class="pathos-entry">
+            <a href={`/portfolio/pathos/${post.id}/`} class="pathos-entry__link">
+              <time class="pathos-entry__date" datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+              <h2 class="pathos-entry__title">{post.data.title}</h2>
+              <p class="pathos-entry__hook">{post.data.hookLine}</p>
+              <p class="pathos-entry__context">{post.data.context}</p>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .pathos-header {
+    margin-bottom: var(--space-4xl);
+    max-width: 720px;
+  }
+
+  .pathos-premise {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .pathos-note {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    border-left: 2px solid var(--border);
+    padding-left: var(--space-lg);
+  }
+
+  .pathos-note a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 3px;
+  }
+
+  .pathos-note a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+
+  .pathos-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .pathos-entry {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .pathos-entry:last-child {
+    border-bottom: none;
+  }
+
+  .pathos-entry__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .pathos-entry__date {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.03em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .pathos-entry__title {
+    font-size: 1.8rem;
+    line-height: 1.15;
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.02em;
+    transition: color var(--transition-fast);
+  }
+
+  .pathos-entry__link:hover .pathos-entry__title {
+    color: var(--accent);
+  }
+
+  .pathos-entry__hook {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+    max-width: 60ch;
+  }
+
+  .pathos-entry__context {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+</style>

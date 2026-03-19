@@ -14,6 +14,31 @@ const logosCollection = defineCollection({
 	}),
 });
 
+const pathosCollection = defineCollection({
+	loader: glob({ base: './src/content/pathos', pattern: '**/*.md' }),
+	schema: z.object({
+		title: z.string(),
+		hookLine: z.string(),
+		date: z.coerce.date(),
+		context: z.string(),
+		voices: z.object({
+			human: z.string(),
+			ai: z.string(),
+		}),
+		artifacts: z
+			.array(
+				z.object({
+					label: z.string(),
+					url: z.string(),
+					type: z.enum(['repo', 'system', 'artifact']),
+				}),
+			)
+			.default([]),
+		tags: z.array(z.string()).optional(),
+	}),
+});
+
 export const collections = {
 	logos: logosCollection,
+	pathos: pathosCollection,
 };
