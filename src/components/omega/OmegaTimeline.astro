@@ -1,0 +1,391 @@
+---
+interface Criterion {
+	id: number;
+	criterion: string;
+	status: string;
+	dateMet?: string;
+	horizon?: string;
+}
+
+interface Props {
+	criteria: Criterion[];
+}
+
+const { criteria } = Astro.props;
+
+const total = criteria.length;
+const metCriteria = criteria.filter((c) => c.status === 'met' && c.dateMet);
+const unmetCriteria = criteria.filter((c) => c.status !== 'met');
+
+// Sort met criteria chronologically, most recent first
+const sortedMet = [...metCriteria].sort(
+	(a, b) => new Date(b.dateMet!).getTime() - new Date(a.dateMet!).getTime(),
+);
+
+// Velocity: criteria met in the last 7 days
+const now = new Date();
+const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+const recentCount = metCriteria.filter((c) => new Date(c.dateMet!) >= sevenDaysAgo).length;
+
+// Velocity: criteria met in the last 30 days
+const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+const monthCount = metCriteria.filter((c) => new Date(c.dateMet!) >= thirtyDaysAgo).length;
+
+const pct = Math.round((metCriteria.length / total) * 100);
+
+function formatDate(iso: string): string {
+	const d = new Date(iso);
+	return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// Group by month for timeline labels
+function monthLabel(iso: string): string {
+	const d = new Date(iso);
+	return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+}
+---
+
+<div class="omega-timeline">
+	<!-- Progress bar -->
+	<div class="omega-timeline__progress-wrap">
+		<div
+			class="omega-timeline__bar"
+			role="progressbar"
+			aria-valuenow={metCriteria.length}
+			aria-valuemin={0}
+			aria-valuemax={total}
+			aria-label={`${metCriteria.length} of ${total} omega criteria met`}
+		>
+			<div class="omega-timeline__bar-fill" style={`width: ${pct}%`}></div>
+		</div>
+		<div class="omega-timeline__bar-legend">
+			<span class="omega-timeline__bar-stat">
+				<strong>{metCriteria.length}</strong> / {total} criteria met
+			</span>
+			<span class="omega-timeline__bar-pct">{pct}%</span>
+		</div>
+	</div>
+
+	<!-- Velocity indicator -->
+	<div class="omega-timeline__velocity">
+		{recentCount > 0 ? (
+			<span class="omega-timeline__velocity-badge omega-timeline__velocity-badge--active">
+				<span class="omega-timeline__velocity-dot"></span>
+				{recentCount} {recentCount === 1 ? 'criterion' : 'criteria'} met in the last 7 days
+			</span>
+		) : monthCount > 0 ? (
+			<span class="omega-timeline__velocity-badge">
+				<span class="omega-timeline__velocity-dot omega-timeline__velocity-dot--warm"></span>
+				{monthCount} {monthCount === 1 ? 'criterion' : 'criteria'} met in the last 30 days
+			</span>
+		) : (
+			<span class="omega-timeline__velocity-badge omega-timeline__velocity-badge--idle">
+				<span class="omega-timeline__velocity-dot omega-timeline__velocity-dot--idle"></span>
+				No criteria met in the last 30 days
+			</span>
+		)}
+	</div>
+
+	<!-- Timeline of met criteria -->
+	{sortedMet.length > 0 && (
+		<div class="omega-timeline__section">
+			<h3 class="omega-timeline__section-heading">Milestone Timeline</h3>
+			<ol class="omega-timeline__list" reversed>
+				{sortedMet.map((c) => (
+					<li class="omega-timeline__entry" data-reveal>
+						<div class="omega-timeline__entry-connector">
+							<span class="omega-timeline__entry-dot" aria-hidden="true">
+								<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+									<path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</span>
+							<span class="omega-timeline__entry-line" aria-hidden="true"></span>
+						</div>
+						<div class="omega-timeline__entry-body">
+							<time class="omega-timeline__entry-date" datetime={c.dateMet}>
+								{formatDate(c.dateMet!)}
+							</time>
+							<p class="omega-timeline__entry-criterion">{c.criterion}</p>
+							{c.horizon && (
+								<span class="omega-timeline__entry-horizon">{c.horizon}</span>
+							)}
+						</div>
+					</li>
+				))}
+			</ol>
+		</div>
+	)}
+
+	<!-- Unmet criteria (collapsed) -->
+	{unmetCriteria.length > 0 && (
+		<details class="omega-timeline__unmet">
+			<summary class="omega-timeline__unmet-summary">
+				<span>{unmetCriteria.length} remaining criteria</span>
+				<span class="omega-timeline__unmet-chevron" aria-hidden="true">▾</span>
+			</summary>
+			<ul class="omega-timeline__unmet-list">
+				{unmetCriteria.map((c) => (
+					<li class="omega-timeline__unmet-item">
+						<span class="omega-timeline__unmet-dot" aria-hidden="true"></span>
+						<span class="omega-timeline__unmet-text">{c.criterion}</span>
+						{c.horizon && (
+							<span class="omega-timeline__unmet-horizon">{c.horizon}</span>
+						)}
+					</li>
+				))}
+			</ul>
+		</details>
+	)}
+</div>
+
+<style>
+	.omega-timeline {
+		margin: var(--space-xl) 0;
+	}
+
+	/* Progress bar */
+	.omega-timeline__progress-wrap {
+		margin-bottom: var(--space-md);
+	}
+
+	.omega-timeline__bar {
+		height: 10px;
+		background: var(--bg-secondary, #111);
+		border: 1px solid var(--border);
+		border-radius: 5px;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.omega-timeline__bar-fill {
+		height: 100%;
+		background: var(--accent, #d4a853);
+		border-radius: 5px;
+		transition: width 0.8s ease;
+	}
+
+	.omega-timeline__bar-legend {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-top: var(--space-xs);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--text-muted);
+	}
+
+	.omega-timeline__bar-stat strong {
+		color: var(--text-primary);
+		font-weight: 700;
+	}
+
+	.omega-timeline__bar-pct {
+		color: var(--accent, #d4a853);
+		font-weight: 700;
+	}
+
+	/* Velocity badge */
+	.omega-timeline__velocity {
+		margin-bottom: var(--space-xl);
+	}
+
+	.omega-timeline__velocity-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-xs);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--text-muted);
+		background: var(--bg-card, #181818);
+		border: 1px solid var(--border);
+		border-radius: 20px;
+		padding: 4px 12px;
+	}
+
+	.omega-timeline__velocity-badge--active {
+		color: var(--accent, #d4a853);
+		border-color: color-mix(in srgb, var(--accent, #d4a853) 30%, transparent);
+		background: color-mix(in srgb, var(--accent, #d4a853) 8%, var(--bg-card, #181818));
+	}
+
+	.omega-timeline__velocity-badge--idle {
+		color: var(--text-muted);
+	}
+
+	.omega-timeline__velocity-dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--accent, #d4a853);
+		flex-shrink: 0;
+	}
+
+	.omega-timeline__velocity-dot--warm {
+		background: var(--warning, #f59e0b);
+	}
+
+	.omega-timeline__velocity-dot--idle {
+		background: var(--text-muted, #707070);
+	}
+
+	/* Timeline section */
+	.omega-timeline__section-heading {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--text-muted);
+		margin: 0 0 var(--space-md) 0;
+	}
+
+	.omega-timeline__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.omega-timeline__entry {
+		display: flex;
+		gap: var(--space-md);
+		position: relative;
+	}
+
+	.omega-timeline__entry-connector {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		flex-shrink: 0;
+		width: 24px;
+	}
+
+	.omega-timeline__entry-dot {
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		background: color-mix(in srgb, var(--accent, #d4a853) 15%, var(--bg-card, #181818));
+		border: 1.5px solid var(--accent, #d4a853);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--accent, #d4a853);
+		flex-shrink: 0;
+	}
+
+	.omega-timeline__entry-line {
+		flex: 1;
+		width: 1px;
+		background: var(--border);
+		margin: 4px 0;
+		min-height: var(--space-sm);
+	}
+
+	.omega-timeline__entry:last-child .omega-timeline__entry-line {
+		display: none;
+	}
+
+	.omega-timeline__entry-body {
+		padding-bottom: var(--space-lg);
+		flex: 1;
+	}
+
+	.omega-timeline__entry-date {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		color: var(--text-muted);
+		margin-bottom: 2px;
+	}
+
+	.omega-timeline__entry-criterion {
+		font-size: 0.9rem;
+		color: var(--text-primary);
+		font-weight: 500;
+		margin: 0 0 4px 0;
+		line-height: 1.4;
+	}
+
+	.omega-timeline__entry-horizon {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		color: var(--accent, #d4a853);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+	}
+
+	/* Unmet section */
+	.omega-timeline__unmet {
+		margin-top: var(--space-lg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-md, 0.5rem);
+		background: var(--bg-card, #181818);
+		overflow: hidden;
+	}
+
+	.omega-timeline__unmet-summary {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: var(--space-sm) var(--space-md);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--text-muted);
+		cursor: pointer;
+		user-select: none;
+		list-style: none;
+	}
+
+	.omega-timeline__unmet-summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.omega-timeline__unmet-summary:hover {
+		color: var(--text-secondary);
+	}
+
+	.omega-timeline__unmet-chevron {
+		font-size: 0.65rem;
+		transition: transform var(--transition-fast, 150ms);
+	}
+
+	details[open] .omega-timeline__unmet-chevron {
+		transform: rotate(180deg);
+	}
+
+	.omega-timeline__unmet-list {
+		list-style: none;
+		margin: 0;
+		padding: 0 var(--space-md) var(--space-md);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xs);
+	}
+
+	.omega-timeline__unmet-item {
+		display: flex;
+		align-items: baseline;
+		gap: var(--space-sm);
+	}
+
+	.omega-timeline__unmet-dot {
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+		background: var(--text-muted, #707070);
+		flex-shrink: 0;
+		margin-top: 0.4em;
+	}
+
+	.omega-timeline__unmet-text {
+		font-size: 0.85rem;
+		color: var(--text-muted);
+		flex: 1;
+	}
+
+	.omega-timeline__unmet-horizon {
+		font-family: var(--font-mono);
+		font-size: 0.6rem;
+		color: var(--text-muted);
+		opacity: 0.6;
+		flex-shrink: 0;
+	}
+</style>

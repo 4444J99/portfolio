@@ -1,5 +1,6 @@
 ---
 import OmegaGalaxy from '../components/galaxy/OmegaGalaxy.astro';
+import OmegaTimeline from '../components/omega/OmegaTimeline.astro';
 import Layout from '../layouts/Layout.astro';
 
 interface OmegaData {
@@ -22,6 +23,7 @@ interface OmegaData {
 		evidence: string;
 		evidenceUrl?: string;
 		target?: string;
+		dateMet?: string;
 	}>;
 }
 
@@ -91,6 +93,9 @@ const statusLabel = (status: string) => {
             </span>
           </div>
         </div>
+
+        <!-- Omega timeline: velocity context + milestone history -->
+        <OmegaTimeline criteria={criteria} />
 
         <!-- Horizon breakdown -->
         <h2 class="section__heading" data-reveal>By Horizon</h2>
