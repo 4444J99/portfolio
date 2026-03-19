@@ -173,7 +173,68 @@ function computeConsensus(
 
       <h2>Implementation</h2>
       <p>
-        Built as a <strong>pnpm monorepo</strong> (TypeScript + Python) with five packages: core-engine (Express + Socket.io + Redis), performance-sdk (React 18 + Vite), audio-synthesis-bridge (OSC + WebAudio), documentation, and example applications. The frontend SDK leverages patterns from the Processing community's tradition of making creative coding accessible through well-designed abstractions.<Cite id={8} author="Reas, Casey and Ben Fry" title="Processing: A Programming Handbook" source="MIT Press" year={2007} /> The core engine handles two strictly separated Socket.io namespaces — <code>/audience</code> for many concurrent clients (target: 1,000+) and <code>/performer</code> for authenticated controllers. Z-score outlier rejection (threshold: 2.5 SD) and exponential smoothing (factor: 0.3) prevent individual inputs from dominating.
+        Built as a <strong>pnpm monorepo</strong> (TypeScript + Python) with five packages: core-engine (Express + Socket.io + Redis), performance-sdk (React 18 + Vite), audio-synthesis-bridge (OSC + WebAudio), client-sdk (lightweight embeddable client), and an orchestrate CLI (Python, multi-AI pipeline). The frontend SDK leverages patterns from the Processing community's tradition of making creative coding accessible through well-designed abstractions.<Cite id={8} author="Reas, Casey and Ben Fry" title="Processing: A Programming Handbook" source="MIT Press" year={2007} /> The core engine handles two strictly separated Socket.io namespaces — <code>/audience</code> for many concurrent clients (target: 1,000+) and <code>/performer</code> for authenticated controllers. Z-score outlier rejection (threshold: 2.5 SD) and exponential smoothing (factor: 0.3) prevent individual inputs from dominating.
+      </p>
+
+      <CodeStructure lang="typescript" caption="Parameter Bus — typed event emitter with 16 event types driving all internal communication" filename="src/bus/parameter-bus.ts (excerpt)">
+{`enum BusEvent {
+  AUDIENCE_INPUT       = 'audience:input',
+  AUDIENCE_INPUT_BATCH = 'audience:input:batch',
+  CONSENSUS_UPDATE     = 'consensus:update',
+  CONSENSUS_SNAPSHOT   = 'consensus:snapshot',
+  PERFORMER_OVERRIDE   = 'performer:override',
+  PERFORMER_COMMAND    = 'performer:command',
+  SESSION_START        = 'session:start',
+  SESSION_END          = 'session:end',
+  PARTICIPANT_JOIN     = 'participant:join',
+  PARTICIPANT_LEAVE    = 'participant:leave',
+  ERROR                = 'error',
+  STATS                = 'stats',
+}
+// All payloads strongly typed via BusEventPayloads interface map.
+// Bus emits throughput stats every second: inputs/sec, consensus/sec,
+// active subscribers, latency.`}
+      </CodeStructure>
+
+      <h2>Package Architecture</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Package</th><th>Stack</th><th>Responsibility</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>@omni-dromenon/core-engine</code></td><td>Express + Socket.io + Redis + Zod</td><td>Consensus algorithm, parameter bus, OSC bridge, session lifecycle</td></tr>
+            <tr><td><code>@omni-dromenon/performance-sdk</code></td><td>React 18 + Vite + Socket.io-client</td><td>Audience sliders, voting panels, performer override dashboard</td></tr>
+            <tr><td><code>@omni-dromenon/audio-synthesis-bridge</code></td><td>OSC + WebAudio API</td><td>Consensus-to-audio translation for SuperCollider, Max/MSP, Ableton</td></tr>
+            <tr><td><code>@omni-dromenon/client-sdk</code></td><td>WebSocket client</td><td>Lightweight embeddable audience participation for third-party sites</td></tr>
+            <tr><td><code>packages/orchestrate</code></td><td>Python 3.11+</td><td>Multi-AI orchestration CLI with gated research-to-implementation pipeline</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Four genre-specific example applications exercise the full stack: generative music (SuperCollider via OSC), generative visual (WebGL shaders driven by consensus uniforms), choreographic interface (pose detection + consensus-weighted movement mapping), and theatre dialogue (branching narrative where audience consensus selects paths). Each example is a self-contained pnpm package demonstrating how the engine adapts to different performance contexts.
+      </p>
+
+      <h2>Performance Targets</h2>
+      <Figure alt="Performance targets for the Omni-Dromenon Engine" caption="Quantitative targets reflecting real-time performance requirements for live deployment" number={3}>
+        <StatGrid stats={[
+          { value: '<2ms', label: 'P95 Latency' },
+          { value: '<1ms', label: 'Consensus/100 Users' },
+          { value: '<500MB', label: 'Memory/1K Connections' },
+          { value: '10/sec', label: 'Input Rate Limit' },
+          { value: '20/sec', label: 'Consensus Broadcast' },
+          { value: '1K+', label: 'Audience Capacity' },
+        ]} />
+      </Figure>
+
+      <h2>Venue Geometry and Deployment</h2>
+      <p>
+        Performance spaces are modeled as 2D coordinate systems with named zones. The default venue defines front, middle, and back sections with spatial weight multipliers (1.0, 0.8, 0.6) applied before distance-decay calculation. Zone-based weights are configurable per deployment: a black box theatre (50-200 seats) uses high spatial resolution with intimate proximity weighting, while an outdoor festival (1,000+ participants) relaxes latency requirements and emphasizes consensus clustering.
+      </p>
+
+      <p>
+        The system ships with Docker Compose configuration for full-stack deployment (core engine, performance SDK, Redis, ChromaDB, Nginx reverse proxy) and includes production-ready documentation — a festival technical rider, indie venue setup guide, and grant budget line-item template — in the repository's <code>docs/community/</code> directory. Target deployment contexts include Ars Electronica (Linz), NIME (the spatial weighting model is a novel HCI contribution), and Transmediale (Berlin), with draft grant narratives prepared for each venue.
       </p>
 
       <h2>Why This Is Art</h2>
@@ -186,7 +247,8 @@ function computeConsensus(
         <li><strong>Generality vs. genre-specific optimization</strong> — A general-purpose engine across ballet, electronic music, theatre, and installation means no genre gets perfectly tailored behavior. The preset system mitigates this, but custom Max/MSP patches will always outperform a generalized solution for a single piece. The tradeoff is worth it for rapid deployment across genres.</li>
         <li><strong>Performer override as compositional tool</strong> — Initially designed as a safety valve, performer override became the most interesting artistic element. The creative tension between crowd desire and performer resistance produces dynamics impossible in either autocratic or purely democratic systems. Bishop's analysis of participatory art's political dimensions — who holds power, who concedes it, and under what conditions — proved unexpectedly relevant to the override system's design.<Cite id={11} author="Bishop, Claire" title="Artificial Hells: Participatory Art and the Politics of Spectatorship" source="Verso" year={2012} /></li>
         <li><strong>Monorepo complexity</strong> — Five packages in a pnpm workspace means more build configuration, more dependency management, more CI complexity. The alternative (five separate repos) would be worse for a system where packages share types and build in lockstep.</li>
-        <li><strong>WebSocket at scale</strong> — Targeting 1,000+ concurrent audience connections pushes Socket.io's single-process limits. Redis adapter handles horizontal scaling but adds operational complexity.</li>
+        <li><strong>WebSocket at scale</strong> — Targeting 1,000+ concurrent audience connections pushes Socket.io's single-process limits. Redis adapter handles horizontal scaling but adds operational complexity. The input rate limit (10/sec per client) and z-score outlier rejection provide defense-in-depth against both accidental flooding and adversarial audience behavior.</li>
+        <li><strong>Theoretical integration</strong> — The engine consumes recursive identity models from ORGAN-I and implements them as applied consensus feedback loops. This dependency is genuine — the spatial weighting model operationalizes phenomenal proximity from the <code>organon-noumenon</code> framework — but it means the theoretical foundations must remain stable. The unidirectional dependency rule (I to II, never II to I) ensures the theory can evolve without breaking the engine.</li>
       </ul>
 
       <h2>By the Numbers</h2>
