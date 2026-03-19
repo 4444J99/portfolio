@@ -1,4 +1,5 @@
 ---
+import PersonaSwitcher from '../../components/PersonaSwitcher.astro';
 import EngineeringVitals from '../../components/resume/EngineeringVitals.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import { certifications, education, history } from '../../data/experience.json';
@@ -42,6 +43,8 @@ const featuredProjects = persona.featured_projects.map((fp) => {
           Switch Persona
         </a>
       </nav>
+
+      <PersonaSwitcher currentPersona={persona.id} />
 
       <div class="sketch-accent print-hide">
         <SketchContainer 
