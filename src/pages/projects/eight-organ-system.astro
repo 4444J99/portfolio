@@ -58,6 +58,10 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
         </table>
       </div>
 
+      <p>
+        The organ model prevents three pathologies that commonly destroy creative systems: art corrupted by commercial pressure (when every project needs revenue justification), theory compromised by the need to scale (when ideas must be production-ready before they are explored), and community colonized by engagement metrics (when relationships are valued only for their conversion rates). Each organ has its own GitHub organization, governance rules, documentation standards, and definition of success. What counts as excellent work in ORGAN-I (intellectual depth, novel frameworks) is deliberately different from what counts in ORGAN-III (revenue potential, user experience).
+      </p>
+
       <h2>The Registry</h2>
       <p>
         A machine-readable <a href="https://github.com/meta-organvm/orchestration-start-here/blob/main/registry-v2.json" target="_blank">JSON registry</a> serves as the single source of truth for all {vitals.repos.total} repositories.<Cite id={5} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's principle of a "single authoritative data source" applies here at the organizational level — every repo entry carries status, dependencies, documentation tier, and promotion state. Automated scripts validate the registry against the live state of every repo, checking CI/CD, documentation, dependency integrity, and constitutional compliance.<Cite id={6} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation" source="Addison-Wesley" year={2010} />
@@ -95,7 +99,11 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
       />
 
       <p>
-        Each transition has documented criteria and automated validation. The state machine prevents premature claims and ensures quality at each stage — a project can't call itself "art" until it produces interesting output.<Cite id={8} author="McConnell, Steve" title="Code Complete: A Practical Handbook of Software Construction" source="Microsoft Press" year={2004} />
+        Each transition has documented criteria and automated validation. The state machine prevents premature claims and ensures quality at each stage — a project cannot call itself "art" until it produces interesting output.<Cite id={8} author="McConnell, Steve" title="Code Complete: A Practical Handbook of Software Construction" source="Microsoft Press" year={2004} /> The Veritas Sprint exemplified this principle in practice: the <code>implementation_status: PRODUCTION</code> field was renamed to <code>ACTIVE</code> across 82 repositories, acknowledging that "production" overstated reality for documented-but-not-deployed repos. Honest state machines require honest state names.
+      </p>
+
+      <p>
+        No state can be skipped. A repository in LOCAL must pass through CANDIDATE and PUBLIC_PROCESS before reaching GRADUATED. Back-transitions are permitted — a CANDIDATE that fails review returns to LOCAL — but forward-skipping is blocked by the <code>promote-repo</code> workflow's pre-validation checks. This creates genuine narrative arcs for each project: every GRADUATED repository has a documented history of the gates it passed through.
       </p>
 
       <h2>The Dependency Rule</h2>
@@ -152,6 +160,11 @@ jobs:
         # back-edge blocking across 31 edges`}
       </CodeStructure>
 
+      <h2>Implementation Velocity</h2>
+      <p>
+        The system was designed, documented, and deployed in a concentrated sequence of sprints — each with defined success criteria and measurable outputs. Phase -1 established the eight GitHub organizations with Greek ontological suffixes. Phase 0 refined the corpus through cross-AI validation — Claude, Gemini, and GPT-4 each reviewed the planning documents independently, catching inconsistencies no single model would have found. The Bronze Sprint produced 7 flagship READMEs (3,000+ words each). The Silver Sprint generated 58 standard READMEs totaling ~202K words. The Gold Sprint completed community health files, workflow specifications, and the first meta-system essays. All 9/9 launch criteria were met on 2026-02-11. Post-launch, 20+ targeted sprints drove the system from launch-ready to portfolio-standard — including the Platinum Sprint (228 validation checks), the Autonomy Sprint (seed.yaml contracts across all repos), and the Veritas Sprint (an honesty audit that renamed overstated status fields and corrected future-dated essays).
+      </p>
+
       <h2>Why This Is Art</h2>
       <p>
         The choice of eight organs (not seven, not ten) is a design decision. The Greek naming scheme is an aesthetic decision. The no-back-edges rule creates dramatic tension.<Cite id={12} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery and Invention" source="Harper Perennial" year={1996} /> Csikszentmihalyi's framework situates creativity at the intersection of domain, field, and individual — this system is simultaneously the domain (the eight-organ architecture), the field (the governance rules that evaluate work), and the individual practice (the daily decisions about what to build). The promotion state machine creates narrative arcs for each project. This isn't an engineer who also makes art, or an artist who codes on the side — the governance model, the registry schema, the dependency graph, <em>these are the work</em>.
@@ -176,9 +189,11 @@ jobs:
           { value: String(vitals.repos.total), label: 'Repositories' },
           { value: String(vitals.repos.orgs), label: 'Organizations' },
           { value: `${wordsK}K`, label: 'Words' },
-          { value: '31', label: 'Dependencies' },
+          { value: '31', label: 'Dependency Edges' },
           { value: '228', label: 'Validation Checks' },
           { value: String(vitals.substance.ci_passing), label: 'CI Workflows' },
+          { value: '130+', label: 'Decision Records' },
+          { value: '115', label: 'Contract Edges' },
         ]} />
       </Figure>
 
@@ -186,12 +201,59 @@ jobs:
         {vitals.substance.ci_passing} repositories carry CI workflows. 130 architectural decision records document key design choices. Every repo has a CHANGELOG and documentation tier assignment (8 flagship, 70 standard, 5 archive, 8 infrastructure).<Cite id={14} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2018} />
       </p>
 
+      <p>
+        The seed.yaml contract schema (v1.0) establishes 115 declared produces/consumes/subscriptions edges across the system, enabling autonomous orchestration. Cross-org event routing operates through <code>dispatch-receiver.yml</code> workflows deployed to all 8 organization <code>.github</code> repos, connected by a shared <code>CROSS_ORG_TOKEN</code> secret. The metrics variable system — three scripts forming a calculate-store-propagate pipeline — ensures metric consistency across all documents without manual cross-referencing. The monthly organ audit workflow performs a full system health check and generates both Markdown reports and JSON metrics suitable for automated dashboards.
+      </p>
+
+      <h2>Validation Infrastructure</h2>
+      <p>
+        Five validation scripts enforce system integrity at every level, embodying the principle that governance claims must be machine-verifiable rather than self-reported.<Cite id={15} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /> Brooks observed that adding documentation does not reduce errors unless the documentation is itself validated — the same applies to governance.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Validator</th><th>Scope</th><th>What It Catches</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Registry validation</strong></td><td>Schema compliance for all {vitals.repos.total} entries</td><td>Missing fields, invalid status values, ORGAN-III entries without revenue metadata</td></tr>
+            <tr><td><strong>Dependency graph</strong></td><td>All 31 declared edges</td><td>Cycles, back-edges, cross-organ violations of I to II to III constraint</td></tr>
+            <tr><td><strong>Documentation completeness</strong></td><td>Every repository</td><td>Missing READMEs, word count below threshold, absent badge rows</td></tr>
+            <tr><td><strong>Link integrity</strong></td><td>1,267+ cross-references</td><td>Broken URLs, stale references between corpus documents</td></tr>
+            <tr><td><strong>Constitutional compliance</strong></td><td>Articles I through VI plus amendments A through D</td><td>Violations of the system constitution and post-cross-validation amendments</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Repository Standards</h2>
+      <p>
+        Every repository meets a defined quality floor that functions as a contract between the system and its audiences. READMEs require 2,000+ words minimum (flagships: 3,000+), written for dual audiences of grant reviewers and hiring managers. {vitals.substance.ci_passing} repositories carry CI/CD workflows. 130+ architectural decision records document key design choices — technology selections, dependency declarations, naming decisions, and tradeoff analyses.<Cite id={16} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /> The Platinum validation suite adds checks for CI workflow presence, CHANGELOG files, ADRs, badge rows, and implementation status fields — 228 checks passing across the full suite.
+      </p>
+
+      <CodeStructure lang="yaml" caption="seed.yaml contract schema — every repository declares its organ membership, produces/consumes edges, and event subscriptions" filename="seed.yaml (excerpt)">
+{`organ: I
+tier: flagship
+implementation_status: ACTIVE
+promotion_status: GRADUATED
+produces:
+  - recursive-identity-model
+  - generative-entity-framework
+consumes:
+  - organvm-i-theoria/myth-engine
+subscriptions:
+  - event: registry.updated
+    action: validate-deps
+  - event: monthly.audit
+    action: report-health`}
+      </CodeStructure>
+
       <h2>Tradeoffs & Lessons</h2>
       <ul>
-        <li><strong>Documentation volume vs. maintenance burden</strong> — ~{wordsK}K words is powerful as proof-of-work, but each README is a liability if the underlying repo changes. The registry-as-source-of-truth pattern helps: stats flow from the registry, not from hand-editing.<Cite id={15} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /></li>
-        <li><strong>Strict dependency rules vs. convenience</strong> — The no-back-edges constraint is the system's best design decision <em>and</em> its most annoying one. It forced clean interfaces but also meant rewriting code that wanted to "just import" from a downstream organ.</li>
-        <li><strong>AI-conductor workflow</strong> — ~{wordsK}K words were produced using a human-AI co-creation model: AI generates volume, human directs and refines. This is honest and documented. The risk is perception ("AI wrote your portfolio"). The mitigation is transparency: every essay in ORGAN-V explains the process.<Cite id={16} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /></li>
-        <li><strong>Naming scheme lock-in</strong> — Greek ontological naming (Theoria, Poiesis, Ergon) is distinctive but means renaming requires 40+ file edits. This was worth the tradeoff for identity coherence.</li>
+        <li><strong>Documentation volume vs. maintenance burden</strong> — ~{wordsK}K words is powerful as proof-of-work, but each README is a liability if the underlying repo changes. The registry-as-source-of-truth pattern helps: stats flow from the registry, not from hand-editing.<Cite id={17} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation" source="Addison-Wesley" year={2010} /></li>
+        <li><strong>Strict dependency rules vs. convenience</strong> — The no-back-edges constraint is the system's best design decision <em>and</em> its most annoying one. It forced clean interfaces but also meant rewriting code that wanted to "just import" from a downstream organ. Two back-edge violations were detected and corrected during the Convergence Sprint, confirming that automated enforcement catches real mistakes, not just theoretical ones.</li>
+        <li><strong>AI-conductor workflow</strong> — ~{wordsK}K words were produced using a human-AI co-creation model: AI generates volume, human directs and refines. This is honest and documented. The risk is perception ("AI wrote your portfolio"). The mitigation is transparency: every essay in ORGAN-V explains the process.<Cite id={18} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /></li>
+        <li><strong>Naming scheme lock-in</strong> — Greek ontological naming (Theoria, Poiesis, Ergon) is distinctive but means renaming requires 40+ file edits. The naming is not decorative — each Greek term encodes the organ's epistemological function — but the coupling is real. This was worth the tradeoff for identity coherence.</li>
+        <li><strong>Implementation velocity vs. soak time</strong> — The system launched in nine days through concentrated sprint execution. This velocity is itself evidence of the AI-conductor methodology's effectiveness, but it also means the system has less operational history than a conventionally-paced project. The 30-day soak test monitor and operational runbooks address this gap explicitly.</li>
       </ul>
 
       <References entries={[
@@ -211,6 +273,8 @@ jobs:
         { id: 14, author: "Nygard, Michael T." , title: "Release It! Design and Deploy Production-Ready Software", source: "Pragmatic Bookshelf", year: 2018 },
         { id: 15, author: "Brooks, Frederick P.", title: "The Mythical Man-Month: Essays on Software Engineering", source: "Addison-Wesley", year: 1975 },
         { id: 16, author: "Shneiderman, Ben", title: "Human-Centered AI", source: "Oxford University Press", year: 2022 },
+        { id: 17, author: "Humble, Jez and David Farley", title: "Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation", source: "Addison-Wesley", year: 2010 },
+        { id: 18, author: "Shneiderman, Ben", title: "Human-Centered AI", source: "Oxford University Press", year: 2022 },
       ]} />
 
 <PrismNav context="projects.eight-organ-system" repoSlug="organvm-engine" />
