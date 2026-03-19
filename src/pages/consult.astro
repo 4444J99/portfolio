@@ -349,6 +349,12 @@ import Layout from '../layouts/Layout.astro';
     box-shadow: 0 0 0 4px var(--accent-muted), inset 0 1px 2px rgba(0, 0, 0, 0.1);
   }
 
+  .form-select:focus-visible,
+  .form-textarea:focus-visible {
+    outline: 2px solid var(--accent-text);
+    outline-offset: 2px;
+  }
+
   :global(html[data-theme="dark"]) .form-select:focus,
   :global(html[data-theme="dark"]) .form-textarea:focus {
     background: var(--bg-card-hover);
