@@ -216,6 +216,38 @@ async function correctClaim(
 }`}
       </CodeStructure>
 
+      <h2>Database Design and Event-Driven Pipeline</h2>
+      <p>
+        The PostgreSQL schema consists of ten domain tables plus an event outbox, organized around the verification spine. Identity tables track platform participants (actors) and conflict-of-interest declarations with validity windows. Content tables store story containers with a draft/review/published state machine and immutable narrative version snapshots in Markdown. Evidence tables hold content-addressed objects with SHA-256 hashes and full provenance metadata. Claims tables store typed atomic statements with support status and confidence scores, connected to evidence through directed, weighted edges. Verification tables manage review task assignments and structured verdicts. Correction tables maintain the append-only event log. The event outbox implements a reliable emission pattern: publish events are inserted into the outbox within the same transaction that updates story state, ensuring that the event is guaranteed to emit if and only if the state change commits.<Cite id={3} author="Newman, Sam" title="Building Microservices: Designing Fine-Grained Systems" source="O'Reilly Media" year={2015} /> All objects are scoped by <code>platform_id</code>, enabling multi-tenant deployment from the same schema — a local civic newsroom and a national investigative platform can run the same codebase with different policy configurations and isolated data.
+      </p>
+
+      <Figure alt="Ten protocol invariants" caption="Protocol invariants — ten hard constraints forming the system's constitution, enforced by conformance tests and database constraints.">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>ID</th><th>Invariant</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>I1</strong></td><td>Published story versions are immutable</td></tr>
+              <tr><td><strong>I2</strong></td><td>Evidence objects are immutable and content-addressed</td></tr>
+              <tr><td><strong>I3</strong></td><td>Corrections are append-only (history is never erased)</td></tr>
+              <tr><td><strong>I4</strong></td><td>Claim text is stable once published (changes require supersession)</td></tr>
+              <tr><td><strong>I5</strong></td><td>Publication gating is deterministic for a given ledger state</td></tr>
+              <tr><td><strong>I6</strong></td><td>Conformance tests pass independent of ingestion ordering</td></tr>
+              <tr><td><strong>I7</strong></td><td>All objects share the same platform scope</td></tr>
+              <tr><td><strong>I8</strong></td><td>Claims reference exactly one story version</td></tr>
+              <tr><td><strong>I9</strong></td><td>Evidence edges reference existing objects (no dangling refs)</td></tr>
+              <tr><td><strong>I10</strong></td><td>Corrections reference existing claims</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </Figure>
+
+      <h2>Ten-Phase Roadmap</h2>
+      <p>
+        The project follows a ten-phase roadmap from prototype to archival permanence, with the north star metric of verified-information-throughput — verified claim throughput per unit cost, with corrections as a first-class improvement signal rather than an embarrassment to be minimized. Phase 0 (Foundations) freezes contracts and establishes the local development loop. Phase 1 (MVP Local Civic Beat) completes the end-to-end story lifecycle: ingest, verify, publish, correct. Phases 2 through 4 build the trust engine, operations posture, and attention-decoupled economics. Phase 5 introduces federation — two independent deployments exchanging story bundles with verifiable consistency. Phases 6 and 7 extend the platform to public institutions (libraries, cities, schools) and specialized reporting (investigations, datasets, media provenance). Phase 8 hardens governance for cooperative or endowment stewardship. Phase 9 (Back Again) ensures archival permanence — a third party can reconstruct the full archive from exports alone. The project currently stands at Phase 0, with contracts frozen, database schema stable, gateway operational, and all seven conformance tests passing.<Cite id={7} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} />
+      </p>
+
       <h2>Economic Model and the AGPL Mandate</h2>
       <p>
         The economic model follows from the architecture: if value comes from verification rather than attention, then funding can decouple from advertising and click-through metrics. A platform whose product is the evidence graph — the structured, machine-readable justification for every claim — creates value that compounds over time as the graph grows, rather than depreciating as news cycles move on. Zuboff's analysis of surveillance capitalism demonstrates the structural problem with attention-based models: when user engagement is the product, the platform's economic incentive is to maximize time-on-site through emotional provocation rather than informational accuracy.<Cite id={9} author="Zuboff, Shoshana" title="The Age of Surveillance Capitalism" source="PublicAffairs" year={2019} /> The Actual News inverts this by making the evidence graph the monetizable asset — institutions, researchers, and other newsrooms can subscribe to the structured data feed, paying for verified claims and their provenance chains rather than for reader eyeballs. Benkler's framework for commons-based peer production provides the theoretical grounding for the licensing choice: the AGPL ensures that any deployment of the platform must share its source code, including modifications, creating a transparency mandate that mirrors the platform's editorial principles.<Cite id={10} author="Benkler, Yochai" title="The Wealth of Networks: How Social Production Transforms Markets and Freedom" source="Yale University Press" year={2006} /> A platform built on the premise that evidence should be transparent cannot itself be opaque. The AGPL makes this principle legally enforceable — any organization running a modified version must publish their modifications, preventing proprietary forks that might weaken the verification requirements while trading on the platform's reputation for rigor.
@@ -249,9 +281,9 @@ async function correctClaim(
           { value: '5', label: 'Microservices' },
           { value: '7', label: 'Conformance Tests' },
           { value: '10', label: 'Hard Invariants' },
-          { value: '3', label: 'Story Layers' },
+          { value: '11', label: 'DB Tables + Outbox' },
           { value: 'AGPL', label: 'License' },
-          { value: 'SQL', label: 'Publish Gate' },
+          { value: '10', label: 'Roadmap Phases' },
         ]} />
       </Figure>
 
