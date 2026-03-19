@@ -11,148 +11,290 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
 
 <ProjectLayout pageTitle="Recursive Engine (RE:GE) — 4444j" description="A symbolic operating system for myth and narrative — 21 organ handlers, a ritual syntax DSL, and 1,254 tests."
-  keywords={["Symbolic AI", "DSL Design", "Python", "Narrative Theory", "System Architecture", "Logocentric"]}
-  sketchId="recursive-tree"
-      title="Recursive Engine (RE:GE)"
-      tagline="Directed symbolic operating system for myth and narrative"
-      tags={['Theory', 'Python', 'DSL']}
-      repo="https://github.com/organvm-i-theoria/recursive-engine--generative-entity"
-      badges={[
-        { src: 'https://img.shields.io/github/languages/top/organvm-i-theoria/recursive-engine--generative-entity', alt: 'Top language' },
-        { src: 'https://img.shields.io/github/last-commit/organvm-i-theoria/recursive-engine--generative-entity', alt: 'Last commit' },
-      ]}>
-      <h2>The Question</h2>
-      <p>
-        Every software system tells a story — user flows are plot arcs, state machines are character development, error handling is conflict resolution. We treat these as metaphors. I wanted to find out what happens when you treat them as engineering principles.<Cite id={1} author="Aristotle" title="Poetics" source="Penguin Classics (trans. 1996)" year={-335} /> Aristotle's six elements of drama — plot, character, thought, diction, spectacle, song — are not literary ornaments but structural primitives. What if narrative structure, from Aristotle through Propp, could be encoded as executable rules?<Cite id={2} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1968} /> Not an AI that "writes stories" — a symbolic operating system where narrative principles govern how systems organize and evolve.
-      </p>
+	keywords={["Symbolic AI", "DSL Design", "Python", "Narrative Theory", "System Architecture", "Logocentric"]}
+	sketchId="recursive-tree"
+			title="Recursive Engine (RE:GE)"
+			tagline="Directed symbolic operating system for myth and narrative"
+			tags={['Theory', 'Python', 'DSL']}
+			repo="https://github.com/organvm-i-theoria/recursive-engine--generative-entity"
+			badges={[
+				{ src: 'https://img.shields.io/github/languages/top/organvm-i-theoria/recursive-engine--generative-entity', alt: 'Top language' },
+				{ src: 'https://img.shields.io/github/last-commit/organvm-i-theoria/recursive-engine--generative-entity', alt: 'Last commit' },
+			]}>
+			<h2>The Question</h2>
+			<p>
+				Every software system tells a story — user flows are plot arcs, state machines are character development, error handling is conflict resolution. We treat these as metaphors. I wanted to find out what happens when you treat them as engineering principles.<Cite id={1} author="Aristotle" title="Poetics" source="Penguin Classics (trans. 1996)" year={-335} /> Aristotle's six elements of drama — plot, character, thought, diction, spectacle, song — are not literary ornaments but structural primitives. What if narrative structure, from Aristotle through Propp, could be encoded as executable rules?<Cite id={2} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1968} /> Not an AI that "writes stories" — a symbolic operating system where narrative principles govern how systems organize and evolve.
+			</p>
 
-      <h2>What RE:GE Does</h2>
-      <p>
-        RE:GE is a pure Python engine where <strong>myths, identities, rituals, and recursive structures are first-class computational objects</strong>.<Cite id={3} author="Campbell, Joseph" title="The Hero with a Thousand Faces" source="New World Library" year={1949} /> Campbell's monomyth — the hero's departure, initiation, and return — becomes a function signature: entity state in, transformed state out. The engine implements <a href="https://github.com/organvm-i-theoria/recursive-engine--generative-entity/tree/main/src/organs" target="_blank">21 organ handlers</a> that process symbolic values through a ritual syntax DSL:
-      </p>
-      <ul>
-        <li><strong>Myth organs</strong> — encode narrative archetypes as transformation rules. A hero's journey is a function: entity state in, transformed state out.</li>
-        <li><strong>Identity organs</strong> — manage how entities maintain coherence across transformations. When a character "changes," what persists?</li>
-        <li><strong>Ritual organs</strong> — define sequences that must execute in order, with pre/post-conditions. Ceremonies as transactions.</li>
-        <li><strong>Recursive organs</strong> — handle self-reference: entities that describe themselves, systems that modify their own rules.</li>
-      </ul>
+			<h2>What RE:GE Does</h2>
+			<p>
+				RE:GE is a pure Python engine where <strong>myths, identities, rituals, and recursive structures are first-class computational objects</strong>.<Cite id={3} author="Campbell, Joseph" title="The Hero with a Thousand Faces" source="New World Library" year={1949} /> Campbell's monomyth — the hero's departure, initiation, and return — becomes a function signature: entity state in, transformed state out. The engine implements <a href="https://github.com/organvm-i-theoria/recursive-engine--generative-entity/tree/main/src/organs" target="_blank">21 organ handlers</a> that process symbolic values through a ritual syntax DSL:
+			</p>
+			<ul>
+				<li><strong>Myth organs</strong> — encode narrative archetypes as transformation rules. A hero's journey is a function: entity state in, transformed state out.</li>
+				<li><strong>Identity organs</strong> — manage how entities maintain coherence across transformations. When a character "changes," what persists?</li>
+				<li><strong>Ritual organs</strong> — define sequences that must execute in order, with pre/post-conditions. Ceremonies as transactions.</li>
+				<li><strong>Recursive organs</strong> — handle self-reference: entities that describe themselves, systems that modify their own rules.</li>
+			</ul>
+			<p>
+				Beyond these four core categories, the engine includes generative and economic organs (managing three internal currencies: dreampoints, looptokens, mirrorcredits), context and translation organs (defining 10 canonical spatial zones and temporal recursion rules), and a publishing gate that controls the transition from internal symbolic process to external output. The 21-organ count grew from an initial 5 as formal completeness demanded finer distinctions.
+			</p>
 
-      <MermaidDiagram
-        caption="Organ processing architecture — myth feeds identity feeds ritual feeds recursion, with recursive loops back to myth"
-        chart={`graph TD
-    M[Myth Organs] -->|archetype transformation| I[Identity Organs]
-    I -->|coherence preservation| R[Ritual Organs]
-    R -->|sequenced execution| RE[Recursive Organs]
-    RE -->|self-reference loop| M
-    M -->|31 Proppian functions| DSL[Ritual Syntax DSL]
-    I -->|entity persistence| DSL
-    R -->|pre/post conditions| DSL
-    RE -->|bounded depth| DSL
-    DSL -->|parse + execute| E[Engine Output]
-    E -->|state feedback| M`}
-      />
+			<MermaidDiagram
+				caption="Organ processing architecture — myth feeds identity feeds ritual feeds recursion, with recursive loops back to myth"
+				chart={`graph TD
+		M[Myth Organs] -->|archetype transformation| I[Identity Organs]
+		I -->|coherence preservation| R[Ritual Organs]
+		R -->|sequenced execution| RE[Recursive Organs]
+		RE -->|self-reference loop| M
+		M -->|31 Proppian functions| DSL[Ritual Syntax DSL]
+		I -->|entity persistence| DSL
+		R -->|pre/post conditions| DSL
+		RE -->|bounded depth| DSL
+		DSL -->|parse + execute| E[Engine Output]
+		E -->|state feedback| M`}
+			/>
 
-      <SketchContainer
-        sketchId="recursive-tree"
-        height="500px"
-        mobileHeight="300px"
-        ariaLabel="Interactive recursive syntax tree: branches grow upward, typed by DSL element (INVOKE, BINDING, WHEN). Some branches curve back into the trunk, visualizing recursion. Mouse guides growth direction. Click triggers recursion fold-back with DSL fragment display."
-        title="Recursive Syntax Tree"
-        caption="A visualization of the DSL parsing process, mapping linguistic structures to growth algorithms."
-        dataSource="RE:GE Interpreter"
-      />
+			<SketchContainer
+				sketchId="recursive-tree"
+				height="500px"
+				mobileHeight="300px"
+				ariaLabel="Interactive recursive syntax tree: branches grow upward, typed by DSL element (INVOKE, BINDING, WHEN). Some branches curve back into the trunk, visualizing recursion. Mouse guides growth direction. Click triggers recursion fold-back with DSL fragment display."
+				title="Recursive Syntax Tree"
+				caption="A visualization of the DSL parsing process, mapping linguistic structures to growth algorithms."
+				dataSource="RE:GE Interpreter"
+			/>
 
-      <h2>The Ritual Syntax</h2>
-      <p>
-        The engine parses and executes a domain-specific language for declaring symbolic operations.<Cite id={4} author="Fowler, Martin" title="Domain-Specific Languages" source="Addison-Wesley" year={2010} /> Fowler distinguishes between internal DSLs (embedded in a host language) and external DSLs (with their own parser) — RE:GE's ritual syntax is a fully external DSL, parsed and executed by a dedicated interpreter. This gives it the expressiveness of declaring symbolic operations declaratively while maintaining a clean separation from the underlying Python runtime.
-      </p>
+			<h2>System Architecture</h2>
+			<p>
+				RE:GE is organized into eight architectural layers, each with a single responsibility. The design draws from both the handler pattern in enterprise systems and the modular routing philosophy of audio signal processing — the central routing component is called the <em>Soul Patchbay</em>, a heap-based priority queue with collision detection and deadlock prevention.<Cite id={13} author="Buschmann, Frank, Regine Meunier, Hans Rohnert, Peter Sommerlad, and Michael Stal" title="Pattern-Oriented Software Architecture, Volume 1" source="Wiley" year={1996} />
+			</p>
 
-      <CodeStructure lang="python" caption="Ritual syntax DSL — an external domain-specific language for declaring symbolic organ operations" filename="ritual_syntax.rege">
+			<MermaidDiagram
+				caption="Eight-layer system architecture — from CLI input through parsing, validation, routing, and dispatch to the three processing subsystems"
+				chart={`graph TD
+		CLI[CLI / REPL] -->|raw text| PARSER[Invocation Parser]
+		PARSER -->|Invocation object| VAL[Validator]
+		VAL -->|validated Invocation| PATCH[Soul Patchbay]
+		PATCH -->|Patch| DISP[Dispatcher]
+		DISP --> ORGANS[21 Organ Handlers]
+		DISP --> PROTO[Protocols]
+		DISP --> BRIDGES[External Bridges]
+		ORGANS --> PERSIST[Persistence Layer]
+		PROTO --> PERSIST
+		BRIDGES --> PERSIST`}
+			/>
+
+			<p>
+				The dispatcher implements a six-phase lifecycle for every invocation: <code>PARSE → VALIDATE → QUEUE → EXECUTE → FORMAT → LOG</code>. This is not incidental sequencing — each phase is a distinct processing stage with its own failure modes and recovery strategies. The depth tracker enforces four-tier recursion ceilings that prevent unbounded self-reference while still allowing the system's recursive organs to operate meaningfully.<Cite id={5} author="Hofstadter, Douglas" title="Gödel, Escher, Bach: An Eternal Golden Braid" source="Basic Books" year={1979} />
+			</p>
+
+			<Figure alt="Recursion depth tiers with corresponding limits and actions" caption="Four-tier recursion depth management — each tier serves a distinct purpose, from standard processing to emergency halt" number={1}>
+				<StatGrid stats={[
+					{ value: '7', label: 'Standard Depth' },
+					{ value: '12', label: 'Extended (LAW_LOOP+)' },
+					{ value: '21', label: 'Emergency (Court Override)' },
+					{ value: '33', label: 'Absolute Limit (PanicStop)' },
+				]} />
+			</Figure>
+
+			<p>
+				Every organ extends the <code>OrganHandler</code> abstract base class, which enforces consistent lifecycle management: invocation validation, state persistence, and participation in system-wide checkpointing. The registry manages organ lookup and bulk state operations. This design ensures that adding a new organ requires implementing a contract, not modifying the routing infrastructure — the open-closed principle applied to symbolic processing.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
+			</p>
+
+			<h2>The Ritual Syntax</h2>
+			<p>
+				The engine parses and executes a domain-specific language for declaring symbolic operations.<Cite id={4} author="Fowler, Martin" title="Domain-Specific Languages" source="Addison-Wesley" year={2010} /> Fowler distinguishes between internal DSLs (embedded in a host language) and external DSLs (with their own parser) — RE:GE's ritual syntax is a fully external DSL, parsed and executed by a dedicated interpreter. This gives it the expressiveness of declaring symbolic operations declaratively while maintaining a clean separation from the underlying Python runtime.
+			</p>
+
+			<CodeStructure lang="python" caption="Ritual syntax DSL — an external domain-specific language for declaring symbolic organ operations" filename="ritual_syntax.rege">
 {`INVOKE myth.hero_journey ON entity:protagonist
-  WITH threshold: 0.7
-  BINDING outcome TO identity.transform
-  WHEN condition.readiness EXCEEDS threshold`}
-      </CodeStructure>
+	WITH threshold: 0.7
+	BINDING outcome TO identity.transform
+	WHEN condition.readiness EXCEEDS threshold`}
+			</CodeStructure>
 
-      <p>
-        This isn't pseudo-code. It's the actual syntax the engine parses and executes.<Cite id={5} author="Hofstadter, Douglas" title="Gödel, Escher, Bach: An Eternal Golden Braid" source="Basic Books" year={1979} /> Hofstadter's strange loops — systems that, by moving through levels, arrive back where they started — are the engine's native operation mode. The <code>BINDING</code> keyword creates a reference from an organ output to another organ's input, forming loops that are bounded but genuinely recursive. The tree visualization above maps branch types to these DSL elements.
-      </p>
+			<p>
+				Each line of an invocation carries semantic weight. <code>::CALL_ORGAN</code> names the processor. <code>::WITH</code> provides the symbolic input. <code>::MODE</code> selects the organ's processing intention — mythic, recursive, devotional, or shadow_work depending on the organ. <code>::DEPTH</code> controls recursion limits across the four tiers. <code>::EXPECT</code> declares the desired output form. <code>::CHARGE</code> assigns initial significance on a 0–100 scale.
+			</p>
 
-      <h2>Testing the Untestable</h2>
-      <p>
-        The hardest part wasn't building the engine — it was proving it worked. When your system formalizes narrative, how do you write assertions?<Cite id={6} author="Schön, Donald A." title="The Reflective Practitioner" source="Basic Books" year={1983} /> Schön's concept of "reflection-in-action" — the practitioner's ability to think about what they are doing while doing it — became the test philosophy. We found three strategies:
-      </p>
-      <p>
-        <strong>Structural invariants (~400 tests)</strong> — An identity transformation must preserve entity type. A ritual must execute all steps or none. A recursive invocation must terminate within bounded depth.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
-      </p>
-      <p>
-        <strong>Reference implementations (~500 tests)</strong> — Propp's 31 functions, Campbell's monomyth stages, Aristotle's six elements encoded as test cases. If the engine claims to implement "Villainy," we verify the correct state transition.<Cite id={2} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1968} />
-      </p>
-      <p>
-        <strong>Round-trip consistency (~350 tests)</strong> — Serialize to DSL, parse back, verify identity. Apply transformation and inverse, verify return to original state.
-      </p>
-      <p>
-        Result: <strong>1,254 tests, 85% line coverage</strong>.
-      </p>
+			<CodeStructure lang="python" caption="Actual invocation syntax parsed by the regex-based InvocationParser" filename="invocation.rege">
+{`::CALL_ORGAN HEART_OF_CANON
+::WITH "the threshold crossing at midnight"
+::MODE mythic
+::DEPTH standard
+::EXPECT narrative
+::CHARGE 75`}
+			</CodeStructure>
 
-      <Figure alt="Test strategy distribution across three categories" caption="Test strategy distribution: structural invariants, reference implementations, and round-trip consistency" number={1}>
-        <StatGrid stats={[
-          { value: '400+', label: 'Structural Invariants' },
-          { value: '500+', label: 'Reference Implementations' },
-          { value: '350+', label: 'Round-Trip Consistency' },
-        ]} />
-      </Figure>
+			<p>
+				This isn't pseudo-code. It's the actual syntax the engine parses and executes.<Cite id={5} author="Hofstadter, Douglas" title="Gödel, Escher, Bach: An Eternal Golden Braid" source="Basic Books" year={1979} /> Hofstadter's strange loops — systems that, by moving through levels, arrive back where they started — are the engine's native operation mode. The <code>BINDING</code> keyword creates a reference from an organ output to another organ's input, forming loops that are bounded but genuinely recursive. The parser supports chained invocations (multiple <code>::CALL_ORGAN</code> blocks in sequence), protocol invocations (<code>::CALL_PROTOCOL FUSE01</code>), and fragment references by name or version.
+			</p>
 
-      <h2>Why Symbolic, Not Neural</h2>
-      <p>
-        <strong>Interpretability.</strong> Every transformation has a trace — which organ fired, what rule applied. As AI systems become more consequential, auditable narrative decisions matter.<Cite id={8} author="Manovich, Lev" title="Software Takes Command" source="Bloomsbury Academic" year={2013} /> Manovich argues that software has become the universal medium through which all cultural forms are experienced — when narrative is encoded as software, interpretability is not a debugging convenience but an aesthetic and ethical requirement.
-      </p>
-      <p>
-        <strong>Composability.</strong> Build a myth organ on top of an identity organ on top of a recursive organ. Swap organs in and out. LLMs don't compose this way.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
-      </p>
-      <p>
-        <strong>Governance integration.</strong> RE:GE lives within the eight-organ system. Dependency validation, promotion state machine, monthly audits — narrative computation within an institutional framework.<Cite id={9} author="Murray, Janet H." title="Hamlet on the Holodeck" source="MIT Press" year={1997} /> Murray's vision of the computer as a medium for procedural, participatory, spatial, and encyclopedic storytelling aligns precisely with a symbolic engine that makes narrative rules explicit and manipulable.
-      </p>
+			<h2>Implementation Details</h2>
+			<p>
+				<strong>Why Python.</strong> RE:GE has a single runtime dependency: Click for the CLI framework. Everything else — all 21 organs, protocols, bridges, and the orchestration engine — is implemented in pure Python with no external libraries. This was a deliberate constraint.<Cite id={14} author="Hunt, Andrew and David Thomas" title="The Pragmatic Programmer" source="Addison-Wesley" year={1999} /> The system needed to be portable, inspectable, and free of framework lock-in. Python's dynamic typing and metaprogramming capabilities allow the DSL parser to construct Invocation objects reflectively, while the ABC pattern provides the structural guarantees needed for the organ handler contract. Python compatibility is verified across versions 3.8 through 3.12.
+			</p>
+			<p>
+				<strong>The handler pattern.</strong> Each of the 21 organs is a class extending <code>OrganHandler</code>, implementing <code>invoke()</code> with organ-specific logic. Organs are registered in a central registry and looked up by name at dispatch time. This is structurally similar to the Strategy pattern but with a crucial difference: organs maintain internal state across invocations, which is persisted via the checkpoint system. An organ is not a stateless function — it is a processor with memory.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
+			</p>
+			<p>
+				<strong>Charge dynamics.</strong> The atomic unit of RE:GE is the Fragment — a piece of meaningful content carrying a charge value between 0 and 100. Charge maps to five behavioral tiers (LATENT, PROCESSING, ACTIVE, INTENSE, CRITICAL) that determine how the system routes and prioritizes each fragment. Fragments gain charge through recurrence, ritual processing, or fusion with other high-charge fragments. They lose charge through time-based decay or deliberate archival. This creates an evolving significance landscape rather than a static metadata system.
+			</p>
 
-      <h2>The Discovery</h2>
-      <p>
-        The most surprising outcome wasn't technical — it was aesthetic. Having 21 distinct organ types with formal interfaces created <em>more</em> creative possibilities than working without structure.<Cite id={10} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery and Invention" source="Harper Perennial" year={1996} /> Csikszentmihalyi's research on flow states shows that creativity emerges not from total freedom but from the right constraints — challenge matched to skill, rules that channel rather than restrict. When you know what an identity transformation guarantees, you can safely compose it with a myth transformation. Formalism enables creativity. That insight reshaped how I think about every system I build.
-      </p>
+			<Figure alt="Charge tier system showing five levels from LATENT to CRITICAL" caption="Fragment charge tiers — each tier triggers qualitatively different system behavior, from background presence to emergency protocols" number={2}>
+				<StatGrid stats={[
+					{ value: '0–25', label: 'LATENT' },
+					{ value: '26–50', label: 'PROCESSING' },
+					{ value: '51–70', label: 'ACTIVE' },
+					{ value: '71–85', label: 'INTENSE' },
+					{ value: '86–100', label: 'CRITICAL' },
+				]} />
+			</Figure>
 
-      <h2>Tradeoffs & Lessons</h2>
-      <ul>
-        <li><strong>Symbolic vs. neural approaches</strong> — Every transformation has a trace: which organ fired, what rule applied. This interpretability comes at the cost of flexibility — LLMs can improvise narrative in ways a symbolic engine cannot.<Cite id={11} author="Ryan, Marie-Laure" title="Narrative as Virtual Reality" source="Johns Hopkins University Press" year={2001} /> Ryan's taxonomy of interactivity reveals the tradeoff: symbolic systems excel at "internal-exploratory" narrative (traversing a defined possibility space) but struggle with "internal-ontological" narrative (creating new possibilities on the fly). The tradeoff is worth it for systems where auditability matters more than novelty.</li>
-        <li><strong>21 organ types — over-engineered?</strong> — Started with 5, grew to 21 as formal completeness demanded finer distinctions. Some organs handle edge cases that arise rarely. The decision to keep them separate prioritizes composability: each organ has a clean interface contract, so removing one doesn't cascade.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /></li>
-        <li><strong>DSL complexity</strong> — The ritual syntax is powerful but has a learning curve. A simpler API (plain Python method calls) would lower the barrier to entry but lose the expressiveness of declaring symbolic operations declaratively.<Cite id={4} author="Fowler, Martin" title="Domain-Specific Languages" source="Addison-Wesley" year={2010} /></li>
-        <li><strong>Test strategy for narrative systems</strong> — Testing "correct narrative behavior" required inventing three distinct strategies (structural invariants, reference implementations, round-trip consistency). This was the hardest engineering challenge — and the most transferable insight.<Cite id={12} author="Reas, Casey and Ben Fry" title="Processing: A Programming Handbook for Visual Designers" source="MIT Press" year={2007} /> Reas and Fry's approach to testing creative code — where correctness is partly subjective — informed the decision to ground tests in established narratological frameworks rather than inventing arbitrary criteria.</li>
-      </ul>
+			<p>
+				<strong>Persistence layer.</strong> The engine persists state to a <code>.rege_archive/</code> directory organized into six categories. A checkpoint manager maintains system state snapshots that enable the four recovery modes (FULL_ROLLBACK, PARTIAL, RECONSTRUCT, EMERGENCY_STOP). The JSON-based format was chosen for inspectability — every piece of system state is human-readable and diffable — though this imposes scaling limits that future phases will address.
+			</p>
+			<p>
+				<strong>External bridges.</strong> RE:GE is not a closed system. Three bridges connect it to external tools, each extending the <code>ExternalBridge</code> abstract base class with connect/disconnect lifecycle, operation logging, and sensitive configuration masking. The <em>Obsidian Bridge</em> exports fragments as Markdown notes with YAML frontmatter into an Obsidian vault and imports notes back as fragments. The <em>Git Bridge</em> installs hooks that log commits as invocation events and maps branch creation to symbolic operations. The <em>Max/MSP Bridge</em> communicates via OSC (Open Sound Control) protocol, sending fragment charge levels as real-time data streams and receiving performance events as invocations — connecting the symbolic operating system to audio-visual creative environments.
+			</p>
 
-      <h2>By the Numbers</h2>
-      <Figure alt="Project statistics for Recursive Engine" caption="RE:GE system metrics — 21 organ handlers processing symbolic values through a ritual syntax DSL" number={2}>
-        <StatGrid stats={[
-          { value: '1,254', label: 'Tests' },
-          { value: '85%', label: 'Coverage' },
-          { value: '21', label: 'Organ Handlers' },
-          { value: '4', label: 'Organ Types' },
-          { value: 'DSL', label: 'Ritual Syntax' },
-          { value: 'Python', label: 'Pure' },
-        ]} />
-      </Figure>
+			<h2>Workflow Orchestration</h2>
+			<p>
+				Individual organ invocations solve point problems. For multi-step processes, RE:GE provides a <strong>Ritual Chain Orchestrator</strong> — a workflow engine that sequences organ invocations with branching, compensation, and error handling.<Cite id={15} author="Hohpe, Gregor and Bobby Woolf" title="Enterprise Integration Patterns" source="Addison-Wesley" year={2003} /> Six built-in chains ship with the system, each encoding a distinct symbolic process:
+			</p>
 
-      <References entries={[
-        { id: 1, author: "Aristotle", title: "Poetics", source: "Penguin Classics (trans. 1996)", year: "335 BCE" },
-        { id: 2, author: "Propp, Vladimir", title: "Morphology of the Folktale", source: "University of Texas Press", year: 1968 },
-        { id: 3, author: "Campbell, Joseph", title: "The Hero with a Thousand Faces", source: "New World Library", year: 1949 },
-        { id: 4, author: "Fowler, Martin", title: "Domain-Specific Languages", source: "Addison-Wesley", year: 2010 },
-        { id: 5, author: "Hofstadter, Douglas", title: "Gödel, Escher, Bach: An Eternal Golden Braid", source: "Basic Books", year: 1979 },
-        { id: 6, author: "Schön, Donald A.", title: "The Reflective Practitioner", source: "Basic Books", year: 1983 },
-        { id: 7, author: "Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides", title: "Design Patterns: Elements of Reusable Object-Oriented Software", source: "Addison-Wesley", year: 1994 },
-        { id: 8, author: "Manovich, Lev", title: "Software Takes Command", source: "Bloomsbury Academic", year: 2013 },
-        { id: 9, author: "Murray, Janet H.", title: "Hamlet on the Holodeck", source: "MIT Press", year: 1997 },
-        { id: 10, author: "Csikszentmihalyi, Mihaly", title: "Creativity: Flow and the Psychology of Discovery and Invention", source: "Harper Perennial", year: 1996 },
-        { id: 11, author: "Ryan, Marie-Laure", title: "Narrative as Virtual Reality", source: "Johns Hopkins University Press", year: 2001 },
-        { id: 12, author: "Reas, Casey and Ben Fry", title: "Processing: A Programming Handbook for Visual Designers", source: "MIT Press", year: 2007 },
-      ]} />
+			<MermaidDiagram
+				caption="Canonization ceremony — the four-phase ritual chain from raw fragment to permanent canon, with conditional branching on court verdict"
+				chart={`graph LR
+		HOC[HEART_OF_CANON] --> RC[RITUAL_COURT]
+		RC -->|approve| FUSE[FUSE01]
+		RC -->|deny| AO_DEFER[ARCHIVE_ORDER: deferred]
+		FUSE --> AO[ARCHIVE_ORDER: canon]`}
+			/>
+
+			<p>
+				The orchestrator supports step mode (pause between phases for inspection), dry run (simulate without executing), and full execution statistics. Compensation logic handles failures at each phase — if fusion fails mid-ceremony, the system rolls back to the pre-fusion state rather than leaving the fragment in an inconsistent state. Three fusion modes (AUTO, INVOKED, FORCED) control the level of human intervention, and fusion is reversible within a 7-day window unless the <code>CANON+</code> tag has been applied.
+			</p>
+			<p>
+				The six built-in chains encode distinct symbolic processes: canonization ceremony (fragment to permanent canon), contradiction resolution (deliberation with conditional branching), grief processing (six-phase ritual with compensation), emergency recovery (snapshot and forced fusion), seasonal bloom (growth, mutation, and consolidation), and fragment lifecycle (creation through decay). Each chain defines not just the happy path but also what happens when processing fails at every intermediate step.
+			</p>
+
+			<h2>Testing the Untestable</h2>
+			<p>
+				The hardest part wasn't building the engine — it was proving it worked. When your system formalizes narrative, how do you write assertions?<Cite id={6} author="Schön, Donald A." title="The Reflective Practitioner" source="Basic Books" year={1983} /> Schön's concept of "reflection-in-action" — the practitioner's ability to think about what they are doing while doing it — became the test philosophy. We found three strategies:
+			</p>
+			<p>
+				<strong>Structural invariants (~400 tests)</strong> — An identity transformation must preserve entity type. A ritual must execute all steps or none. A recursive invocation must terminate within bounded depth.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
+			</p>
+			<p>
+				<strong>Reference implementations (~500 tests)</strong> — Propp's 31 functions, Campbell's monomyth stages, Aristotle's six elements encoded as test cases. If the engine claims to implement "Villainy," we verify the correct state transition.<Cite id={2} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1968} />
+			</p>
+			<p>
+				<strong>Round-trip consistency (~350 tests)</strong> — Serialize to DSL, parse back, verify identity. Apply transformation and inverse, verify return to original state.
+			</p>
+
+			<Figure alt="Test suite coverage by architectural area" caption="Test distribution across 33 test files covering all eight architectural layers" number={3}>
+				<StatGrid stats={[
+					{ value: '400+', label: 'Structural Invariants' },
+					{ value: '500+', label: 'Reference Implementations' },
+					{ value: '350+', label: 'Round-Trip Consistency' },
+				]} />
+			</Figure>
+
+			<p>
+				The test suite is organized across 33 test files covering every architectural layer: parser edge cases and malformed input, priority queuing and collision detection in the routing layer, mode validation and charge dynamics per organ, fusion eligibility and rollback in protocols, all 15 CLI command groups, archive read/write and checkpoint integrity, chain execution with branching and compensation, and the connect/disconnect lifecycle for all three bridges. The testing strategy itself — grounding assertions in established narratological frameworks (Propp's morphology, Campbell's monomyth, Aristotle's elements) rather than inventing arbitrary criteria — was the hardest engineering challenge and the most transferable insight.
+			</p>
+
+			<Figure alt="Quality metrics for the RE:GE test suite" caption="Test suite quality metrics — 100% pass rate across 33 files with compatibility verified on five Python versions" number={4}>
+				<StatGrid stats={[
+					{ value: '1,254', label: 'Total Tests' },
+					{ value: '85%', label: 'Line Coverage' },
+					{ value: '33', label: 'Test Files' },
+					{ value: '100%', label: 'Pass Rate' },
+					{ value: '5', label: 'Python Versions' },
+					{ value: '0', label: 'Failures' },
+				]} />
+			</Figure>
+
+			<h2>Why Symbolic, Not Neural</h2>
+			<p>
+				<strong>Interpretability.</strong> Every transformation has a trace — which organ fired, what rule applied. As AI systems become more consequential, auditable narrative decisions matter.<Cite id={8} author="Manovich, Lev" title="Software Takes Command" source="Bloomsbury Academic" year={2013} /> Manovich argues that software has become the universal medium through which all cultural forms are experienced — when narrative is encoded as software, interpretability is not a debugging convenience but an aesthetic and ethical requirement.
+			</p>
+			<p>
+				<strong>Composability.</strong> Build a myth organ on top of an identity organ on top of a recursive organ. Swap organs in and out. LLMs don't compose this way.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
+			</p>
+			<p>
+				<strong>Governance integration.</strong> RE:GE lives within the eight-organ system. Dependency validation, promotion state machine, monthly audits — narrative computation within an institutional framework.<Cite id={9} author="Murray, Janet H." title="Hamlet on the Holodeck" source="MIT Press" year={1997} /> Murray's vision of the computer as a medium for procedural, participatory, spatial, and encyclopedic storytelling aligns precisely with a symbolic engine that makes narrative rules explicit and manipulable.
+			</p>
+
+			<h2>Outcomes &amp; Impact</h2>
+			<p>
+				RE:GE demonstrates several capabilities that transfer directly to production software engineering. For a hiring manager or technical evaluator, the project is evidence of end-to-end system design — from formal specification through implementation, testing, and integration with external tools:
+			</p>
+			<ul>
+				<li><strong>DSL design and implementation</strong> — Building a fully external domain-specific language with its own parser, validator, and execution engine. The ritual syntax is not embedded in Python but parsed by a dedicated regex-based interpreter with its own error handling and recovery semantics.</li>
+				<li><strong>Large-scale modular architecture</strong> — 21 distinct handlers with a unified abstract base class, registered in a central lookup, routed through a priority queue with collision detection and deadlock prevention. The system scales by adding organs, not by modifying the routing infrastructure.</li>
+				<li><strong>Testing strategy for novel domains</strong> — When the domain has no established testing patterns, you invent them. Three distinct strategies emerged from the specific challenge of verifying narrative-computational systems. This approach — grounding tests in external frameworks rather than inventing arbitrary criteria — is transferable to any domain where "correct behavior" is partly subjective.<Cite id={12} author="Reas, Casey and Ben Fry" title="Processing: A Programming Handbook for Visual Designers" source="MIT Press" year={2007} /></li>
+				<li><strong>Systems integration</strong> — Three external bridges (Obsidian, Git, Max/MSP) demonstrate the ability to connect a symbolic engine to real-world tools through clean abstraction boundaries. Each bridge implements the same lifecycle contract while communicating via entirely different protocols (filesystem, Git hooks, OSC).</li>
+				<li><strong>Workflow orchestration</strong> — The Ritual Chain Orchestrator implements branching, compensation, step mode, and dry run — the same patterns found in production workflow engines like Temporal or AWS Step Functions, applied to a symbolic domain.<Cite id={15} author="Hohpe, Gregor and Bobby Woolf" title="Enterprise Integration Patterns" source="Addison-Wesley" year={2003} /></li>
+			</ul>
+			<p>
+				RE:GE serves as the theoretical foundation (ORGAN-I) for the entire eight-organ system. Its organ model, charge dynamics, and ritual syntax concepts propagate downstream: ORGAN-II applies them to live creative performance systems, ORGAN-III applies the modular processing pattern to commercial data infrastructure, and ORGAN-IV extends the architecture into multi-agent AI orchestration. The dependency flow is unidirectional: theory establishes vocabulary, downstream organs instantiate it.
+			</p>
+
+			<h2>The Discovery</h2>
+			<p>
+				The most surprising outcome wasn't technical — it was aesthetic. Having 21 distinct organ types with formal interfaces created <em>more</em> creative possibilities than working without structure.<Cite id={10} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery and Invention" source="Harper Perennial" year={1996} /> Csikszentmihalyi's research on flow states shows that creativity emerges not from total freedom but from the right constraints — challenge matched to skill, rules that channel rather than restrict. When you know what an identity transformation guarantees, you can safely compose it with a myth transformation. Formalism enables creativity. That insight reshaped how I think about every system I build.
+			</p>
+
+			<h2>Technical Debt &amp; Future</h2>
+			<p>
+				<strong>What's incomplete.</strong> The remaining roadmap phases (7–15) outline work that ranges from straightforward to speculative. Phase 7 adds a conversational interface organ (INTERLOCUTOR). Phases 8–9 introduce user-defined ritual chains and a browser-based REPL with visualization. Phase 10 addresses performance optimization for large-scale fragment management — the current JSON persistence layer is adequate for the present corpus but will not scale to thousands of active fragments without migration to a proper database.
+			</p>
+			<p>
+				<strong>Known tradeoffs.</strong> The ritual syntax is powerful but has a learning curve. A simpler API (plain Python method calls) would lower the barrier to entry but lose the expressiveness of declaring symbolic operations declaratively.<Cite id={4} author="Fowler, Martin" title="Domain-Specific Languages" source="Addison-Wesley" year={2010} /> The 21-organ count grew from an initial 5 as formal completeness demanded finer distinctions — some organs handle edge cases that arise rarely. The decision to keep them separate prioritizes composability: each organ has a clean interface contract, so removing one doesn't cascade.
+			</p>
+			<p>
+				<strong>The symbolic-neural boundary.</strong> RE:GE excels at "internal-exploratory" narrative — traversing a defined possibility space — but cannot improvise narrative the way an LLM can.<Cite id={11} author="Ryan, Marie-Laure" title="Narrative as Virtual Reality" source="Johns Hopkins University Press" year={2001} /> Ryan's taxonomy of interactivity reveals this tradeoff precisely. The future likely involves a hybrid architecture where RE:GE provides the structural governance and audit trail while a neural component handles generative improvisation within the constraints the symbolic engine defines. The 15% coverage gap maps almost exactly to these unexplored integration points.
+			</p>
+			<p>
+				<strong>Law enforcement system.</strong> Seven core laws encode the system's invariants — LAW_01 enforces organ isolation, LAW_04 prevents stagnation (fragments cannot remain in LATENT tier indefinitely), LAW_81 governs fusion violations.
+				Laws can be activated or deactivated through the Mythic Senate organ, and violations trigger consequences tracked in a persistent violation log.
+				This is governance-as-code applied to a symbolic domain: the rules are explicit, versioned, and enforced programmatically rather than by convention.
+			</p>
+
+			<h2>By the Numbers</h2>
+			<Figure alt="Project statistics for Recursive Engine" caption="RE:GE system metrics — 21 organ handlers processing symbolic values through a ritual syntax DSL" number={5}>
+				<StatGrid stats={[
+					{ value: '1,254', label: 'Tests' },
+					{ value: '85%', label: 'Coverage' },
+					{ value: '21', label: 'Organ Handlers' },
+					{ value: '33', label: 'Test Files' },
+					{ value: '1', label: 'Runtime Dependency' },
+					{ value: '6', label: 'Built-in Chains' },
+					{ value: '3', label: 'External Bridges' },
+					{ value: 'Python', label: 'Pure' },
+				]} />
+			</Figure>
+
+			<References entries={[
+				{ id: 1, author: 'Aristotle', title: 'Poetics', source: 'Penguin Classics (trans. 1996)', year: '335 BCE' },
+				{ id: 2, author: 'Propp, Vladimir', title: 'Morphology of the Folktale', source: 'University of Texas Press', year: 1968 },
+				{ id: 3, author: 'Campbell, Joseph', title: 'The Hero with a Thousand Faces', source: 'New World Library', year: 1949 },
+				{ id: 4, author: 'Fowler, Martin', title: 'Domain-Specific Languages', source: 'Addison-Wesley', year: 2010 },
+				{ id: 5, author: 'Hofstadter, Douglas', title: 'Gödel, Escher, Bach: An Eternal Golden Braid', source: 'Basic Books', year: 1979 },
+				{ id: 6, author: 'Schön, Donald A.', title: 'The Reflective Practitioner', source: 'Basic Books', year: 1983 },
+				{ id: 7, author: 'Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides', title: 'Design Patterns: Elements of Reusable Object-Oriented Software', source: 'Addison-Wesley', year: 1994 },
+				{ id: 8, author: 'Manovich, Lev', title: 'Software Takes Command', source: 'Bloomsbury Academic', year: 2013 },
+				{ id: 9, author: 'Murray, Janet H.', title: 'Hamlet on the Holodeck', source: 'MIT Press', year: 1997 },
+				{ id: 10, author: 'Csikszentmihalyi, Mihaly', title: 'Creativity: Flow and the Psychology of Discovery and Invention', source: 'Harper Perennial', year: 1996 },
+				{ id: 11, author: 'Ryan, Marie-Laure', title: 'Narrative as Virtual Reality', source: 'Johns Hopkins University Press', year: 2001 },
+				{ id: 12, author: 'Reas, Casey and Ben Fry', title: 'Processing: A Programming Handbook for Visual Designers', source: 'MIT Press', year: 2007 },
+				{ id: 13, author: 'Buschmann, Frank, Regine Meunier, Hans Rohnert, Peter Sommerlad, and Michael Stal', title: 'Pattern-Oriented Software Architecture, Volume 1', source: 'Wiley', year: 1996 },
+				{ id: 14, author: 'Hunt, Andrew and David Thomas', title: 'The Pragmatic Programmer', source: 'Addison-Wesley', year: 1999 },
+				{ id: 15, author: 'Hohpe, Gregor and Bobby Woolf', title: 'Enterprise Integration Patterns', source: 'Addison-Wesley', year: 2003 },
+			]} />
 
 <PrismNav context="projects.recursive-engine" repoSlug="sema-metra--alchemica-mundi" />
 </ProjectLayout>
