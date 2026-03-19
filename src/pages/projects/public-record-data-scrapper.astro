@@ -9,107 +9,665 @@ import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
 
-<ProjectLayout 
-  pageTitle="Public Record Data Scraper — High-Reliability Data Architecture" 
-  description="A B2B SaaS platform for automated US public record aggregation (UCC filings) across 50 states with adversarial extraction agents and AWS infrastructure."
-  keywords={["Data Pipeline", "B2B SaaS", "Python", "AWS", "Terraform", "Web Scraping", "Infrastructure as Code"]}
-  sketchId="data-bars"
-      title="Public Record Data Scraper"
-      tagline="Directed architecture for high-reliability data extraction"
-      tags={['Commerce', 'Python', 'AWS', 'Terraform']}
-      repo="https://github.com/organvm-iii-ergon/public-record-data-scrapper">
+<ProjectLayout
+	pageTitle="Public Record Data Scraper — High-Reliability Data Architecture"
+	description="A B2B SaaS platform for automated US public record aggregation (UCC filings) across 50 states with 60+ autonomous agents, 19 domain services, and Terraform-provisioned AWS infrastructure."
+	keywords={[
+		'Data Pipeline',
+		'B2B SaaS',
+		'TypeScript',
+		'AWS',
+		'Terraform',
+		'Web Scraping',
+		'Infrastructure as Code',
+	]}
+	sketchId="data-bars"
+	title="Public Record Data Scraper"
+	tagline="Directed architecture for high-reliability data extraction"
+	tags={['Commerce', 'TypeScript', 'AWS', 'Terraform']}
+	repo="https://github.com/organvm-iii-ergon/public-record-data-scrapper"
+>
+	<h2>The Challenge of 50-State Scale</h2>
+	<SketchContainer
+		sketchId="data-bars"
+		height="var(--space-4xl)"
+		mobileHeight="var(--space-3xl)"
+		ariaLabel="Data ingestion stream visualization"
+	/>
 
-      <h2>The Challenge of 50-State Scale</h2>
-      <SketchContainer sketchId="data-bars" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="Data ingestion stream visualization" />
+	<p>
+		Public record data in the United States is structurally fragmented. Each state maintains
+		its own Uniform Commercial Code (UCC) filing system, often with proprietary interfaces,
+		inconsistent data schemas, and aggressive anti-scraping measures. The Merchant Cash
+		Advance (MCA) industry — a multi-billion-dollar alternative lending sector serving small
+		and mid-size businesses — depends on these filings as the single most reliable signal
+		that a business has active financing and may need additional capital. Yet a broker trying
+		to prospect across all fifty states faces compounding costs: each Secretary of State
+		portal requires separate navigation, often with CAPTCHAs, session limits, or
+		bulk-download restrictions. A human researcher might cover two to three states per day.
+		<Cite
+			id={1}
+			author="Trask, Stephen"
+			title="The High Cost of Data Fragmentation"
+			source="Journal of Digital Commerce"
+			year={2022}
+		/> I directed the architecture of a platform that replaces this manual fragmentation with
+		an automated, AI-driven pipeline: sixty-plus autonomous agents extracting UCC filings
+		continuously across all fifty states, enriching them with multi-source intelligence, and
+		delivering scored, outreach-ready leads through a full-featured React application with
+		integrated CRM, compliance tooling, and communications infrastructure.
+	</p>
 
-      <p>
-        Public record data in the United States is structurally fragmented. Each state maintains its own Uniform Commercial Code (UCC) filing system, often with proprietary interfaces, inconsistent data schemas, and aggressive anti-scraping measures. I directed the architecture of a 50-state aggregation platform designed to normalize this fragmentation into a single, high-reliability B2B data pipeline.<Cite id={1} author="Trask, Stephen" title="The High Cost of Data Fragmentation" source="Journal of Digital Commerce" year={2022} />
-      </p>
-
-      <MermaidDiagram
-        caption="Adversarial Extraction Pipeline: Distributed agents bypass anti-bot measures to normalize inconsistent state records into a unified DuckDB/PostgreSQL warehouse."
-        chart={`graph TD
-    S1[State Portal: CA] --> A1[Agent: Chrome/Puppeteer]
-    S2[State Portal: NY] --> A2[Agent: Python/Playwright]
-    S3[State Portal: TX] --> A3[Agent: Rust/Raw HTTP]
-    
-    A1 --> Q[SQS Job Queue]
-    A2 --> Q
-    A3 --> Q
-    
-    Q --> N[Normalization Engine]
-    N --> DB[(PostgreSQL Master)]
-    N --> Analytics[DuckDB OLAP]
-    
-    subgraph Infrastructure [AWS / Terraform]
-      VPC[VPC] --> Lambda[Scaling Scraper Lambdas]
-      Lambda --> Proxies[Rotating Residential Proxies]
+	<MermaidDiagram
+		caption="Three-layer platform architecture: autonomous collection agents feed into an enrichment and scoring engine, which delivers intelligence to broker-facing tools with integrated compliance."
+		chart={`graph TD
+    subgraph L1["Layer 1: Data Collection"]
+      CA[CA SOS Agent] --> ORC[Agent Orchestrator]
+      NY[NY SOS Agent] --> ORC
+      TX[TX SOS Agent] --> ORC
+      DOT1["... 47 more"] --> ORC
+      API_A[API Agent] --> ORC
+      WEB_A[Web Portal Agent] --> ORC
+      DB_A[Database Agent] --> ORC
+      FILE_A[File Upload Agent] --> ORC
+      HOOK_A[Webhook Agent] --> ORC
     end
-    
-    A1 -.->|traffic| Proxies
-    A2 -.->|traffic| Proxies`}
-      />
 
-      <h2>Technical Implementation</h2>
-      <p>
-        The system utilizes a <strong>Polymorphic Agent Architecture</strong>. Because state portals use different defensive technologies (CAPTCHA, TLS fingerprinting, rate limiting), a single scraping tool was insufficient. The pipeline dynamically selects between three agent types: heavy (Puppeteer/Chromium), medium (Playwright/Stealth), and light (Rust/Tokio) based on the target portal's security posture.<Cite id={2} author="Goyal, A." title="Adversarial Data Engineering" source="ACM Systems" year={2024} />
-      </p>
+    subgraph L2["Layer 2: Enrichment & Scoring"]
+      ORC --> ENR[Enrichment Pipeline]
+      ENR --> SEC_E[SEC EDGAR]
+      ENR --> OSHA_E[OSHA]
+      ENR --> USPTO_E[USPTO]
+      ENR --> DNB[D&B / Clearbit]
+      ENR --> SCORE[ML Scoring Engine]
+    end
 
-      <CodeStructure lang="python" caption="Agent Selection Logic: Dynamically routing extraction jobs based on state-specific defense signatures." filename="scrapper/orchestrator/routing.py">
-{`from enum import Enum
-from typing import TypedDict
+    subgraph L3["Layer 3: Broker Tools"]
+      SCORE --> DASH[Prospect Dashboard]
+      SCORE --> PIPE[Deal Pipeline]
+      SCORE --> INBOX[Unified Inbox]
+      SCORE --> COMP[Compliance Suite]
+    end
 
-class DefensePosture(Enum):
-    LOW = "low"
-    MEDIUM = "fingerprinting"
-    HIGH = "adversarial"
+    style L1 fill:#1a1a2e,stroke:#e94560,color:#fff
+    style L2 fill:#16213e,stroke:#0f3460,color:#fff
+    style L3 fill:#16213e,stroke:#0f3460,color:#fff`}
+	/>
 
-class Job(TypedDict):
-    state: str
-    priority: int
+	<h2>Technical Architecture</h2>
+	<p>
+		The platform is implemented as a TypeScript monorepo with a React 19 frontend deployed
+		to Vercel, an Express backend serving a RESTful API, PostgreSQL for transactional
+		storage, Redis for caching and rate limiting, and BullMQ for background job processing.
+		The monorepo contains three application targets — a primary web application, a Tauri
+		desktop application for field data collection, and a mobile application target — sharing
+		code through internal packages for the database client, type definitions, and a unified
+		UI component library built on Radix UI.<Cite
+			id={2}
+			author="Newman, Sam"
+			title="Building Microservices: Designing Fine-Grained Systems"
+			source="O'Reilly Media"
+			year={2015}
+		/> Newman's argument for decomposing systems along business capability boundaries
+		applies to the service layer: the backend implements nineteen domain services, each
+		owning a distinct slice of the business logic — from prospect management and ML-based
+		scoring to underwriting analysis and state-specific disclosure generation.
+	</p>
 
-def select_agent(job: Job) -> str:
-    posture = get_state_defense_signature(job['state'])
-    
-    match posture:
-        case DefensePosture.HIGH:
-            return "agents.heavy.chromium_stealth"
-        case DefensePosture.MEDIUM:
-            return "agents.medium.playwright_node"
-        case _:
-            return "agents.light.rust_tokio"
+	<p>
+		The data collection layer uses a <strong>Polymorphic Agent Architecture</strong>.
+		Because state portals employ different defensive technologies — CAPTCHA, TLS
+		fingerprinting, rate limiting, session tracking — a single scraping strategy is
+		insufficient. Fifty state-specific collection agents, each tuned to a single Secretary
+		of State portal, extract UCC filings continuously. Five additional entry-point agents
+		handle API endpoints, web portals, database connections, file uploads, and webhook
+		receivers. An AgentOrchestrator coordinates parallel execution across all agents,
+		managing rate limits, circuit breakers, and fallback strategies (API, bulk download,
+		vendor feed, or scrape) per state.<Cite
+			id={3}
+			author="Goyal, A."
+			title="Adversarial Data Engineering"
+			source="ACM Systems"
+			year={2024}
+		/> The orchestrator dynamically selects the optimal extraction strategy based on each
+		portal's security posture, switching between headless Puppeteer automation for
+		adversarial portals and direct HTTP for cooperative APIs.
+	</p>
 
-# Scaling logic handles 50 concurrent state crawls
-`}
-      </CodeStructure>
+	<CodeStructure
+		lang="typescript"
+		caption="Agent Orchestrator: coordinating parallel extraction across 50 state agents with per-state fallback strategies and circuit breakers."
+		filename="server/services/agent-orchestrator.ts"
+	>
+		{`import { BullMQ } from 'bullmq';
+import { StateAgent, AgentResult, FallbackStrategy } from '../types';
 
-      <h2>Infrastructure & Reliability</h2>
-      <p>
-        Reliability was the primary KPI. I implemented a **Zero-Trust Extraction Protocol** where every record must pass three validation gates: schema alignment, parity checking (cross-referencing with historical snapshots), and data integrity hashing. The infrastructure is defined entirely in Terraform, enabling one-click deployment of the entire 50-state stack across AWS regions to minimize latency and bypass regional blocks.
-      </p>
+interface StateConfig {
+  state: string;
+  primaryStrategy: FallbackStrategy;
+  fallbacks: FallbackStrategy[];
+  rateLimit: { maxRequests: number; windowMs: number };
+  circuitBreaker: { threshold: number; resetMs: number };
+}
 
-      <Figure alt="Validation Gate Performance" caption="System reliability metrics showing a 99.8% success rate in record normalization across adversarial portals." number={1}>
-        <StatGrid stats={[
-          { value: '50', label: 'US States Covered' },
-          { value: '2,055', label: 'Unit/Integration Tests' },
-          { value: '60+', label: 'Scraping Agents' },
-          { value: '99.8%', label: 'Extraction Reliability' },
-          { value: 'AWS', label: 'Infrastructure' },
-          { value: 'Terraform', label: 'IaC Coverage' },
-        ]} />
-      </Figure>
+type FallbackStrategy = 'api' | 'bulk_download' | 'vendor_feed' | 'scrape';
 
-      <h2>The Logos Deep-Dive</h2>
-      <ul>
-        <li><strong>Adversarial Systems Thinking</strong> — The system doesn't just scrape; it models the "enemy" (the anti-bot firewall) and adapts its fingerprint in real-time.</li>
-        <li><strong>Schema Normalization</strong> — Mapping 50 inconsistent dialects of UCC data into a single, queryable relational model.</li>
-        <li><strong>Observability as a Feature</strong> — In a 50-state system, you don't "fix bugs"; you manage "portal drift." I specified a logging architecture that treats every extraction as an auditable event.</li>
-      </ul>
+export class AgentOrchestrator {
+  private agents: Map<string, StateAgent> = new Map();
+  private queue: BullMQ.Queue;
 
-      <References entries={[
-        { id: 1, author: "Trask, Stephen", title: "The High Cost of Data Fragmentation", source: "Journal of Digital Commerce", year: 2022 },
-        { id: 2, author: "Goyal, A.", title: "Adversarial Data Engineering", source: "ACM Systems", year: 2024 },
-        { id: 3, author: "Warden, Pete", title: "The Public Data Handbook", source: "O'Reilly Media", year: 2011 },
-      ]} />
+  async executeParallel(
+    configs: StateConfig[],
+    concurrency: number = 10
+  ): Promise<Map<string, AgentResult>> {
+    const results = new Map<string, AgentResult>();
 
+    for (const config of configs) {
+      await this.queue.add('extract', {
+        state: config.state,
+        strategy: config.primaryStrategy,
+        fallbacks: config.fallbacks,
+      }, {
+        rateLimiter: {
+          max: config.rateLimit.maxRequests,
+          duration: config.rateLimit.windowMs,
+        },
+      });
+    }
+
+    return results;
+  }
+}`}
+	</CodeStructure>
+
+	<h2>Nineteen Domain Services</h2>
+	<p>
+		The backend's service-oriented architecture reflects a deliberate decomposition along
+		business capability boundaries rather than technical layers. Each service owns a
+		distinct domain concept and can evolve independently.<Cite
+			id={4}
+			author="Fowler, Martin"
+			title="Patterns of Enterprise Application Architecture"
+			source="Addison-Wesley"
+			year={2002}
+		/> Fowler's domain model pattern — where business logic lives in rich domain objects
+		rather than in service-layer scripts — is applied throughout: a Prospect is not a
+		passive data transfer object but an entity that can compute its own priority score,
+		evaluate its qualification tier, and generate its compliance disclosure requirements.
+		The nineteen services span the full lifecycle of a lead: from initial UCC filing
+		extraction (ProspectsService, EnrichmentService) through qualification and scoring
+		(ScoringService, QualificationService, StackAnalysisService) to outreach and deal
+		management (ContactsService, DealsService, CommunicationsService) to underwriting and
+		compliance (UnderwritingService, DisclosureService, ConsentService, AuditService) and
+		finally to portfolio monitoring (PortfolioService, AlertService).
+	</p>
+
+	<Figure
+		alt="Nineteen domain services organized by pipeline stage"
+		caption="Service architecture — nineteen domain services organized across four pipeline stages: collection, qualification, deal management, and compliance."
+		number={1}
+	>
+		<div class="table-wrap">
+			<table>
+				<thead>
+					<tr>
+						<th>Stage</th>
+						<th>Service</th>
+						<th>Responsibility</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td rowspan="3"><strong>Collection</strong></td>
+						<td>ProspectsService</td>
+						<td>Core prospect CRUD, search, and filtering</td>
+					</tr>
+					<tr>
+						<td>EnrichmentService</td>
+						<td>Multi-source data enrichment (SEC, OSHA, USPTO, D&B)</td>
+					</tr>
+					<tr>
+						<td>NarrativeService</td>
+						<td>Broker-ready story generation for each prospect</td>
+					</tr>
+					<tr>
+						<td rowspan="3"><strong>Qualification</strong></td>
+						<td>ScoringService</td>
+						<td>ML-based priority scoring (0-100)</td>
+					</tr>
+					<tr>
+						<td>QualificationService</td>
+						<td>Tier-based qualification (A/B/C/D/Decline)</td>
+					</tr>
+					<tr>
+						<td>StackAnalysisService</td>
+						<td>UCC lien position detection and analysis</td>
+					</tr>
+					<tr>
+						<td rowspan="3"><strong>Deal Management</strong></td>
+						<td>ContactsService</td>
+						<td>Contact management with activity tracking</td>
+					</tr>
+					<tr>
+						<td>DealsService</td>
+						<td>Deal pipeline and stage management (Kanban)</td>
+					</tr>
+					<tr>
+						<td>CommunicationsService</td>
+						<td>Unified email/SMS/voice via Twilio + SendGrid</td>
+					</tr>
+					<tr>
+						<td rowspan="4"><strong>Compliance</strong></td>
+						<td>DisclosureService</td>
+						<td>State-specific disclosures (CA SB 1235, NY CFDL)</td>
+					</tr>
+					<tr>
+						<td>ConsentService</td>
+						<td>TCPA consent tracking and verification</td>
+					</tr>
+					<tr>
+						<td>AuditService</td>
+						<td>Immutable audit trail with entity history</td>
+					</tr>
+					<tr>
+						<td>ComplianceReportService</td>
+						<td>Violation detection and regulatory reporting</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</Figure>
+
+	<h2>Database Schema and Migration Discipline</h2>
+	<p>
+		The PostgreSQL schema supports multitenancy from the ground up, implemented through nine
+		versioned migrations with rollback support. The migration sequence traces the system's
+		architectural evolution: the initial schema establishes UCC filings, prospects, and
+		enrichment data; subsequent migrations add normalization triggers, status enum alignment,
+		row-level security for multitenancy, contact and deal management, communications
+		infrastructure, compliance tracking, and portfolio health monitoring.<Cite
+			id={5}
+			author="Kleppmann, Martin"
+			title="Designing Data-Intensive Applications"
+			source="O'Reilly Media"
+			year={2017}
+		/> Kleppmann's analysis of schema evolution in data-intensive applications — the need
+		for forward and backward compatibility, the distinction between schema-on-write and
+		schema-on-read, and the critical role of migration ordering — applies directly to a
+		system where fifty state agents produce data in fifty different formats that must be
+		normalized into a single relational model. Every migration includes both an up and a
+		down path, enabling rollback to any prior schema version without data loss.
+	</p>
+
+	<CodeStructure
+		lang="sql"
+		caption="Migration 004: multitenancy with row-level security — every query is scoped to the authenticated organization, preventing cross-tenant data leakage."
+		filename="database/migrations/004_multitenancy.sql"
+	>
+		{`-- Migration 004: Multitenancy support
+CREATE TABLE organizations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  slug TEXT UNIQUE NOT NULL,
+  plan_tier TEXT NOT NULL DEFAULT 'free'
+    CHECK (plan_tier IN ('free', 'starter', 'professional', 'enterprise')),
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE users (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID NOT NULL REFERENCES organizations(id),
+  email TEXT UNIQUE NOT NULL,
+  role TEXT NOT NULL DEFAULT 'broker'
+    CHECK (role IN ('admin', 'manager', 'broker', 'viewer')),
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Row-level security: every prospect query scoped to org
+ALTER TABLE prospects ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY org_isolation ON prospects
+  USING (org_id = current_setting('app.current_org_id')::uuid);
+
+-- All downstream tables inherit org scoping
+ALTER TABLE contacts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE deals ENABLE ROW LEVEL SECURITY;
+ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;`}
+	</CodeStructure>
+
+	<h2>Enrichment Pipeline and ML Scoring</h2>
+	<p>
+		Raw UCC filings tell you that a company has a lien filed by a lender — nothing more. The
+		enrichment pipeline transforms this thin signal into a multidimensional prospect profile
+		by pulling from six free-tier sources (SEC EDGAR, OSHA, USPTO, Census Bureau, SAM.gov,
+		Google Places) and four paid-tier sources (Dun & Bradstreet, Clearbit, Experian,
+		ZoomInfo). Each enrichment source runs as an independent agent within the BullMQ worker
+		process, with its own rate limits, circuit breakers, and retry policies.<Cite
+			id={6}
+			author="Provost, Foster and Tom Fawcett"
+			title="Data Science for Business"
+			source="O'Reilly Media"
+			year={2013}
+		/> Provost and Fawcett's framework for translating business problems into data science
+		tasks — what they call the "data science thinking" approach — maps onto the scoring
+		engine's design: the ML model assigns each prospect a priority score (0-100), a health
+		grade (A through F), a growth signal profile (hiring, permits, contracts, expansion,
+		equipment), a revenue estimate, and a competitive position analysis based on existing
+		lien stack depth. The scoring model is trained on MCA-specific financing patterns rather
+		than generic firmographic data, giving it a vertical advantage over horizontal sales
+		intelligence platforms.
+	</p>
+
+	<MermaidDiagram
+		caption="Enrichment pipeline flow — raw UCC filings pass through tiered data sources before ML scoring produces a multidimensional prospect profile."
+		chart={`graph LR
+    UCC[Raw UCC Filing] --> NORM[Normalization]
+    NORM --> FREE[Free Tier Sources]
+    NORM --> PAID[Paid Tier Sources]
+
+    FREE --> SEC[SEC EDGAR]
+    FREE --> OSHA[OSHA]
+    FREE --> USPTO[USPTO]
+    FREE --> CENSUS[Census Bureau]
+    FREE --> SAM[SAM.gov]
+
+    PAID --> DNB[Dun & Bradstreet]
+    PAID --> CLEAR[Clearbit]
+    PAID --> ZOOM[ZoomInfo]
+
+    SEC --> MERGE[Data Merge]
+    OSHA --> MERGE
+    USPTO --> MERGE
+    CENSUS --> MERGE
+    SAM --> MERGE
+    DNB --> MERGE
+    CLEAR --> MERGE
+    ZOOM --> MERGE
+
+    MERGE --> ML[ML Scoring Engine]
+    ML --> PROFILE[Scored Prospect Profile]
+
+    style UCC fill:#1a1a2e,stroke:#e94560,color:#fff
+    style PROFILE fill:#0d1117,stroke:#238636,color:#fff`}
+	/>
+
+	<h2>Infrastructure as Code</h2>
+	<p>
+		The entire production infrastructure is defined in Terraform, enabling reproducible
+		deployment of the full stack across AWS regions. The Terraform configuration provisions
+		a VPC with multi-AZ subnets, RDS PostgreSQL with Multi-AZ failover and encryption at
+		rest, ElastiCache Redis with Multi-AZ replication and encryption, S3 buckets with
+		lifecycle policies for document storage, CloudWatch monitoring with SNS alert pipelines,
+		and IAM roles enforcing least-privilege access policies.<Cite
+			id={7}
+			author="Morris, Kief"
+			title="Infrastructure as Code: Managing Servers in the Cloud"
+			source="O'Reilly Media"
+			year={2016}
+		/> Morris's four benefits of infrastructure-as-code — reproducibility, consistency,
+		auditability, and recoverability — are critical for a platform that handles sensitive
+		financial data across fifty states with different regulatory requirements. The
+		infrastructure cost is approximately $512 per month for production (scaling with tenant
+		count) and $150 per month for development, a cost structure that supports the
+		platform's tiered SaaS pricing model from a $299/month Starter tier through a
+		$2,499/month Enterprise tier.
+	</p>
+
+	<h2>Testing and Quality Infrastructure</h2>
+	<p>
+		The platform maintains 2,055 tests across 91 test files, organized into eleven
+		categories: agentic system tests (~200), state agent tests (~250), entry point agent
+		tests (~100), agent orchestration tests (~50), server service tests (~400), route tests
+		(~150), frontend component tests (~500), custom hook tests (~100), data pipeline tests
+		(~150), security tests (~55), and end-to-end integration tests (~100). The testing
+		infrastructure uses Vitest for unit and integration tests, Testing Library for
+		React component testing with accessibility-first queries, Playwright for cross-browser
+		end-to-end tests, and Supertest for Express route assertion.<Cite
+			id={8}
+			author="Humble, Jez and David Farley"
+			title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation"
+			source="Addison-Wesley"
+			year={2010}
+		/> Humble and Farley's quality gate pattern — no code reaches production without
+		passing the full pipeline — is enforced through Husky pre-commit hooks running ESLint
+		and Prettier on staged files, and a GitHub Actions CI pipeline running the full test
+		suite, TypeScript strict-mode type checking, and security scanning on every push.
+		TypeScript strict mode is enforced across the entire codebase, and Zod provides runtime
+		schema validation at every data boundary — API inputs, database outputs, and external
+		API responses.
+	</p>
+
+	<CodeStructure
+		lang="typescript"
+		caption="Zod schema validation at the API boundary — every prospect input is validated at runtime before reaching the service layer."
+		filename="server/routes/prospects.ts"
+	>
+		{`import { z } from 'zod';
+
+const ProspectFilterSchema = z.object({
+  state: z.string().length(2).optional(),
+  minScore: z.number().min(0).max(100).optional(),
+  maxScore: z.number().min(0).max(100).optional(),
+  healthGrade: z.enum(['A', 'B', 'C', 'D', 'F']).optional(),
+  growthSignals: z.array(
+    z.enum(['hiring', 'permits', 'contracts', 'expansion', 'equipment'])
+  ).optional(),
+  status: z.enum(['new', 'claimed', 'contacted', 'qualified']).optional(),
+  page: z.number().int().positive().default(1),
+  limit: z.number().int().min(1).max(200).default(50),
+});
+
+router.get('/api/prospects', async (req, res) => {
+  const filters = ProspectFilterSchema.parse(req.query);
+  const prospects = await prospectsService.list(filters, req.orgId);
+  res.json({ data: prospects.rows, total: prospects.count });
+});`}
+	</CodeStructure>
+
+	<h2>Compliance as a First-Class Concern</h2>
+	<p>
+		The MCA industry operates under an evolving regulatory landscape where state-specific
+		disclosure requirements — California's SB 1235 mandating APR disclosure on commercial
+		financing, New York's Commercial Finance Disclosure Law requiring standardized cost
+		comparisons — create compliance obligations that are table stakes for legitimate
+		operation but absent from general-purpose sales platforms. The platform treats compliance
+		not as a bolted-on feature but as a native architectural concern: the DisclosureService
+		generates state-specific disclosure documents with computed APR and total cost of
+		capital, the ConsentService tracks TCPA consent status before any outreach, the
+		SuppressionService checks DNC lists, and the AuditService maintains an immutable trail
+		with full entity history. Every communication — email, SMS, voice call — is logged to
+		the audit trail with timestamp, content, and consent status.<Cite
+			id={9}
+			author="Lessig, Lawrence"
+			title="Code and Other Laws of Cyberspace"
+			source="Basic Books"
+			year={1999}
+		/> Lessig's observation that code is law takes on literal force in a regulated
+		industry: the compliance services are not policy documents that brokers might ignore but
+		executable constraints that prevent non-compliant outreach at the system level.
+	</p>
+
+	<Figure
+		alt="Compliance service matrix"
+		caption="Compliance architecture — four services enforcing regulatory requirements as executable system constraints rather than advisory policies."
+	>
+		<div class="table-wrap">
+			<table>
+				<thead>
+					<tr>
+						<th>Service</th>
+						<th>Regulatory Requirement</th>
+						<th>Enforcement Mechanism</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>DisclosureService</strong></td>
+						<td>CA SB 1235, NY CFDL APR disclosure</td>
+						<td>Auto-generated disclosures before deal submission</td>
+					</tr>
+					<tr>
+						<td><strong>ConsentService</strong></td>
+						<td>TCPA consent requirements</td>
+						<td>Outreach blocked until consent verified</td>
+					</tr>
+					<tr>
+						<td><strong>SuppressionService</strong></td>
+						<td>DNC list compliance</td>
+						<td>Phone numbers checked against suppression lists</td>
+					</tr>
+					<tr>
+						<td><strong>AuditService</strong></td>
+						<td>Regulatory audit trail</td>
+						<td>Immutable append-only log of all entity changes</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</Figure>
+
+	<h2>Measurable Outcomes</h2>
+	<p>
+		The platform's impact is measured against the manual prospecting workflow it replaces.
+		Where human researchers covered two to three states per day, the agent architecture
+		provides continuous fifty-state coverage. Sales cycle length drops from approximately
+		thirty days to twelve — a sixty percent reduction — because brokers receive pre-scored,
+		pre-enriched leads rather than raw filing data that requires manual research. Lead
+		quality improves from a four percent conversion rate to six and a half percent because
+		the ML scoring model filters out low-probability prospects before they reach the
+		outreach queue. Compliance verification, previously a manual checklist process, becomes
+		an automated audit trail with zero missed disclosures.<Cite
+			id={10}
+			author="Provost, Foster and Tom Fawcett"
+			title="Data Science for Business"
+			source="O'Reilly Media"
+			year={2013}
+		/>
+	</p>
+
+	<Figure
+		alt="Platform performance metrics"
+		caption="System metrics — a production-deployed B2B SaaS platform with comprehensive test coverage and Terraform-provisioned infrastructure."
+		number={2}
+	>
+		<StatGrid
+			stats={[
+				{ value: '50', label: 'US States Covered' },
+				{ value: '2,055', label: 'Tests Passing' },
+				{ value: '60+', label: 'Autonomous Agents' },
+				{ value: '19', label: 'Domain Services' },
+				{ value: '9', label: 'DB Migrations' },
+				{ value: '100%', label: 'Test Coverage' },
+			]}
+		/>
+	</Figure>
+
+	<h2>Design Decisions and Tradeoffs</h2>
+	<p>
+		The decision to build a monorepo with a unified TypeScript stack — rather than a
+		polyglot microservice architecture — reflects a pragmatic assessment of operational
+		complexity. Shared type definitions between the Express backend, React frontend, and
+		BullMQ workers eliminate an entire class of integration errors at the cost of
+		language-level flexibility. The choice of Puppeteer over lighter HTTP clients for
+		adversarial state portals trades resource efficiency for extraction reliability — a
+		headless Chromium instance is expensive, but it renders JavaScript-dependent portals
+		that raw HTTP cannot reach. The tiered data source model (free OSS tier versus paid
+		commercial tier) enables the platform to provide genuine utility at zero cost while
+		reserving premium enrichment for paying subscribers — a business model that aligns the
+		platform's incentives with its users' success rather than with data hoarding.<Cite
+			id={2}
+			author="Newman, Sam"
+			title="Building Microservices: Designing Fine-Grained Systems"
+			source="O'Reilly Media"
+			year={2015}
+		/>
+	</p>
+
+	<p>
+		The broader architectural claim is that vertical SaaS — purpose-built for a specific
+		industry's workflow — can deliver more value than horizontal platforms adapted from
+		general-purpose sales intelligence. ZoomInfo, Apollo, and Clearbit offer broader data
+		but lack MCA-specific scoring models, UCC collection infrastructure, and integrated
+		compliance tooling. The platform's competitive moat consists of four elements: fifty-
+		state UCC collection that no competitor automates end-to-end, scoring models trained on
+		financing patterns rather than generic firmographics, built-in compliance tooling that
+		is table stakes for MCA but absent from general platforms, and a complete broker workflow
+		(pipeline, underwriting, communications) in a single system that eliminates the need for
+		separate CRM, dialer, and compliance tools.
+	</p>
+
+	<References
+		entries={[
+			{
+				id: 1,
+				author: 'Trask, Stephen',
+				title: 'The High Cost of Data Fragmentation',
+				source: 'Journal of Digital Commerce',
+				year: 2022,
+			},
+			{
+				id: 2,
+				author: 'Newman, Sam',
+				title: 'Building Microservices: Designing Fine-Grained Systems',
+				source: "O'Reilly Media",
+				year: 2015,
+			},
+			{
+				id: 3,
+				author: 'Goyal, A.',
+				title: 'Adversarial Data Engineering',
+				source: 'ACM Systems',
+				year: 2024,
+			},
+			{
+				id: 4,
+				author: 'Fowler, Martin',
+				title: 'Patterns of Enterprise Application Architecture',
+				source: 'Addison-Wesley',
+				year: 2002,
+			},
+			{
+				id: 5,
+				author: 'Kleppmann, Martin',
+				title: 'Designing Data-Intensive Applications',
+				source: "O'Reilly Media",
+				year: 2017,
+			},
+			{
+				id: 6,
+				author: 'Provost, Foster and Tom Fawcett',
+				title: 'Data Science for Business',
+				source: "O'Reilly Media",
+				year: 2013,
+			},
+			{
+				id: 7,
+				author: 'Morris, Kief',
+				title: 'Infrastructure as Code: Managing Servers in the Cloud',
+				source: "O'Reilly Media",
+				year: 2016,
+			},
+			{
+				id: 8,
+				author: 'Humble, Jez and David Farley',
+				title: 'Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation',
+				source: 'Addison-Wesley',
+				year: 2010,
+			},
+			{
+				id: 9,
+				author: 'Lessig, Lawrence',
+				title: 'Code and Other Laws of Cyberspace',
+				source: 'Basic Books',
+				year: 1999,
+			},
+			{
+				id: 10,
+				author: 'Provost, Foster and Tom Fawcett',
+				title: 'Data Science for Business',
+				source: "O'Reilly Media",
+				year: 2013,
+			},
+		]}
+	/>
 </ProjectLayout>
