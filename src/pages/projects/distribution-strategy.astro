@@ -223,19 +223,76 @@ jobs:
     end`}
       />
 
+      <h2>Content Calendar Architecture</h2>
+      <p>
+        The content calendar is driven by external rhythms rather than internal cadences. Grant deadlines (Knight Foundation, NEA, Mellon Foundation, NSF) trigger increased visibility 2-4 weeks beforehand. Conference seasons (SIGGRAPH in July-August, Ars Electronica in September, ISEA in June) create attention windows for submissions and related content. The academic calendar shapes posting density: reduced during exam periods, increased at the start of semesters when researchers form new interests.<Cite id={4} author="Doctorow, Cory" title="Information Doesn't Want to Be Free: Laws for the Internet Age" source="McSweeney's" year={2014} />
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Quarter</th><th>Strategic Theme</th><th>Priority Audience</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Q1 (Jan-Mar)</strong></td><td>Grant season: organizational capacity, system metrics, institutional maturity</td><td>Grant reviewers, academics</td></tr>
+            <tr><td><strong>Q2 (Apr-Jun)</strong></td><td>Conference preparation: technical depth, creative vision, ISEA submissions</td><td>Creative technologists, practitioners</td></tr>
+            <tr><td><strong>Q3 (Jul-Sep)</strong></td><td>Conference season: maximum visibility, talks, Ars Electronica content</td><td>All segments</td></tr>
+            <tr><td><strong>Q4 (Oct-Dec)</strong></td><td>Residency applications: creative vision, collaboration potential, retrospectives</td><td>Creative technologists, grant reviewers</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        The content mix targets a 70/30 ratio of evergreen to ephemeral content. Essays exploring ideas beyond the news cycle, repository documentation with indefinite shelf life, and governance specifications demonstrating institutional maturity form the evergreen core. Event announcements and milestone celebrations serve as ephemeral supplements but are not the strategic center.<Cite id={6} author="Burke, Kenneth" title="A Rhetoric of Motives" source="University of California Press" year={1950} />
+      </p>
+
+      <h2>Strategic Risks and Mitigations</h2>
+      <CodeStructure lang="yaml" caption="Risk matrix: each strategic risk carries documented likelihood, impact, and mitigation" filename="distribution-strategy/risks.yml">
+{`risks:
+  - name: Mastodon instance shutdown
+    likelihood: low
+    impact: high
+    mitigation: >
+      All content canonical on own site.
+      Maintain account on well-established instance.
+
+  - name: Platform lock-in
+    likelihood: low
+    impact: high
+    mitigation: >
+      POSSE architecture prevents dependency on any
+      single platform. Syndicated copies are derivative.
+
+  - name: Grant reviewer unfamiliarity
+    likelihood: medium
+    impact: high
+    mitigation: >
+      Self-explanatory entry points (org profiles,
+      essay abstracts). Avoid internal jargon.
+
+  - name: Audience fatigue
+    likelihood: medium
+    impact: medium
+    mitigation: >
+      Quality-over-quantity principle.
+      Publish only when there is something worth saying.`}
+      </CodeStructure>
+
       <h2>Measuring Distribution Without Vanity Metrics</h2>
       <p>
-        The distribution strategy deliberately avoids vanity metrics — follower counts, like ratios, impression numbers — in favor of metrics that indicate whether the content reached the intended audiences and served the intended purposes.<Cite id={2} author="Jenkins, Henry" title="Convergence Culture: Where Old and New Media Collide" source="NYU Press" year={2006} />
+        The distribution strategy deliberately avoids vanity metrics — follower counts, like ratios, impression numbers — in favor of metrics that indicate whether the content reached the intended audiences and served the intended purposes.<Cite id={2} author="Jenkins, Henry" title="Convergence Culture: Where Old and New Media Collide" source="NYU Press" year={2006} /> The measurement framework tracks leading indicators weekly (new followers, engagement rate per post, click-through rate to canonical URLs), lagging indicators quarterly (grant application outcomes, interview invitations, conference acceptance rate), and health indicators monthly (audience segment composition, content mix ratio, channel reliability). Raw follower counts are explicitly excluded from success criteria — what matters is whether the right people encountered the right content through the right channels.
       </p>
 
       <Figure alt="Distribution strategy metrics summary" caption="Key metrics for the POSSE distribution system across the eight-organ architecture">
         <StatGrid stats={[
           { value: '4', label: 'Distribution Channels' },
-          { value: '4', label: 'Audience Segments' },
+          { value: '5', label: 'Audience Segments' },
           { value: '16', label: 'Adaptation Strategies' },
           { value: 'POSSE', label: 'Distribution Principle' },
           { value: String(vitals.repos.total), label: 'Source Repositories' },
           { value: `${wordsK}K`, label: 'Words to Distribute' },
+          { value: '70/30', label: 'Evergreen/Ephemeral' },
+          { value: '3', label: 'Syndication Feeds' },
         ]} />
       </Figure>
 
