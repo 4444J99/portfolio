@@ -11,26 +11,51 @@ import vitals from '../../data/vitals.json';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
 
-<ProjectLayout pageTitle="Orchestration Hub — 4444j" description={`The central nervous system of ${vitals.repos.orgs} GitHub organizations — a machine-readable registry, validation scripts, and governance rules coordinating ${vitals.repos.total} repositories.`}
-  sketchId="routing"
-      title="Orchestration Hub"
-      tagline="The central nervous system of eight GitHub organizations"
-      tags={['Platform Engineering', 'Governance', 'Python', 'Automation']}
-      repo="https://github.com/organvm-iv-taxis/orchestration-start-here"
-      badges={[
-        { src: 'https://img.shields.io/github/languages/top/organvm-iv-taxis/orchestration-start-here', alt: 'Top language' },
-        { src: 'https://img.shields.io/github/last-commit/organvm-iv-taxis/orchestration-start-here', alt: 'Last commit' },
-      ]}>
-      <h2>The Problem: Scale Without Legibility</h2>
-<SketchContainer sketchId="routing" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="Message routing between nodes" />
+<ProjectLayout
+	pageTitle="Orchestration Hub — 4444j"
+	description={`The central nervous system of ${vitals.repos.orgs} GitHub organizations — a machine-readable registry, validation scripts, and governance rules coordinating ${vitals.repos.total} repositories.`}
+	sketchId="routing"
+	title="Orchestration Hub"
+	tagline="The central nervous system of eight GitHub organizations"
+	tags={['Platform Engineering', 'Governance', 'Python', 'Automation']}
+	repo="https://github.com/organvm-iv-taxis/orchestration-start-here"
+	badges={[
+		{ src: 'https://img.shields.io/github/languages/top/organvm-iv-taxis/orchestration-start-here', alt: 'Top language' },
+		{ src: 'https://img.shields.io/github/last-commit/organvm-iv-taxis/orchestration-start-here', alt: 'Last commit' },
+	]}
+>
+	<h2>The Problem: Scale Without Legibility</h2>
+	<SketchContainer
+		sketchId="routing"
+		height="var(--space-4xl)"
+		mobileHeight="var(--space-3xl)"
+		ariaLabel="Message routing between nodes"
+	/>
 
-      <p>
-        Every system with {vitals.repos.total} repositories needs a single place that answers "what exists, what's its status, and who owns it?"<Cite id={1} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> Meadows identifies information flows as the most powerful leverage points in complex systems — when participants can see the system's state, they make better decisions. Most multi-repo systems rely on tribal knowledge: someone remembers which repo does what, which ones are active, which ones were experiments. That breaks at scale. It breaks when you onboard new contributors — human or AI. And it breaks when you need to answer a simple question: <em>is this system healthy?</em><Cite id={2} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} />
-      </p>
+	<p>
+		Every system with {vitals.repos.total} repositories needs a single place that answers "what exists,
+		what's its status, and who owns it?"<Cite
+			id={1}
+			author="Meadows, Donella H."
+			title="Thinking in Systems: A Primer"
+			source="Chelsea Green Publishing"
+			year={2008}
+		/> Meadows identifies information flows as the most powerful leverage points in complex systems —
+		when participants can see the system's state, they make better decisions. Most multi-repo systems
+		rely on tribal knowledge: someone remembers which repo does what, which ones are active, which ones
+		were experiments. That breaks at scale. It breaks when you onboard new contributors — human or AI.
+		And it breaks when you need to answer a simple question: <em>is this system healthy?</em><Cite
+			id={2}
+			author="Brooks, Frederick P."
+			title="The Mythical Man-Month: Essays on Software Engineering"
+			source="Addison-Wesley"
+			year={1975}
+		/>
+	</p>
 
-      <MermaidDiagram
-        caption="The orchestration hub as information nexus — all governance flows pass through the registry"
-        chart={`graph TD
+	<MermaidDiagram
+		caption="The orchestration hub as information nexus — all governance flows pass through the registry"
+		chart={`graph TD
     A[Registry v2.json] --> B[Dependency Validator]
     A --> C[Monthly Audit]
     A --> D[Promotion Engine]
@@ -41,15 +66,37 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     D --> I[State Transition]
     E --> J[Public Process]
     F --> K[Mastodon + Discord]`}
-      />
+	/>
 
-      <h2>The Solution</h2>
-      <p>
-        A machine-readable JSON registry (<code>registry-v2.json</code>) that serves as the single source of truth for the entire eight-organ system.<Cite id={3} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's principle of a "Repository" pattern — an abstraction layer that mediates between the domain and data mapping layers — applies here at the organizational scale. Every repository entry carries its current status, documentation tier, dependency declarations, promotion state, implementation status, and portfolio relevance score. The registry isn't documentation <em>about</em> the system — it <em>is</em> the system's self-knowledge. When the registry and reality disagree, either the registry must be updated or reality must be fixed. This is Article I of the system constitution.<Cite id={4} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} />
-      </p>
+	<h2>The Solution</h2>
+	<p>
+		A machine-readable JSON registry (<code>registry-v2.json</code>) that serves as the single source
+		of truth for the entire eight-organ system.<Cite
+			id={3}
+			author="Fowler, Martin"
+			title="Patterns of Enterprise Application Architecture"
+			source="Addison-Wesley"
+			year={2002}
+		/> Fowler's principle of a "Repository" pattern — an abstraction layer that mediates between the
+		domain and data mapping layers — applies here at the organizational scale. Every repository entry
+		carries its current status, documentation tier, dependency declarations, promotion state,
+		implementation status, and portfolio relevance score. The registry isn't documentation
+		<em>about</em> the system — it <em>is</em> the system's self-knowledge. When the registry and
+		reality disagree, either the registry must be updated or reality must be fixed. This is Article I
+		of the system constitution.<Cite
+			id={4}
+			author="Ostrom, Elinor"
+			title="Governing the Commons: The Evolution of Institutions for Collective Action"
+			source="Cambridge University Press"
+			year={1990}
+		/>
+	</p>
 
-      <Figure alt="Organ hub architecture diagram" caption="The orchestration hub coordinates all 8 organs through a centralized registry with enforced dependency flow">
-        <pre class="architecture-diagram"><code>{`            ┌──────────────────────────────┐
+	<Figure
+		alt="Organ hub architecture diagram"
+		caption="The orchestration hub coordinates all 8 organs through a centralized registry with enforced dependency flow"
+	>
+		<pre class="architecture-diagram"><code>{`            ┌──────────────────────────────┐
             │   orchestration-start-here    │
             │                              │
             │  registry-v2.json            │
@@ -77,75 +124,171 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
 Flow enforced: I → II → III (no back-edges)
 Hub validates all 31 dependency edges.`}</code></pre>
-      </Figure>
+	</Figure>
 
-      <h2>The Registry Schema</h2>
-      <p>
-        Each of the 80 entries in the registry carries structured metadata that enables both automated validation and human reasoning about system state.<Cite id={5} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The schema follows the Composite pattern — each entry is a leaf node, organs are composites, and the registry is the root — allowing queries at any level of granularity.
-      </p>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Field</th><th>Type</th><th>Purpose</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><code>status</code></td><td>enum</td><td>ACTIVE, ARCHIVED, PLANNED</td></tr>
-            <tr><td><code>tier</code></td><td>enum</td><td>flagship, standard, stub, archive, infrastructure</td></tr>
-            <tr><td><code>dependencies</code></td><td>array</td><td>Cross-organ dependency declarations</td></tr>
-            <tr><td><code>promotion_status</code></td><td>enum</td><td>LOCAL → CANDIDATE → PUBLIC_PROCESS → GRADUATED → ARCHIVED</td></tr>
-            <tr><td><code>implementation_status</code></td><td>enum</td><td>PRODUCTION, PROTOTYPE, SKELETON, DESIGN_ONLY</td></tr>
-            <tr><td><code>portfolio_relevance</code></td><td>enum</td><td>CRITICAL, HIGH, MEDIUM, LOW, INTERNAL</td></tr>
-          </tbody>
-        </table>
-      </div>
+	<h2>Registry Architecture</h2>
+	<p>
+		The v2 registry is a single JSON file with a versioned envelope wrapping per-organ repository
+		arrays. The top-level structure carries a deployment model declaration, a summary block with
+		system-wide counts, and an <code>audit_history</code> array that the monthly workflow appends to
+		automatically — giving the file a built-in changelog of every health check ever
+		run.<Cite
+			id={5}
+			author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides"
+			title="Design Patterns: Elements of Reusable Object-Oriented Software"
+			source="Addison-Wesley"
+			year={1994}
+		/> The schema follows the Composite pattern — each repository is a leaf node, organs are
+		composites, and the registry root allows queries at any granularity without traversing the entire
+		structure.
+	</p>
 
-      <CodeStructure lang="json" caption="Complete registry entry — every field is validated by automated scripts" filename="registry-v2.json (excerpt)">
-{`{
+	<CodeStructure
+		lang="json"
+		caption="Top-level registry envelope — summary and audit history are maintained automatically by CI"
+		filename="registry-v2.json (top-level structure)"
+	>
+		{`{
+  "version": "2.0",
+  "schema_version": "0.2",
+  "deployment_model": "PARALLEL_ALL_ORGANS",
+  "summary": {
+    "total_repos": 80,
+    "operational_organs": 8,
+    "portfolio_strength": "SILVER (ALL ORGANS)"
+  },
+  "organs": {
+    "ORGAN-I": {
+      "name": "Theory",
+      "launch_status": "OPERATIONAL",
+      "repositories": [ ... ]
+    }
+  },
+  "audit_history": [
+    { "date": "2026-02-01", "total_repos": 79, "violations": 0 },
+    { "date": "2026-03-01", "total_repos": 80, "violations": 0 }
+  ]
+}`}
+	</CodeStructure>
+
+	<p>
+		Each of the {vitals.repos.total} entries in the registry carries structured metadata that enables
+		both automated validation and human reasoning about system state. ORGAN-III repositories carry two
+		additional fields — <code>type</code> (SaaS / B2B / B2C / internal) and <code>revenue</code> —
+		reflecting that commerce-layer repos have a business model dimension absent from theoretical or
+		artistic work.
+	</p>
+
+	<div class="table-wrap">
+		<table>
+			<thead>
+				<tr><th>Field</th><th>Type</th><th>Purpose</th></tr>
+			</thead>
+			<tbody>
+				<tr><td><code>status</code></td><td>enum</td><td>ACTIVE, ARCHIVED, PLANNED</td></tr>
+				<tr><td><code>tier</code></td><td>enum</td><td>flagship, standard, stub, archive, infrastructure</td></tr>
+				<tr><td><code>documentation_status</code></td><td>enum</td><td>DEPLOYED, FLAGSHIP README DEPLOYED, INFRASTRUCTURE, SKELETON, EMPTY</td></tr>
+				<tr><td><code>dependencies</code></td><td>array</td><td>Cross-organ dependency declarations (org/repo strings)</td></tr>
+				<tr><td><code>promotion_status</code></td><td>enum</td><td>LOCAL → CANDIDATE → PUBLIC_PROCESS → GRADUATED → ARCHIVED</td></tr>
+				<tr><td><code>implementation_status</code></td><td>enum</td><td>PRODUCTION, PROTOTYPE, SKELETON, DESIGN_ONLY</td></tr>
+				<tr><td><code>portfolio_relevance</code></td><td>enum</td><td>CRITICAL, HIGH, MEDIUM, LOW, INTERNAL</td></tr>
+				<tr><td><code>last_validated</code></td><td>ISO 8601</td><td>Timestamp of the most recent automated validation pass</td></tr>
+			</tbody>
+		</table>
+	</div>
+
+	<CodeStructure
+		lang="json"
+		caption="Complete registry entry — every field is validated by automated scripts"
+		filename="registry-v2.json (excerpt)"
+	>
+		{`{
   "orchestration-start-here": {
     "organ": "IV",
     "status": "ACTIVE",
     "tier": "flagship",
     "promotion_status": "GRADUATED",
     "implementation_status": "PRODUCTION",
+    "documentation_status": "FLAGSHIP README DEPLOYED",
     "dependencies": [],
     "portfolio_relevance": "CRITICAL",
     "ci_workflow": "ci-python.yml",
     "platinum_status": true,
+    "last_validated": "2026-03-01T02:00:00Z",
     "description": "Central nervous system of the eight-organ architecture"
   }
 }`}
-      </CodeStructure>
+	</CodeStructure>
 
-      <h2>Governance as Code</h2>
-      <p>
-        The governance model is codified in <code>governance-rules.json</code> — a machine-readable constitution with six articles and four amendments.<Cite id={6} author="Scott, James C." title="Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed" source="Yale University Press" year={1998} /> Scott's critique of "high modernist" schemes warns against legibility imposed without local knowledge — these governance rules encode both top-down constraints (no back-edges, mandatory documentation) and bottom-up flexibility (promotion is earned, not assigned). The most important constraint: <strong>no back-edges</strong> in the dependency graph. Theory feeds art feeds commerce (I→II→III), validated automatically across all 31 dependency edges.<Cite id={7} author="Martin, Robert C." title="Clean Architecture: A Craftsman's Guide to Software Structure and Design" source="Prentice Hall" year={2017} />
-      </p>
+	<p>
+		Because the registry is plain JSON, any tool in the standard Unix toolchain can query it without
+		a bespoke client. The three commands below cover the most common operational queries:
+	</p>
 
-      <MermaidDiagram
-        caption="Governance article enforcement — each article maps to an automated check"
-        chart={`graph LR
-    A1[Art I: Registry Truth] --> V1[Reconciliation Script]
-    A2[Art II: No Back-Edges] --> V2[Dependency Validator]
-    A3[Art III: Promotion Gates] --> V3[Promote Workflow]
-    A4[Art IV: Monthly Audit] --> V4[Audit Workflow]
-    A5[Art V: Documentation] --> V5[Tier Checker]
-    A6[Art VI: Transparency] --> V6[Public Process Pipeline]`}
-      />
+	<CodeStructure
+		lang="bash"
+		caption="Registry queries — jq is the only runtime dependency for ad-hoc interrogation"
+		filename="shell"
+	>
+		{`# Count repos per organ
+jq '.organs | to_entries[] | {organ: .key, count: (.value.repositories | length)}' registry.json
 
-      <h2>Five Automation Workflows</h2>
-      <p>
-        The automation layer transforms governance from aspiration to enforcement.<Cite id={8} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation" source="Addison-Wesley" year={2010} /> Humble and Farley's core argument — that the deployment pipeline should be the only way to make changes — applies here: the registry pipeline is the only legitimate way to modify system state.
-      </p>
-      <ul>
-        <li><strong>validate-dependencies</strong> — Checks the dependency graph on every registry change. Cycle detection, transitive depth analysis, back-edge blocking.</li>
-        <li><strong>monthly-organ-audit</strong> — Full system health check with Markdown report + JSON metrics. Creates a GitHub Issue with findings.</li>
-        <li><strong>promote-repo</strong> — Handles state machine transitions with pre/post validation against governance rules.</li>
-        <li><strong>publish-process</strong> — Syncs ORGAN-V content to public channels. README extraction + essay scaffolding.</li>
-        <li><strong>distribute-content</strong> — POSSE distribution to Mastodon and Discord. Verified live (HTTP 200 + 204).</li>
-      </ul>
+# Find all repos with CRITICAL portfolio relevance
+jq '[.organs[].repositories[] | select(.portfolio_relevance == "CRITICAL")] | .[].name' registry.json
 
-      <CodeStructure lang="python" caption="Dependency validation — cycle detection and back-edge enforcement across 31 edges" filename="scripts/validate-deps.py (core logic)">
-{`def validate_dependencies(registry: dict) -> list[str]:
+# Find undocumented active repos (candidates for the monthly audit warning list)
+jq '[.organs[].repositories[]
+  | select(.documentation_status != "DEPLOYED"
+    and .documentation_status != "FLAGSHIP README DEPLOYED"
+    and .documentation_status != "INFRASTRUCTURE"
+    and .status == "ACTIVE")] | .[].name' registry.json`}
+	</CodeStructure>
+
+	<h2>Validation Pipeline</h2>
+	<p>
+		The validation pipeline runs on every pull request that touches a dependency manifest in any organ
+		repository. It fetches the central registry and governance rules from this hub, classifies the
+		pull request's source organ, then runs three sequential checks before allowing a merge.<Cite
+			id={6}
+			author="Humble, Jez and David Farley"
+			title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation"
+			source="Addison-Wesley"
+			year={2010}
+		/> Humble and Farley's core argument — that the deployment pipeline should be the only legitimate
+		path for changing system state — applies at the governance layer: no dependency may be added
+		except through a PR that passes all three checks.
+	</p>
+
+	<MermaidDiagram
+		caption="Validation pipeline — three sequential checks gate every cross-organ dependency change"
+		chart={`flowchart TD
+    PR[Pull Request opened] --> FETCH[Fetch registry-v2.json\nand governance-rules.json]
+    FETCH --> CLASSIFY[Classify source organ\nfrom repo path]
+    CLASSIFY --> CHECK1{Direction\nvalidation}
+    CHECK1 -- violation --> BLOCK1[Block merge\npost PR comment]
+    CHECK1 -- pass --> CHECK2{Circular\ndependency\ndetection}
+    CHECK2 -- cycle found --> BLOCK2[Block merge\npost PR comment]
+    CHECK2 -- pass --> CHECK3{Transitive\ndepth ≤ 4}
+    CHECK3 -- depth exceeded --> BLOCK3[Block merge\npost PR comment]
+    CHECK3 -- pass --> APPROVE[Post validation\nsummary · Allow merge]`}
+	/>
+
+	<p>
+		Direction validation enforces the I→II→III flow: ORGAN-I has no upstream dependencies, ORGAN-VII
+		depends exclusively on ORGAN-V, and every other organ's allowed dependency set is defined in
+		<code>governance-rules.json</code>. Circular dependency detection builds the full system-wide
+		graph — not just the PR under review — and runs DFS cycle detection so that a cycle introduced
+		transitively is still caught. Transitive depth analysis measures the longest chain from the PR's
+		repo through all dependencies; the limit of four leaves one additional layer of growth before
+		requiring architectural review.
+	</p>
+
+	<CodeStructure
+		lang="python"
+		caption="Dependency validation — direction enforcement plus DFS cycle detection across all 31 edges"
+		filename="scripts/validate-deps.py (core logic)"
+	>
+		{`def validate_dependencies(registry: dict) -> list[str]:
     """Validate all dependency edges. Returns list of violations."""
     violations = []
     organ_order = {'I': 1, 'II': 2, 'III': 3, 'IV': 4,
@@ -163,65 +306,268 @@ Hub validates all 31 dependency edges.`}</code></pre>
         violations.append("CIRCULAR DEPENDENCY DETECTED")
 
     return violations  # Must be empty for merge gate to pass`}
-      </CodeStructure>
+	</CodeStructure>
 
-      <h2>Why a Registry Matters</h2>
-      <p>
-        A machine-readable registry enables automation (CI/CD workflows query it), auditing (monthly health checks generate reports from it), and honest portfolio presentation (the portfolio site reads from the same source of truth as the governance scripts).<Cite id={9} author="Deming, W. Edwards" title="Out of the Crisis" source="MIT Press" year={1986} /> Deming's principle — "In God we trust; all others must bring data" — is enacted literally: the registry is the data. It's what makes the eight-organ system <em>governable</em> rather than merely large. It's the difference between {vitals.repos.total} repositories and a <em>system</em>.<Cite id={10} author="Senge, Peter M." title="The Fifth Discipline: The Art and Practice of the Learning Organization" source="Doubleday" year={1990} />
-      </p>
+	<h2>Governance as Code</h2>
+	<p>
+		The governance model is codified in <code>governance-rules.json</code> — a machine-readable
+		constitution with six articles and four amendments.<Cite
+			id={7}
+			author="Scott, James C."
+			title="Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed"
+			source="Yale University Press"
+			year={1998}
+		/> Scott's critique of "high modernist" schemes warns against legibility imposed without local
+		knowledge — these governance rules encode both top-down constraints (no back-edges, mandatory
+		documentation) and bottom-up flexibility (promotion is earned, not assigned). The most important
+		constraint: <strong>no back-edges</strong> in the dependency graph. Theory feeds art feeds
+		commerce (I→II→III), validated automatically across all 31 dependency edges.<Cite
+			id={8}
+			author="Martin, Robert C."
+			title="Clean Architecture: A Craftsman's Guide to Software Structure and Design"
+			source="Prentice Hall"
+			year={2017}
+		/>
+	</p>
 
-      <h2>Tradeoffs & Lessons</h2>
-      <ul>
-        <li><strong>Single file vs. distributed config</strong> — Keeping the entire registry in one JSON file means every change touches one file and every query is a local read. The alternative (per-repo config files aggregated at build time) would be more distributed but harder to validate atomically. At 80 entries the single-file approach works; at 500 it might not.<Cite id={11} author="Tanenbaum, Andrew S. and Maarten van Steen" title="Distributed Systems: Principles and Paradigms" source="Pearson" year={2007} /></li>
-        <li><strong>Strict governance vs. velocity</strong> — The no-back-edges rule and promotion state machine add friction to every cross-organ change. This is intentional: the friction prevents the most common failure mode of multi-repo systems (tangled dependencies that nobody can reason about). But it slows rapid prototyping across organ boundaries.</li>
-        <li><strong>Monthly audit cadence</strong> — Monthly is frequent enough to catch drift but infrequent enough to be actionable. Weekly would create audit fatigue; quarterly would let too much drift accumulate.</li>
-        <li><strong>Constitution as code</strong> — Writing governance rules as JSON rather than prose forces precision but loses nuance. Article V ("Portfolio-Quality Documentation") requires human judgment that can't be reduced to a JSON field. The compromise: automated checks for measurable criteria, manual review gates for qualitative ones.<Cite id={12} author="McConnell, Steve" title="Code Complete: A Practical Handbook of Software Construction" source="Microsoft Press" year={2004} /></li>
-      </ul>
+	<MermaidDiagram
+		caption="Governance article enforcement — each constitutional article maps to an automated check"
+		chart={`graph LR
+    A1[Art I: Registry Truth] --> V1[Reconciliation Script]
+    A2[Art II: No Back-Edges] --> V2[Dependency Validator]
+    A3[Art III: Promotion Gates] --> V3[Promote Workflow]
+    A4[Art IV: Monthly Audit] --> V4[Audit Workflow]
+    A5[Art V: Documentation] --> V5[Tier Checker]
+    A6[Art VI: Transparency] --> V6[Public Process Pipeline]`}
+	/>
 
-      <Figure alt="System health metrics" caption="Orchestration hub: system-wide health metrics as of launch">
-        <StatGrid stats={[
-          { value: String(vitals.repos.total), label: 'Registry Entries' },
-          { value: '31', label: 'Dependencies' },
-          { value: '5', label: 'Workflows' },
-          { value: '6+4', label: 'Articles + Amendments' },
-          { value: '228', label: 'Validation Checks' },
-          { value: '0', label: 'Circular Deps' },
-        ]} />
-      </Figure>
+	<p>
+		The four amendments handle edge cases the six articles cannot cover with clean automation.
+		Amendment A establishes the Bronze Tier Launch Path — five rigorously documented repos beat
+		forty-four mediocre ones — encoding a quality-over-quantity policy directly in the governance
+		file. Amendment D acknowledges AI non-determinism: all AI-generated deliverables require human
+		review before a repo may advance beyond CANDIDATE state, preventing automated systems from
+		self-promoting their own output.
+	</p>
 
-      <References entries={[
-        { id: 1, author: "Meadows, Donella H.", title: "Thinking in Systems: A Primer", source: "Chelsea Green Publishing", year: 2008 },
-        { id: 2, author: "Brooks, Frederick P.", title: "The Mythical Man-Month: Essays on Software Engineering", source: "Addison-Wesley", year: 1975 },
-        { id: 3, author: "Fowler, Martin", title: "Patterns of Enterprise Application Architecture", source: "Addison-Wesley", year: 2002 },
-        { id: 4, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
-        { id: 5, author: "Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides", title: "Design Patterns: Elements of Reusable Object-Oriented Software", source: "Addison-Wesley", year: 1994 },
-        { id: 6, author: "Scott, James C.", title: "Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed", source: "Yale University Press", year: 1998 },
-        { id: 7, author: "Martin, Robert C.", title: "Clean Architecture: A Craftsman's Guide to Software Structure and Design", source: "Prentice Hall", year: 2017 },
-        { id: 8, author: "Humble, Jez and David Farley", title: "Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation", source: "Addison-Wesley", year: 2010 },
-        { id: 9, author: "Deming, W. Edwards", title: "Out of the Crisis", source: "MIT Press", year: 1986 },
-        { id: 10, author: "Senge, Peter M.", title: "The Fifth Discipline: The Art and Practice of the Learning Organization", source: "Doubleday", year: 1990 },
-        { id: 11, author: "Tanenbaum, Andrew S. and Maarten van Steen", title: "Distributed Systems: Principles and Paradigms", source: "Pearson", year: 2007 },
-        { id: 12, author: "McConnell, Steve", title: "Code Complete: A Practical Handbook of Software Construction", source: "Microsoft Press", year: 2004 },
-      ]} />
+	<div class="table-wrap">
+		<table>
+			<thead>
+				<tr><th>Amendment</th><th>Title</th><th>Enforcement</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>A</td><td>Bronze Tier Launch Path</td><td>5 perfect repos beat 44 mediocre repos</td></tr>
+				<tr><td>B</td><td>Coordination Overhead Budget</td><td>10% of phase TE budgeted for reconciliation</td></tr>
+				<tr><td>C</td><td>Registry Schema Completeness</td><td><code>dependencies[]</code>, <code>promotion_status</code>, <code>tier</code>, <code>last_validated</code> required</td></tr>
+				<tr><td>D</td><td>AI Non-Determinism Acknowledgment</td><td>All AI-generated deliverables require human review</td></tr>
+			</tbody>
+		</table>
+	</div>
 
-<PrismNav context="projects.orchestration-hub" repoSlug="orchestration-start-here" />
+	<h2>Automation: Five Workflows, Three Scripts</h2>
+	<p>
+		The automation layer transforms governance from aspiration to enforcement. All five workflows are
+		data-driven: logic lives in <code>registry-v2.json</code> and <code>governance-rules.json</code>,
+		not in workflow YAML. Changing a governance rule — for example, permitting a new dependency
+		direction — requires updating the JSON constitution; no workflow file needs modification. The
+		three Python scripts share the same zero-external-dependencies constraint (Python 3.12 standard
+		library only), making them portable across any environment with a Python interpreter.<Cite
+			id={9}
+			author="Raymond, Eric S."
+			title="The Art of Unix Programming"
+			source="Addison-Wesley"
+			year={2003}
+		/>
+	</p>
+
+	<ul>
+		<li>
+			<strong>validate-dependencies</strong> — Checks the dependency graph on every PR that touches
+			a dependency manifest. Cycle detection, transitive depth analysis (limit: 4), back-edge
+			blocking. Posts a structured PR comment with per-check results.
+		</li>
+		<li>
+			<strong>monthly-organ-audit</strong> — Full system health check on the 1st of each month.
+			Runs all three Python scripts, opens a GitHub Issue with the Markdown report and metrics
+			table, then commits an updated <code>audit_history</code> entry back to <code>registry.json</code>.
+		</li>
+		<li>
+			<strong>promote-repo</strong> — Handles promotion state machine transitions triggered by issue
+			comment commands. Pre-validates against governance rules; for commerce promotions, verifies
+			revenue model documentation. Executes repository creation in the destination organ when
+			<code>ORCHESTRATION_PAT</code> is configured.
+		</li>
+		<li>
+			<strong>publish-process</strong> — Extracts source README content and generates a structured
+			ORGAN-V process essay with YAML frontmatter, then opens a PR in
+			<code>organvm-v-logos/public-process</code>. Connects the Theory→Art→Commerce pipeline with
+			the public documentation organ.
+		</li>
+		<li>
+			<strong>distribute-content</strong> — POSSE distribution to Mastodon (HTTP 200 verified) and
+			Discord (HTTP 204 verified). Triggered by the <code>ready-to-distribute</code> label on any
+			issue in this repository.
+		</li>
+	</ul>
+
+	<CodeStructure
+		lang="bash"
+		caption="CLI interface for all three validation scripts — zero external dependencies, clean exit codes"
+		filename="shell"
+	>
+		{`# Run dependency direction validation (exit 0 = clean, exit 1 = violation)
+python3 scripts/validate-deps.py \\
+  --registry registry.json \\
+  --governance governance-rules.json
+
+# Full organ audit — produces structured Markdown report
+python3 scripts/organ-audit.py \\
+  --registry registry.json \\
+  --governance governance-rules.json \\
+  --output audit-report.md
+
+# Calculate system-wide metrics → metrics.json
+python3 scripts/calculate-metrics.py \\
+  --registry registry.json \\
+  --output metrics.json
+
+# Trigger monthly audit manually via GitHub CLI
+gh workflow run monthly-organ-audit.yml \\
+  --repo organvm-iv-taxis/orchestration-start-here
+
+# Trigger dependency validation manually
+gh workflow run validate-dependencies.yml \\
+  --repo organvm-iv-taxis/orchestration-start-here`}
+	</CodeStructure>
+
+	<p>
+		The <code>calculate-metrics.py</code> script produces a <code>metrics.json</code> snapshot that
+		the monthly audit workflow embeds in its GitHub Issue report. Each run appends to the registry's
+		<code>audit_history</code> array, giving every audit a persistent record without requiring a
+		separate data store. The system is self-archiving by design.
+	</p>
+
+	<h2>Why a Registry Matters</h2>
+	<p>
+		A machine-readable registry enables automation (CI/CD workflows query it), auditing (monthly
+		health checks generate reports from it), and honest portfolio presentation (the portfolio site
+		reads from the same source of truth as the governance scripts).<Cite
+			id={10}
+			author="Deming, W. Edwards"
+			title="Out of the Crisis"
+			source="MIT Press"
+			year={1986}
+		/> Deming's principle — "In God we trust; all others must bring data" — is enacted literally: the
+		registry is the data. It's what makes the eight-organ system <em>governable</em> rather than
+		merely large. It's the difference between {vitals.repos.total} repositories and a
+		<em>system</em>.<Cite
+			id={11}
+			author="Senge, Peter M."
+			title="The Fifth Discipline: The Art and Practice of the Learning Organization"
+			source="Doubleday"
+			year={1990}
+		/>
+	</p>
+
+	<h2>Tradeoffs & Lessons</h2>
+	<ul>
+		<li>
+			<strong>Single file vs. distributed config</strong> — Keeping the entire registry in one JSON
+			file means every change touches one file and every query is a local read. The alternative
+			(per-repo config files aggregated at build time) would be more distributed but harder to
+			validate atomically. At {vitals.repos.total} entries the single-file approach works; at 500 it
+			might not.<Cite
+				id={12}
+				author="Tanenbaum, Andrew S. and Maarten van Steen"
+				title="Distributed Systems: Principles and Paradigms"
+				source="Pearson"
+				year={2007}
+			/>
+		</li>
+		<li>
+			<strong>Strict governance vs. velocity</strong> — The no-back-edges rule and promotion state
+			machine add friction to every cross-organ change. This is intentional: the friction prevents
+			the most common failure mode of multi-repo systems (tangled dependencies that nobody can reason
+			about). But it slows rapid prototyping across organ boundaries.
+		</li>
+		<li>
+			<strong>Monthly audit cadence</strong> — Monthly is frequent enough to catch drift but
+			infrequent enough to be actionable. Weekly would create audit fatigue; quarterly would let too
+			much drift accumulate. The auto-commit of audit results into <code>registry.json</code> keeps
+			the cadence self-enforcing.
+		</li>
+		<li>
+			<strong>Constitution as code</strong> — Writing governance rules as JSON rather than prose
+			forces precision but loses nuance. Article V ("Portfolio-Quality Documentation") requires human
+			judgment that cannot be reduced to a JSON field. The compromise: automated checks for
+			measurable criteria, manual review gates for qualitative ones.<Cite
+				id={13}
+				author="McConnell, Steve"
+				title="Code Complete: A Practical Handbook of Software Construction"
+				source="Microsoft Press"
+				year={2004}
+			/>
+		</li>
+		<li>
+			<strong>Zero external dependencies in scripts</strong> — All three Python scripts use only the
+			standard library. This keeps them executable in any GitHub Actions runner without a
+			<code>pip install</code> step and eliminates an entire class of supply-chain failure modes.
+			The tradeoff is verbosity: graph algorithms that <code>networkx</code> would express in two
+			lines require explicit DFS implementations.
+		</li>
+	</ul>
+
+	<Figure alt="System health metrics" caption="Orchestration hub: system-wide health metrics as of last audit">
+		<StatGrid
+			stats={[
+				{ value: String(vitals.repos.total), label: 'Registry Entries' },
+				{ value: String(vitals.repos.orgs), label: 'GitHub Orgs' },
+				{ value: '31', label: 'Dependency Edges' },
+				{ value: '5', label: 'Workflows' },
+				{ value: '6+4', label: 'Articles + Amendments' },
+				{ value: '3', label: 'Max Transitive Depth' },
+				{ value: '8/8', label: 'Organs Operational' },
+				{ value: '0', label: 'Circular Deps' },
+			]}
+		/>
+	</Figure>
+
+	<References
+		entries={[
+			{ id: 1, author: 'Meadows, Donella H.', title: 'Thinking in Systems: A Primer', source: 'Chelsea Green Publishing', year: 2008 },
+			{ id: 2, author: 'Brooks, Frederick P.', title: 'The Mythical Man-Month: Essays on Software Engineering', source: 'Addison-Wesley', year: 1975 },
+			{ id: 3, author: 'Fowler, Martin', title: 'Patterns of Enterprise Application Architecture', source: 'Addison-Wesley', year: 2002 },
+			{ id: 4, author: 'Ostrom, Elinor', title: 'Governing the Commons: The Evolution of Institutions for Collective Action', source: 'Cambridge University Press', year: 1990 },
+			{ id: 5, author: 'Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides', title: 'Design Patterns: Elements of Reusable Object-Oriented Software', source: 'Addison-Wesley', year: 1994 },
+			{ id: 6, author: 'Humble, Jez and David Farley', title: 'Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation', source: 'Addison-Wesley', year: 2010 },
+			{ id: 7, author: 'Scott, James C.', title: 'Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed', source: 'Yale University Press', year: 1998 },
+			{ id: 8, author: 'Martin, Robert C.', title: 'Clean Architecture: A Craftsman\'s Guide to Software Structure and Design', source: 'Prentice Hall', year: 2017 },
+			{ id: 9, author: 'Raymond, Eric S.', title: 'The Art of Unix Programming', source: 'Addison-Wesley', year: 2003 },
+			{ id: 10, author: 'Deming, W. Edwards', title: 'Out of the Crisis', source: 'MIT Press', year: 1986 },
+			{ id: 11, author: 'Senge, Peter M.', title: 'The Fifth Discipline: The Art and Practice of the Learning Organization', source: 'Doubleday', year: 1990 },
+			{ id: 12, author: 'Tanenbaum, Andrew S. and Maarten van Steen', title: 'Distributed Systems: Principles and Paradigms', source: 'Pearson', year: 2007 },
+			{ id: 13, author: 'McConnell, Steve', title: 'Code Complete: A Practical Handbook of Software Construction', source: 'Microsoft Press', year: 2004 },
+		]}
+	/>
+
+	<PrismNav context="projects.orchestration-hub" repoSlug="orchestration-start-here" />
 </ProjectLayout>
 
 <style>
-  .architecture-diagram {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: var(--space-lg);
-    margin: 0;
-    font-size: 0.8rem;
-    line-height: 1.4;
-  }
+	.architecture-diagram {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		background: rgba(255, 255, 255, 0.02);
+		border: 1px solid var(--border);
+		border-radius: 4px;
+		padding: var(--space-lg);
+		margin: 0;
+		font-size: 0.8rem;
+		line-height: 1.4;
+	}
 
-  .architecture-diagram code {
-    background: none;
-    padding: 0;
-  }
+	.architecture-diagram code {
+		background: none;
+		padding: 0;
+	}
 </style>
