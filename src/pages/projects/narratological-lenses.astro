@@ -93,12 +93,22 @@ class ActantialDiagnostic:
         return violations`}
       </CodeStructure>
 
-      <h2>Four-Package Architecture</h2>
+      <h2>The Compendium: Twenty-Eight Formalized Frameworks</h2>
       <p>
-        The monorepo is structured as four distinct packages, each serving a different consumer while sharing the same analytical core. This separation follows the ports-and-adapters pattern: the core library contains all domain logic — models, algorithms, diagnostics, the unified compendium of narratological definitions — while the CLI, API, and frontend are adapters that expose that logic through different interfaces.<Cite id={5} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The Python core bundles a unified compendium of narratological algorithms as structured JSON, with a loader that resolves packaged resources first and falls back to repository paths for local development. The CLI (built on Typer) enables terminal-based analysis for researchers who work in scripts and pipelines. The FastAPI service provides programmatic access for downstream systems — ORGAN-II's generative art tools, ORGAN-III's product prototypes — that need to call narratological analysis as a microservice. The React frontend enables interactive exploration, letting users select frameworks, adjust confidence thresholds, and visually inspect structural mappings.<Cite id={6} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Source material — chat transcripts, primary texts, structured JSON exports — lives in a <code>specs/</code> directory organized by research stage: primary sources, completed studies, templates, and open drafts.
+        The system's analytical breadth is defined by its compendium — a living library of twenty-eight formalized narrative frameworks spanning classical, film, television, global, interactive, comics, and meta-analytical traditions. Classical frameworks include Aristotle's dramatic structure, Bharata Muni's Natyasastra, Ovid's metamorphic narrative, Plato's dialectical form, Horace's decorum principles, and African oral epic traditions. Film frameworks encode the directorial theories of Tarkovsky (time-pressure), Bergman (interiority), Tarantino (discovery writing), Lynch (dream logic), and Kubrick (non-submersible units). Television frameworks formalize Phoebe Waller-Bridge's layered obstacle technique, Larry David's comedy geometry, and South Park's therefore/but causal structure. Global traditions include Kishotenketsu (the Japanese four-act structure that operates without conflict) and the Heroine's Journey (Murdock's model of internal integration). Interactive narrative frameworks encode the design philosophies of Zelda (exploration-driven) and Final Fantasy (ensemble-driven). Comics frameworks include Alan Moore's formalism, Grant Morrison's hypersigil technique, and Jack Kirby's mythopoeia.<Cite id={3} author="Greimas, Algirdas Julien" title="Structural Semantics: An Attempt at a Method" source="University of Nebraska Press" year={1966} /> Each framework is stored as both a completed Markdown study (in <code>specs/02-completed-studies/</code>) and a validated JSON extract (in <code>specs/03-structured-data/</code>), with a synchronization mechanism ensuring that edits to the research source are reflected in the computational model.
       </p>
 
-      <Figure alt="Package comparison table showing four packages with their technologies and purposes" caption="Four-package architecture — each package exposes the same analytical engine through a different interface modality" number={1}>
+      <h2>Deep Diagnostics</h2>
+      <p>
+        Beyond framework-specific analysis, the system provides four quantitative diagnostic instruments that evaluate structural quality independent of any particular narratological tradition. <strong>Causal Binding</strong> measures the ratio of "therefore/but" connections versus "and then" connections between scenes — a metric derived from Trey Parker and Matt Stone's observation that professional narrative is driven by consequence rather than sequence, with a target ratio above sixty percent. <strong>Reorderability</strong> identifies scenes that can be moved to a different position without breaking causal chains — lower reorderability indicates tighter structural integration. <strong>Necessity</strong> flags scenes that serve no identifiable structural or character function, surfacing dead weight that might pass unnoticed in close reading. <strong>Information Economy</strong> detects redundant exposition and missing setups, mapping the flow of narrative information to identify both inefficiencies and gaps.<Cite id={4} author="Barthes, Roland" title="S/Z: An Essay" source="Hill and Wang" year={1970} /> Barthes's distinction between the proairetic code (the sequence of actions) and the hermeneutic code (the sequence of revelations) provides the theoretical foundation for the information economy diagnostic: it tracks not just what happens but what the reader knows, and when.
+      </p>
+
+      <h2>Six-Package Architecture</h2>
+      <p>
+        The monorepo is structured as six distinct packages, each serving a different consumer while sharing the same analytical core. This separation follows the ports-and-adapters pattern: the core library contains all domain logic — models, algorithms, diagnostics, the unified compendium of narratological definitions — while the CLI, API, MCP server, VS Code extension, and web dashboard are adapters that expose that logic through different interfaces.<Cite id={5} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The Python core bundles a unified compendium of narratological algorithms as structured JSON, with a loader that resolves packaged resources first and falls back to repository paths for local development. The CLI (built on Typer) enables terminal-based analysis for researchers who work in scripts and pipelines. The FastAPI service provides programmatic access for downstream ORGAN-II and ORGAN-III systems. The MCP server (built on FastMCP) exposes the analytical engine through the Model Context Protocol, enabling AI assistants to invoke narratological analysis as a tool call. The VS Code extension provides snippets and tagging for researchers working directly in the editor. The React web dashboard enables interactive visual exploration.<Cite id={6} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} />
+      </p>
+
+      <Figure alt="Package comparison table showing six packages with their technologies and purposes" caption="Six-package architecture — each package exposes the same analytical engine through a different interface modality" number={1}>
         <div class="table-wrap">
           <table>
             <thead>
@@ -129,15 +139,32 @@ class ActantialDiagnostic:
                 <td>REST API</td>
               </tr>
               <tr>
-                <td><code>narratological-frontend</code></td>
+                <td><code>narratological-mcp</code></td>
+                <td>FastMCP</td>
+                <td>Model Context Protocol server for AI assistant tool integration</td>
+                <td>MCP</td>
+              </tr>
+              <tr>
+                <td><code>narratological-vscode</code></td>
+                <td>VS Code Extension API</td>
+                <td>Editor snippets and framework tagging for in-IDE research</td>
+                <td>IDE Plugin</td>
+              </tr>
+              <tr>
+                <td><code>narratological-web</code></td>
                 <td>React, Vite, TypeScript</td>
-                <td>Interactive exploration with visual framework selection and threshold tuning</td>
+                <td>Interactive visualization dashboard with framework selection</td>
                 <td>Web UI</td>
               </tr>
             </tbody>
           </table>
         </div>
       </Figure>
+
+      <h2>The Script Doctor</h2>
+      <p>
+        The Script Doctor is a collaborative AI analysis mode that simulates a writers' room consultation between master creators. Users select a pairing — Tarkovsky and Bergman debating pacing, Larry David and Aristotle clashing over comedic structure, Phoebe Waller-Bridge prescribing fixes for a faltering second act — and the system generates a structured diagnostic conversation formatted as a philosophical debate between the selected frameworks. The Script Doctor draws on the compendium's formalized frameworks to ground each creator's perspective in specific analytical primitives: Tarkovsky's feedback will reference time-pressure metrics, Bergman's will reference interiority scores, and the South Park framework will evaluate causal binding ratios. This is not arbitrary persona simulation but framework-grounded analysis delivered through an accessible conversational interface.<Cite id={7} author="Moretti, Franco" title="Distant Reading" source="Verso Books" year={2013} /> Moretti's argument that computational methods should complement rather than replace close reading applies precisely: the Script Doctor uses quantitative diagnostics to identify structural issues, then presents them through the interpretive vocabulary of specific creative traditions.
+      </p>
 
       <h2>Diagnostic Output: Beyond Classification</h2>
       <p>
@@ -222,13 +249,49 @@ def compose_analysis(
         The narratological lenses project occupies a specific position within the eight-organ system: it is ORGAN-I (Theoria) infrastructure that enables work in ORGAN-II (Poiesis) and ORGAN-III (Ergon). When narrative theory is encoded as executable algorithms with typed outputs, those outputs become inputs for generative systems. A Proppian analysis that identifies the "Villainy" and "Lack" functions at specific text positions can drive a generative music system to shift harmonic mode at those structural inflection points. An actantial analysis that maps Subject-Object-Opponent relations can inform the spatial layout of an interactive visualization, positioning entities according to their structural roles.<Cite id={9} author="Murray, Janet H." title="Hamlet on the Holodeck: The Future of Narrative in Cyberspace" source="MIT Press" year={1997} /> Murray's vision of the computer as a medium for procedural, participatory, spatial, and encyclopedic storytelling requires exactly this kind of machine-readable narrative intelligence — not stories generated by algorithms, but analytical structures that algorithms can consume and transform. The lenses project makes theory operational: it turns ORGAN-I's scholarly frameworks into API endpoints that ORGAN-II's art tools and ORGAN-III's product prototypes can call.<Cite id={10} author="Manovich, Lev" title="Software Takes Command" source="Bloomsbury Academic" year={2013} /> Manovich's thesis that software has become the engine of cultural production implies that the boundary between analysis and generation is permeable — the same typed models that describe a narrative's structure can be used to synthesize new structures that satisfy the same constraints.
       </p>
 
-      <Figure alt="Project statistics for Narratological Algorithmic Lenses" caption="System metrics — a four-package monorepo encoding multiple narratological frameworks as composable, testable Python algorithms" number={2}>
+      <Figure alt="Project statistics for Narratological Algorithmic Lenses" caption="System metrics — a six-package monorepo encoding twenty-eight narratological frameworks as composable, testable Python algorithms with 290+ tests across eight development phases." number={2}>
         <StatGrid stats={[
-          { value: '4', label: 'Packages' },
-          { value: '4+', label: 'Frameworks Encoded' },
+          { value: '6', label: 'Packages' },
+          { value: '28', label: 'Frameworks Encoded' },
+          { value: '290+', label: 'Tests' },
+          { value: '4', label: 'Diagnostic Instruments' },
           { value: 'specs/', label: 'Research Archive' },
-          { value: 'Typed', label: 'Diagnostic Output' },
+          { value: 'P1-P7', label: 'Protocol Levels' },
         ]} />
+      </Figure>
+
+      <h2>Fountain Integration and Protocol Framework</h2>
+      <p>
+        The system includes native support for the Fountain screenplay format, enabling direct ingestion of professional scripts from Highland 2, Fade In, or VS Code without format conversion. The Fountain parser decomposes scripts into structured scene objects with character, dialogue, action, and transition metadata, which then feed into the diagnostic and framework analysis pipelines. This integration means that working screenwriters can run causal binding analysis or Proppian morphological decomposition against their actual production scripts rather than manually annotated text files.
+      </p>
+
+      <p>
+        The Protocol Framework defines a seven-level skill progression (P1 through P7) for practitioners using the system, documented in <code>specs/08-protocol-framework/</code> with corresponding skill implementations in <code>specs/09-protocol-skills/</code>. Levels P1 and P2 establish foundational awareness of narrative structure and the compendium's vocabulary. P3 and P4 involve diagnostic application to real scripts — running causal binding checks, identifying reorderability issues, flagging unnecessary scenes. P5 and P6 require multi-framework synthesis and Script Doctor facilitation, where the practitioner composes analyses across multiple frameworks and interprets cross-framework correspondences. P7 represents autonomous framework extension — the ability to formalize new narrative theories as computational models with typed outputs, confidence scoring, and test suites that integrate into the existing compendium. The protocol framework transforms the system from a tool into a pedagogical infrastructure, encoding not just what narrative theory says but how to learn to apply it computationally.<Cite id={9} author="Murray, Janet H." title="Hamlet on the Holodeck: The Future of Narrative in Cyberspace" source="MIT Press" year={1997} /> Murray's vision of the computer as a medium for procedural storytelling requires exactly this kind of progressive mastery path — the protocol levels ensure that practitioners develop genuine analytical competence rather than treating the system as a black box that produces labels.
+      </p>
+
+      <h2>Build History and Test Infrastructure</h2>
+      <p>
+        The project was built across eight phases from an open-view Claude Desktop research project spanning fifty-two files and twenty-seven conversation threads. The entire build history is traceable through architecture decision records in the <code>docs/adr/</code> directory.
+      </p>
+
+      <Figure alt="Eight-phase build history" caption="Development phases — progressive construction from CI scaffolding through foundation models, diagnostic engines, and multi-interface delivery.">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Phase</th><th>Name</th><th>Highlights</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>0</td><td>Platinum Sprint</td><td>CI/CD, CHANGELOG, ADR documentation</td></tr>
+              <tr><td>1</td><td>Foundation</td><td>Pydantic models, JSON loader, 14 studies, 65 tests</td></tr>
+              <tr><td>2</td><td>Promotion</td><td>Fountain parser, causal binding, Script Doctor</td></tr>
+              <tr><td>3</td><td>Engine</td><td>4 generators, 8-role analyst, 5 diagnostics, 243 tests</td></tr>
+              <tr><td>4</td><td>Debate</td><td>CLI wiring, LLM providers, multi-agent debate, 290 tests</td></tr>
+              <tr><td>5</td><td>Interface</td><td>FastAPI, React dashboard, MCP server, VS Code extension</td></tr>
+              <tr><td>6</td><td>Omega Synthesis</td><td>Documentation, v0.1.0 release, organvm integration</td></tr>
+              <tr><td>7</td><td>Intake</td><td>Full Claude Desktop archive import (119 files)</td></tr>
+            </tbody>
+          </table>
+        </div>
       </Figure>
 
       <h2>Why This Approach Matters</h2>
