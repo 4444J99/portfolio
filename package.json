@@ -71,6 +71,9 @@
 		"quality:local": "npm run test:security:prod && npm run test:security && npm run test:security:github && npm run test:security:drift && npm run quality:core",
 		"quality:local:no-lh": "npm run test:security:prod && npm run test:security && npm run test:security:github && npm run test:security:drift && npm run quality:core:no-lh",
 		"lighthouse:cloud": "node scripts/lighthouse-cloud.mjs",
+		"quality:parallel:pre": "run-p lint typecheck:strict test:security:prod test:security",
+		"quality:parallel:post": "run-p test validate test:a11y",
+		"quality:fast": "npm run quality:parallel:pre && npm run build && npm run quality:parallel:post",
 		"preflight": "npm run lint && npm run typecheck && npm run build && npm run validate && npm run sync:a11y-routes && npm run check:runtime-route-manifest && npm run test",
 		"test:ci": "npm run quality:local"
 	},
@@ -102,6 +105,7 @@
 		"happy-dom": "20.8.4",
 		"html-validate": "10.11.2",
 		"lighthouse": "13.0.3",
+		"npm-run-all2": "8.0.4",
 		"pagefind": "1.4.0",
 		"playwright": "1.58.2",
 		"satori": "0.25.0",
