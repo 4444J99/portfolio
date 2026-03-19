@@ -1,8 +1,11 @@
 ---
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import { mappings } from '../data/ontology.json';
+import vitals from '../data/vitals.json';
 import Layout from '../layouts/Layout.astro';
 import { base } from '../utils/paths';
+
+const wordsK = Math.floor(vitals.logos.words / 1000);
 ---
 
 <Layout title="The Logocentric Architect — Philosophy" description="Bridging the gap between Humanities and Systems Engineering. How MFA-level rhetoric becomes production-grade code.">
@@ -87,7 +90,7 @@ import { base } from '../utils/paths';
             <div class="timeline-marker"></div>
             <div class="timeline-content">
               <h4>The Synthesis: The Eight-Organ System</h4>
-              <p>The culmination of these identities. 91 repositories of code, 400K words of documentation, and a fully governed creative ecosystem.</p>
+              <p>The culmination of these identities. {vitals.repos.total} repositories of code, {wordsK}K words of documentation, and a fully governed creative ecosystem.</p>
             </div>
           </div>
         </div>

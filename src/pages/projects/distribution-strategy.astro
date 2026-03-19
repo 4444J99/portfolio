@@ -6,7 +6,10 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import vitals from '../../data/vitals.json';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+
+const wordsK = Math.floor(vitals.logos.words / 1000);
 ---
 
 <ProjectLayout pageTitle="Distribution Strategy — 4444j" description="POSSE-first content distribution across the eight-organ system — audience segmentation, channel strategy, and why distribution deserves its own organ."
@@ -19,7 +22,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 <SketchContainer sketchId="scatter" height="250px" mobileHeight="180px" ariaLabel="Content distribution scatter pattern" />
 
       <p>
-        You can build 91 repositories with 404,000 words of documentation and it means nothing if nobody encounters the work. Distribution is the most systematically underthought problem in creative technology: engineers and artists invest enormous energy in building, then treat the question of who sees the work as an afterthought — a tweet after launch, a link in a Slack channel, a conference talk if they happen to know someone on the program committee.<Cite id={1} author="Shirky, Clay" title="Here Comes Everybody: The Power of Organizing Without Organizations" source="Penguin Press" year={2008} />
+        You can build {vitals.repos.total} repositories with {vitals.logos.words.toLocaleString()} words of documentation and it means nothing if nobody encounters the work. Distribution is the most systematically underthought problem in creative technology: engineers and artists invest enormous energy in building, then treat the question of who sees the work as an afterthought — a tweet after launch, a link in a Slack channel, a conference talk if they happen to know someone on the program committee.<Cite id={1} author="Shirky, Clay" title="Here Comes Everybody: The Power of Organizing Without Organizations" source="Penguin Press" year={2008} />
       </p>
 
       <MermaidDiagram
@@ -231,8 +234,8 @@ jobs:
           { value: '4', label: 'Audience Segments' },
           { value: '16', label: 'Adaptation Strategies' },
           { value: 'POSSE', label: 'Distribution Principle' },
-          { value: '91', label: 'Source Repositories' },
-          { value: '404K', label: 'Words to Distribute' },
+          { value: String(vitals.repos.total), label: 'Source Repositories' },
+          { value: `${wordsK}K`, label: 'Words to Distribute' },
         ]} />
       </Figure>
 

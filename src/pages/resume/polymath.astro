@@ -1,7 +1,10 @@
 ---
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import vitals from '../../data/vitals.json';
 import Layout from '../../layouts/Layout.astro';
 import { base } from '../../utils/paths';
+
+const wordsK = Math.floor(vitals.logos.words / 1000);
 ---
 
 <Layout title="Resume (Polymath) — AI Orchestration Architect" description="Comprehensive CV of Anthony James Padavano: AI-Native Architect, Systems Designer, and Creative Technologist.">
@@ -57,7 +60,7 @@ import { base } from '../../utils/paths';
         <section class="resume__section prose">
           <h2>Executive Summary</h2>
           <p>
-            AI Orchestration Architect and Systems Director with 15 years of experience bridging high-stakes infrastructure with creative R&D. Expert in multi-agent orchestration, automated governance, and large-scale system design. Recently engineered an eight-organ creative-institutional system coordinating 91 repositories across 8 organizations with ~386K words of public documentation and 1,254 automated tests (85% coverage). Delivered +17.5M views and contributed to $2M in revenue/fundraising across commercial and nonprofit sectors. MFA in Creative Writing; Google-certified in UX, PM, and Digital Marketing; Meta-certified Full-Stack Developer.
+            AI Orchestration Architect and Systems Director with 15 years of experience bridging high-stakes infrastructure with creative R&D. Expert in multi-agent orchestration, automated governance, and large-scale system design. Recently engineered an eight-organ creative-institutional system coordinating {vitals.repos.total} repositories across {vitals.repos.orgs} organizations with ~{wordsK}K words of public documentation and {vitals.substance.automated_tests.toLocaleString()}+ automated tests. Delivered +17.5M views and contributed to $2M in revenue/fundraising across commercial and nonprofit sectors. MFA in Creative Writing; Google-certified in UX, PM, and Digital Marketing; Meta-certified Full-Stack Developer.
           </p>
         </section>
 
@@ -145,11 +148,11 @@ import { base } from '../../utils/paths';
 
           <div class="resume__project">
             <h3><a href={`${base}projects/eight-organ-system/`}>The Eight-Organ System</a></h3>
-            <p class="resume__project-sub">Governance as creative infrastructure — 91 repos, 8 orgs</p>
+            <p class="resume__project-sub">Governance as creative infrastructure — {vitals.repos.total} repos, {vitals.repos.orgs} orgs</p>
             <ul>
               <li>Designed orchestration architecture coordinating theory, art, commerce, community, and marketing as a single governed system</li>
               <li>Built machine-readable registry, automated dependency validation (31 edges, zero back-edge violations), and promotion state machine</li>
-              <li>Authored ~386K words of public documentation; 5 GitHub Actions workflows for autonomous governance</li>
+              <li>Authored ~{wordsK}K words of public documentation; 5 GitHub Actions workflows for autonomous governance</li>
             </ul>
           </div>
 
@@ -175,8 +178,8 @@ import { base } from '../../utils/paths';
             <h3><a href={`${base}projects/ai-conductor/`}>AI-Conductor Model</a></h3>
             <p class="resume__project-sub">Human-AI co-creation methodology</p>
             <ul>
-              <li>Developed the workflow producing ~386K words: AI generates volume, human directs and refines</li>
-              <li>Includes quality gates, template compliance validation, and automated link checking across 91 repos</li>
+              <li>Developed the workflow producing ~{wordsK}K words: AI generates volume, human directs and refines</li>
+              <li>Includes quality gates, template compliance validation, and automated link checking across {vitals.repos.total} repos</li>
             </ul>
           </div>
 
@@ -205,7 +208,7 @@ import { base } from '../../utils/paths';
             <h3>Independent Creative Technologist</h3>
             <p class="resume__date">2021 — Present</p>
             <ul>
-              <li>Designed and launched the eight-organ orchestration system coordinating 91 repositories across 8 GitHub organizations with automated dependency validation and ~386K words of documentation</li>
+              <li>Designed and launched the eight-organ orchestration system coordinating {vitals.repos.total} repositories across {vitals.repos.orgs} GitHub organizations with automated dependency validation and ~{wordsK}K words of documentation</li>
               <li>Built recursive-engine (1,254 tests, 85% coverage) — a symbolic operating system translating epistemological frameworks into executable Python</li>
               <li>Developed generative art and music systems, interactive installations, and AI-conductor workflow for human-AI co-creation</li>
             </ul>

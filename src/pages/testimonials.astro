@@ -1,5 +1,6 @@
 ---
 import omegaData from '../data/omega.json';
+import vitals from '../data/vitals.json';
 import Layout from '../layouts/Layout.astro';
 
 const soakDay = omegaData.soak.streak_days;
@@ -8,7 +9,7 @@ const targetDay = omegaData.soak.target_days;
 const feedbackCriteria = [
 	{
 		title: 'Architectural Coherence',
-		description: 'Does the system maintain logical consistency across all 91 repositories?',
+		description: `Does the system maintain logical consistency across all ${vitals.repos.total} repositories?`,
 		target: 'Stranger Test Score >= 80%',
 	},
 	{

@@ -7,10 +7,13 @@ import References from '../../components/academic/References.astro';
 import PrismNav from '../../components/PrismNav.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import vitals from '../../data/vitals.json';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+
+const wordsK = Math.floor(vitals.logos.words / 1000);
 ---
 
-<ProjectLayout pageTitle="The Eight-Organ System — 4444j" description="An orchestration system coordinating 91 repositories across 8 GitHub organizations, treating governance as creative infrastructure."
+<ProjectLayout pageTitle="The Eight-Organ System — 4444j" description={`An orchestration system coordinating ${vitals.repos.total} repositories across ${vitals.repos.orgs} GitHub organizations, treating governance as creative infrastructure.`}
   sketchId="octagon"
       title="The Eight-Organ System"
       tagline="Governance as creative infrastructure"
@@ -29,7 +32,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
         sketchId="octagon"
         height="500px"
         mobileHeight="350px"
-        ariaLabel="Interactive directed graph: 8 organ nodes with 91 repo particles orbiting. Directed edges enforce no-back-edges rule — particles flow I to II to III only. Hover organs to see repo counts. Click to send pulses along outgoing edges."
+        ariaLabel={`Interactive directed graph: ${vitals.repos.orgs} organ nodes with ${vitals.repos.total} repo particles orbiting. Directed edges enforce no-back-edges rule — particles flow I to II to III only. Hover organs to see repo counts. Click to send pulses along outgoing edges.`}
       />
 
       <h2>How It Works</h2>
@@ -57,10 +60,10 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
       <h2>The Registry</h2>
       <p>
-        A machine-readable <a href="https://github.com/meta-organvm/orchestration-start-here/blob/main/registry-v2.json" target="_blank">JSON registry</a> serves as the single source of truth for all 91 repositories.<Cite id={5} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's principle of a "single authoritative data source" applies here at the organizational level — every repo entry carries status, dependencies, documentation tier, and promotion state. Automated scripts validate the registry against the live state of every repo, checking CI/CD, documentation, dependency integrity, and constitutional compliance.<Cite id={6} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation" source="Addison-Wesley" year={2010} />
+        A machine-readable <a href="https://github.com/meta-organvm/orchestration-start-here/blob/main/registry-v2.json" target="_blank">JSON registry</a> serves as the single source of truth for all {vitals.repos.total} repositories.<Cite id={5} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's principle of a "single authoritative data source" applies here at the organizational level — every repo entry carries status, dependencies, documentation tier, and promotion state. Automated scripts validate the registry against the live state of every repo, checking CI/CD, documentation, dependency integrity, and constitutional compliance.<Cite id={6} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation" source="Addison-Wesley" year={2010} />
       </p>
 
-      <CodeStructure lang="json" caption="Registry entry structure — each of 91 repos carries this metadata" filename="registry-v2.json (excerpt)">
+      <CodeStructure lang="json" caption={`Registry entry structure — each of ${vitals.repos.total} repos carries this metadata`} filename="registry-v2.json (excerpt)">
 {`{
   "recursive-engine": {
     "organ": "I",
@@ -170,24 +173,24 @@ jobs:
 
       <Figure alt="Validation results summary" caption="Platinum validation suite: 228/228 checks passing across all 8 organs">
         <StatGrid stats={[
-          { value: '91', label: 'Repositories' },
-          { value: '8', label: 'Organizations' },
-          { value: '404K', label: 'Words' },
+          { value: String(vitals.repos.total), label: 'Repositories' },
+          { value: String(vitals.repos.orgs), label: 'Organizations' },
+          { value: `${wordsK}K`, label: 'Words' },
           { value: '31', label: 'Dependencies' },
           { value: '228', label: 'Validation Checks' },
-          { value: '77', label: 'CI Workflows' },
+          { value: String(vitals.substance.ci_passing), label: 'CI Workflows' },
         ]} />
       </Figure>
 
       <p>
-        77 repositories carry CI workflows. 130 architectural decision records document key design choices. Every repo has a CHANGELOG and documentation tier assignment (8 flagship, 70 standard, 5 archive, 8 infrastructure).<Cite id={14} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2018} />
+        {vitals.substance.ci_passing} repositories carry CI workflows. 130 architectural decision records document key design choices. Every repo has a CHANGELOG and documentation tier assignment (8 flagship, 70 standard, 5 archive, 8 infrastructure).<Cite id={14} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2018} />
       </p>
 
       <h2>Tradeoffs & Lessons</h2>
       <ul>
-        <li><strong>Documentation volume vs. maintenance burden</strong> — ~404K words is powerful as proof-of-work, but each README is a liability if the underlying repo changes. The registry-as-source-of-truth pattern helps: stats flow from the registry, not from hand-editing.<Cite id={15} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /></li>
+        <li><strong>Documentation volume vs. maintenance burden</strong> — ~{wordsK}K words is powerful as proof-of-work, but each README is a liability if the underlying repo changes. The registry-as-source-of-truth pattern helps: stats flow from the registry, not from hand-editing.<Cite id={15} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /></li>
         <li><strong>Strict dependency rules vs. convenience</strong> — The no-back-edges constraint is the system's best design decision <em>and</em> its most annoying one. It forced clean interfaces but also meant rewriting code that wanted to "just import" from a downstream organ.</li>
-        <li><strong>AI-conductor workflow</strong> — ~404K words were produced using a human-AI co-creation model: AI generates volume, human directs and refines. This is honest and documented. The risk is perception ("AI wrote your portfolio"). The mitigation is transparency: every essay in ORGAN-V explains the process.<Cite id={16} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /></li>
+        <li><strong>AI-conductor workflow</strong> — ~{wordsK}K words were produced using a human-AI co-creation model: AI generates volume, human directs and refines. This is honest and documented. The risk is perception ("AI wrote your portfolio"). The mitigation is transparency: every essay in ORGAN-V explains the process.<Cite id={16} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /></li>
         <li><strong>Naming scheme lock-in</strong> — Greek ontological naming (Theoria, Poiesis, Ergon) is distinctive but means renaming requires 40+ file edits. This was worth the tradeoff for identity coherence.</li>
       </ul>
 
