@@ -266,12 +266,36 @@ class CoordinationBot(commands.Bot):
         The eight-organ system can be read as a solo practitioner's portfolio, and it functions at that level. But the community organ represents a specific ambition beyond individual craft: building the relational infrastructure for a creative institution that can survive beyond a single person's attention span. Lave and Wenger's research on situated learning demonstrates that knowledge which exists only in one person's head is not institutional knowledge — it becomes institutional only when it is embodied in practices, artifacts, and relationships that others can participate in.<Cite id={9} author="Lave, Jean and Etienne Wenger" title="Situated Learning: Legitimate Peripheral Participation" source="Cambridge University Press" year={1991} /> The salon archive, the reading group curricula, the synthesis documents, and the theory-to-architecture correspondence tables are all artifacts designed to make the system's intellectual foundations accessible to people who were not present at its creation. Ostrom's research on long-lived commons institutions reveals a common pattern: communities that successfully govern shared resources over generations invest heavily in creating and maintaining shared narratives about why their rules exist, how decisions were made, and what principles guide future choices.<Cite id={10} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> The community organ is this investment for the eight-organ system. It transforms a portfolio into a practice — something with enough relational and documentary infrastructure to be continued, modified, and governed by people beyond its original architect.
       </p>
 
+      <h2>The Community Hub Application</h2>
+      <p>
+        To operationalize these theoretical commitments as deployed infrastructure, ORGAN-VI includes a <strong>community-hub</strong> FastAPI web application — the flagship software artifact for the organ. The hub provides both HTML pages (Jinja2 templates) and a JSON API for browsing salon archives, reading curricula, taxonomy, community events, contributor profiles, personalized learning paths, full-text search, and Atom 1.0 syndication feeds. WebSocket-powered live salon rooms enable real-time participation with token authentication and rate limiting. The application is backed by a shared PostgreSQL database (<code>koinonia-db</code>) with SQLAlchemy models and Alembic migrations, deployed on Render with Neon-compatible async connections.
+      </p>
+
+      <CodeStructure lang="python" caption="Community hub route architecture — FastAPI application with HTML, JSON API, Atom feeds, and WebSocket endpoints" filename="src/community_hub/app.py (structure)">
+{`# Routes (7 modules, 122 tests)
+routes/
+  salons.py       # Salon HTML: browse, detail, live rooms
+  curricula.py    # Curricula HTML: browse, detail, sessions
+  community.py    # Events, contributors, stats dashboard
+  search.py       # Full-text search (HTML + JSON)
+  syllabus.py     # Personalized learning path generator
+  feeds.py        # Atom 1.0: salons, events, curricula
+  live.py         # WebSocket live salon rooms
+  api.py          # JSON API: paginated CRUD + manifest
+
+# Security: CSRF (double-submit cookie), rate limiting
+# (10-20/min on generation), WebSocket rate limiting
+# (10 msg/sec, 4KB max), HTML escaping on broadcast`}
+      </CodeStructure>
+
       <Figure alt="Community infrastructure statistics" caption="Community organ metrics — the relational infrastructure that makes the eight-organ system reproducible and governable beyond a single practitioner" number={3}>
         <StatGrid stats={[
           { value: '6+', label: 'Salon Topics' },
           { value: '3', label: 'Reading Group Arcs' },
           { value: '4', label: 'Theoretical Traditions' },
           { value: '4', label: 'Discussion Formats' },
+          { value: '122', label: 'Tests' },
+          { value: '5', label: 'ORGAN-VI Repos' },
         ]} />
       </Figure>
 
