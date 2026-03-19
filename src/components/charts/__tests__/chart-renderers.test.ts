@@ -120,6 +120,117 @@ describe('chart renderers', () => {
 		expect(container.querySelectorAll('line').length).toBeGreaterThan(0);
 	});
 
+	it('renders dependency graph with edges field instead of links', () => {
+		const container = createContainer();
+		dependencyGraph(container, {
+			nodes: [
+				{ id: 'x', name: 'Repo X', organ: 'ORGAN-I', organ_name: 'Theoria', tier: 'flagship' },
+				{ id: 'y', name: 'Repo Y', organ: 'ORGAN-II', organ_name: 'Poiesis', tier: 'standard' },
+			],
+			edges: [{ source: 'x', target: 'y' }],
+		});
+
+		expect(container.querySelector('svg')).not.toBeNull();
+		expect(container.querySelectorAll('circle').length).toBe(2);
+	});
+
+	it('renders dependency graph with empty nodes and links', () => {
+		const container = createContainer();
+		dependencyGraph(container, { nodes: [], links: [] });
+
+		expect(container.querySelector('svg')).not.toBeNull();
+		expect(container.querySelectorAll('circle').length).toBe(0);
+		expect(container.querySelectorAll('line').length).toBe(0);
+	});
+
+	it('renders dependency graph filtering unlinked nodes', () => {
+		const container = createContainer();
+		dependencyGraph(container, {
+			nodes: [
+				{ id: 'a', name: 'Repo A', organ: 'ORGAN-I', organ_name: 'Theoria', tier: 'flagship' },
+				{ id: 'b', name: 'Repo B', organ: 'ORGAN-II', organ_name: 'Poiesis', tier: 'standard' },
+				{
+					id: 'orphan',
+					name: 'Orphan',
+					organ: 'ORGAN-III',
+					organ_name: 'Ergon',
+					tier: 'standard',
+				},
+			],
+			links: [{ source: 'a', target: 'b' }],
+		});
+
+		// Only linked nodes are rendered (a and b, not orphan)
+		expect(container.querySelectorAll('circle').length).toBe(2);
+	});
+
+	it('renders dependency graph without reduced motion', () => {
+		// Override matchMedia to NOT prefer reduced motion
+		Object.defineProperty(window, 'matchMedia', {
+			writable: true,
+			value: vi.fn().mockImplementation((query: string) => ({
+				matches: false,
+				media: query,
+				onchange: null,
+				addListener: vi.fn(),
+				removeListener: vi.fn(),
+				addEventListener: vi.fn(),
+				removeEventListener: vi.fn(),
+				dispatchEvent: vi.fn(),
+			})),
+		});
+
+		const container = createContainer();
+		dependencyGraph(container, {
+			nodes: [
+				{ id: 'a', name: 'Repo A', organ: 'ORGAN-I', organ_name: 'Theoria', tier: 'flagship' },
+				{ id: 'b', name: 'Repo B', organ: 'ORGAN-II', organ_name: 'Poiesis', tier: 'standard' },
+			],
+			links: [{ source: 'a', target: 'b' }],
+		});
+
+		expect(container.querySelector('svg')).not.toBeNull();
+		expect(container.querySelectorAll('circle').length).toBe(2);
+	});
+
+	it('dependency graph handles missing links and edges fields', () => {
+		const container = createContainer();
+		dependencyGraph(container, {
+			nodes: [
+				{ id: 'a', name: 'Repo A', organ: 'ORGAN-I', organ_name: 'Theoria', tier: 'flagship' },
+			],
+		});
+
+		expect(container.querySelector('svg')).not.toBeNull();
+		// No links means no linked nodes, so no circles rendered
+		expect(container.querySelectorAll('circle').length).toBe(0);
+	});
+
+	it('dependency graph uses fallback color for unknown organ', () => {
+		const container = createContainer();
+		dependencyGraph(container, {
+			nodes: [
+				{
+					id: 'a',
+					name: 'Repo A',
+					organ: 'UNKNOWN-ORGAN',
+					organ_name: 'Mystery',
+					tier: 'standard',
+				},
+				{
+					id: 'b',
+					name: 'Repo B',
+					organ: 'UNKNOWN-ORGAN',
+					organ_name: 'Mystery',
+					tier: 'standard',
+				},
+			],
+			links: [{ source: 'a', target: 'b' }],
+		});
+
+		expect(container.querySelectorAll('circle').length).toBe(2);
+	});
+
 	it('renders praxis sparklines chart', () => {
 		const container = createContainer();
 		praxisSparklines(container, {

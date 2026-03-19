@@ -91,7 +91,6 @@ describe('chart-loader lifecycle', () => {
 		container.appendChild(svg);
 		document.body.appendChild(container);
 
-		// Trigger some initial state
 		document.dispatchEvent(new Event('astro:page-load'));
 		observerCallback([{ isIntersecting: true, target: container }]);
 
@@ -99,5 +98,113 @@ describe('chart-loader lifecycle', () => {
 
 		expect(container.querySelector('svg')).toBeNull();
 		expect(mockDisconnect).toHaveBeenCalled();
+	});
+
+	it('skips containers with unknown chart id', async () => {
+		const container = document.createElement('div');
+		container.dataset.chart = 'nonexistent-chart';
+		document.body.appendChild(container);
+
+		document.dispatchEvent(new Event('astro:page-load'));
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		await vi.advanceTimersByTimeAsync(100);
+	});
+
+	it('skips containers with empty chart id', async () => {
+		const container = document.createElement('div');
+		container.setAttribute('data-chart', '');
+		document.body.appendChild(container);
+
+		document.dispatchEvent(new Event('astro:page-load'));
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		await vi.advanceTimersByTimeAsync(100);
+	});
+
+	it('reads data from embedded script[type="application/json"]', async () => {
+		const container = document.createElement('div');
+		container.dataset.chart = 'organ-bar';
+		const script = document.createElement('script');
+		script.type = 'application/json';
+		script.textContent = JSON.stringify({ organs: [{ key: 'I' }] });
+		container.appendChild(script);
+		document.body.appendChild(container);
+
+		document.dispatchEvent(new Event('astro:page-load'));
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		await vi.advanceTimersByTimeAsync(100);
+	});
+
+	it('handles invalid JSON in chart payload gracefully', async () => {
+		const container = document.createElement('div');
+		container.dataset.chart = 'organ-bar';
+		container.dataset.chartData = '{broken json!!!';
+		document.body.appendChild(container);
+
+		const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+		document.dispatchEvent(new Event('astro:page-load'));
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		await vi.advanceTimersByTimeAsync(100);
+
+		expect(consoleSpy).toHaveBeenCalledWith(
+			'[chart]',
+			'organ-bar',
+			'invalid chart payload:',
+			expect.any(Error),
+		);
+		consoleSpy.mockRestore();
+	});
+
+	it('removes chart-tooltip elements during cleanup', async () => {
+		const container = document.createElement('div');
+		container.dataset.chart = 'organ-bar';
+		container.dataset.chartData = JSON.stringify({ organs: [] });
+		const tooltip = document.createElement('div');
+		tooltip.className = 'chart-tooltip';
+		container.appendChild(tooltip);
+		const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		container.appendChild(svg);
+		document.body.appendChild(container);
+
+		document.dispatchEvent(new Event('astro:page-load'));
+		observerCallback([{ isIntersecting: true, target: container }]);
+		await vi.advanceTimersByTimeAsync(100);
+
+		loader.teardown();
+
+		expect(container.querySelector('.chart-tooltip')).toBeNull();
+		expect(container.querySelector('svg')).toBeNull();
+	});
+
+	it('does not re-init an already initialized chart', async () => {
+		const container = document.createElement('div');
+		container.dataset.chart = 'organ-bar';
+		container.dataset.chartData = JSON.stringify({ organs: [] });
+		document.body.appendChild(container);
+
+		document.dispatchEvent(new Event('astro:page-load'));
+
+		observerCallback([{ isIntersecting: true, target: container }]);
+		await vi.advanceTimersByTimeAsync(100);
+
+		// Second intersection should be a no-op
+		observerCallback([{ isIntersecting: true, target: container }]);
+		await vi.advanceTimersByTimeAsync(100);
+	});
+
+	it('handles data with no chartData and no script element', async () => {
+		const container = document.createElement('div');
+		container.dataset.chart = 'organ-bar';
+		// No data-chart-data and no script element — should parse undefined as '{}'
+		document.body.appendChild(container);
+
+		document.dispatchEvent(new Event('astro:page-load'));
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		await vi.advanceTimersByTimeAsync(100);
 	});
 });

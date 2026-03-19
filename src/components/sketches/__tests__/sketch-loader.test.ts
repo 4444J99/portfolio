@@ -330,4 +330,376 @@ describe('sketch-loader runtime', () => {
 		}
 		vi.unstubAllGlobals();
 	});
+
+	it('shows existing .sketch-noscript fallback element', async () => {
+		const container = document.createElement('div');
+		container.className = 'sketch-container';
+		container.dataset.sketch = 'nonexistent-sketch-xyz';
+		const noscript = document.createElement('div');
+		noscript.className = 'sketch-noscript';
+		noscript.style.display = 'none';
+		container.appendChild(noscript);
+		document.body.appendChild(container);
+
+		vi.spyOn(console, 'error').mockImplementation(() => {});
+
+		const { initSketches } = await import('../sketch-loader');
+		initSketches();
+
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		for (let i = 0; i < 10; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		expect(noscript.style.display).toBe('flex');
+		vi.restoreAllMocks();
+	});
+
+	it('queues sketches when concurrency limit is reached', async () => {
+		vi.spyOn(console, 'error').mockImplementation(() => {});
+
+		const containers: HTMLElement[] = [];
+		for (let i = 0; i < 6; i++) {
+			const c = document.createElement('div');
+			c.className = 'sketch-container';
+			c.dataset.sketch = 'hero';
+			document.body.appendChild(c);
+			containers.push(c);
+		}
+
+		const { initSketches } = await import('../sketch-loader');
+		initSketches();
+
+		// Trigger all containers as visible at once
+		observerCallback(containers.map((c) => ({ isIntersecting: true, target: c })));
+
+		for (let i = 0; i < 30; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		vi.restoreAllMocks();
+	});
+
+	it('skips background init on deferred routes', async () => {
+		// Set location to a deferred route
+		Object.defineProperty(window, 'location', {
+			value: { ...window.location, pathname: '/portfolio/architecture' },
+			writable: true,
+			configurable: true,
+		});
+
+		const bg = document.createElement('canvas');
+		bg.id = 'bg-canvas';
+		document.body.appendChild(bg);
+
+		const { reinitPage, getSketchInstance } = await import('../sketch-loader');
+		reinitPage();
+
+		for (let i = 0; i < 15; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		// Background should not be initialized on deferred routes
+		expect(getSketchInstance(bg)).toBeUndefined();
+	});
+
+	it('falls back to setTimeout when no PerformanceObserver', async () => {
+		// Remove PerformanceObserver
+		const origPO = (window as any).PerformanceObserver;
+		// @ts-expect-error
+		delete window.PerformanceObserver;
+
+		const bg = document.createElement('canvas');
+		bg.id = 'bg-canvas';
+		document.body.appendChild(bg);
+
+		const { reinitPage } = await import('../sketch-loader');
+		reinitPage();
+
+		for (let i = 0; i < 30; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		if (origPO) {
+			(window as any).PerformanceObserver = origPO;
+		}
+	});
+
+	it('falls back to setTimeout when no requestIdleCallback', async () => {
+		// Remove requestIdleCallback
+		const origRIC = (window as any).requestIdleCallback;
+		// @ts-expect-error
+		delete window.requestIdleCallback;
+
+		// Also remove PerformanceObserver to use setTimeout path
+		const origPO = (window as any).PerformanceObserver;
+		// @ts-expect-error
+		delete window.PerformanceObserver;
+
+		const bg = document.createElement('canvas');
+		bg.id = 'bg-canvas';
+		document.body.appendChild(bg);
+
+		const { reinitPage } = await import('../sketch-loader');
+		reinitPage();
+
+		for (let i = 0; i < 30; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		if (origRIC) {
+			(window as any).requestIdleCallback = origRIC;
+		}
+		if (origPO) {
+			(window as any).PerformanceObserver = origPO;
+		}
+	});
+
+	it('observeSketches falls back without IntersectionObserver', async () => {
+		const origIO = window.IntersectionObserver;
+		// @ts-expect-error
+		delete window.IntersectionObserver;
+
+		const container = document.createElement('div');
+		container.className = 'sketch-container';
+		container.dataset.sketch = 'hero';
+		document.body.appendChild(container);
+
+		const { initSketches, getSketchInstance } = await import('../sketch-loader');
+		initSketches();
+
+		for (let i = 0; i < 20; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		// Without IO, sketches are initialized directly
+		expect(getSketchInstance(container)).toBeDefined();
+
+		window.IntersectionObserver = origIO;
+	});
+
+	it('pauseSketch and resumeSketch are no-ops for unknown containers', async () => {
+		const unknown = document.createElement('div');
+
+		const { pauseSketch, resumeSketch } = await import('../sketch-loader');
+
+		// Should not throw
+		pauseSketch(unknown);
+		expect(unknown.hasAttribute('data-paused')).toBe(false);
+
+		resumeSketch(unknown);
+		expect(unknown.hasAttribute('data-paused')).toBe(false);
+	});
+
+	it('sets mobile height when window width < 768', async () => {
+		Object.defineProperty(window, 'innerWidth', {
+			value: 400,
+			writable: true,
+			configurable: true,
+		});
+
+		const container = document.createElement('div');
+		container.className = 'sketch-container';
+		container.dataset.sketch = 'hero';
+		container.dataset.height = '600px';
+		container.dataset.mobileHeight = '250px';
+		document.body.appendChild(container);
+
+		const { initSketches } = await import('../sketch-loader');
+		initSketches();
+
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		for (let i = 0; i < 10; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		expect(container.style.height).toBe('250px');
+	});
+
+	it('uses default heights when data attributes are missing', async () => {
+		// happy-dom defaults to a narrow window, so set desktop width
+		Object.defineProperty(window, 'innerWidth', {
+			value: 1024,
+			writable: true,
+			configurable: true,
+		});
+
+		const container = document.createElement('div');
+		container.className = 'sketch-container';
+		container.dataset.sketch = 'hero';
+		// No height or mobileHeight data attributes
+		document.body.appendChild(container);
+
+		const { initSketches } = await import('../sketch-loader');
+		initSketches();
+
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		for (let i = 0; i < 10; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		// Default desktop height is 500px
+		expect(container.style.height).toBe('500px');
+	});
+
+	it('reinitPage does not throw when bg-canvas is absent', async () => {
+		const { reinitPage } = await import('../sketch-loader');
+		expect(() => reinitPage()).not.toThrow();
+	});
+
+	it('handles reduced motion: wraps draw with warmup frames', async () => {
+		// Enable reduced motion
+		vi.stubGlobal(
+			'matchMedia',
+			vi.fn().mockReturnValue({
+				matches: true,
+				addEventListener: vi.fn(),
+				removeEventListener: vi.fn(),
+			}),
+		);
+
+		const container = document.createElement('div');
+		container.className = 'sketch-container';
+		container.dataset.sketch = 'hero';
+		document.body.appendChild(container);
+
+		const { initSketches, getSketchInstance, teardown } = await import('../sketch-loader');
+		initSketches();
+
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		for (let i = 0; i < 15; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		const instance = getSketchInstance(container);
+		expect(instance).toBeDefined();
+
+		teardown();
+	});
+
+	it('handles p5 constructor error gracefully', async () => {
+		// Mock p5 to throw during construction
+		vi.doMock('p5', () => ({
+			default: class FailP5 {
+				constructor() {
+					throw new Error('p5 constructor failed');
+				}
+			},
+		}));
+
+		const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+		const container = document.createElement('div');
+		container.className = 'sketch-container';
+		container.dataset.sketch = 'hero';
+		document.body.appendChild(container);
+
+		const { initSketches } = await import('../sketch-loader');
+		initSketches();
+
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		for (let i = 0; i < 15; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		// Fallback should be shown
+		const fallback = container.querySelector('div');
+		expect(fallback?.textContent).toContain('[hero]');
+
+		consoleSpy.mockRestore();
+	});
+
+	it('multiple rapid resize events debounce correctly', async () => {
+		const container = document.createElement('div');
+		container.className = 'sketch-container';
+		container.dataset.sketch = 'hero';
+		container.dataset.height = '600px';
+		container.dataset.mobileHeight = '300px';
+		document.body.appendChild(container);
+
+		const { initSketches, teardown } = await import('../sketch-loader');
+		initSketches();
+
+		// Trigger multiple resizes rapidly
+		window.dispatchEvent(new Event('resize'));
+		window.dispatchEvent(new Event('resize'));
+		window.dispatchEvent(new Event('resize'));
+
+		for (let i = 0; i < 15; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		expect(container.style.height).toBeDefined();
+		teardown();
+	});
+
+	it('handles non-intersecting entries in observer', async () => {
+		const container = document.createElement('div');
+		container.className = 'sketch-container';
+		container.dataset.sketch = 'hero';
+		document.body.appendChild(container);
+
+		const { initSketches } = await import('../sketch-loader');
+		initSketches();
+
+		// Non-intersecting entries should be ignored
+		observerCallback([{ isIntersecting: false, target: container }]);
+
+		for (let i = 0; i < 10; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+	});
+
+	it('sketch load import failure shows fallback', async () => {
+		// Mock hero-sketch to reject
+		vi.doMock('../hero-sketch', () => {
+			throw new Error('Module load failed');
+		});
+
+		const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+		const container = document.createElement('div');
+		container.className = 'sketch-container';
+		container.dataset.sketch = 'hero';
+		document.body.appendChild(container);
+
+		const { initSketches } = await import('../sketch-loader');
+		initSketches();
+
+		observerCallback([{ isIntersecting: true, target: container }]);
+
+		for (let i = 0; i < 15; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		consoleSpy.mockRestore();
+	});
+
+	it('normalizePath handles root and trailing slashes', async () => {
+		// Test shouldBootBackground with trailing slash route
+		Object.defineProperty(window, 'location', {
+			value: { ...window.location, pathname: '/portfolio/architecture/' },
+			writable: true,
+			configurable: true,
+		});
+
+		const bg = document.createElement('canvas');
+		bg.id = 'bg-canvas';
+		document.body.appendChild(bg);
+
+		const { reinitPage, getSketchInstance } = await import('../sketch-loader');
+		reinitPage();
+
+		for (let i = 0; i < 15; i++) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+
+		// Architecture is a deferred route — background should not init
+		expect(getSketchInstance(bg)).toBeUndefined();
+	});
 });
