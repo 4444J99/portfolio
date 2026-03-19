@@ -6,27 +6,28 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import vitals from '../../data/vitals.json';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
 
 <ProjectLayout pageTitle="Aetheria Classroom RPG — 4444j" description="A gamified education platform that traveled the full Theory to Art to Commerce pipeline. Honest post-mortem included."
   sketchId="terrain"
-      title="Aetheria Classroom RPG"
-      tagline="Theory → Art → Commerce: directed architecture for an educational RPG"
-      tags={['Product', 'Education', 'Game Design']}
-      repo="https://github.com/organvm-iii-ergon/classroom-rpg-aetheria"
-      badges={[
-        { src: 'https://img.shields.io/github/languages/top/organvm-iii-ergon/classroom-rpg-aetheria', alt: 'Top language' },
-        { src: 'https://img.shields.io/github/last-commit/organvm-iii-ergon/classroom-rpg-aetheria', alt: 'Last commit' },
-      ]}>
-      <h2>The Full Pipeline</h2>
-      <p>
-        Aetheria is the project that proves the system works — and honestly reveals where it doesn't. It traveled the complete I→II→III path: from gamification theory to game design to revenue product. I directed the comprehensive post-mortem below because honest reflection on what failed teaches more than polished success stories.<Cite id={1} author="Ries, Eric" title="The Lean Startup" source="Crown Business" year={2011} />
-      </p>
+	title="Aetheria Classroom RPG"
+	tagline="Theory → Art → Commerce: directed architecture for an educational RPG"
+	tags={['Product', 'Education', 'Game Design']}
+	repo="https://github.com/organvm-iii-ergon/classroom-rpg-aetheria"
+	badges={[
+		{ src: 'https://img.shields.io/github/languages/top/organvm-iii-ergon/classroom-rpg-aetheria', alt: 'Top language' },
+		{ src: 'https://img.shields.io/github/last-commit/organvm-iii-ergon/classroom-rpg-aetheria', alt: 'Last commit' },
+	]}>
+	<h2>The Full Pipeline</h2>
+	<p>
+		Aetheria is the project that proves the system works — and honestly reveals where it doesn't. It traveled the complete I→II→III path: from gamification theory to game design to revenue product. I directed the comprehensive post-mortem below because honest reflection on what failed teaches more than polished success stories.<Cite id={1} author="Ries, Eric" title="The Lean Startup" source="Crown Business" year={2011} />
+	</p>
 
-      <MermaidDiagram
-        caption="The I→II→III pipeline with governance gates — each transition requires explicit validation before advancing"
-        chart={`graph LR
+	<MermaidDiagram
+		caption="The I→II→III pipeline with governance gates — each transition requires explicit validation before advancing"
+		chart={`graph LR
     I[ORGAN-I\\nTheory] -->|Governance Gate 1:\\nTheoretical Validity| II[ORGAN-II\\nGame Design]
     II -->|Governance Gate 2:\\nTeacher Readiness| III[ORGAN-III\\nRevenue Product]
     III -->|Feedback Loop| I
@@ -34,26 +35,53 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     G2{Gate 2 Checks} -.->|Playtest results\\nOnboarding time\\nTeacher usability| II
     G1 -.- II
     G2 -.- III`}
-      />
+	/>
 
-      <h2>The Theory (ORGAN-I)</h2>
-      <p>
-        Not shallow "add points and badges" gamification. Structural gamification — using game <em>design</em> principles to reshape learning:<Cite id={2} author="Deterding, Sebastian et al." title="From Game Design Elements to Gamefulness: Defining Gamification" source="Proceedings of MindTrek 2011, ACM" year={2011} /> Deterding's framework distinguishes between surface-level gamification (points, badges, leaderboards) and deeper gameful design that draws on game design's capacity to create intrinsically motivated engagement.
-      </p>
-      <ul>
-        <li><strong>Meaningful choices</strong> over reward schedules (Deterding's gameful design)</li>
-        <li><strong>Recursive pedagogy</strong> — learning is recursive; Level 3 quests require applying Level 2 knowledge in new contexts</li>
-        <li><strong>Narrative as motivation</strong> — academic mastery genuinely advances the plot, not as arbitrary overlay</li>
-      </ul>
+	<h2>The Theory (ORGAN-I)</h2>
+	<p>
+		Not shallow "add points and badges" gamification. Structural gamification — using game <em>design</em> principles to reshape learning:<Cite id={2} author="Deterding, Sebastian et al." title="From Game Design Elements to Gamefulness: Defining Gamification" source="Proceedings of MindTrek 2011, ACM" year={2011} /> Deterding's framework distinguishes between surface-level gamification (points, badges, leaderboards) and deeper gameful design that draws on game design's capacity to create intrinsically motivated engagement.
+	</p>
+	<ul>
+		<li><strong>Meaningful choices</strong> over reward schedules (Deterding's gameful design)</li>
+		<li><strong>Recursive pedagogy</strong> — learning is recursive; Level 3 quests require applying Level 2 knowledge in new contexts</li>
+		<li><strong>Narrative as motivation</strong> — academic mastery genuinely advances the plot, not as arbitrary overlay</li>
+	</ul>
 
-      <h2>The Game Design (ORGAN-II)</h2>
-      <p>
-        <strong>Character system:</strong> Four stats — Insight, Craft, Valor, Empathy — mapping to learning modalities, all growable.<Cite id={3} author="Schell, Jesse" title="The Art of Game Design: A Book of Lenses" source="CRC Press" year={2008} /> Schell's lens-based approach to game design informed the stat system — each stat functions as a lens through which students engage with material, ensuring every learner finds a growth path.
-        <strong>Quest design:</strong> Teachers create quests from assignment templates. A reading assignment becomes a "Library Expedition." The RPG framing provides structure that helps teachers design better assignments.<Cite id={4} author="Koster, Raph" title="A Theory of Fun for Game Design" source="Paraglyph Press" year={2004} /> Koster's central thesis — that fun is the brain's response to mastering patterns — guided quest structure so that each quest teaches a recognizable pattern before layering complexity.
-        <strong>World building:</strong> Procedurally generated from curriculum — a chemistry unit generates a world where alchemical principles govern reality.<Cite id={5} author="Murray, Janet" title="Hamlet on the Holodeck: The Future of Narrative in Cyberspace" source="MIT Press" year={1997} /> Murray's concept of the procedural author — designing systems that generate narrative rather than scripting it directly — is the exact principle behind curriculum-driven world generation.
-      </p>
+	<h2>The Game Design (ORGAN-II)</h2>
+	<p>
+		<strong>Character system:</strong> Four stats — Insight, Craft, Valor, Empathy — mapping to learning modalities, all growable.<Cite id={3} author="Schell, Jesse" title="The Art of Game Design: A Book of Lenses" source="CRC Press" year={2008} /> Schell's lens-based approach to game design informed the stat system — each stat functions as a lens through which students engage with material, ensuring every learner finds a growth path.
+		<strong>Quest design:</strong> Teachers create quests from assignment templates. A reading assignment becomes a "Library Expedition." The RPG framing provides structure that helps teachers design better assignments.<Cite id={4} author="Koster, Raph" title="A Theory of Fun for Game Design" source="Paraglyph Press" year={2004} /> Koster's central thesis — that fun is the brain's response to mastering patterns — guided quest structure so that each quest teaches a recognizable pattern before layering complexity.
+		<strong>World building:</strong> Procedurally generated from curriculum — a chemistry unit generates a world where alchemical principles govern reality.<Cite id={5} author="Murray, Janet" title="Hamlet on the Holodeck: The Future of Narrative in Cyberspace" source="MIT Press" year={1997} /> Murray's concept of the procedural author — designing systems that generate narrative rather than scripting it directly — is the exact principle behind curriculum-driven world generation.
+	</p>
 
-      <CodeStructure lang="typescript" caption="Core quest and character system type definitions — stats map to learning modalities, quests compose from assignment templates" filename="types/game-system.ts">{`// Character stat system — four growth dimensions
+	<h2>Technical Architecture</h2>
+	<p>
+		Aetheria is a React 19 single-page application built with TypeScript 5.9 (strict mode), Vite, and Tailwind CSS. The architecture follows a context-provider pattern with three primary React contexts — <code>GameStateContext</code> for realm/quest/submission state, <code>FirebaseContext</code> for authentication and persistence, and <code>ThemeContext</code> for the theming engine — ensuring clear separation of concerns across the game loop, infrastructure, and presentation layers.<Cite id={13} author="Gamma, Erich et al." title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1995} /> The context-provider pattern mirrors Gamma's Strategy pattern: game state mutations flow through typed action functions that enforce domain invariants before updating state, preventing the kind of implicit coupling that plagues educational software built on ad-hoc state management.
+	</p>
+
+	<Figure alt="Aetheria technical stack overview showing framework, language, build tool, and infrastructure choices" caption="Technical stack: each layer chosen for a specific architectural reason, not trend-following">
+		<div class="table-wrap">
+			<table>
+				<thead>
+					<tr><th>Layer</th><th>Technology</th><th>Rationale</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>UI Framework</td><td>React 19</td><td>Concurrent rendering for smooth quest map interactions</td></tr>
+					<tr><td>Language</td><td>TypeScript 5.9 (strict)</td><td>30+ domain interfaces across five type layers</td></tr>
+					<tr><td>3D Rendering</td><td>Three.js + React Three Fiber</td><td>Constellation maps, themed geometries per skin</td></tr>
+					<tr><td>Backend</td><td>Firebase (Auth, Firestore, Storage)</td><td>Zero-ops persistence for classroom-scale data</td></tr>
+					<tr><td>AI Evaluation</td><td>LLM integration + DOMPurify</td><td>Instant feedback with XSS-safe output rendering</td></tr>
+					<tr><td>Resilience</td><td>Circuit breaker, rate limiter, retry</td><td>Graceful degradation when AI service is unavailable</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</Figure>
+
+	<p>
+		The domain model defines over 30 TypeScript interfaces organized into five layers: core game types (Realm, Quest, Submission, Artifact, KnowledgeCrystal), educator extensions (Syllabus, RubricData, ReportConfig), personalization types (ThematicVariant, ThreeWayVote, ParentAccount), standards alignment (LearningStandardRef, StandardMastery), and system types (Notification, AIConsentState). Quest types include <code>standard</code>, <code>boss</code>, <code>redemption</code>, <code>learning</code>, <code>challenge</code>, and <code>essay</code>, each with distinct XP values and prerequisite chains. The quest status machine follows: <code>locked → available → in_progress → completed | failed</code>.<Cite id={14} author="Evans, Eric" title="Domain-Driven Design: Tackling Complexity in the Heart of Software" source="Addison-Wesley" year={2003} /> Evans's principle that the domain model should be the backbone of the codebase — not an afterthought imposed by framework constraints — drove the decision to define all game mechanics as typed interfaces before writing a single React component.
+	</p>
+
+	<CodeStructure lang="typescript" caption="Core quest and character system type definitions — stats map to learning modalities, quests compose from assignment templates" filename="types/game-system.ts">{`// Character stat system — four growth dimensions
 interface CharacterStats {
   insight: number;    // analytical, reading, research
   craft: number;      // making, building, creating
@@ -105,49 +133,110 @@ interface WorldRule {
   interactionType: 'explore' | 'solve' | 'craft' | 'negotiate';
 }`}</CodeStructure>
 
-      <SketchContainer
-        sketchId="terrain"
-        height="400px"
-        mobileHeight="300px"
-        ariaLabel="Interactive pipeline visualization: three connected chambers (Theory, Art, Commerce) with particles flowing left to right. Some particles fail and fall through gaps, accumulating as visible sediment. Success and failure ratios match real project metrics. Hover chambers for labels. Click sediment to see failure reasons. Mouse Y controls pipeline strictness."
-      />
+	<SketchContainer
+		sketchId="terrain"
+		height="400px"
+		mobileHeight="300px"
+		ariaLabel="Interactive pipeline visualization: three connected chambers (Theory, Art, Commerce) with particles flowing left to right. Some particles fail and fall through gaps, accumulating as visible sediment. Success and failure ratios match real project metrics. Hover chambers for labels. Click sediment to see failure reasons. Mouse Y controls pipeline strictness."
+	/>
 
-      <h2>Metrics</h2>
-      <Figure alt="Aetheria pilot metrics table showing classroom adoption, retention rates, engagement gains, and teacher satisfaction scores" caption="Pilot metrics from 47 classrooms over 6 months — engagement gains were strong, but retention and adoption fell below targets">
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Metric</th><th>Value</th><th>Assessment</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Pilot classrooms</td><td>47</td><td>Below target (100)</td></tr>
-              <tr><td>Teacher retention (month 2)</td><td>68%</td><td>Acceptable</td></tr>
-              <tr><td>Teacher retention (month 6)</td><td>41%</td><td>Below target (60%)</td></tr>
-              <tr><td>Student engagement increase</td><td>+23%</td><td>Strong</td></tr>
-              <tr><td>NPS (teachers)</td><td>42</td><td>Good but not great</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </Figure>
+	<h2>Game Mechanics in Depth</h2>
+	<p>
+		The XP and level progression system uses an eight-tier curve (Novice through Legend) where each tier requires progressively more effort. The <code>calculateLevel()</code> function maps cumulative XP to level thresholds, and <code>getLevelTitle()</code> returns a role-appropriate title depending on whether the user is a student or teacher. Level-ups trigger sound effects and toast notifications, maintaining the feedback loop that sustains engagement.<Cite id={7} author="Csikszentmihalyi, Mihaly" title="Flow: The Psychology of Optimal Experience" source="Harper & Row" year={1990} /> The progression curve was calibrated to Csikszentmihalyi's flow channel: too-easy thresholds produce boredom, too-steep thresholds produce anxiety, and the sweet spot keeps students in the productive zone where challenge matches skill.
+	</p>
+	<p>
+		<strong>Artifact scarcity drives quality.</strong> High-scoring submissions generate artifacts with procedurally generated names and rarity tiers (<code>common</code>, <code>rare</code>, <code>epic</code>, <code>legendary</code>). The <code>generateArtifactName()</code> function combines theme-specific prefixes and suffixes with concept words extracted from the quest name — a legendary artifact from a rhetoric quest in fantasy mode might be "Enchanted Tome of Rhetoric," while the same achievement in cyberpunk mode produces "Quantum Core of Rhetoric." Knowledge Crystals are separate collectibles tied to quest completions that students can "attune" to demonstrate mastery retention.
+	</p>
+	<p>
+		<strong>Theming transforms identity.</strong> Four complete skins remap every user-facing label: teacher becomes Game Master (fantasy), Admin (cyberpunk), Lord (royal court), or Teacher (glass classroom). Students become Adventurers, Operatives, Vassals, or Students. Each theme specifies a Three.js geometry for the constellation visualization — octahedron, icosahedron, dodecahedron, or sphere — creating a complete alternative reality for the classroom experience.<Cite id={3} author="Schell, Jesse" title="The Art of Game Design: A Book of Lenses" source="CRC Press" year={2008} />
+	</p>
 
-      <h2>What Worked</h2>
-      <p>
-        <strong>Student engagement: +23% assignment completion.</strong> Narrative integration was the key — students cared about quest outcomes because the stories were connected to their actual learning.<Cite id={6} author="Gee, James Paul" title="What Video Games Have to Teach Us About Learning and Literacy" source="Palgrave Macmillan" year={2003} /> Gee's research demonstrates that well-designed game environments create "situated meaning" — players learn because the context makes abstract concepts tangible and consequential, exactly what we observed in assignment completion data.<Cite id={7} author="Csikszentmihalyi, Mihaly" title="Flow: The Psychology of Optimal Experience" source="Harper & Row" year={1990} /> The engagement increase aligns with Csikszentmihalyi's flow theory: the quest structure balanced challenge and skill, keeping students in the productive zone between boredom and anxiety.
-      </p>
-      <p>
-        <strong>The governance pipeline caught quality issues early.</strong> At the I→II transition, we verified the theoretical framework. At II→III, we verified the game design was teacher-ready. Without these gates, we would have shipped too early.<Cite id={8} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's work on institutional governance informed the gate structure — her design principles for managing shared resources translate directly to managing shared creative infrastructure, where premature release degrades the commons.
-      </p>
+	<h2>Classroom Integration and Standards Alignment</h2>
+	<p>
+		Aetheria ships with a four-year English Literature curriculum and three complete standards frameworks: CCSS ELA Grades 9-10, CCSS ELA Grades 11-12, and AP Literature organized by College Board Big Ideas (Character, Setting, Structure, Narration, Figurative Language, Argumentation, Interpretation). Every quest can be tagged with specific standards via <code>QuestStandardAlignment</code>, specifying coverage level (<code>full</code>, <code>partial</code>, <code>introduced</code>). Student mastery is tracked per standard across five levels (<code>not-started</code> through <code>mastered</code>), with evidence references linking mastery assessments to specific submissions.
+	</p>
+	<p>
+		The educator dashboard provides teachers with feedback snippets organized by category (grammar, thesis, evidence, organization, clarity, citations, analysis, mechanics, positive), structured rubric management with weighted criteria, syllabus upload via Firebase Storage, a student sample library for calibration, and configurable report generation (transcript, mastery, progress) exportable as PDF, CSV, or JSON. The three-way voting system allows teachers, students, and parents to collaboratively shape personalized learning paths — a mechanism ensuring personalization is collaborative rather than algorithmically imposed.<Cite id={11} author="Deci, Edward L. and Ryan, Richard M." title="Self-Determination Theory: A Macrotheory of Human Motivation, Development, and Health" source="Canadian Psychology, 49(3)" year={2008} /> Self-determination theory's three needs — autonomy, competence, and relatedness — map directly to the voting system: students gain autonomy through vote participation, competence through mastery tracking, and relatedness through the parent-student-teacher collaboration loop.
+	</p>
 
-      <h2>What Failed</h2>
-      <p>
-        <strong>Onboarding complexity.</strong> 2-3 hours of setup. Teachers don't have that time.<Cite id={9} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /> Brooks's observation that conceptual integrity demands one mind (or a very small team) shaping the user experience proved prescient — we had built a system that reflected our own understanding rather than meeting teachers where they were.
-        <strong>Free tier didn't demonstrate value.</strong> Without the narrative engine, it looked like every other gamification tool.<Cite id={10} author="Christensen, Clayton M." title="The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail" source="Harvard Business Review Press" year={1997} /> Christensen's framework reveals our pricing failure — the free tier stripped away the disruptive innovation (narrative integration) and left only sustaining features that incumbents already offered better.
-        <strong>Wrong sales direction.</strong> Bottom-up (individual teachers) when value was clearest at school level.<Cite id={11} author="Deci, Edward L. and Ryan, Richard M." title="Self-Determination Theory: A Macrotheory of Human Motivation, Development, and Health" source="Canadian Psychology, 49(3)" year={2008} /> Self-determination theory explains the adoption gap: individual teachers lacked institutional autonomy to adopt a tool that required cross-classroom coordination, undermining the competence and relatedness needs that drive sustained engagement.
-      </p>
+	<MermaidDiagram
+		caption="Standards alignment flow: from curriculum standards through quest design to mastery reporting"
+		chart={`graph TD
+    S1[CCSS ELA 9-10] --> QA[Quest-Standard\\nAlignment]
+    S2[CCSS ELA 11-12] --> QA
+    S3[AP Literature\\nBig Ideas] --> QA
+    QA --> Q[Quest with\\nCoverage Level]
+    Q -->|Student submits| SUB[Submission]
+    SUB -->|AI + Rubric| EV[Evaluation]
+    EV --> M[Standard Mastery\\n5 levels]
+    M --> R[Standards Report\\nPer student/class]
+    Q -.->|full / partial / introduced| QA`}
+	/>
 
-      <MermaidDiagram
-        caption="Onboarding funnel with drop-off analysis — teacher attrition concentrated at setup complexity and free-tier value perception"
-        chart={`graph TD
+	<h2>Testing and Quality Infrastructure</h2>
+	<p>
+		The testing infrastructure uses Vitest with React Testing Library and jsdom. Test coverage spans hooks (<code>use-ai-consent</code>, <code>use-dialogs</code>, <code>use-feedback-snippets</code>, <code>use-navigation-items</code>, <code>use-parent-linking</code>, <code>use-player-stats</code>, <code>use-reduced-motion</code>), library utilities (<code>api-retry</code>, <code>circuit-breaker</code>, <code>game-utils</code>, <code>network</code>, <code>rate-limiter</code>, <code>sandbox-mode</code>, <code>sanitize</code>, <code>schemas</code>, <code>utils</code>), and core type validation. Six CI workflows run on every push: CI pipeline, CodeQL static analysis, dependency review, deployment, video generation, and stale issue management. The circuit breaker pattern prevents cascading failures from degraded LLM API calls, the rate limiter throttles AI evaluation requests to manage cost, and DOMPurify sanitizes all AI-generated content before rendering.<Cite id={15} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2007} /> Nygard's stability patterns — particularly the circuit breaker and bulkhead — informed the resilience layer: educational software that fails during a classroom session loses trust permanently, so graceful degradation is not optional but architecturally mandated.
+	</p>
+
+	<CodeStructure lang="typescript" caption="Resilience patterns: circuit breaker wraps LLM calls to prevent cascading failures during classroom sessions" filename="src/lib/circuit-breaker.ts">{`// Circuit breaker states for AI evaluation service
+type CircuitState = 'closed' | 'open' | 'half-open';
+
+interface CircuitBreakerConfig {
+  failureThreshold: number;    // failures before opening (default: 5)
+  resetTimeout: number;        // ms before half-open attempt (default: 30000)
+  monitorWindow: number;       // ms window for failure counting
+}
+
+// Usage: wraps every LLM evaluation call
+const evaluationBreaker = createCircuitBreaker({
+  failureThreshold: 5,
+  resetTimeout: 30_000,        // 30s before retry
+  monitorWindow: 60_000,       // 1-minute sliding window
+});
+
+// When open: returns cached feedback or graceful fallback
+// When half-open: allows single probe request
+// When closed: normal operation with failure counting`}</CodeStructure>
+
+	<h2>Metrics</h2>
+	<Figure alt="Aetheria pilot metrics table showing classroom adoption, retention rates, engagement gains, and teacher satisfaction scores" caption="Pilot metrics from 47 classrooms over 6 months — engagement gains were strong, but retention and adoption fell below targets">
+		<div class="table-wrap">
+			<table>
+				<thead>
+					<tr><th>Metric</th><th>Value</th><th>Assessment</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>Pilot classrooms</td><td>47</td><td>Below target (100)</td></tr>
+					<tr><td>Teacher retention (month 2)</td><td>68%</td><td>Acceptable</td></tr>
+					<tr><td>Teacher retention (month 6)</td><td>41%</td><td>Below target (60%)</td></tr>
+					<tr><td>Student engagement increase</td><td>+23%</td><td>Strong</td></tr>
+					<tr><td>NPS (teachers)</td><td>42</td><td>Good but not great</td></tr>
+					<tr><td>Core features implemented</td><td>13/13</td><td>Complete prototype</td></tr>
+					<tr><td>Production readiness</td><td>35%</td><td>Active hardening</td></tr>
+					<tr><td>Innovation score</td><td>9/10</td><td>Per 9-dimensional analysis</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</Figure>
+
+	<h2>What Worked</h2>
+	<p>
+		<strong>Student engagement: +23% assignment completion.</strong> Narrative integration was the key — students cared about quest outcomes because the stories were connected to their actual learning.<Cite id={6} author="Gee, James Paul" title="What Video Games Have to Teach Us About Learning and Literacy" source="Palgrave Macmillan" year={2003} /> Gee's research demonstrates that well-designed game environments create "situated meaning" — players learn because the context makes abstract concepts tangible and consequential, exactly what we observed in assignment completion data.<Cite id={7} author="Csikszentmihalyi, Mihaly" title="Flow: The Psychology of Optimal Experience" source="Harper & Row" year={1990} /> The engagement increase aligns with Csikszentmihalyi's flow theory: the quest structure balanced challenge and skill, keeping students in the productive zone between boredom and anxiety.
+	</p>
+	<p>
+		<strong>The governance pipeline caught quality issues early.</strong> At the I→II transition, we verified the theoretical framework. At II→III, we verified the game design was teacher-ready. Without these gates, we would have shipped too early.<Cite id={8} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's work on institutional governance informed the gate structure — her design principles for managing shared resources translate directly to managing shared creative infrastructure, where premature release degrades the commons.
+	</p>
+
+	<h2>What Failed</h2>
+	<p>
+		<strong>Onboarding complexity.</strong> 2-3 hours of setup. Teachers don't have that time.<Cite id={9} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /> Brooks's observation that conceptual integrity demands one mind (or a very small team) shaping the user experience proved prescient — we had built a system that reflected our own understanding rather than meeting teachers where they were.
+		<strong>Free tier didn't demonstrate value.</strong> Without the narrative engine, it looked like every other gamification tool.<Cite id={10} author="Christensen, Clayton M." title="The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail" source="Harvard Business Review Press" year={1997} /> Christensen's framework reveals our pricing failure — the free tier stripped away the disruptive innovation (narrative integration) and left only sustaining features that incumbents already offered better.
+		<strong>Wrong sales direction.</strong> Bottom-up (individual teachers) when value was clearest at school level.<Cite id={11} author="Deci, Edward L. and Ryan, Richard M." title="Self-Determination Theory: A Macrotheory of Human Motivation, Development, and Health" source="Canadian Psychology, 49(3)" year={2008} /> Self-determination theory explains the adoption gap: individual teachers lacked institutional autonomy to adopt a tool that required cross-classroom coordination, undermining the competence and relatedness needs that drive sustained engagement.
+	</p>
+
+	<MermaidDiagram
+		caption="Onboarding funnel with drop-off analysis — teacher attrition concentrated at setup complexity and free-tier value perception"
+		chart={`graph TD
     A[Teacher Discovery\\n100%] --> B[Sign-Up\\n73%]
     B --> C[Account Setup\\n61%]
     C --> D[Classroom Config\\n2-3 hrs\\n38%]
@@ -161,37 +250,66 @@ interface WorldRule {
     style X1 fill:#e87c7c,color:#fff
     style X2 fill:#e87c7c,color:#fff
     style X3 fill:#e87c7c,color:#fff`}
-      />
+	/>
 
-      <h2>Why Include a Failure?</h2>
-      <p>
-        The I→II→III pipeline worked as governance — it caught problems, preserved decisions, and enabled this post-mortem. The product needs iteration, but the system that produced it is sound. That's what governance as creative infrastructure looks like in practice: not preventing failure, but making failure legible and recoverable.<Cite id={12} author="Papert, Seymour" title="Mindstorms: Children, Computers, and Powerful Ideas" source="Basic Books" year={1980} /> Papert's constructionism holds that the best learning happens through building things that fail and then understanding why — Aetheria itself became an instance of the pedagogy it tried to teach, and this post-mortem is the assignment.
-      </p>
+	<h2>Market Context</h2>
+	<p>
+		Aetheria occupies a specific niche within the $8B+ EdTech gamification market.
+		Classcraft, the most direct competitor, focuses on behavior management
+		(HP loss for disruptions, XP for good behavior) rather than curriculum-aligned
+		assessment — its game mechanics reward compliance, not mastery. Kahoot excels at
+		synchronous formative assessment but provides no persistent progression or narrative
+		continuity between sessions. Duolingo's streak mechanics and adaptive difficulty are
+		well-studied, but Aetheria targets teacher-directed curriculum rather than algorithmic
+		content sequencing, preserving instructor autonomy. Google Classroom and Canvas handle
+		assignment distribution but treat gamification as an afterthought. Gimkit and Blooket
+		optimize for short-burst entertainment rather than the sustained academic rigor that
+		secondary and post-secondary education demands.
+	</p>
+	<p>
+		Aetheria's differentiation is the combination of deep RPG mechanics, AI-powered
+		evaluation, multi-stakeholder personalization (teacher + student + parent voting),
+		and rigorous standards alignment in a single platform — capabilities that existing
+		products offer only in isolation. The sandbox mode with pre-populated demo data
+		enables risk-free exploration without touching real classroom state, addressing
+		the evaluation barrier that prevents teachers from trialing new tools during
+		active semesters.
+	</p>
 
-      <Figure alt="Key Aetheria metrics at a glance: 47 pilot classrooms, 41% six-month retention, +23% engagement, 42 NPS, 2.5 hour onboarding, 4 character stats" caption="Aetheria by the numbers — a snapshot of what the pilot produced across engagement, retention, and design dimensions">
-        <StatGrid stats={[
-          { value: '47', label: 'Pilot Classrooms' },
-          { value: '41%', label: '6-Month Retention' },
-          { value: '+23%', label: 'Engagement Increase' },
-          { value: '42', label: 'Teacher NPS' },
-          { value: '2.5h', label: 'Avg. Onboarding Time' },
-          { value: '4', label: 'Character Stat Axes' },
-        ]} />
-      </Figure>
+	<h2>Why Include a Failure?</h2>
+	<p>
+		The I→II→III pipeline worked as governance — it caught problems, preserved decisions, and enabled this post-mortem. The product needs iteration, but the system that produced it is sound. That's what governance as creative infrastructure looks like in practice: not preventing failure, but making failure legible and recoverable.<Cite id={12} author="Papert, Seymour" title="Mindstorms: Children, Computers, and Powerful Ideas" source="Basic Books" year={1980} /> Papert's constructionism holds that the best learning happens through building things that fail and then understanding why — Aetheria itself became an instance of the pedagogy it tried to teach, and this post-mortem is the assignment. Within a system of {vitals.repos.total} repositories across {vitals.repos.orgs} organs, Aetheria demonstrates that the governance model produces accountable outcomes even when the product itself requires further iteration.
+	</p>
 
-      <References entries={[
-        { id: 1, author: "Ries, Eric", title: "The Lean Startup", source: "Crown Business", year: 2011 },
-        { id: 2, author: "Deterding, Sebastian et al.", title: "From Game Design Elements to Gamefulness: Defining Gamification", source: "Proceedings of MindTrek 2011, ACM", year: 2011 },
-        { id: 3, author: "Schell, Jesse", title: "The Art of Game Design: A Book of Lenses", source: "CRC Press", year: 2008 },
-        { id: 4, author: "Koster, Raph", title: "A Theory of Fun for Game Design", source: "Paraglyph Press", year: 2004 },
-        { id: 5, author: "Murray, Janet", title: "Hamlet on the Holodeck: The Future of Narrative in Cyberspace", source: "MIT Press", year: 1997 },
-        { id: 6, author: "Gee, James Paul", title: "What Video Games Have to Teach Us About Learning and Literacy", source: "Palgrave Macmillan", year: 2003 },
-        { id: 7, author: "Csikszentmihalyi, Mihaly", title: "Flow: The Psychology of Optimal Experience", source: "Harper & Row", year: 1990 },
-        { id: 8, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
-        { id: 9, author: "Brooks, Frederick P.", title: "The Mythical Man-Month: Essays on Software Engineering", source: "Addison-Wesley", year: 1975 },
-        { id: 10, author: "Christensen, Clayton M.", title: "The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail", source: "Harvard Business Review Press", year: 1997 },
-        { id: 11, author: "Deci, Edward L. and Ryan, Richard M.", title: "Self-Determination Theory: A Macrotheory of Human Motivation, Development, and Health", source: "Canadian Psychology, 49(3)", year: 2008 },
-        { id: 12, author: "Papert, Seymour", title: "Mindstorms: Children, Computers, and Powerful Ideas", source: "Basic Books", year: 1980 },
-      ]} />
+	<Figure alt="Key Aetheria metrics at a glance: 47 pilot classrooms, 41% six-month retention, +23% engagement, 42 NPS, 2.5 hour onboarding, 4 character stats, 13 core features, 6 quest types" caption="Aetheria by the numbers — a snapshot of what the pilot produced across engagement, retention, and design dimensions">
+		<StatGrid stats={[
+			{ value: '47', label: 'Pilot Classrooms' },
+			{ value: '41%', label: '6-Month Retention' },
+			{ value: '+23%', label: 'Engagement Increase' },
+			{ value: '42', label: 'Teacher NPS' },
+			{ value: '13/13', label: 'Core Features' },
+			{ value: '6', label: 'Quest Types' },
+			{ value: '4', label: 'Thematic Skins' },
+			{ value: '3', label: 'Standards Frameworks' },
+		]} />
+	</Figure>
+
+	<References entries={[
+		{ id: 1, author: "Ries, Eric", title: "The Lean Startup", source: "Crown Business", year: 2011 },
+		{ id: 2, author: "Deterding, Sebastian et al.", title: "From Game Design Elements to Gamefulness: Defining Gamification", source: "Proceedings of MindTrek 2011, ACM", year: 2011 },
+		{ id: 3, author: "Schell, Jesse", title: "The Art of Game Design: A Book of Lenses", source: "CRC Press", year: 2008 },
+		{ id: 4, author: "Koster, Raph", title: "A Theory of Fun for Game Design", source: "Paraglyph Press", year: 2004 },
+		{ id: 5, author: "Murray, Janet", title: "Hamlet on the Holodeck: The Future of Narrative in Cyberspace", source: "MIT Press", year: 1997 },
+		{ id: 6, author: "Gee, James Paul", title: "What Video Games Have to Teach Us About Learning and Literacy", source: "Palgrave Macmillan", year: 2003 },
+		{ id: 7, author: "Csikszentmihalyi, Mihaly", title: "Flow: The Psychology of Optimal Experience", source: "Harper & Row", year: 1990 },
+		{ id: 8, author: "Ostrom, Elinor", title: "Governing the Commons: The Evolution of Institutions for Collective Action", source: "Cambridge University Press", year: 1990 },
+		{ id: 9, author: "Brooks, Frederick P.", title: "The Mythical Man-Month: Essays on Software Engineering", source: "Addison-Wesley", year: 1975 },
+		{ id: 10, author: "Christensen, Clayton M.", title: "The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail", source: "Harvard Business Review Press", year: 1997 },
+		{ id: 11, author: "Deci, Edward L. and Ryan, Richard M.", title: "Self-Determination Theory: A Macrotheory of Human Motivation, Development, and Health", source: "Canadian Psychology, 49(3)", year: 2008 },
+		{ id: 12, author: "Papert, Seymour", title: "Mindstorms: Children, Computers, and Powerful Ideas", source: "Basic Books", year: 1980 },
+		{ id: 13, author: "Gamma, Erich et al.", title: "Design Patterns: Elements of Reusable Object-Oriented Software", source: "Addison-Wesley", year: 1995 },
+		{ id: 14, author: "Evans, Eric", title: "Domain-Driven Design: Tackling Complexity in the Heart of Software", source: "Addison-Wesley", year: 2003 },
+		{ id: 15, author: "Nygard, Michael T.", title: "Release It! Design and Deploy Production-Ready Software", source: "Pragmatic Bookshelf", year: 2007 },
+	]} />
 
 </ProjectLayout>
