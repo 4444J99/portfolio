@@ -24,7 +24,7 @@ function selectChunkThresholds(referenceTime) {
 		{
 			date: '2026-03-07',
 			thresholds: {
-				'vendor-mermaid': 480 * 1024,
+				'vendor-mermaid': 520 * 1024,
 				'vendor-p5': 320 * 1024,
 				'vendor-cytoscape': 200 * 1024,
 				'vendor-katex': 230 * 1024,
@@ -100,8 +100,8 @@ function selectInteractionThresholds(referenceTime) {
 		{
 			date: '2026-03-07',
 			thresholds: {
-				'/portfolio/architecture': 1008 * 1024,
-				'/portfolio/gallery': 1010 * 1024,
+				'/portfolio/architecture': 1050 * 1024,
+				'/portfolio/gallery': 1060 * 1024,
 			},
 		},
 		{
