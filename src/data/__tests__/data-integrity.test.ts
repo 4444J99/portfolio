@@ -141,38 +141,35 @@ describe('vitals.json', () => {
 
 describe('system-metrics.json', () => {
 	it('has top-level required sections', () => {
-		expect(systemMetrics.system).toBeTruthy();
-		expect(systemMetrics.registry).toBeTruthy();
-		expect(systemMetrics.omega).toBeTruthy();
-		expect(systemMetrics.essays).toBeTruthy();
-		expect(systemMetrics.sprints).toBeTruthy();
-		expect(systemMetrics.github_issues).toBeTruthy();
-		expect(systemMetrics.sprint_history).toBeTruthy();
+		expect(systemMetrics.computed).toBeTruthy();
+		expect(systemMetrics.schema_version).toBeTruthy();
+		expect(systemMetrics.generated).toBeTruthy();
 	});
 
 	it('registry totals are positive', () => {
-		expect(systemMetrics.registry.total_repos).toBeGreaterThan(0);
-		expect(systemMetrics.registry.total_organs).toBeGreaterThan(0);
+		expect(systemMetrics.computed.total_repos).toBeGreaterThan(0);
+		expect(systemMetrics.computed.total_organs).toBeGreaterThan(0);
 	});
 
 	it('implementation_status counts sum to total_repos', () => {
-		const sum = Object.values(systemMetrics.registry.implementation_status).reduce(
+		const sum = Object.values(systemMetrics.computed.implementation_status).reduce(
 			(a: number, b: number) => a + b,
 			0,
 		);
-		expect(sum).toBe(systemMetrics.registry.total_repos);
+		expect(sum).toBe(systemMetrics.computed.total_repos);
 	});
 
-	it('sprint_history has entries', () => {
-		expect(systemMetrics.sprint_history.length).toBeGreaterThan(0);
-		for (const s of systemMetrics.sprint_history) {
-			expect(s.name).toBeTruthy();
-			expect(s.date).toBeTruthy();
+	it('per_organ has entries', () => {
+		const perOrgan = systemMetrics.computed.per_organ;
+		expect(Object.keys(perOrgan).length).toBeGreaterThan(0);
+		for (const [organ, data] of Object.entries(perOrgan) as [string, any][]) {
+			expect(organ).toBeTruthy();
+			expect(data.repos).toBeGreaterThan(0);
 		}
 	});
 
 	it('contains documentation and test metrics', () => {
-		expect(systemMetrics.automated_tests).toBeGreaterThan(0);
-		expect(systemMetrics.documentation_words).toBeGreaterThan(0);
+		const wc = systemMetrics.computed.word_counts;
+		expect(wc).toBeTruthy();
 	});
 });

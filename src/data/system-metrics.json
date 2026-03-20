@@ -1,383 +1,68 @@
 {
+  "schema_version": "1.0",
   "generated": "2026-03-20T05:17:58.628766+00:00",
-  "sprint": "PROPULSIO_TERTIA",
-  "system": {
-    "name": "ORGANVM",
-    "launch_date": "2026-02-11",
-    "project_status": "PROPULSIO TERTIA Sprint 2026-03-19. 113 repos (59 ACTIVE, 53 ARCHIVED), 49 essays (~165K words), ~739K+ total words. Omega scorecard: 7/17 MET. Soak test: 32/30 days complete, 0 incidents. 70 GitHub issues tracking, 33 sprints completed, schema v1.0.0, governance v2.0. 4,015+ automated tests across 6 packages. 12 products deployed live. 16 repos with revenue models. GitHub Discussions + community onboarding active."
-  },
-  "registry": {
+  "computed": {
     "total_repos": 116,
+    "active_repos": 62,
+    "archived_repos": 53,
     "total_organs": 8,
     "operational_organs": 8,
+    "ci_workflows": 104,
+    "dependency_edges": 55,
+    "per_organ": {
+      "ORGAN-I": {
+        "name": "Theory",
+        "repos": 20
+      },
+      "ORGAN-II": {
+        "name": "Art",
+        "repos": 32
+      },
+      "ORGAN-III": {
+        "name": "Commerce",
+        "repos": 29
+      },
+      "ORGAN-IV": {
+        "name": "Orchestration",
+        "repos": 11
+      },
+      "ORGAN-V": {
+        "name": "Public Process",
+        "repos": 2
+      },
+      "ORGAN-VI": {
+        "name": "Community",
+        "repos": 6
+      },
+      "ORGAN-VII": {
+        "name": "Marketing",
+        "repos": 4
+      },
+      "META-ORGANVM": {
+        "name": "Meta",
+        "repos": 12
+      }
+    },
     "implementation_status": {
       "ACTIVE": 62,
       "ARCHIVED": 53,
       "PROTOTYPE": 1
     },
-    "tier_distribution": {
-      "flagship": 9,
-      "standard": 66,
-      "infrastructure": 8,
-      "archive": 7
+    "word_counts": {
+      "readmes": 137315,
+      "essays": 144924,
+      "corpus": 453152,
+      "org_profiles": 5516,
+      "total": 740907
     },
-    "promotion_status": {
-      "GRADUATED": 4,
-      "PUBLIC_PROCESS": 29,
-      "CANDIDATE": 55,
-      "LOCAL": 6,
-      "ARCHIVED": 9
-    },
-    "ci_coverage": 104,
-    "dependency_edges": 55,
-    "schema_version": "1.0.0",
-    "governance_version": "2.0",
-    "organs": {
-      "ORGAN-I": {
-        "name": "Theory",
-        "status": "OPERATIONAL",
-        "total_repos": 20,
-        "implementation_status": {
-          "ACTIVE": 17,
-          "ARCHIVED": 3
-        },
-        "ci_coverage": 18
-      },
-      "ORGAN-II": {
-        "name": "Art",
-        "status": "OPERATIONAL",
-        "total_repos": 32,
-        "implementation_status": {
-          "ACTIVE": 26,
-          "ARCHIVED": 4
-        },
-        "ci_coverage": 25
-      },
-      "ORGAN-III": {
-        "name": "Commerce",
-        "status": "OPERATIONAL",
-        "total_repos": 29,
-        "implementation_status": {
-          "ACTIVE": 25,
-          "ARCHIVED": 2
-        },
-        "ci_coverage": 26
-      },
-      "ORGAN-IV": {
-        "name": "Orchestration",
-        "status": "OPERATIONAL",
-        "total_repos": 11,
-        "implementation_status": {
-          "ACTIVE": 7
-        },
-        "ci_coverage": 6
-      },
-      "ORGAN-V": {
-        "name": "Public Process",
-        "status": "OPERATIONAL",
-        "total_repos": 2,
-        "implementation_status": {
-          "ACTIVE": 6
-        },
-        "ci_coverage": 5
-      },
-      "ORGAN-VI": {
-        "name": "Community",
-        "status": "OPERATIONAL",
-        "total_repos": 6,
-        "implementation_status": {
-          "ACTIVE": 6
-        },
-        "ci_coverage": 5
-      },
-      "ORGAN-VII": {
-        "name": "Distribution",
-        "status": "OPERATIONAL",
-        "total_repos": 4,
-        "implementation_status": {
-          "ACTIVE": 5,
-          "ARCHIVED": 1
-        },
-        "ci_coverage": 5
-      },
-      "META-ORGANVM": {
-        "name": "Meta",
-        "status": "OPERATIONAL",
-        "total_repos": 12,
-        "implementation_status": {
-          "ACTIVE": 7
-        },
-        "ci_coverage": 5
-      }
-    }
+    "total_words": "~741,000+",
+    "total_words_numeric": 740907,
+    "total_words_short": "741K+",
+    "code_files": 23121,
+    "test_files": 4337,
+    "repos_with_tests": 47
   },
-  "omega": {
-    "met": 7,
-    "in_progress": 0,
-    "not_met": 10,
-    "total": 17,
-    "percentage": 41,
-    "soak_streak": 32,
-    "soak_target": 30,
-    "soak_complete": true,
-    "soak_incidents": 0
-  },
-  "essays": {
-    "total": 49,
-    "word_count_estimate": 165000
-  },
-  "sprints": {
-    "completed": 33,
-    "cataloged": 76,
-    "latest": "PROPULSIO_TERTIA"
-  },
-  "github_issues": {
-    "corpus": 70,
-    "engine": 4,
-    "total": 70
-  },
-  "adrs": 16,
-  "schemas": 6,
-  "ci_workflows": 104,
-  "automated_tests": 4015,
-  "automated_tests_packages": 6,
-  "products_deployed_live": 12,
-  "deployment_platforms": [
-    "Netlify",
-    "Render",
-    "Vercel",
-    "Cloudflare Pages"
-  ],
-  "repos_with_revenue_models": 16,
-  "documentation_words": 739000,
-  "sprint_history": [
-    {
-      "name": "IGNITION",
-      "date": "2026-02-09",
-      "focus": "Org architecture",
-      "deliverables": "8 GitHub orgs created"
-    },
-    {
-      "name": "PROPULSION",
-      "date": "2026-02-10",
-      "focus": "Documentation",
-      "deliverables": "Bronze/Silver/Gold sprints"
-    },
-    {
-      "name": "ASCENSION",
-      "date": "2026-02-10",
-      "focus": "Validation",
-      "deliverables": "1,267 links audited"
-    },
-    {
-      "name": "EXODUS",
-      "date": "2026-02-11",
-      "focus": "Launch",
-      "deliverables": "9/9 criteria met"
-    },
-    {
-      "name": "PERFECTION",
-      "date": "2026-02-11",
-      "focus": "Gap-fill",
-      "deliverables": "11 repos, 14 promotions"
-    },
-    {
-      "name": "AUTONOMY",
-      "date": "2026-02-12",
-      "focus": "Automation",
-      "deliverables": "seed.yaml, 5 agents, 11 workflows"
-    },
-    {
-      "name": "GENESIS",
-      "date": "2026-02-12",
-      "focus": "Creation",
-      "deliverables": "7 new repos from local materials"
-    },
-    {
-      "name": "ALCHEMIA",
-      "date": "2026-02-12",
-      "focus": "Aesthetics",
-      "deliverables": "2,012 files, taste.yaml cascading"
-    },
-    {
-      "name": "CONVERGENCE",
-      "date": "2026-02-13",
-      "focus": "Coherence",
-      "deliverables": "82 ACTIVE, zero gaps"
-    },
-    {
-      "name": "PRAXIS",
-      "date": "2026-02-13",
-      "focus": "Impact",
-      "deliverables": "Portfolio, distribution, revenue"
-    },
-    {
-      "name": "VERITAS",
-      "date": "2026-02-13",
-      "focus": "Credibility",
-      "deliverables": "PRODUCTION\u2192ACTIVE, revenue split"
-    },
-    {
-      "name": "MANIFESTATIO",
-      "date": "2026-02-14",
-      "focus": "Outward-facing",
-      "deliverables": "Re-audit (3,586 code files), engagement baseline"
-    },
-    {
-      "name": "ILLUSTRATIO",
-      "date": "2026-02-14",
-      "focus": "Portfolio polish",
-      "deliverables": "CMYK design system, p5.js, LLM consultation page"
-    },
-    {
-      "name": "SUBMISSIO",
-      "date": "2026-02-14",
-      "focus": "Applications",
-      "deliverables": "5 application packages"
-    },
-    {
-      "name": "OPERATIO-I",
-      "date": "2026-02-16",
-      "focus": "Governance",
-      "deliverables": "Post-construction governance, runbooks"
-    },
-    {
-      "name": "GAP-FILL",
-      "date": "2026-02-11",
-      "focus": "Coverage",
-      "deliverables": "Coverage completion across all organs"
-    },
-    {
-      "name": "PLATINUM",
-      "date": "2026-02-11",
-      "focus": "Standardization",
-      "deliverables": "CI/CD across 77 repos"
-    },
-    {
-      "name": "REMEDIUM",
-      "date": "2026-02-16",
-      "focus": "Metrics repair",
-      "deliverables": "13 files updated"
-    },
-    {
-      "name": "SYNCHRONIUM",
-      "date": "2026-02-16",
-      "focus": "Infrastructure",
-      "deliverables": "68 repos moved, flat layout"
-    },
-    {
-      "name": "CONCORDIA",
-      "date": "2026-02-16",
-      "focus": "Reconciliation",
-      "deliverables": "6 orphan repos registered"
-    },
-    {
-      "name": "TRIPARTITUM",
-      "date": "2026-02-16",
-      "focus": "Documentation",
-      "deliverables": "19 sprint specs written"
-    },
-    {
-      "name": "METRICUM",
-      "date": "2026-02-16",
-      "focus": "Automation",
-      "deliverables": "Automated metrics pipeline"
-    },
-    {
-      "name": "PUBLICATIO",
-      "date": "2026-02-16",
-      "focus": "Essays",
-      "deliverables": "4 essays deployed, 3 new"
-    },
-    {
-      "name": "CANON",
-      "date": "2026-02-16",
-      "focus": "Reconciliation",
-      "deliverables": "4 numbering collisions fixed"
-    },
-    {
-      "name": "INSPECTIO",
-      "date": "2026-02-16",
-      "focus": "Assessment",
-      "deliverables": "Product assessment"
-    },
-    {
-      "name": "PROPAGATIO",
-      "date": "2026-02-16",
-      "focus": "Propagation",
-      "deliverables": "20+ files corrected"
-    },
-    {
-      "name": "BETA-VITAE",
-      "date": "2026-02-16",
-      "focus": "Deployment",
-      "deliverables": "Neon DB, 291 tests, render.yaml"
-    },
-    {
-      "name": "RECOGNITIO",
-      "date": "2026-02-17",
-      "focus": "Review",
-      "deliverables": "E2G-II, omega scorecard (1/17)"
-    },
-    {
-      "name": "AUTOMATA",
-      "date": "2026-02-17",
-      "focus": "Autonomy",
-      "deliverables": "3 cron workflows, auto-deploy"
-    },
-    {
-      "name": "DISTRIBUTIO",
-      "date": "2026-02-17",
-      "focus": "Distribution",
-      "deliverables": "Backfill pipeline, drip-feed"
-    },
-    {
-      "name": "FUNDAMEN",
-      "date": "2026-02-17",
-      "focus": "Hardening",
-      "deliverables": "6 repos synced, 25+ tests"
-    },
-    {
-      "name": "SENSORIA",
-      "date": "2026-02-17",
-      "focus": "Perception",
-      "deliverables": "100% seed.yaml coverage"
-    },
-    {
-      "name": "OPERATIO",
-      "date": "2026-02-17",
-      "focus": "Operations",
-      "deliverables": "Essay-deploy, organ-cli, health dashboard"
-    },
-    {
-      "name": "PROPULSIO",
-      "date": "2026-02-23",
-      "focus": "Forward motion",
-      "deliverables": "Pitch decks, omega live, MCP server, context sync"
-    },
-    {
-      "name": "PROPULSIO_MAXIMA",
-      "date": "2026-02-24",
-      "focus": "Multi-front",
-      "deliverables": "48 repos promoted, 83 decks, Doris Duke submitted, omega 1\u21922"
-    },
-    {
-      "name": "ERUPTIO",
-      "date": "2026-02-28",
-      "focus": "Deployment sprint",
-      "deliverables": "12 products deployed, schema v1.0.0, omega 2\u21924"
-    },
-    {
-      "name": "ERUPTIO_SECUNDA",
-      "date": "2026-03-04",
-      "focus": "Outreach + community",
-      "deliverables": "58 issues, governance v2.0, HOSPITIUM, FORUM, evidence portfolio, security audit, accessibility audit"
-    },
-    {
-      "name": "PROPULSIO_TERTIA",
-      "date": "2026-03-04",
-      "focus": "Portfolio + hardening",
-      "deliverables": "Portfolio refresh, PROBATIO, VIVIFICATIO, conference proposals"
-    }
-  ]
+  "manual": {
+    "_note": "Edit these by hand. calculate-metrics.py preserves this section."
+  }
 }
