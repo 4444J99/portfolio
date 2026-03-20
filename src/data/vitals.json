@@ -6,14 +6,21 @@
   },
   "substance": {
     "code_files": 2260,
-    "test_files": 171,
-    "automated_tests": 4015,
+    "test_files": 400,
+    "automated_tests": 2000,
     "ci_passing": 104,
     "ci_coverage_pct": 92
   },
   "logos": {
-    "essays": 49,
-    "words": 410000
+    "essays": 0,
+    "words": 739331,
+    "word_breakdown": {
+      "readmes": 136372,
+      "essays": 144924,
+      "corpus": 452519,
+      "org_profiles": 5516,
+      "total": 739331
+    }
   },
-  "timestamp": "2026-03-15T20:49:28.883339+00:00"
+  "timestamp": "2026-03-20T07:28:32.253496+00:00"
 }
