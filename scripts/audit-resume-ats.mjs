@@ -295,7 +295,7 @@ if (existsSync(resumePageDir)) {
 			result.status === 'pass' ? '[PASS]' : result.status === 'warn' ? '[WARN]' : '[FAIL]';
 		console.log(`  ${icon}  ${filename}`);
 		console.log(
-			`         h1: ${result.hasH1 ? (result.h1Headings?.[0] ?? 'yes') : 'none'}  |  h2 count: ${result.h2Headings.length}  |  sections: ${result.sectionCount}`,
+			`         h1: ${result.hasH1 ? 'yes' : 'none'}  |  h2 count: ${result.h2Headings.length}  |  sections: ${result.sectionCount}`,
 		);
 		console.log(
 			`         ATS keywords in headings: ${result.atsKeywordsFound.length > 0 ? result.atsKeywordsFound.join(', ') : 'none'}`,

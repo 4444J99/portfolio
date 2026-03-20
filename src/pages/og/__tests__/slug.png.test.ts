@@ -7,8 +7,8 @@ vi.mock('../../../utils/og-image', () => ({
 }));
 
 describe('[...slug].png.ts', () => {
-	it('should generate static paths for all configured pages', () => {
-		const paths = getStaticPaths({} as any) as any[];
+	it('should generate static paths for all configured pages', async () => {
+		const paths = (await getStaticPaths({} as any)) as any[];
 		expect(paths.length).toBeGreaterThan(0);
 		expect(paths[0]).toHaveProperty('params');
 		expect(paths[0].params).toHaveProperty('slug');
