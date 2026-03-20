@@ -7,8 +7,9 @@
 	},
 	"scripts": {
 		"dev": "npm run sync:vitals && astro dev",
-		"generate-data": "python3 ../ingesting-organ-document-structure/scripts/praxis-portfolio-generate.py --output-dir src/data && cp ../ingesting-organ-document-structure/system-metrics.json src/data/",
+		"generate-data": "python3 ../../meta-organvm/organvm-corpvs-testamentvm/scripts/praxis-portfolio-generate.py --output-dir src/data && cp ../../meta-organvm/organvm-corpvs-testamentvm/system-metrics.json src/data/",
 		"sync:content": "node scripts/sync-content-from-praxis.mjs",
+		"syndicate:devto": "node scripts/syndicate-essays.mjs",
 		"sync:github-pages": "node scripts/sync-github-pages.mjs --output src/data/github-pages.json --curation src/data/github-pages-curation.json",
 		"sync:identity": "node scripts/sync-identity.mjs",
 		"sync:vitals": "node scripts/sync-trust-metrics.mjs",
