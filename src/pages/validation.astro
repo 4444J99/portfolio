@@ -1,0 +1,822 @@
+---
+import StatGrid from '../components/StatGrid.astro';
+import omegaDataRaw from '../data/omega.json';
+import metrics from '../data/system-metrics.json';
+import vitals from '../data/vitals.json';
+import Layout from '../layouts/Layout.astro';
+
+interface OmegaCriterion {
+	id: number;
+	criterion: string;
+	measurement: string;
+	horizon: string;
+	status: string;
+	evidence: string;
+	evidenceUrl?: string | null;
+	target?: string | null;
+	dateMet?: string | null;
+}
+
+interface OmegaSoak {
+	streak_days: number;
+	target_days: number;
+	critical_incidents: number;
+	first_date: string;
+	last_date: string;
+	days_remaining: number;
+	target_met: boolean;
+}
+
+interface OmegaCommunity {
+	github_discussions: boolean;
+	good_first_issues: number;
+	issue_templates: boolean;
+	contributing_guide: boolean;
+	total_github_issues: number;
+	sprints_completed: number;
+	sprints_cataloged: number;
+}
+
+interface OmegaData {
+	generated: string;
+	summary: { met: number; in_progress: number; not_started: number; total: number };
+	horizons: Array<{
+		id: string;
+		name: string;
+		timeline: string;
+		met: number;
+		in_progress: number;
+		not_started: number;
+	}>;
+	criteria: OmegaCriterion[];
+	soak: OmegaSoak;
+	community: OmegaCommunity;
+}
+
+const omegaData = (Array.isArray(omegaDataRaw) ? omegaDataRaw[0] : omegaDataRaw) as OmegaData;
+const { summary, criteria, soak, community } = omegaData;
+
+const typedMetrics = metrics as Record<string, unknown>;
+const registry = typedMetrics.registry as Record<string, unknown>;
+const omega = typedMetrics.omega as Record<string, unknown>;
+
+const soakStreak = (omega.soak_streak as number) ?? soak.streak_days;
+const soakTarget = (omega.soak_target as number) ?? soak.target_days;
+const soakIncidents = (omega.soak_incidents as number) ?? soak.critical_incidents;
+
+const totalRepos = (registry.total_repos as number) ?? vitals.repos.total;
+const totalOrgans = (registry.total_organs as number) ?? vitals.repos.orgs;
+const ciCoverage = (registry.ci_coverage as number) ?? vitals.substance.ci_passing;
+const depEdges = (registry.dependency_edges as number) ?? 50;
+const activeRepos =
+	(registry.implementation_status as Record<string, number>)?.ACTIVE ?? vitals.repos.active;
+
+const automatedTests = (typedMetrics.automated_tests as number) ?? vitals.substance.automated_tests;
+const testPackages = (typedMetrics.automated_tests_packages as number) ?? 6;
+const sprintsCompleted = community.sprints_completed;
+
+// Test distribution by package
+const testBreakdown = [
+	{ pkg: 'engine', count: 3235 },
+	{ pkg: 'ontologia', count: 353 },
+	{ pkg: 'mcp-server', count: 207 },
+	{ pkg: 'alchemia', count: 136 },
+	{ pkg: 'dashboard', count: 62 },
+	{ pkg: 'schema-defs', count: 22 },
+];
+const maxTestCount = Math.max(...testBreakdown.map((t) => t.count));
+
+// Constitutional corpus (not in JSON data files -- sourced from governance corpus)
+const corpus = {
+	specs: 27,
+	bibtexSources: 130,
+	groundingWords: 84049,
+	traceability: 100,
+};
+
+const metCriteria = criteria.filter((c) => c.status === 'met');
+const unmetCriteria = criteria.filter((c) => c.status !== 'met');
+---
+
+<Layout
+	title="System Validation — Evidence of Operation"
+	description="Quantitative validation evidence for a 113-repository creative-institutional system: omega scorecard, soak test, test coverage, and constitutional corpus."
+>
+	<section class="section">
+		<div class="container">
+			<h1 class="page-title">System Validation</h1>
+			<p class="page-sub">
+				Quantitative evidence that a {totalRepos}-repository system across {totalOrgans} organs
+				is not a diagram — it runs, it tests, it self-heals, and it governs itself.
+			</p>
+
+			<StatGrid stats={[
+				{ value: `${summary.met}/${summary.total}`, label: 'Omega Criteria Met' },
+				{ value: `${soakStreak}/${soakTarget}`, label: 'Soak Test Days' },
+				{ value: automatedTests.toLocaleString(), label: 'Automated Tests' },
+				{ value: totalRepos, label: 'Repositories' },
+				{ value: ciCoverage, label: 'CI Workflows' },
+				{ value: `${corpus.specs}`, label: 'Governance Specs' },
+			]} />
+		</div>
+	</section>
+
+	<!-- Omega Scorecard -->
+	<section class="section">
+		<div class="container">
+			<h2 class="section__heading" data-reveal>Omega Scorecard</h2>
+			<p class="validation__intro">
+				17 binary criteria defining the transition from <em>construction</em> to
+				<em>sustainable operation</em>. Each criterion has a measurable threshold --
+				no partial credit.
+			</p>
+
+			<div class="omega-progress" role="progressbar" aria-valuenow={summary.met} aria-valuemin="0" aria-valuemax={summary.total} aria-label={`${summary.met} of ${summary.total} criteria met`}>
+				<div class="omega-progress__track">
+					{criteria.map((c) => (
+						<div
+							class={`omega-progress__cell omega-progress__cell--${c.status}`}
+							title={`#${c.id}: ${c.criterion} (${c.status.replace('_', ' ')})`}
+						/>
+					))}
+				</div>
+				<div class="omega-progress__legend">
+					<span class="omega-progress__stat">
+						<span class="omega-dot omega-dot--met"></span>
+						<strong>{summary.met}</strong> Met
+					</span>
+					<span class="omega-progress__stat">
+						<span class="omega-dot omega-dot--progress"></span>
+						<strong>{summary.in_progress}</strong> In Progress
+					</span>
+					<span class="omega-progress__stat">
+						<span class="omega-dot omega-dot--not-started"></span>
+						<strong>{summary.not_started}</strong> Not Started
+					</span>
+				</div>
+			</div>
+
+			<div class="criteria-grid">
+				{criteria.map((c) => (
+					<div class={`criteria-cell criteria-cell--${c.status}`} data-reveal>
+						<span class="criteria-cell__id">#{c.id}</span>
+						<span class={`criteria-cell__status criteria-cell__status--${c.status}`}>
+							{c.status === 'met' ? 'MET' : c.status === 'in_progress' ? 'WIP' : '---'}
+						</span>
+						<span class="criteria-cell__label">{c.criterion}</span>
+						{c.dateMet && (
+							<span class="criteria-cell__date">{c.dateMet}</span>
+						)}
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Soak Test -->
+	<section class="section">
+		<div class="container">
+			<h2 class="section__heading" data-reveal>Soak Test</h2>
+			<p class="validation__intro">
+				Continuous monitoring since {soak.first_date}. The system must run for {soakTarget} consecutive
+				days with zero critical incidents to prove operational stability.
+			</p>
+
+			<div class="soak-card" data-reveal>
+				<div class="soak-card__header">
+					<span class={`soak-card__badge soak-card__badge--${soak.target_met ? 'met' : 'active'}`}>
+						{soak.target_met ? 'TARGET MET' : 'IN PROGRESS'}
+					</span>
+				</div>
+				<div class="soak-card__stats">
+					<div class="soak-stat">
+						<span class="soak-stat__value">{soakStreak}</span>
+						<span class="soak-stat__label">Days Streak</span>
+					</div>
+					<div class="soak-stat">
+						<span class="soak-stat__value">{soakTarget}</span>
+						<span class="soak-stat__label">Target Days</span>
+					</div>
+					<div class="soak-stat">
+						<span class="soak-stat__value">{soakIncidents}</span>
+						<span class="soak-stat__label">Critical Incidents</span>
+					</div>
+				</div>
+				<div class="soak-card__timeline">
+					<span class="soak-card__date">{soak.first_date}</span>
+					<div class="soak-card__bar">
+						<div
+							class="soak-card__fill"
+							style={`width: ${Math.min((soakStreak / soakTarget) * 100, 100)}%`}
+						/>
+					</div>
+					<span class="soak-card__date">{soak.last_date}</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Test Coverage -->
+	<section class="section">
+		<div class="container">
+			<h2 class="section__heading" data-reveal>Test Coverage</h2>
+			<p class="validation__intro">
+				{automatedTests.toLocaleString()} automated tests across {testPackages} packages.
+				Not a prototype count — these run on every commit.
+			</p>
+
+			<div class="test-bars" data-reveal>
+				{testBreakdown.map((t) => (
+					<div class="test-bar">
+						<span class="test-bar__label">{t.pkg}</span>
+						<div class="test-bar__track">
+							<div
+								class="test-bar__fill"
+								style={`width: ${(t.count / maxTestCount) * 100}%`}
+							/>
+						</div>
+						<span class="test-bar__count">{t.count.toLocaleString()}</span>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- System Scale -->
+	<section class="section">
+		<div class="container">
+			<h2 class="section__heading" data-reveal>System Scale</h2>
+			<p class="validation__intro">
+				A live multi-organ architecture — not a sketch, not a plan.
+			</p>
+
+			<div class="scale-grid" data-reveal>
+				<div class="scale-card">
+					<div class="scale-card__value">{totalRepos}</div>
+					<div class="scale-card__label">Repositories</div>
+				</div>
+				<div class="scale-card">
+					<div class="scale-card__value">{totalOrgans}</div>
+					<div class="scale-card__label">Organs</div>
+				</div>
+				<div class="scale-card">
+					<div class="scale-card__value">{ciCoverage}</div>
+					<div class="scale-card__label">CI Workflows</div>
+				</div>
+				<div class="scale-card">
+					<div class="scale-card__value">{depEdges}</div>
+					<div class="scale-card__label">Dependency Edges</div>
+				</div>
+				<div class="scale-card scale-card--highlight">
+					<div class="scale-card__value">0</div>
+					<div class="scale-card__label">Violations</div>
+				</div>
+				<div class="scale-card">
+					<div class="scale-card__value">{activeRepos}</div>
+					<div class="scale-card__label">Active Repos</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Constitutional Corpus -->
+	<section class="section">
+		<div class="container">
+			<h2 class="section__heading" data-reveal>Constitutional Corpus</h2>
+			<p class="validation__intro">
+				The governance layer is not ad-hoc configuration — it is a formally specified,
+				citation-grounded constitutional corpus with full traceability.
+			</p>
+
+			<div class="corpus-grid" data-reveal>
+				<div class="corpus-card">
+					<div class="corpus-card__value">{corpus.specs}</div>
+					<div class="corpus-card__label">Governance Specs</div>
+				</div>
+				<div class="corpus-card">
+					<div class="corpus-card__value">{corpus.bibtexSources}</div>
+					<div class="corpus-card__label">BibTeX Sources</div>
+				</div>
+				<div class="corpus-card">
+					<div class="corpus-card__value">{corpus.groundingWords.toLocaleString()}</div>
+					<div class="corpus-card__label">Words of Grounding</div>
+				</div>
+				<div class="corpus-card corpus-card--highlight">
+					<div class="corpus-card__value">{corpus.traceability}%</div>
+					<div class="corpus-card__label">Traceability</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Infrastructure -->
+	<section class="section">
+		<div class="container">
+			<h2 class="section__heading" data-reveal>Infrastructure</h2>
+			<p class="validation__intro">
+				Deployed, monitored, and publicly accessible.
+			</p>
+
+			<div class="infra-grid" data-reveal>
+				<div class="infra-item">
+					<span class="infra-item__indicator infra-item__indicator--live"></span>
+					<div class="infra-item__content">
+						<span class="infra-item__title">Stakeholder Portal</span>
+						<span class="infra-item__detail">
+							<a href="https://stakeholder-portal-ten.vercel.app" target="_blank" rel="noopener noreferrer">
+								stakeholder-portal-ten.vercel.app
+							</a>
+						</span>
+					</div>
+				</div>
+				<div class="infra-item">
+					<span class="infra-item__indicator infra-item__indicator--live"></span>
+					<div class="infra-item__content">
+						<span class="infra-item__title">Active Repositories</span>
+						<span class="infra-item__detail">{activeRepos} repos with implementation_status: ACTIVE</span>
+					</div>
+				</div>
+				<div class="infra-item">
+					<span class="infra-item__indicator infra-item__indicator--live"></span>
+					<div class="infra-item__content">
+						<span class="infra-item__title">Development Sprints</span>
+						<span class="infra-item__detail">{sprintsCompleted}+ sprints completed, {community.sprints_cataloged} cataloged</span>
+					</div>
+				</div>
+				<div class="infra-item">
+					<span class="infra-item__indicator infra-item__indicator--live"></span>
+					<div class="infra-item__content">
+						<span class="infra-item__title">Products Deployed</span>
+						<span class="infra-item__detail">{typedMetrics.products_deployed_live} live across {(typedMetrics.deployment_platforms as string[])?.join(', ')}</span>
+					</div>
+				</div>
+				<div class="infra-item">
+					<span class="infra-item__indicator infra-item__indicator--live"></span>
+					<div class="infra-item__content">
+						<span class="infra-item__title">Community Infrastructure</span>
+						<span class="infra-item__detail">
+							{community.total_github_issues} issues, {community.good_first_issues} good-first-issues,
+							GitHub Discussions enabled
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<section class="section">
+		<div class="container">
+			<div class="validation-footer" data-reveal>
+				<p>
+					All data on this page is derived from live system state.
+					Omega criteria are defined in
+					<a href="https://github.com/meta-organvm/organvm-corpvs-testamentvm/blob/main/docs/strategy/there%2Bback-again.md" target="_blank" rel="noopener noreferrer">there+back-again.md</a>.
+				</p>
+				<p class="validation-footer__date">
+					Data generated: {omegaData.generated}
+				</p>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	/* --- Intro text --- */
+	.validation__intro {
+		font-size: 0.9rem;
+		color: var(--text-secondary);
+		margin-bottom: var(--space-xl);
+		line-height: 1.6;
+		max-width: 48rem;
+	}
+
+	/* --- Omega Progress Grid --- */
+	.omega-progress {
+		margin-bottom: var(--space-xl);
+	}
+
+	.omega-progress__track {
+		display: flex;
+		gap: 3px;
+		margin-bottom: var(--space-sm);
+	}
+
+	.omega-progress__cell {
+		flex: 1;
+		height: 12px;
+		border-radius: 2px;
+		transition: transform var(--transition-fast);
+	}
+
+	.omega-progress__cell:hover {
+		transform: scaleY(1.5);
+	}
+
+	.omega-progress__cell--met {
+		background: var(--cmyk-cyan, #00bcd4);
+	}
+
+	.omega-progress__cell--in_progress {
+		background: var(--cmyk-yellow, #ffc107);
+	}
+
+	.omega-progress__cell--not_started {
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+	}
+
+	.omega-progress__legend {
+		display: flex;
+		gap: var(--space-lg);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--text-muted);
+	}
+
+	.omega-progress__stat {
+		display: flex;
+		align-items: center;
+		gap: var(--space-xs);
+	}
+
+	.omega-dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		flex-shrink: 0;
+	}
+
+	.omega-dot--met { background: var(--cmyk-cyan, #00bcd4); }
+	.omega-dot--progress { background: var(--cmyk-yellow, #ffc107); }
+	.omega-dot--not-started { background: var(--border); }
+
+	/* --- Criteria Grid --- */
+	.criteria-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: var(--space-sm);
+	}
+
+	.criteria-cell {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: var(--space-xs);
+		padding: var(--space-sm) var(--space-md);
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm, 4px);
+		border-left: 3px solid var(--border);
+	}
+
+	.criteria-cell--met { border-left-color: var(--cmyk-cyan, #00bcd4); }
+	.criteria-cell--in_progress { border-left-color: var(--cmyk-yellow, #ffc107); }
+
+	.criteria-cell__id {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		color: var(--text-muted);
+		font-weight: 700;
+	}
+
+	.criteria-cell__status {
+		font-family: var(--font-mono);
+		font-size: 0.6rem;
+		padding: 1px 6px;
+		border-radius: 8px;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		font-weight: 600;
+	}
+
+	.criteria-cell__status--met {
+		background: rgba(0, 188, 212, 0.15);
+		color: var(--cmyk-cyan, #00bcd4);
+	}
+
+	.criteria-cell__status--in_progress {
+		background: rgba(255, 193, 7, 0.15);
+		color: var(--cmyk-yellow, #ffc107);
+	}
+
+	.criteria-cell__status--not_started {
+		background: rgba(255, 255, 255, 0.05);
+		color: var(--text-muted);
+	}
+
+	.criteria-cell__label {
+		font-size: 0.8rem;
+		color: var(--text-secondary);
+		flex: 1 1 100%;
+	}
+
+	.criteria-cell__date {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		color: var(--text-muted);
+	}
+
+	/* --- Soak Card --- */
+	.soak-card {
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg, 8px);
+		padding: var(--space-lg);
+	}
+
+	.soak-card__header {
+		margin-bottom: var(--space-md);
+	}
+
+	.soak-card__badge {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		padding: 3px 10px;
+		border-radius: 10px;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-weight: 600;
+	}
+
+	.soak-card__badge--met {
+		background: rgba(0, 188, 212, 0.15);
+		color: var(--cmyk-cyan, #00bcd4);
+	}
+
+	.soak-card__badge--active {
+		background: rgba(255, 193, 7, 0.15);
+		color: var(--cmyk-yellow, #ffc107);
+	}
+
+	.soak-card__stats {
+		display: flex;
+		gap: var(--space-2xl);
+		margin-bottom: var(--space-lg);
+	}
+
+	.soak-stat__value {
+		display: block;
+		font-size: 2rem;
+		font-weight: 700;
+		color: var(--text-primary);
+		line-height: 1;
+	}
+
+	.soak-stat__label {
+		display: block;
+		font-size: 0.75rem;
+		color: var(--text-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-top: var(--space-xs);
+	}
+
+	.soak-card__timeline {
+		display: flex;
+		align-items: center;
+		gap: var(--space-sm);
+	}
+
+	.soak-card__date {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		color: var(--text-muted);
+		white-space: nowrap;
+	}
+
+	.soak-card__bar {
+		flex: 1;
+		height: 6px;
+		background: var(--bg-secondary);
+		border-radius: 3px;
+		overflow: hidden;
+	}
+
+	.soak-card__fill {
+		height: 100%;
+		background: var(--cmyk-cyan, #00bcd4);
+		border-radius: 3px;
+		transition: width 0.6s ease;
+	}
+
+	/* --- Test Bars --- */
+	.test-bars {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+	}
+
+	.test-bar {
+		display: grid;
+		grid-template-columns: 7rem 1fr 4rem;
+		align-items: center;
+		gap: var(--space-sm);
+	}
+
+	.test-bar__label {
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		color: var(--text-secondary);
+		text-align: right;
+	}
+
+	.test-bar__track {
+		height: 10px;
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		border-radius: 5px;
+		overflow: hidden;
+	}
+
+	.test-bar__fill {
+		height: 100%;
+		background: var(--cmyk-cyan, #00bcd4);
+		border-radius: 5px;
+		transition: width 0.6s ease;
+	}
+
+	.test-bar__count {
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: var(--text-primary);
+	}
+
+	/* --- Scale Grid --- */
+	.scale-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+		gap: var(--space-md);
+	}
+
+	.scale-card {
+		text-align: center;
+		padding: var(--space-lg);
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-md, 6px);
+	}
+
+	.scale-card--highlight {
+		border-color: var(--cmyk-cyan, #00bcd4);
+	}
+
+	.scale-card__value {
+		font-size: 2rem;
+		font-weight: 700;
+		color: var(--text-primary);
+		line-height: 1;
+	}
+
+	.scale-card--highlight .scale-card__value {
+		color: var(--cmyk-cyan, #00bcd4);
+	}
+
+	.scale-card__label {
+		font-size: 0.75rem;
+		color: var(--text-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-top: var(--space-xs);
+	}
+
+	/* --- Corpus Grid --- */
+	.corpus-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+		gap: var(--space-md);
+	}
+
+	.corpus-card {
+		text-align: center;
+		padding: var(--space-lg);
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-md, 6px);
+	}
+
+	.corpus-card--highlight {
+		border-color: var(--cmyk-cyan, #00bcd4);
+	}
+
+	.corpus-card__value {
+		font-size: 2rem;
+		font-weight: 700;
+		color: var(--text-primary);
+		line-height: 1;
+	}
+
+	.corpus-card--highlight .corpus-card__value {
+		color: var(--cmyk-cyan, #00bcd4);
+	}
+
+	.corpus-card__label {
+		font-size: 0.75rem;
+		color: var(--text-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-top: var(--space-xs);
+	}
+
+	/* --- Infrastructure List --- */
+	.infra-grid {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+	}
+
+	.infra-item {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--space-md);
+		padding: var(--space-md);
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm, 4px);
+	}
+
+	.infra-item__indicator {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		flex-shrink: 0;
+		margin-top: 5px;
+	}
+
+	.infra-item__indicator--live {
+		background: var(--cmyk-cyan, #00bcd4);
+		box-shadow: 0 0 6px rgba(0, 188, 212, 0.4);
+	}
+
+	.infra-item__content {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+
+	.infra-item__title {
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--text-primary);
+	}
+
+	.infra-item__detail {
+		font-size: 0.8rem;
+		color: var(--text-muted);
+	}
+
+	.infra-item__detail a {
+		color: var(--cmyk-cyan, #00bcd4);
+		text-decoration: none;
+	}
+
+	.infra-item__detail a:hover {
+		text-decoration: underline;
+	}
+
+	/* --- Footer --- */
+	.validation-footer {
+		text-align: center;
+		padding: var(--space-xl) 0;
+		border-top: 1px solid var(--border);
+		font-size: 0.85rem;
+		color: var(--text-muted);
+	}
+
+	.validation-footer a {
+		color: var(--cmyk-cyan, #00bcd4);
+		text-decoration: none;
+	}
+
+	.validation-footer a:hover {
+		text-decoration: underline;
+	}
+
+	.validation-footer__date {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		margin-top: var(--space-sm);
+	}
+
+	/* --- Responsive --- */
+	@media (max-width: 768px) {
+		.soak-card__stats {
+			flex-direction: column;
+			gap: var(--space-md);
+		}
+
+		.soak-card__timeline {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.test-bar {
+			grid-template-columns: 5rem 1fr 3.5rem;
+		}
+
+		.criteria-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

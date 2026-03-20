@@ -134,6 +134,15 @@
       ]
     },
     {
+      "path": "/pathos",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
       "path": "/philosophy",
       "checks": [
         "nav-menu",
@@ -378,6 +387,15 @@
     },
     {
       "path": "/testimonials",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/validation",
       "checks": [
         "nav-menu",
         "dropdown-menu",
