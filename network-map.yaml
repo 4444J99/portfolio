@@ -1,0 +1,33 @@
+schema_version: '1.0'
+repo: portfolio
+organ: PERSONAL
+mirrors:
+  technical:
+  - project: withastro/astro
+    platform: github
+    relevance: 'JS/TS dependency: astro'
+    engagement:
+    - watch
+    tags:
+    - auto-discovered
+    - js-dep
+  - project: microsoft/TypeScript
+    platform: github
+    relevance: 'JS/TS dependency: typescript'
+    engagement:
+    - watch
+    tags:
+    - auto-discovered
+    - js-dep
+  - project: vitest-dev/vitest
+    platform: github
+    relevance: 'JS/TS dependency: vitest'
+    engagement:
+    - watch
+    tags:
+    - auto-discovered
+    - js-dep
+  parallel: []
+  kinship: []
+ledger: ~/.organvm/network/ledger.jsonl
+last_scanned: '2026-03-20T11:55:26.314238+00:00'
