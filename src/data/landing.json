@@ -1,14 +1,14 @@
 {
-  "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
+  "title": "ORGANVM — Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
-    "total_repos": 113,
-    "active_repos": 59,
+    "total_repos": 116,
+    "active_repos": 62,
     "archived_repos": 53,
-    "dependency_edges": 50,
+    "dependency_edges": 55,
     "ci_workflows": 104,
     "operational_organs": 8,
-    "sprints_completed": 0
+    "sprints_completed": 33
   },
   "organs": [
     {
@@ -36,7 +36,7 @@
       "org": "organvm-iii-ergon",
       "repo_count": 29,
       "status": "OPERATIONAL",
-      "description": "Product platforms, deployed systems, customer-facing tools, B2B/B2C applications"
+      "description": "Revenue-generating products, deployed systems, customer-facing tools, B2B/B2C applications"
     },
     {
       "key": "ORGAN-IV",
@@ -63,7 +63,7 @@
       "org": "organvm-vi-koinonia",
       "repo_count": 6,
       "status": "OPERATIONAL",
-      "description": "Community infrastructure, member management, governance, forums, shared resources, collaborative spaces"
+      "description": "Community infrastructure — salon archives, reading group curricula, adaptive syllabi, contributor profiles, shared PostgreSQL layer, FastAPI portal with full-text search, Atom feeds, and WebSocket live rooms"
     },
     {
       "key": "ORGAN-VII",
@@ -72,7 +72,7 @@
       "org": "organvm-vii-kerygma",
       "repo_count": 4,
       "status": "OPERATIONAL",
-      "description": "Content distribution, social amplification, audience building, POSSE automation, release coordination, press/announcement strategy"
+      "description": "Marketing & Distribution — POSSE distribution pipeline with Ghost newsletter hub, Mastodon, Discord, Bluesky adapters, cross-organ event wiring, autonomous RSS polling, bidirectional analytics, Ghost Handlebars theme, 15 announcement templates"
     },
     {
       "key": "META-ORGANVM",
@@ -149,7 +149,7 @@
       "name": "VERITAS",
       "date": "2026-02-13",
       "focus": "Credibility",
-      "deliverables": "PRODUCTION\u2192ACTIVE, revenue split"
+      "deliverables": "PRODUCTION→ACTIVE, revenue split"
     },
     {
       "name": "MANIFESTATIO",
@@ -293,13 +293,13 @@
       "name": "PROPULSIO_MAXIMA",
       "date": "2026-02-24",
       "focus": "Multi-front",
-      "deliverables": "48 repos promoted, 83 decks, Doris Duke submitted, omega 1\u21922"
+      "deliverables": "48 repos promoted, 83 decks, Doris Duke submitted, omega 1→2"
     },
     {
       "name": "ERUPTIO",
       "date": "2026-02-28",
       "focus": "Deployment sprint",
-      "deliverables": "12 products deployed, schema v1.0.0, omega 2\u21924"
+      "deliverables": "12 products deployed, schema v1.0.0, omega 2→4"
     },
     {
       "name": "ERUPTIO_SECUNDA",
@@ -314,5 +314,5 @@
       "deliverables": "Portfolio refresh, PROBATIO, VIVIFICATIO, conference proposals"
     }
   ],
-  "generated": "2026-03-20T07:28:32.253873+00:00"
+  "generated": "2026-03-20T05:17:58.628766+00:00"
 }

@@ -36,12 +36,7 @@ const triageCandidates = candidates.filter((c) => c.status === 'triage');
         <p class="role-title">{candidate.role}</p>
         <p class="justification">{candidate.reason}</p>
         
-        <div class="card-actions">
-          <button class="promote-btn" data-company={candidate.company} data-role={candidate.role} data-persona={candidate.persona_id}>
-            Promote to Strike
-          </button>
-          <button class="ignore-btn">Ignore</button>
-        </div>
+        <p class="card-cli-hint">Review candidates via <code>npm run strike:new</code></p>
       </div>
     ))}
   </div>
@@ -148,50 +143,17 @@ const triageCandidates = candidates.filter((c) => c.status === 'triage');
     flex-grow: 1;
   }
 
-  .card-actions {
-    display: flex;
-    gap: var(--space-sm);
-  }
-
-  .promote-btn {
-    background: var(--accent);
-    color: var(--bg-primary);
-    border: none;
-    padding: var(--space-xs) var(--space-md);
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    cursor: pointer;
-    flex-grow: 2;
-  }
-
-  .ignore-btn {
-    background: transparent;
-    border: 1px solid var(--border);
+  .card-cli-hint {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
     color: var(--text-muted);
-    padding: var(--space-xs) var(--space-md);
-    border-radius: 4px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    flex-grow: 1;
+    margin-top: auto;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border);
   }
 
-  .ignore-btn:hover {
-    background: rgba(255,255,255,0.05);
-    color: #fff;
+  .card-cli-hint code {
+    color: var(--accent-text);
   }
 </style>
 
-<script>
-  // Handlers for Promotion
-  const buttons = document.querySelectorAll('.promote-btn');
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const { company, role, persona } = (btn as HTMLElement).dataset;
-      console.log(`Promoting ${company} to active strike...`);
-      // In a real app, this would call an API or CLI tool
-      alert(`To deploy this strike, run:
-npm run strike:new "${company}" "${role}" "${persona}"`);
-    });
-  });
-</script>

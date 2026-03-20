@@ -3,11 +3,11 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
-  const pathos = await getCollection('pathos');
-  return pathos.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+	const pathos = await getCollection('pathos');
+	return pathos.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
 }
 
 const { entry } = Astro.props;
