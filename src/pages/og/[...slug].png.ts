@@ -1,4 +1,5 @@
-import { getCollection } from 'astro:content';
+import { readdirSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { personas } from '../../data/personas.json';
 import { projectIndex } from '../../data/project-index';
@@ -104,14 +105,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		});
 	});
 
-	// Dynamic Pathos dialogue pages
-	const pathosEntries = await getCollection('pathos');
-	for (const entry of pathosEntries) {
-		pages.push({
-			slug: `pathos/${entry.id}`,
-			title: entry.data.title,
-			subtitle: entry.data.hookLine,
-		});
+	// Dynamic Pathos dialogue pages (read directly — getCollection unavailable in .ts endpoints)
+	const pathosDir = resolve(process.cwd(), 'src/content/pathos');
+	try {
+		const pathosFiles = readdirSync(pathosDir).filter((f) => f.endsWith('.md'));
+		for (const file of pathosFiles) {
+			const content = readFileSync(resolve(pathosDir, file), 'utf-8');
+			const frontmatter = content.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
+			const title = frontmatter.match(/^title:\s*"(.+)"/m)?.[1] ?? file.replace('.md', '');
+			const hookLine = frontmatter.match(/^hookLine:\s*"(.+)"/m)?.[1] ?? '';
+			pages.push({
+				slug: `pathos/${file.replace('.md', '')}`,
+				title,
+				subtitle: hookLine,
+			});
+		}
+	} catch {
+		// pathos directory may not exist yet
 	}
 
 	return pages.map((page) => ({
