@@ -18,7 +18,7 @@ import { extname, join, resolve } from 'node:path';
 
 const DIST_DIR = resolve('dist');
 const OUTPUT_DIR = resolve('.lighthouseci');
-const NUMBER_OF_RUNS = 3;
+const NUMBER_OF_RUNS = process.env.CI ? 1 : 3;
 
 const URLS = [
 	'index.html',
