@@ -31,6 +31,7 @@ const sorted = allPathos.sort((a, b) => b.data.date.valueOf() - a.data.date.valu
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
+                  timeZone: 'UTC',
                 })}
               </time>
               <h2 class="pathos-entry__title">{post.data.title}</h2>
