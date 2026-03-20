@@ -60,16 +60,26 @@ const typedMetrics = metrics as Record<string, unknown>;
 const registry = typedMetrics.registry as Record<string, unknown>;
 const omega = typedMetrics.omega as Record<string, unknown>;
 
-const soakStreak = (omega.soak_streak as number) ?? soak.streak_days;
-const soakTarget = (omega.soak_target as number) ?? soak.target_days;
-const soakIncidents = (omega.soak_incidents as number) ?? soak.critical_incidents;
+const soakStreak = (omega?.soak_streak as number) ?? soak.streak_days;
+const soakTarget = (omega?.soak_target as number) ?? soak.target_days;
+const soakIncidents = (omega?.soak_incidents as number) ?? soak.critical_incidents;
 
-const totalRepos = (registry.total_repos as number) ?? vitals.repos.total;
-const totalOrgans = (registry.total_organs as number) ?? vitals.repos.orgs;
-const ciCoverage = (registry.ci_coverage as number) ?? vitals.substance.ci_passing;
-const depEdges = (registry.dependency_edges as number) ?? 50;
+// Support new schema (computed.*) alongside legacy (registry.*)
+const computed = (typedMetrics.computed ?? {}) as Record<string, unknown>;
+const totalRepos =
+	(registry?.total_repos as number) ?? (computed.total_repos as number) ?? vitals.repos.total;
+const totalOrgans =
+	(registry?.total_organs as number) ?? (computed.total_organs as number) ?? vitals.repos.orgs;
+const ciCoverage =
+	(registry?.ci_coverage as number) ??
+	(computed.ci_workflows as number) ??
+	vitals.substance.ci_passing;
+const depEdges =
+	(registry?.dependency_edges as number) ?? (computed.dependency_edges as number) ?? 50;
 const activeRepos =
-	(registry.implementation_status as Record<string, number>)?.ACTIVE ?? vitals.repos.active;
+	(registry?.implementation_status as Record<string, number>)?.ACTIVE ??
+	(computed.implementation_status as Record<string, number>)?.ACTIVE ??
+	vitals.repos.active;
 
 const automatedTests = (typedMetrics.automated_tests as number) ?? vitals.substance.automated_tests;
 const testPackages = (typedMetrics.automated_tests_packages as number) ?? 6;

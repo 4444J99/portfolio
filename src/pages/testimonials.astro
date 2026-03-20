@@ -1,10 +1,22 @@
 ---
+import StatGrid from '../components/StatGrid.astro';
 import omegaData from '../data/omega.json';
 import vitals from '../data/vitals.json';
 import Layout from '../layouts/Layout.astro';
+import { base } from '../utils/paths';
 
 const soakDay = omegaData.soak.streak_days;
 const targetDay = omegaData.soak.target_days;
+const omegaMet = omegaData.summary.met;
+const omegaTotal = omegaData.summary.total;
+const omegaPct = Math.round((omegaMet / omegaTotal) * 100);
+
+const validationStats = [
+	{ value: `${omegaMet}/${omegaTotal}`, label: 'Omega Criteria Met' },
+	{ value: `${omegaPct}%`, label: 'Maturity Score' },
+	{ value: omegaData.soak.critical_incidents.toString(), label: 'Critical Incidents' },
+	{ value: vitals.repos.total.toString(), label: 'Repos Under Governance' },
+];
 
 const feedbackCriteria = [
 	{
@@ -33,12 +45,24 @@ const feedbackCriteria = [
         The "Stranger Test" is our primary protocol for external validation. A project isn't finished until an uninvolved person can navigate, understand, and operate it.
       </p>
 
+      <div class="omega-banner" data-reveal>
+        <div class="omega-banner__label">Omega Maturity Scorecard</div>
+        <div class="omega-banner__ratio">{omegaMet}<span class="omega-banner__denom">/{omegaTotal}</span></div>
+        <div class="omega-banner__sub">criteria met &mdash; {omegaPct}% maturity</div>
+        <a href={`${base}omega/`} class="omega-banner__link">View full scorecard &rarr;</a>
+      </div>
+
+      <StatGrid stats={validationStats} />
+
       <div class="callout">
-        <h3>📢 Seeking External Validators</h3>
+        <h3>Seeking External Validators</h3>
         <p>
           We are currently in the <strong>Soak Test Phase (Day {soakDay}/{targetDay})</strong>. We are actively seeking technical auditors and systems engineers to perform "Stranger Tests" on the ORGANVM architecture.
         </p>
-        <a href="/portfolio/consult" class="btn">Apply to Validate</a>
+        <div class="callout__actions">
+          <a href={`${base}consult/`} class="btn">Apply to Validate</a>
+          <a href={`${base}validation/`} class="btn btn--secondary">View Test Protocol</a>
+        </div>
       </div>
 
       <h2 class="section__heading" data-reveal>Validation Protocol</h2>
@@ -57,13 +81,56 @@ const feedbackCriteria = [
       <h2 class="section__heading" data-reveal>Current Feedback Logs</h2>
       <div class="empty-state">
         <p>No external testimonials logged yet. System is currently in autonomous soak mode.</p>
-        <p class="small">Refer to Omega Criterion #7 for tracking status.</p>
+        <p class="small">Refer to <a href={`${base}omega/`}>Omega Criterion #7</a> for tracking status.</p>
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
+  .omega-banner {
+    background: var(--bg-card);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: var(--space-xl);
+    text-align: center;
+    margin: var(--space-2xl) 0 var(--space-lg);
+  }
+  .omega-banner__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+  }
+  .omega-banner__ratio {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .omega-banner__denom {
+    color: var(--text-secondary);
+    font-size: 0.6em;
+  }
+  .omega-banner__sub {
+    color: var(--text-secondary);
+    margin-top: var(--space-xs);
+    font-size: 0.95rem;
+  }
+  .omega-banner__link {
+    display: inline-block;
+    margin-top: var(--space-md);
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .omega-banner__link:hover {
+    text-decoration: underline;
+  }
   .callout {
     background: var(--bg-secondary);
     border: 2px solid var(--accent);
@@ -75,6 +142,13 @@ const feedbackCriteria = [
   .callout h3 {
     margin-top: 0;
     color: var(--accent);
+  }
+  .callout__actions {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-md);
   }
   .protocol-grid {
     display: grid;
@@ -109,6 +183,13 @@ const feedbackCriteria = [
     border-radius: 4px;
     text-decoration: none;
     font-weight: 600;
-    margin-top: var(--space-md);
+  }
+  .btn--secondary {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .btn--secondary:hover {
+    background: var(--bg-card);
   }
 </style>

@@ -1,14 +1,14 @@
 {
-  "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
+  "title": "ORGANVM — Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
-    "total_repos": 117,
+    "total_repos": 116,
     "active_repos": 62,
-    "archived_repos": 54,
-    "dependency_edges": 56,
+    "archived_repos": 53,
+    "dependency_edges": 55,
     "ci_workflows": 104,
     "operational_organs": 8,
-    "sprints_completed": 13
+    "sprints_completed": 0
   },
   "organs": [
     {
@@ -63,7 +63,7 @@
       "org": "organvm-vi-koinonia",
       "repo_count": 6,
       "status": "OPERATIONAL",
-      "description": "Community infrastructure \u2014 salon archives, reading group curricula, adaptive syllabi, contributor profiles, shared PostgreSQL layer, FastAPI portal with full-text search, Atom feeds, and WebSocket live rooms"
+      "description": "Community infrastructure — salon archives, reading group curricula, adaptive syllabi, contributor profiles, shared PostgreSQL layer, FastAPI portal with full-text search, Atom feeds, and WebSocket live rooms"
     },
     {
       "key": "ORGAN-VII",
@@ -72,7 +72,7 @@
       "org": "organvm-vii-kerygma",
       "repo_count": 4,
       "status": "OPERATIONAL",
-      "description": "Marketing & Distribution \u2014 POSSE distribution pipeline with Ghost newsletter hub, Mastodon, Discord, Bluesky adapters, cross-organ event wiring, autonomous RSS polling, bidirectional analytics, Ghost Handlebars theme, 15 announcement templates"
+      "description": "Marketing & Distribution — POSSE distribution pipeline with Ghost newsletter hub, Mastodon, Discord, Bluesky adapters, cross-organ event wiring, autonomous RSS polling, bidirectional analytics, Ghost Handlebars theme, 15 announcement templates"
     },
     {
       "key": "META-ORGANVM",
@@ -88,7 +88,7 @@
     {
       "name": "IGNITION",
       "date": "2026-02-09",
-      "summary": "Org architecture \u2014 8 GitHub orgs"
+      "summary": "Org architecture — 8 GitHub orgs"
     },
     {
       "name": "PROPULSION",
@@ -103,12 +103,12 @@
     {
       "name": "EXODUS",
       "date": "2026-02-11",
-      "summary": "System launch \u2014 all 8 organs OPERATIONAL"
+      "summary": "System launch — all 8 organs OPERATIONAL"
     },
     {
       "name": "PERFECTION",
       "date": "2026-02-11",
-      "summary": "Gap-fill \u2014 11 repos, 14 promotions"
+      "summary": "Gap-fill — 11 repos, 14 promotions"
     },
     {
       "name": "AUTONOMY",
@@ -133,12 +133,12 @@
     {
       "name": "PRAXIS",
       "date": "2026-02-13",
-      "summary": "External impact \u2014 portfolio, distribution, revenue"
+      "summary": "External impact — portfolio, distribution, revenue"
     },
     {
       "name": "VERITAS",
       "date": "2026-02-13",
-      "summary": "Credibility hardening \u2014 PRODUCTION\u2192ACTIVE, revenue split, essay dates"
+      "summary": "Credibility hardening — PRODUCTION→ACTIVE, revenue split, essay dates"
     },
     {
       "name": "MANIFESTATIO",
@@ -148,8 +148,8 @@
     {
       "name": "ILLUSTRATIO",
       "date": "2026-02-14",
-      "summary": "Portfolio polish \u2014 CMYK design, p5.js animations, LLM consultation"
+      "summary": "Portfolio polish — CMYK design, p5.js animations, LLM consultation"
     }
   ],
-  "generated": "2026-03-20T18:31:31.095923+00:00"
+  "generated": "2026-03-20T05:17:58.628766+00:00"
 }

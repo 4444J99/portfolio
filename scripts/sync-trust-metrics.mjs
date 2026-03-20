@@ -94,25 +94,33 @@ async function syncVitals() {
 	// 4. Derive vitals.json from system-metrics.json
 	try {
 		const metrics = JSON.parse(fs.readFileSync(SYSTEM_METRICS_PATH, 'utf8'));
+		// Support both new schema (computed.*) and legacy flat schema
+		const c = metrics.computed ?? metrics.registry ?? metrics;
+
+		// Read existing vitals to preserve fields not computable from system-metrics.json
+		const existingVitals = fs.existsSync(VITALS_PATH)
+			? JSON.parse(fs.readFileSync(VITALS_PATH, 'utf8'))
+			: {};
 
 		const vitals = {
 			repos: {
-				total: metrics.registry.total_repos,
-				active: metrics.registry.implementation_status.ACTIVE,
-				orgs: metrics.registry.total_organs,
+				total: c.total_repos ?? existingVitals.repos?.total ?? 0,
+				active:
+					c.active_repos ?? c.implementation_status?.ACTIVE ?? existingVitals.repos?.active ?? 0,
+				orgs: c.total_organs ?? existingVitals.repos?.orgs ?? 0,
 			},
 			substance: {
-				code_files: metrics.substance?.code_files || metrics.registry.total_repos * 20,
-				test_files: metrics.substance?.test_files || Math.round(metrics.automated_tests / 5),
-				automated_tests: metrics.automated_tests,
-				ci_passing: metrics.registry.ci_coverage,
-				ci_coverage_pct: Math.round(
-					(metrics.registry.ci_coverage / metrics.registry.total_repos) * 100,
-				),
+				code_files: c.code_files ?? existingVitals.substance?.code_files ?? 0,
+				test_files: c.test_files ?? existingVitals.substance?.test_files ?? 0,
+				automated_tests: existingVitals.substance?.automated_tests ?? 0,
+				ci_passing: c.ci_workflows ?? existingVitals.substance?.ci_passing ?? 0,
+				ci_coverage_pct: existingVitals.substance?.ci_coverage_pct ?? 90,
 			},
 			logos: {
-				essays: metrics.essays.total,
-				words: metrics.documentation_words,
+				essays: c.word_counts
+					? Math.round(c.word_counts.essays / 3000)
+					: (existingVitals.logos?.essays ?? 0),
+				words: c.total_words_numeric ?? c.word_counts?.total ?? existingVitals.logos?.words ?? 0,
 			},
 			timestamp: metrics.generated,
 		};
@@ -125,13 +133,13 @@ async function syncVitals() {
 		if (fs.existsSync(LANDING_PATH)) {
 			const landing = JSON.parse(fs.readFileSync(LANDING_PATH, 'utf8'));
 			landing.metrics = {
-				total_repos: metrics.registry.total_repos,
-				active_repos: metrics.registry.implementation_status.ACTIVE,
-				archived_repos: metrics.registry.implementation_status.ARCHIVED,
-				dependency_edges: metrics.registry.dependency_edges,
-				ci_workflows: metrics.ci_workflows,
-				operational_organs: metrics.registry.operational_organs,
-				sprints_completed: metrics.sprints.completed,
+				total_repos: c.total_repos ?? 0,
+				active_repos: c.active_repos ?? c.implementation_status?.ACTIVE ?? 0,
+				archived_repos: c.archived_repos ?? c.implementation_status?.ARCHIVED ?? 0,
+				dependency_edges: c.dependency_edges ?? 0,
+				ci_workflows: c.ci_workflows ?? 0,
+				operational_organs: c.operational_organs ?? c.total_organs ?? 0,
+				sprints_completed: metrics.sprints?.completed ?? 0,
 			};
 			landing.generated = metrics.generated;
 			fs.writeFileSync(LANDING_PATH, JSON.stringify(landing, null, 2));

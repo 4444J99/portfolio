@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-20T18:34:44.764Z",
+  "generated": "2026-03-20T18:49:23.227Z",
   "tests": {
     "total": 289,
     "passed": 289,
@@ -1703,7 +1703,7 @@
     ]
   },
   "build": {
-    "pages": 102,
+    "pages": 100,
     "bundleFiles": 67
   },
   "sources": {

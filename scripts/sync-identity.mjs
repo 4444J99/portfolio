@@ -19,14 +19,18 @@ function syncIdentity() {
 	const about = JSON.parse(fs.readFileSync(ABOUT_PATH, 'utf8'));
 	const metrics = JSON.parse(fs.readFileSync(METRICS_PATH, 'utf8'));
 
-	const { registry, documentation_words } = metrics;
-	const activeRepos = registry.implementation_status.ACTIVE;
-	const archivedRepos = registry.implementation_status.ARCHIVED;
-	const totalRepos = registry.total_repos;
+	// Support both new schema (computed.*) and legacy flat schema
+	const c = metrics.computed ?? metrics.registry ?? metrics;
+	const activeRepos = c.active_repos ?? c.implementation_status?.ACTIVE ?? 0;
+	const archivedRepos = c.archived_repos ?? c.implementation_status?.ARCHIVED ?? 0;
+	const totalRepos = c.total_repos ?? 0;
+	const totalWords =
+		c.total_words_short ?? c.total_words ?? `~${Math.round((c.total_words_numeric ?? 0) / 1000)}K+`;
+	const ciWorkflows = c.ci_workflows ?? metrics.ci_workflows ?? 0;
 
 	// Build the high-fidelity summary string
 	const summary =
-		`${metrics.sprints.completed} SPRINTS COMPLETE — ${totalRepos} repos (${activeRepos} ACTIVE, ${archivedRepos} ARCHIVED), ${metrics.essays.total} published essays (~${Math.round(metrics.essays.word_count_estimate / 1000)}K words), ${metrics.sprints.completed} named sprints, 9 flagship repos, 102 CI/CD workflows, ~${Math.round(documentation_words / 1000)}K+ total words, full provenance tracking, 100% seed.yaml coverage. Omega status: ${metrics.omega.met}/17 met.`.trim();
+		`${totalRepos} repos (${activeRepos} ACTIVE, ${archivedRepos} ARCHIVED), ${ciWorkflows} CI/CD workflows, ${totalWords} total words, full provenance tracking, 100% seed.yaml coverage.`.trim();
 
 	if (about.system_summary === summary) {
 		console.log('✅ Identity is already in sync with system vitals.');
@@ -37,9 +41,7 @@ function syncIdentity() {
 	about.generated = new Date().toISOString();
 
 	fs.writeFileSync(ABOUT_PATH, JSON.stringify(about, null, '\t'), 'utf8');
-	console.log(
-		`🚀 Identity synchronized: ${totalRepos} repos, ${metrics.omega.met}/17 Omega criteria.`,
-	);
+	console.log(`🚀 Identity synchronized: ${totalRepos} repos, ${ciWorkflows} CI workflows.`);
 }
 
 syncIdentity();

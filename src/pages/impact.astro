@@ -1,16 +1,27 @@
 ---
 import MermaidDiagram from '../components/academic/MermaidDiagram.astro';
 import StatGrid from '../components/StatGrid.astro';
+import omegaData from '../data/omega.json';
 import systemMetrics from '../data/system-metrics.json';
+import vitals from '../data/vitals.json';
 import Layout from '../layouts/Layout.astro';
 
 const impactMetrics = [
-	{ value: systemMetrics.registry.total_repos.toString(), label: 'Repos Managed' },
-	{ value: systemMetrics.automated_tests.toLocaleString(), label: 'Automated Tests' },
-	{ value: `${Math.round(systemMetrics.documentation_words / 1000)}K+`, label: 'Words Written' },
-	{ value: systemMetrics.ci_workflows.toString(), label: 'CI Workflows' },
-	{ value: `${systemMetrics.registry.ci_coverage}%`, label: 'Avg. Coverage' },
-	{ value: systemMetrics.omega.soak_streak.toString(), label: 'Soak Days' },
+	{ value: vitals.repos.total.toString(), label: 'Repos Managed' },
+	{ value: vitals.substance.automated_tests.toLocaleString(), label: 'Automated Tests' },
+	{ value: `${Math.round(vitals.logos.words / 1000)}K+`, label: 'Words Written' },
+	{ value: vitals.substance.ci_passing.toString(), label: 'CI Workflows Passing' },
+	{ value: `${vitals.substance.ci_coverage_pct}%`, label: 'Avg. Coverage' },
+	{ value: omegaData.soak.streak_days.toString(), label: 'Soak Days' },
+];
+
+const scaleMetrics = [
+	{ value: vitals.repos.orgs.toString(), label: 'GitHub Orgs' },
+	{ value: vitals.repos.active.toString(), label: 'Active Repos' },
+	{ value: vitals.substance.code_files.toLocaleString(), label: 'Code Files' },
+	{ value: vitals.substance.test_files.toLocaleString(), label: 'Test Files' },
+	{ value: vitals.logos.essays.toString(), label: 'Published Essays' },
+	{ value: systemMetrics.computed.dependency_edges.toString(), label: 'Dependency Edges' },
 ];
 ---
 
@@ -24,9 +35,18 @@ const impactMetrics = [
 
       <StatGrid stats={impactMetrics} />
 
+      <h2 class="section__heading" data-reveal>System Scale</h2>
+      <p>
+        The ORGANVM architecture spans {vitals.repos.orgs} GitHub organizations, {vitals.repos.total} repositories,
+        and {systemMetrics.computed.total_words_short} of documented knowledge. Every organ is independently governed
+        with machine-readable promotion criteria and automated dependency validation.
+      </p>
+
+      <StatGrid stats={scaleMetrics} />
+
       <h2 class="section__heading" data-reveal>Data Flow & Orchestration</h2>
       <p>
-        The system serves as a central intelligence hub, coordinating state transitions across 91 leaf nodes. 
+        The system serves as a central intelligence hub, coordinating state transitions across 91 leaf nodes.
         Each organ produces and consumes discrete data artifacts, ensuring that "impact" is measurable at the protocol level.
       </p>
 
@@ -55,7 +75,7 @@ const impactMetrics = [
         </div>
         <div class="card" data-reveal>
           <h3>Autonomous Governance</h3>
-          <p>18 consecutive days of zero-incident operations under the fully automated quality ratchet system.</p>
+          <p>{omegaData.soak.streak_days} consecutive days of zero-incident operations under the fully automated quality ratchet system.</p>
         </div>
       </div>
     </div>

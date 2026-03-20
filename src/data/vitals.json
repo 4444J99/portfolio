@@ -5,15 +5,15 @@
     "orgs": 8
   },
   "substance": {
-    "code_files": 2320,
-    "test_files": 803,
+    "code_files": 23121,
+    "test_files": 4337,
     "automated_tests": 4015,
     "ci_passing": 104,
     "ci_coverage_pct": 90
   },
   "logos": {
-    "essays": 49,
-    "words": 739000
+    "essays": 48,
+    "words": 740907
   },
   "timestamp": "2026-03-20T05:17:58.628766+00:00"
 }

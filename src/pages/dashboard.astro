@@ -25,11 +25,44 @@ const quality = qualityData as QualityMetrics;
 
 const typedMetrics = metrics as unknown as SystemMetrics;
 
-const organNames = Object.keys(typedMetrics.registry.organs);
-const repoCounts = Object.values(typedMetrics.registry.organs).map((o: Organ) => o.total_repos);
+// Support both new schema (computed.per_organ) and legacy schema (registry.organs)
+const rawMetrics = metrics as unknown as Record<string, unknown>;
+const computed = (rawMetrics.computed ?? {}) as Record<string, unknown>;
+const legacyRegistry = (rawMetrics.registry ?? {}) as Record<string, unknown>;
+
+// Build organs map from whichever schema is present
+const perOrganRaw = (computed.per_organ ?? legacyRegistry.organs ?? {}) as Record<
+	string,
+	Record<string, unknown>
+>;
+const organsMap: Record<string, Organ> = Object.fromEntries(
+	Object.entries(perOrganRaw).map(([key, o]) => [
+		key,
+		{
+			name: String(o.name ?? key),
+			status: String(o.status ?? 'active'),
+			total_repos: Number(o.repos ?? o.total_repos ?? 0),
+			implementation_status: (o.implementation_status as Record<string, number>) ?? {},
+			tier_distribution: (o.tier_distribution as Record<string, number>) ?? {},
+			ci_coverage: Number(o.ci_coverage ?? 0),
+		} satisfies Organ,
+	]),
+);
+
+// Registry shim: merge legacy registry with computed fields for backward-compat references
+const registryShim = {
+	total_repos: Number(computed.total_repos ?? legacyRegistry.total_repos ?? 0),
+	implementation_status: (computed.implementation_status ??
+		legacyRegistry.implementation_status ??
+		{}) as Record<string, number>,
+	organs: organsMap,
+};
+
+const organNames = Object.keys(organsMap);
+const repoCounts = Object.values(organsMap).map((o: Organ) => o.total_repos);
 
 const organChartData = {
-	organs: Object.entries(typedMetrics.registry.organs).map(([key, organ]: [string, Organ]) => ({
+	organs: Object.entries(organsMap).map(([key, organ]: [string, Organ]) => ({
 		key,
 		name: organ.name,
 		total_repos: organ.total_repos,
@@ -45,13 +78,11 @@ const classificationChartData = {
 const sprintChartData = { sprints: typedMetrics.sprint_history || [] };
 
 const treemapData = {
-	organs: Object.entries(typedMetrics.registry?.organs || {}).map(
-		([key, organ]: [string, Organ]) => ({
-			key,
-			name: organ.name,
-			total_repos: organ.total_repos,
-		}),
-	),
+	organs: Object.entries(organsMap).map(([key, organ]: [string, Organ]) => ({
+		key,
+		name: organ.name,
+		total_repos: organ.total_repos,
+	})),
 };
 
 const praxisChartData = {
@@ -89,12 +120,12 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification?.repos || 
         <p class="page-sub">Live orchestration vitals from {vitals.repos.total} repositories across {vitals.repos.orgs} organs.</p>
 
         <StatGrid stats={[
-          { value: typedMetrics.code_substance?.total_code_files?.toLocaleString() || '0', label: 'Code Files' },
-          { value: typedMetrics.code_substance?.total_test_files || 0, label: 'Test Files' },
-          { value: typedMetrics.code_substance?.ci_passing || 0, label: 'Passing CI Workflows' },
-          { value: typedMetrics.registry?.total_repos || 0, label: 'Repositories' },
-          { value: typedMetrics.registry?.implementation_status?.ACTIVE || 0, label: 'Active' },
-          { value: typedMetrics.essays?.total || 0, label: 'Essays' },
+          { value: vitals.substance.code_files.toLocaleString(), label: 'Code Files' },
+          { value: vitals.substance.test_files, label: 'Test Files' },
+          { value: vitals.substance.ci_passing, label: 'Passing CI Workflows' },
+          { value: registryShim.total_repos, label: 'Repositories' },
+          { value: registryShim.implementation_status.ACTIVE || 0, label: 'Active' },
+          { value: vitals.logos.essays, label: 'Essays' },
         ]} />
 
         <div class="stack-badges">
@@ -145,7 +176,7 @@ const flagshipChartData = { repos: typedMetrics.flagship_vivification?.repos || 
       </div>
     </section>
 
-    <OrganStatus organs={typedMetrics.registry?.organs || {}} organColors={organColors} />
+    <OrganStatus organs={organsMap} organColors={organColors} />
 
     <FlagshipTable
       repos={typedMetrics.flagship_vivification?.repos || []}
