@@ -7,8 +7,8 @@
   },
   "security": {
     "status": "pass",
-    "vulnerabilities": 0,
-    "lastAudit": "2026-03-19T18:23:25.052Z"
+    "vulnerabilities": 2,
+    "lastAudit": "2026-03-20T17:18:29.419Z"
   },
   "ecosystem": {
     "totalRepos": 85,
@@ -26,8 +26,8 @@
       "approval": "Student evaluation approval rating across all teaching assignments"
     }
   },
-  "generatedAt": "2026-03-20T11:35:09.869Z",
-  "fingerprint": "CCF5F140",
+  "generatedAt": "2026-03-20T17:20:33.152Z",
+  "fingerprint": "875A51D3",
   "strikes": {
     "total": 2,
     "conversionRate": 0

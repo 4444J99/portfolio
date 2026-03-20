@@ -63,3 +63,5 @@ playwright-report/
 
 # Cloudflare Wrangler local state
 .wrangler/
+dist-syndication/
+network-map.yaml
