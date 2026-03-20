@@ -8,7 +8,7 @@
     "flagships": 12,
     "active_repos": 59,
     "ci_enabled": 104,
-    "automated_tests": 2700,
+    "automated_tests": 4015,
     "mcp_tools": 94,
     "cli_commands": 23,
     "ontologia_entities": 121,
@@ -40,22 +40,22 @@
     "archive": 11
   },
   "omega_scorecard": {
-    "met": 4,
-    "in_progress": 3,
+    "met": 7,
+    "in_progress": 0,
     "not_met": 10,
     "total": 17,
     "met_criteria": [
+      1,
+      3,
       5,
       6,
       8,
-      13
-    ],
-    "in_progress_criteria": [
-      1,
-      3,
+      13,
       17
     ],
-    "soak_days": 26,
+    "in_progress_criteria": [],
+    "soak_days": 32,
+    "soak_complete": true,
     "soak_incidents": 0
   },
   "technical_highlights": [
@@ -81,7 +81,7 @@
     },
     {
       "category": "Testing",
-      "detail": "2700+ tests across 6 packages, autouse fixture blocks production paths"
+      "detail": "4,015+ tests across 6 packages, autouse fixture blocks production paths"
     },
     {
       "category": "Schema",
@@ -100,8 +100,8 @@
     "Graceful degradation: all bridge modules work with or without ontologia installed"
   ],
   "validation_evidence": {
-    "soak_test": "26 consecutive days, 0 incidents (target: 30)",
-    "test_coverage": "2700+ automated tests, 6 test suites",
+    "soak_test": "32 consecutive days, 0 incidents (target: 30, complete)",
+    "test_coverage": "4,015+ automated tests, 6 test suites",
     "ci_coverage": "104 repos with CI workflows",
     "schema_validation": "9 JSON Schemas with examples",
     "governance_audit": "Automated policy evaluation across all entities",

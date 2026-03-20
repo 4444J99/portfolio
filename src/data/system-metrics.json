@@ -4,7 +4,7 @@
   "system": {
     "name": "ORGANVM",
     "launch_date": "2026-02-11",
-    "project_status": "PROPULSIO TERTIA Sprint 2026-03-08. 105 repos (96 ACTIVE, 9 ARCHIVED), 48 essays (~165K words), ~410K+ total words. Omega scorecard: 4/17 MET, 3 IN_PROGRESS. Soak test: 21/30 days, 0 incidents. 70 GitHub issues tracking, 33 sprints completed, schema v1.0.0, governance v2.0. 853+ automated tests across 5 packages. 12 products deployed live. 16 repos with revenue models. GitHub Discussions + community onboarding active."
+    "project_status": "PROPULSIO TERTIA Sprint 2026-03-19. 113 repos (59 ACTIVE, 53 ARCHIVED), 49 essays (~165K words), ~410K+ total words. Omega scorecard: 7/17 MET. Soak test: 32/30 days complete, 0 incidents. 70 GitHub issues tracking, 33 sprints completed, schema v1.0.0, governance v2.0. 4,015+ automated tests across 6 packages. 12 products deployed live. 16 repos with revenue models. GitHub Discussions + community onboarding active."
   },
   "registry": {
     "total_repos": 113,
@@ -112,15 +112,15 @@
     }
   },
   "omega": {
-    "met": 4,
-    "in_progress": 3,
+    "met": 7,
+    "in_progress": 0,
     "not_met": 10,
     "total": 17,
-    "percentage": 23,
-    "soak_streak": 21,
+    "percentage": 41,
+    "soak_streak": 32,
     "soak_target": 30,
-    "soak_incidents": 0,
-    "next_auto_flip": "2026-03-18"
+    "soak_complete": true,
+    "soak_incidents": 0
   },
   "essays": {
     "total": 49,
@@ -138,9 +138,9 @@
   },
   "adrs": 16,
   "schemas": 6,
-  "ci_workflows": 96,
-  "automated_tests": 853,
-  "automated_tests_packages": 5,
+  "ci_workflows": 104,
+  "automated_tests": 4015,
+  "automated_tests_packages": 6,
   "products_deployed_live": 12,
   "deployment_platforms": [
     "Netlify",

@@ -7,7 +7,7 @@
   "substance": {
     "code_files": 2260,
     "test_files": 171,
-    "automated_tests": 853,
+    "automated_tests": 4015,
     "ci_passing": 104,
     "ci_coverage_pct": 92
   },
