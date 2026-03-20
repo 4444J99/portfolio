@@ -15,7 +15,7 @@ const triageCandidates = candidates.filter((c) => c.status === 'triage');
   <div class="scout-triage__header">
     <div class="header-main">
       <h3>Scout Triage</h3>
-      <span class="scout-meta">Last scout: {new Date(last_scout).toLocaleDateString()}</span>
+      <span class="scout-meta">Last scout: {new Date(last_scout).toLocaleDateString('en-US', { timeZone: 'UTC' })}</span>
     </div>
     <div class="scout-stats">
       <span class="stat-pill">{triageCandidates.length} Candidates Found</span>
@@ -29,7 +29,7 @@ const triageCandidates = candidates.filter((c) => c.status === 'triage');
           <span class="persona-badge" style={`background: ${personaColors[candidate.persona_id as keyof typeof personaColors] || 'var(--border)'}`}>
             {candidate.persona_id.replace(/-/g, ' ')}
           </span>
-          <span class="discovered-date">{new Date(candidate.discovered_at).toLocaleDateString()}</span>
+          <span class="discovered-date">{new Date(candidate.discovered_at).toLocaleDateString('en-US', { timeZone: 'UTC' })}</span>
         </div>
         
         <h4 class="company-name">{candidate.company}</h4>

@@ -27,6 +27,7 @@ const sortedLogos = allLogos.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
+                  timeZone: 'UTC',
                 })}
               </time>
               {post.data.description && <p class="essay-card__desc">{post.data.description}</p>}

@@ -249,7 +249,7 @@ const freshnessDetail =
       <img src={`${base}badges/pages.svg`} alt={`Pages: ${quality.build.pages}`} width="80" height="20" />
     </div>
 
-    <p class="quality-timestamp">Last updated: {new Date(quality.generated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+    <p class="quality-timestamp">Last updated: {new Date(quality.generated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}</p>
     <p class:list={['quality-freshness', `quality-freshness--${freshnessStatus}`]}>{freshnessDetail}</p>
     <p class="quality-sources">
       Sources: tests ({sources.tests}) · security full ({sources.security}) · security prod ({sources.securityProd}) · security github ({sources.securityGithub}) · security drift ({sources.securityDrift}) · coverage ({sources.coverage}) · lighthouse ({sources.lighthouse}) · a11y static ({sources.a11yStatic}) · a11y runtime ({sources.a11yRuntime}) · runtime coverage ({sources.runtimeCoverage}) · e2e smoke ({sources.e2eSmoke}) · runtime errors ({sources.runtimeErrors}) · green runs ({sources.greenRuns}) · ledger ({sources.ledger}) · performance ({sources.performance}) · build ({sources.build})

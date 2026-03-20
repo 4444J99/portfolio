@@ -32,7 +32,7 @@ const displaySnapshots = snapshots.slice(-5); // Last 5 weeks/snapshots
                   `pulse-block--${run.conclusion || 'pending'}`,
                   run.status === 'in_progress' && 'pulse-block--loading'
                 ]}
-                title={`Run #${run.runNumber}: ${run.conclusion || run.status} (${new Date(run.createdAt).toLocaleDateString()})`}
+                title={`Run #${run.runNumber}: ${run.conclusion || run.status} (${new Date(run.createdAt).toLocaleDateString('en-US', { timeZone: 'UTC' })})`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -67,7 +67,7 @@ const displaySnapshots = snapshots.slice(-5); // Last 5 weeks/snapshots
               {displaySnapshots.length > 0 ? (
                 displaySnapshots.map((snap) => (
                   <tr>
-                    <td>{new Date(snap.generated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
+                    <td>{new Date(snap.generated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })}</td>
                     <td>{snap.coverage.lines}%</td>
                     <td class:list={[{ 'text-success': snap.lighthouse.performance >= 90 }]}>{snap.lighthouse.performance}</td>
                     <td>{snap.security.status}</td>
