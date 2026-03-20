@@ -881,6 +881,15 @@
       ]
     },
     {
+      "path": "/pathos/trash-and-church",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
       "path": "/for/palantir",
       "checks": [
         "nav-menu",

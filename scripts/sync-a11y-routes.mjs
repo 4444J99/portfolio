@@ -102,6 +102,17 @@ async function generateA11yRoutes() {
 		}
 	}
 
+	// Inject Pathos Routes
+	const pathosContentDir = path.join(__dirname, '../src/content/pathos');
+	if (fs.existsSync(pathosContentDir)) {
+		for (const entry of fs.readdirSync(pathosContentDir)) {
+			if (entry.endsWith('.md') || entry.endsWith('.mdx')) {
+				const slug = entry.replace(/\.(md|mdx)$/, '');
+				routes.push({ path: `/pathos/${slug}`, checks: DEFAULT_CHECKS });
+			}
+		}
+	}
+
 	// Inject Dynamic Target Routes
 	for (const target of targets) {
 		routes.push({ path: `/for/${target.slug}`, checks: DEFAULT_CHECKS });
