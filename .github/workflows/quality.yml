@@ -181,7 +181,7 @@ jobs:
   performance:
     needs: build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     continue-on-error: true
     steps:
       - uses: actions/checkout@v6
