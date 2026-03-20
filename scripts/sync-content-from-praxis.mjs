@@ -11,9 +11,20 @@
 
 import { copyFileSync, existsSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
+import { parseArgs } from 'node:util';
 
 const ROOT = resolve(import.meta.dirname, '..');
-const PRAXIS_DIR = resolve(ROOT, '..', 'ingesting-organ-document-structure');
+
+const { values } = parseArgs({
+	options: {
+		'praxis-dir': { type: 'string' },
+	},
+	strict: false,
+});
+
+const PRAXIS_DIR = values['praxis-dir']
+	? resolve(values['praxis-dir'])
+	: resolve(ROOT, '..', '..', 'meta-organvm', 'organvm-corpvs-testamentvm');
 const DATA_DIR = join(ROOT, 'src', 'data');
 
 /** Files the Python generator writes into --output-dir */
