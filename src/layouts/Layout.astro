@@ -10,6 +10,7 @@ import SchemaOrg from '../components/head/SchemaOrg.astro';
 import SEOMeta from '../components/head/SEOMeta.astro';
 import SiteLinks from '../components/head/SiteLinks.astro';
 import ClientBootstrap from '../components/scripts/ClientBootstrap.astro';
+import ErrorBeacon from '../components/scripts/ErrorBeacon.astro';
 import ScrollReveal from '../components/scripts/ScrollReveal.astro';
 import SketchLifecycle from '../components/scripts/SketchLifecycle.astro';
 import ThemeRestore from '../components/scripts/ThemeRestore.astro';
@@ -73,6 +74,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
   <ClientBootstrap />
   <ThemeRestore />
   <WebVitals />
+  <ErrorBeacon />
 </html>
 
 <style is:global>

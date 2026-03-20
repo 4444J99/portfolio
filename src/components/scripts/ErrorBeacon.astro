@@ -1,0 +1,21 @@
+---
+// Production error beacon — reports uncaught JS errors to Plausible
+// as custom events, mirroring the WebVitals.astro pattern.
+---
+
+<script>
+	window.addEventListener('error', (event) => {
+		if (typeof window.plausible === 'function') {
+			(window.plausible as unknown as (event: string, options: Record<string, unknown>) => void)(
+				'JS Error',
+				{
+					props: {
+						message: event.message?.slice(0, 200),
+						source: event.filename?.split('/').pop(),
+						page: window.location.pathname,
+					},
+				},
+			);
+		}
+	});
+</script>
