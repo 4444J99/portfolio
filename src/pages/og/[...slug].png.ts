@@ -1,3 +1,4 @@
+import { getCollection } from 'astro:content';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { personas } from '../../data/personas.json';
 import { projectIndex } from '../../data/project-index';
@@ -11,7 +12,7 @@ interface OGPage extends Record<string, unknown> {
 	accent?: string;
 }
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
 	const pages: OGPage[] = [
 		// Top-level pages
 		{
@@ -102,6 +103,16 @@ export const getStaticPaths: GetStaticPaths = () => {
 			subtitle: persona?.title || target.role,
 		});
 	});
+
+	// Dynamic Pathos dialogue pages
+	const pathosEntries = await getCollection('pathos');
+	for (const entry of pathosEntries) {
+		pages.push({
+			slug: `pathos/${entry.id}`,
+			title: entry.data.title,
+			subtitle: entry.data.hookLine,
+		});
+	}
 
 	return pages.map((page) => ({
 		params: { slug: page.slug },
