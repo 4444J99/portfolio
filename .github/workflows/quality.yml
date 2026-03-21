@@ -81,6 +81,8 @@ jobs:
           npm run sync:identity
       - name: Build
         run: npm run build
+      - name: Collect Perf Metrics
+        run: npm run collect:perf
       - name: Perf Budgets
         run: npm run test:perf:budgets
       - name: Upload dist
