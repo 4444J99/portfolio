@@ -64,5 +64,54 @@
   },
   "manual": {
     "_note": "Edit these by hand. calculate-metrics.py preserves this section."
+  },
+  "registry": {
+    "total_repos": 116,
+    "total_organs": 8,
+    "operational_organs": 8,
+    "implementation_status": {
+      "ACTIVE": 62,
+      "ARCHIVED": 53,
+      "PROTOTYPE": 1
+    },
+    "ci_coverage": 104,
+    "dependency_edges": 55,
+    "organs": {
+      "ORGAN-I": {
+        "name": "Theory",
+        "total_repos": 20
+      },
+      "ORGAN-II": {
+        "name": "Art",
+        "total_repos": 32
+      },
+      "ORGAN-III": {
+        "name": "Commerce",
+        "total_repos": 29
+      },
+      "ORGAN-IV": {
+        "name": "Orchestration",
+        "total_repos": 11
+      },
+      "ORGAN-V": {
+        "name": "Public Process",
+        "total_repos": 2
+      },
+      "ORGAN-VI": {
+        "name": "Community",
+        "total_repos": 6
+      },
+      "ORGAN-VII": {
+        "name": "Marketing",
+        "total_repos": 4
+      },
+      "META-ORGANVM": {
+        "name": "Meta",
+        "total_repos": 12
+      }
+    }
+  },
+  "essays": {
+    "total": 0
   }
 }

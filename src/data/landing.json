@@ -1,5 +1,5 @@
 {
-  "title": "ORGANVM — Eight-Organ Creative-Institutional System",
+  "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
     "total_repos": 116,
@@ -36,7 +36,7 @@
       "org": "organvm-iii-ergon",
       "repo_count": 29,
       "status": "OPERATIONAL",
-      "description": "Revenue-generating products, deployed systems, customer-facing tools, B2B/B2C applications"
+      "description": "Product platforms, deployed systems, customer-facing tools, B2B/B2C applications"
     },
     {
       "key": "ORGAN-IV",
@@ -63,7 +63,7 @@
       "org": "organvm-vi-koinonia",
       "repo_count": 6,
       "status": "OPERATIONAL",
-      "description": "Community infrastructure — salon archives, reading group curricula, adaptive syllabi, contributor profiles, shared PostgreSQL layer, FastAPI portal with full-text search, Atom feeds, and WebSocket live rooms"
+      "description": "Community infrastructure, member management, governance, forums, shared resources, collaborative spaces"
     },
     {
       "key": "ORGAN-VII",
@@ -72,7 +72,7 @@
       "org": "organvm-vii-kerygma",
       "repo_count": 4,
       "status": "OPERATIONAL",
-      "description": "Marketing & Distribution — POSSE distribution pipeline with Ghost newsletter hub, Mastodon, Discord, Bluesky adapters, cross-organ event wiring, autonomous RSS polling, bidirectional analytics, Ghost Handlebars theme, 15 announcement templates"
+      "description": "Content distribution, social amplification, audience building, POSSE automation, release coordination, press/announcement strategy"
     },
     {
       "key": "META-ORGANVM",
@@ -84,72 +84,6 @@
       "description": "Umbrella organization coordinating all 7 organ orgs. System-wide governance, cross-organ visibility, and institutional identity."
     }
   ],
-  "sprint_history": [
-    {
-      "name": "IGNITION",
-      "date": "2026-02-09",
-      "summary": "Org architecture — 8 GitHub orgs"
-    },
-    {
-      "name": "PROPULSION",
-      "date": "2026-02-10",
-      "summary": "Bronze/Silver/Gold documentation sprints"
-    },
-    {
-      "name": "ASCENSION",
-      "date": "2026-02-10",
-      "summary": "Micro-validation and integration"
-    },
-    {
-      "name": "EXODUS",
-      "date": "2026-02-11",
-      "summary": "System launch — all 8 organs OPERATIONAL"
-    },
-    {
-      "name": "PERFECTION",
-      "date": "2026-02-11",
-      "summary": "Gap-fill — 11 repos, 14 promotions"
-    },
-    {
-      "name": "AUTONOMY",
-      "date": "2026-02-12",
-      "summary": "seed.yaml contracts, agents, workflows"
-    },
-    {
-      "name": "GENESIS",
-      "date": "2026-02-12",
-      "summary": "7 new repos from local materials"
-    },
-    {
-      "name": "ALCHEMIA",
-      "date": "2026-02-12",
-      "summary": "2,012 files inventoried, taste.yaml cascading"
-    },
-    {
-      "name": "CONVERGENCE",
-      "date": "2026-02-13",
-      "summary": "82 ACTIVE, 7 ARCHIVED, zero gaps"
-    },
-    {
-      "name": "PRAXIS",
-      "date": "2026-02-13",
-      "summary": "External impact — portfolio, distribution, revenue"
-    },
-    {
-      "name": "VERITAS",
-      "date": "2026-02-13",
-      "summary": "Credibility hardening — PRODUCTION→ACTIVE, revenue split, essay dates"
-    },
-    {
-      "name": "MANIFESTATIO",
-      "date": "2026-02-14",
-      "summary": "Re-audit (7x more code), 3 CI fixes, engagement baseline"
-    },
-    {
-      "name": "ILLUSTRATIO",
-      "date": "2026-02-14",
-      "summary": "Portfolio polish — CMYK design, p5.js animations, LLM consultation"
-    }
-  ],
-  "generated": "2026-03-20T05:17:58.628766+00:00"
+  "sprint_history": [],
+  "generated": "2026-03-21T07:07:28.472431+00:00"
 }
