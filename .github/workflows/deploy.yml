@@ -87,6 +87,11 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
+      - uses: actions/upload-artifact@v7
+        with:
+          name: deploy-dist
+          path: dist/
+          retention-days: 1
 
   deploy:
     needs: build
@@ -118,6 +123,36 @@ jobs:
           else
             echo "passed=false" >> "$GITHUB_OUTPUT"
           fi
+
+  lighthouse:
+    needs: [build, verify]
+    if: always() && needs.verify.outputs.smoke-passed == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Download dist
+        uses: actions/download-artifact@v8
+        with:
+          name: deploy-dist
+          path: dist
+      - name: Lighthouse
+        run: npm run lighthouse
+      - name: Upload Lighthouse artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lighthouse-deploy-${{ github.run_id }}
+          path: .lighthouseci/
+          retention-days: 7
 
   rollback:
     needs: [deploy, verify]
