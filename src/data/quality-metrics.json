@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-20T18:49:23.227Z",
+  "generated": "2026-03-21T16:46:15.998Z",
   "tests": {
     "total": 289,
     "passed": 289,
@@ -27,7 +27,7 @@
       "low": 0,
       "total": 0
     },
-    "allowlistActive": 2,
+    "allowlistActive": 5,
     "policyCheckpoint": {
       "date": "2026-03-18",
       "maxModerate": 0,
@@ -1703,7 +1703,7 @@
     ]
   },
   "build": {
-    "pages": 100,
+    "pages": 102,
     "bundleFiles": 67
   },
   "sources": {

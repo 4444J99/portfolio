@@ -94,7 +94,7 @@ function runLighthouse(url, outputPath) {
 	const flags = [
 		`--output=json`,
 		`--output-path=${outputPath}`,
-		'--chrome-flags="--headless --no-sandbox --disable-gpu"',
+		'--chrome-flags="--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage"',
 		'--quiet',
 	].join(' ');
 
