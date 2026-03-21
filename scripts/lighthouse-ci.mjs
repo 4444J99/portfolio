@@ -9,10 +9,35 @@
  * LHR JSON to .lighthouseci/ for badge generation.
  */
 
-import { execSync } from 'node:child_process';
+import { execFileSync, execSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, resolve } from 'node:path';
+
+// ── Chrome detection ─────────────────────────────────────────────────────────
+
+function findChrome() {
+	const candidates =
+		process.platform === 'darwin'
+			? [
+					'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+					'/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary',
+				]
+			: [
+					'/usr/bin/google-chrome-stable',
+					'/usr/bin/google-chrome',
+					'/usr/bin/chromium-browser',
+					'/usr/bin/chromium',
+				];
+
+	if (process.env.CHROME_PATH && existsSync(process.env.CHROME_PATH)) {
+		return process.env.CHROME_PATH;
+	}
+	for (const c of candidates) {
+		if (existsSync(c)) return c;
+	}
+	return null;
+}
 
 // ── Configuration ────────────────────────────────────────────────────────────
 
@@ -90,15 +115,20 @@ function createStaticServer() {
 
 // ── Lighthouse runner ────────────────────────────────────────────────────────
 
-function runLighthouse(url, outputPath) {
-	const flags = [
-		`--output=json`,
+function runLighthouse(url, outputPath, chromePath) {
+	const lhBin = resolve('node_modules/.bin/lighthouse');
+	const args = [
+		url,
+		'--output=json',
 		`--output-path=${outputPath}`,
-		'--chrome-flags="--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage"',
+		'--chrome-flags=--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage',
 		'--quiet',
-	].join(' ');
+	];
+	if (chromePath) {
+		args.push(`--chrome-path=${chromePath}`);
+	}
 
-	execSync(`npx lighthouse ${url} ${flags}`, {
+	execFileSync(lhBin, args, {
 		stdio: ['ignore', 'pipe', 'pipe'],
 		timeout: 120_000,
 	});
@@ -134,13 +164,22 @@ async function main() {
 	}
 	mkdirSync(OUTPUT_DIR, { recursive: true });
 
+	// Detect Chrome
+	const chromePath = findChrome();
+	if (chromePath) {
+		console.log(`Chrome: ${chromePath}`);
+	} else {
+		console.error('Chrome not found. Set CHROME_PATH or install google-chrome-stable.');
+		process.exit(1);
+	}
+
 	// Start static server
 	const server = createStaticServer();
 	await new Promise((resolve) => {
 		server.listen(0, '127.0.0.1', resolve);
 	});
 	const port = server.address().port;
-	console.log(`\nServing dist/ on http://127.0.0.1:${port}`);
+	console.log(`Serving dist/ on http://127.0.0.1:${port}`);
 	console.log(`Running Lighthouse: ${URLS.length} URLs x ${NUMBER_OF_RUNS} runs\n`);
 
 	const failures = [];
@@ -155,12 +194,14 @@ async function main() {
 			for (let run = 0; run < NUMBER_OF_RUNS; run++) {
 				const tmpPath = join(OUTPUT_DIR, `tmp-run-${run}.json`);
 				try {
-					runLighthouse(fullUrl, tmpPath);
+					runLighthouse(fullUrl, tmpPath, chromePath);
 					const lhr = JSON.parse(readFileSync(tmpPath, 'utf-8'));
 					runScores.push({ lhr, scores: extractScores(lhr) });
 					process.stdout.write('.');
 				} catch (err) {
-					console.error(`\n    Run ${run + 1} failed: ${err.message}`);
+					const stderr = err.stderr?.toString().trim();
+					const detail = stderr ? `: ${stderr.split('\n').slice(-3).join(' | ')}` : '';
+					console.error(`\n    Run ${run + 1} failed: ${err.message}${detail}`);
 					// Continue with remaining runs
 				}
 			}
