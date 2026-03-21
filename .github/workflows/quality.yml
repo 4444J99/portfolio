@@ -81,6 +81,8 @@ jobs:
           npm run sync:identity
       - name: Build
         run: npm run build
+      - name: Perf Budgets
+        run: npm run test:perf:budgets
       - name: Upload dist
         uses: actions/upload-artifact@v7
         with:
@@ -180,6 +182,7 @@ jobs:
 
   performance:
     needs: build
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     continue-on-error: true
@@ -195,13 +198,9 @@ jobs:
         with:
           name: build-dist
           path: dist
-      - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
       - name: Collect Perf Metrics
         run: npm run collect:perf
-      - name: Perf Budgets
-        run: npm run test:perf:budgets
-      - name: Lighthouse (no-upload)
+      - name: Lighthouse
         run: npm run lighthouse
       - name: Upload perf artifacts
         if: always()
