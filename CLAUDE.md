@@ -258,7 +258,7 @@ All configs in `.config/` (not project root):
 
 ### Current phase: W10
 
-Coverage floors: 45/32/32/45 (stmt/branch/func/line). Hint budget: 0.
+Coverage floors: 45/32/32/45 (stmt/branch/func/line). Hint budget: 0. Test suite: **496 tests** (vitest unit + integration + workspace packages). Security: **0 vulnerabilities** (npm audit — all severity levels ratcheted to 0 as of 2026-03-14).
 
 ### Workspace package tests
 
