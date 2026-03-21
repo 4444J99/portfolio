@@ -244,7 +244,7 @@ deploy.yml (workflow_run on quality success | schedule | manual)
 
 ### Environment variables
 
-- `QUALITY_PHASE=W10` (quality.yml line 19) — must match a phase in `ratchet-policy.json`
+- `QUALITY_PHASE=W12` (quality.yml line 19) — must match a phase in `ratchet-policy.json`
 - `PUBLIC_CONSULT_API_BASE` (deploy.yml secret) — Cloudflare Worker URL
 
 ## Testing
@@ -254,11 +254,11 @@ deploy.yml (workflow_run on quality success | schedule | manual)
 All configs in `.config/` (not project root):
 - **Vitest** — `.config/vitest.config.ts`: jsdom environment, `@` → `src/`, setup file `src/test/setup.ts` (canvas stubs), coverage excludes `.astro` and sketch implementations. Coverage thresholds loaded from `.quality/ratchet-policy.json` at config parse time.
 - **Playwright** — `.config/playwright.smoke.config.ts`: mobile + desktop viewports
-- **Lighthouse** — `.config/lighthouserc.cjs`: perf/a11y/best-practices thresholds
+- **Lighthouse** — `scripts/lighthouse-ci.mjs`: programmatic API runner with inline thresholds
 
-### Current phase: W10
+### Current phase: W12
 
-Coverage floors: 45/32/32/45 (stmt/branch/func/line). Hint budget: 0. Test suite: **496 tests** (vitest unit + integration + workspace packages). Security: **0 vulnerabilities** (npm audit — all severity levels ratcheted to 0 as of 2026-03-14).
+Coverage floors: 55/40/40/55 (stmt/branch/func/line). Hint budget: 0. Test suite: **496 tests** (vitest unit + integration + workspace packages). Security: **0 vulnerabilities** (npm audit — all severity levels allowlisted, no upstream fixes available as of 2026-03-21).
 
 ### Workspace package tests
 
