@@ -81,10 +81,6 @@ jobs:
           npm run sync:identity
       - name: Build
         run: npm run build
-      - name: Collect Perf Metrics
-        run: npm run collect:perf
-      - name: Perf Budgets
-        run: npm run test:perf:budgets
       - name: Upload dist
         uses: actions/upload-artifact@v7
         with:
@@ -219,9 +215,15 @@ jobs:
         with:
           name: build-dist
           path: dist
+      - name: Install Playwright Chromium
+        if: steps.changes.outputs.run == 'true'
+        run: npx playwright install --with-deps chromium
       - name: Collect Perf Metrics
         if: steps.changes.outputs.run == 'true'
         run: npm run collect:perf
+      - name: Perf Budgets
+        if: steps.changes.outputs.run == 'true'
+        run: npm run test:perf:budgets
       - name: Lighthouse
         if: steps.changes.outputs.run == 'true'
         run: npm run lighthouse
