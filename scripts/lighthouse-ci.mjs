@@ -4,40 +4,14 @@
  * Lightweight Lighthouse CI runner.
  *
  * Replaces @lhci/cli to eliminate the puppeteer-core/yauzl vulnerability chain.
- * Serves dist/ with Node's built-in http server, shells out to `npx lighthouse`
- * for each URL (3 runs), takes median score, asserts thresholds, and saves
- * LHR JSON to .lighthouseci/ for badge generation.
+ * Serves dist/ with Node's built-in http server, runs Lighthouse programmatically
+ * (in-process, no child process), asserts thresholds, and saves LHR JSON to
+ * .lighthouseci/ for badge generation.
  */
 
-import { execFileSync, execSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, resolve } from 'node:path';
-
-// ── Chrome detection ─────────────────────────────────────────────────────────
-
-function findChrome() {
-	const candidates =
-		process.platform === 'darwin'
-			? [
-					'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-					'/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary',
-				]
-			: [
-					'/usr/bin/google-chrome-stable',
-					'/usr/bin/google-chrome',
-					'/usr/bin/chromium-browser',
-					'/usr/bin/chromium',
-				];
-
-	if (process.env.CHROME_PATH && existsSync(process.env.CHROME_PATH)) {
-		return process.env.CHROME_PATH;
-	}
-	for (const c of candidates) {
-		if (existsSync(c)) return c;
-	}
-	return null;
-}
 
 // ── Configuration ────────────────────────────────────────────────────────────
 
@@ -113,25 +87,27 @@ function createStaticServer() {
 	});
 }
 
-// ── Lighthouse runner ────────────────────────────────────────────────────────
+// ── Lighthouse runner (programmatic) ─────────────────────────────────────────
 
-function runLighthouse(url, outputPath, chromePath) {
-	const lhBin = resolve('node_modules/.bin/lighthouse');
-	const args = [
-		url,
-		'--output=json',
-		`--output-path=${outputPath}`,
-		'--chrome-flags=--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage',
-		'--quiet',
-	];
-	if (chromePath) {
-		args.push(`--chrome-path=${chromePath}`);
-	}
+async function runLighthouse(url, chromePath) {
+	const lighthouse = (await import('lighthouse')).default;
+	const chromeLauncher = await import('chrome-launcher');
 
-	execFileSync(lhBin, args, {
-		stdio: ['ignore', 'pipe', 'pipe'],
-		timeout: 120_000,
+	const chrome = await chromeLauncher.launch({
+		chromePath,
+		chromeFlags: ['--headless=new', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
 	});
+
+	try {
+		const result = await lighthouse(url, {
+			port: chrome.port,
+			output: 'json',
+			logLevel: 'error',
+		});
+		return result?.lhr ?? null;
+	} finally {
+		chrome.kill();
+	}
 }
 
 function median(values) {
@@ -148,6 +124,31 @@ function extractScores(lhr) {
 		'best-practices': cats['best-practices']?.score ?? null,
 		seo: cats.seo?.score ?? null,
 	};
+}
+
+// ── Chrome detection ─────────────────────────────────────────────────────────
+
+function findChrome() {
+	const candidates =
+		process.platform === 'darwin'
+			? [
+					'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+					'/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary',
+				]
+			: [
+					'/usr/bin/google-chrome-stable',
+					'/usr/bin/google-chrome',
+					'/usr/bin/chromium-browser',
+					'/usr/bin/chromium',
+				];
+
+	if (process.env.CHROME_PATH && existsSync(process.env.CHROME_PATH)) {
+		return process.env.CHROME_PATH;
+	}
+	for (const c of candidates) {
+		if (existsSync(c)) return c;
+	}
+	return null;
 }
 
 // ── Main ─────────────────────────────────────────────────────────────────────
@@ -175,8 +176,8 @@ async function main() {
 
 	// Start static server
 	const server = createStaticServer();
-	await new Promise((resolve) => {
-		server.listen(0, '127.0.0.1', resolve);
+	await new Promise((r) => {
+		server.listen(0, '127.0.0.1', r);
 	});
 	const port = server.address().port;
 	console.log(`Serving dist/ on http://127.0.0.1:${port}`);
@@ -192,16 +193,13 @@ async function main() {
 			process.stdout.write(`  ${urlPath} `);
 
 			for (let run = 0; run < NUMBER_OF_RUNS; run++) {
-				const tmpPath = join(OUTPUT_DIR, `tmp-run-${run}.json`);
 				try {
-					runLighthouse(fullUrl, tmpPath, chromePath);
-					const lhr = JSON.parse(readFileSync(tmpPath, 'utf-8'));
+					const lhr = await runLighthouse(fullUrl, chromePath);
+					if (!lhr) throw new Error('Lighthouse returned no result');
 					runScores.push({ lhr, scores: extractScores(lhr) });
 					process.stdout.write('.');
 				} catch (err) {
-					const stderr = err.stderr?.toString().trim();
-					const detail = stderr ? `: ${stderr.split('\n').slice(-3).join(' | ')}` : '';
-					console.error(`\n    Run ${run + 1} failed: ${err.message}${detail}`);
+					console.error(`\n    Run ${run + 1} failed: ${err.message}`);
 					// Continue with remaining runs
 				}
 			}
