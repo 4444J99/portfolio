@@ -27,24 +27,6 @@
 			"created": "2026-03-21",
 			"expires": "2026-04-04",
 			"trackingIssue": "https://github.com/advisories/GHSA-72gr-qfp7-vwhw"
-		},
-		{
-			"package": "unstorage",
-			"severity": "moderate",
-			"reason": "Transitive via h3@1.15.8. No fix available upstream (h3 1.15.9 not published).",
-			"owner": "4444j99",
-			"created": "2026-03-21",
-			"expires": "2026-04-04",
-			"trackingIssue": "https://github.com/advisories/GHSA-72gr-qfp7-vwhw"
-		},
-		{
-			"package": "astro",
-			"severity": "moderate",
-			"reason": "Transitive via unstorage → h3@1.15.8. No fix available upstream (h3 1.15.9 not published).",
-			"owner": "4444j99",
-			"created": "2026-03-21",
-			"expires": "2026-04-04",
-			"trackingIssue": "https://github.com/advisories/GHSA-72gr-qfp7-vwhw"
 		}
 	]
 }
