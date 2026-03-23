@@ -18,15 +18,6 @@
 			"created": "2026-03-20",
 			"expires": "2026-04-03",
 			"trackingIssue": "https://github.com/advisories/GHSA-jp2q-39xq-3w4g"
-		},
-		{
-			"package": "h3",
-			"severity": "moderate",
-			"reason": "Dev-only transitive dep (astro → unstorage → h3). serveStatic path traversal + SSE injection. Only active during astro dev, not in built static site. h3@1.15.8 is latest 1.x — v1.15.9 never published to npm. No fix available.",
-			"owner": "4444j99",
-			"created": "2026-03-21",
-			"expires": "2026-04-04",
-			"trackingIssue": "https://github.com/advisories/GHSA-72gr-qfp7-vwhw"
 		}
 	]
 }
