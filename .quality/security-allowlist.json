@@ -1,23 +1,4 @@
 {
 	"version": 1,
-	"entries": [
-		{
-			"package": "fast-xml-parser",
-			"severity": "moderate",
-			"reason": "Dev-only via @astrojs/rss. Entity expansion bypass when limits set to zero. No fix available. Portfolio does not process untrusted XML.",
-			"owner": "4444j99",
-			"created": "2026-03-20",
-			"expires": "2026-04-03",
-			"trackingIssue": "https://github.com/advisories/GHSA-jp2q-39xq-3w4g"
-		},
-		{
-			"package": "@astrojs/rss",
-			"severity": "moderate",
-			"reason": "Transitive via fast-xml-parser. No fix available upstream.",
-			"owner": "4444j99",
-			"created": "2026-03-20",
-			"expires": "2026-04-03",
-			"trackingIssue": "https://github.com/advisories/GHSA-jp2q-39xq-3w4g"
-		}
-	]
+	"entries": []
 }
