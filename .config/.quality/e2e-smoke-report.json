@@ -1,0 +1,594 @@
+{
+	"config": {
+		"configFile": "/Users/4jp/Workspace/4444J99/portfolio/.config/playwright.smoke.config.ts",
+		"rootDir": "/Users/4jp/Workspace/4444J99/portfolio/src/e2e",
+		"forbidOnly": false,
+		"fullyParallel": false,
+		"globalSetup": null,
+		"globalTeardown": null,
+		"globalTimeout": 0,
+		"grep": {},
+		"grepInvert": null,
+		"maxFailures": 0,
+		"metadata": {
+			"actualWorkers": 1
+		},
+		"preserveOutput": "always",
+		"projects": [
+			{
+				"outputDir": "/Users/4jp/Workspace/4444J99/portfolio/test-results",
+				"repeatEach": 1,
+				"retries": 0,
+				"metadata": {
+					"actualWorkers": 1
+				},
+				"id": "mobile",
+				"name": "mobile",
+				"testDir": "/Users/4jp/Workspace/4444J99/portfolio/src/e2e",
+				"testIgnore": [],
+				"testMatch": ["*.smoke.spec.ts"],
+				"timeout": 60000
+			},
+			{
+				"outputDir": "/Users/4jp/Workspace/4444J99/portfolio/test-results",
+				"repeatEach": 1,
+				"retries": 0,
+				"metadata": {
+					"actualWorkers": 1
+				},
+				"id": "desktop",
+				"name": "desktop",
+				"testDir": "/Users/4jp/Workspace/4444J99/portfolio/src/e2e",
+				"testIgnore": [],
+				"testMatch": ["*.smoke.spec.ts"],
+				"timeout": 60000
+			}
+		],
+		"quiet": false,
+		"reporter": [
+			["line", null],
+			[
+				"json",
+				{
+					"outputFile": ".quality/e2e-smoke-report.json"
+				}
+			]
+		],
+		"reportSlowTests": {
+			"max": 5,
+			"threshold": 300000
+		},
+		"runAgents": "none",
+		"shard": null,
+		"tags": [],
+		"updateSnapshots": "missing",
+		"updateSourceMethod": "patch",
+		"version": "1.58.2",
+		"workers": 1,
+		"webServer": {
+			"command": "npm run preview -- --host 127.0.0.1 --port 4173",
+			"port": 4173,
+			"reuseExistingServer": true,
+			"timeout": 120000
+		}
+	},
+	"suites": [
+		{
+			"title": "consult.smoke.spec.ts",
+			"file": "consult.smoke.spec.ts",
+			"column": 0,
+			"line": 0,
+			"specs": [
+				{
+					"title": "consult page form and global controls handle navigation",
+					"ok": true,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "mobile",
+							"projectName": "mobile",
+							"results": [
+								{
+									"workerIndex": 0,
+									"parallelIndex": 0,
+									"status": "passed",
+									"duration": 1639,
+									"errors": [],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:15:53.052Z",
+									"annotations": [],
+									"attachments": []
+								}
+							],
+							"status": "expected"
+						}
+					],
+					"id": "0f11b1eb2bb6273dadcf-11a237491a6c1ff16e52",
+					"file": "consult.smoke.spec.ts",
+					"line": 4,
+					"column": 1
+				},
+				{
+					"title": "consult page form and global controls handle navigation",
+					"ok": true,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "desktop",
+							"projectName": "desktop",
+							"results": [
+								{
+									"workerIndex": 2,
+									"parallelIndex": 0,
+									"status": "passed",
+									"duration": 3128,
+									"errors": [],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:16:20.973Z",
+									"annotations": [],
+									"attachments": []
+								}
+							],
+							"status": "expected"
+						}
+					],
+					"id": "0f11b1eb2bb6273dadcf-a63d1943d3c1080f39bc",
+					"file": "consult.smoke.spec.ts",
+					"line": 4,
+					"column": 1
+				}
+			]
+		},
+		{
+			"title": "dynamic-routes.smoke.spec.ts",
+			"file": "dynamic-routes.smoke.spec.ts",
+			"column": 0,
+			"line": 0,
+			"specs": [
+				{
+					"title": "strike target page loads and has intro content",
+					"ok": true,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "mobile",
+							"projectName": "mobile",
+							"results": [
+								{
+									"workerIndex": 0,
+									"parallelIndex": 0,
+									"status": "passed",
+									"duration": 768,
+									"errors": [],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:15:55.039Z",
+									"annotations": [],
+									"attachments": []
+								}
+							],
+							"status": "expected"
+						}
+					],
+					"id": "1b67f11c141c1895ab3f-8ce68ab018e7a3e4a43c",
+					"file": "dynamic-routes.smoke.spec.ts",
+					"line": 13,
+					"column": 1
+				},
+				{
+					"title": "resume persona page loads and has heading",
+					"ok": true,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "mobile",
+							"projectName": "mobile",
+							"results": [
+								{
+									"workerIndex": 0,
+									"parallelIndex": 0,
+									"status": "passed",
+									"duration": 794,
+									"errors": [],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:15:55.815Z",
+									"annotations": [],
+									"attachments": []
+								}
+							],
+							"status": "expected"
+						}
+					],
+					"id": "1b67f11c141c1895ab3f-2dd6600b9305f6aecbea",
+					"file": "dynamic-routes.smoke.spec.ts",
+					"line": 21,
+					"column": 1
+				},
+				{
+					"title": "strike target page loads and has intro content",
+					"ok": true,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "desktop",
+							"projectName": "desktop",
+							"results": [
+								{
+									"workerIndex": 2,
+									"parallelIndex": 0,
+									"status": "passed",
+									"duration": 733,
+									"errors": [],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:16:24.416Z",
+									"annotations": [],
+									"attachments": []
+								}
+							],
+							"status": "expected"
+						}
+					],
+					"id": "1b67f11c141c1895ab3f-7bd082da2f3391867e3d",
+					"file": "dynamic-routes.smoke.spec.ts",
+					"line": 13,
+					"column": 1
+				},
+				{
+					"title": "resume persona page loads and has heading",
+					"ok": true,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "desktop",
+							"projectName": "desktop",
+							"results": [
+								{
+									"workerIndex": 2,
+									"parallelIndex": 0,
+									"status": "passed",
+									"duration": 720,
+									"errors": [],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:16:25.153Z",
+									"annotations": [],
+									"attachments": []
+								}
+							],
+							"status": "expected"
+						}
+					],
+					"id": "1b67f11c141c1895ab3f-277e51735340c8ebbf4b",
+					"file": "dynamic-routes.smoke.spec.ts",
+					"line": 21,
+					"column": 1
+				}
+			]
+		},
+		{
+			"title": "gallery-fullscreen.smoke.spec.ts",
+			"file": "gallery-fullscreen.smoke.spec.ts",
+			"column": 0,
+			"line": 0,
+			"specs": [
+				{
+					"title": "gallery controls remain deterministic across lifecycle replays",
+					"ok": false,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "mobile",
+							"projectName": "mobile",
+							"results": [
+								{
+									"workerIndex": 0,
+									"parallelIndex": 0,
+									"status": "failed",
+									"duration": 3857,
+									"error": {
+										"message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n\nCall Log:\n- Timeout 3000ms exceeded while waiting on the predicate",
+										"stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n\nCall Log:\n- Timeout 3000ms exceeded while waiting on the predicate\n    at assertFullscreenSingleFire (/Users/4jp/Workspace/4444J99/portfolio/src/e2e/helpers.ts:95:3)\n    at /Users/4jp/Workspace/4444J99/portfolio/src/e2e/gallery-fullscreen.smoke.spec.ts:17:3",
+										"location": {
+											"file": "/Users/4jp/Workspace/4444J99/portfolio/src/e2e/helpers.ts",
+											"column": 3,
+											"line": 95
+										},
+										"snippet": "\u001b[90m   at \u001b[39mhelpers.ts:95\n\n  93 |\n  94 |   await page.keyboard.press('Escape');\n> 95 |   await expect\n     |   ^\n  96 |     .poll(async () => page.evaluate(() => Boolean(document.fullscreenElement)), { timeout: 3000 })\n  97 |     .toBe(false);\n  98 | }"
+									},
+									"errors": [
+										{
+											"location": {
+												"file": "/Users/4jp/Workspace/4444J99/portfolio/src/e2e/helpers.ts",
+												"column": 3,
+												"line": 95
+											},
+											"message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n\nCall Log:\n- Timeout 3000ms exceeded while waiting on the predicate\n\n   at helpers.ts:95\n\n  93 |\n  94 |   await page.keyboard.press('Escape');\n> 95 |   await expect\n     |   ^\n  96 |     .poll(async () => page.evaluate(() => Boolean(document.fullscreenElement)), { timeout: 3000 })\n  97 |     .toBe(false);\n  98 | }\n    at assertFullscreenSingleFire (/Users/4jp/Workspace/4444J99/portfolio/src/e2e/helpers.ts:95:3)\n    at /Users/4jp/Workspace/4444J99/portfolio/src/e2e/gallery-fullscreen.smoke.spec.ts:17:3"
+										}
+									],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:15:56.632Z",
+									"annotations": [],
+									"attachments": [
+										{
+											"name": "error-context",
+											"contentType": "text/markdown",
+											"path": "/Users/4jp/Workspace/4444J99/portfolio/test-results/gallery-fullscreen.smoke-g-0bdf1-ic-across-lifecycle-replays-mobile/error-context.md"
+										}
+									],
+									"errorLocation": {
+										"file": "/Users/4jp/Workspace/4444J99/portfolio/src/e2e/helpers.ts",
+										"column": 3,
+										"line": 95
+									}
+								}
+							],
+							"status": "unexpected"
+						}
+					],
+					"id": "ad9b1f06f6e515e04ee2-5473801b41672ea4b70d",
+					"file": "gallery-fullscreen.smoke.spec.ts",
+					"line": 10,
+					"column": 1
+				},
+				{
+					"title": "gallery controls remain deterministic across lifecycle replays",
+					"ok": false,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "desktop",
+							"projectName": "desktop",
+							"results": [
+								{
+									"workerIndex": 2,
+									"parallelIndex": 0,
+									"status": "failed",
+									"duration": 4018,
+									"error": {
+										"message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n\nCall Log:\n- Timeout 3000ms exceeded while waiting on the predicate",
+										"stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n\nCall Log:\n- Timeout 3000ms exceeded while waiting on the predicate\n    at assertFullscreenSingleFire (/Users/4jp/Workspace/4444J99/portfolio/src/e2e/helpers.ts:95:3)\n    at /Users/4jp/Workspace/4444J99/portfolio/src/e2e/gallery-fullscreen.smoke.spec.ts:17:3",
+										"location": {
+											"file": "/Users/4jp/Workspace/4444J99/portfolio/src/e2e/helpers.ts",
+											"column": 3,
+											"line": 95
+										},
+										"snippet": "\u001b[90m   at \u001b[39mhelpers.ts:95\n\n  93 |\n  94 |   await page.keyboard.press('Escape');\n> 95 |   await expect\n     |   ^\n  96 |     .poll(async () => page.evaluate(() => Boolean(document.fullscreenElement)), { timeout: 3000 })\n  97 |     .toBe(false);\n  98 | }"
+									},
+									"errors": [
+										{
+											"location": {
+												"file": "/Users/4jp/Workspace/4444J99/portfolio/src/e2e/helpers.ts",
+												"column": 3,
+												"line": 95
+											},
+											"message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mfalse\u001b[39m\nReceived: \u001b[31mtrue\u001b[39m\n\nCall Log:\n- Timeout 3000ms exceeded while waiting on the predicate\n\n   at helpers.ts:95\n\n  93 |\n  94 |   await page.keyboard.press('Escape');\n> 95 |   await expect\n     |   ^\n  96 |     .poll(async () => page.evaluate(() => Boolean(document.fullscreenElement)), { timeout: 3000 })\n  97 |     .toBe(false);\n  98 | }\n    at assertFullscreenSingleFire (/Users/4jp/Workspace/4444J99/portfolio/src/e2e/helpers.ts:95:3)\n    at /Users/4jp/Workspace/4444J99/portfolio/src/e2e/gallery-fullscreen.smoke.spec.ts:17:3"
+										}
+									],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:16:25.882Z",
+									"annotations": [],
+									"attachments": [
+										{
+											"name": "error-context",
+											"contentType": "text/markdown",
+											"path": "/Users/4jp/Workspace/4444J99/portfolio/test-results/gallery-fullscreen.smoke-g-0bdf1-ic-across-lifecycle-replays-desktop/error-context.md"
+										}
+									],
+									"errorLocation": {
+										"file": "/Users/4jp/Workspace/4444J99/portfolio/src/e2e/helpers.ts",
+										"column": 3,
+										"line": 95
+									}
+								}
+							],
+							"status": "unexpected"
+						}
+					],
+					"id": "ad9b1f06f6e515e04ee2-0e3fe800290e699a96dc",
+					"file": "gallery-fullscreen.smoke.spec.ts",
+					"line": 10,
+					"column": 1
+				}
+			]
+		},
+		{
+			"title": "menu-search-theme.smoke.spec.ts",
+			"file": "menu-search-theme.smoke.spec.ts",
+			"column": 0,
+			"line": 0,
+			"specs": [
+				{
+					"title": "menu/search/theme controls stay single-fire across top-level routes",
+					"ok": true,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "mobile",
+							"projectName": "mobile",
+							"results": [
+								{
+									"workerIndex": 1,
+									"parallelIndex": 0,
+									"status": "passed",
+									"duration": 8640,
+									"errors": [],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:16:00.972Z",
+									"annotations": [],
+									"attachments": []
+								}
+							],
+							"status": "expected"
+						}
+					],
+					"id": "98676f8081289d2abdaf-47bac6a1acf0e5e3bc6d",
+					"file": "menu-search-theme.smoke.spec.ts",
+					"line": 10,
+					"column": 1
+				},
+				{
+					"title": "menu/search/theme controls stay single-fire across top-level routes",
+					"ok": true,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "desktop",
+							"projectName": "desktop",
+							"results": [
+								{
+									"workerIndex": 3,
+									"parallelIndex": 0,
+									"status": "passed",
+									"duration": 10847,
+									"errors": [],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:16:30.382Z",
+									"annotations": [],
+									"attachments": []
+								}
+							],
+							"status": "expected"
+						}
+					],
+					"id": "98676f8081289d2abdaf-dbb663bb2cfac0e09078",
+					"file": "menu-search-theme.smoke.spec.ts",
+					"line": 10,
+					"column": 1
+				}
+			]
+		},
+		{
+			"title": "transition-cycles.smoke.spec.ts",
+			"file": "transition-cycles.smoke.spec.ts",
+			"column": 0,
+			"line": 0,
+			"specs": [
+				{
+					"title": "repeated transition cycles preserve single active menu behavior",
+					"ok": true,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "mobile",
+							"projectName": "mobile",
+							"results": [
+								{
+									"workerIndex": 1,
+									"parallelIndex": 0,
+									"status": "passed",
+									"duration": 10464,
+									"errors": [],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:16:09.973Z",
+									"annotations": [],
+									"attachments": []
+								}
+							],
+							"status": "expected"
+						}
+					],
+					"id": "cd30b385f5c6f340955b-42d3a705f8d3bfbc043c",
+					"file": "transition-cycles.smoke.spec.ts",
+					"line": 4,
+					"column": 1
+				},
+				{
+					"title": "repeated transition cycles preserve single active menu behavior",
+					"ok": true,
+					"tags": [],
+					"tests": [
+						{
+							"timeout": 60000,
+							"annotations": [],
+							"expectedStatus": "passed",
+							"projectId": "desktop",
+							"projectName": "desktop",
+							"results": [
+								{
+									"workerIndex": 3,
+									"parallelIndex": 0,
+									"status": "passed",
+									"duration": 8068,
+									"errors": [],
+									"stdout": [],
+									"stderr": [],
+									"retry": 0,
+									"startTime": "2026-03-06T01:16:41.488Z",
+									"annotations": [],
+									"attachments": []
+								}
+							],
+							"status": "expected"
+						}
+					],
+					"id": "cd30b385f5c6f340955b-78c5fdb3d0bafd84026e",
+					"file": "transition-cycles.smoke.spec.ts",
+					"line": 4,
+					"column": 1
+				}
+			]
+		}
+	],
+	"errors": [],
+	"stats": {
+		"startTime": "2026-03-06T01:15:51.621Z",
+		"duration": 57997.061,
+		"expected": 10,
+		"skipped": 0,
+		"unexpected": 2,
+		"flaky": 0
+	}
+}
