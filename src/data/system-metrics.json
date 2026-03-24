@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated": "2026-03-23T07:05:34.314242+00:00",
+  "generated": "2026-03-24T07:00:16.838170+00:00",
   "computed": {
     "total_repos": 116,
     "active_repos": 62,
@@ -66,21 +66,21 @@
     "_note": "Edit these by hand. calculate-metrics.py preserves this section."
   },
   "registry": {
-    "total_repos": 118,
+    "total_repos": 125,
     "total_organs": 8,
     "operational_organs": 8,
     "implementation_status": {
-      "ACTIVE": 62,
+      "ACTIVE": 63,
       "ARCHIVED": 54,
       "PROTOTYPE": 1,
-      "UNKNOWN": 1
+      "UNKNOWN": 7
     },
-    "ci_coverage": 105,
+    "ci_coverage": 106,
     "dependency_edges": 58,
     "organs": {
       "ORGAN-I": {
         "name": "Theory",
-        "total_repos": 21
+        "total_repos": 22
       },
       "ORGAN-II": {
         "name": "Art",
@@ -92,7 +92,7 @@
       },
       "ORGAN-IV": {
         "name": "Orchestration",
-        "total_repos": 12
+        "total_repos": 18
       },
       "ORGAN-V": {
         "name": "Public Process",
