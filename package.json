@@ -103,15 +103,15 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "0.9.8",
-		"@biomejs/biome": "2.4.8",
+		"@biomejs/biome": "2.4.9",
 		"@playwright/test": "1.58.2",
 		"@resvg/resvg-js": "2.6.2",
 		"@types/d3": "7.4.3",
 		"@types/p5": "1.7.7",
 		"@types/three": "0.183.1",
-		"@vitest/coverage-v8": "4.1.0",
+		"@vitest/coverage-v8": "4.1.1",
 		"axe-core": "4.11.1",
-		"happy-dom": "20.8.4",
+		"happy-dom": "20.8.8",
 		"html-validate": "10.11.2",
 		"lighthouse": "13.0.3",
 		"npm-run-all2": "8.0.4",
@@ -119,7 +119,7 @@
 		"playwright": "1.58.2",
 		"satori": "0.26.0",
 		"typescript": "5.9.3",
-		"vitest": "4.1.0"
+		"vitest": "4.1.1"
 	},
 	"overrides": {
 		"lodash": "4.17.23",
