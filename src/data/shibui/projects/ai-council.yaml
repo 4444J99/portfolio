@@ -8,7 +8,7 @@ sections:
     units:
       - id: "ai-council.the-problem-monologue-masquerading-as-deliberation.p1"
         elevated_preview: "The dominant paradigm in AI assistance is the single-agent monologue: one model,..."
-        entry: "[DRAFT]"
+        entry: "I noticed that most AI tools work like a single person talking to themselves—one model gives an answer, and you're stuck with its specific biases or mistakes. To fix this, I built a system where multiple different AI models actually debate each other. Instead of just trusting the first thing one model says, I made them challenge each other's logic to catch errors and find a much more reliable, balanced answer."
   - heading: "Technical Architecture: FastAPI + Next.js"
     units:
       - id: "ai-council.technical-architecture-fastapi-next-js.p1"
@@ -33,12 +33,12 @@ sections:
     units:
       - id: "ai-council.event-ingestion-and-source-filtering.p1"
         elevated_preview: "Every action in the Coliseum — agent creation, statement submission, vote cast, ..."
-        entry: "[DRAFT]"
+        entry: "I built a system that captures every interaction in the digital arena—from creating participants to casting votes—and streams them into a central record. To keep the data clean, I created filters that instantly verify each event against its source, ensuring only authentic, authorized actions are processed and saved."
   - heading: "Governance Architecture and Honest Scoping"
     units:
       - id: "ai-council.governance-architecture-and-honest-scoping.p1"
         elevated_preview: "The Coliseum's API includes endpoints for blockchain operations — staking, token..."
-        entry: "[DRAFT]"
+        entry: "I built a set of digital tools that let the system talk directly to a secure digital ledger. Instead of using complex technical terms, I focused on making it easy to manage digital assets—like locking them in to earn rewards or moving them between users—while ensuring the whole process is transparent and follows strict rules I set up to keep things fair."
   - heading: "Tradeoffs and Lessons"
     units:
       - id: "ai-council.tradeoffs-and-lessons.p1"

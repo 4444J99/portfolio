@@ -13,7 +13,7 @@ sections:
     units:
       - id: "eight-organ-system.how-it-works.p1"
         elevated_preview: "Eight GitHub organizations, each representing a distinct organ with a Greek onto..."
-        entry: "[DRAFT]"
+        entry: "I organized my portfolio into eight online spaces, naming each after a Greek concept for a different \"organ\" of my work. I kept the project data separate from the site itself, using a central hub to pull them together. This lets me track the history of each area independently while showing you the whole system in one place."
   - heading: "The Registry"
     units:
       - id: "eight-organ-system.the-registry.p1"

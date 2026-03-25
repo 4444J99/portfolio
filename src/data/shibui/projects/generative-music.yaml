@@ -27,7 +27,7 @@ sections:
         entry: "[DRAFT]"
       - id: "generative-music.three-layer-architecture.p2"
         elevated_preview: "This is where the artistic decisions live. The bridge maps symbolic events to mu..."
-        entry: "[DRAFT]"
+        entry: "I built a bridge to turn abstract ideas into specific sounds. I chose a three-part system so I can tweak the logic while the music keeps playing smoothly. To keep things from sounding messy, I made sure every random note automatically snaps to the right timing and stays perfectly in key."
       - id: "generative-music.three-layer-architecture.p3"
         elevated_preview: "I directed the implementation of a real-time audio synthesis engine utilizing To..."
         entry: "[DRAFT]"

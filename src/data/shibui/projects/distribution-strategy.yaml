@@ -13,7 +13,7 @@ sections:
     units:
       - id: "distribution-strategy.the-posse-principle.p1"
         elevated_preview: "The distribution strategy is built on the POSSE principle: Publish on your Own S..."
-        entry: "[DRAFT]"
+        entry: "I make sure my work starts on my own website first. This way, I own everything I create instead of just handing it over to social media companies. After it’s safely on my site, I share it elsewhere to reach more people, but the original version always stays under my control."
   - heading: "Audience Segmentation"
     units:
       - id: "distribution-strategy.audience-segmentation.p1"
@@ -28,7 +28,7 @@ sections:
     units:
       - id: "distribution-strategy.automated-distribution-infrastructure.p1"
         elevated_preview: "The distribution system is not a manual checklist but an automated pipeline impl..."
-        entry: "[DRAFT]"
+        entry: "I replaced my manual checklists with an automated system that handles everything whenever I finish a project. I built a pipeline that double-checks my work for errors, updates my portfolio across different platforms, and formats the same content for social media and professional sites simultaneously. This ensures my work is always consistent and up-to-date everywhere without me having to repeat the same steps by hand."
   - heading: "Distribution as Organ: Governance Protection"
     units:
       - id: "distribution-strategy.distribution-as-organ-governance-protection.p1"

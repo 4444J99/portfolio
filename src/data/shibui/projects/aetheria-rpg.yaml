@@ -13,7 +13,7 @@ sections:
     units:
       - id: "aetheria-rpg.the-theory-organ-i.p1"
         elevated_preview: "Not shallow \"add points and badges\" gamification. Structural gamification — usin..."
-        entry: "[DRAFT]"
+        entry: "I’m building a role-playing game where the world isn't just a static map, but a living system that reacts to how players behave. I designed an engine that tracks every decision and interaction, allowing the story and environment to shift based on the collective weight of those choices. It’s my way of moving past scripted paths to create a space where the narrative feels earned and truly unique to the person playing."
   - heading: "Technical Architecture"
     units:
       - id: "aetheria-rpg.technical-architecture.p1"
@@ -52,7 +52,7 @@ sections:
     units:
       - id: "aetheria-rpg.what-failed.p1"
         elevated_preview: "Onboarding complexity. 2-3 hours of setup. Teachers don't have that time. Brooks..."
-        entry: "[DRAFT]"
+        entry: "I realized that getting started was far too difficult, requiring two to three hours of setup that teachers simply didn't have. I saw firsthand that even the most well-designed tool fails if the initial hurdle to use it is too high for a busy professional."
   - heading: "Market Context"
     units:
       - id: "aetheria-rpg.market-context.p1"

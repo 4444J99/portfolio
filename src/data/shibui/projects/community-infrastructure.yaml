@@ -13,7 +13,7 @@ sections:
     units:
       - id: "community-infrastructure.the-salon-model.p1"
         elevated_preview: "The salon format draws on a tradition that stretches from the seventeenth-centur..."
-        entry: "[DRAFT]"
+        entry: "I’ve shaped this space after the classic European salon, where people used to gather for deep conversation across different fields. I wanted to move away from the noise of modern social media and instead build a quiet, intentional home for sharing ideas. By focusing on a single, curated environment, I’ve created a place where we can actually think together and focus on what matters most."
   - heading: "Reading Group Curriculum"
     units:
       - id: "community-infrastructure.reading-group-curriculum.p1"
@@ -28,7 +28,7 @@ sections:
     units:
       - id: "community-infrastructure.community-as-institutional-memory.p1"
         elevated_preview: "One of the less obvious functions of community infrastructure is the creation an..."
-        entry: "[DRAFT]"
+        entry: "I realized that when people build things together, they don't just create a physical space; they create a shared memory for the neighborhood. I focused on making sure the stories and lessons from these projects weren't lost when individuals moved on. By building systems to capture this collective knowledge, I helped the community keep its history alive and use past experiences to solve new problems."
   - heading: "From Salon to System: Feedback Mechanisms"
     units:
       - id: "community-infrastructure.from-salon-to-system-feedback-mechanisms.p1"

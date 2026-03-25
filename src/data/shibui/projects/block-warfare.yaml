@@ -18,7 +18,7 @@ sections:
     units:
       - id: "block-warfare.procedural-generation-geography-as-level-designer.p1"
         elevated_preview: "The procedural generation engine is the system's core intellectual contribution...."
-        entry: "[DRAFT]"
+        entry: "I built an engine that acts like a digital level designer, automatically carving out balanced battlefields so I don’t have to hand-draw every map. It translates abstract math into playable terrain by placing strategic cover and vertical paths exactly where they’re needed for fair competition. This system ensures that every new round feels fresh while still following the core rules of tactical movement and line-of-sight I established."
   - heading: "Territory Control: Claiming Real Boundaries"
     units:
       - id: "block-warfare.territory-control-claiming-real-boundaries.p1"
@@ -33,14 +33,14 @@ sections:
     units:
       - id: "block-warfare.design-philosophy-the-organ-i-connection.p1"
         elevated_preview: "TurfSynth is an ORGAN-III commercial product — pragmatic, shippable, revenue-awa..."
-        entry: "[DRAFT]"
+        entry: "I built TurfSynth to be a practical, shippable product that actually makes money. Unlike my more experimental projects, I chose to focus on a design that works reliably for real-world customers right now. Every decision I made was about balancing high-quality results with the business reality of getting a finished tool into people's hands."
   - heading: "Gameplay Modes and Player Experience"
     units:
       - id: "block-warfare.gameplay-modes-and-player-experience.p1"
         elevated_preview: "TurfSynth supports four gameplay modes, each engaging differently with the geogr..."
-        entry: "[DRAFT]"
+        entry: "I designed four different ways to play, each using the map’s terrain in a unique way. I built a standard mode for classic territory control, a \"Blitz\" version for faster sessions on smaller maps, a \"Stealth\" option that hides player movements to reward careful scouting, and a \"High-Ground\" mode where holding hills provides a distinct advantage. This variety ensures the game stays interesting whether players want a quick match or a slow, tactical challenge."
   - heading: "Tradeoffs and Lessons"
     units:
       - id: "block-warfare.tradeoffs-and-lessons.p1"
         elevated_preview: "The hardest tradeoff is geographic fidelity versus playability. Real-world geogr..."
-        entry: "[DRAFT]"
+        entry: "I had to choose between making the map look exactly like the real world or making the game actually fun to play. I realized that keeping every street and building perfectly accurate made moving around feel slow and frustrating, so I decided to simplify the layout. By focusing on how players navigate rather than strict realism, I created a much smoother experience while still keeping the recognizable spirit of the original location."

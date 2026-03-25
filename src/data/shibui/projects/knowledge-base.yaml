@@ -18,7 +18,7 @@ sections:
     units:
       - id: "knowledge-base.five-strategy-atomizer.p1"
         elevated_preview: "Raw conversations are not knowledge — they are transcripts of a knowledge-genera..."
-        entry: "[DRAFT]"
+        entry: "I built a system to turn my raw chat logs into a searchable library. Instead of just saving every word, I created a process that identifies the key ideas, summarizes the context, and tags the important lessons learned. This ensures that every conversation becomes a useful resource I can actually find and use later, rather than just a pile of unorganized transcripts."
   - heading: "Triple-Modal Search"
     units:
       - id: "knowledge-base.triple-modal-search.p1"

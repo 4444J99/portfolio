@@ -8,7 +8,7 @@ sections:
     units:
       - id: "agentic-titan.problem.p1"
         elevated_preview: "Multi-agent AI systems face a scaling problem: frameworks that work for two agen..."
-        entry: "[DRAFT]"
+        entry: "I noticed that when you try to scale up teams of AI agents, they often get stuck in \"logic loops\" or start repeating each other, which wastes processing power and breaks the workflow. I built a system that treats these AI interactions like a high-speed traffic grid, using a central controller to manage how they talk to one another. This ensures that even as the number of agents grows, they stay coordinated and efficient without collapsing into chaos."
   - heading: "Approach"
     units:
       - id: "agentic-titan.approach.p1"

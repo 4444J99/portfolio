@@ -36,7 +36,7 @@ sections:
     units:
       - id: "ai-conductor.quality-assurance-pipeline.p1"
         elevated_preview: "Governance. Every AI-generated document passes through the same promotion state ..."
-        entry: "[DRAFT]"
+        entry: "I built a system to make sure everything I create with AI meets my standards before it goes live. I chose to put every document through a formal check—similar to how a professional editor reviews an article—so that the final work is always accurate and polished. This process keeps my project organized and ensures that nothing is published until it has been properly verified."
       - id: "ai-conductor.quality-assurance-pipeline.p2"
         elevated_preview: "Six automated validation scripts run after each sprint across the full corpus:"
         entry: "[DRAFT]"
@@ -54,7 +54,7 @@ sections:
     units:
       - id: "ai-conductor.results.p1"
         elevated_preview: "The eight-organ system is proof that human-AI collaboration produces real output..."
-        entry: "[DRAFT]"
+        entry: "I organized my work into eight distinct categories to show how humans and AI can build complex projects together. By using this structured approach, I was able to manage everything from the initial theories and creative building to the final organization and public sharing. It’s my way of proving that when we use these tools intentionally, we can move beyond simple experiments and create finished, meaningful work."
       - id: "ai-conductor.results.p2"
         elevated_preview: "The initial documentation campaign ran across four sprints in approximately 48 h..."
         entry: "[DRAFT]"
