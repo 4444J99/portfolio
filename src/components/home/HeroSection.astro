@@ -1,6 +1,8 @@
 ---
 import vitals from '../../data/vitals.json';
 import SketchContainer from '../sketches/SketchContainer.astro';
+import ShibuiContent from '../shibui/ShibuiContent.astro';
+import ShibuiTerm from '../shibui/ShibuiTerm.astro';
 
 interface ResolvedGroup {
 	organ: string;
@@ -44,28 +46,70 @@ function splitWords(text: string) {
 
       <div class="hero__view" data-hero-view="engineering">
         <p class="hero__label" data-reveal>AI Systems Architect</p>
-        <h1 class="hero__title hero__title--animated" data-reveal style="animation-delay: 100ms">
-          {splitWords(engineeringTitle).map((word, i) => (
-            <span class="hero__word" style={`animation-delay: ${100 + i * 40}ms`}>{word}&nbsp;</span>
-          ))}
-        </h1>
-        <p class="hero__sub" data-reveal style="animation-delay: 200ms">
-          <strong>Translating complex requirements into resilient software.</strong><br/>
-          15 years of strategic delivery. Lead Architect for a {vitals.repos.total}-repo <abbr title="A unified portfolio architecture spanning multiple organizations and systems" style="text-decoration: underline dotted; cursor: help; color: inherit;">orchestration ecosystem</abbr>. Expert in <abbr title="Self-regulating CI/CD and deployment pipelines" style="text-decoration: underline dotted; cursor: help; color: inherit;">autonomous governance</abbr>, <abbr title="The arrangement and communication patterns between autonomous AI agents" style="text-decoration: underline dotted; cursor: help; color: inherit;">multi-agent topologies</abbr>, and <abbr title="Architecture pattern where core logic is isolated from external dependencies via adapter layers" style="text-decoration: underline dotted; cursor: help; color: inherit;">hexagonal reliability</abbr>. {vitals.substance.automated_tests.toLocaleString()} tests and {vitals.substance.ci_coverage_pct}% coverage across the production fleet.
-        </p>
+        <ShibuiContent id="hero.engineering.title">
+          <span slot="entry">
+            <h1 class="hero__title" data-reveal style="animation-delay: 100ms">
+              I design AI systems that manage themselves — building the infrastructure that lets teams scale without scaling headcount.
+            </h1>
+          </span>
+          <span slot="elevated">
+            <h1 class="hero__title hero__title--animated" data-reveal style="animation-delay: 100ms">
+              {splitWords(engineeringTitle).map((word, i) => (
+                <span class="hero__word" style={`animation-delay: ${100 + i * 40}ms`}>{word}&nbsp;</span>
+              ))}
+            </h1>
+          </span>
+        </ShibuiContent>
+        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+        <ShibuiContent id="hero.engineering.sub">
+          <span slot="entry">
+            <p class="hero__sub" data-reveal style="animation-delay: 200ms">
+              <strong>Translating complex requirements into resilient software.</strong><br/>
+              15 years of strategic delivery. Lead Architect for a {vitals.repos.total}-repo ecosystem. {vitals.substance.automated_tests.toLocaleString()} automated tests and {vitals.substance.ci_coverage_pct}% coverage.
+            </p>
+          </span>
+          <span slot="elevated">
+            <p class="hero__sub" data-reveal style="animation-delay: 200ms">
+              <strong>Translating complex requirements into resilient software.</strong><br/>
+              15 years of strategic delivery. Lead Architect for a {vitals.repos.total}-repo <ShibuiTerm term="orchestration ecosystem" definition="A unified portfolio architecture spanning multiple organizations and systems" />. Expert in <ShibuiTerm term="autonomous governance" definition="Self-regulating CI/CD and deployment pipelines" />, <ShibuiTerm term="multi-agent topologies" definition="The arrangement and communication patterns between autonomous AI agents" />, and <ShibuiTerm term="hexagonal reliability" definition="Architecture pattern where core logic is isolated from external dependencies via adapter layers" />. {vitals.substance.automated_tests.toLocaleString()} tests and {vitals.substance.ci_coverage_pct}% coverage across the production fleet.
+            </p>
+          </span>
+        </ShibuiContent>
+        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
       </div>
 
       <div class="hero__view" data-hero-view="creative" style="display: none;">
         <p class="hero__label">Creative Technologist</p>
-        <h1 class="hero__title hero__title--animated">
-          {splitWords(creativeTitle).map((word, i) => (
-            <span class="hero__word" style={`animation-delay: ${i * 40}ms`}>{word}&nbsp;</span>
-          ))}
-        </h1>
-        <p class="hero__sub">
-          <strong>Combining rigorous systems design with narrative strategy.</strong><br/>
-          Directing the intersection of rhetoric and code. Coordinating {vitals.repos.total} repositories and {vitals.repos.orgs} organizations as a unified artistic ecosystem — ~{Math.floor(vitals.logos.words / 1000)}K words of architectural planning and public process documentation.
-        </p>
+        <ShibuiContent id="hero.creative.title">
+          <span slot="entry">
+            <h1 class="hero__title" data-reveal style="animation-delay: 100ms">
+              Combining code, storytelling, and system design to build creative projects that sustain themselves.
+            </h1>
+          </span>
+          <span slot="elevated">
+            <h1 class="hero__title hero__title--animated">
+              {splitWords(creativeTitle).map((word, i) => (
+                <span class="hero__word" style={`animation-delay: ${i * 40}ms`}>{word}&nbsp;</span>
+              ))}
+            </h1>
+          </span>
+        </ShibuiContent>
+        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+        <ShibuiContent id="hero.creative.sub">
+          <span slot="entry">
+            <p class="hero__sub">
+              <strong>Combining rigorous systems design with narrative strategy.</strong><br/>
+              Directing the intersection of writing and code. Coordinating {vitals.repos.total} repositories and {vitals.repos.orgs} organizations. ~{Math.floor(vitals.logos.words / 1000)}K words of planning and documentation.
+            </p>
+          </span>
+          <span slot="elevated">
+            <p class="hero__sub">
+              <strong>Combining rigorous systems design with narrative strategy.</strong><br/>
+              Directing the intersection of rhetoric and code. Coordinating {vitals.repos.total} repositories and {vitals.repos.orgs} organizations as a unified artistic ecosystem — ~{Math.floor(vitals.logos.words / 1000)}K words of architectural planning and public process documentation.
+            </p>
+          </span>
+        </ShibuiContent>
+        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
       </div>
 
       <div class="hero__credentials" data-reveal style="animation-delay: 280ms">
