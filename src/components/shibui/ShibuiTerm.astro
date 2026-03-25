@@ -1,0 +1,31 @@
+---
+// src/components/shibui/ShibuiTerm.astro
+// Inline annotation for domain-specific terms.
+// Renders a dotted-underlined term with a tooltip definition on hover/focus.
+
+interface Props {
+	/** The term being annotated (displayed inline) */
+	term: string;
+	/** Plain-language definition shown in tooltip */
+	definition: string;
+}
+
+const { term, definition } = Astro.props;
+---
+
+<span
+	class="shibui-term"
+	tabindex="0"
+	role="button"
+	aria-expanded="false"
+	aria-describedby={`shibui-def-${term.toLowerCase().replace(/\s+/g, '-')}`}
+>
+	<span class="shibui-term__text">{term}</span>
+	<span
+		class="shibui-term__definition"
+		role="tooltip"
+		id={`shibui-def-${term.toLowerCase().replace(/\s+/g, '-')}`}
+	>
+		{definition}
+	</span>
+</span>

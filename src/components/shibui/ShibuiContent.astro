@@ -1,0 +1,21 @@
+---
+// src/components/shibui/ShibuiContent.astro
+// Dual-layer content wrapper. Renders both entry and elevated layers;
+// CSS in global.css controls which is visible based on html[data-shibui-depth].
+
+interface Props {
+	/** Stable content unit ID, e.g. "about.bio.p1" */
+	id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<div class="shibui-content" data-unit-id={id}>
+	<span class="shibui-content__entry" data-shibui-layer="entry" aria-hidden="true">
+		<slot name="entry" />
+	</span>
+	<span class="shibui-content__elevated" data-shibui-layer="elevated">
+		<slot name="elevated" />
+	</span>
+</div>
