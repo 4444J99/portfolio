@@ -20,6 +20,7 @@
       {/* Inner dot — visible at full only */}
       <circle cx="10" cy="10" r="2" fill="currentColor" class="depth-control__ring depth-control__ring--inner" opacity="0.15" />
     </svg>
+    <span class="depth-control__label" data-shibui-label>Overview</span>
     <span class="depth-control__tooltip" role="tooltip">Depth: Overview</span>
   </button>
 </div>
@@ -58,26 +59,32 @@
       const label = DEPTH_LABELS[depth];
       btn!.setAttribute('aria-label', `Content depth: ${label}`);
       if (tooltip) tooltip.textContent = `Depth: ${label}`;
+      const labelEl = document.querySelector<HTMLSpanElement>('[data-shibui-label]');
+      if (labelEl) labelEl.textContent = label;
       if (announce) announce.textContent = `Content depth changed to ${label}`;
 
       // Toggle aria-hidden on shibui content layers
+      // Overview: entry visible, elevated hidden
+      // Standard + Full: elevated visible, entry hidden
+      const showElevated = depth !== 'overview';
       document.querySelectorAll<HTMLElement>('.shibui-content__entry').forEach(el => {
-        el.setAttribute('aria-hidden', depth === 'full' ? 'true' : 'false');
+        el.setAttribute('aria-hidden', showElevated ? 'true' : 'false');
       });
       document.querySelectorAll<HTMLElement>('.shibui-content__elevated').forEach(el => {
-        el.setAttribute('aria-hidden', depth === 'full' ? 'false' : 'true');
+        el.setAttribute('aria-hidden', showElevated ? 'false' : 'true');
       });
 
       // Toggle focusability of interactive elements in shibui layers
-      // (avoid aria-hidden-focus axe violation — focusable elements inside aria-hidden containers)
+      // (avoid aria-hidden-focus axe violation)
       document.querySelectorAll<HTMLElement>('.shibui-content__elevated a, .shibui-content__elevated button, .shibui-content__elevated [tabindex]').forEach(el => {
-        el.setAttribute('tabindex', depth === 'full' ? '0' : '-1');
+        el.setAttribute('tabindex', showElevated ? '0' : '-1');
       });
       document.querySelectorAll<HTMLElement>('.shibui-content__entry a, .shibui-content__entry button, .shibui-content__entry [tabindex]').forEach(el => {
-        el.setAttribute('tabindex', depth === 'full' ? '-1' : '0');
+        el.setAttribute('tabindex', showElevated ? '-1' : '0');
       });
+      // Terms are interactive at Standard (prominent) and Full (subtle hover)
       document.querySelectorAll<HTMLElement>('.shibui-term').forEach(el => {
-        if (depth === 'full') {
+        if (showElevated) {
           el.setAttribute('tabindex', '0');
         } else {
           el.removeAttribute('tabindex');

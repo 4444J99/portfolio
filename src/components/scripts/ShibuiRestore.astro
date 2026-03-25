@@ -36,17 +36,19 @@
     document.documentElement.dataset.shibuiDepth = depth;
 
     // Toggle aria-hidden to match depth (eliminates timing gap before DepthControl init)
-    var showEntry = depth !== 'full';
+    // Overview: entry visible, elevated hidden
+    // Standard + Full: elevated visible, entry hidden
+    var showElevated = depth !== 'overview';
     var entries = document.querySelectorAll('[data-shibui-layer="entry"]');
     var elevateds = document.querySelectorAll('[data-shibui-layer="elevated"]');
-    for (var i = 0; i < entries.length; i++) entries[i].setAttribute('aria-hidden', showEntry ? 'false' : 'true');
-    for (var j = 0; j < elevateds.length; j++) elevateds[j].setAttribute('aria-hidden', showEntry ? 'true' : 'false');
+    for (var i = 0; i < entries.length; i++) entries[i].setAttribute('aria-hidden', showElevated ? 'true' : 'false');
+    for (var j = 0; j < elevateds.length; j++) elevateds[j].setAttribute('aria-hidden', showElevated ? 'false' : 'true');
 
     // Toggle focusability of interactive elements (avoid aria-hidden-focus axe violation)
     var hiddenLinks = document.querySelectorAll(
-      showEntry
-        ? '.shibui-content__elevated a, .shibui-content__elevated button'
-        : '.shibui-content__entry a, .shibui-content__entry button'
+      showElevated
+        ? '.shibui-content__entry a, .shibui-content__entry button'
+        : '.shibui-content__elevated a, .shibui-content__elevated button'
     );
     for (var k = 0; k < hiddenLinks.length; k++) hiddenLinks[k].setAttribute('tabindex', '-1');
 

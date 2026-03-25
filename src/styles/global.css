@@ -140,6 +140,7 @@ html[data-theme="light"] :root,
 /* Overview: entry visible, elevated hidden */
 html[data-shibui-depth="overview"] .shibui-content__entry {
 	display: inline;
+	animation: shibui-reveal var(--transition-base) ease-in-out;
 }
 
 html[data-shibui-depth="overview"] .shibui-content__elevated {
@@ -149,25 +150,14 @@ html[data-shibui-depth="overview"] .shibui-content__elevated {
 	position: absolute;
 }
 
-/* Standard: entry visible, elevated available via local expand */
+/* Standard: elevated visible with rich annotations — the "guided tour" mode */
 html[data-shibui-depth="standard"] .shibui-content__entry {
-	display: inline;
+	display: none;
 }
 
 html[data-shibui-depth="standard"] .shibui-content__elevated {
-	visibility: hidden;
-	height: 0;
-	overflow: hidden;
-	position: absolute;
-}
-
-/* Standard + locally expanded: elevated revealed */
-html[data-shibui-depth="standard"] .shibui-content[data-shibui-expanded] .shibui-content__elevated {
-	visibility: visible;
-	height: auto;
-	overflow: visible;
-	position: static;
-	animation: shibui-reveal var(--transition-slow) ease-in-out;
+	display: inline;
+	animation: shibui-reveal var(--transition-base) ease-in-out;
 }
 
 /* Full: elevated visible, entry hidden */
@@ -177,6 +167,7 @@ html[data-shibui-depth="full"] .shibui-content__entry {
 
 html[data-shibui-depth="full"] .shibui-content__elevated {
 	display: inline;
+	animation: shibui-reveal var(--transition-fast) ease-out;
 }
 
 /* Reveal animation — palimpsest: rises from below */
@@ -191,40 +182,57 @@ html[data-shibui-depth="full"] .shibui-content__elevated {
 	}
 }
 
-/* Shibui term annotations */
+/* Shibui term annotations — base (visible at Standard + Full) */
 .shibui-term {
 	position: relative;
 	cursor: help;
 	border-bottom: 1px dotted var(--accent);
+	transition: border-color var(--transition-fast);
 }
 
+/* Standard: prominent gold underlines — the "guided tour" affordance */
+html[data-shibui-depth="standard"] .shibui-term {
+	border-bottom: 2px dotted var(--accent);
+	padding-bottom: 1px;
+}
+
+/* Full: subtle underlines — clean academic reading */
+html[data-shibui-depth="full"] .shibui-term {
+	border-bottom: 1px dotted color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+/* Overview: terms are inside hidden elevated — no styling needed */
+
 .shibui-term__definition {
-	display: none;
 	position: absolute;
-	bottom: calc(100% + 4px);
+	bottom: calc(100% + 8px);
 	left: 50%;
-	transform: translateX(-50%) translateY(-4px);
+	transform: translateX(-50%) translateY(4px);
 	background: var(--bg-card);
-	border: 1px solid var(--border);
+	border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
 	border-radius: var(--radius-sm);
 	padding: var(--space-xs) var(--space-sm);
+	font-family: var(--font-body);
 	font-size: 0.85rem;
+	line-height: 1.4;
 	color: var(--text-secondary);
 	max-width: 300px;
+	width: max-content;
 	white-space: normal;
 	z-index: var(--z-dropdown);
 	opacity: 0;
 	pointer-events: none;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+	transition:
+		opacity var(--transition-fast) ease,
+		transform var(--transition-fast) ease;
 }
 
 .shibui-term:hover .shibui-term__definition,
 .shibui-term:focus .shibui-term__definition {
-	display: block;
 	opacity: 1;
 	transform: translateX(-50%) translateY(0);
-	transition:
-		opacity var(--transition-fast),
-		transform var(--transition-fast);
+	pointer-events: auto;
 }
 
 /* Annotation glint — single-pass shimmer on page load */
@@ -267,22 +275,35 @@ html[data-shibui-depth="full"] .shibui-content__elevated {
 	}
 }
 
-/* Depth control icon */
+/* Depth control — icon + label pill */
 .depth-control {
-	background: none;
-	border: none;
+	background: color-mix(in srgb, var(--accent) 8%, transparent);
+	border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+	border-radius: var(--radius-md);
 	cursor: pointer;
-	padding: var(--space-xs);
+	padding: var(--space-2xs) var(--space-sm);
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	color: var(--text-muted);
-	transition: color var(--transition-fast);
+	gap: var(--space-xs);
+	color: var(--accent);
+	transition:
+		color var(--transition-fast),
+		background var(--transition-fast),
+		border-color var(--transition-fast);
 }
 
 .depth-control:hover,
 .depth-control:focus-visible {
-	color: var(--accent);
+	background: color-mix(in srgb, var(--accent) 15%, transparent);
+	border-color: var(--accent);
+	color: var(--text-primary);
+}
+
+.depth-control__label {
+	font-family: var(--font-mono);
+	font-size: 0.7rem;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
 }
 
 .depth-control__tooltip {
@@ -307,29 +328,33 @@ html[data-shibui-depth="full"] .shibui-content__elevated {
 	display: block;
 }
 
-/* Section depth bridge (Overview mode only) */
+/* Section depth bridge — visible at Overview as a prominent affordance */
 .shibui-bridge {
 	display: none;
-	color: var(--text-muted);
-	font-size: 0.85rem;
+	color: var(--accent);
+	font-family: var(--font-mono);
+	font-size: 0.8rem;
+	letter-spacing: 0.03em;
 	cursor: pointer;
-	border: none;
-	background: none;
-	padding: var(--space-xs) 0;
-	transition: color var(--transition-fast);
+	border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+	border-radius: var(--radius-sm);
+	background: color-mix(in srgb, var(--accent) 5%, transparent);
+	padding: var(--space-xs) var(--space-sm);
+	margin-top: var(--space-sm);
+	transition:
+		color var(--transition-fast),
+		background var(--transition-fast),
+		border-color var(--transition-fast);
 }
 
 .shibui-bridge:hover {
-	color: var(--accent);
+	color: var(--text-primary);
+	background: color-mix(in srgb, var(--accent) 12%, transparent);
+	border-color: var(--accent);
 }
 
-html[data-shibui-depth="overview"] .shibui-bridge,
-html[data-shibui-depth="standard"] .shibui-bridge {
-	display: block;
-}
-
-html[data-shibui-depth="standard"] .shibui-content[data-shibui-expanded] + .shibui-bridge {
-	display: none;
+html[data-shibui-depth="overview"] .shibui-bridge {
+	display: inline-block;
 }
 
 html {

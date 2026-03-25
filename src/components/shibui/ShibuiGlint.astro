@@ -4,6 +4,10 @@
 
 	function triggerGlint() {
 		const path = window.location.pathname;
+		const depth = document.documentElement.dataset.shibuiDepth || 'overview';
+
+		// Only glint when terms are visible (Standard or Full depth)
+		if (depth === 'overview') return;
 		if (glintedPages.has(path)) return;
 		glintedPages.add(path);
 
