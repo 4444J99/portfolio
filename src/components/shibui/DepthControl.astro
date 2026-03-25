@@ -25,7 +25,7 @@
 </div>
 
 <script>
-  import { nextDepth, stepDepth, readStoredDepth, writeStoredDepth, DEPTH_LABELS, type ShibuiDepth } from '../../utils/shibui';
+  import { nextDepth, stepDepth, writeStoredDepth, DEPTH_LABELS, type ShibuiDepth } from '../../utils/shibui';
 
   function initDepthControl() {
     const btn = document.querySelector<HTMLButtonElement>('[data-shibui-control]');
@@ -50,7 +50,7 @@
 
       // Update ARIA + tooltip + live region announcement
       const label = DEPTH_LABELS[depth];
-      btn.setAttribute('aria-label', `Content depth: ${label}`);
+      btn!.setAttribute('aria-label', `Content depth: ${label}`);
       if (tooltip) tooltip.textContent = `Depth: ${label}`;
       if (announce) announce.textContent = `Content depth changed to ${label}`;
 
