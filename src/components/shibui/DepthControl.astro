@@ -62,7 +62,14 @@
         el.setAttribute('aria-hidden', depth === 'full' ? 'false' : 'true');
       });
 
-      // Toggle focusability of ShibuiTerm elements (avoid aria-hidden-focus violation)
+      // Toggle focusability of interactive elements in shibui layers
+      // (avoid aria-hidden-focus axe violation — focusable elements inside aria-hidden containers)
+      document.querySelectorAll<HTMLElement>('.shibui-content__elevated a, .shibui-content__elevated button, .shibui-content__elevated [tabindex]').forEach(el => {
+        el.setAttribute('tabindex', depth === 'full' ? '0' : '-1');
+      });
+      document.querySelectorAll<HTMLElement>('.shibui-content__entry a, .shibui-content__entry button, .shibui-content__entry [tabindex]').forEach(el => {
+        el.setAttribute('tabindex', depth === 'full' ? '-1' : '0');
+      });
       document.querySelectorAll<HTMLElement>('.shibui-term').forEach(el => {
         if (depth === 'full') {
           el.setAttribute('tabindex', '0');
