@@ -88,6 +88,7 @@
 	"dependencies": {
 		"@4444j99/quality-ratchet-kit": "file:packages/quality-ratchet-kit",
 		"@4444j99/sketches": "file:packages/sketches",
+		"@astrojs/mdx": "5.0.2",
 		"@astrojs/rss": "4.0.17",
 		"@astrojs/sitemap": "3.7.1",
 		"@meta-organvm/github-pages-index-core": "file:packages/github-pages-index-core",

@@ -24,8 +24,15 @@
       return 'overview';
     }
 
+    // Enforce per-page depth floor (e.g. essays locked to standard+)
+    function enforceFloor(d) {
+      var floor = document.documentElement.dataset.shibuiPageFloor;
+      if (!floor || VALID.indexOf(floor) === -1) return d;
+      return VALID.indexOf(d) < VALID.indexOf(floor) ? floor : d;
+    }
+
     var stored = readDepth();
-    var depth = stored || inferFromReferrer();
+    var depth = enforceFloor(stored || inferFromReferrer());
     document.documentElement.dataset.shibuiDepth = depth;
 
     // Toggle aria-hidden to match depth (eliminates timing gap before DepthControl init)

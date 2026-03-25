@@ -21,11 +21,8 @@ This doctoral thesis presents the theoretical foundations, mathematical proofs, 
 
 ## Read the Full Dissertation
 
-The thesis is published chapter-by-chapter:
+The thesis is published chapter-by-chapter.
 
-{% assign chapters = site.dissertations | where: "dissertation", "precision-pipeline" | sort: "chapter" %}
-{% for chapter in chapters %}
-- [{{ chapter.title }}]({{ chapter.url | relative_url }}) ({{ chapter.word_count | divided_by: 1000.0 | round: 1 }}k words)
-{% endfor %}
+{/* Chapter list was dynamically generated from Jekyll collections — not available in Astro. */}
 
-Or start from the [dissertations overview]({{ site.baseurl }}/dissertations/).
+Or start from the dissertations overview.

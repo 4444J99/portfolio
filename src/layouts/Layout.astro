@@ -33,6 +33,8 @@ interface Props {
 		liveUrl?: string;
 	};
 	keywords?: string[];
+	/** Minimum shibui depth for this page (e.g. 'standard' prevents overview mode) */
+	shibuiFloor?: 'overview' | 'standard' | 'full';
 }
 
 const slug = Astro.url.pathname.replace(/^\/portfolio\//, '').replace(/\/$/, '') || 'index';
@@ -45,12 +47,13 @@ const {
 	mainAttrs = {},
 	schemaProject,
 	keywords = [],
+	shibuiFloor,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').href;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" {...(shibuiFloor ? { 'data-shibui-page-floor': shibuiFloor } : {})}>
   <head>
     <BaseMeta description={description} canonicalURL={canonicalURL} />
     <FaviconLinks />

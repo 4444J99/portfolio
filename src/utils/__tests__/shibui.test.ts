@@ -5,6 +5,7 @@ import {
 	DEPTH_LABELS,
 	DEPTH_MAP,
 	depthToFloat,
+	enforceFloor,
 	floatToDepth,
 	inferInitialDepth,
 	nextDepth,
@@ -149,6 +150,27 @@ describe('Referral heuristic', () => {
 	it("returns 'overview' for unknown referrers", () => {
 		expect(inferInitialDepth('https://news.ycombinator.com')).toBe('overview');
 		expect(inferInitialDepth('https://example.com')).toBe('overview');
+	});
+});
+
+describe('Page depth floors', () => {
+	it('returns depth unchanged when floor is null', () => {
+		expect(enforceFloor('overview', null)).toBe('overview');
+		expect(enforceFloor('standard', null)).toBe('standard');
+		expect(enforceFloor('full', null)).toBe('full');
+	});
+
+	it('clamps depth up to floor when depth is below floor', () => {
+		expect(enforceFloor('overview', 'standard')).toBe('standard');
+		expect(enforceFloor('overview', 'full')).toBe('full');
+		expect(enforceFloor('standard', 'full')).toBe('full');
+	});
+
+	it('returns depth unchanged when depth is at or above floor', () => {
+		expect(enforceFloor('standard', 'standard')).toBe('standard');
+		expect(enforceFloor('full', 'standard')).toBe('full');
+		expect(enforceFloor('full', 'full')).toBe('full');
+		expect(enforceFloor('standard', 'overview')).toBe('standard');
 	});
 });
 

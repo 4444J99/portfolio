@@ -17,6 +17,7 @@ const { Content } = await render(entry);
 <Layout
   title={entry.data.title.length > 65 ? `${entry.data.title.slice(0, 62)}...` : entry.data.title}
   description={entry.data.description}
+  shibuiFloor="standard"
 >
   <article class="essay-article">
     <div class="container essay-container">

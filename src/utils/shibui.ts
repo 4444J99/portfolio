@@ -83,3 +83,12 @@ export function inferInitialDepth(referrer: string): ShibuiDepth {
 	if (referrer.includes('google.com')) return 'standard';
 	return 'overview';
 }
+
+/** Enforce a page-level minimum depth floor.
+ *  If the page declares data-shibui-page-floor="standard", depth cannot go below standard. */
+export function enforceFloor(depth: ShibuiDepth, floor: ShibuiDepth | null): ShibuiDepth {
+	if (!floor) return depth;
+	const depthIdx = DEPTH_CYCLE.indexOf(depth);
+	const floorIdx = DEPTH_CYCLE.indexOf(floor);
+	return depthIdx < floorIdx ? floor : depth;
+}
