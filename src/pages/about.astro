@@ -1,4 +1,6 @@
 ---
+import ShibuiContent from '../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import vitals from '../data/vitals.json';
 import Layout from '../layouts/Layout.astro';
@@ -7,13 +9,13 @@ import { base } from '../utils/paths';
 
 <Layout title="About — Anthony James Padavano" description="Creative technologist building autonomous creative systems. Professional bio, practice statement, and contact information." >
     <div class="sketch-accent">
-      <SketchContainer 
-        sketchId="particle-field" 
-        height="var(--space-5xl)" 
-        mobileHeight="var(--space-4xl)" 
-        ariaLabel="Generative particle field visualization representing creative identity" 
-        data-density="high" 
-        data-count={vitals.repos.total} 
+      <SketchContainer
+        sketchId="particle-field"
+        height="var(--space-5xl)"
+        mobileHeight="var(--space-4xl)"
+        ariaLabel="Generative particle field visualization representing creative identity"
+        data-density="high"
+        data-count={vitals.repos.total}
         title="Identity Plexus"
         caption={`A generative network representing the ${vitals.repos.total} nodes of the creative system.`}
         dataSource="System Graph"
@@ -28,40 +30,90 @@ import { base } from '../utils/paths';
         <span class="sr-only p-locality">New York City</span>
 
         <section class="about__bio prose" data-reveal>
-          <p>
-            I'm Anthony James Padavano — an AI Orchestration Architect and strategic producer based in New York City. I bridge the gap between high-level rhetorical theory and production-grade system design.
-          </p>
-          <p>
-            For 15 years, I have operated in high-consequence environments where storytelling and systems collide. My career spans a decade of multimedia production (17.5M+ views, $2M raised), large-scale project management in the construction industry, and over 100 courses delivered in higher education. I treat code, culture, and governance as a single, unified architectural medium.
-          </p>
-          <p>
-            I hold an MFA in Creative Writing from Florida Atlantic University and a BA in English Literature from CUNY. I am a Meta-certified Full-Stack Developer and hold Google Professional Certificates in Project Management, UX Design, and Digital Marketing. Today, I direct the orchestration of autonomous agent swarms and the automated governance of massive technical ecosystems. I am not a manual coder; I am an AI-Native Architect who directs machines to build the safe, scalable creative infrastructure of the future.
-          </p>
+          <ShibuiContent id="about.bio.p1">
+            <p slot="entry">
+              I'm Anthony James Padavano — I design systems where AI and humans work together to build things at scale. Based in New York City, I combine 15 years of production, education, and engineering into large-scale technical projects.
+            </p>
+            <p slot="elevated">
+              I'm Anthony James Padavano — an AI Orchestration Architect and strategic producer based in New York City. I bridge the gap between high-level <ShibuiTerm term="rhetorical theory" definition="The study of how communication persuades and constructs meaning — here applied to system architecture as a form of argumentation" /> and production-grade system design.
+            </p>
+          </ShibuiContent>
+          <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+
+          <ShibuiContent id="about.bio.p2">
+            <p slot="entry">
+              My career spans multimedia production (17.5M+ views, $2M raised), large-scale project management in construction, and 100+ university courses. I bring the same structured thinking to software that I developed managing real-world projects with budgets, teams, and deadlines.
+            </p>
+            <p slot="elevated">
+              For 15 years, I have operated in high-consequence environments where storytelling and systems collide. My career spans a decade of multimedia production (17.5M+ views, $2M raised), large-scale project management in the construction industry, and over 100 courses delivered in higher education. I treat code, culture, and governance as a single, unified architectural medium.
+            </p>
+          </ShibuiContent>
+          <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+
+          <ShibuiContent id="about.bio.p3">
+            <p slot="entry">
+              MFA in Creative Writing (FAU), BA in English Literature (CUNY). Meta-certified Full-Stack Developer. Google-certified in Project Management, UX Design, and Digital Marketing. I specialize in directing AI to build and maintain large technical systems — not writing every line by hand, but designing the systems that write and test themselves.
+            </p>
+            <p slot="elevated">
+              I hold an MFA in Creative Writing from Florida Atlantic University and a BA in English Literature from CUNY. I am a Meta-certified Full-Stack Developer and hold Google Professional Certificates in Project Management, UX Design, and Digital Marketing. Today, I direct the orchestration of <ShibuiTerm term="autonomous agent swarms" definition="Groups of AI agents that coordinate to complete tasks without human intervention for each step" /> and the automated governance of massive technical ecosystems. I am not a manual coder; I am an AI-Native Architect who directs machines to build the safe, scalable creative infrastructure of the future.
+            </p>
+          </ShibuiContent>
+          <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
         </section>
 
         <hr />
 
         <section class="about__system prose" data-reveal>
           <h2>The Eight-Organ System</h2>
-          <p>
-            Most creative portfolios are flat — a list of projects with screenshots. Mine is an operating system.
-          </p>
+
+          <ShibuiContent id="about.organs.intro">
+            <p slot="entry">
+              Most portfolios are a flat list of projects. Mine is organized like a living system — {vitals.repos.total} repositories across {vitals.repos.orgs} organizations, each handling a different function.
+            </p>
+            <p slot="elevated">
+              Most creative portfolios are flat — a list of projects with screenshots. Mine is an operating system.
+            </p>
+          </ShibuiContent>
+          <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+
           <p>
             The <a href="https://github.com/meta-organvm" target="_blank" rel="noopener noreferrer">eight-organ system</a> is a coordinated infrastructure spanning {vitals.repos.total} repositories across {vitals.repos.orgs} GitHub organizations, with ~{Math.floor(vitals.logos.words / 1000)}K words of public documentation. Each "organ" handles a different function:
           </p>
-          <div class="about__organ-map">
-            <div class="organ-row"><span class="organ-num">I</span> <strong>Theoria</strong> — Ontology, recursion, <abbr title="A symbolic computing system that processes self-referential structures" style="text-decoration: underline dotted; cursor: help; color: inherit;">epistemic engines</abbr></div>
-            <div class="organ-row"><span class="organ-num">II</span> <strong>Poiesis</strong> — Generative art, performance, experiential systems</div>
-            <div class="organ-row"><span class="organ-num">III</span> <strong>Ergon</strong> — Products, platforms, deployed commerce</div>
-            <div class="organ-row"><span class="organ-num">IV</span> <strong>Taxis</strong> — Orchestration, governance, agent swarms</div>
-            <div class="organ-row"><span class="organ-num">V</span> <strong>Logos</strong> — Essays, public process, building in public</div>
-            <div class="organ-row"><span class="organ-num">VI</span> <strong>Koinonia</strong> — Community, salons, collaborative infrastructure</div>
-            <div class="organ-row"><span class="organ-num">VII</span> <strong>Kerygma</strong> — Distribution, amplification, audience</div>
-            <div class="organ-row"><span class="organ-num">∞</span> <strong>Meta</strong> — The system that holds the system</div>
-          </div>
-          <p>
-            Work flows through a pipeline: theory becomes art, art becomes product, product gets governed, governance gets documented, documentation builds community, community amplifies. The meta-organ — with its machine-readable registry, dependency validation, and <abbr title="Automated workflows that advance a repository from local development through candidate, public review, to graduated production status" style="text-decoration: underline dotted; cursor: help; color: inherit;">promotion state machines</abbr> — is itself the primary artifact.
-          </p>
+
+          <ShibuiContent id="about.organs.map">
+            <div slot="entry" class="about__organ-map">
+              <div class="organ-row"><span class="organ-num">I</span> <strong>Theoria</strong> — Theory — Foundational concepts and frameworks</div>
+              <div class="organ-row"><span class="organ-num">II</span> <strong>Poiesis</strong> — Art — Generative art and creative coding</div>
+              <div class="organ-row"><span class="organ-num">III</span> <strong>Ergon</strong> — Products — Commercial tools and deployed software</div>
+              <div class="organ-row"><span class="organ-num">IV</span> <strong>Taxis</strong> — Orchestration — Automation, governance, AI agents</div>
+              <div class="organ-row"><span class="organ-num">V</span> <strong>Logos</strong> — Writing — Essays, documentation, public thinking</div>
+              <div class="organ-row"><span class="organ-num">VI</span> <strong>Koinonia</strong> — Community — Reading groups, workshops, learning</div>
+              <div class="organ-row"><span class="organ-num">VII</span> <strong>Kerygma</strong> — Distribution — Sharing work across platforms</div>
+              <div class="organ-row"><span class="organ-num">∞</span> <strong>Meta</strong> — The system that manages itself</div>
+            </div>
+            <div slot="elevated" class="about__organ-map">
+              <div class="organ-row"><span class="organ-num">I</span> <strong><ShibuiTerm term="Theoria" definition="Greek: contemplation — the organ of foundational theory and philosophical frameworks" /></strong> — Ontology, recursion, <abbr title="A symbolic computing system that processes self-referential structures" style="text-decoration: underline dotted; cursor: help; color: inherit;">epistemic engines</abbr></div>
+              <div class="organ-row"><span class="organ-num">II</span> <strong><ShibuiTerm term="Poiesis" definition="Greek: making/creation — the organ of generative art, performance, and experiential systems" /></strong> — Generative art, performance, experiential systems</div>
+              <div class="organ-row"><span class="organ-num">III</span> <strong><ShibuiTerm term="Ergon" definition="Greek: work/deed — the organ of commercial products and deployed software" /></strong> — Products, platforms, deployed commerce</div>
+              <div class="organ-row"><span class="organ-num">IV</span> <strong><ShibuiTerm term="Taxis" definition="Greek: arrangement/order — the organ of orchestration, governance, and agent coordination" /></strong> — Orchestration, governance, agent swarms</div>
+              <div class="organ-row"><span class="organ-num">V</span> <strong><ShibuiTerm term="Logos" definition="Greek: word/reason — the organ of essays, public discourse, and transparent process" /></strong> — Essays, public process, building in public</div>
+              <div class="organ-row"><span class="organ-num">VI</span> <strong><ShibuiTerm term="Koinonia" definition="Greek: fellowship/communion — the organ of community, learning groups, and collaboration" /></strong> — Community, salons, collaborative infrastructure</div>
+              <div class="organ-row"><span class="organ-num">VII</span> <strong><ShibuiTerm term="Kerygma" definition="Greek: proclamation — the organ of distribution, amplification, and audience reach" /></strong> — Distribution, amplification, audience</div>
+              <div class="organ-row"><span class="organ-num">∞</span> <strong>Meta</strong> — The system that holds the system</div>
+            </div>
+          </ShibuiContent>
+          <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+
+          <ShibuiContent id="about.organs.pipeline">
+            <p slot="entry">
+              Work flows through these stages: theory becomes art, art becomes product, product gets governed, governance gets documented, documentation builds community, community amplifies. Each organ feeds the next.
+            </p>
+            <p slot="elevated">
+              Work flows through a pipeline: theory becomes art, art becomes product, product gets governed, governance gets documented, documentation builds community, community amplifies. The meta-organ — with its machine-readable registry, dependency validation, and <ShibuiTerm term="promotion state machines" definition="Automated workflows that advance a repository from local development through candidate, public review, to graduated production status" /> — is itself the primary artifact.
+            </p>
+          </ShibuiContent>
+          <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+
           <p>
             This isn't project-based art. It's infrastructure-as-practice. The choice of how work moves between organs is as important as any individual output. You can read more in the <a href="https://organvm-v-logos.github.io/public-process/" target="_blank" rel="noopener noreferrer">essays on building in public</a>.
           </p>
