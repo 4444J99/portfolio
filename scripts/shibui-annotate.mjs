@@ -42,7 +42,9 @@ function callGemini(prompt) {
 		});
 		return cleanGeminiOutput(raw).join('\n').trim();
 	} finally {
-		try { fs.unlinkSync(tmpFile); } catch {}
+		try {
+			fs.unlinkSync(tmpFile);
+		} catch {}
 	}
 }
 
@@ -82,10 +84,7 @@ function generateAnnotations(slug, combinedText) {
 // ─── YAML helpers ─────────────────────────────────────────────────────────
 
 function yamlStr(s) {
-	return s
-		.replace(/\\/g, '\\\\')
-		.replace(/"/g, '\\"')
-		.replace(/\n/g, '\\n');
+	return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
 }
 
 /** Build the annotations: YAML block to append. */
@@ -163,9 +162,7 @@ async function main() {
 		}
 	}
 
-	console.log(
-		`\nDone. Annotated: ${annotated}, Skipped: ${skipped}, Fallbacks: ${fallbacks}`,
-	);
+	console.log(`\nDone. Annotated: ${annotated}, Skipped: ${skipped}, Fallbacks: ${fallbacks}`);
 }
 
 main().catch((err) => {

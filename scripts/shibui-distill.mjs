@@ -46,7 +46,9 @@ function callGemini(prompt) {
 		});
 		return cleanGeminiOutput(raw);
 	} finally {
-		try { fs.unlinkSync(tmpFile); } catch {}
+		try {
+			fs.unlinkSync(tmpFile);
+		} catch {}
 	}
 }
 
@@ -156,9 +158,7 @@ async function main() {
 		fs.writeFileSync(filePath, yamlText, 'utf8');
 	}
 
-	console.log(
-		`\nDone. Processed: ${processed}, Fallbacks (kept [DRAFT]): ${fallbacks}`,
-	);
+	console.log(`\nDone. Processed: ${processed}, Fallbacks (kept [DRAFT]): ${fallbacks}`);
 }
 
 main().catch((err) => {

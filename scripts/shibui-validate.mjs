@@ -48,9 +48,7 @@ function validateFile(filePath, errors) {
 	// No [REVIEW] markers
 	const reviewMatches = [...text.matchAll(/\[REVIEW\]/g)];
 	if (reviewMatches.length > 0) {
-		errors.push(
-			`${file}: ${reviewMatches.length} [REVIEW] marker(s) — resolve before publishing`,
-		);
+		errors.push(`${file}: ${reviewMatches.length} [REVIEW] marker(s) — resolve before publishing`);
 	}
 
 	// Unique unit IDs (within this file)
@@ -93,9 +91,7 @@ function main() {
 		const ids = extractUnitIds(text);
 		for (const id of ids) {
 			if (globalIds.has(id)) {
-				errors.push(
-					`Duplicate unit ID "${id}" found in both "${globalIds.get(id)}" and "${file}"`,
-				);
+				errors.push(`Duplicate unit ID "${id}" found in both "${globalIds.get(id)}" and "${file}"`);
 			} else {
 				globalIds.set(id, file);
 			}

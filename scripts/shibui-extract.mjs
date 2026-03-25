@@ -122,10 +122,7 @@ function parsePage(source) {
 
 /** Escape a string for YAML double-quoted scalar. */
 function yamlStr(s) {
-	return s
-		.replace(/\\/g, '\\\\')
-		.replace(/"/g, '\\"')
-		.replace(/\n/g, '\\n');
+	return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
 }
 
 /** Produce the YAML content for one project. */
