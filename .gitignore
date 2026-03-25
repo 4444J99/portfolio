@@ -65,3 +65,4 @@ playwright-report/
 .wrangler/
 dist-syndication/
 network-map.yaml
+.shibui-prompt.tmp

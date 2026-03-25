@@ -32,9 +32,18 @@ function cleanGeminiOutput(raw) {
 }
 
 function callGemini(prompt) {
-	const escaped = prompt.replace(/"/g, '\\"');
-	const raw = execSync(`gemini -p "${escaped}" 2>/dev/null`, { encoding: 'utf8' });
-	return cleanGeminiOutput(raw).join('\n').trim();
+	// Write prompt to temp file to avoid shell escaping issues
+	const tmpFile = path.join(__dirname, '.shibui-prompt.tmp');
+	try {
+		fs.writeFileSync(tmpFile, prompt, 'utf8');
+		const raw = execSync(`cat "${tmpFile}" | gemini -p "" 2>/dev/null`, {
+			encoding: 'utf8',
+			timeout: 30000,
+		});
+		return cleanGeminiOutput(raw).join('\n').trim();
+	} finally {
+		try { fs.unlinkSync(tmpFile); } catch {}
+	}
 }
 
 /**
