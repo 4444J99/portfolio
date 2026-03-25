@@ -14,6 +14,7 @@ import ErrorBeacon from '../components/scripts/ErrorBeacon.astro';
 import ScrollReveal from '../components/scripts/ScrollReveal.astro';
 import SketchLifecycle from '../components/scripts/SketchLifecycle.astro';
 import ShibuiRestore from '../components/scripts/ShibuiRestore.astro';
+import ShibuiGlint from '../components/shibui/ShibuiGlint.astro';
 import ThemeRestore from '../components/scripts/ThemeRestore.astro';
 import WebVitals from '../components/scripts/WebVitals.astro';
 import { canonicalBase } from '../utils/paths';
@@ -75,6 +76,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
   <ClientBootstrap />
   <ThemeRestore />
   <ShibuiRestore />
+  <ShibuiGlint />
   <WebVitals />
   <ErrorBeacon />
 </html>

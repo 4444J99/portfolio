@@ -1,0 +1,30 @@
+<!-- src/components/shibui/ShibuiGlint.astro -->
+<script>
+	const glintedPages = new Set<string>();
+
+	function triggerGlint() {
+		const path = window.location.pathname;
+		if (glintedPages.has(path)) return;
+		glintedPages.add(path);
+
+		// Slight delay so the page has settled after view transition
+		requestAnimationFrame(() => {
+			document.querySelectorAll<HTMLElement>('.shibui-term').forEach((el, i) => {
+				// Stagger glint across terms
+				setTimeout(() => {
+					el.classList.add('shibui-term--glint');
+					// Remove class after animation completes so it doesn't replay
+					el.addEventListener(
+						'animationend',
+						() => {
+							el.classList.remove('shibui-term--glint');
+						},
+						{ once: true },
+					);
+				}, i * 80);
+			});
+		});
+	}
+
+	document.addEventListener('astro:page-load', triggerGlint);
+</script>
