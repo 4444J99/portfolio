@@ -61,6 +61,15 @@
       document.querySelectorAll<HTMLElement>('.shibui-content__elevated').forEach(el => {
         el.setAttribute('aria-hidden', depth === 'full' ? 'false' : 'true');
       });
+
+      // Toggle focusability of ShibuiTerm elements (avoid aria-hidden-focus violation)
+      document.querySelectorAll<HTMLElement>('.shibui-term').forEach(el => {
+        if (depth === 'full') {
+          el.setAttribute('tabindex', '0');
+        } else {
+          el.removeAttribute('tabindex');
+        }
+      });
     }
 
     // Initialize visual state from current attribute

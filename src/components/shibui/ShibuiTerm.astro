@@ -15,9 +15,6 @@ const { term, definition } = Astro.props;
 
 <span
 	class="shibui-term"
-	tabindex="0"
-	role="button"
-	aria-expanded="false"
 	aria-describedby={`shibui-def-${term.toLowerCase().replace(/\s+/g, '-')}`}
 >
 	<span class="shibui-term__text">{term}</span>
