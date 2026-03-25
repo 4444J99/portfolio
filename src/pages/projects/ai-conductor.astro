@@ -7,6 +7,8 @@ import References from '../../components/academic/References.astro';
 import PrismNav from '../../components/PrismNav.astro';
 import StatGrid from '../../components/StatGrid.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import vitals from '../../data/vitals.json';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
@@ -24,28 +26,48 @@ const efficiencyMultiplier = Math.round(vitals.logos.words / 200 / 400);
 	repo="https://github.com/organvm-v-logos/public-process"
 >
 	<h2>The Model</h2>
-	<p>
-		Every creative team in 2026 is figuring out how to work with AI. Most approaches are
-		"AI replaces human work" or "human ignores AI."<Cite id={1} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} />
-		Shneiderman's framework proposes a third path: systems that amplify human capability
-		rather than replacing it. I developed the <strong>AI-conductor model</strong>, where
-		human acts as conductor — setting direction, maintaining quality, making every structural
-		decision — while AI acts as an instrument capable of producing drafts at speed. This
-		isn't "AI wrote my portfolio." It's a designed practice with explicit roles, quality
-		gates, and attribution.<Cite id={2} author="Schön, Donald A." title="The Reflective Practitioner: How Professionals Think in Action" source="Basic Books" year={1983} />
-	</p>
+	<ShibuiContent id="ai-conductor.model.p1">
+		<span slot="entry">
+			<p>
+				I developed a method for working with AI where the human leads and the AI executes — like a conductor directing an orchestra. The human makes every creative and structural decision; the AI produces drafts at speed. This isn't "AI wrote my portfolio." It's a designed workflow with clear roles, quality checks, and full attribution.
+			</p>
+		</span>
+		<span slot="elevated">
+			<p>
+				Every creative team in 2026 is figuring out how to work with AI. Most approaches are
+				"AI replaces human work" or "human ignores AI."<Cite id={1} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} />
+				<ShibuiTerm term="Shneiderman's framework" definition="Ben Shneiderman's 2022 book 'Human-Centered AI' — argues AI should amplify humans, not replace them" /> proposes a third path: systems that amplify human capability
+				rather than replacing it. I developed the <strong>AI-conductor model</strong>, where
+				human acts as conductor — setting direction, maintaining quality, making every structural
+				decision — while AI acts as an instrument capable of producing drafts at speed. This
+				isn't "AI wrote my portfolio." It's a designed practice with explicit roles, quality
+				gates, and attribution.<Cite id={2} author="Schön, Donald A." title="The Reflective Practitioner: How Professionals Think in Action" source="Basic Books" year={1983} />
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<h2>The Four-Phase Workflow</h2>
-	<p>
-		The conductor model operates through four distinct phases, each with defined role
-		assignments and quality criteria that must be met before advancing. The separation
-		enforces a principle: AI generation without human direction produces plausible but
-		untrustworthy output, while human direction without AI generation produces trustworthy
-		but unscalable output.<Cite id={3} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery and Invention" source="Harper Perennial" year={1996} />
-		Csikszentmihalyi's research on creative flow emphasizes that the critical creative act
-		is selection — choosing what to keep, what to discard, what to reshape. The conductor
-		model formalizes this at industrial scale.
-	</p>
+	<ShibuiContent id="ai-conductor.workflow.p1">
+		<span slot="entry">
+			<p>
+				The workflow has four stages, each with clear roles. AI without human direction produces plausible but untrustworthy output. Human direction without AI produces trustworthy but unscalable output. The four phases combine both: the human sets context and reviews, the AI generates and iterates.
+			</p>
+		</span>
+		<span slot="elevated">
+			<p>
+				The conductor model operates through four distinct phases, each with defined role
+				assignments and quality criteria that must be met before advancing. The separation
+				enforces a principle: AI generation without human direction produces plausible but
+				untrustworthy output, while human direction without AI generation produces trustworthy
+				but unscalable output.<Cite id={3} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery and Invention" source="Harper Perennial" year={1996} />
+				<ShibuiTerm term="Csikszentmihalyi's research" definition="Mihaly Csikszentmihalyi's work on creative 'flow' states — the critical creative act is selection, not generation" /> on creative flow emphasizes that the critical creative act
+				is selection — choosing what to keep, what to discard, what to reshape. The conductor
+				model formalizes this at industrial scale.
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<MermaidDiagram
 		caption="The four-phase AI-Conductor workflow — human direction governs context and review; AI handles generation and iteration"
