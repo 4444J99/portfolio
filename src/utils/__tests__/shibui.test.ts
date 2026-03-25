@@ -12,7 +12,7 @@ import {
 	STORAGE_KEY,
 	stepDepth,
 	writeStoredDepth,
-} from '@/utils/shibui';
+} from '../shibui';
 
 // ---------------------------------------------------------------------------
 // localStorage mock — happy-dom's vitest integration exposes a stripped
