@@ -8,7 +8,7 @@ sections:
     units:
       - id: "distribution-strategy.the-distribution-problem.p1"
         elevated_preview: "You can build [dynamic] repositories with [dynamic] words of documentation and i..."
-        entry: "[DRAFT]"
+        entry: "I realized that building a massive system means nothing if nobody ever sees it. Most engineers treat distribution as an afterthought -- a tweet or a Slack link. I decided to make distribution a first-class concern with its own dedicated infrastructure."
   - heading: "The POSSE Principle"
     units:
       - id: "distribution-strategy.the-posse-principle.p1"
@@ -23,7 +23,7 @@ sections:
     units:
       - id: "distribution-strategy.channel-native-adaptation.p1"
         elevated_preview: "The critical distinction in this distribution strategy is between cross-posting ..."
-        entry: "[DRAFT]"
+        entry: "I do not cross-post -- I genuinely re-frame each piece of content for the channel it is going to. A Mastodon thread has different conventions than a newsletter digest, which is different from a GitHub Pages essay. Each channel gets content adapted to its discourse norms, not a copy-paste."
   - heading: "Automated Distribution Infrastructure"
     units:
       - id: "distribution-strategy.automated-distribution-infrastructure.p1"
@@ -38,9 +38,9 @@ sections:
     units:
       - id: "distribution-strategy.content-calendar-architecture.p1"
         elevated_preview: "The content calendar is driven by external rhythms rather than internal cadences..."
-        entry: "[DRAFT]"
+        entry: "I timed my content calendar around external rhythms rather than arbitrary internal cadences. Grant deadlines trigger increased visibility two to four weeks beforehand, conference seasons create attention windows for technical content, and the academic calendar shapes posting density. The schedule responds to when specific audiences are actually paying attention."
   - heading: "Measuring Distribution Without Vanity Metrics"
     units:
       - id: "distribution-strategy.measuring-distribution-without-vanity-metrics.p1"
         elevated_preview: "The distribution strategy deliberately avoids vanity metrics — follower counts, ..."
-        entry: "[DRAFT]"
+        entry: "I deliberately avoid vanity metrics like follower counts and like ratios. Instead I track whether the right people encountered the right content: weekly leading indicators like click-through rates to canonical URLs, quarterly lagging indicators like conference acceptance rates and interview invitations, and monthly health checks on audience segment composition."

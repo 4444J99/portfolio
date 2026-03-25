@@ -8,7 +8,7 @@ sections:
     units:
       - id: "community-infrastructure.the-discord-coordination-bot.p1"
         elevated_preview: "To operationalize these theoretical foundations, I directed the implementation o..."
-        entry: "[DRAFT]"
+        entry: "I built a Discord bot that handles the logistics of running salons and reading groups. It sends invitations, tracks who attends, and archives discussion summaries into the system's registry so nothing gets lost."
   - heading: "The Salon Model"
     units:
       - id: "community-infrastructure.the-salon-model.p1"
@@ -18,12 +18,12 @@ sections:
     units:
       - id: "community-infrastructure.reading-group-curriculum.p1"
         elevated_preview: "The reading group curriculum provides structured pathways through the intellectu..."
-        entry: "[DRAFT]"
+        entry: "I designed structured reading group curricula that trace a path from foundational theory to concrete architecture decisions. Each curriculum runs six to twelve weeks through primary texts, and participants map concepts directly to design choices in the system. These are not book clubs -- they are collaborative sense-making sessions where abstract ideas become engineering rationale."
   - heading: "Intellectual Foundations"
     units:
       - id: "community-infrastructure.intellectual-foundations.p1"
         elevated_preview: "The community organ draws on three distinct but convergent intellectual traditio..."
-        entry: "[DRAFT]"
+        entry: "I drew on three intellectual traditions to design the community organ. Bateson's cybernetics taught me that creative thinking is distributed across groups, not locked inside individual heads. Luhmann's systems theory showed me how communities can self-organize through communication. And Haraway's work on situated knowledge convinced me that diverse perspectives are not decoration but epistemic necessity."
   - heading: "Community as Institutional Memory"
     units:
       - id: "community-infrastructure.community-as-institutional-memory.p1"
@@ -33,7 +33,10 @@ sections:
     units:
       - id: "community-infrastructure.from-salon-to-system-feedback-mechanisms.p1"
         elevated_preview: "The community organ is not a passive archive — it is an active feedback mechanis..."
-        entry: "[DRAFT]"
+        entry: "The community organ is not a passive archive -- it actively shapes how the other seven organs develop. When a salon surfaces a tension between two architectural principles, that tension gets documented, tagged, and fed back into governance. Several real architectural decisions -- including the meta-organvm umbrella and cross-organ health files -- originated directly from salon discussions that revealed blind spots I could not see from inside the system."
+      - id: "community-infrastructure.from-portfolio-to-practice.p1"
+        elevated_preview: ""
+        entry: "The community organ is what turns a portfolio into a practice. Knowledge locked in one person's head is not institutional knowledge -- it only becomes institutional when it is embedded in artifacts and relationships that others can participate in. The salon archives, curricula, and synthesis documents are all designed so that someone who was not present at the system's creation can trace the reasoning behind its architecture."
   - heading: "The Community Hub Application"
     units:
       - id: "community-infrastructure.the-community-hub-application.p1"
@@ -43,4 +46,4 @@ sections:
     units:
       - id: "community-infrastructure.why-community-infrastructure-cannot-be-deferred.p1"
         elevated_preview: "There is a persistent temptation in systems design to treat community as a phase..."
-        entry: "[DRAFT]"
+        entry: "I built the community organ from the very beginning, not as a phase-two afterthought. The shared vocabulary and sense-making practices that enable collaboration cannot be bolted on after the technical architecture is complete. They have to grow alongside the system. Community infrastructure is not the last organ to build -- it is the organ that ensures all the others remain buildable."

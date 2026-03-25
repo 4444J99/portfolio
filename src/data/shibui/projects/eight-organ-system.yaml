@@ -8,17 +8,20 @@ sections:
     units:
       - id: "eight-organ-system.the-insight.p1"
         elevated_preview: "I started from a conviction: the way you organize creative work is creative work..."
-        entry: "[DRAFT]"
+        entry: "I believe the way you organize creative work is itself creative work. I wanted to find out what happens when you give governance decisions the same care as the art they coordinate. The result surprised me: the governance model became the most interesting artifact in the system."
   - heading: "How It Works"
     units:
       - id: "eight-organ-system.how-it-works.p1"
         elevated_preview: "Eight GitHub organizations, each representing a distinct organ with a Greek onto..."
         entry: "I organized my portfolio into eight online spaces, naming each after a Greek concept for a different \"organ\" of my work. I kept the project data separate from the site itself, using a central hub to pull them together. This lets me track the history of each area independently while showing you the whole system in one place."
+      - id: "eight-organ-system.how-it-works.p2"
+        elevated_preview: ""
+        entry: "I separated the system this way to protect each kind of work from being judged by the wrong standards. Art shouldn't need to justify itself commercially, and theory shouldn't need to scale before it's explored. Each organ has its own rules, its own documentation standards, and its own definition of what \"good\" looks like."
   - heading: "The Registry"
     units:
       - id: "eight-organ-system.the-registry.p1"
         elevated_preview: "A machine-readable JSON registry serves as the single source of truth for all [d..."
-        entry: "[DRAFT]"
+        entry: "I built a single JSON file that tracks every repository in the system. It records each project's status, dependencies, and documentation tier. Automated scripts validate the registry against the live state of every repo, so nothing drifts out of sync without being caught."
   - heading: "The State Machine"
     units:
       - id: "eight-organ-system.the-state-machine.p1"
@@ -31,7 +34,7 @@ sections:
     units:
       - id: "eight-organ-system.the-dependency-rule.p1"
         elevated_preview: "The most important constraint, and the one that generated the most creative tens..."
-        entry: "[DRAFT]"
+        entry: "I enforced one strict rule: ideas can only flow in one direction. Theory feeds art, art feeds commerce, and nothing flows backward. This forced clean boundaries between the organs and created real stakes -- theory has to commit to art without knowing if it will ever become a product. 31 dependency edges, zero circular dependencies."
   - heading: "Automation"
     units:
       - id: "eight-organ-system.automation.p1"
@@ -41,12 +44,12 @@ sections:
     units:
       - id: "eight-organ-system.why-this-is-art.p1"
         elevated_preview: "The choice of eight organs (not seven, not ten) is a design decision. The Greek ..."
-        entry: "[DRAFT]"
+        entry: "I chose eight organs deliberately. I chose Greek names deliberately. The no-back-edges rule creates dramatic tension on purpose. This isn't an engineer who also makes art, or an artist who codes on the side -- the governance model, the registry, the dependency graph, these are the creative work itself."
   - heading: "Results"
     units:
       - id: "eight-organ-system.results.p1"
         elevated_preview: "The system launched on 2026-02-11 with 9/9 launch criteria met. All 8 organs are..."
-        entry: "[DRAFT]"
+        entry: "I launched the system on 2026-02-11 with all 9 launch criteria met and all 8 organs operational. 228 validation checks pass across the full suite, POSSE distribution is live on Mastodon and Discord, and 36 meta-system essays are published with an RSS feed."
       - id: "eight-organ-system.results.p2"
         elevated_preview: "[dynamic] repositories carry CI workflows. 130 architectural decision records do..."
         entry: "[DRAFT]"
@@ -59,4 +62,4 @@ sections:
     units:
       - id: "eight-organ-system.repository-standards.p1"
         elevated_preview: "Every repository meets a defined quality floor that functions as a contract betw..."
-        entry: "[DRAFT]"
+        entry: "I set a quality floor for every repository: minimum README lengths, CI/CD workflows, and architectural decision records. This functions as a contract between the system and its audiences -- whether you're a hiring manager or a grant reviewer, you can trust the documentation is substantive and current."

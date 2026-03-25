@@ -13,22 +13,22 @@ sections:
     units:
       - id: "ai-council.technical-architecture-fastapi-next-js.p1"
         elevated_preview: "The Coliseum is built as a decoupled system: I directed the architecture of a Fa..."
-        entry: "[DRAFT]"
+        entry: "I built the Coliseum as two separate pieces: a FastAPI backend that runs all the debate logic and a Next.js frontend for live audience interaction. The API is organized around five domains -- agents, events, voting, achievements, and stats -- and I deliberately kept debate state in memory for real-time speed, accepting the tradeoff that a server restart mid-debate would lose progress."
   - heading: "The Deliberation Model"
     units:
       - id: "ai-council.the-deliberation-model.p1"
         elevated_preview: "The Coliseum's deliberation format is not arbitrary — it draws on formal argumen..."
-        entry: "[DRAFT]"
+        entry: "I designed the debates to follow a three-round structure: state your position, rebut the opponent, then synthesize. Agents can't just talk past each other -- the system flags any response that doesn't engage with what the other side actually said. The goal isn't to look like a debate; it's to force the kind of adversarial reasoning that actually surfaces better answers."
   - heading: "The Gamification Layer"
     units:
       - id: "ai-council.the-gamification-layer.p1"
         elevated_preview: "Governance is boring. This is not a design flaw — it is a design failure. The Co..."
-        entry: "[DRAFT]"
+        entry: "I treated audience engagement as an engineering problem, not an afterthought. The system includes achievements, leaderboards, and unlockable capabilities that reward genuine deliberative behavior -- voting thoughtfully, engaging with diverse topics, identifying synthesis points -- rather than just showing up. The goal is making governance compelling enough that people actually participate."
   - heading: "Voting Sessions and Audience Judgment"
     units:
       - id: "ai-council.voting-sessions-and-audience-judgment.p1"
         elevated_preview: "The voting system implements a three-phase lifecycle: open, active, and finalize..."
-        entry: "[DRAFT]"
+        entry: "I built a voting system where audiences rate debates across four dimensions -- argument strength, evidence quality, responsiveness, and rhetorical clarity -- instead of simple thumbs up/down. The entire lifecycle is idempotent, meaning you can safely retry any operation without corrupting results. This matters in production where network issues cause duplicate requests."
   - heading: "Event Ingestion and Source Filtering"
     units:
       - id: "ai-council.event-ingestion-and-source-filtering.p1"
@@ -43,4 +43,4 @@ sections:
     units:
       - id: "ai-council.tradeoffs-and-lessons.p1"
         elevated_preview: "The most consequential design decision was in-memory state over a database. For ..."
-        entry: "[DRAFT]"
+        entry: "I chose in-memory state over a database because debates are ephemeral performances, not permanent records. The tradeoff is that a server restart mid-debate loses everything. I also found that smarter agents produce better arguments but harder-to-follow debates, so I limited the system to four distinct roles as a compromise between depth and clarity."

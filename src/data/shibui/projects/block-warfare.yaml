@@ -8,12 +8,12 @@ sections:
     units:
       - id: "block-warfare.the-problem-geography-as-decoration.p1"
         elevated_preview: "Location-based games have a geography problem. They overlay generic game mechani..."
-        entry: "[DRAFT]"
+        entry: "I wanted to build a location-based game where your actual neighborhood shapes the gameplay, not just the backdrop. Most AR games treat the real world as a blank grid — I set out to make the streets, parks, and buildings around you matter strategically."
   - heading: "Technical Architecture: TypeScript Monorepo"
     units:
       - id: "block-warfare.technical-architecture-typescript-monorepo.p1"
         elevated_preview: "TurfSynth is structured as a TypeScript monorepo managed with pnpm workspaces. I..."
-        entry: "[DRAFT]"
+        entry: "I organized the codebase as a TypeScript monorepo split into five packages, each owning a single responsibility: geospatial primitives, procedural generation, territory control, AR rendering, and the coordination server. This separation keeps each piece testable on its own and lets me swap out any layer without touching the others."
   - heading: "Procedural Generation: Geography as Level Designer"
     units:
       - id: "block-warfare.procedural-generation-geography-as-level-designer.p1"
@@ -23,12 +23,12 @@ sections:
     units:
       - id: "block-warfare.territory-control-claiming-real-boundaries.p1"
         elevated_preview: "The territory system is where geographic fidelity produces its most distinctive ..."
-        entry: "[DRAFT]"
+        entry: "I designed the territory system so players claim real city blocks, not abstract hexagons. Your dead-end street is genuinely easier to defend than a busy intersection, and a Manhattan block plays completely differently from a suburban cul-de-sac. The game boundaries follow actual streets, park edges, and property lines."
   - heading: "Spatial Indexing and Performance"
     units:
       - id: "block-warfare.spatial-indexing-and-performance.p1"
         elevated_preview: "A location-based game that lags when you cross the street is unplayable. TurfSyn..."
-        entry: "[DRAFT]"
+        entry: "I needed the game to answer \"what's nearby?\" in under a millisecond on every GPS update, so I built a two-tier spatial index. Nearby objects get full AR rendering while the broader zone stays tracked for strategic awareness. The result is smooth frame rates even in dense urban areas with hundreds of game features."
   - heading: "Design Philosophy: The ORGAN-I Connection"
     units:
       - id: "block-warfare.design-philosophy-the-organ-i-connection.p1"

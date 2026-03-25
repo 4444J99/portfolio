@@ -8,34 +8,34 @@ sections:
     units:
       - id: "your-fit-tailored.the-crisis-of-linear-fashion.p1"
         elevated_preview: "The global apparel industry produces approximately 92 million tons of textile wa..."
-        entry: "[DRAFT]"
+        entry: "I designed this platform because the fashion industry's waste problem is staggering — 92 million tons of textile waste per year, with the average garment worn only seven times. Existing rental services add too much friction. I wanted to build a circular system that makes sustainable clothing effortless, not aspirational."
   - heading: "Specification-Driven Design"
     units:
       - id: "your-fit-tailored.specification-driven-design.p1"
         elevated_preview: "Your Fit Tailored is not a prototype or a minimum viable product — it is a compr..."
-        entry: "[DRAFT]"
+        entry: "I wrote the full product specification before writing a single line of implementation code. The spec defines six subsystems — onboarding, curation, subscription management, logistics, garment lifecycle, and sustainability metrics — each with its own interfaces and state machines. The specification is the product; building it is the downstream step."
   - heading: "Algorithmic Curation"
     units:
       - id: "your-fit-tailored.algorithmic-curation.p1"
         elevated_preview: "The curation engine is the system's core differentiator — a recommender system w..."
-        entry: "[DRAFT]"
+        entry: "I designed the curation engine so it gets smarter with every cycle. It fuses four signal types — body measurements, style preferences, wear-and-return feedback, and seasonal trends — into a single score per garment. Over time, the system learns what you want to wear so well that the weekly box just arrives with the right things in it."
   - heading: "Sustainability as Product Architecture"
     units:
       - id: "your-fit-tailored.sustainability-as-product-architecture.p1"
         elevated_preview: "Most sustainability reporting in fashion is retrospective — annual reports that ..."
-        entry: "[DRAFT]"
+        entry: "I made sustainability a live feature, not a retrospective report. Every garment carries a running ledger of water savings, carbon offset, and waste diverted. Subscribers see the environmental impact of their subscription in real time, which turns abstract eco-claims into something concrete and measurable."
   - heading: "Closed-Loop Logistics"
     units:
       - id: "your-fit-tailored.closed-loop-logistics.p1"
         elevated_preview: "The logistical backbone is what separates a circular apparel platform from a con..."
-        entry: "[DRAFT]"
+        entry: "I designed the logistics so outbound deliveries and return pickups happen simultaneously on a weekly cycle, eliminating the \"return burden\" that kills most rental services. The system tracks every garment's location through every phase, so it can predict what will be available for curation days in advance. This turns inventory from a static warehouse count into a dynamic flow."
   - heading: "Specification-Driven Methodology"
     units:
       - id: "your-fit-tailored.specification-driven-methodology.p1"
         elevated_preview: "Your Fit Tailored embodies ORGAN-III's core methodology: rigorous product specif..."
-        entry: "[DRAFT]"
+        entry: "I wrote a complete formal specification before any engineering work began. The spec decomposes the platform into modules that hide their internals from each other -- curation doesn't know about logistics, logistics doesn't know about sustainability. This discipline forces design decisions to surface early, when changing them is cheap rather than expensive."
   - heading: "Temporal Service Model"
     units:
       - id: "your-fit-tailored.temporal-service-model.p1"
         elevated_preview: "The fundamental product insight is that the subscription is the product — subscr..."
-        entry: "[DRAFT]"
+        entry: "I designed the subscription itself as the product -- subscribers don't own clothes, they subscribe to a wardrobe experience that gets better every week. When the platform owns the garments, the incentive flips: longevity becomes profitable instead of obsolescence. The system genuinely learns what you want to wear, so service quality improves with every cycle."

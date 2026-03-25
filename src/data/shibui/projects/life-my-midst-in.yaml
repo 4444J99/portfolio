@@ -8,29 +8,32 @@ sections:
     units:
       - id: "life-my-midst-in.the-problem-with-professional-identity.p1"
         elevated_preview: "The conventional curriculum vitae forces a fundamental act of self-falsification..."
-        entry: "[DRAFT]"
+        entry: "I designed a system that flips the traditional resume on its head. Instead of forcing a multidimensional career into one flat document, this application asks the employer what they actually need — then assembles a tailored view of my professional identity in real time. The employer becomes the interviewee, and the CV builds itself."
+      - id: "life-my-midst-in.the-i-ii-iii-pipeline.p1"
+        elevated_preview: ""
+        entry: "This project is the clearest example of how my eight-organ system actually works in practice. Theoretical frameworks from the research organ become computable structures in the design organ, which become production code in the engineering organ. It is not a description of how hiring works -- it is a working prescription for how it should work, backed by 68+ commits and 21 database migrations."
   - heading: "Technical Architecture"
     units:
       - id: "life-my-midst-in.technical-architecture.p1"
         elevated_preview: "The system is a full-stack monorepo implementing hexagonal architecture — a patt..."
-        entry: "[DRAFT]"
+        entry: "I architected this as a full-stack monorepo using hexagonal architecture, so the core business logic stays completely independent of any framework. The frontend is Next.js 16 with React Server Components, the API is Fastify 5, and four shared packages handle validation, identity modeling, and the design system."
   - heading: "The Mask System"
     units:
       - id: "life-my-midst-in.the-mask-system.p1"
         elevated_preview: "The core innovation is a taxonomy of 16 professional masks organized across thre..."
-        entry: "[DRAFT]"
+        entry: "I created 16 professional \"masks\" organized into three categories: cognitive, expressive, and operational. Each mask is a truthful lens on the same career — a systems-architect view emphasizes abstraction and integration, while a creative-director view foregrounds aesthetic judgment. They don't invent different people; they highlight different dimensions of the same one."
   - heading: "Verifiable Credentials"
     units:
       - id: "life-my-midst-in.verifiable-credentials.p1"
         elevated_preview: "Professional claims are cheap. Anyone can list \"10 years of experience\" or \"led ..."
-        entry: "[DRAFT]"
+        entry: "I integrated W3C Verifiable Credentials so that professional claims on this CV are cryptographically provable, not just stated. Each credential is a signed document that anyone can independently verify. The employer sees which claims are attested and which are self-reported, and I control my own credential wallet without depending on LinkedIn or any other platform."
   - heading: "Compatibility Scoring"
     units:
       - id: "life-my-midst-in.compatibility-scoring.p1"
         elevated_preview: "The five-factor compatibility scorer operates on the responses the employer prov..."
-        entry: "[DRAFT]"
+        entry: "I built a five-factor scoring system that evaluates mutual fit rather than just technical skill overlap. Instead of asking \"do you need a frontend developer,\" it asks about team dynamics, growth expectations, and compensation philosophy. Values alignment and growth trajectory are weighted more heavily than technical match because they predict long-term success far better."
   - heading: "The Hunter Protocol"
     units:
       - id: "life-my-midst-in.the-hunter-protocol.p1"
         elevated_preview: "Most job search tools are passive: they wait for the candidate to search, filter..."
-        entry: "[DRAFT]"
+        entry: "I built an autonomous job search agent that flips the traditional model. Instead of me endlessly scrolling job boards, the Hunter Protocol continuously scans opportunities and scores them against my full professional profile using the same five-factor compatibility model. It only surfaces roles that clear a quality threshold, complete with a breakdown and a draft application narrative."

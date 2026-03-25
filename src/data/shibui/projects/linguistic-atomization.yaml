@@ -8,29 +8,32 @@ sections:
     units:
       - id: "linguistic-atomization.the-problem-rhetoric-without-instruments.p1"
         elevated_preview: "For twenty-four centuries, the study of rhetoric has operated with essentially t..."
-        entry: "[DRAFT]"
+        entry: "I built a computational framework that breaks literary texts down into their smallest functional parts. Rhetoric has been studied for over two thousand years, but the tools haven't changed much — it's still mostly close reading and intuition. This project brings computational precision to the question of how texts produce their effects, not just what they mean."
+      - id: "linguistic-atomization.testing-rhetoric-computationally.p1"
+        elevated_preview: ""
+        entry: "I wrote 142 tests across three categories: does decomposition preserve the source text, do independent modules produce consistent annotations, and do Western-derived categories actually work on non-Western texts? The most informative tests are the failures -- when Aristotelian argument detection breaks on Sanskrit poetics, that reveals the limits of the category, not a bug in the code."
   - heading: "Corpus and Scale"
     units:
       - id: "linguistic-atomization.corpus-and-scale.p1"
         elevated_preview: "The framework operates on a curated corpus of 46 canonical works spanning 15+ la..."
-        entry: "[DRAFT]"
+        entry: "I curated a corpus of 46 canonical works across 15 languages and 12 literary traditions — from ancient Greek oratory to Japanese zuihitsu to Latin American fiction. The goal was to test whether our analytical categories actually work across civilizations, not just within the Western tradition where they were invented."
   - heading: "Six Analysis Modules"
     units:
       - id: "linguistic-atomization.six-analysis-modules.p1"
         elevated_preview: "The framework applies six configurable analysis modules, each operating at every..."
-        entry: "[DRAFT]"
+        entry: "I designed six analysis modules that each examine a different dimension of how text works: figurative language, rhythm, argument structure, narrative mechanics, vocabulary layers, and pragmatic force. Each module can zoom from a single word up to the architecture of an entire book, so I can trace patterns at any level of detail."
   - heading: "Visualization and Output"
     units:
       - id: "linguistic-atomization.visualization-and-output.p1"
         elevated_preview: "Raw analysis data is only as useful as its representation. The framework generat..."
-        entry: "[DRAFT]"
+        entry: "I built two types of output: interactive HTML views for exploration and structured data exports for computational work. The HTML views let you drill from a rhetorical move down to individual morphemes, with heat maps showing where figurative language clusters. The structured exports feed tradition-level pattern questions into statistical analysis while keeping every claim traceable back to specific text."
   - heading: "Cross-Tradition Analysis"
     units:
       - id: "linguistic-atomization.cross-tradition-analysis.p1"
         elevated_preview: "The most theoretically significant capability of the framework is cross-traditio..."
-        entry: "[DRAFT]"
+        entry: "I can now ask questions that were never systematically answerable before: does Cicero's figurative language distribution resemble Chinese parallel prose? Are the argumentative structures of Sanskrit poetics commensurable with Aristotle? These comparisons test whether our inherited analytical categories are genuinely universal or just culturally specific artifacts dressed up as natural law."
   - heading: "Connection to ORGAN-II: From Analysis to Generation"
     units:
       - id: "linguistic-atomization.connection-to-organ-ii-from-analysis-to-generation.p1"
         elevated_preview: "The Linguistic Atomization Framework exists within ORGAN-I (Theoria) — the theor..."
-        entry: "[DRAFT]"
+        entry: "I built this framework to directly feed my generative art projects. You can't generate compelling text without understanding how compelling text works at every level. The atomized inventory of rhetorical devices, rhythmic patterns, and narrative mechanics becomes a library of compositional primitives that generative systems draw on. Without this analysis, generation is just blind pattern-matching."

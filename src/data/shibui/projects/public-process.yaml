@@ -8,27 +8,27 @@ sections:
     units:
       - id: "public-process.the-problem-opacity-as-default.p1"
         elevated_preview: "Creative technologists face a structural problem: finished work is visible, but ..."
-        entry: "[DRAFT]"
+        entry: "I noticed that portfolios show finished work but hide everything that matters — the decisions, the dead ends, the debates. Code is public in open source, but the reasoning behind it stays locked in private channels. I built ORGAN V (Logos) to fix that: a dedicated system for making the process of building visible, structured, and citable."
   - heading: "The Essay Collection"
     units:
       - id: "public-process.the-essay-collection.p1"
         elevated_preview: "The collection comprises [dynamic] published essays totaling approximately [dyna..."
-        entry: "[DRAFT]"
+        entry: "I wrote [dynamic] long-form essays totaling about [dynamic],000 words, deployed as a static Jekyll site. These aren't blog posts — each one documents a specific phase or decision in real time, capturing the uncertainty and provisional reasoning that retrospective accounts always smooth over."
   - heading: "Audience Design"
     units:
       - id: "public-process.audience-design.p1"
         elevated_preview: "A single essay must address multiple audiences without becoming incoherent, and ..."
-        entry: "[DRAFT]"
+        entry: "I designed each essay to serve four audiences simultaneously: practitioners get tooling decisions, grant reviewers get timestamped evidence, hiring managers get communication clarity, and academics get theoretical grounding. The same text works for all of them without separate versions."
   - heading: "Publication Pipeline Architecture"
     units:
       - id: "public-process.publication-pipeline-architecture.p1"
         elevated_preview: "The publication infrastructure follows a deliberate pipeline: source material en..."
-        entry: "[DRAFT]"
+        entry: "I built a three-layer publication pipeline on top of Jekyll. An Atom feed enables machine-readable syndication, SEO tags inject structured metadata for social sharing and search engines, and YAML front matter encodes audience routing so downstream tools can filter essays by target readership automatically."
   - heading: "Cross-Referencing Infrastructure"
     units:
       - id: "public-process.cross-referencing-infrastructure.p1"
         elevated_preview: "The essays form a citation graph, not a flat list. Architectural essays referenc..."
-        entry: "[DRAFT]"
+        entry: "I structured the essays as a citation graph, not a flat list. Architectural essays reference sprint narratives for evidence, sprint narratives reference methodology essays for frameworks, and reflective essays reference all three to examine what actually happened versus what was predicted. The cross-reference density is itself evidence of the practice's integrity."
       - id: "public-process.cross-referencing-infrastructure.p2"
         elevated_preview: "The cross-validation methodology documented in the lead essay (\"How I Used 4 AI ..."
         entry: "[DRAFT]"
@@ -36,7 +36,7 @@ sections:
     units:
       - id: "public-process.reflective-practice-as-structural-commitment.p1"
         elevated_preview: "The reflective essays in the collection are not afterthoughts appended to the sp..."
-        entry: "[DRAFT]"
+        entry: "I made reflective essays a structural requirement, not an afterthought. Every sprint produces both a real-time narrative and a separate reflective essay examining what went wrong, what surprised me, and what I would change. Writing the reflection while the surprise is still fresh preserves knowledge that would otherwise become invisible."
   - heading: "The Jekyll Architecture"
     units:
       - id: "public-process.the-jekyll-architecture.p1"
@@ -54,7 +54,7 @@ sections:
     units:
       - id: "public-process.building-in-public-as-reusable-methodology.p1"
         elevated_preview: "The most significant claim this project makes is that building-in-public can be ..."
-        entry: "[DRAFT]"
+        entry: "I designed this as a reusable methodology, not a personal quirk. The dominant model of building in public is the tweet thread -- fragmentary, performative, forgotten in 48 hours. This model offers an alternative: structured long-form documentation, explicit audience models, and POSSE distribution. Any practitioner could adopt it without adopting the eight-organ system."
   - heading: "Outcomes and Metrics"
     units:
       - id: "public-process.outcomes-and-metrics.p1"

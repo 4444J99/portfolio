@@ -8,27 +8,30 @@ sections:
     units:
       - id: "narratological-lenses.the-problem-narrative-theory-without-infrastructure.p1"
         elevated_preview: "Narrative analysis has operated for a century on frameworks that are structurall..."
-        entry: "[DRAFT]"
+        entry: "I noticed that narrative analysis has a century of precise structural frameworks -- Propp's plot functions, Genette's discourse taxonomy -- but none of them are executable. They exist only as paper artifacts. I built this project to turn those frameworks into typed Python algorithms with confidence scores and testable assertions."
+      - id: "narratological-lenses.the-compendium-twenty-eight-formalized-frameworks.p1"
+        elevated_preview: ""
+        entry: "I built a library of twenty-eight narrative frameworks spanning classical drama, film theory, television craft, global storytelling traditions, interactive media, and comics. Each one is stored as both a research study and a validated JSON model, kept in sync so edits to the scholarship are automatically reflected in the computational version."
   - heading: "Analytical Frameworks as Algorithms"
     units:
       - id: "narratological-lenses.analytical-frameworks-as-algorithms.p1"
         elevated_preview: "The core intellectual challenge is translating humanistic frameworks into comput..."
-        entry: "[DRAFT]"
+        entry: "I translated humanistic frameworks into computational primitives without losing their interpretive richness. Propp's plot functions become a finite state machine, Greimas's actantial model becomes six typed roles on three axes, and Barthes's narrative codes become detection heuristics. Each framework is a separate module that shares a common interface so they can be composed and cross-referenced."
   - heading: "Six-Package Architecture"
     units:
       - id: "narratological-lenses.six-package-architecture.p1"
         elevated_preview: "The monorepo is structured as six distinct packages, each serving a different co..."
-        entry: "[DRAFT]"
+        entry: "I structured the monorepo as six packages that all share the same analytical core. The core library holds all the domain logic, and the CLI, REST API, MCP server, VS Code extension, and web dashboard are just different interfaces into it. One engine, six ways to access it."
   - heading: "Diagnostic Output: Beyond Classification"
     units:
       - id: "narratological-lenses.diagnostic-output-beyond-classification.p1"
         elevated_preview: "The system's output is not a label but a diagnostic — a structured report that t..."
-        entry: "[DRAFT]"
+        entry: "I designed the output as a full diagnostic, not a label. When the engine runs a Proppian analysis, it reports which functions were found, at what confidence, with what evidence, and which expected functions are missing. This structured format lets different analyses be cross-referenced and aggregated across large corpora."
   - heading: "Composable Frameworks and Cross-Reference"
     units:
       - id: "narratological-lenses.composable-frameworks-and-cross-reference.p1"
         elevated_preview: "The most powerful analytical results emerge not from applying a single framework..."
-        entry: "[DRAFT]"
+        entry: "I designed the frameworks to be composable. When you run Propp, Greimas, and Genette against the same text, the engine maps where their outputs align and where they disagree. Those disagreements are the most interesting results -- they point to genuine ambiguities in the narrative that no single framework could surface alone."
   - heading: "The Specs Directory: Research as First-Class Data"
     units:
       - id: "narratological-lenses.the-specs-directory-research-as-first-class-data.p1"
@@ -38,7 +41,7 @@ sections:
     units:
       - id: "narratological-lenses.bridge-to-generative-work.p1"
         elevated_preview: "The narratological lenses project occupies a specific position within the eight-..."
-        entry: "[DRAFT]"
+        entry: "I built this as theory infrastructure that feeds directly into generative work. A Proppian analysis can drive a music system to shift harmonic mode at narrative turning points. An actantial analysis can determine the spatial layout of a visualization. The lenses turn scholarly frameworks into API endpoints that art tools and product prototypes can call."
   - heading: "Fountain Integration and Protocol Framework"
     units:
       - id: "narratological-lenses.fountain-integration-and-protocol-framework.p1"
@@ -53,4 +56,4 @@ sections:
     units:
       - id: "narratological-lenses.why-this-approach-matters.p1"
         elevated_preview: "The digital humanities have produced remarkable tools for corpus analysis — topi..."
-        entry: "[DRAFT]"
+        entry: "I built this because digital humanities tools like topic modeling and sentiment analysis bypass the structural vocabularies narratologists spent a century creating. This project encodes those frameworks as first-class computational objects with typed models and testable assertions. When a narratological claim is a function with tests, scholarly debate gains a new modality."

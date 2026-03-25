@@ -8,7 +8,7 @@ sections:
     units:
       - id: "aetheria-rpg.the-full-pipeline.p1"
         elevated_preview: "Aetheria is the project that proves the system works — and honestly reveals wher..."
-        entry: "[DRAFT]"
+        entry: "I took a classroom RPG from theory through game design to a revenue product, following my own governance pipeline end to end. It proved the system works -- and honestly showed where it doesn't. I'm including the full post-mortem because honest failures teach more than polished wins."
   - heading: "The Theory (ORGAN-I)"
     units:
       - id: "aetheria-rpg.the-theory-organ-i.p1"
@@ -18,15 +18,15 @@ sections:
     units:
       - id: "aetheria-rpg.technical-architecture.p1"
         elevated_preview: "Aetheria is a React 19 single-page application built with TypeScript 5.9 (strict..."
-        entry: "[DRAFT]"
+        entry: "I built Aetheria as a React 19 app with TypeScript in strict mode, Vite, and Tailwind CSS. I separated concerns into three React contexts: one for game state, one for Firebase authentication, and one for theming. State mutations flow through typed action functions that enforce game rules before updating, which prevents the spaghetti coupling that usually plagues educational software."
       - id: "aetheria-rpg.technical-architecture.p2"
         elevated_preview: "The domain model defines over 30 TypeScript interfaces organized into five layer..."
-        entry: "[DRAFT]"
+        entry: "I defined over 30 TypeScript interfaces across five layers before writing a single React component. The domain model covers game mechanics, educator tools, personalization, standards alignment, and system notifications. Six quest types each have distinct XP values and prerequisite chains, following a clear status machine from locked through completion or failure."
   - heading: "Game Mechanics in Depth"
     units:
       - id: "aetheria-rpg.game-mechanics-in-depth.p1"
         elevated_preview: "The XP and level progression system uses an eight-tier curve (Novice through Leg..."
-        entry: "[DRAFT]"
+        entry: "I designed an eight-tier progression curve from Novice through Legend, where each tier requires progressively more effort. Level-ups trigger sound effects and notifications to maintain the feedback loop. I calibrated the curve so the difficulty stays in the sweet spot between boredom and anxiety -- keeping students engaged without overwhelming them."
       - id: "aetheria-rpg.game-mechanics-in-depth.p2"
         elevated_preview: "Artifact scarcity drives quality. High-scoring submissions generate artifacts wi..."
         entry: "[DRAFT]"
@@ -42,7 +42,7 @@ sections:
     units:
       - id: "aetheria-rpg.testing-and-quality-infrastructure.p1"
         elevated_preview: "The testing infrastructure uses Vitest with React Testing Library and jsdom. Tes..."
-        entry: "[DRAFT]"
+        entry: "I built a resilience layer with circuit breakers, rate limiters, and content sanitization because educational software that fails during a classroom session loses trust permanently. Six CI workflows run on every push. The circuit breaker prevents cascading failures from degraded AI calls, and DOMPurify sanitizes all AI-generated content before students see it."
   - heading: "What Worked"
     units:
       - id: "aetheria-rpg.what-worked.p1"
@@ -62,4 +62,4 @@ sections:
     units:
       - id: "aetheria-rpg.why-include-a-failure.p1"
         elevated_preview: "The I→II→III pipeline worked as governance — it caught problems, preserved decis..."
-        entry: "[DRAFT]"
+        entry: "I included this project because the governance pipeline worked exactly as designed -- it caught problems, preserved every decision, and made this honest post-mortem possible. The product needs more work, but the system that produced it is sound. Good governance doesn't prevent failure; it makes failure legible and recoverable."

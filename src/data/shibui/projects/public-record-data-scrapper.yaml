@@ -8,12 +8,12 @@ sections:
     units:
       - id: "public-record-data-scrapper.the-challenge-of-50-state-scale.p1"
         elevated_preview: "Public record data in the United States is structurally fragmented. Each state m..."
-        entry: "[DRAFT]"
+        entry: "I directed the architecture of a platform that automates public record extraction across all 50 US states. Each state has its own UCC filing system with different interfaces and anti-scraping measures — a human researcher covers two or three states per day. I replaced that with 60+ autonomous agents extracting filings continuously, enriching them with multi-source intelligence, and delivering scored leads through a full React application."
   - heading: "Technical Architecture"
     units:
       - id: "public-record-data-scrapper.technical-architecture.p1"
         elevated_preview: "The platform is implemented as a TypeScript monorepo with a React 19 frontend de..."
-        entry: "[DRAFT]"
+        entry: "I built this as a TypeScript monorepo: React 19 frontend on Vercel, Express API backend, PostgreSQL, Redis, and BullMQ for background jobs. Three application targets — web, Tauri desktop, and mobile — share code through internal packages. The backend implements nineteen domain services, each owning a distinct slice of the business logic."
       - id: "public-record-data-scrapper.technical-architecture.p2"
         elevated_preview: "The data collection layer uses a Polymorphic Agent Architecture. Because state p..."
         entry: "[DRAFT]"
@@ -21,27 +21,27 @@ sections:
     units:
       - id: "public-record-data-scrapper.nineteen-domain-services.p1"
         elevated_preview: "The backend's service-oriented architecture reflects a deliberate decomposition ..."
-        entry: "[DRAFT]"
+        entry: "I decomposed the backend into nineteen services organized by business capability, not technical layer. Each service owns a domain concept — a Prospect can compute its own priority score and generate its own compliance disclosures. The services span the full lead lifecycle: extraction, qualification, scoring, outreach, deal management, underwriting, compliance, and portfolio monitoring."
   - heading: "Database Schema and Migration Discipline"
     units:
       - id: "public-record-data-scrapper.database-schema-and-migration-discipline.p1"
         elevated_preview: "The PostgreSQL schema supports multitenancy from the ground up, implemented thro..."
-        entry: "[DRAFT]"
+        entry: "I built the PostgreSQL schema for multitenancy from the start, using nine versioned migrations with rollback support. The migration sequence traces the system's evolution from initial UCC filings through row-level security, deal management, compliance tracking, and portfolio monitoring. Every migration has both an up and down path."
   - heading: "Enrichment Pipeline and ML Scoring"
     units:
       - id: "public-record-data-scrapper.enrichment-pipeline-and-ml-scoring.p1"
         elevated_preview: "Raw UCC filings tell you that a company has a lien filed by a lender — nothing m..."
-        entry: "[DRAFT]"
+        entry: "I transform raw UCC filings into multidimensional prospect profiles by pulling from ten data sources -- six free-tier and four paid-tier. An ML scoring model assigns each prospect a priority score, health grade, growth signals, revenue estimate, and competitive position. The model is trained on MCA-specific financing patterns, not generic firmographic data."
   - heading: "Testing and Quality Infrastructure"
     units:
       - id: "public-record-data-scrapper.testing-and-quality-infrastructure.p1"
         elevated_preview: "The platform maintains 2,055 tests across 91 test files, organized into eleven c..."
-        entry: "[DRAFT]"
+        entry: "I maintain 2,055 tests across 91 files in eleven categories -- from agentic system tests through frontend components to end-to-end integration. Pre-commit hooks run ESLint and Prettier on staged files, and CI runs the full test suite with TypeScript strict-mode checking and security scanning on every push. Zod validates data at every boundary."
   - heading: "Compliance as a First-Class Concern"
     units:
       - id: "public-record-data-scrapper.compliance-as-a-first-class-concern.p1"
         elevated_preview: "The MCA industry operates under an evolving regulatory landscape where state-spe..."
-        entry: "[DRAFT]"
+        entry: "I treated compliance as a native architectural concern, not a bolt-on. Four services enforce regulatory requirements as executable constraints: state-specific disclosures are auto-generated, TCPA consent is verified before any outreach, DNC lists are checked, and an immutable audit trail logs every communication with timestamp, content, and consent status."
   - heading: "Measurable Outcomes"
     units:
       - id: "public-record-data-scrapper.measurable-outcomes.p1"
@@ -51,7 +51,7 @@ sections:
     units:
       - id: "public-record-data-scrapper.design-decisions-and-tradeoffs.p1"
         elevated_preview: "The decision to build a monorepo with a unified TypeScript stack — rather than a..."
-        entry: "[DRAFT]"
+        entry: "I chose a unified TypeScript monorepo over polyglot microservices to eliminate integration errors through shared types. I used Puppeteer for adversarial portals because headless Chrome can render what raw HTTP cannot. The tiered data model lets the platform provide real value at zero cost while reserving premium enrichment for subscribers."
       - id: "public-record-data-scrapper.design-decisions-and-tradeoffs.p2"
         elevated_preview: "The broader architectural claim is that vertical SaaS — purpose-built for a spec..."
         entry: "[DRAFT]"

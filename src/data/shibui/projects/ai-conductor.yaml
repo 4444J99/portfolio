@@ -24,11 +24,14 @@ sections:
       - id: "ai-conductor.the-four-phase-workflow.p6"
         elevated_preview: "After review, documents pass through automated quality gates: registry gate (is ..."
         entry: "[DRAFT]"
+      - id: "ai-conductor.workflow.p1"
+        elevated_preview: ""
+        entry: "The workflow has four stages, each with clear roles. AI without human direction produces plausible but untrustworthy output. Human direction without AI produces trustworthy but unscalable output. The four phases combine both: the human sets context and reviews, the AI generates and iterates."
   - heading: "Token Economics"
     units:
       - id: "ai-conductor.token-economics.p1"
         elevated_preview: "The fundamental economic insight: the bottleneck shifts from production to revie..."
-        entry: "[DRAFT]"
+        entry: "I discovered that the bottleneck shifts completely. Writing hundreds of thousands of words is no longer the expensive part -- reviewing them for accuracy, voice, and positioning is. I measure effort in LLM API tokens now, not human-hours. The economics are fundamentally different from traditional authoring."
       - id: "ai-conductor.token-economics.p2"
         elevated_preview: "The 6.5M token budget was distributed across three implementation phases. The co..."
         entry: "[DRAFT]"
@@ -44,7 +47,10 @@ sections:
     units:
       - id: "ai-conductor.risks-and-mitigations.p1"
         elevated_preview: "Amendment D of the system constitution — the AI Non-Determinism Acknowledgment —..."
-        entry: "[DRAFT]"
+        entry: "I wrote a constitutional amendment acknowledging that the same inputs produce different outputs across AI models and across time. Every AI-generated deliverable requires human review. The risks are real and specific -- I observed hallucinated details in 15-20% of drafts, voice drift after about 40 READMEs, and broken cross-references that only automated scripts caught."
+      - id: "ai-conductor.risks-and-mitigations.p2"
+        elevated_preview: ""
+        entry: "I found that voice drift is the subtlest risk. Over a long generation session of 58 READMEs, AI output becomes more formulaic. The first five are distinctive; by number 40, everything starts converging. I solved this by batching by organ -- generating all repos within one domain together with domain-specific voice direction, then moving to the next."
   - heading: "Attribution and Transparency"
     units:
       - id: "ai-conductor.attribution-and-transparency.p1"

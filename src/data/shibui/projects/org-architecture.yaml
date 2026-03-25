@@ -8,17 +8,17 @@ sections:
     units:
       - id: "org-architecture.the-problem-standards-at-scale.p1"
         elevated_preview: "Every multi-repository organization faces the same entropy: standards drift, sec..."
-        entry: "[DRAFT]"
+        entry: "I built a single repository that governs every other repo in the organization. It pushes out shared CI pipelines, security scanning, contributor guidelines, and AI agent configs so that no individual project has to reinvent those wheels. One source of truth, inherited everywhere."
   - heading: "Community Health Layer"
     units:
       - id: "org-architecture.community-health-layer.p1"
         elevated_preview: "The foundation of any collaborative software project is not its code but its soc..."
-        entry: "[DRAFT]"
+        entry: "I set up shared community health files -- a code of conduct, contributing guide, security policy, and support docs -- that automatically appear on every repo in the org. Instead of copying boilerplate, each repo inherits thoughtful governance documents tailored to the system's values and threat model."
   - heading: "CI/CD Infrastructure"
     units:
       - id: "org-architecture.ci-cd-infrastructure.p1"
         elevated_preview: "The second layer transforms GitHub Actions from per-repository configuration fil..."
-        entry: "[DRAFT]"
+        entry: "I turned GitHub Actions into a shared platform for the whole org. Each repo calls centralized, reusable workflows instead of maintaining its own pipeline. Every action reference is SHA-pinned to a specific commit, which prevents supply-chain attacks from compromised tags."
       - id: "org-architecture.ci-cd-infrastructure.p2"
         elevated_preview: "The three scanning tools form a defense-in-depth strategy. CodeQL operates at th..."
         entry: "[DRAFT]"
@@ -26,25 +26,25 @@ sections:
     units:
       - id: "org-architecture.ai-agent-framework.p1"
         elevated_preview: "The third layer is the most forward-looking: a framework of production AI agents..."
-        entry: "[DRAFT]"
+        entry: "I built a layer of specialized AI agents that plug directly into the development workflow. Security agents review pull requests for vulnerabilities, documentation agents keep READMEs consistent across all repos, and infrastructure agents validate workflow configurations. They all work through GitHub Copilot, so there is no separate toolchain to learn."
   - heading: "Design Philosophy: Infrastructure as Culture"
     units:
       - id: "org-architecture.design-philosophy-infrastructure-as-culture.p1"
         elevated_preview: "The deeper claim of this project is that organizational culture can be encoded a..."
-        entry: "[DRAFT]"
+        entry: "I believe organizational culture can be encoded as versionable, reviewable code -- just like server infrastructure. When a Code of Conduct lives in a Git repository, it has a commit history, a blame log, and a review trail. When CI policy changes, the diff is visible and you can roll back. This turns governance from an unwritten social agreement into an explicit, testable system."
       - id: "org-architecture.design-philosophy-infrastructure-as-culture.p2"
         elevated_preview: "The decision to make AI agents part of this governance layer — rather than a sep..."
-        entry: "[DRAFT]"
+        entry: "I made AI agents part of the governance layer rather than a separate system. An agent's prompt is as consequential as a CI pipeline config, so it should be versioned, reviewed, and access-controlled through the same Git workflows. This makes agent capabilities visible, auditable, and revocable."
   - heading: "Automation Pipeline"
     units:
       - id: "org-architecture.automation-pipeline.p1"
         elevated_preview: "Beyond static governance files, the repository includes a Python automation laye..."
-        entry: "[DRAFT]"
+        entry: "I built a Python automation layer that goes beyond static governance files. It includes health score calculations, workflow analysis, label synchronization, action pin updates, and batch onboarding -- all as production modules with typed interfaces and test coverage. Everything needed to manage the organization is generated from code and deployed through the same CI pipelines as application software."
   - heading: "Testing and Verification"
     units:
       - id: "org-architecture.testing-and-verification.p1"
         elevated_preview: "The repository maintains over sixty unit tests covering every automation module ..."
-        entry: "[DRAFT]"
+        entry: "I wrote over sixty unit tests covering every automation module and AI framework component. Security tests are not isolated in a separate folder -- they are woven throughout the automation modules so that every component handling external resources or untrusted input is tested against adversarial scenarios. The test suite validates everything from label schemas to SSRF protection logic."
   - heading: "Tradeoffs and Limitations"
     units:
       - id: "org-architecture.tradeoffs-and-limitations.p1"

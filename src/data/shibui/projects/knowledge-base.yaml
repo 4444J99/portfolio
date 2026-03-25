@@ -8,12 +8,12 @@ sections:
     units:
       - id: "knowledge-base.the-evaporation-problem.p1"
         elevated_preview: "Every meaningful AI conversation generates knowledge that evaporates. You spend ..."
-        entry: "[DRAFT]"
+        entry: "I built a system to capture what I learn from AI conversations before it disappears. Every chat with Claude, ChatGPT, or Gemini generates real knowledge, but it vanishes into inaccessible interfaces the moment the session ends. My Knowledge Base ingests from nine sources, breaks conversations into searchable units, and surfaces connections I never explicitly made."
   - heading: "Multi-Source Export"
     units:
       - id: "knowledge-base.multi-source-export.p1"
         elevated_preview: "The first subsystem solves the ingestion problem: AI platforms do not offer robu..."
-        entry: "[DRAFT]"
+        entry: "I designed the ingestion layer to pull conversations from nine different AI platforms into one unified format. Since most platforms lack proper export APIs, the system uses browser automation to extract conversations and normalize them through source adapters I specified."
   - heading: "Five-Strategy Atomizer"
     units:
       - id: "knowledge-base.five-strategy-atomizer.p1"
@@ -23,19 +23,19 @@ sections:
     units:
       - id: "knowledge-base.triple-modal-search.p1"
         elevated_preview: "Search is the system's primary interface — the mechanism by which stored knowled..."
-        entry: "[DRAFT]"
+        entry: "I built the search to run three modes simultaneously: exact keyword matching, semantic vector search, and a fusion algorithm that merges both result sets. Keyword search catches exact terms; vector search finds related concepts even when the words differ. The fusion layer interleaves them so results that rank well in both modes rise to the top without any manual tuning."
   - heading: "Intelligence Layer"
     units:
       - id: "knowledge-base.intelligence-layer.p1"
         elevated_preview: "Search retrieves what you already know to look for. The intelligence layer surfa..."
-        entry: "[DRAFT]"
+        entry: "I built an intelligence layer on top of search that surfaces things I didn't know I knew. It runs three LLM-powered processes: extracting patterns across conversations, generating normalized tags, and detecting relationships between atoms that were never explicitly connected. It works with Anthropic, OpenAI, or Ollama, so the whole system can run fully local with zero API keys."
   - heading: "Knowledge Graph and Downstream Integration"
     units:
       - id: "knowledge-base.knowledge-graph-and-downstream-integration.p1"
         elevated_preview: "The knowledge graph is the system's connective tissue — a directed graph where n..."
-        entry: "[DRAFT]"
+        entry: "I built a knowledge graph where atoms are nodes and typed relationships (supports, contradicts, extends) are edges. It grows automatically as the intelligence layer discovers new connections between conversations I had months apart on different platforms. The graph feeds downstream projects: patterns seed generative art, architecture decisions inform product specs, and insights become essay material."
   - heading: "Architecture and Testing"
     units:
       - id: "knowledge-base.architecture-and-testing.p1"
         elevated_preview: "The system is implemented in TypeScript with strict mode enabled, backed by SQLi..."
-        entry: "[DRAFT]"
+        entry: "I built the system in TypeScript strict mode with SQLite for storage, ChromaDB for vector search, and over 200 tests covering the full pipeline. Search quality is measured against hand-labeled relevance judgments. The entire system can run fully local with Ollama, so my knowledge infrastructure doesn't depend on any single vendor's availability or pricing."

@@ -8,22 +8,22 @@ sections:
     units:
       - id: "metasystem-master.the-design-decision.p1"
         elevated_preview: "The critical insight: the audience is a co-performer operating a collective inst..."
-        entry: "[DRAFT]"
+        entry: "I designed the system around one core idea: the audience is a co-performer, not just a data source. The performer always stays in control through three override modes, but the result is a real-time negotiation between crowd desire and artistic intent."
   - heading: "The Consensus Algorithm"
     units:
       - id: "metasystem-master.the-consensus-algorithm.p1"
         elevated_preview: "Audience inputs are batched, never processed individually. The consensus loop ru..."
-        entry: "[DRAFT]"
+        entry: "I batch all audience inputs instead of processing them one at a time. A consensus loop runs every 50 milliseconds, computing weighted averages across three axes -- spatial proximity, recency, and convergence -- that together determine what the audience \"wants.\""
       - id: "metasystem-master.the-consensus-algorithm.p2"
         elevated_preview: "Spatial weighting uses exponential decay from the stage — closer audience member..."
-        entry: "[DRAFT]"
+        entry: "I implemented three weighting axes. Spatial weighting gives closer audience members more influence. Temporal weighting responds to what the audience wants right now, not their historical average. Consensus weighting detects clusters, so converging inputs amplify each other and produce decisive group movements."
   - heading: "Implementation"
     units:
       - id: "metasystem-master.implementation.p1"
         elevated_preview: "Built as a pnpm monorepo (TypeScript + Python) with five packages: core-engine (..."
-        entry: "[DRAFT]"
+        entry: "I built this as a five-package monorepo in TypeScript and Python. The core engine handles over a thousand concurrent audience connections through WebSockets, while a separate performer namespace gives the artist authenticated control. Outlier rejection and smoothing keep any single audience member from hijacking the output."
   - heading: "Venue Geometry and Deployment"
     units:
       - id: "metasystem-master.venue-geometry-and-deployment.p1"
         elevated_preview: "Performance spaces are modeled as 2D coordinate systems with named zones. The de..."
-        entry: "[DRAFT]"
+        entry: "I modeled performance spaces as 2D coordinate systems with named zones. A black box theatre uses tight spatial weighting, while an outdoor festival emphasizes consensus clustering. The system ships with Docker Compose for full-stack deployment, plus production documentation like technical riders and grant budget templates."
