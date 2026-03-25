@@ -1,5 +1,7 @@
 ---
 import PersonaCard from '../components/resume/PersonaCard.astro';
+import ShibuiContent from '../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../components/shibui/ShibuiTerm.astro';
 import { personas } from '../data/personas.json';
 import Layout from '../layouts/Layout.astro';
 import { base } from '../utils/paths';
@@ -13,11 +15,34 @@ import { base } from '../utils/paths';
   <div class="resume-gateway">
     <div class="container container--narrow">
       <header class="gateway-header" data-reveal>
-        <h1 class="page-title">I am a Polymath.</h1>
-        <p class="gateway-intro">
-          My work spans engineering, theory, and art. Built upon a <a href={`${base}philosophy/`}>Logocentric Architecture</a>, I've engineered specific "masks" that translate my high-dimensional body of work into market-legible signals.
-        </p>
-        <p class="gateway-prompt">Select a specialized mask to view my evidence:</p>
+        <ShibuiContent id="resume.gateway.title">
+          <span slot="entry">
+            <h1 class="page-title">Multiple Specializations. One Person.</h1>
+          </span>
+          <span slot="elevated">
+            <h1 class="page-title">I am a Polymath.</h1>
+          </span>
+        </ShibuiContent>
+        <ShibuiContent id="resume.gateway.intro">
+          <span slot="entry">
+            <p class="gateway-intro">
+              My work spans engineering, theory, and art. I've organized my experience into focused profiles so you can see the evidence most relevant to you.
+            </p>
+          </span>
+          <span slot="elevated">
+            <p class="gateway-intro">
+              My work spans engineering, theory, and art. Built upon a <a href={`${base}philosophy/`}><ShibuiTerm term="Logocentric Architecture" definition="A design philosophy where system structure is derived from language, meaning, and rhetorical principles rather than purely technical constraints" /></a>, I've engineered specific "masks" that translate my high-dimensional body of work into market-legible signals.
+            </p>
+          </span>
+        </ShibuiContent>
+        <ShibuiContent id="resume.gateway.prompt">
+          <span slot="entry">
+            <p class="gateway-prompt">Choose a profile to see my qualifications:</p>
+          </span>
+          <span slot="elevated">
+            <p class="gateway-prompt">Select a specialized mask to view my evidence:</p>
+          </span>
+        </ShibuiContent>
       </header>
 
       <div class="gateway-grid">
@@ -29,7 +54,10 @@ import { base } from '../utils/paths';
       </div>
 
       <footer class="gateway-footer" data-reveal style="--stagger-index: 5">
-        <p>Looking for the full, unfiltered complexity?</p>
+        <ShibuiContent id="resume.gateway.footer">
+          <span slot="entry"><p>Want to see everything in one place?</p></span>
+          <span slot="elevated"><p>Looking for the full, unfiltered complexity?</p></span>
+        </ShibuiContent>
         <a href={`${base}resume/polymath/`} class="visionary-link">
           View Visionary Polymath Resume
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
