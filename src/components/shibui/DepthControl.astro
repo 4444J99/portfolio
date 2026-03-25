@@ -1,0 +1,111 @@
+---
+// src/components/shibui/DepthControl.astro
+// Concentric rings depth control — cycles through overview/standard/full.
+// Visual: outer ring always visible, middle ring at standard+, inner dot at full.
+---
+
+<div class="depth-control-wrap" style="position: relative;">
+  <p class="sr-only" aria-live="polite" data-shibui-announce></p>
+  <button
+    class="depth-control"
+    aria-label="Content depth: Overview"
+    title="Content depth"
+    data-shibui-control
+  >
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      {/* Outer ring — always visible */}
+      <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.2" class="depth-control__ring depth-control__ring--outer" />
+      {/* Middle ring — visible at standard + full */}
+      <circle cx="10" cy="10" r="5.5" stroke="currentColor" stroke-width="1.2" class="depth-control__ring depth-control__ring--middle" opacity="0.25" />
+      {/* Inner dot — visible at full only */}
+      <circle cx="10" cy="10" r="2" fill="currentColor" class="depth-control__ring depth-control__ring--inner" opacity="0.15" />
+    </svg>
+    <span class="depth-control__tooltip" role="tooltip">Depth: Overview</span>
+  </button>
+</div>
+
+<script>
+  import { nextDepth, stepDepth, readStoredDepth, writeStoredDepth, DEPTH_LABELS, type ShibuiDepth } from '../../utils/shibui';
+
+  function initDepthControl() {
+    const btn = document.querySelector<HTMLButtonElement>('[data-shibui-control]');
+    if (!btn) return;
+
+    const tooltip = btn.querySelector<HTMLSpanElement>('.depth-control__tooltip');
+    const middleRing = btn.querySelector<SVGCircleElement>('.depth-control__ring--middle');
+    const innerDot = btn.querySelector<SVGCircleElement>('.depth-control__ring--inner');
+    const announce = document.querySelector<HTMLElement>('[data-shibui-announce]');
+
+    function getCurrentDepth(): ShibuiDepth {
+      return (document.documentElement.dataset.shibuiDepth as ShibuiDepth) || 'overview';
+    }
+
+    function applyDepth(depth: ShibuiDepth) {
+      document.documentElement.dataset.shibuiDepth = depth;
+      writeStoredDepth(depth);
+
+      // Update visual state of rings
+      if (middleRing) middleRing.setAttribute('opacity', depth === 'overview' ? '0.25' : '1');
+      if (innerDot) innerDot.setAttribute('opacity', depth === 'full' ? '1' : '0.15');
+
+      // Update ARIA + tooltip + live region announcement
+      const label = DEPTH_LABELS[depth];
+      btn.setAttribute('aria-label', `Content depth: ${label}`);
+      if (tooltip) tooltip.textContent = `Depth: ${label}`;
+      if (announce) announce.textContent = `Content depth changed to ${label}`;
+
+      // Toggle aria-hidden on shibui content layers
+      document.querySelectorAll<HTMLElement>('.shibui-content__entry').forEach(el => {
+        el.setAttribute('aria-hidden', depth === 'full' ? 'true' : 'false');
+      });
+      document.querySelectorAll<HTMLElement>('.shibui-content__elevated').forEach(el => {
+        el.setAttribute('aria-hidden', depth === 'full' ? 'false' : 'true');
+      });
+    }
+
+    // Initialize visual state from current attribute
+    applyDepth(getCurrentDepth());
+
+    btn.addEventListener('click', () => {
+      applyDepth(nextDepth(getCurrentDepth()));
+    });
+
+    btn.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        applyDepth(stepDepth(getCurrentDepth(), 'deeper'));
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        applyDepth(stepDepth(getCurrentDepth(), 'shallower'));
+      }
+    });
+  }
+
+  // Local expand: clicking a bridge button toggles `data-shibui-expanded` on its sibling ShibuiContent
+  function initBridgeExpanders() {
+    document.querySelectorAll<HTMLButtonElement>('.shibui-bridge').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.previousElementSibling as HTMLElement | null;
+        if (content?.classList.contains('shibui-content')) {
+          const expanded = content.hasAttribute('data-shibui-expanded');
+          if (expanded) {
+            content.removeAttribute('data-shibui-expanded');
+            btn.textContent = 'This section goes deeper \u2192';
+          } else {
+            content.setAttribute('data-shibui-expanded', '');
+            btn.textContent = 'Show less \u2190';
+            // Toggle aria-hidden on the elevated layer
+            const elevated = content.querySelector('[data-shibui-layer="elevated"]');
+            if (elevated) elevated.setAttribute('aria-hidden', 'false');
+          }
+        }
+      });
+    });
+  }
+
+  // Initialize on page load and view transitions
+  document.addEventListener('astro:page-load', () => {
+    initDepthControl();
+    initBridgeExpanders();
+  });
+</script>

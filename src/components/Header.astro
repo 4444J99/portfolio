@@ -1,6 +1,7 @@
 ---
 import { base } from '../utils/paths';
 import Search from './Search.astro';
+import DepthControl from './shibui/DepthControl.astro';
 
 interface NavItem {
 	label: string;
@@ -162,6 +163,7 @@ const navGroups: NavGroup[] = [
       ))}
 
       <Search />
+      <DepthControl />
       <button class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">
         <svg class="theme-icon theme-icon--sun" width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="9" cy="9" r="4"/>
