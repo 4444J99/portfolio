@@ -256,6 +256,89 @@ html[data-shibui-depth="full"] .shibui-term {
 	animation: shibui-glint 600ms ease-in-out 1 forwards;
 }
 
+/* --- Shibui Lens — Algorithmic Depth Rendering ---
+   Elements tagged by the rehype-shibui-lens plugin at build time.
+   Works alongside manual ShibuiContent blocks (backward compatible).
+*/
+
+/* Auto-generated entry text: hidden by default, visible at overview */
+.shibui-entry {
+	display: none;
+	font-style: normal;
+	line-height: inherit;
+}
+
+/* Overview: show entry text, hide complex paragraphs */
+html[data-shibui-depth="overview"] .shibui-entry {
+	display: block;
+	margin-bottom: 1em;
+	animation: shibui-reveal var(--transition-base) ease-in-out;
+}
+
+/* Hide original paragraph when entry text is shown (adjacent sibling) */
+html[data-shibui-depth="overview"] .shibui-entry + p[data-shibui-c] {
+	display: none;
+}
+
+/* Standard: show all paragraphs, auto-terms prominently annotated */
+html[data-shibui-depth="standard"] .shibui-entry {
+	display: none;
+}
+
+html[data-shibui-depth="standard"] [data-shibui-c] .shibui-term[data-definition] {
+	border-bottom: 2px dotted var(--accent);
+	padding-bottom: 1px;
+}
+
+/* Full: show all paragraphs, auto-terms subtle */
+html[data-shibui-depth="full"] .shibui-entry {
+	display: none;
+}
+
+html[data-shibui-depth="full"] [data-shibui-c] .shibui-term[data-definition] {
+	border-bottom: 1px dotted color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+/* Auto-annotated term tooltip (uses data-definition attribute) */
+.shibui-term[data-definition] {
+	position: relative;
+	cursor: help;
+	border-bottom: 1px dotted var(--accent);
+	transition: border-color var(--transition-fast);
+}
+
+.shibui-term[data-definition] .shibui-term__definition {
+	position: absolute;
+	bottom: calc(100% + 8px);
+	left: 50%;
+	transform: translateX(-50%) translateY(4px);
+	background: var(--bg-card);
+	border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+	border-radius: var(--radius-sm);
+	padding: var(--space-xs) var(--space-sm);
+	font-family: var(--font-body);
+	font-size: 0.85rem;
+	line-height: 1.4;
+	color: var(--text-secondary);
+	max-width: 300px;
+	width: max-content;
+	white-space: normal;
+	z-index: var(--z-dropdown);
+	opacity: 0;
+	pointer-events: none;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+	transition:
+		opacity var(--transition-fast) ease,
+		transform var(--transition-fast) ease;
+}
+
+.shibui-term[data-definition]:hover .shibui-term__definition,
+.shibui-term[data-definition]:focus .shibui-term__definition {
+	opacity: 1;
+	transform: translateX(-50%) translateY(0);
+	pointer-events: auto;
+}
+
 /* Reduced motion: kill all shibui animations */
 @media (prefers-reduced-motion: reduce) {
 	@keyframes shibui-reveal {

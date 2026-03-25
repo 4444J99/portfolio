@@ -1,0 +1,2833 @@
+{
+	"_meta": {
+		"generated": "2026-03-25T21:12:27.684Z",
+		"corpus_size": 70,
+		"vocabulary_size": 426,
+		"definitions_seeded": 141,
+		"definitions_needed": 285
+	},
+	"terms": {
+		"section": {
+			"idf": 0.69,
+			"score": 10.35,
+			"docs": 35,
+			"definition": null
+		},
+		"goes": {
+			"idf": 0.69,
+			"score": 9.66,
+			"docs": 35,
+			"definition": null
+		},
+		"deeper": {
+			"idf": 0.69,
+			"score": 9.66,
+			"docs": 35,
+			"definition": null
+		},
+		"symbolic": {
+			"idf": 1.95,
+			"score": 7.52,
+			"docs": 10,
+			"definition": null
+		},
+		"quest": {
+			"idf": 3.15,
+			"score": 4.87,
+			"docs": 3,
+			"definition": null
+		},
+		"students": {
+			"idf": 3.56,
+			"score": 4.64,
+			"docs": 2,
+			"definition": null
+		},
+		"teachers": {
+			"idf": 3.15,
+			"score": 4.55,
+			"docs": 3,
+			"definition": null
+		},
+		"https": {
+			"idf": 1.61,
+			"score": 4.19,
+			"docs": 14,
+			"definition": null
+		},
+		"repos": {
+			"idf": 0.64,
+			"score": 4.17,
+			"docs": 37,
+			"definition": null
+		},
+		"sprint": {
+			"idf": 0.72,
+			"score": 4.07,
+			"docs": 34,
+			"definition": null
+		},
+		"ref-": {
+			"idf": 2.64,
+			"score": 4.04,
+			"docs": 5,
+			"definition": null
+		},
+		"badge": {
+			"idf": 1.85,
+			"score": 4,
+			"docs": 11,
+			"definition": null
+		},
+		"wikipedia": {
+			"idf": 2.64,
+			"score": 3.98,
+			"docs": 5,
+			"definition": null
+		},
+		"registry": {
+			"idf": 0.72,
+			"score": 3.93,
+			"docs": 34,
+			"definition": "A centralized, queryable data store that serves as the single source of truth for all entities and their relationships in a system"
+		},
+		"stroke": {
+			"idf": 3.56,
+			"score": 3.7,
+			"docs": 2,
+			"definition": null
+		},
+		"fff": {
+			"idf": 3.56,
+			"score": 3.7,
+			"docs": 2,
+			"definition": null
+		},
+		"enum": {
+			"idf": 3.56,
+			"score": 3.56,
+			"docs": 2,
+			"definition": null
+		},
+		"repo": {
+			"idf": 0.81,
+			"score": 3.4,
+			"docs": 31,
+			"definition": null
+		},
+		"fill": {
+			"idf": 3.15,
+			"score": 3.28,
+			"docs": 3,
+			"definition": null
+		},
+		"soak": {
+			"idf": 2.86,
+			"score": 3.26,
+			"docs": 4,
+			"definition": null
+		},
+		"color": {
+			"idf": 2.64,
+			"score": 3.26,
+			"docs": 5,
+			"definition": null
+		},
+		"gamification": {
+			"idf": 3.15,
+			"score": 3.18,
+			"docs": 3,
+			"definition": null
+		},
+		"wiki": {
+			"idf": 2.3,
+			"score": 3.16,
+			"docs": 7,
+			"definition": null
+		},
+		"topology": {
+			"idf": 3.15,
+			"score": 3.15,
+			"docs": 3,
+			"definition": null
+		},
+		"provenance": {
+			"idf": 2.17,
+			"score": 3.14,
+			"docs": 8,
+			"definition": null
+		},
+		"ritual": {
+			"idf": 2.3,
+			"score": 3.07,
+			"docs": 7,
+			"definition": null
+		},
+		"repository": {
+			"idf": 0.72,
+			"score": 3.05,
+			"docs": 34,
+			"definition": null
+		},
+		"coaching": {
+			"idf": 2.86,
+			"score": 2.86,
+			"docs": 4,
+			"definition": null
+		},
+		"specs": {
+			"idf": 2.86,
+			"score": 2.79,
+			"docs": 4,
+			"definition": null
+		},
+		"fail": {
+			"idf": 2.64,
+			"score": 2.64,
+			"docs": 5,
+			"definition": null
+		},
+		"game": {
+			"idf": 2.3,
+			"score": 2.63,
+			"docs": 7,
+			"definition": null
+		},
+		"autonomous": {
+			"idf": 1.48,
+			"score": 2.55,
+			"docs": 16,
+			"definition": "Groups of AI agents that coordinate to complete tasks without human intervention for each step",
+			"displayTerm": "autonomous agent swarms"
+		},
+		"words": {
+			"idf": 0.92,
+			"score": 2.51,
+			"docs": 28,
+			"definition": null
+		},
+		"knowledge": {
+			"idf": 1.3,
+			"score": 2.5,
+			"docs": 19,
+			"definition": "A network data structure where entities are nodes and their semantic relationships are typed, directed edges enabling traversal and discovery",
+			"displayTerm": "knowledge graph"
+		},
+		"movement": {
+			"idf": 2.46,
+			"score": 2.46,
+			"docs": 6,
+			"definition": null
+		},
+		"consensus": {
+			"idf": 2.86,
+			"score": 2.45,
+			"docs": 4,
+			"definition": "A procedure that aggregates divergent inputs from multiple participants into a single agreed-upon output value",
+			"displayTerm": "consensus algorithm"
+		},
+		"accepted": {
+			"idf": 3.15,
+			"score": 2.41,
+			"docs": 3,
+			"definition": null
+		},
+		"mastery": {
+			"idf": 3.56,
+			"score": 2.37,
+			"docs": 2,
+			"definition": null
+		},
+		"career": {
+			"idf": 3.15,
+			"score": 2.36,
+			"docs": 3,
+			"definition": null
+		},
+		"mapping": {
+			"idf": 1.68,
+			"score": 2.35,
+			"docs": 13,
+			"definition": null
+		},
+		"min": {
+			"idf": 3.15,
+			"score": 2.32,
+			"docs": 3,
+			"definition": null
+		},
+		"handler": {
+			"idf": 2.64,
+			"score": 2.3,
+			"docs": 5,
+			"definition": null
+		},
+		"precision": {
+			"idf": 1.85,
+			"score": 2.28,
+			"docs": 11,
+			"definition": null
+		},
+		"tests": {
+			"idf": 0.95,
+			"score": 2.28,
+			"docs": 27,
+			"definition": null
+		},
+		"mappings": {
+			"idf": 2.86,
+			"score": 2.26,
+			"docs": 4,
+			"definition": null
+		},
+		"override": {
+			"idf": 2.46,
+			"score": 2.22,
+			"docs": 6,
+			"definition": null
+		},
+		"repositories": {
+			"idf": 0.53,
+			"score": 2.21,
+			"docs": 41,
+			"definition": null
+		},
+		"promotions": {
+			"idf": 1.85,
+			"score": 2.21,
+			"docs": 11,
+			"definition": null
+		},
+		"aetheria": {
+			"idf": 3.15,
+			"score": 2.16,
+			"docs": 3,
+			"definition": null
+		},
+		"style": {
+			"idf": 2.05,
+			"score": 2.14,
+			"docs": 9,
+			"definition": null
+		},
+		"addiction": {
+			"idf": 3.56,
+			"score": 2.13,
+			"docs": 2,
+			"definition": null
+		},
+		"institution": {
+			"idf": 2.17,
+			"score": 2.08,
+			"docs": 8,
+			"definition": null
+		},
+		"agent": {
+			"idf": 1.3,
+			"score": 2.04,
+			"docs": 19,
+			"definition": null
+		},
+		"constraint": {
+			"idf": 1.07,
+			"score": 2.02,
+			"docs": 24,
+			"definition": null
+		},
+		"marketplace": {
+			"idf": 3.56,
+			"score": 1.98,
+			"docs": 2,
+			"definition": null
+		},
+		"cadence": {
+			"idf": 2.3,
+			"score": 1.94,
+			"docs": 7,
+			"definition": null
+		},
+		"tuning": {
+			"idf": 2.86,
+			"score": 1.92,
+			"docs": 4,
+			"definition": null
+		},
+		"proximity": {
+			"idf": 3.56,
+			"score": 1.91,
+			"docs": 2,
+			"definition": null
+		},
+		"student": {
+			"idf": 2.86,
+			"score": 1.9,
+			"docs": 4,
+			"definition": null
+		},
+		"archetypes": {
+			"idf": 3.56,
+			"score": 1.9,
+			"docs": 2,
+			"definition": null
+		},
+		"spatial": {
+			"idf": 2.86,
+			"score": 1.9,
+			"docs": 4,
+			"definition": null
+		},
+		"teacher": {
+			"idf": 3.56,
+			"score": 1.88,
+			"docs": 2,
+			"definition": null
+		},
+		"platform": {
+			"idf": 1.25,
+			"score": 1.88,
+			"docs": 20,
+			"definition": null
+		},
+		"aesthetic": {
+			"idf": 1.48,
+			"score": 1.85,
+			"docs": 16,
+			"definition": null
+		},
+		"music": {
+			"idf": 1.95,
+			"score": 1.85,
+			"docs": 10,
+			"definition": null
+		},
+		"readmes": {
+			"idf": 1.2,
+			"score": 1.84,
+			"docs": 21,
+			"definition": null
+		},
+		"units": {
+			"idf": 2.64,
+			"score": 1.83,
+			"docs": 5,
+			"definition": null
+		},
+		"security": {
+			"idf": 1.95,
+			"score": 1.82,
+			"docs": 10,
+			"definition": null
+		},
+		"voice": {
+			"idf": 1.54,
+			"score": 1.81,
+			"docs": 15,
+			"definition": null
+		},
+		"performer": {
+			"idf": 3.15,
+			"score": 1.8,
+			"docs": 3,
+			"definition": null
+		},
+		"product": {
+			"idf": 0.72,
+			"score": 1.8,
+			"docs": 34,
+			"definition": null
+		},
+		"sprints": {
+			"idf": 1.2,
+			"score": 1.79,
+			"docs": 21,
+			"definition": null
+		},
+		"stochastic": {
+			"idf": 3.56,
+			"score": 1.78,
+			"docs": 2,
+			"definition": "Creating melodies through controlled randomness governed by probability distributions rather than deterministic rules",
+			"displayTerm": "stochastic melodic generation"
+		},
+		"quests": {
+			"idf": 3.15,
+			"score": 1.75,
+			"docs": 3,
+			"definition": null
+		},
+		"stripe": {
+			"idf": 2.86,
+			"score": 1.75,
+			"docs": 4,
+			"definition": null
+		},
+		"edit": {
+			"idf": 3.15,
+			"score": 1.74,
+			"docs": 3,
+			"definition": null
+		},
+		"intensity": {
+			"idf": 2.46,
+			"score": 1.74,
+			"docs": 6,
+			"definition": null
+		},
+		"protocol": {
+			"idf": 1.85,
+			"score": 1.74,
+			"docs": 11,
+			"definition": null
+		},
+		"essays": {
+			"idf": 0.72,
+			"score": 1.73,
+			"docs": 34,
+			"definition": null
+		},
+		"proofs": {
+			"idf": 2.64,
+			"score": 1.73,
+			"docs": 5,
+			"definition": null
+		},
+		"article": {
+			"idf": 1.68,
+			"score": 1.71,
+			"docs": 13,
+			"definition": null
+		},
+		"contracts": {
+			"idf": 1.85,
+			"score": 1.7,
+			"docs": 11,
+			"definition": null
+		},
+		"mask": {
+			"idf": 3.56,
+			"score": 1.7,
+			"docs": 2,
+			"definition": null
+		},
+		"osc": {
+			"idf": 2.46,
+			"score": 1.68,
+			"docs": 6,
+			"definition": null
+		},
+		"architecture-diagram": {
+			"idf": 2.86,
+			"score": 1.67,
+			"docs": 4,
+			"definition": null
+		},
+		"charge": {
+			"idf": 3.15,
+			"score": 1.67,
+			"docs": 3,
+			"definition": null
+		},
+		"can't": {
+			"idf": 2.17,
+			"score": 1.66,
+			"docs": 8,
+			"definition": null
+		},
+		"axis": {
+			"idf": 3.56,
+			"score": 1.66,
+			"docs": 2,
+			"definition": null
+		},
+		"harmonic": {
+			"idf": 2.64,
+			"score": 1.65,
+			"docs": 5,
+			"definition": null
+		},
+		"readme": {
+			"idf": 0.85,
+			"score": 1.65,
+			"docs": 30,
+			"definition": null
+		},
+		"beta": {
+			"idf": 2.46,
+			"score": 1.64,
+			"docs": 6,
+			"definition": null
+		},
+		"promotion": {
+			"idf": 0.75,
+			"score": 1.63,
+			"docs": 33,
+			"definition": "Automated workflows that advance a repository from local development through candidate, public review, to graduated production status",
+			"displayTerm": "promotion state machines"
+		},
+		"thesis": {
+			"idf": 2.17,
+			"score": 1.63,
+			"docs": 8,
+			"definition": null
+		},
+		"trade-off": {
+			"idf": 2.3,
+			"score": 1.63,
+			"docs": 7,
+			"definition": null
+		},
+		"org": {
+			"idf": 1.16,
+			"score": 1.59,
+			"docs": 22,
+			"definition": null
+		},
+		"corpus": {
+			"idf": 1.25,
+			"score": 1.58,
+			"docs": 20,
+			"definition": null
+		},
+		"artist": {
+			"idf": 2.17,
+			"score": 1.58,
+			"docs": 8,
+			"definition": null
+		},
+		"contact": {
+			"idf": 2.64,
+			"score": 1.58,
+			"docs": 5,
+			"definition": null
+		},
+		"archiving": {
+			"idf": 3.15,
+			"score": 1.57,
+			"docs": 3,
+			"definition": null
+		},
+		"assessment": {
+			"idf": 1.85,
+			"score": 1.56,
+			"docs": 11,
+			"definition": null
+		},
+		"human": {
+			"idf": 0.61,
+			"score": 1.54,
+			"docs": 38,
+			"definition": "A design philosophy holding that AI and automated systems must keep humans in command of consequential decisions rather than deferring to algorithmic output",
+			"displayTerm": "human-centered ai"
+		},
+		"seed": {
+			"idf": 1.61,
+			"score": 1.54,
+			"docs": 14,
+			"definition": null
+		},
+		"safety": {
+			"idf": 2.86,
+			"score": 1.53,
+			"docs": 4,
+			"definition": null
+		},
+		"conference": {
+			"idf": 2.86,
+			"score": 1.52,
+			"docs": 4,
+			"definition": null
+		},
+		"theatre": {
+			"idf": 3.56,
+			"score": 1.52,
+			"docs": 2,
+			"definition": null
+		},
+		"scoring": {
+			"idf": 1.85,
+			"score": 1.52,
+			"docs": 11,
+			"definition": null
+		},
+		"method": {
+			"idf": 2.3,
+			"score": 1.5,
+			"docs": 7,
+			"definition": null
+		},
+		"density": {
+			"idf": 2.3,
+			"score": 1.5,
+			"docs": 7,
+			"definition": null
+		},
+		"coach": {
+			"idf": 3.56,
+			"score": 1.49,
+			"docs": 2,
+			"definition": null
+		},
+		"campaign": {
+			"idf": 3.56,
+			"score": 1.48,
+			"docs": 2,
+			"definition": null
+		},
+		"salon": {
+			"idf": 2.46,
+			"score": 1.47,
+			"docs": 6,
+			"definition": "A structured format for intellectual dialogue borrowed from Enlightenment-era gatherings, designed to produce synthesis through curated, facilitated conversation",
+			"displayTerm": "salon model"
+		},
+		"quality": {
+			"idf": 0.53,
+			"score": 1.47,
+			"docs": 41,
+			"definition": "W. Edwards Deming's systematic approach to continuous improvement through statistical measurement, validation cycles, and feedback loops",
+			"displayTerm": "quality management"
+		},
+		"greek": {
+			"idf": 1.68,
+			"score": 1.47,
+			"docs": 13,
+			"definition": null
+		},
+		"atomization": {
+			"idf": 3.56,
+			"score": 1.47,
+			"docs": 2,
+			"definition": null
+		},
+		"diagnostic": {
+			"idf": 2.46,
+			"score": 1.47,
+			"docs": 6,
+			"definition": null
+		},
+		"calling": {
+			"idf": 3.56,
+			"score": 1.47,
+			"docs": 2,
+			"definition": null
+		},
+		"archival": {
+			"idf": 2.86,
+			"score": 1.46,
+			"docs": 4,
+			"definition": null
+		},
+		"epistemic": {
+			"idf": 3.15,
+			"score": 1.45,
+			"docs": 3,
+			"definition": null
+		},
+		"behavioral": {
+			"idf": 3.15,
+			"score": 1.45,
+			"docs": 3,
+			"definition": null
+		},
+		"letter": {
+			"idf": 2.46,
+			"score": 1.44,
+			"docs": 6,
+			"definition": null
+		},
+		"clients": {
+			"idf": 3.56,
+			"score": 1.43,
+			"docs": 2,
+			"definition": null
+		},
+		"feature-complete": {
+			"idf": 2.64,
+			"score": 1.43,
+			"docs": 5,
+			"definition": null
+		},
+		"array": {
+			"idf": 3.56,
+			"score": 1.43,
+			"docs": 2,
+			"definition": null
+		},
+		"optimal": {
+			"idf": 2.86,
+			"score": 1.43,
+			"docs": 4,
+			"definition": null
+		},
+		"science": {
+			"idf": 2.86,
+			"score": 1.43,
+			"docs": 4,
+			"definition": null
+		},
+		"causal": {
+			"idf": 3.56,
+			"score": 1.42,
+			"docs": 2,
+			"definition": null
+		},
+		"scorecard": {
+			"idf": 3.56,
+			"score": 1.42,
+			"docs": 2,
+			"definition": null
+		},
+		"constitution": {
+			"idf": 1.48,
+			"score": 1.42,
+			"docs": 16,
+			"definition": null
+		},
+		"film": {
+			"idf": 2.86,
+			"score": 1.41,
+			"docs": 4,
+			"definition": null
+		},
+		"omni-dromenon": {
+			"idf": 2.46,
+			"score": 1.4,
+			"docs": 6,
+			"definition": null
+		},
+		"masks": {
+			"idf": 3.15,
+			"score": 1.4,
+			"docs": 3,
+			"definition": null
+		},
+		"veritas": {
+			"idf": 2.86,
+			"score": 1.39,
+			"docs": 4,
+			"definition": null
+		},
+		"convergence": {
+			"idf": 2.64,
+			"score": 1.39,
+			"docs": 5,
+			"definition": null
+		},
+		"self-model": {
+			"idf": 3.56,
+			"score": 1.38,
+			"docs": 2,
+			"definition": null
+		},
+		"frontmatter": {
+			"idf": 2.64,
+			"score": 1.38,
+			"docs": 5,
+			"definition": null
+		},
+		"organs": {
+			"idf": 0.78,
+			"score": 1.37,
+			"docs": 32,
+			"definition": null
+		},
+		"body": {
+			"idf": 2.05,
+			"score": 1.37,
+			"docs": 9,
+			"definition": null
+		},
+		"reset": {
+			"idf": 3.56,
+			"score": 1.37,
+			"docs": 2,
+			"definition": null
+		},
+		"parameter": {
+			"idf": 2.46,
+			"score": 1.36,
+			"docs": 6,
+			"definition": null
+		},
+		"platform's": {
+			"idf": 2.86,
+			"score": 1.35,
+			"docs": 4,
+			"definition": null
+		},
+		"schema": {
+			"idf": 1.2,
+			"score": 1.35,
+			"docs": 21,
+			"definition": null
+		},
+		"construction": {
+			"idf": 1.54,
+			"score": 1.34,
+			"docs": 15,
+			"definition": null
+		},
+		"velocity": {
+			"idf": 1.95,
+			"score": 1.34,
+			"docs": 10,
+			"definition": null
+		},
+		"species": {
+			"idf": 3.56,
+			"score": 1.33,
+			"docs": 2,
+			"definition": "Fux's graduated method of teaching polyphony, where each 'species' adds rhythmic complexity against a fixed melody",
+			"displayTerm": "species counterpoint"
+		},
+		"analysis": {
+			"idf": 1.03,
+			"score": 1.32,
+			"docs": 25,
+			"definition": null
+		},
+		"seven": {
+			"idf": 1.36,
+			"score": 1.32,
+			"docs": 18,
+			"definition": null
+		},
+		"vision": {
+			"idf": 1.76,
+			"score": 1.31,
+			"docs": 12,
+			"definition": null
+		},
+		"constraints": {
+			"idf": 1.07,
+			"score": 1.31,
+			"docs": 24,
+			"definition": null
+		},
+		"commerce": {
+			"idf": 0.85,
+			"score": 1.31,
+			"docs": 30,
+			"definition": null
+		},
+		"readiness": {
+			"idf": 2.17,
+			"score": 1.31,
+			"docs": 8,
+			"definition": null
+		},
+		"cli": {
+			"idf": 2.17,
+			"score": 1.3,
+			"docs": 8,
+			"definition": null
+		},
+		"organ-aesthetic": {
+			"idf": 3.15,
+			"score": 1.3,
+			"docs": 3,
+			"definition": null
+		},
+		"artists": {
+			"idf": 2.17,
+			"score": 1.28,
+			"docs": 8,
+			"definition": null
+		},
+		"assignment": {
+			"idf": 2.86,
+			"score": 1.27,
+			"docs": 4,
+			"definition": null
+		},
+		"prefix": {
+			"idf": 2.46,
+			"score": 1.27,
+			"docs": 6,
+			"definition": null
+		},
+		"analytics": {
+			"idf": 2.64,
+			"score": 1.26,
+			"docs": 5,
+			"definition": null
+		},
+		"residency": {
+			"idf": 1.61,
+			"score": 1.26,
+			"docs": 14,
+			"definition": null
+		},
+		"warning": {
+			"idf": 3.15,
+			"score": 1.26,
+			"docs": 3,
+			"definition": null
+		},
+		"declarative": {
+			"idf": 2.3,
+			"score": 1.25,
+			"docs": 7,
+			"definition": null
+		},
+		"json": {
+			"idf": 1.03,
+			"score": 1.24,
+			"docs": 25,
+			"definition": null
+		},
+		"submit": {
+			"idf": 2.64,
+			"score": 1.23,
+			"docs": 5,
+			"definition": null
+		},
+		"mathematical": {
+			"idf": 2.46,
+			"score": 1.23,
+			"docs": 6,
+			"definition": null
+		},
+		"contract": {
+			"idf": 1.95,
+			"score": 1.22,
+			"docs": 10,
+			"definition": null
+		},
+		"semantic": {
+			"idf": 2.05,
+			"score": 1.22,
+			"docs": 9,
+			"definition": null
+		},
+		"deadline": {
+			"idf": 3.56,
+			"score": 1.21,
+			"docs": 2,
+			"definition": null
+		},
+		"generation": {
+			"idf": 1.36,
+			"score": 1.19,
+			"docs": 18,
+			"definition": null
+		},
+		"copilot": {
+			"idf": 3.56,
+			"score": 1.19,
+			"docs": 2,
+			"definition": null
+		},
+		"deployable": {
+			"idf": 3.56,
+			"score": 1.19,
+			"docs": 2,
+			"definition": null
+		},
+		"review": {
+			"idf": 0.75,
+			"score": 1.17,
+			"docs": 33,
+			"definition": null
+		},
+		"you've": {
+			"idf": 2.86,
+			"score": 1.17,
+			"docs": 4,
+			"definition": null
+		},
+		"doesn't": {
+			"idf": 1.42,
+			"score": 1.17,
+			"docs": 17,
+			"definition": null
+		},
+		"expertise": {
+			"idf": 3.56,
+			"score": 1.16,
+			"docs": 2,
+			"definition": null
+		},
+		"transparency": {
+			"idf": 2.05,
+			"score": 1.16,
+			"docs": 9,
+			"definition": null
+		},
+		"practitioners": {
+			"idf": 1.68,
+			"score": 1.16,
+			"docs": 13,
+			"definition": null
+		},
+		"cover": {
+			"idf": 1.76,
+			"score": 1.16,
+			"docs": 12,
+			"definition": null
+		},
+		"synthesis": {
+			"idf": 1.95,
+			"score": 1.15,
+			"docs": 10,
+			"definition": null
+		},
+		"dates": {
+			"idf": 3.15,
+			"score": 1.15,
+			"docs": 3,
+			"definition": null
+		},
+		"fusion": {
+			"idf": 3.56,
+			"score": 1.14,
+			"docs": 2,
+			"definition": null
+		},
+		"typed": {
+			"idf": 2.86,
+			"score": 1.14,
+			"docs": 4,
+			"definition": null
+		},
+		"binding": {
+			"idf": 2.86,
+			"score": 1.14,
+			"docs": 4,
+			"definition": null
+		},
+		"choreographic": {
+			"idf": 2.64,
+			"score": 1.14,
+			"docs": 5,
+			"definition": null
+		},
+		"separation": {
+			"idf": 2.86,
+			"score": 1.14,
+			"docs": 4,
+			"definition": "A design principle where each module addresses a single aspect of functionality, so changes to one concern do not require changes to unrelated parts of the system",
+			"displayTerm": "separation of concerns"
+		},
+		"tokens": {
+			"idf": 1.76,
+			"score": 1.13,
+			"docs": 12,
+			"definition": null
+		},
+		"invocations": {
+			"idf": 3.15,
+			"score": 1.11,
+			"docs": 3,
+			"definition": null
+		},
+		"installation": {
+			"idf": 1.85,
+			"score": 1.11,
+			"docs": 11,
+			"definition": null
+		},
+		"feb": {
+			"idf": 3.56,
+			"score": 1.11,
+			"docs": 2,
+			"definition": null
+		},
+		"catalog": {
+			"idf": 3.15,
+			"score": 1.11,
+			"docs": 3,
+			"definition": null
+		},
+		"bridge": {
+			"idf": 2.05,
+			"score": 1.11,
+			"docs": 9,
+			"definition": null
+		},
+		"yes": {
+			"idf": 1.76,
+			"score": 1.1,
+			"docs": 12,
+			"definition": null
+		},
+		"consumes": {
+			"idf": 1.54,
+			"score": 1.09,
+			"docs": 15,
+			"definition": null
+		},
+		"dissolved": {
+			"idf": 3.56,
+			"score": 1.09,
+			"docs": 2,
+			"definition": null
+		},
+		"launch": {
+			"idf": 1.3,
+			"score": 1.09,
+			"docs": 19,
+			"definition": null
+		},
+		"validation": {
+			"idf": 0.64,
+			"score": 1.08,
+			"docs": 37,
+			"definition": null
+		},
+		"corrected": {
+			"idf": 2.46,
+			"score": 1.07,
+			"docs": 6,
+			"definition": null
+		},
+		"ucc": {
+			"idf": 2.86,
+			"score": 1.07,
+			"docs": 4,
+			"definition": null
+		},
+		"technique": {
+			"idf": 3.15,
+			"score": 1.07,
+			"docs": 3,
+			"definition": null
+		},
+		"identity": {
+			"idf": 1.2,
+			"score": 1.07,
+			"docs": 21,
+			"definition": null
+		},
+		"classroom": {
+			"idf": 3.15,
+			"score": 1.05,
+			"docs": 3,
+			"definition": null
+		},
+		"technologists": {
+			"idf": 3.15,
+			"score": 1.05,
+			"docs": 3,
+			"definition": null
+		},
+		"ephemeral": {
+			"idf": 3.15,
+			"score": 1.05,
+			"docs": 3,
+			"definition": null
+		},
+		"compliance": {
+			"idf": 1.68,
+			"score": 1.05,
+			"docs": 13,
+			"definition": "Encoding regulatory requirements as executable system constraints that enforce rules automatically rather than relying on manual adherence",
+			"displayTerm": "compliance-as-code"
+		},
+		"fragment": {
+			"idf": 3.56,
+			"score": 1.05,
+			"docs": 2,
+			"definition": null
+		},
+		"don't": {
+			"idf": 1.48,
+			"score": 1.05,
+			"docs": 16,
+			"definition": null
+		},
+		"coverage": {
+			"idf": 1.11,
+			"score": 1.05,
+			"docs": 23,
+			"definition": null
+		},
+		"badges": {
+			"idf": 2.3,
+			"score": 1.05,
+			"docs": 7,
+			"definition": null
+		},
+		"interview": {
+			"idf": 3.15,
+			"score": 1.05,
+			"docs": 3,
+			"definition": null
+		},
+		"archived": {
+			"idf": 1.11,
+			"score": 1.04,
+			"docs": 23,
+			"definition": null
+		},
+		"adr": {
+			"idf": 2.3,
+			"score": 1.03,
+			"docs": 7,
+			"definition": null
+		},
+		"organvm": {
+			"idf": 0.99,
+			"score": 1.03,
+			"docs": 26,
+			"definition": null
+		},
+		"network": {
+			"idf": 2.05,
+			"score": 1.03,
+			"docs": 9,
+			"definition": null
+		},
+		"genre": {
+			"idf": 3.56,
+			"score": 1.02,
+			"docs": 2,
+			"definition": null
+		},
+		"electronic": {
+			"idf": 3.56,
+			"score": 1.02,
+			"docs": 2,
+			"definition": null
+		},
+		"ballet": {
+			"idf": 3.56,
+			"score": 1.02,
+			"docs": 2,
+			"definition": null
+		},
+		"supercollider": {
+			"idf": 3.56,
+			"score": 1.02,
+			"docs": 2,
+			"definition": null
+		},
+		"pnpm": {
+			"idf": 3.56,
+			"score": 1.02,
+			"docs": 2,
+			"definition": null
+		},
+		"approval": {
+			"idf": 2.64,
+			"score": 1.01,
+			"docs": 5,
+			"definition": null
+		},
+		"interaction": {
+			"idf": 2.17,
+			"score": 1.01,
+			"docs": 8,
+			"definition": null
+		},
+		"day": {
+			"idf": 1.36,
+			"score": 1,
+			"docs": 18,
+			"definition": null
+		},
+		"meta-system": {
+			"idf": 1.54,
+			"score": 1,
+			"docs": 15,
+			"definition": null
+		},
+		"package": {
+			"idf": 2.3,
+			"score": 0.99,
+			"docs": 7,
+			"definition": null
+		},
+		"percent": {
+			"idf": 2.64,
+			"score": 0.99,
+			"docs": 5,
+			"definition": null
+		},
+		"function": {
+			"idf": 0.99,
+			"score": 0.99,
+			"docs": 26,
+			"definition": null
+		},
+		"skill": {
+			"idf": 2.46,
+			"score": 0.98,
+			"docs": 6,
+			"definition": null
+		},
+		"testing": {
+			"idf": 1.42,
+			"score": 0.98,
+			"docs": 17,
+			"definition": null
+		},
+		"commercial": {
+			"idf": 1.03,
+			"score": 0.98,
+			"docs": 25,
+			"definition": null
+		},
+		"claiming": {
+			"idf": 3.56,
+			"score": 0.97,
+			"docs": 2,
+			"definition": null
+		},
+		"strategic": {
+			"idf": 1.95,
+			"score": 0.97,
+			"docs": 10,
+			"definition": null
+		},
+		"gap": {
+			"idf": 0.99,
+			"score": 0.97,
+			"docs": 26,
+			"definition": null
+		},
+		"template": {
+			"idf": 1.48,
+			"score": 0.97,
+			"docs": 16,
+			"definition": null
+		},
+		"it's": {
+			"idf": 1.25,
+			"score": 0.96,
+			"docs": 20,
+			"definition": null
+		},
+		"canonical": {
+			"idf": 1.54,
+			"score": 0.96,
+			"docs": 15,
+			"definition": null
+		},
+		"machine": {
+			"idf": 0.75,
+			"score": 0.96,
+			"docs": 33,
+			"definition": null
+		},
+		"accessibility": {
+			"idf": 2.05,
+			"score": 0.96,
+			"docs": 9,
+			"definition": null
+		},
+		"migration": {
+			"idf": 2.17,
+			"score": 0.96,
+			"docs": 8,
+			"definition": null
+		},
+		"omega": {
+			"idf": 2.86,
+			"score": 0.95,
+			"docs": 4,
+			"definition": null
+		},
+		"search": {
+			"idf": 2.05,
+			"score": 0.95,
+			"docs": 9,
+			"definition": null
+		},
+		"audio": {
+			"idf": 2.64,
+			"score": 0.95,
+			"docs": 5,
+			"definition": null
+		},
+		"try": {
+			"idf": 2.86,
+			"score": 0.95,
+			"docs": 4,
+			"definition": null
+		},
+		"tables": {
+			"idf": 2.86,
+			"score": 0.95,
+			"docs": 4,
+			"definition": null
+		},
+		"pages": {
+			"idf": 2.46,
+			"score": 0.94,
+			"docs": 6,
+			"definition": null
+		},
+		"exploration": {
+			"idf": 2.46,
+			"score": 0.94,
+			"docs": 6,
+			"definition": null
+		},
+		"event": {
+			"idf": 1.3,
+			"score": 0.93,
+			"docs": 19,
+			"definition": "A persistence pattern that stores every state change as an immutable event rather than overwriting current state, enabling full history reconstruction",
+			"displayTerm": "event sourcing"
+		},
+		"operator": {
+			"idf": 2.3,
+			"score": 0.93,
+			"docs": 7,
+			"definition": null
+		},
+		"readme-only": {
+			"idf": 3.15,
+			"score": 0.93,
+			"docs": 3,
+			"definition": null
+		},
+		"builder": {
+			"idf": 3.15,
+			"score": 0.93,
+			"docs": 3,
+			"definition": null
+		},
+		"application": {
+			"idf": 0.92,
+			"score": 0.92,
+			"docs": 28,
+			"definition": null
+		},
+		"learning": {
+			"idf": 2.05,
+			"score": 0.91,
+			"docs": 9,
+			"definition": null
+		},
+		"engineer": {
+			"idf": 2.64,
+			"score": 0.91,
+			"docs": 5,
+			"definition": null
+		},
+		"yaml": {
+			"idf": 0.99,
+			"score": 0.91,
+			"docs": 26,
+			"definition": null
+		},
+		"deliberation": {
+			"idf": 3.15,
+			"score": 0.9,
+			"docs": 3,
+			"definition": null
+		},
+		"preset": {
+			"idf": 3.15,
+			"score": 0.9,
+			"docs": 3,
+			"definition": null
+		},
+		"archive": {
+			"idf": 1.48,
+			"score": 0.9,
+			"docs": 16,
+			"definition": null
+		},
+		"space": {
+			"idf": 1.42,
+			"score": 0.9,
+			"docs": 17,
+			"definition": null
+		},
+		"green": {
+			"idf": 2.17,
+			"score": 0.9,
+			"docs": 8,
+			"definition": null
+		},
+		"accountability": {
+			"idf": 1.95,
+			"score": 0.9,
+			"docs": 10,
+			"definition": null
+		},
+		"art": {
+			"idf": 0.58,
+			"score": 0.9,
+			"docs": 39,
+			"definition": null
+		},
+		"sonification": {
+			"idf": 3.56,
+			"score": 0.89,
+			"docs": 2,
+			"definition": null
+		},
+		"scripts": {
+			"idf": 1.11,
+			"score": 0.89,
+			"docs": 23,
+			"definition": null
+		},
+		"concentration": {
+			"idf": 3.56,
+			"score": 0.89,
+			"docs": 2,
+			"definition": null
+		},
+		"archives": {
+			"idf": 2.3,
+			"score": 0.89,
+			"docs": 7,
+			"definition": null
+		},
+		"organ-level": {
+			"idf": 3.56,
+			"score": 0.89,
+			"docs": 2,
+			"definition": null
+		},
+		"they're": {
+			"idf": 1.68,
+			"score": 0.89,
+			"docs": 13,
+			"definition": null
+		},
+		"jekyll": {
+			"idf": 1.76,
+			"score": 0.88,
+			"docs": 12,
+			"definition": null
+		},
+		"production": {
+			"idf": 0.58,
+			"score": 0.88,
+			"docs": 39,
+			"definition": null
+		},
+		"parallel": {
+			"idf": 1.76,
+			"score": 0.88,
+			"docs": 12,
+			"definition": null
+		},
+		"dark": {
+			"idf": 2.64,
+			"score": 0.88,
+			"docs": 5,
+			"definition": null
+		},
+		"maybe": {
+			"idf": 2.64,
+			"score": 0.88,
+			"docs": 5,
+			"definition": null
+		},
+		"fragments": {
+			"idf": 2.46,
+			"score": 0.87,
+			"docs": 6,
+			"definition": null
+		},
+		"reputation": {
+			"idf": 3.15,
+			"score": 0.87,
+			"docs": 3,
+			"definition": null
+		},
+		"google": {
+			"idf": 1.95,
+			"score": 0.87,
+			"docs": 10,
+			"definition": null
+		},
+		"parameters": {
+			"idf": 2.3,
+			"score": 0.86,
+			"docs": 7,
+			"definition": null
+		},
+		"core": {
+			"idf": 1.07,
+			"score": 0.86,
+			"docs": 24,
+			"definition": null
+		},
+		"installations": {
+			"idf": 2.86,
+			"score": 0.86,
+			"docs": 4,
+			"definition": null
+		},
+		"fund": {
+			"idf": 2.86,
+			"score": 0.86,
+			"docs": 4,
+			"definition": null
+		},
+		"classified": {
+			"idf": 2.46,
+			"score": 0.86,
+			"docs": 6,
+			"definition": null
+		},
+		"revenue": {
+			"idf": 1.42,
+			"score": 0.85,
+			"docs": 17,
+			"definition": null
+		},
+		"law": {
+			"idf": 3.56,
+			"score": 0.84,
+			"docs": 2,
+			"definition": null
+		},
+		"migrated": {
+			"idf": 3.56,
+			"score": 0.84,
+			"docs": 2,
+			"definition": null
+		},
+		"order": {
+			"idf": 1.61,
+			"score": 0.84,
+			"docs": 14,
+			"definition": null
+		},
+		"secret": {
+			"idf": 3.15,
+			"score": 0.84,
+			"docs": 3,
+			"definition": null
+		},
+		"imposter": {
+			"idf": 3.56,
+			"score": 0.84,
+			"docs": 2,
+			"definition": null
+		},
+		"syndrome": {
+			"idf": 3.56,
+			"score": 0.84,
+			"docs": 2,
+			"definition": null
+		},
+		"consumers": {
+			"idf": 2.86,
+			"score": 0.82,
+			"docs": 4,
+			"definition": null
+		},
+		"friction": {
+			"idf": 2.46,
+			"score": 0.82,
+			"docs": 6,
+			"definition": null
+		},
+		"engagement": {
+			"idf": 1.85,
+			"score": 0.82,
+			"docs": 11,
+			"definition": null
+		},
+		"audit": {
+			"idf": 0.81,
+			"score": 0.81,
+			"docs": 31,
+			"definition": null
+		},
+		"publication": {
+			"idf": 2.17,
+			"score": 0.81,
+			"docs": 8,
+			"definition": null
+		},
+		"load": {
+			"idf": 2.17,
+			"score": 0.81,
+			"docs": 8,
+			"definition": null
+		},
+		"evidence": {
+			"idf": 0.81,
+			"score": 0.81,
+			"docs": 31,
+			"definition": "A directed network of content-addressed objects connected by typed, weighted edges that make the structure of justification for each claim transparent and traversable",
+			"displayTerm": "evidence graph"
+		},
+		"i'm": {
+			"idf": 2.3,
+			"score": 0.81,
+			"docs": 7,
+			"definition": null
+		},
+		"uniform": {
+			"idf": 2.05,
+			"score": 0.8,
+			"docs": 9,
+			"definition": "A standardized set of laws governing commercial transactions in the US, including UCC-1 financing statements that signal active business lending",
+			"displayTerm": "uniform commercial code"
+		},
+		"procedurally": {
+			"idf": 3.56,
+			"score": 0.79,
+			"docs": 2,
+			"definition": null
+		},
+		"grades": {
+			"idf": 3.56,
+			"score": 0.79,
+			"docs": 2,
+			"definition": null
+		},
+		"assigns": {
+			"idf": 3.15,
+			"score": 0.79,
+			"docs": 3,
+			"definition": null
+		},
+		"cross-validation": {
+			"idf": 3.15,
+			"score": 0.79,
+			"docs": 3,
+			"definition": null
+		},
+		"html": {
+			"idf": 3.15,
+			"score": 0.79,
+			"docs": 3,
+			"definition": null
+		},
+		"obsidian": {
+			"idf": 2.86,
+			"score": 0.79,
+			"docs": 4,
+			"definition": null
+		},
+		"reporting": {
+			"idf": 3.15,
+			"score": 0.79,
+			"docs": 3,
+			"definition": null
+		},
+		"global": {
+			"idf": 2.86,
+			"score": 0.79,
+			"docs": 4,
+			"definition": null
+		},
+		"alternatives": {
+			"idf": 3.15,
+			"score": 0.79,
+			"docs": 3,
+			"definition": null
+		},
+		"structural-gamification": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Using game design principles like meaningful choice, progression systems, and narrative framing to reshape an activity, rather than just adding points and badges",
+			"displayTerm": "structural gamification",
+			"source": "manual"
+		},
+		"context-provider-architecture": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A React pattern where application state is organized into distinct context objects, each managing one domain, and made available to the component tree through provider wrappers",
+			"displayTerm": "context-provider architecture",
+			"source": "manual"
+		},
+		"domain-driven-design": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Eric Evans's approach where the software's core structure directly models the business domain, with shared language between developers and domain experts driving architecture decisions",
+			"displayTerm": "domain-driven design",
+			"source": "manual"
+		},
+		"flow-channel": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The narrow zone between boredom and anxiety where challenge matches skill level, producing a state of deep, intrinsically motivated engagement",
+			"displayTerm": "flow channel",
+			"source": "manual"
+		},
+		"circuit-breaker": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A resilience pattern that monitors for failures and temporarily stops calling a degraded service, preventing cascading failures across the system",
+			"displayTerm": "circuit breaker",
+			"source": "manual"
+		},
+		"actor-model": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Carl Hewitt's 1973 computational model where independent actors communicate exclusively through asynchronous message passing, with no shared mutable state",
+			"displayTerm": "actor model",
+			"source": "manual"
+		},
+		"rhizomatic-topology": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A non-hierarchical network pattern inspired by Deleuze and Guattari, where any node can connect to any other without a central root or fixed hierarchy",
+			"displayTerm": "rhizomatic topology",
+			"source": "manual"
+		},
+		"stigmergic-coordination": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A mechanism from insect colony behavior where agents communicate indirectly by modifying a shared environment rather than sending direct messages",
+			"displayTerm": "stigmergic coordination",
+			"source": "manual"
+		},
+		"adapter-pattern": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A Gang of Four design pattern that wraps an incompatible interface behind a uniform one, allowing systems with different APIs to work together without modification",
+			"displayTerm": "adapter pattern",
+			"source": "manual"
+		},
+		"separation-of-concerns": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A design principle where each module addresses a single aspect of functionality, so changes to one concern do not require changes to unrelated parts of the system",
+			"displayTerm": "separation of concerns",
+			"source": "manual"
+		},
+		"shneiderman-s-framework": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Ben Shneiderman's 2022 book 'Human-Centered AI' — argues AI should amplify humans, not replace them",
+			"displayTerm": "shneiderman's framework",
+			"source": "manual"
+		},
+		"csikszentmihalyi-s-research": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Mihaly Csikszentmihalyi's work on creative 'flow' states — the critical creative act is selection, not generation",
+			"displayTerm": "csikszentmihalyi's research",
+			"source": "manual"
+		},
+		"multi-agent-environment": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A system where multiple autonomous agents interact, and each agent's optimal strategy depends on the actions of others",
+			"displayTerm": "multi-agent environment",
+			"source": "manual"
+		},
+		"deliberative-alignment": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A process where multiple AI models with distinct positions reach more reliable conclusions through structured adversarial reasoning",
+			"displayTerm": "deliberative alignment",
+			"source": "manual"
+		},
+		"argumentation-theory": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The interdisciplinary study of how conclusions are reached through logical reasoning, evidence, and structured debate",
+			"displayTerm": "argumentation theory",
+			"source": "manual"
+		},
+		"rational-discourse": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Habermas's ideal of communication where validity claims are redeemed through the force of argument alone, not authority or coercion",
+			"displayTerm": "rational discourse",
+			"source": "manual"
+		},
+		"argumentative-theory-of-reasoning": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The hypothesis that human reasoning evolved primarily for producing and evaluating arguments in social contexts, not solitary truth-seeking",
+			"displayTerm": "argumentative theory of reasoning",
+			"source": "manual"
+		},
+		"smart-contracts": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Self-executing programs stored on a blockchain that enforce agreement terms deterministically without intermediaries",
+			"displayTerm": "smart contracts",
+			"source": "manual"
+		},
+		"procedural-generation": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Algorithmic creation of game content through rules and parameters rather than manual design",
+			"displayTerm": "procedural generation",
+			"source": "manual"
+		},
+		"constructive-generation": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A procedural content generation approach that assembles output through sequential rule application without backtracking or search",
+			"displayTerm": "constructive generation",
+			"source": "manual"
+		},
+		"magic-circle": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Huizinga's term for the conceptual boundary that separates the rules and space of play from ordinary life",
+			"displayTerm": "magic circle",
+			"source": "manual"
+		},
+		"r-tree-spatial-index": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A tree data structure that organizes spatial objects by nested bounding rectangles for efficient geographic range queries",
+			"displayTerm": "r-tree spatial index",
+			"source": "manual"
+		},
+		"web-mercator": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The map projection used by virtually all web mapping platforms, which represents the globe as a flat square grid",
+			"displayTerm": "web mercator",
+			"source": "manual"
+		},
+		"territory-control": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A game system where players claim, defend, and contest ownership of map regions with rules governing state transitions",
+			"displayTerm": "territory control",
+			"source": "manual"
+		},
+		"salon-model": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A structured format for intellectual dialogue borrowed from Enlightenment-era gatherings, designed to produce synthesis through curated, facilitated conversation",
+			"displayTerm": "salon model",
+			"source": "manual"
+		},
+		"habermas": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Jurgen Habermas, German philosopher whose theory of the public sphere describes the social conditions required for rational democratic discourse",
+			"displayTerm": "habermas",
+			"source": "manual"
+		},
+		"cybernetic-epistemology": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A theory of knowledge grounded in feedback loops and circular causation, where information is defined as a difference that makes a difference",
+			"displayTerm": "cybernetic epistemology",
+			"source": "manual"
+		},
+		"luhmann": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Niklas Luhmann, German sociologist who modeled social systems as self-producing (autopoietic) communication networks that maintain their own boundaries",
+			"displayTerm": "luhmann",
+			"source": "manual"
+		},
+		"autopoiesis": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The property of a system that continuously produces and maintains the very components of which it is composed, originally coined in biology by Maturana and Varela",
+			"displayTerm": "autopoiesis",
+			"source": "manual"
+		},
+		"institutional-memory": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The accumulated, transferable knowledge of why decisions were made, what alternatives were considered, and what principles guided choices",
+			"displayTerm": "institutional memory",
+			"source": "manual"
+		},
+		"posse": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Publish on your Own Site, Syndicate Elsewhere -- an IndieWeb principle where canonical content lives on infrastructure you control and copies flow outward",
+			"displayTerm": "posse",
+			"source": "manual"
+		},
+		"channel-native-adaptation": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Genuinely re-framing content for each platform's discourse conventions, audience expectations, and technical affordances rather than copying identical text",
+			"displayTerm": "channel-native adaptation",
+			"source": "manual"
+		},
+		"content-calendar": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A strategic publishing schedule aligned to external rhythms like grant deadlines, conference seasons, and audience attention windows rather than arbitrary cadences",
+			"displayTerm": "content calendar",
+			"source": "manual"
+		},
+		"vanity-metrics": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Engagement numbers like follower counts and like ratios that look impressive but do not indicate whether content reached its intended audience or served its purpose",
+			"displayTerm": "vanity metrics",
+			"source": "manual"
+		},
+		"conway-s-law": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The 1968 observation that system designs inevitably mirror the communication structures of the organizations that build them",
+			"displayTerm": "conway's law",
+			"source": "manual"
+		},
+		"pattern-language": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Christopher Alexander's theory that complex environments emerge from networks of named, interconnected design solutions that reinforce each other",
+			"displayTerm": "pattern language",
+			"source": "manual"
+		},
+		"dependency-rule": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Robert C. Martin's architectural principle that source code dependencies must point only inward toward high-level policies, never outward toward low-level mechanisms",
+			"displayTerm": "dependency rule",
+			"source": "manual"
+		},
+		"domain-field-and-individual": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Csikszentmihalyi's systems model of creativity, where innovation requires a symbolic domain, a field of gatekeepers who evaluate novelty, and an individual who produces variations",
+			"displayTerm": "domain, field, and individual",
+			"source": "manual"
+		},
+		"quality-management": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "W. Edwards Deming's systematic approach to continuous improvement through statistical measurement, validation cycles, and feedback loops",
+			"displayTerm": "quality management",
+			"source": "manual"
+		},
+		"markov-chains": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A stochastic model where each state's probability depends only on the immediately preceding state, not the full history",
+			"displayTerm": "markov chains",
+			"source": "manual"
+		},
+		"stochastic-melodic-generation": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Creating melodies through controlled randomness governed by probability distributions rather than deterministic rules",
+			"displayTerm": "stochastic melodic generation",
+			"source": "manual"
+		},
+		"lindenmayer-systems": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "String-rewriting grammars invented to model plant growth, where simple rules applied recursively produce complex self-similar structures",
+			"displayTerm": "lindenmayer systems",
+			"source": "manual"
+		},
+		"counterpoint": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The art of combining simultaneous independent melodic lines according to rules of harmonic consonance and voice independence",
+			"displayTerm": "counterpoint",
+			"source": "manual"
+		},
+		"species-counterpoint": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Fux's graduated method of teaching polyphony, where each 'species' adds rhythmic complexity against a fixed melody",
+			"displayTerm": "species counterpoint",
+			"source": "manual"
+		},
+		"stocks-and-flows": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Systems thinking primitives where stocks are accumulations that change over time and flows are the rates that fill or drain them",
+			"displayTerm": "stocks and flows",
+			"source": "manual"
+		},
+		"fts5": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "SQLite's full-text search extension that builds inverted indexes for fast keyword matching with BM25 relevance ranking",
+			"displayTerm": "fts5",
+			"source": "manual"
+		},
+		"chromadb": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "An open-source vector database that stores and queries high-dimensional embeddings for semantic similarity search",
+			"displayTerm": "chromadb",
+			"source": "manual"
+		},
+		"reciprocal-rank-fusion": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A parameter-free algorithm that merges multiple ranked result lists by summing the reciprocal of each item's rank across lists",
+			"displayTerm": "reciprocal rank fusion",
+			"source": "manual"
+		},
+		"vector-search": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Finding similar items by comparing their numerical embedding representations in high-dimensional space using distance metrics like cosine similarity",
+			"displayTerm": "vector search",
+			"source": "manual"
+		},
+		"knowledge-graph": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A network data structure where entities are nodes and their semantic relationships are typed, directed edges enabling traversal and discovery",
+			"displayTerm": "knowledge graph",
+			"source": "manual"
+		},
+		"dramaturgical-analysis": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A sociological framework treating everyday social interaction as theatrical performance, where individuals manage impressions for different audiences",
+			"displayTerm": "dramaturgical analysis",
+			"source": "manual"
+		},
+		"hexagonal-architecture": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A design pattern (also called ports and adapters) where core business logic has zero dependencies on frameworks, databases, or delivery mechanisms",
+			"displayTerm": "hexagonal architecture",
+			"source": "manual"
+		},
+		"w3c-verifiable-credentials": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A W3C standard for cryptographically signed digital documents that let anyone independently verify a claim without trusting the presenter",
+			"displayTerm": "w3c verifiable credentials",
+			"source": "manual"
+		},
+		"self-sovereign-identity": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A model where individuals own and control their digital credentials without depending on any centralized platform or issuing authority",
+			"displayTerm": "self-sovereign identity",
+			"source": "manual"
+		},
+		"compatibility-scoring": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A multi-dimensional assessment that produces a weighted composite score measuring mutual fit across several independent factors",
+			"displayTerm": "compatibility scoring",
+			"source": "manual"
+		},
+		"topic-modeling": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "An unsupervised machine learning technique that discovers abstract thematic clusters across a collection of documents",
+			"displayTerm": "topic modeling",
+			"source": "manual"
+		},
+		"dramatistic-framework": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Kenneth Burke's theory that language is fundamentally a form of symbolic action, analyzable through five elements: act, scene, agent, agency, purpose",
+			"displayTerm": "dramatistic framework",
+			"source": "manual"
+		},
+		"enthymeme": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A rhetorical syllogism that omits one premise, relying on the audience to supply the missing assumption -- Aristotle's primary unit of persuasive reasoning",
+			"displayTerm": "enthymeme",
+			"source": "manual"
+		},
+		"focalization": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Genette's term for the narrative perspective through which events are perceived, distinguishing who sees from who speaks in a story",
+			"displayTerm": "focalization",
+			"source": "manual"
+		},
+		"speech-act-classification": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Categorizing utterances by their intended effect -- asserting, promising, requesting, declaring -- following Austin and Searle's theory",
+			"displayTerm": "speech act classification",
+			"source": "manual"
+		},
+		"illocutionary-sequencing": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The ordered pattern of speech acts in a text that produces cumulative persuasive or narrative force beyond any single utterance",
+			"displayTerm": "illocutionary sequencing",
+			"source": "manual"
+		},
+		"pianwen": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Classical Chinese parallel prose -- a highly structured literary form built on syntactic parallelism, tonal balance, and allusive density",
+			"displayTerm": "pianwen",
+			"source": "manual"
+		},
+		"topoi": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Rhetorical commonplaces -- recurring argumentative patterns and themes that persist across literary traditions and centuries",
+			"displayTerm": "topoi",
+			"source": "manual"
+		},
+		"human-centered-ai": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A design philosophy holding that AI and automated systems must keep humans in command of consequential decisions rather than deferring to algorithmic output",
+			"displayTerm": "human-centered ai",
+			"source": "manual"
+		},
+		"distributed-systems": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Computing architectures where components on networked machines coordinate through message-passing to achieve shared goals despite partial failures",
+			"displayTerm": "distributed systems",
+			"source": "manual"
+		},
+		"consensus-algorithm": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A procedure that aggregates divergent inputs from multiple participants into a single agreed-upon output value",
+			"displayTerm": "consensus algorithm",
+			"source": "manual"
+		},
+		"exponential-smoothing": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A time-series technique that weights recent observations more heavily than older ones, dampening jitter in streaming data",
+			"displayTerm": "exponential smoothing",
+			"source": "manual"
+		},
+		"bourriaud": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Nicolas Bourriaud, French curator and critic who coined 'relational aesthetics' to describe art practices centered on human interaction rather than object production",
+			"displayTerm": "bourriaud",
+			"source": "manual"
+		},
+		"relational-aesthetics": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "An art-critical framework defining artwork by the human relations and social encounters it produces rather than by the physical objects it creates",
+			"displayTerm": "relational aesthetics",
+			"source": "manual"
+		},
+		"propp-s-morphology": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Vladimir Propp's 1928 discovery that all Russian fairy tales share the same thirty-one sequential plot functions, forming a universal grammar of narrative structure",
+			"displayTerm": "propp's morphology",
+			"source": "manual"
+		},
+		"genette-s-framework": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Gerard Genette's systematic taxonomy for analyzing narrative discourse across five dimensions: order, duration, frequency, mood, and voice",
+			"displayTerm": "genette's framework",
+			"source": "manual"
+		},
+		"actantial-model": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Greimas's reduction of any narrative to six structural roles (Subject, Object, Sender, Receiver, Helper, Opponent) on three axes of desire, communication, and power",
+			"displayTerm": "actantial model",
+			"source": "manual"
+		},
+		"narrative-codes": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Barthes's five channels through which a text produces meaning: hermeneutic (enigma), proairetic (action), semantic (connotation), symbolic (theme), and cultural (shared knowledge)",
+			"displayTerm": "narrative codes",
+			"source": "manual"
+		},
+		"ports-and-adapters": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "An architectural pattern (also called hexagonal architecture) where domain logic lives at the center and all external interfaces are interchangeable adapters plugged into defined ports",
+			"displayTerm": "ports-and-adapters",
+			"source": "manual"
+		},
+		"distant-reading": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Franco Moretti's method of analyzing literature computationally across thousands of texts to reveal patterns invisible to close reading of individual works",
+			"displayTerm": "distant reading",
+			"source": "manual"
+		},
+		"composite-pattern": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A Gang of Four design pattern where individual objects and groups of objects share a common interface, enabling uniform traversal at any granularity",
+			"displayTerm": "composite pattern",
+			"source": "manual"
+		},
+		"merge-gate": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A CI enforcement point that blocks code integration until all automated quality and policy checks pass",
+			"displayTerm": "merge gate",
+			"source": "manual"
+		},
+		"governance-as-code": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Encoding organizational rules, policies, and constraints as machine-readable files that are version-controlled, testable, and automatically enforced",
+			"displayTerm": "governance-as-code",
+			"source": "manual"
+		},
+		"no-back-edges-rule": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A dependency constraint requiring that information flow only in one direction through a layered system, preventing circular coupling",
+			"displayTerm": "no-back-edges rule",
+			"source": "manual"
+		},
+		"community-health-files": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Standardized governance documents (Code of Conduct, Contributing Guide, Security Policy) that GitHub automatically inherits across all repos in an organization",
+			"displayTerm": "community health files",
+			"source": "manual"
+		},
+		"sha-pinning": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Referencing GitHub Actions by their immutable commit hash rather than a mutable tag, preventing supply-chain attacks from compromised action versions",
+			"displayTerm": "sha-pinning",
+			"source": "manual"
+		},
+		"infrastructure-as-culture": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Applying infrastructure-as-code principles to governance and social contracts, making organizational norms versionable, testable, and auditable",
+			"displayTerm": "infrastructure-as-culture",
+			"source": "manual"
+		},
+		"ssrf": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Server-Side Request Forgery -- an attack where a server is tricked into making requests to unintended internal resources on the attacker's behalf",
+			"displayTerm": "ssrf",
+			"source": "manual"
+		},
+		"sch-ouml-n": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Donald Sch&ouml;n, educational theorist who distinguished reflection-in-action (thinking while doing) from reflection-on-action (thinking after doing)",
+			"displayTerm": "sch&ouml;n",
+			"source": "manual"
+		},
+		"reflection-in-action": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The practice of thinking critically about what you are doing while you are doing it, adjusting approach in real time rather than only in retrospect",
+			"displayTerm": "reflection-in-action",
+			"source": "manual"
+		},
+		"atom-xml-feed": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A standardized syndication format that lets readers and automation tools subscribe to content updates without polling the website",
+			"displayTerm": "atom xml feed",
+			"source": "manual"
+		},
+		"citation-graph": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A directed network where nodes are documents and edges represent references between them, revealing the structure of intellectual dependency",
+			"displayTerm": "citation graph",
+			"source": "manual"
+		},
+		"reflective-practice": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A disciplined habit of examining one's own decisions and assumptions after action, transforming experience into transferable knowledge",
+			"displayTerm": "reflective practice",
+			"source": "manual"
+		},
+		"building-in-public": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A practice of documenting and sharing the process of creating software or creative work as it happens, rather than only showing finished results",
+			"displayTerm": "building in public",
+			"source": "manual"
+		},
+		"uniform-commercial-code": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A standardized set of laws governing commercial transactions in the US, including UCC-1 financing statements that signal active business lending",
+			"displayTerm": "uniform commercial code",
+			"source": "manual"
+		},
+		"domain-service": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A software component that owns a single business concept and its rules, evolving independently from other services",
+			"displayTerm": "domain service",
+			"source": "manual"
+		},
+		"multitenancy": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A software architecture where a single instance serves multiple isolated customers, each seeing only their own data",
+			"displayTerm": "multitenancy",
+			"source": "manual"
+		},
+		"enrichment-pipeline": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A staged data-processing chain that augments raw records with additional context from external sources to increase their analytical value",
+			"displayTerm": "enrichment pipeline",
+			"source": "manual"
+		},
+		"compliance-as-code": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Encoding regulatory requirements as executable system constraints that enforce rules automatically rather than relying on manual adherence",
+			"displayTerm": "compliance-as-code",
+			"source": "manual"
+		},
+		"aristotle-s-four-causes": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Aristotle's framework for explaining anything fully: material cause (what it's made of), formal cause (its structure), efficient cause (what made it), and final cause (its purpose)",
+			"displayTerm": "aristotle's four causes",
+			"source": "manual"
+		},
+		"monomyth": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Joseph Campbell's theory that all hero myths share a single underlying structure of departure, initiation, and return",
+			"displayTerm": "monomyth",
+			"source": "manual"
+		},
+		"dispatcher-pattern": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "An architectural pattern where a central routing component receives requests and delegates them to the appropriate handler based on type, priority, or content",
+			"displayTerm": "dispatcher pattern",
+			"source": "manual"
+		},
+		"recursive-descent": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A parsing and processing technique where a system calls itself with progressively simpler inputs, requiring explicit depth limits to guarantee termination",
+			"displayTerm": "recursive descent",
+			"source": "manual"
+		},
+		"organhandler": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The abstract base class that all 21 organ processors must implement, enforcing a shared contract for validation, state persistence, and checkpointing",
+			"displayTerm": "organhandler",
+			"source": "manual"
+		},
+		"evidence-graph": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A directed network of content-addressed objects connected by typed, weighted edges that make the structure of justification for each claim transparent and traversable",
+			"displayTerm": "evidence graph",
+			"source": "manual"
+		},
+		"policy-as-code": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Expressing editorial or regulatory rules as versioned, machine-executable configurations rather than prose documents open to interpretation",
+			"displayTerm": "policy-as-code",
+			"source": "manual"
+		},
+		"append-only-log": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A data structure where new entries are only ever added to the end, never modified or deleted, preserving a complete and tamper-evident history",
+			"displayTerm": "append-only log",
+			"source": "manual"
+		},
+		"event-sourcing": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A persistence pattern that stores every state change as an immutable event rather than overwriting current state, enabling full history reconstruction",
+			"displayTerm": "event sourcing",
+			"source": "manual"
+		},
+		"commons-based-peer-production": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Yochai Benkler's model of collaborative creation where participants contribute to a shared resource without traditional market or firm coordination",
+			"displayTerm": "commons-based peer production",
+			"source": "manual"
+		},
+		"agpl": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "GNU Affero General Public License -- a copyleft license that requires anyone running modified software over a network to publish their source code",
+			"displayTerm": "agpl",
+			"source": "manual"
+		},
+		"cradle-to-cradle": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A design philosophy where all materials are perpetually recycled through biological or technical nutrient cycles, eliminating the concept of waste",
+			"displayTerm": "cradle-to-cradle",
+			"source": "manual"
+		},
+		"circular-economy": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "An economic model that replaces the linear extract-make-dispose pattern with closed loops of reuse, repair, and recycling",
+			"displayTerm": "circular economy",
+			"source": "manual"
+		},
+		"state-transition": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A defined change from one discrete system state to another, triggered by an event and governed by preconditions",
+			"displayTerm": "state transition",
+			"source": "manual"
+		},
+		"information-hiding": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Parnas's principle that each module should conceal a design decision behind a stable interface, isolating change",
+			"displayTerm": "information hiding",
+			"source": "manual"
+		},
+		"performance-economy": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "An economic model where customers pay for the service a product delivers rather than owning the product itself",
+			"displayTerm": "performance economy",
+			"source": "manual"
+		},
+		"temporal-service-model": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A subscription architecture where service quality compounds over time as accumulated feedback refines each successive delivery cycle",
+			"displayTerm": "temporal service model",
+			"source": "manual"
+		},
+		"rhetorical-theory": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The study of how communication persuades and constructs meaning — here applied to system architecture as a form of argumentation",
+			"displayTerm": "rhetorical theory",
+			"source": "manual"
+		},
+		"autonomous-agent-swarms": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Groups of AI agents that coordinate to complete tasks without human intervention for each step",
+			"displayTerm": "autonomous agent swarms",
+			"source": "manual"
+		},
+		"theoria": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Greek: contemplation — the organ of foundational theory and philosophical frameworks",
+			"displayTerm": "theoria",
+			"source": "manual"
+		},
+		"poiesis": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Greek: making/creation — the organ of generative art, performance, and experiential systems",
+			"displayTerm": "poiesis",
+			"source": "manual"
+		},
+		"ergon": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Greek: work/deed — the organ of commercial products and deployed software",
+			"displayTerm": "ergon",
+			"source": "manual"
+		},
+		"taxis": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Greek: arrangement/order — the organ of orchestration, governance, and agent coordination",
+			"displayTerm": "taxis",
+			"source": "manual"
+		},
+		"logos": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Greek: word/reason — the organ of essays, public discourse, and transparent process",
+			"displayTerm": "logos",
+			"source": "manual"
+		},
+		"koinonia": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Greek: fellowship/communion — the organ of community, learning groups, and collaboration",
+			"displayTerm": "koinonia",
+			"source": "manual"
+		},
+		"kerygma": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Greek: proclamation — the organ of distribution, amplification, and audience reach",
+			"displayTerm": "kerygma",
+			"source": "manual"
+		},
+		"promotion-state-machines": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "Automated workflows that advance a repository from local development through candidate, public review, to graduated production status",
+			"displayTerm": "promotion state machines",
+			"source": "manual"
+		},
+		"narrative-theory": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The study of how stories are structured and how that structure creates meaning — applied here to system design",
+			"displayTerm": "narrative theory",
+			"source": "manual"
+		},
+		"logocentric-architecture": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A design philosophy where narrative coherence and logical integrity govern every system decision",
+			"displayTerm": "logocentric architecture",
+			"source": "manual"
+		},
+		"narrative-coherence": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "The quality of a system where every component's purpose is legible and its relationship to the whole is clear",
+			"displayTerm": "narrative coherence",
+			"source": "manual"
+		},
+		"state-machine": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A model describing all possible states a system can be in and the transitions between them",
+			"displayTerm": "state machine",
+			"source": "manual"
+		},
+		"recursive-synthesis": {
+			"idf": 0,
+			"score": 0,
+			"docs": 0,
+			"definition": "A process where each stage incorporates and transcends the previous, producing emergent capability at each iteration",
+			"displayTerm": "recursive synthesis",
+			"source": "manual"
+		}
+	}
+}

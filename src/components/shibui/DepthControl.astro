@@ -90,6 +90,15 @@
           el.removeAttribute('tabindex');
         }
       });
+
+      // Auto-generated entry text: toggle aria-hidden
+      document.querySelectorAll<HTMLElement>('.shibui-entry').forEach(el => {
+        el.setAttribute('aria-hidden', depth !== 'overview' ? 'true' : 'false');
+      });
+      // Auto-annotated terms: toggle focusability based on depth
+      document.querySelectorAll<HTMLElement>('.shibui-term[data-definition]').forEach(el => {
+        el.setAttribute('tabindex', depth !== 'overview' ? '0' : '-1');
+      });
     }
 
     // Initialize visual state from current attribute

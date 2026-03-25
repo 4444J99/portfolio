@@ -3,6 +3,8 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
+import astroShibuiLens from './plugins/astro-shibui-lens.mjs';
+import rehypeShibuiLens from './plugins/rehype-shibui-lens.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,11 +12,15 @@ export default defineConfig({
 	base: '/portfolio',
 	// Keep navigation transitions but avoid eager cross-route prefetch bursts on heavy pages.
 	prefetch: false,
+	markdown: {
+		rehypePlugins: [rehypeShibuiLens],
+	},
 	integrations: [
 		sitemap({
 			filter: (page) => !page.includes('/404') && !page.includes('/og/'),
 		}),
 		mdx(),
+		astroShibuiLens(),
 	],
 	vite: {
 		build: {
