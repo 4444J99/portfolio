@@ -21,6 +21,7 @@
 		"wcag/h37": "off",
 		"wcag/h63": "off",
 		"wcag/h67": "off",
-		"wcag/h71": "off"
+		"wcag/h71": "off",
+		"void-style": "off"
 	}
 }
