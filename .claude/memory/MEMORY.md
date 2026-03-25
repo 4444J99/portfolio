@@ -9,6 +9,7 @@
 ## Critical Feedback
 - [feedback_deploy_frustration.md](feedback_deploy_frustration.md) — Deploy MUST work every time. Verify after every push.
 - [feedback_bento_grid.md](feedback_bento_grid.md) — Don't wrap full-width components in grid cells. Two attempts failed and reverted.
+- [feedback_memory_persistence.md](feedback_memory_persistence.md) — Memory MUST be local & remote simultaneously; soul survives machine death
 
 ## Project State
 - [project_ci_next_level.md](project_ci_next_level.md) — Mega session: 73 commits, 30+ issues closed (2026-03-15 to 2026-03-20)
