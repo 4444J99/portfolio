@@ -120,7 +120,7 @@
 		"playwright": "1.58.2",
 		"satori": "0.26.0",
 		"text-readability": "1.1.1",
-		"typescript": "5.9.3",
+		"typescript": "6.0.2",
 		"vitest": "4.1.1"
 	},
 	"overrides": {
