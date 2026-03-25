@@ -71,6 +71,10 @@
 	--transition-fast: 150ms ease;
 	--transition-normal: 350ms ease;
 	--transition-base: 250ms ease;
+	--transition-slow: 400ms ease;
+
+	/* Z-index scale (used by shibui tooltips, dropdowns) */
+	--z-dropdown: 100;
 
 	/* Borders */
 	--border-bright: rgba(255, 255, 255, 0.35);
@@ -116,6 +120,216 @@ html[data-theme="light"] :root,
 	--cmyk-cyan: #0097a7;
 	--cmyk-magenta: #c2185b;
 	--cmyk-yellow: #f9a825;
+}
+
+/* --- Shibui Content System ---
+   Depth-dependent layer visibility.
+   Default (no JS / no attribute): elevated text visible (current behavior).
+   JS sets html[data-shibui-depth] to activate the layer system.
+*/
+
+/* Base: both layers present, elevated visible by default (no-JS fallback) */
+.shibui-content__entry {
+	display: none;
+}
+
+.shibui-content__elevated {
+	display: inline;
+}
+
+/* Overview: entry visible, elevated hidden */
+html[data-shibui-depth="overview"] .shibui-content__entry {
+	display: inline;
+}
+
+html[data-shibui-depth="overview"] .shibui-content__elevated {
+	visibility: hidden;
+	height: 0;
+	overflow: hidden;
+	position: absolute;
+}
+
+/* Standard: entry visible, elevated available via local expand */
+html[data-shibui-depth="standard"] .shibui-content__entry {
+	display: inline;
+}
+
+html[data-shibui-depth="standard"] .shibui-content__elevated {
+	visibility: hidden;
+	height: 0;
+	overflow: hidden;
+	position: absolute;
+}
+
+/* Standard + locally expanded: elevated revealed */
+html[data-shibui-depth="standard"] .shibui-content[data-shibui-expanded] .shibui-content__elevated {
+	visibility: visible;
+	height: auto;
+	overflow: visible;
+	position: static;
+	animation: shibui-reveal var(--transition-slow) ease-in-out;
+}
+
+/* Full: elevated visible, entry hidden */
+html[data-shibui-depth="full"] .shibui-content__entry {
+	display: none;
+}
+
+html[data-shibui-depth="full"] .shibui-content__elevated {
+	display: inline;
+}
+
+/* Reveal animation — palimpsest: rises from below */
+@keyframes shibui-reveal {
+	from {
+		clip-path: inset(100% 0 0 0);
+		opacity: 0.6;
+	}
+	to {
+		clip-path: inset(0);
+		opacity: 1;
+	}
+}
+
+/* Shibui term annotations */
+.shibui-term {
+	position: relative;
+	cursor: help;
+	border-bottom: 1px dotted var(--accent);
+}
+
+.shibui-term__definition {
+	display: none;
+	position: absolute;
+	bottom: calc(100% + 4px);
+	left: 50%;
+	transform: translateX(-50%) translateY(-4px);
+	background: var(--bg-card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+	padding: var(--space-xs) var(--space-sm);
+	font-size: 0.85rem;
+	color: var(--text-secondary);
+	max-width: 300px;
+	white-space: normal;
+	z-index: var(--z-dropdown);
+	opacity: 0;
+	pointer-events: none;
+}
+
+.shibui-term:hover .shibui-term__definition,
+.shibui-term:focus .shibui-term__definition {
+	display: block;
+	opacity: 1;
+	transform: translateX(-50%) translateY(0);
+	transition:
+		opacity var(--transition-fast),
+		transform var(--transition-fast);
+}
+
+/* Annotation glint — single-pass shimmer on page load */
+@keyframes shibui-glint {
+	0% {
+		background-position: -200% center;
+	}
+	100% {
+		background-position: 200% center;
+	}
+}
+
+.shibui-term--glint {
+	background-image: linear-gradient(
+		105deg,
+		transparent 40%,
+		rgba(212, 168, 83, 0.15) 50%,
+		transparent 60%
+	);
+	background-size: 200% 100%;
+	animation: shibui-glint 600ms ease-in-out 1 forwards;
+}
+
+/* Reduced motion: kill all shibui animations */
+@media (prefers-reduced-motion: reduce) {
+	@keyframes shibui-reveal {
+		from {
+			opacity: 1;
+			clip-path: inset(0);
+		}
+		to {
+			opacity: 1;
+			clip-path: inset(0);
+		}
+	}
+
+	.shibui-term--glint {
+		animation: none;
+		background-image: none;
+	}
+}
+
+/* Depth control icon */
+.depth-control {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: var(--space-xs);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--text-muted);
+	transition: color var(--transition-fast);
+}
+
+.depth-control:hover,
+.depth-control:focus-visible {
+	color: var(--accent);
+}
+
+.depth-control__tooltip {
+	display: none;
+	position: absolute;
+	bottom: calc(100% + 8px);
+	left: 50%;
+	transform: translateX(-50%);
+	background: var(--bg-card);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+	padding: var(--space-2xs) var(--space-sm);
+	font-size: 0.75rem;
+	color: var(--text-secondary);
+	white-space: nowrap;
+	z-index: var(--z-dropdown);
+	pointer-events: none;
+}
+
+.depth-control:hover .depth-control__tooltip,
+.depth-control:focus-visible .depth-control__tooltip {
+	display: block;
+}
+
+/* Section depth bridge (Overview mode only) */
+.shibui-bridge {
+	display: none;
+	color: var(--text-muted);
+	font-size: 0.85rem;
+	cursor: pointer;
+	border: none;
+	background: none;
+	padding: var(--space-xs) 0;
+	transition: color var(--transition-fast);
+}
+
+.shibui-bridge:hover {
+	color: var(--accent);
+}
+
+html[data-shibui-depth="overview"] .shibui-bridge,
+html[data-shibui-depth="standard"] .shibui-bridge {
+	display: block;
+}
+
+html[data-shibui-depth="standard"] .shibui-content[data-shibui-expanded] + .shibui-bridge {
+	display: none;
 }
 
 html {
