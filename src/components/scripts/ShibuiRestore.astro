@@ -1,0 +1,49 @@
+<script is:inline>
+  // Shibui depth restore — must be inline to avoid FOUC (runs before first paint).
+  // Mirrors ThemeRestore.astro pattern.
+  (function() {
+    var STORAGE_KEY = 'shibui-depth';
+    var VALID = ['overview', 'standard', 'full'];
+
+    function readDepth() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (parsed && VALID.indexOf(parsed.depth) !== -1) return parsed.depth;
+        }
+      } catch(e) {}
+      return null;
+    }
+
+    function inferFromReferrer() {
+      var ref = document.referrer || '';
+      if (ref.indexOf('github.com') !== -1) return 'full';
+      if (ref.indexOf('linkedin.com') !== -1) return 'overview';
+      if (ref.indexOf('google.com') !== -1) return 'standard';
+      return 'overview';
+    }
+
+    var stored = readDepth();
+    var depth = stored || inferFromReferrer();
+    document.documentElement.dataset.shibuiDepth = depth;
+
+    // Toggle aria-hidden to match depth (eliminates timing gap before DepthControl init)
+    var showEntry = depth !== 'full';
+    var entries = document.querySelectorAll('[data-shibui-layer="entry"]');
+    var elevateds = document.querySelectorAll('[data-shibui-layer="elevated"]');
+    for (var i = 0; i < entries.length; i++) entries[i].setAttribute('aria-hidden', showEntry ? 'false' : 'true');
+    for (var j = 0; j < elevateds.length; j++) elevateds[j].setAttribute('aria-hidden', showEntry ? 'true' : 'false');
+
+    // Persist if this was a first visit inference
+    if (!stored) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          depth: depth,
+          version: 1,
+          timestamp: Date.now()
+        }));
+      } catch(e) {}
+    }
+  })();
+</script>
