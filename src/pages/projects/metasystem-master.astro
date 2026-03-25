@@ -6,6 +6,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import PrismNav from '../../components/PrismNav.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
@@ -28,9 +30,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       </p>
 
       <h2>The Design Decision</h2>
+<ShibuiContent id="metasystem-master.the-design-decision.p1">
+	<span slot="entry">
+		<p>I designed the system around one core idea: the audience is a co-performer, not just a data source. The performer always stays in control through three override modes, but the result is a real-time negotiation between crowd desire and artistic intent.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        The critical insight: the audience is a <strong>co-performer operating a collective instrument</strong>, not a data source.<Cite id={2} author="Weinberg, Gil" title="Interconnected Musical Networks" source="MIT Press" year={2005} /> And the performer is never subordinate to the crowd. Three override modes (<code>absolute</code>, <code>blend</code>, <code>lock</code>) give the performer graduated control — they can fully override a parameter, blend their intent with the audience's at any ratio, or lock it entirely. This approach reflects the principle that human-centered systems must keep humans in command of consequential decisions, even when the system aggregates collective intelligence.<Cite id={3} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /> The resulting performances are negotiated in real time, at sub-second latency, across every parameter the performer exposes.
+        The critical insight: the audience is a <strong>co-performer operating a collective instrument</strong>, not a data source.<Cite id={2} author="Weinberg, Gil" title="Interconnected Musical Networks" source="MIT Press" year={2005} /> And the performer is never subordinate to the crowd. Three override modes (<code>absolute</code>, <code>blend</code>, <code>lock</code>) give the performer graduated control — they can fully override a parameter, blend their intent with the audience's at any ratio, or lock it entirely. This approach reflects the principle that <ShibuiTerm term="human-centered AI" definition="A design philosophy holding that AI and automated systems must keep humans in command of consequential decisions rather than deferring to algorithmic output" /> must keep humans in command of consequential decisions, even when the system aggregates collective intelligence.<Cite id={3} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /> The resulting performances are negotiated in real time, at sub-second latency, across every parameter the performer exposes.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Data flow through the Omni-Dromenon Engine: audience input is aggregated through weighted consensus, checked against performer overrides, and distributed to all output channels."
@@ -97,14 +107,30 @@ Phone → WebSocket /audience → Parameter Bus
 → Performer override check
 → Audience UI + Performer Dashboard + OSC</code></pre>
       </Figure>
+<ShibuiContent id="metasystem-master.architecture.p1">
+	<span slot="entry">
+		<p>I designed the architecture around message-passing between isolated namespaces for fault tolerance. The core engine handles high-concurrency WebSocket traffic with sub-50ms latency, and the Redis adapter enables horizontal scaling across multiple Node.js processes.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        The architecture reflects distributed systems principles where message-passing between isolated namespaces ensures fault tolerance. I directed the implementation of the <a href="https://github.com/organvm-ii-poiesis/metasystem-master/tree/master/packages/core-engine" target="_blank">core engine</a> to handle high-concurrency WebSocket traffic with sub-50ms latency invariants. The Redis adapter enables horizontal scaling across multiple Node.js processes.<Cite id={10} author="Tanenbaum, Andrew S." title="Distributed Systems: Principles and Paradigms" source="Pearson" year={2007} />
+        The architecture reflects <ShibuiTerm term="distributed systems" definition="Computing architectures where components on networked machines coordinate through message-passing to achieve shared goals despite partial failures" /> principles where message-passing between isolated namespaces ensures fault tolerance. I directed the implementation of the <a href="https://github.com/organvm-ii-poiesis/metasystem-master/tree/master/packages/core-engine" target="_blank">core engine</a> to handle high-concurrency WebSocket traffic with sub-50ms latency invariants. The Redis adapter enables horizontal scaling across multiple Node.js processes.<Cite id={10} author="Tanenbaum, Andrew S." title="Distributed Systems: Principles and Paradigms" source="Pearson" year={2007} />
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <h2>The Consensus Algorithm</h2>
+<ShibuiContent id="metasystem-master.the-consensus-algorithm.p1">
+	<span slot="entry">
+		<p>I batch all audience inputs instead of processing them one at a time. A consensus loop runs every 50 milliseconds, computing weighted averages across three axes -- spatial proximity, recency, and convergence -- that together determine what the audience "wants."</p>
+	</span>
+	<span slot="elevated">
       <p>
-        Audience inputs are batched, never processed individually. The consensus loop runs every 50ms, computing weighted averages across three axes that must sum to ~1.0. This approach draws on research into social creativity, where collective input must be structured to avoid both tyranny-of-the-majority and cacophony.<Cite id={4} author="Fischer, Gerhard" title="Social Creativity: Turning Barriers into Opportunities for Design" source="ACM" year={2004} />
+        Audience inputs are batched, never processed individually. The <ShibuiTerm term="consensus algorithm" definition="A procedure that aggregates divergent inputs from multiple participants into a single agreed-upon output value" /> runs every 50ms, computing weighted averages across three axes that must sum to ~1.0. This approach draws on research into social creativity, where collective input must be structured to avoid both tyranny-of-the-majority and cacophony.<Cite id={4} author="Fischer, Gerhard" title="Social Creativity: Turning Barriers into Opportunities for Design" source="ACM" year={2004} />
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
       <div class="table-wrap">
         <table>
           <thead>
@@ -119,9 +145,17 @@ Phone → WebSocket /audience → Parameter Bus
           </tbody>
         </table>
       </div>
+<ShibuiContent id="metasystem-master.the-consensus-algorithm.p2">
+	<span slot="entry">
+		<p>I implemented three weighting axes. Spatial weighting gives closer audience members more influence. Temporal weighting responds to what the audience wants right now, not their historical average. Consensus weighting detects clusters, so converging inputs amplify each other and produce decisive group movements.</p>
+	</span>
+	<span slot="elevated">
       <p>
         <strong>Spatial weighting</strong> uses exponential decay from the stage — closer audience members have more influence, reflecting the qualitative difference of proximity. <strong>Temporal weighting</strong> ensures the system responds to the audience's current state (5s decay window), not their historical average. <strong>Consensus weighting</strong> detects clusters: converging inputs amplify each other, producing decisive group movements rather than perpetual averages. The cluster detection mechanism resonates with Csikszentmihalyi's observations on how group flow states emerge when individual contributions align toward a shared creative target.<Cite id={7} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery" source="Harper Perennial" year={1996} />
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="typescript" caption="Core consensus loop: batched audience inputs are weighted across spatial, temporal, and cluster axes, with outlier rejection and performer override applied before output." filename="consensus-engine.ts">
 {`interface ConsensusConfig {
@@ -172,9 +206,17 @@ function computeConsensus(
       </CodeStructure>
 
       <h2>Implementation</h2>
+<ShibuiContent id="metasystem-master.implementation.p1">
+	<span slot="entry">
+		<p>I built this as a five-package monorepo in TypeScript and Python. The core engine handles over a thousand concurrent audience connections through WebSockets, while a separate performer namespace gives the artist authenticated control. Outlier rejection and smoothing keep any single audience member from hijacking the output.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        Built as a <strong>pnpm monorepo</strong> (TypeScript + Python) with five packages: core-engine (Express + Socket.io + Redis), performance-sdk (React 18 + Vite), audio-synthesis-bridge (OSC + WebAudio), client-sdk (lightweight embeddable client), and an orchestrate CLI (Python, multi-AI pipeline). The frontend SDK leverages patterns from the Processing community's tradition of making creative coding accessible through well-designed abstractions.<Cite id={8} author="Reas, Casey and Ben Fry" title="Processing: A Programming Handbook" source="MIT Press" year={2007} /> The core engine handles two strictly separated Socket.io namespaces — <code>/audience</code> for many concurrent clients (target: 1,000+) and <code>/performer</code> for authenticated controllers. Z-score outlier rejection (threshold: 2.5 SD) and exponential smoothing (factor: 0.3) prevent individual inputs from dominating.
+        Built as a <strong>pnpm monorepo</strong> (TypeScript + Python) with five packages: core-engine (Express + Socket.io + Redis), performance-sdk (React 18 + Vite), audio-synthesis-bridge (OSC + WebAudio), client-sdk (lightweight embeddable client), and an orchestrate CLI (Python, multi-AI pipeline). The frontend SDK leverages patterns from the Processing community's tradition of making creative coding accessible through well-designed abstractions.<Cite id={8} author="Reas, Casey and Ben Fry" title="Processing: A Programming Handbook" source="MIT Press" year={2007} /> The core engine handles two strictly separated Socket.io namespaces — <code>/audience</code> for many concurrent clients (target: 1,000+) and <code>/performer</code> for authenticated controllers. Z-score outlier rejection (threshold: 2.5 SD) and <ShibuiTerm term="exponential smoothing" definition="A time-series technique that weights recent observations more heavily than older ones, dampening jitter in streaming data" /> (factor: 0.3) prevent individual inputs from dominating.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="typescript" caption="Parameter Bus — typed event emitter with 16 event types driving all internal communication" filename="src/bus/parameter-bus.ts (excerpt)">
 {`enum BusEvent {
@@ -229,6 +271,11 @@ function computeConsensus(
       </Figure>
 
       <h2>Venue Geometry and Deployment</h2>
+<ShibuiContent id="metasystem-master.venue-geometry-and-deployment.p1">
+	<span slot="entry">
+		<p>I modeled performance spaces as 2D coordinate systems with named zones. A black box theatre uses tight spatial weighting, while an outdoor festival emphasizes consensus clustering. The system ships with Docker Compose for full-stack deployment, plus production documentation like technical riders and grant budget templates.</p>
+	</span>
+	<span slot="elevated">
       <p>
         Performance spaces are modeled as 2D coordinate systems with named zones. The default venue defines front, middle, and back sections with spatial weight multipliers (1.0, 0.8, 0.6) applied before distance-decay calculation. Zone-based weights are configurable per deployment: a black box theatre (50-200 seats) uses high spatial resolution with intimate proximity weighting, while an outdoor festival (1,000+ participants) relaxes latency requirements and emphasizes consensus clustering.
       </p>
@@ -236,11 +283,22 @@ function computeConsensus(
       <p>
         The system ships with Docker Compose configuration for full-stack deployment (core engine, performance SDK, Redis, ChromaDB, Nginx reverse proxy) and includes production-ready documentation — a festival technical rider, indie venue setup guide, and grant budget line-item template — in the repository's <code>docs/community/</code> directory. Target deployment contexts include Ars Electronica (Linz), NIME (the spatial weighting model is a novel HCI contribution), and Transmediale (Berlin), with draft grant narratives prepared for each venue.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <h2>Why This Is Art</h2>
+<ShibuiContent id="metasystem-master.why-this-is-art.p1">
+	<span slot="entry">
+		<p>I treat the consensus algorithms as the artistic medium, not backstage plumbing. Who gets weighted more? What happens when crowd and performer disagree? These are artistic questions answered by system design. The engine's purpose is to structure human relations -- that makes it relational art at a technical level.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        The consensus algorithms aren't backstage plumbing — they're the medium. Who gets weighted more? What happens when the crowd and the performer disagree? These are <em>artistic</em> questions answered by system design. This positions the engine within the lineage of generative art, where the system's rules constitute the artwork itself.<Cite id={6} author="Galanter, Philip" title="What Is Generative Art?" source="Digital Creativity" year={2003} /> The engine consumes theoretical foundations from ORGAN-I (recursive-engine's identity models inform how performers and audience maintain coherence across transformations) and produces a framework that could become a commercial product in ORGAN-III. Bourriaud's concept of relational aesthetics — art defined by the human relations it produces rather than the objects it creates — finds its most literal technical expression here: the engine's entire purpose is to structure the relationship between performer and audience.<Cite id={12} author="Bourriaud, Nicolas" title="Relational Aesthetics" source="Les Presses du R\u00e9el" year={2002} /> This is ORGAN-II at its most ambitious: art that treats its own governance as part of the aesthetic.
+        The consensus algorithms aren't backstage plumbing — they're the medium. Who gets weighted more? What happens when the crowd and the performer disagree? These are <em>artistic</em> questions answered by system design. This positions the engine within the lineage of generative art, where the system's rules constitute the artwork itself.<Cite id={6} author="Galanter, Philip" title="What Is Generative Art?" source="Digital Creativity" year={2003} /> The engine consumes theoretical foundations from ORGAN-I (recursive-engine's identity models inform how performers and audience maintain coherence across transformations) and produces a framework that could become a commercial product in ORGAN-III. <ShibuiTerm term="Bourriaud" definition="Nicolas Bourriaud, French curator and critic who coined 'relational aesthetics' to describe art practices centered on human interaction rather than object production" />'s concept of <ShibuiTerm term="relational aesthetics" definition="An art-critical framework defining artwork by the human relations and social encounters it produces rather than by the physical objects it creates" /> — art defined by the human relations it produces rather than the objects it creates — finds its most literal technical expression here: the engine's entire purpose is to structure the relationship between performer and audience.<Cite id={12} author="Bourriaud, Nicolas" title="Relational Aesthetics" source="Les Presses du R\u00e9el" year={2002} /> This is ORGAN-II at its most ambitious: art that treats its own governance as part of the aesthetic.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <h2>Tradeoffs & Lessons</h2>
       <ul>

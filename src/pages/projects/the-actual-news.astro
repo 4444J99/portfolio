@@ -6,6 +6,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import PrismNav from '../../components/PrismNav.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
@@ -19,9 +21,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       <h2>The Problem: Architectural Truthfulness</h2>
 <SketchContainer sketchId="ticker" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="News data ticker stream" />
 
-      <p>
-        The crisis in journalism is not primarily one of intent but of architecture. Newsrooms filled with principled reporters publish through platforms whose economic incentives reward engagement over accuracy, whose correction mechanisms are afterthoughts, and whose verification processes are invisible to readers. Kovach and Rosenstiel identified the core tension decades ago: journalism's first obligation is to the truth, but the institutions delivering journalism are structured around business models that treat truth as a byproduct rather than the product itself.<Cite id={1} author="Kovach, Bill and Tom Rosenstiel" title="The Elements of Journalism: What Newspeople Should Know and the Public Should Expect" source="Three Rivers Press" year={2014} /> Habermas's analysis of the public sphere reveals the deeper structural problem — when the communicative infrastructure of democratic discourse is colonized by market logic, the rational-critical debate that journalism is supposed to enable degrades into manufactured consent and spectacle.<Cite id={2} author="Habermas, Jurgen" title="The Structural Transformation of the Public Sphere" source="MIT Press" year={1962} /> The Actual News starts from a different premise: what if the platform itself made truthfulness the product? Not fact-checking after publication, but a native architecture where every published story ships with a machine-readable verification spine — atomic claims with confidence scores, content-addressed evidence graphs with provenance chains, and append-only correction history. If a story does not meet the evidence threshold, it does not publish.
-      </p>
+      <ShibuiContent id="the-actual-news.the-problem-architectural-truthfulness.p1">
+        <span slot="entry">
+          <p>I started from a simple question: what if a news platform made truthfulness the product, not a byproduct? Not fact-checking after publication, but an architecture where every story ships with a machine-readable verification spine — atomic claims with confidence scores, evidence graphs with provenance chains, and append-only correction history. If a story doesn't meet the evidence threshold, it doesn't publish.</p>
+        </span>
+        <span slot="elevated">
+          <p>
+            The crisis in journalism is not primarily one of intent but of architecture. Newsrooms filled with principled reporters publish through platforms whose economic incentives reward engagement over accuracy, whose correction mechanisms are afterthoughts, and whose verification processes are invisible to readers. Kovach and Rosenstiel identified the core tension decades ago: journalism's first obligation is to the truth, but the institutions delivering journalism are structured around business models that treat truth as a byproduct rather than the product itself.<Cite id={1} author="Kovach, Bill and Tom Rosenstiel" title="The Elements of Journalism: What Newspeople Should Know and the Public Should Expect" source="Three Rivers Press" year={2014} /> Habermas's analysis of the public sphere reveals the deeper structural problem — when the communicative infrastructure of democratic discourse is colonized by market logic, the rational-critical debate that journalism is supposed to enable degrades into manufactured consent and spectacle.<Cite id={2} author="Habermas, Jurgen" title="The Structural Transformation of the Public Sphere" source="MIT Press" year={1962} /> The Actual News starts from a different premise: what if the platform itself made truthfulness the product? Not fact-checking after publication, but a native architecture where every published story ships with a machine-readable verification spine — atomic claims with confidence scores, content-addressed evidence graphs with provenance chains, and append-only correction history. If a story does not meet the evidence threshold, it does not publish.
+          </p>
+        </span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Three-layer story model — every published story decomposes into a human-readable narrative, a structured claims ledger, and a content-addressed evidence graph"
@@ -44,9 +54,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       />
 
       <h2>Technical Architecture</h2>
-      <p>
-        The platform is implemented as five TypeScript microservices behind a unified API gateway, with a Next.js frontend and PostgreSQL as the primary data store. The Gateway service handles authentication, rate limiting, and request routing. The Story service manages narrative content and its decomposition into claim references. The Claim service maintains the ledger of typed atomic statements — each claim carries a confidence score, a support status (supported, contested, or unsupported), and bidirectional links to both its parent narrative and its supporting evidence. The Evidence service manages the content-addressed object store and the typed, weighted edge graph. The Verify service orchestrates the publish gate — the deterministic quality evaluation that decides whether a story meets the threshold for publication.<Cite id={3} author="Newman, Sam" title="Building Microservices: Designing Fine-Grained Systems" source="O'Reilly Media" year={2015} /> Newman's argument for service decomposition along business capability boundaries applies precisely: each service owns a distinct domain concept (narrative, claim, evidence, verification), communicates through well-defined contracts, and can be deployed independently. The choice of TypeScript across all services reflects a deliberate tradeoff — shared type definitions between services reduce integration errors at the cost of language-level flexibility.<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's patterns for managing distributed state — Unit of Work, Identity Map, Repository — are implemented in the Story and Claim services to ensure that the three-layer decomposition remains consistent across concurrent edits.
-      </p>
+      <ShibuiContent id="the-actual-news.technical-architecture.p1">
+        <span slot="entry">
+          <p>I designed this as five TypeScript microservices: Gateway for auth and routing, Story for narrative content, Claim for the atomic statement ledger, Evidence for the content-addressed object store, and Verify for the publish gate. Each service owns a distinct domain concept and deploys independently. Shared TypeScript definitions across all services eliminate integration errors.</p>
+        </span>
+        <span slot="elevated">
+          <p>
+            The platform is implemented as five TypeScript microservices behind a unified API gateway, with a Next.js frontend and PostgreSQL as the primary data store. The Gateway service handles authentication, rate limiting, and request routing. The Story service manages narrative content and its decomposition into claim references. The Claim service maintains the ledger of typed atomic statements — each claim carries a confidence score, a support status (supported, contested, or unsupported), and bidirectional links to both its parent narrative and its supporting evidence. The Evidence service manages the content-addressed object store and the typed, weighted edge graph. The Verify service orchestrates the publish gate — the deterministic quality evaluation that decides whether a story meets the threshold for publication.<Cite id={3} author="Newman, Sam" title="Building Microservices: Designing Fine-Grained Systems" source="O'Reilly Media" year={2015} /> Newman's argument for service decomposition along business capability boundaries applies precisely: each service owns a distinct domain concept (narrative, claim, evidence, verification), communicates through well-defined contracts, and can be deployed independently. The choice of TypeScript across all services reflects a deliberate tradeoff — shared type definitions between services reduce integration errors at the cost of language-level flexibility.<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's patterns for managing distributed state — Unit of Work, Identity Map, Repository — are implemented in the Story and Claim services to ensure that the three-layer decomposition remains consistent across concurrent edits.
+          </p>
+        </span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="sql" caption="Publish gate evaluation — a single transactional query that enforces all quality thresholds before a story can reach publication" filename="verify-service/src/queries/publish-gate.sql">
 {`-- Publish Gate: deterministic quality evaluation
@@ -102,9 +120,17 @@ FROM story_metrics;`}
       </CodeStructure>
 
       <h2>The Evidence Graph</h2>
-      <p>
-        The evidence graph is the system's epistemological core. Every piece of evidence is stored as a content-addressed object — its identifier is the SHA-256 hash of its contents, making it immutable and independently verifiable. Evidence objects are connected to claims through typed, weighted edges: a document might <em>corroborate</em> a claim with weight 0.8, or <em>contextualize</em> it with weight 0.5, or <em>contradict</em> it with weight 0.9. This structure draws directly from Berners-Lee's linked data principles — each evidence node has a URI, is dereferenceable, and links to other nodes using standards-based relationships — but applies them to epistemological rather than informational linking.<Cite id={5} author="Berners-Lee, Tim" title="Linked Data" source="W3C Design Issues" year={2006} /> The provenance chain extends this further: every evidence object records its source, any intermediaries through which it was obtained, and the timestamp of acquisition, creating an auditable trail from published claim back to primary source. This is not fact-checking in the traditional sense — a human reviewer deciding whether something is true — but what Mercier and Sperber call "epistemic vigilance" encoded as data structure.<Cite id={6} author="Mercier, Hugo and Dan Sperber" title="The Enigma of Reason" source="Harvard University Press" year={2017} /> Their argumentative theory of reasoning — that human reason evolved not for individual truth-seeking but for social justification and evaluation — maps onto the evidence graph's design: the graph does not determine truth but makes the structure of justification transparent, enabling readers (and automated systems) to evaluate the reasoning for themselves.
-      </p>
+      <ShibuiContent id="the-actual-news.the-evidence-graph.p1">
+        <span slot="entry">
+          <p>I built the evidence graph as a content-addressed store where every piece of evidence is identified by its SHA-256 hash, making it immutable and independently verifiable. Evidence connects to claims through typed, weighted edges — a document can corroborate, contextualize, or contradict a claim. Every evidence object records its full provenance chain back to the primary source.</p>
+        </span>
+        <span slot="elevated">
+          <p>
+            The <ShibuiTerm term="evidence graph" definition="A directed network of content-addressed objects connected by typed, weighted edges that make the structure of justification for each claim transparent and traversable" /> is the system's epistemological core. Every piece of evidence is stored as a content-addressed object — its identifier is the SHA-256 hash of its contents, making it immutable and independently verifiable. Evidence objects are connected to claims through typed, weighted edges: a document might <em>corroborate</em> a claim with weight 0.8, or <em>contextualize</em> it with weight 0.5, or <em>contradict</em> it with weight 0.9. This structure draws directly from Berners-Lee's linked data principles — each evidence node has a URI, is dereferenceable, and links to other nodes using standards-based relationships — but applies them to epistemological rather than informational linking.<Cite id={5} author="Berners-Lee, Tim" title="Linked Data" source="W3C Design Issues" year={2006} /> The provenance chain extends this further: every evidence object records its source, any intermediaries through which it was obtained, and the timestamp of acquisition, creating an auditable trail from published claim back to primary source. This is not fact-checking in the traditional sense — a human reviewer deciding whether something is true — but what Mercier and Sperber call "epistemic vigilance" encoded as data structure.<Cite id={6} author="Mercier, Hugo and Dan Sperber" title="The Enigma of Reason" source="Harvard University Press" year={2017} /> Their argumentative theory of reasoning — that human reason evolved not for individual truth-seeking but for social justification and evaluation — maps onto the evidence graph's design: the graph does not determine truth but makes the structure of justification transparent, enabling readers (and automated systems) to evaluate the reasoning for themselves.
+          </p>
+        </span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Seven conformance tests for the publish gate" caption="Conformance test matrix — seven tests (CT-01 through CT-07) validating gate behavior against an RFC-style protocol specification with 10 hard invariants">
         <div class="table-wrap">
@@ -126,9 +152,17 @@ FROM story_metrics;`}
       </Figure>
 
       <h2>Policy-as-Code</h2>
-      <p>
-        The publish gate's quality thresholds are not hardcoded but externalized into versioned policy packs — JSON documents that define the specific numerical boundaries for each gate check. A local civic newsroom covering city council meetings and a national investigative platform breaking complex financial stories can run the same codebase with different policy configurations: the civic newsroom might accept a lower primary evidence ratio for routine meeting coverage while demanding strict corroboration for any claims about public officials, while the investigative platform might require multiple independent sources for every claim regardless of impact classification.<Cite id={7} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's framework for polycentric governance — multiple overlapping authorities with nested rules — is the direct inspiration: the platform provides the rule engine, but the rules themselves are locally determined, versioned, and auditable. Lessig's observation that code is law takes on literal force here — the publish gate's SQL query <em>is</em> the editorial policy, executable and testable rather than aspirational and ambiguous.<Cite id={8} author="Lessig, Lawrence" title="Code and Other Laws of Cyberspace" source="Basic Books" year={1999} /> Policy packs are immutable once deployed: changing a threshold creates a new version, and historical stories retain a reference to the policy version under which they were published, enabling retrospective analysis of how editorial standards evolved over time.
+      <ShibuiContent id="the-actual-news.policy-as-code.p1">
+	<span slot="entry">
+		<p>I externalized every publish gate threshold into versioned policy packs rather than hardcoding them. A local civic newsroom and a national investigative platform can run the same codebase with different quality configurations. The SQL query that evaluates whether a story can publish literally is the editorial policy -- executable and testable rather than aspirational. Policy packs are immutable once deployed, so you can always trace which standards were in effect when any story was published.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The publish gate's quality thresholds are not hardcoded but externalized into versioned <ShibuiTerm term="policy-as-code" definition="Expressing editorial or regulatory rules as versioned, machine-executable configurations rather than prose documents open to interpretation" /> — JSON documents that define the specific numerical boundaries for each gate check. A local civic newsroom covering city council meetings and a national investigative platform breaking complex financial stories can run the same codebase with different policy configurations: the civic newsroom might accept a lower primary evidence ratio for routine meeting coverage while demanding strict corroboration for any claims about public officials, while the investigative platform might require multiple independent sources for every claim regardless of impact classification.<Cite id={7} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's framework for polycentric governance — multiple overlapping authorities with nested rules — is the direct inspiration: the platform provides the rule engine, but the rules themselves are locally determined, versioned, and auditable. Lessig's observation that code is law takes on literal force here — the publish gate's SQL query <em>is</em> the editorial policy, executable and testable rather than aspirational and ambiguous.<Cite id={8} author="Lessig, Lawrence" title="Code and Other Laws of Cyberspace" source="Basic Books" year={1999} /> Policy packs are immutable once deployed: changing a threshold creates a new version, and historical stories retain a reference to the policy version under which they were published, enabling retrospective analysis of how editorial standards evolved over time.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Publish gate evaluation flow — a story submission triggers deterministic threshold checks against the active policy pack, producing a pass or fail with detailed metrics"
@@ -154,9 +188,17 @@ FROM story_metrics;`}
       />
 
       <h2>Correction Model and Append-Only History</h2>
-      <p>
-        Traditional news platforms handle corrections through quiet edits — the original text is silently replaced, and readers who saw the earlier version have no way to know what changed or why. The Actual News treats corrections as first-class immutable events in an append-only log. When a claim is corrected, the original claim is preserved with its original evidence graph, a new claim version is appended with updated evidence, and a correction event records the reason, the author, the timestamp, and the diff between old and new.<Cite id={3} author="Newman, Sam" title="Building Microservices: Designing Fine-Grained Systems" source="O'Reilly Media" year={2015} /> Newman's event-sourcing pattern — storing state changes as an immutable sequence of events rather than overwriting current state — provides the technical foundation: the claims ledger is not a mutable table but an append-only log where every state transition is recorded. This makes it possible to reconstruct the exact state of any story at any point in its history, including which evidence supported which claims at the time of original publication versus after correction. Conformance test CT-07 validates this invariant: it verifies that the correction mechanism never deletes or modifies original claim records, only appends new versions with correction metadata.
+      <ShibuiContent id="the-actual-news.correction-model-and-append-only-history.p1">
+	<span slot="entry">
+		<p>I designed corrections as first-class immutable events rather than quiet edits. When a claim is corrected, the original stays intact, a new version is appended with updated evidence, and a correction event records who changed what and why. You can reconstruct the exact state of any story at any point in its history. Conformance test CT-07 enforces this: original records are never deleted or modified.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        Traditional news platforms handle corrections through quiet edits — the original text is silently replaced, and readers who saw the earlier version have no way to know what changed or why. The Actual News treats corrections as first-class immutable events in an <ShibuiTerm term="append-only log" definition="A data structure where new entries are only ever added to the end, never modified or deleted, preserving a complete and tamper-evident history" />. When a claim is corrected, the original claim is preserved with its original evidence graph, a new claim version is appended with updated evidence, and a correction event records the reason, the author, the timestamp, and the diff between old and new.<Cite id={3} author="Newman, Sam" title="Building Microservices: Designing Fine-Grained Systems" source="O'Reilly Media" year={2015} /> Newman's <ShibuiTerm term="event sourcing" definition="A persistence pattern that stores every state change as an immutable event rather than overwriting current state, enabling full history reconstruction" /> pattern — storing state changes as an immutable sequence of events rather than overwriting current state — provides the technical foundation: the claims ledger is not a mutable table but an append-only log where every state transition is recorded. This makes it possible to reconstruct the exact state of any story at any point in its history, including which evidence supported which claims at the time of original publication versus after correction. Conformance test CT-07 validates this invariant: it verifies that the correction mechanism never deletes or modifies original claim records, only appends new versions with correction metadata.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="typescript" caption="Correction event handler — appends a new claim version while preserving the original, creating an auditable correction trail" filename="claim-service/src/handlers/correct-claim.ts">
 {`interface CorrectionEvent {
@@ -217,9 +259,17 @@ async function correctClaim(
       </CodeStructure>
 
       <h2>Database Design and Event-Driven Pipeline</h2>
-      <p>
+      <ShibuiContent id="the-actual-news.database-design-and-event-driven-pipeline.p1">
+	<span slot="entry">
+		<p>I designed a PostgreSQL schema with ten domain tables plus an event outbox, all organized around the verification spine. Identity, content, evidence, claims, verification, and correction tables each own a distinct concern. The event outbox ensures publish events only fire if the transaction commits, and every table is scoped by platform ID so multiple newsrooms can run the same codebase with isolated data.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         The PostgreSQL schema consists of ten domain tables plus an event outbox, organized around the verification spine. Identity tables track platform participants (actors) and conflict-of-interest declarations with validity windows. Content tables store story containers with a draft/review/published state machine and immutable narrative version snapshots in Markdown. Evidence tables hold content-addressed objects with SHA-256 hashes and full provenance metadata. Claims tables store typed atomic statements with support status and confidence scores, connected to evidence through directed, weighted edges. Verification tables manage review task assignments and structured verdicts. Correction tables maintain the append-only event log. The event outbox implements a reliable emission pattern: publish events are inserted into the outbox within the same transaction that updates story state, ensuring that the event is guaranteed to emit if and only if the state change commits.<Cite id={3} author="Newman, Sam" title="Building Microservices: Designing Fine-Grained Systems" source="O'Reilly Media" year={2015} /> All objects are scoped by <code>platform_id</code>, enabling multi-tenant deployment from the same schema — a local civic newsroom and a national investigative platform can run the same codebase with different policy configurations and isolated data.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Ten protocol invariants" caption="Protocol invariants — ten hard constraints forming the system's constitution, enforced by conformance tests and database constraints.">
         <div class="table-wrap">
@@ -249,9 +299,17 @@ async function correctClaim(
       </p>
 
       <h2>Economic Model and the AGPL Mandate</h2>
-      <p>
-        The economic model follows from the architecture: if value comes from verification rather than attention, then funding can decouple from advertising and click-through metrics. A platform whose product is the evidence graph — the structured, machine-readable justification for every claim — creates value that compounds over time as the graph grows, rather than depreciating as news cycles move on. Zuboff's analysis of surveillance capitalism demonstrates the structural problem with attention-based models: when user engagement is the product, the platform's economic incentive is to maximize time-on-site through emotional provocation rather than informational accuracy.<Cite id={9} author="Zuboff, Shoshana" title="The Age of Surveillance Capitalism" source="PublicAffairs" year={2019} /> The Actual News inverts this by making the evidence graph the monetizable asset — institutions, researchers, and other newsrooms can subscribe to the structured data feed, paying for verified claims and their provenance chains rather than for reader eyeballs. Benkler's framework for commons-based peer production provides the theoretical grounding for the licensing choice: the AGPL ensures that any deployment of the platform must share its source code, including modifications, creating a transparency mandate that mirrors the platform's editorial principles.<Cite id={10} author="Benkler, Yochai" title="The Wealth of Networks: How Social Production Transforms Markets and Freedom" source="Yale University Press" year={2006} /> A platform built on the premise that evidence should be transparent cannot itself be opaque. The AGPL makes this principle legally enforceable — any organization running a modified version must publish their modifications, preventing proprietary forks that might weaken the verification requirements while trading on the platform's reputation for rigor.
+      <ShibuiContent id="the-actual-news.economic-model-and-the-agpl-mandate.p1">
+	<span slot="entry">
+		<p>I built the economics around verification rather than attention. The evidence graph is the monetizable asset -- institutions and researchers subscribe to structured, verified claims rather than paying for reader eyeballs. The AGPL license enforces the same transparency principle at the code level: a platform built on the premise that evidence should be transparent cannot itself be opaque. Any deployment must share its source, preventing proprietary forks from weakening verification standards.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The economic model follows from the architecture: if value comes from verification rather than attention, then funding can decouple from advertising and click-through metrics. A platform whose product is the evidence graph — the structured, machine-readable justification for every claim — creates value that compounds over time as the graph grows, rather than depreciating as news cycles move on. Zuboff's analysis of surveillance capitalism demonstrates the structural problem with attention-based models: when user engagement is the product, the platform's economic incentive is to maximize time-on-site through emotional provocation rather than informational accuracy.<Cite id={9} author="Zuboff, Shoshana" title="The Age of Surveillance Capitalism" source="PublicAffairs" year={2019} /> The Actual News inverts this by making the evidence graph the monetizable asset — institutions, researchers, and other newsrooms can subscribe to the structured data feed, paying for verified claims and their provenance chains rather than for reader eyeballs. Benkler's framework for <ShibuiTerm term="commons-based peer production" definition="Yochai Benkler's model of collaborative creation where participants contribute to a shared resource without traditional market or firm coordination" /> provides the theoretical grounding for the licensing choice: the <ShibuiTerm term="AGPL" definition="GNU Affero General Public License -- a copyleft license that requires anyone running modified software over a network to publish their source code" /> ensures that any deployment of the platform must share its source code, including modifications, creating a transparency mandate that mirrors the platform's editorial principles.<Cite id={10} author="Benkler, Yochai" title="The Wealth of Networks: How Social Production Transforms Markets and Freedom" source="Yale University Press" year={2006} /> A platform built on the premise that evidence should be transparent cannot itself be opaque. The AGPL makes this principle legally enforceable — any organization running a modified version must publish their modifications, preventing proprietary forks that might weaken the verification requirements while trading on the platform's reputation for rigor.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Platform architecture comparison — attention vs. verification economics" caption="Economic model comparison — attention-based platforms versus verification-based architecture">
         <div class="table-wrap">
@@ -271,9 +329,17 @@ async function correctClaim(
         </div>
       </Figure>
 
-      <p>
+      <ShibuiContent id="the-actual-news.economic-model-and-the-agpl-mandate.p2">
+	<span slot="entry">
+		<p>I chose five microservices rather than a monolith because each maps to a distinct domain concept that scales independently. During breaking news, the Story and Claim services see high write throughput while Evidence handles sustained read loads. Within each service, business logic lives in rich domain objects -- a Claim can evaluate its own support status and validate its evidence links, not just hold data.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         The choice of five distinct microservices — rather than a monolith or a more aggressive decomposition — reflects a pragmatic assessment of domain boundaries. The Story, Claim, and Evidence services map to the three conceptual layers of the story model, while the Gateway and Verify services provide cross-cutting infrastructure. Each service can scale independently: during breaking news events, the Story and Claim services see high write throughput, while the Evidence service experiences sustained read-heavy loads as the graph is traversed for verification.<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's domain model pattern — where business logic lives in rich domain objects rather than in service-layer scripts — is applied within each service: a Claim is not a passive data transfer object but an entity with behavior (it can evaluate its own support status, compute its confidence score, and validate its evidence links). The inter-service communication uses synchronous HTTP for queries and asynchronous events for state changes, a hybrid that Fowler identifies as appropriate when strong consistency is needed within a bounded context (the publish gate transaction) but eventual consistency is acceptable across contexts (evidence graph updates propagating to related claims).
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <h2>By the Numbers</h2>
       <Figure alt="Platform statistics for The Actual News" caption="System metrics — five microservices enforcing deterministic quality policies across three story layers" number={1}>

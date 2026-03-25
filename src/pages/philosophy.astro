@@ -1,4 +1,6 @@
 ---
+import ShibuiContent from '../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../components/sketches/SketchContainer.astro';
 import { mappings } from '../data/ontology.json';
 import vitals from '../data/vitals.json';
@@ -21,15 +23,42 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
       </header>
 
       <section class="prose" data-reveal style="--stagger-index: 1">
-        <p>
-          I do not come to engineering from a vacuum. I come to it from <strong>Literature</strong>, <strong>Rhetoric</strong>, and <strong>Narrative Theory</strong>. To me, code is not just a tool for computation—it is a medium for <em>structured intention</em>.
-        </p>
-        <p>
-          As an <strong>AI-Native Architect</strong>, I focus on the <strong>Logocentric Architecture</strong>: the narrative coherence and logical integrity of the system. I direct AI to implement these structures with a rigor that manual coding often misses.
-        </p>
-        <p>
-          Most technical systems fail not because of bad syntax, but because of poor <strong>narrative coherence</strong>. If a system's state machine doesn't have a clear "character arc," it becomes buggy. If an orchestration layer lacks "rhetorical awareness," it collapses under scale.
-        </p>
+        <ShibuiContent id="philosophy.thesis.p1">
+          <span slot="entry">
+            <p>I came to engineering through literature and storytelling, not through computer science. For me, code is a medium for expressing ideas with precision — the same way an essay or a novel is.</p>
+          </span>
+          <span slot="elevated">
+            <p>
+              I do not come to engineering from a vacuum. I come to it from <strong>Literature</strong>, <strong>Rhetoric</strong>, and <strong><ShibuiTerm term="Narrative Theory" definition="The study of how stories are structured and how that structure creates meaning — applied here to system design" /></strong>. To me, code is not just a tool for computation—it is a medium for <em>structured intention</em>.
+            </p>
+          </span>
+        </ShibuiContent>
+        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+
+        <ShibuiContent id="philosophy.thesis.p2">
+          <span slot="entry">
+            <p>I focus on making systems tell a coherent story — every part connected, every decision justified. I use AI to implement these designs with a thoroughness that's hard to achieve manually.</p>
+          </span>
+          <span slot="elevated">
+            <p>
+              As an <strong>AI-Native Architect</strong>, I focus on the <strong><ShibuiTerm term="Logocentric Architecture" definition="A design philosophy where narrative coherence and logical integrity govern every system decision" /></strong>: the narrative coherence and logical integrity of the system. I direct AI to implement these structures with a rigor that manual coding often misses.
+            </p>
+          </span>
+        </ShibuiContent>
+        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+
+        <ShibuiContent id="philosophy.thesis.p3">
+          <span slot="entry">
+            <p>Most systems break not because of bad code, but because they lack a clear through-line. When the logic doesn't hang together, bugs multiply. When the design doesn't account for growth, it collapses.</p>
+          </span>
+          <span slot="elevated">
+            <p>
+              Most technical systems fail not because of bad syntax, but because of poor <strong><ShibuiTerm term="narrative coherence" definition="The quality of a system where every component's purpose is legible and its relationship to the whole is clear" /></strong>. If a system's <ShibuiTerm term="state machine" definition="A model describing all possible states a system can be in and the transitions between them" /> doesn't have a clear "character arc," it becomes buggy. If an orchestration layer lacks "rhetorical awareness," it collapses under scale.
+            </p>
+          </span>
+        </ShibuiContent>
+        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+
         <blockquote>
           "Humanities provide the 'Why' and the 'How things mean.' Engineering provides the 'What' and the 'How things work.' My work is the bridge."
         </blockquote>
@@ -64,6 +93,18 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
 
       <section class="identity-stack" data-reveal style="--stagger-index: 3">
         <h2 class="section-label">The Evolutionary Stack</h2>
+        <ShibuiContent id="philosophy.stack.overview">
+          <span slot="entry">
+            <p>My path to technology wasn't a straight line — it was four distinct phases, each one building on the last. Literature taught me to read systems. Writing taught me to build them. Teaching taught me to explain them. Now I combine all three.</p>
+          </span>
+          <span slot="elevated">
+            <p>
+              The trajectory below is not a career pivot — it is a <ShibuiTerm term="recursive synthesis" definition="A process where each stage incorporates and transcends the previous, producing emergent capability at each iteration" />. Each phase supplied a cognitive tool that became load-bearing in the next.
+            </p>
+          </span>
+        </ShibuiContent>
+        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+
         <div class="timeline">
           <div class="timeline-item">
             <div class="timeline-marker"></div>

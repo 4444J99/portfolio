@@ -5,6 +5,8 @@ import Figure from '../../components/academic/Figure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import vitals from '../../data/vitals.json';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
@@ -19,9 +21,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       <h2>The Problem: Standards at Scale</h2>
 <SketchContainer sketchId="hierarchy" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="Self-building organization tree" />
 
+      <ShibuiContent id="org-architecture.the-problem-standards-at-scale.p1">
+	<span slot="entry">
+		<p>I built a single repository that governs every other repo in the organization. It pushes out shared CI pipelines, security scanning, contributor guidelines, and AI agent configs so that no individual project has to reinvent those wheels. One source of truth, inherited everywhere.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        Every multi-repository organization faces the same entropy: standards drift, security configurations diverge, and contributor onboarding becomes a per-repo archaeology exercise. Conway's law predicts this — organizations that design systems are constrained to produce designs which mirror their communication structures, and when those structures are fragmented across dozens of repositories, fragmentation is the inevitable output.<Cite id={1} author="Conway, Melvin E." title="How Do Committees Invent?" source="Datamation" year={1968} /> The open-source world has known this for decades. Raymond's analysis of the bazaar model revealed that even decentralized projects require institutional infrastructure — mailing list conventions, patch formats, release protocols — to avoid collapsing under their own coordination costs.<Cite id={2} author="Raymond, Eric S." title="The Cathedral and the Bazaar" source="O'Reilly Media" year={1999} /> GitHub's special <code>.github</code> repository mechanism offers a solution: a single repository whose contents — workflows, templates, governance documents, AI configurations — are inherited by every other repository in the organization. This project takes that mechanism and builds a comprehensive organizational operating system on top of it, governing {vitals.repos.total} repositories across {vitals.repos.orgs} organizations from a single source of truth.
+        Every multi-repository organization faces the same entropy: standards drift, security configurations diverge, and contributor onboarding becomes a per-repo archaeology exercise. <ShibuiTerm term="Conway's law" definition="The 1968 observation that system designs inevitably mirror the communication structures of the organizations that build them" /> predicts this — organizations that design systems are constrained to produce designs which mirror their communication structures, and when those structures are fragmented across dozens of repositories, fragmentation is the inevitable output.<Cite id={1} author="Conway, Melvin E." title="How Do Committees Invent?" source="Datamation" year={1968} /> The open-source world has known this for decades. Raymond's analysis of the bazaar model revealed that even decentralized projects require institutional infrastructure — mailing list conventions, patch formats, release protocols — to avoid collapsing under their own coordination costs.<Cite id={2} author="Raymond, Eric S." title="The Cathedral and the Bazaar" source="O'Reilly Media" year={1999} /> GitHub's special <code>.github</code> repository mechanism offers a solution: a single repository whose contents — workflows, templates, governance documents, AI configurations — are inherited by every other repository in the organization. This project takes that mechanism and builds a comprehensive organizational operating system on top of it, governing {vitals.repos.total} repositories across {vitals.repos.orgs} organizations from a single source of truth.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Inheritance flow — the .github repository propagates governance, CI/CD, and AI configurations to every org repository that does not define its own"
@@ -45,9 +55,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       />
 
       <h2>Community Health Layer</h2>
+      <ShibuiContent id="org-architecture.community-health-layer.p1">
+	<span slot="entry">
+		<p>I set up shared community health files -- a code of conduct, contributing guide, security policy, and support docs -- that automatically appear on every repo in the org. Instead of copying boilerplate, each repo inherits thoughtful governance documents tailored to the system's values and threat model.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        The foundation of any collaborative software project is not its code but its social contracts. GitHub's community health file inheritance means that a <code>CODE_OF_CONDUCT.md</code>, <code>CONTRIBUTING.md</code>, <code>SECURITY.md</code>, and <code>SUPPORT.md</code> placed in the <code>.github</code> repository appear on every repository in the organization that has not defined its own — creating a baseline of contributor experience without requiring any per-repo configuration.<Cite id={3} author="Eghbal, Nadia" title="Working in Public: The Making and Maintenance of Open Source Software" source="Stripe Press" year={2020} /> Eghbal's research into the maintenance burden of open-source projects demonstrates that community health files are not bureaucratic overhead but essential load-bearing infrastructure: projects without clear contribution guidelines see higher friction in first-time contributions and higher maintainer burnout. Fogel extends this argument to the operational level, showing that explicit governance documents reduce "bike-shedding" — endless procedural debates — by providing authoritative answers to common questions before they are asked.<Cite id={4} author="Fogel, Karl" title="Producing Open Source Software: How to Run a Successful Free Software Project" source="O'Reilly Media" year={2005} /> In this system, the four health files are not boilerplate templates but carefully authored documents reflecting the specific governance philosophy of the eight-organ architecture: the Code of Conduct references the system's values, the Contributing guide maps onto the promotion state machine, and the Security policy defines responsible disclosure procedures tailored to the project's threat model.
+        The foundation of any collaborative software project is not its code but its social contracts. GitHub's <ShibuiTerm term="community health files" definition="Standardized governance documents (Code of Conduct, Contributing Guide, Security Policy) that GitHub automatically inherits across all repos in an organization" /> inheritance means that a <code>CODE_OF_CONDUCT.md</code>, <code>CONTRIBUTING.md</code>, <code>SECURITY.md</code>, and <code>SUPPORT.md</code> placed in the <code>.github</code> repository appear on every repository in the organization that has not defined its own — creating a baseline of contributor experience without requiring any per-repo configuration.<Cite id={3} author="Eghbal, Nadia" title="Working in Public: The Making and Maintenance of Open Source Software" source="Stripe Press" year={2020} /> Eghbal's research into the maintenance burden of open-source projects demonstrates that community health files are not bureaucratic overhead but essential load-bearing infrastructure: projects without clear contribution guidelines see higher friction in first-time contributions and higher maintainer burnout. Fogel extends this argument to the operational level, showing that explicit governance documents reduce "bike-shedding" — endless procedural debates — by providing authoritative answers to common questions before they are asked.<Cite id={4} author="Fogel, Karl" title="Producing Open Source Software: How to Run a Successful Free Software Project" source="O'Reilly Media" year={2005} /> In this system, the four health files are not boilerplate templates but carefully authored documents reflecting the specific governance philosophy of the eight-organ architecture: the Code of Conduct references the system's values, the Contributing guide maps onto the promotion state machine, and the Security policy defines responsible disclosure procedures tailored to the project's threat model.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="yaml" caption="Reusable CI workflow with SHA-pinned actions for supply-chain security — called by every repository in the organization" filename=".github/workflows/ci-pipeline.yml">
 {`name: CI Pipeline
@@ -92,9 +110,17 @@ jobs:
       </CodeStructure>
 
       <h2>CI/CD Infrastructure</h2>
+      <ShibuiContent id="org-architecture.ci-cd-infrastructure.p1">
+	<span slot="entry">
+		<p>I turned GitHub Actions into a shared platform for the whole org. Each repo calls centralized, reusable workflows instead of maintaining its own pipeline. Every action reference is SHA-pinned to a specific commit, which prevents supply-chain attacks from compromised tags.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        The second layer transforms GitHub Actions from per-repository configuration files into an organizational platform. Every workflow uses <code>workflow_call</code> to expose itself as a reusable component — individual repositories call these shared workflows with parameters rather than duplicating pipeline logic.<Cite id={5} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation" source="Addison-Wesley" year={2010} /> Humble and Farley's core insight — that the deployment pipeline should be a first-class artifact, versioned and tested like application code — applies doubly at the organizational level, where pipeline drift across repositories creates silent security gaps and inconsistent quality gates. The critical security decision is SHA-pinning: every GitHub Action reference uses a full commit SHA rather than a mutable tag, preventing supply-chain attacks where a compromised action tag is silently replaced with malicious code.<Cite id={6} author="Bass, Len, Ingo Weber, and Liming Zhu" title="DevOps: A Software Architect's Perspective" source="Addison-Wesley" year={2015} /> Bass et al. identify supply-chain integrity as a DevOps architectural concern — this repository implements that concern at the organizational boundary, ensuring that no repository in the system can accidentally reference an unvetted action version.
+        The second layer transforms GitHub Actions from per-repository configuration files into an organizational platform. Every workflow uses <code>workflow_call</code> to expose itself as a reusable component — individual repositories call these shared workflows with parameters rather than duplicating pipeline logic. The critical security decision is <ShibuiTerm term="SHA-pinning" definition="Referencing GitHub Actions by their immutable commit hash rather than a mutable tag, preventing supply-chain attacks from compromised action versions" />.<Cite id={5} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation" source="Addison-Wesley" year={2010} /> Humble and Farley's core insight — that the deployment pipeline should be a first-class artifact, versioned and tested like application code — applies doubly at the organizational level, where pipeline drift across repositories creates silent security gaps and inconsistent quality gates. The critical security decision is SHA-pinning: every GitHub Action reference uses a full commit SHA rather than a mutable tag, preventing supply-chain attacks where a compromised action tag is silently replaced with malicious code.<Cite id={6} author="Bass, Len, Ingo Weber, and Liming Zhu" title="DevOps: A Software Architect's Perspective" source="Addison-Wesley" year={2015} /> Bass et al. identify supply-chain integrity as a DevOps architectural concern — this repository implements that concern at the organizational boundary, ensuring that no repository in the system can accidentally reference an unvetted action version.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Security scanning tools comparison" caption="Security scanning tool matrix — three complementary tools covering secrets detection, static analysis, and dependency vulnerabilities">
         <div class="table-wrap">
@@ -141,9 +167,17 @@ jobs:
       />
 
       <h2>AI Agent Framework</h2>
-      <p>
+      <ShibuiContent id="org-architecture.ai-agent-framework.p1">
+	<span slot="entry">
+		<p>I built a layer of specialized AI agents that plug directly into the development workflow. Security agents review pull requests for vulnerabilities, documentation agents keep READMEs consistent across all repos, and infrastructure agents validate workflow configurations. They all work through GitHub Copilot, so there is no separate toolchain to learn.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         The third layer is the most forward-looking: a framework of production AI agents, each specialized for a domain within the organizational workflow. Security agents review pull requests for vulnerability patterns, infrastructure agents validate workflow configurations and dependency graphs, development agents assist with code generation within the established patterns, and documentation agents enforce consistency across the {vitals.repos.total} repositories' README files and changelogs.<Cite id={7} author="Wooldridge, Michael" title="An Introduction to MultiAgent Systems" source="John Wiley & Sons" year={2009} /> Wooldridge's taxonomy of agent architectures — reactive, deliberative, and hybrid — maps onto the framework's design: security agents are reactive (trigger on PR events), documentation agents are deliberative (analyze repository state and generate updates), and development agents are hybrid (respond to immediate requests while maintaining context across sessions). The agents are implemented as GitHub Copilot-compatible configurations, meaning they integrate with the developer's existing IDE workflow rather than requiring a separate toolchain.<Cite id={8} author="Russell, Stuart and Peter Norvig" title="Artificial Intelligence: A Modern Approach" source="Pearson" year={2020} /> Russell and Norvig's framework for rational agents — perceive, reason, act — is realized concretely: each agent perceives through GitHub event webhooks, reasons through its specialized prompt context, and acts through the GitHub API. The chatmodes layer adds specialized personas — a security auditor, a documentation editor, a dependency analyst — each with tailored system prompts and tool access policies.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="yaml" caption="AI agent configuration — production security agent with scoped permissions and Copilot integration" filename=".github/agents/security-reviewer.yml">
 {`name: security-reviewer
@@ -176,9 +210,17 @@ copilot:
       </CodeStructure>
 
       <h2>Design Philosophy: Infrastructure as Culture</h2>
-      <p>
-        The deeper claim of this project is that organizational culture can be encoded as versionable, reviewable, inheritable artifacts. This is infrastructure-as-code thinking applied not to servers or networks but to governance, contributor experience, and development methodology.<Cite id={9} author="Morris, Kief" title="Infrastructure as Code: Managing Servers in the Cloud" source="O'Reilly Media" year={2016} /> Morris argues that treating infrastructure as code provides four benefits — reproducibility, consistency, auditability, and recoverability — and every one of these applies to organizational standards. When the Code of Conduct is a file in a Git repository, it has a commit history, a blame log, a review trail. When CI policy changes, the diff is visible and the rollback path is clear. This transforms governance from an implicit social agreement into an explicit, testable system.<Cite id={10} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's Nobel Prize-winning research on institutional governance demonstrated that successful commons management requires clear boundaries, proportional rules, collective-choice arrangements, and monitoring — all of which this repository implements through GitHub's access controls, inherited workflow rules, PR-based governance changes, and automated health monitoring respectively.
+      <ShibuiContent id="org-architecture.design-philosophy-infrastructure-as-culture.p1">
+	<span slot="entry">
+		<p>I believe organizational culture can be encoded as versionable, reviewable code -- just like server infrastructure. When a Code of Conduct lives in a Git repository, it has a commit history, a blame log, and a review trail. When CI policy changes, the diff is visible and you can roll back. This turns governance from an unwritten social agreement into an explicit, testable system.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The deeper claim of this project is that organizational culture can be encoded as versionable, reviewable, inheritable artifacts. This is <ShibuiTerm term="infrastructure-as-culture" definition="Applying infrastructure-as-code principles to governance and social contracts, making organizational norms versionable, testable, and auditable" /> thinking applied not to servers or networks but to governance, contributor experience, and development methodology.<Cite id={9} author="Morris, Kief" title="Infrastructure as Code: Managing Servers in the Cloud" source="O'Reilly Media" year={2016} /> Morris argues that treating infrastructure as code provides four benefits — reproducibility, consistency, auditability, and recoverability — and every one of these applies to organizational standards. When the Code of Conduct is a file in a Git repository, it has a commit history, a blame log, a review trail. When CI policy changes, the diff is visible and the rollback path is clear. This transforms governance from an implicit social agreement into an explicit, testable system.<Cite id={10} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's Nobel Prize-winning research on institutional governance demonstrated that successful commons management requires clear boundaries, proportional rules, collective-choice arrangements, and monitoring — all of which this repository implements through GitHub's access controls, inherited workflow rules, PR-based governance changes, and automated health monitoring respectively.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Governance features mapped to Ostrom's institutional design principles" caption="Mapping Ostrom's eight institutional design principles to the .github repository's governance implementation">
         <div class="table-wrap">
@@ -198,9 +240,17 @@ copilot:
         </div>
       </Figure>
 
-      <p>
+      <ShibuiContent id="org-architecture.design-philosophy-infrastructure-as-culture.p2">
+	<span slot="entry">
+		<p>I made AI agents part of the governance layer rather than a separate system. An agent's prompt is as consequential as a CI pipeline config, so it should be versioned, reviewed, and access-controlled through the same Git workflows. This makes agent capabilities visible, auditable, and revocable.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         The decision to make AI agents part of this governance layer — rather than a separate system — reflects a deliberate architectural position: AI tooling should be subject to the same review, versioning, and access control processes as any other piece of organizational infrastructure. An agent's prompt is as consequential as a CI pipeline's configuration, and should be governed accordingly.<Cite id={7} author="Wooldridge, Michael" title="An Introduction to MultiAgent Systems" source="John Wiley & Sons" year={2009} /> Wooldridge identifies trust and delegation as the central challenges of multi-agent systems; by placing agent configurations within the same governance framework as security policies and contribution guidelines, the system makes agent capabilities visible, auditable, and revocable through familiar Git-based workflows rather than opaque administrative interfaces.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Inheritance override decision tree — repositories inherit all organizational defaults unless they define explicit overrides, which are tracked by the monthly health audit"
@@ -220,9 +270,17 @@ copilot:
       />
 
       <h2>Automation Pipeline</h2>
-      <p>
+      <ShibuiContent id="org-architecture.automation-pipeline.p1">
+	<span slot="entry">
+		<p>I built a Python automation layer that goes beyond static governance files. It includes health score calculations, workflow analysis, label synchronization, action pin updates, and batch onboarding -- all as production modules with typed interfaces and test coverage. Everything needed to manage the organization is generated from code and deployed through the same CI pipelines as application software.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         Beyond static governance files, the repository includes a Python automation layer — an <code>src/</code> directory containing two subsystems: <code>ai_framework/</code> and <code>automation/</code>. The AI framework implements the agent, chatmode, and collection inventory generators that produce machine-readable manifests of every AI configuration deployed across the organization. The automation subsystem handles operational concerns: health score calculation, workflow analysis, repository evaluation, label synchronization, action pin updates, batch onboarding, and proactive maintenance scheduling. These are not ad-hoc scripts but production Python modules with typed interfaces, structured configuration, and comprehensive test coverage.<Cite id={5} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation" source="Addison-Wesley" year={2010} /> Humble and Farley's core principle — that everything needed to build, test, and deploy should be version-controlled and automated — extends here beyond code and pipelines to the organizational infrastructure itself: health audits, label taxonomies, agent inventories, and maintenance schedules are all generated from code, tested against assertions, and deployed through the same CI pipelines that govern application software.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="python" caption="Health score calculation — evaluating repository compliance against organizational standards with weighted scoring across governance dimensions." filename="src/automation/calculate_health_score.py">
 {`from dataclasses import dataclass
@@ -265,9 +323,17 @@ class HealthReport:
       </CodeStructure>
 
       <h2>Testing and Verification</h2>
-      <p>
-        The repository maintains over sixty unit tests covering every automation module and AI framework component. Test categories include workflow health analysis, repository health scoring, agent and chatmode frontmatter validation, label schema validation, action pin security verification, batch onboarding processes, quota management, secret rotation, SLA monitoring, notification integration, incident response automation, and ML-based workflow failure prediction. The test suite also includes security-specific tests: SSRF protection logic, web crawler security boundaries, and secret manager access controls.<Cite id={6} author="Bass, Len, Ingo Weber, and Liming Zhu" title="DevOps: A Software Architect's Perspective" source="Addison-Wesley" year={2015} /> Bass et al.'s treatment of security as an architectural concern — not a feature to be bolted on but a quality attribute to be designed for — manifests in the test suite's structure: security tests are not isolated in a separate directory but woven throughout the automation modules, ensuring that every component that touches external resources or processes untrusted input is tested against adversarial scenarios.
+      <ShibuiContent id="org-architecture.testing-and-verification.p1">
+	<span slot="entry">
+		<p>I wrote over sixty unit tests covering every automation module and AI framework component. Security tests are not isolated in a separate folder -- they are woven throughout the automation modules so that every component handling external resources or untrusted input is tested against adversarial scenarios. The test suite validates everything from label schemas to SSRF protection logic.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The repository maintains over sixty unit tests covering every automation module and AI framework component. Test categories include workflow health analysis, repository health scoring, agent and chatmode frontmatter validation, label schema validation, action pin security verification, batch onboarding processes, quota management, secret rotation, SLA monitoring, notification integration, incident response automation, and ML-based workflow failure prediction. The test suite also includes security-specific tests: <ShibuiTerm term="SSRF" definition="Server-Side Request Forgery -- an attack where a server is tricked into making requests to unintended internal resources on the attacker's behalf" /> protection logic, web crawler security boundaries, and secret manager access controls.<Cite id={6} author="Bass, Len, Ingo Weber, and Liming Zhu" title="DevOps: A Software Architect's Perspective" source="Addison-Wesley" year={2015} /> Bass et al.'s treatment of security as an architectural concern — not a feature to be bolted on but a quality attribute to be designed for — manifests in the test suite's structure: security tests are not isolated in a separate directory but woven throughout the automation modules, ensuring that every component that touches external resources or processes untrusted input is tested against adversarial scenarios.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Test coverage across automation modules" caption="Test coverage matrix — sixty-plus unit tests organized across automation, AI framework, and security domains.">
         <div class="table-wrap">

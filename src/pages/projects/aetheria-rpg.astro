@@ -5,6 +5,8 @@ import Figure from '../../components/academic/Figure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import vitals from '../../data/vitals.json';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
@@ -21,9 +23,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 		{ src: 'https://img.shields.io/github/last-commit/organvm-iii-ergon/classroom-rpg-aetheria', alt: 'Last commit' },
 	]}>
 	<h2>The Full Pipeline</h2>
-	<p>
-		Aetheria is the project that proves the system works — and honestly reveals where it doesn't. It traveled the complete I→II→III path: from gamification theory to game design to revenue product. I directed the comprehensive post-mortem below because honest reflection on what failed teaches more than polished success stories.<Cite id={1} author="Ries, Eric" title="The Lean Startup" source="Crown Business" year={2011} />
-	</p>
+	<ShibuiContent id="aetheria-rpg.the-full-pipeline.p1">
+		<span slot="entry">
+			<p>I took a classroom RPG from theory through game design to a revenue product, following my own governance pipeline end to end. It proved the system works -- and honestly showed where it doesn't. I'm including the full post-mortem because honest failures teach more than polished wins.</p>
+		</span>
+		<span slot="elevated">
+			<p>
+				Aetheria is the project that proves the system works — and honestly reveals where it doesn't. It traveled the complete I→II→III path: from gamification theory to game design to revenue product. I directed the comprehensive post-mortem below because honest reflection on what failed teaches more than polished success stories.<Cite id={1} author="Ries, Eric" title="The Lean Startup" source="Crown Business" year={2011} />
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<MermaidDiagram
 		caption="The I→II→III pipeline with governance gates — each transition requires explicit validation before advancing"
@@ -38,9 +48,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 	/>
 
 	<h2>The Theory (ORGAN-I)</h2>
-	<p>
-		Not shallow "add points and badges" gamification. Structural gamification — using game <em>design</em> principles to reshape learning:<Cite id={2} author="Deterding, Sebastian et al." title="From Game Design Elements to Gamefulness: Defining Gamification" source="Proceedings of MindTrek 2011, ACM" year={2011} /> Deterding's framework distinguishes between surface-level gamification (points, badges, leaderboards) and deeper gameful design that draws on game design's capacity to create intrinsically motivated engagement.
-	</p>
+	<ShibuiContent id="aetheria-rpg.the-theory-organ-i.p1">
+		<span slot="entry">
+			<p>I'm building a role-playing game where the world isn't just a static map, but a living system that reacts to how players behave. I designed an engine that tracks every decision and interaction, allowing the story and environment to shift based on the collective weight of those choices. It's my way of moving past scripted paths to create a space where the narrative feels earned and truly unique to the person playing.</p>
+		</span>
+		<span slot="elevated">
+			<p>
+				Not shallow "add points and badges" gamification. <ShibuiTerm term="Structural gamification" definition="Using game design principles like meaningful choice, progression systems, and narrative framing to reshape an activity, rather than just adding points and badges" /> — using game <em>design</em> principles to reshape learning:<Cite id={2} author="Deterding, Sebastian et al." title="From Game Design Elements to Gamefulness: Defining Gamification" source="Proceedings of MindTrek 2011, ACM" year={2011} /> Deterding's framework distinguishes between surface-level gamification (points, badges, leaderboards) and deeper gameful design that draws on game design's capacity to create intrinsically motivated engagement.
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 	<ul>
 		<li><strong>Meaningful choices</strong> over reward schedules (Deterding's gameful design)</li>
 		<li><strong>Recursive pedagogy</strong> — learning is recursive; Level 3 quests require applying Level 2 knowledge in new contexts</li>
@@ -55,9 +73,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 	</p>
 
 	<h2>Technical Architecture</h2>
-	<p>
-		Aetheria is a React 19 single-page application built with TypeScript 5.9 (strict mode), Vite, and Tailwind CSS. The architecture follows a context-provider pattern with three primary React contexts — <code>GameStateContext</code> for realm/quest/submission state, <code>FirebaseContext</code> for authentication and persistence, and <code>ThemeContext</code> for the theming engine — ensuring clear separation of concerns across the game loop, infrastructure, and presentation layers.<Cite id={13} author="Gamma, Erich et al." title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1995} /> The context-provider pattern mirrors Gamma's Strategy pattern: game state mutations flow through typed action functions that enforce domain invariants before updating state, preventing the kind of implicit coupling that plagues educational software built on ad-hoc state management.
-	</p>
+	<ShibuiContent id="aetheria-rpg.technical-architecture.p1">
+		<span slot="entry">
+			<p>I built Aetheria as a React 19 app with TypeScript in strict mode, Vite, and Tailwind CSS. I separated concerns into three React contexts: one for game state, one for Firebase authentication, and one for theming. State mutations flow through typed action functions that enforce game rules before updating, which prevents the spaghetti coupling that usually plagues educational software.</p>
+		</span>
+		<span slot="elevated">
+			<p>
+		Aetheria is a React 19 single-page application built with TypeScript 5.9 (strict mode), Vite, and Tailwind CSS. The architecture follows a <ShibuiTerm term="context-provider architecture" definition="A React pattern where application state is organized into distinct context objects, each managing one domain, and made available to the component tree through provider wrappers" /> with three primary React contexts — <code>GameStateContext</code> for realm/quest/submission state, <code>FirebaseContext</code> for authentication and persistence, and <code>ThemeContext</code> for the theming engine — ensuring clear separation of concerns across the game loop, infrastructure, and presentation layers.<Cite id={13} author="Gamma, Erich et al." title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1995} /> The context-provider pattern mirrors Gamma's Strategy pattern: game state mutations flow through typed action functions that enforce domain invariants before updating state, preventing the kind of implicit coupling that plagues educational software built on ad-hoc state management.
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<Figure alt="Aetheria technical stack overview showing framework, language, build tool, and infrastructure choices" caption="Technical stack: each layer chosen for a specific architectural reason, not trend-following">
 		<div class="table-wrap">
@@ -77,9 +103,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 		</div>
 	</Figure>
 
-	<p>
-		The domain model defines over 30 TypeScript interfaces organized into five layers: core game types (Realm, Quest, Submission, Artifact, KnowledgeCrystal), educator extensions (Syllabus, RubricData, ReportConfig), personalization types (ThematicVariant, ThreeWayVote, ParentAccount), standards alignment (LearningStandardRef, StandardMastery), and system types (Notification, AIConsentState). Quest types include <code>standard</code>, <code>boss</code>, <code>redemption</code>, <code>learning</code>, <code>challenge</code>, and <code>essay</code>, each with distinct XP values and prerequisite chains. The quest status machine follows: <code>locked → available → in_progress → completed | failed</code>.<Cite id={14} author="Evans, Eric" title="Domain-Driven Design: Tackling Complexity in the Heart of Software" source="Addison-Wesley" year={2003} /> Evans's principle that the domain model should be the backbone of the codebase — not an afterthought imposed by framework constraints — drove the decision to define all game mechanics as typed interfaces before writing a single React component.
-	</p>
+	<ShibuiContent id="aetheria-rpg.technical-architecture.p2">
+		<span slot="entry">
+			<p>I defined over 30 TypeScript interfaces across five layers before writing a single React component. The domain model covers game mechanics, educator tools, personalization, standards alignment, and system notifications. Six quest types each have distinct XP values and prerequisite chains, following a clear status machine from locked through completion or failure.</p>
+		</span>
+		<span slot="elevated">
+			<p>
+		The domain model defines over 30 TypeScript interfaces organized into five layers: core game types (Realm, Quest, Submission, Artifact, KnowledgeCrystal), educator extensions (Syllabus, RubricData, ReportConfig), personalization types (ThematicVariant, ThreeWayVote, ParentAccount), standards alignment (LearningStandardRef, StandardMastery), and system types (Notification, AIConsentState). Quest types include <code>standard</code>, <code>boss</code>, <code>redemption</code>, <code>learning</code>, <code>challenge</code>, and <code>essay</code>, each with distinct XP values and prerequisite chains. The quest status machine follows: <code>locked → available → in_progress → completed | failed</code>.<Cite id={14} author="Evans, Eric" title="Domain-Driven Design: Tackling Complexity in the Heart of Software" source="Addison-Wesley" year={2003} /> Evans's <ShibuiTerm term="domain-driven design" definition="Eric Evans's approach where the software's core structure directly models the business domain, with shared language between developers and domain experts driving architecture decisions" /> principle that the domain model should be the backbone of the codebase — not an afterthought imposed by framework constraints — drove the decision to define all game mechanics as typed interfaces before writing a single React component.
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<CodeStructure lang="typescript" caption="Core quest and character system type definitions — stats map to learning modalities, quests compose from assignment templates" filename="types/game-system.ts">{`// Character stat system — four growth dimensions
 interface CharacterStats {
@@ -141,9 +175,17 @@ interface WorldRule {
 	/>
 
 	<h2>Game Mechanics in Depth</h2>
-	<p>
-		The XP and level progression system uses an eight-tier curve (Novice through Legend) where each tier requires progressively more effort. The <code>calculateLevel()</code> function maps cumulative XP to level thresholds, and <code>getLevelTitle()</code> returns a role-appropriate title depending on whether the user is a student or teacher. Level-ups trigger sound effects and toast notifications, maintaining the feedback loop that sustains engagement.<Cite id={7} author="Csikszentmihalyi, Mihaly" title="Flow: The Psychology of Optimal Experience" source="Harper & Row" year={1990} /> The progression curve was calibrated to Csikszentmihalyi's flow channel: too-easy thresholds produce boredom, too-steep thresholds produce anxiety, and the sweet spot keeps students in the productive zone where challenge matches skill.
-	</p>
+	<ShibuiContent id="aetheria-rpg.game-mechanics-in-depth.p1">
+		<span slot="entry">
+			<p>I designed an eight-tier progression curve from Novice through Legend, where each tier requires progressively more effort. Level-ups trigger sound effects and notifications to maintain the feedback loop. I calibrated the curve so the difficulty stays in the sweet spot between boredom and anxiety -- keeping students engaged without overwhelming them.</p>
+		</span>
+		<span slot="elevated">
+			<p>
+		The XP and level progression system uses an eight-tier curve (Novice through Legend) where each tier requires progressively more effort. The <code>calculateLevel()</code> function maps cumulative XP to level thresholds, and <code>getLevelTitle()</code> returns a role-appropriate title depending on whether the user is a student or teacher. Level-ups trigger sound effects and toast notifications, maintaining the feedback loop that sustains engagement.<Cite id={7} author="Csikszentmihalyi, Mihaly" title="Flow: The Psychology of Optimal Experience" source="Harper & Row" year={1990} /> The progression curve was calibrated to Csikszentmihalyi's <ShibuiTerm term="flow channel" definition="The narrow zone between boredom and anxiety where challenge matches skill level, producing a state of deep, intrinsically motivated engagement" />: too-easy thresholds produce boredom, too-steep thresholds produce anxiety, and the sweet spot keeps students in the productive zone where challenge matches skill.
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 	<p>
 		<strong>Artifact scarcity drives quality.</strong> High-scoring submissions generate artifacts with procedurally generated names and rarity tiers (<code>common</code>, <code>rare</code>, <code>epic</code>, <code>legendary</code>). The <code>generateArtifactName()</code> function combines theme-specific prefixes and suffixes with concept words extracted from the quest name — a legendary artifact from a rhetoric quest in fantasy mode might be "Enchanted Tome of Rhetoric," while the same achievement in cyberpunk mode produces "Quantum Core of Rhetoric." Knowledge Crystals are separate collectibles tied to quest completions that students can "attune" to demonstrate mastery retention.
 	</p>
@@ -174,9 +216,17 @@ interface WorldRule {
 	/>
 
 	<h2>Testing and Quality Infrastructure</h2>
-	<p>
-		The testing infrastructure uses Vitest with React Testing Library and jsdom. Test coverage spans hooks (<code>use-ai-consent</code>, <code>use-dialogs</code>, <code>use-feedback-snippets</code>, <code>use-navigation-items</code>, <code>use-parent-linking</code>, <code>use-player-stats</code>, <code>use-reduced-motion</code>), library utilities (<code>api-retry</code>, <code>circuit-breaker</code>, <code>game-utils</code>, <code>network</code>, <code>rate-limiter</code>, <code>sandbox-mode</code>, <code>sanitize</code>, <code>schemas</code>, <code>utils</code>), and core type validation. Six CI workflows run on every push: CI pipeline, CodeQL static analysis, dependency review, deployment, video generation, and stale issue management. The circuit breaker pattern prevents cascading failures from degraded LLM API calls, the rate limiter throttles AI evaluation requests to manage cost, and DOMPurify sanitizes all AI-generated content before rendering.<Cite id={15} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2007} /> Nygard's stability patterns — particularly the circuit breaker and bulkhead — informed the resilience layer: educational software that fails during a classroom session loses trust permanently, so graceful degradation is not optional but architecturally mandated.
-	</p>
+	<ShibuiContent id="aetheria-rpg.testing-and-quality-infrastructure.p1">
+		<span slot="entry">
+			<p>I built a resilience layer with circuit breakers, rate limiters, and content sanitization because educational software that fails during a classroom session loses trust permanently. Six CI workflows run on every push. The circuit breaker prevents cascading failures from degraded AI calls, and DOMPurify sanitizes all AI-generated content before students see it.</p>
+		</span>
+		<span slot="elevated">
+			<p>
+		The testing infrastructure uses Vitest with React Testing Library and jsdom. Test coverage spans hooks (<code>use-ai-consent</code>, <code>use-dialogs</code>, <code>use-feedback-snippets</code>, <code>use-navigation-items</code>, <code>use-parent-linking</code>, <code>use-player-stats</code>, <code>use-reduced-motion</code>), library utilities (<code>api-retry</code>, <code>circuit-breaker</code>, <code>game-utils</code>, <code>network</code>, <code>rate-limiter</code>, <code>sandbox-mode</code>, <code>sanitize</code>, <code>schemas</code>, <code>utils</code>), and core type validation. Six CI workflows run on every push: CI pipeline, CodeQL static analysis, dependency review, deployment, video generation, and stale issue management. The <ShibuiTerm term="circuit breaker" definition="A resilience pattern that monitors for failures and temporarily stops calling a degraded service, preventing cascading failures across the system" /> pattern prevents cascading failures from degraded LLM API calls, the rate limiter throttles AI evaluation requests to manage cost, and DOMPurify sanitizes all AI-generated content before rendering.<Cite id={15} author="Nygard, Michael T." title="Release It! Design and Deploy Production-Ready Software" source="Pragmatic Bookshelf" year={2007} /> Nygard's stability patterns — particularly the circuit breaker and bulkhead — informed the resilience layer: educational software that fails during a classroom session loses trust permanently, so graceful degradation is not optional but architecturally mandated.
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<CodeStructure lang="typescript" caption="Resilience patterns: circuit breaker wraps LLM calls to prevent cascading failures during classroom sessions" filename="src/lib/circuit-breaker.ts">{`// Circuit breaker states for AI evaluation service
 type CircuitState = 'closed' | 'open' | 'half-open';
@@ -228,11 +278,19 @@ const evaluationBreaker = createCircuitBreaker({
 	</p>
 
 	<h2>What Failed</h2>
-	<p>
-		<strong>Onboarding complexity.</strong> 2-3 hours of setup. Teachers don't have that time.<Cite id={9} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /> Brooks's observation that conceptual integrity demands one mind (or a very small team) shaping the user experience proved prescient — we had built a system that reflected our own understanding rather than meeting teachers where they were.
-		<strong>Free tier didn't demonstrate value.</strong> Without the narrative engine, it looked like every other gamification tool.<Cite id={10} author="Christensen, Clayton M." title="The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail" source="Harvard Business Review Press" year={1997} /> Christensen's framework reveals our pricing failure — the free tier stripped away the disruptive innovation (narrative integration) and left only sustaining features that incumbents already offered better.
-		<strong>Wrong sales direction.</strong> Bottom-up (individual teachers) when value was clearest at school level.<Cite id={11} author="Deci, Edward L. and Ryan, Richard M." title="Self-Determination Theory: A Macrotheory of Human Motivation, Development, and Health" source="Canadian Psychology, 49(3)" year={2008} /> Self-determination theory explains the adoption gap: individual teachers lacked institutional autonomy to adopt a tool that required cross-classroom coordination, undermining the competence and relatedness needs that drive sustained engagement.
-	</p>
+	<ShibuiContent id="aetheria-rpg.what-failed.p1">
+		<span slot="entry">
+			<p>I realized that getting started was far too difficult, requiring two to three hours of setup that teachers simply didn't have. I saw firsthand that even the most well-designed tool fails if the initial hurdle to use it is too high for a busy professional.</p>
+		</span>
+		<span slot="elevated">
+			<p>
+				<strong>Onboarding complexity.</strong> 2-3 hours of setup. Teachers don't have that time.<Cite id={9} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} /> Brooks's observation that conceptual integrity demands one mind (or a very small team) shaping the user experience proved prescient — we had built a system that reflected our own understanding rather than meeting teachers where they were.
+				<strong>Free tier didn't demonstrate value.</strong> Without the narrative engine, it looked like every other gamification tool.<Cite id={10} author="Christensen, Clayton M." title="The Innovator's Dilemma: When New Technologies Cause Great Firms to Fail" source="Harvard Business Review Press" year={1997} /> Christensen's framework reveals our pricing failure — the free tier stripped away the disruptive innovation (narrative integration) and left only sustaining features that incumbents already offered better.
+				<strong>Wrong sales direction.</strong> Bottom-up (individual teachers) when value was clearest at school level.<Cite id={11} author="Deci, Edward L. and Ryan, Richard M." title="Self-Determination Theory: A Macrotheory of Human Motivation, Development, and Health" source="Canadian Psychology, 49(3)" year={2008} /> Self-determination theory explains the adoption gap: individual teachers lacked institutional autonomy to adopt a tool that required cross-classroom coordination, undermining the competence and relatedness needs that drive sustained engagement.
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<MermaidDiagram
 		caption="Onboarding funnel with drop-off analysis — teacher attrition concentrated at setup complexity and free-tier value perception"
@@ -277,9 +335,17 @@ const evaluationBreaker = createCircuitBreaker({
 	</p>
 
 	<h2>Why Include a Failure?</h2>
-	<p>
+	<ShibuiContent id="aetheria-rpg.why-include-a-failure.p1">
+		<span slot="entry">
+			<p>I included this project because the governance pipeline worked exactly as designed -- it caught problems, preserved every decision, and made this honest post-mortem possible. The product needs more work, but the system that produced it is sound. Good governance doesn't prevent failure; it makes failure legible and recoverable.</p>
+		</span>
+		<span slot="elevated">
+			<p>
 		The I→II→III pipeline worked as governance — it caught problems, preserved decisions, and enabled this post-mortem. The product needs iteration, but the system that produced it is sound. That's what governance as creative infrastructure looks like in practice: not preventing failure, but making failure legible and recoverable.<Cite id={12} author="Papert, Seymour" title="Mindstorms: Children, Computers, and Powerful Ideas" source="Basic Books" year={1980} /> Papert's constructionism holds that the best learning happens through building things that fail and then understanding why — Aetheria itself became an instance of the pedagogy it tried to teach, and this post-mortem is the assignment. Within a system of {vitals.repos.total} repositories across {vitals.repos.orgs} organs, Aetheria demonstrates that the governance model produces accountable outcomes even when the product itself requires further iteration.
-	</p>
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<Figure alt="Key Aetheria metrics at a glance: 47 pilot classrooms, 41% six-month retention, +23% engagement, 42 NPS, 2.5 hour onboarding, 4 character stats, 13 core features, 6 quest types" caption="Aetheria by the numbers — a snapshot of what the pilot produced across engagement, retention, and design dimensions">
 		<StatGrid stats={[

@@ -5,6 +5,8 @@ import Figure from '../../components/academic/Figure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
@@ -22,9 +24,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       <h2>The Problem: Monologue Masquerading as Deliberation</h2>
 <SketchContainer sketchId="deliberation" height="250px" mobileHeight="180px" ariaLabel="Converging deliberation vectors" />
 
-      <p>
-        The dominant paradigm in AI assistance is the single-agent monologue: one model, one prompt, one answer. This collapses the epistemic richness that emerges when multiple perspectives genuinely contend with each other.<Cite id={1} author="Russell, Stuart and Peter Norvig" title="Artificial Intelligence: A Modern Approach" source="Pearson" year={2020} /> Russell and Norvig formalize the multi-agent environment as one where "the best course of action for each agent depends on what the other agents do" — a fundamentally different problem than single-agent optimization. The AI Council Coliseum operationalizes this insight: rather than asking one model for the best answer, it stages structured deliberation among agents with distinct positions, letting adversarial argument surface considerations that consensus-seeking models suppress.<Cite id={2} author="Wooldridge, Michael" title="An Introduction to MultiAgent Systems" source="John Wiley & Sons" year={2009} /> Wooldridge's taxonomy of agent interaction — cooperative, competitive, and mixed — maps directly onto the Coliseum's debate formats, where agents must balance advocacy for their position with responsiveness to counter-arguments.
+      <ShibuiContent id="ai-council.the-problem-monologue-masquerading-as-deliberation.p1">
+	<span slot="entry">
+		<p>I noticed that most AI tools work like a single person talking to themselves—one model gives an answer, and you're stuck with its specific biases or mistakes. To fix this, I built a system where multiple different AI models actually debate each other. Instead of just trusting the first thing one model says, I made them challenge each other's logic to catch errors and find a much more reliable, balanced answer.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The dominant paradigm in AI assistance is the single-agent monologue: one model, one prompt, one answer. This collapses the epistemic richness that emerges when multiple perspectives genuinely contend with each other.<Cite id={1} author="Russell, Stuart and Peter Norvig" title="Artificial Intelligence: A Modern Approach" source="Pearson" year={2020} /> Russell and Norvig formalize the <ShibuiTerm term="multi-agent environment" definition="A system where multiple autonomous agents interact, and each agent's optimal strategy depends on the actions of others" /> as one where "the best course of action for each agent depends on what the other agents do" — a fundamentally different problem than single-agent optimization. The AI Council Coliseum operationalizes this insight: rather than asking one model for the best answer, it stages structured <ShibuiTerm term="deliberative alignment" definition="A process where multiple AI models with distinct positions reach more reliable conclusions through structured adversarial reasoning" /> among agents with distinct positions, letting adversarial argument surface considerations that consensus-seeking models suppress.<Cite id={2} author="Wooldridge, Michael" title="An Introduction to MultiAgent Systems" source="John Wiley & Sons" year={2009} /> Wooldridge's taxonomy of agent interaction — cooperative, competitive, and mixed — maps directly onto the Coliseum's debate formats, where agents must balance advocacy for their position with responsiveness to counter-arguments.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Core deliberation flow — agents are created with positions, engage in structured debate rounds, face audience voting, and produce governance outcomes"
@@ -44,9 +54,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       />
 
       <h2>Technical Architecture: FastAPI + Next.js</h2>
-      <p>
+      <ShibuiContent id="ai-council.technical-architecture-fastapi-next-js.p1">
+	<span slot="entry">
+		<p>I built the Coliseum as two separate pieces: a FastAPI backend that runs all the debate logic and a Next.js frontend for live audience interaction. The API is organized around five domains -- agents, events, voting, achievements, and stats -- and I deliberately kept debate state in memory for real-time speed, accepting the tradeoff that a server restart mid-debate would lose progress.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         The Coliseum is built as a decoupled system: I directed the architecture of a <a href="https://github.com/organvm-ii-poiesis/a-i-council--coliseum/tree/main/api" target="_blank">FastAPI backend</a> that manages all deliberation state and a <strong>Next.js frontend scaffold</strong> for real-time audience interaction. The API follows REST conventions with resource-oriented endpoints organized around five domains: agents, events, voting, achievements, and user statistics.<Cite id={3} author="Fielding, Roy Thomas" title="Architectural Styles and the Design of Network-Based Software Architectures" source="Doctoral dissertation, University of California, Irvine" year={2000} /> Fielding's dissertation defines the constraints that make REST scalable — stateless interactions, uniform interfaces, layered systems — and the Coliseum adheres to these rigorously, with one deliberate exception: debate state is maintained in-memory on the server to enable real-time round progression without the latency of database round-trips. This is not accidental statefulness but a conscious architectural tradeoff, following the principle that patterns should be applied where they serve the system's actual constraints, not as dogma.<Cite id={4} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The Observer pattern governs event propagation: when an agent submits a statement, all subscribed clients receive the update through server-sent events, enabling the real-time spectacle that makes deliberation watchable.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="python" caption="Agent lifecycle management — creation, debate assignment, and state transitions through the deliberation pipeline" filename="api/agents.py">
 {`from fastapi import APIRouter, HTTPException
@@ -110,9 +128,17 @@ async def enter_debate(agent_id: str, debate_id: str) -> Agent:
       </CodeStructure>
 
       <h2>The Deliberation Model</h2>
-      <p>
-        The Coliseum's deliberation format is not arbitrary — it draws on formal argumentation theory to structure how agents engage. Each debate proceeds through three rounds: position statement, rebuttal, and synthesis. This structure mirrors Habermas's conditions for rational discourse, where validity claims must be raised, challenged, and redeemed through argument rather than authority.<Cite id={5} author="Habermas, Jürgen" title="The Theory of Communicative Action, Vol. 1: Reason and the Rationalization of Society" source="Beacon Press" year={1981} /> Agents don't simply state positions in parallel — they must respond to what the opposing agent actually said, creating genuine dialectical tension. The system enforces this structurally: a Round 2 response that fails to reference specific claims from Round 1 is flagged by the moderator logic as non-responsive. This matters because the goal is not to simulate debate aesthetics but to produce the epistemic benefits that adversarial reasoning provides.<Cite id={6} author="Mercier, Hugo and Dan Sperber" title="The Enigma of Reason" source="Harvard University Press" year={2017} /> Mercier and Sperber's argumentative theory of reasoning holds that human reason evolved not for solitary truth-seeking but for persuading others and evaluating their arguments — the Coliseum externalizes this into a computational architecture where agents must justify their reasoning to survive audience judgment.
+      <ShibuiContent id="ai-council.the-deliberation-model.p1">
+	<span slot="entry">
+		<p>I designed the debates to follow a three-round structure: state your position, rebut the opponent, then synthesize. Agents can't just talk past each other -- the system flags any response that doesn't engage with what the other side actually said. The goal isn't to look like a debate; it's to force the kind of adversarial reasoning that actually surfaces better answers.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The Coliseum's deliberation format is not arbitrary — it draws on formal <ShibuiTerm term="argumentation theory" definition="The interdisciplinary study of how conclusions are reached through logical reasoning, evidence, and structured debate" /> to structure how agents engage. Each debate proceeds through three rounds: position statement, rebuttal, and synthesis. This structure mirrors Habermas's conditions for <ShibuiTerm term="rational discourse" definition="Habermas's ideal of communication where validity claims are redeemed through the force of argument alone, not authority or coercion" />, where validity claims must be raised, challenged, and redeemed through argument rather than authority.<Cite id={5} author="Habermas, Jürgen" title="The Theory of Communicative Action, Vol. 1: Reason and the Rationalization of Society" source="Beacon Press" year={1981} /> Agents don't simply state positions in parallel — they must respond to what the opposing agent actually said, creating genuine dialectical tension. The system enforces this structurally: a Round 2 response that fails to reference specific claims from Round 1 is flagged by the moderator logic as non-responsive. This matters because the goal is not to simulate debate aesthetics but to produce the epistemic benefits that adversarial reasoning provides.<Cite id={6} author="Mercier, Hugo and Dan Sperber" title="The Enigma of Reason" source="Harvard University Press" year={2017} /> Mercier and Sperber's <ShibuiTerm term="argumentative theory of reasoning" definition="The hypothesis that human reasoning evolved primarily for producing and evaluating arguments in social contexts, not solitary truth-seeking" /> holds that human reason evolved not for solitary truth-seeking but for persuading others and evaluating their arguments — the Coliseum externalizes this into a computational architecture where agents must justify their reasoning to survive audience judgment.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Comparison of deliberation models" caption="Deliberation model comparison — the Coliseum implements adversarial debate with structured rounds, contrasted with consensus and voting approaches" number={1}>
         <div class="table-wrap">
@@ -168,9 +194,17 @@ async def enter_debate(agent_id: str, debate_id: str) -> Agent:
       </Figure>
 
       <h2>The Gamification Layer</h2>
-      <p>
+      <ShibuiContent id="ai-council.the-gamification-layer.p1">
+	<span slot="entry">
+		<p>I treated audience engagement as an engineering problem, not an afterthought. The system includes achievements, leaderboards, and unlockable capabilities that reward genuine deliberative behavior -- voting thoughtfully, engaging with diverse topics, identifying synthesis points -- rather than just showing up. The goal is making governance compelling enough that people actually participate.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         Governance is boring. This is not a design flaw — it is a design failure. The Coliseum treats audience engagement as a first-class engineering problem, implementing a progression system with achievements, leaderboards, and unlockable capabilities that reward sustained participation in deliberation.<Cite id={7} author="Deterding, Sebastian, Dan Dixon, Rilla Khaled, and Lennart Nacke" title="From Game Design Elements to Gamefulness: Defining Gamification" source="Proceedings of the 15th International Academic MindTrek Conference" year={2011} /> Deterding et al. distinguish gamification from full game design: it is the use of game elements in non-game contexts, and its effectiveness depends on whether those elements serve intrinsic rather than merely extrinsic motivation. The Coliseum's achievement system is designed around this distinction. Achievements like "Devil's Advocate" (voting against the majority 5 times) and "Bridge Builder" (identifying synthesis points across positions) reward genuine deliberative behavior, not just clicking buttons. The leaderboard tracks "Deliberation Quality Score" — a composite metric weighting argument engagement, voting consistency, and diversity of debate topics — rather than raw participation volume.<Cite id={8} author="McGonigal, Jane" title="Reality Is Broken: Why Games Make Us Better and How They Can Change the World" source="Penguin Press" year={2011} /> McGonigal's argument that games provide "unnecessary obstacles that we volunteer to tackle" maps precisely onto the Coliseum's design: nobody needs to watch AI agents debate, but the gamification transforms optional observation into compelling participation.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="User progression state machine — audiences advance through tiers by accumulating deliberation engagement, unlocking new capabilities at each level"
@@ -198,9 +232,17 @@ async def enter_debate(agent_id: str, debate_id: str) -> Agent:
       />
 
       <h2>Voting Sessions and Audience Judgment</h2>
-      <p>
+      <ShibuiContent id="ai-council.voting-sessions-and-audience-judgment.p1">
+	<span slot="entry">
+		<p>I built a voting system where audiences rate debates across four dimensions -- argument strength, evidence quality, responsiveness, and rhetorical clarity -- instead of simple thumbs up/down. The entire lifecycle is idempotent, meaning you can safely retry any operation without corrupting results. This matters in production where network issues cause duplicate requests.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         The voting system implements a three-phase lifecycle: open, active, and finalized. When a debate concludes its third round, a voting session opens with a configurable window (default 5 minutes for real-time, 24 hours for asynchronous deliberation). Votes are cast as weighted assessments across four dimensions — argument strength, evidence quality, responsiveness, and rhetorical clarity — rather than simple binary choices.<Cite id={9} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom's institutional analysis framework demonstrates that governance rules must match the structure of the problem they govern — the Coliseum's multi-dimensional voting prevents the degeneration into popularity contests that plague simple up/down systems. Once the voting window closes, the finalization endpoint computes results, updates agent rankings, triggers achievement checks, and publishes outcomes through the event system. The entire voting lifecycle is idempotent: calling finalize twice on the same session returns the same results without side effects, a property that becomes critical when network partitions or client retries occur in production deployment.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="python" caption="Voting session lifecycle — three-phase process with multi-dimensional weighted ballots and idempotent finalization" filename="api/voting.py">
 {`from pydantic import BaseModel, Field
@@ -281,9 +323,17 @@ class VotingSession(BaseModel):
       />
 
       <h2>Governance Architecture and Honest Scoping</h2>
-      <p>
-        The Coliseum's API includes endpoints for blockchain operations — staking, token transfers, reward distribution, and on-chain governance proposals. Every one of them returns HTTP <code>501 Not Implemented</code>. This is not laziness; it is an architectural statement about honest MVP scoping.<Cite id={9} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom demonstrates that successful governance institutions evolve incrementally from local practice rather than being imposed top-down from abstract theory — the Coliseum's deliberation mechanics must prove themselves in centralized form before decentralization adds value. The blockchain endpoints exist in the OpenAPI spec because they define the governance surface area: what operations will eventually be trustless, what state will live on-chain, what transitions require consensus. By making these explicit as 501s rather than hiding them, the architecture communicates its own roadmap.<Cite id={10} author="Buterin, Vitalik" title="Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform" source="Ethereum Whitepaper" year={2014} /> Buterin's vision of programmable governance — where rules are encoded as smart contracts that execute deterministically — is the Coliseum's long-term trajectory. But governance without a community is theater. The current MVP builds the community engagement layer (gamification, progression, achievements) first, so that when decentralization arrives, there are actual governance participants, not just governance infrastructure.
+      <ShibuiContent id="ai-council.governance-architecture-and-honest-scoping.p1">
+	<span slot="entry">
+		<p>I included blockchain governance endpoints in the API spec, but every one returns 501 Not Implemented. This is deliberate honesty about scope -- the decentralized features are the roadmap, not the MVP. I built the community engagement layer first because governance without actual participants is just theater. The 501s communicate exactly where the system is headed.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The Coliseum's API includes endpoints for blockchain operations — staking, token transfers, reward distribution, and on-chain governance proposals. Every one of them returns HTTP <code>501 Not Implemented</code>. This is not laziness; it is an architectural statement about honest MVP scoping.<Cite id={9} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} /> Ostrom demonstrates that successful governance institutions evolve incrementally from local practice rather than being imposed top-down from abstract theory — the Coliseum's deliberation mechanics must prove themselves in centralized form before decentralization adds value. The blockchain endpoints exist in the OpenAPI spec because they define the governance surface area: what operations will eventually be trustless, what state will live on-chain, what transitions require consensus. By making these explicit as 501s rather than hiding them, the architecture communicates its own roadmap.<Cite id={10} author="Buterin, Vitalik" title="Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform" source="Ethereum Whitepaper" year={2014} /> Buterin's vision of programmable governance — where rules are encoded as <ShibuiTerm term="smart contracts" definition="Self-executing programs stored on a blockchain that enforce agreement terms deterministically without intermediaries" /> that execute deterministically — is the Coliseum's long-term trajectory. But governance without a community is theater. The current MVP builds the community engagement layer (gamification, progression, achievements) first, so that when decentralization arrives, there are actual governance participants, not just governance infrastructure.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Project statistics for AI Council Coliseum" caption="AI Council Coliseum system metrics — a multi-agent deliberation platform with gamified audience governance" number={2}>
         <StatGrid stats={[
@@ -297,9 +347,17 @@ class VotingSession(BaseModel):
       </Figure>
 
       <h2>Tradeoffs and Lessons</h2>
-      <p>
+      <ShibuiContent id="ai-council.tradeoffs-and-lessons.p1">
+	<span slot="entry">
+		<p>I chose in-memory state over a database because debates are ephemeral performances, not permanent records. The tradeoff is that a server restart mid-debate loses everything. I also found that smarter agents produce better arguments but harder-to-follow debates, so I limited the system to four distinct roles as a compromise between depth and clarity.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         The most consequential design decision was in-memory state over a database. For a deliberation platform where debates are ephemeral performances rather than permanent records, this is defensible — debate state matters during the debate and can be archived afterward. But it means the current system cannot survive a server restart mid-debate, and horizontal scaling requires shared state infrastructure that does not yet exist.<Cite id={1} author="Russell, Stuart and Peter Norvig" title="Artificial Intelligence: A Modern Approach" source="Pearson" year={2020} /> The agent design also revealed a tension between agent autonomy and audience comprehensibility: agents with more sophisticated reasoning produce better arguments but harder-to-follow debates. The four-role system (advocate, critic, synthesizer, wildcard) is a compromise — enough variety to produce genuine dialectic, constrained enough that audiences can follow the argument structure without a philosophy degree.<Cite id={6} author="Mercier, Hugo and Dan Sperber" title="The Enigma of Reason" source="Harvard University Press" year={2017} /> Mercier and Sperber's insight that reasoning is fundamentally social — designed for argument production and evaluation, not solitary truth-seeking — validates the Coliseum's core wager: that multi-agent deliberation produces better epistemic outcomes than single-agent monologue, precisely because it mirrors the social structure that reasoning evolved to operate within.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <References entries={[
         { id: 1, author: "Russell, Stuart and Peter Norvig", title: "Artificial Intelligence: A Modern Approach", source: "Pearson", year: 2020 },

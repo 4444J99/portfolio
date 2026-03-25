@@ -6,6 +6,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import PrismNav from '../../components/PrismNav.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import vitals from '../../data/vitals.json';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
@@ -24,9 +26,17 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
         { src: 'https://img.shields.io/github/last-commit/meta-organvm/orchestration-start-here', alt: 'Last commit' },
       ]}>
       <h2>The Insight</h2>
-      <p>
-        I started from a conviction: the way you organize creative work <em>is</em> creative work. Most technologists treat governance as overhead — project boards, CI/CD, dependency rules.<Cite id={1} author="Conway, Melvin E." title="How Do Committees Invent?" source="Datamation" year={1968} /> Conway's Law observes that system structure mirrors organizational structure; this project inverts that insight — the organizational structure was designed as an aesthetic artifact. I wanted to find out what happens when you give those decisions the same care as the art they coordinate. The result surprised me: the governance model became the most interesting artifact in the system.<Cite id={2} author="Schön, Donald A." title="The Reflective Practitioner: How Professionals Think in Action" source="Basic Books" year={1983} />
-      </p>
+      <ShibuiContent id="eight-organ-system.the-insight.p1">
+      	<span slot="entry">
+      		<p>I believe the way you organize creative work is itself creative work. I wanted to find out what happens when you give governance decisions the same care as the art they coordinate. The result surprised me: the governance model became the most interesting artifact in the system.</p>
+      	</span>
+      	<span slot="elevated">
+      		<p>
+        I started from a conviction: the way you organize creative work <em>is</em> creative work. Most technologists treat governance as overhead — project boards, CI/CD, dependency rules.<Cite id={1} author="Conway, Melvin E." title="How Do Committees Invent?" source="Datamation" year={1968} /> <ShibuiTerm term="Conway's Law" definition="The 1968 observation that system design inevitably mirrors the communication structure of the organization that builds it" /> observes that system structure mirrors organizational structure; this project inverts that insight — the organizational structure was designed as an aesthetic artifact. I wanted to find out what happens when you give those decisions the same care as the art they coordinate. The result surprised me: the governance model became the most interesting artifact in the system.<Cite id={2} author="Schön, Donald A." title="The Reflective Practitioner: How Professionals Think in Action" source="Basic Books" year={1983} />
+      		</p>
+      	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <SketchContainer
         sketchId="octagon"
@@ -36,9 +46,17 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
       />
 
       <h2>How It Works</h2>
-      <p>
-        Eight GitHub organizations, each representing a distinct organ with a Greek ontological suffix.<Cite id={3} author="Alexander, Christopher" title="A Pattern Language: Towns, Buildings, Construction" source="Oxford University Press" year={1977} /> Alexander's "pattern language" proposes that environments are shaped by named, interrelating patterns — here, each organ is a named pattern governing a domain of creative practice. The naming is not decorative: Greek ontological terms encode the organ's epistemological function.<Cite id={4} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} />
-      </p>
+      <ShibuiContent id="eight-organ-system.how-it-works.p1">
+      	<span slot="entry">
+      		<p>I organized my portfolio into eight online spaces, naming each after a Greek concept for a different "organ" of my work. I kept the project data separate from the site itself, using a central hub to pull them together. This lets me track the history of each area independently while showing you the whole system in one place.</p>
+      	</span>
+      	<span slot="elevated">
+      		<p>
+        Eight GitHub organizations, each representing a distinct organ with a Greek ontological suffix.<Cite id={3} author="Alexander, Christopher" title="A Pattern Language: Towns, Buildings, Construction" source="Oxford University Press" year={1977} /> Alexander's "<ShibuiTerm term="pattern language" definition="Christopher Alexander's theory that complex environments emerge from networks of named, interconnected design solutions that reinforce each other" />" proposes that environments are shaped by named, interrelating patterns — here, each organ is a named pattern governing a domain of creative practice. The naming is not decorative: Greek ontological terms encode the organ's epistemological function.<Cite id={4} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} />
+      		</p>
+      	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <div class="table-wrap">
         <table>
@@ -58,14 +76,30 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
         </table>
       </div>
 
-      <p>
+      <ShibuiContent id="eight-organ-system.how-it-works.p2">
+      	<span slot="entry">
+      		<p>I separated the system this way to protect each kind of work from being judged by the wrong standards. Art shouldn't need to justify itself commercially, and theory shouldn't need to scale before it's explored. Each organ has its own rules, its own documentation standards, and its own definition of what "good" looks like.</p>
+      	</span>
+      	<span slot="elevated">
+      		<p>
         The organ model prevents three pathologies that commonly destroy creative systems: art corrupted by commercial pressure (when every project needs revenue justification), theory compromised by the need to scale (when ideas must be production-ready before they are explored), and community colonized by engagement metrics (when relationships are valued only for their conversion rates). Each organ has its own GitHub organization, governance rules, documentation standards, and definition of success. What counts as excellent work in ORGAN-I (intellectual depth, novel frameworks) is deliberately different from what counts in ORGAN-III (revenue potential, user experience).
-      </p>
+      		</p>
+      	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <h2>The Registry</h2>
-      <p>
+      <ShibuiContent id="eight-organ-system.the-registry.p1">
+      	<span slot="entry">
+      		<p>I built a single JSON file that tracks every repository in the system. It records each project's status, dependencies, and documentation tier. Automated scripts validate the registry against the live state of every repo, so nothing drifts out of sync without being caught.</p>
+      	</span>
+      	<span slot="elevated">
+      		<p>
         A machine-readable <a href="https://github.com/meta-organvm/orchestration-start-here/blob/main/registry-v2.json" target="_blank">JSON registry</a> serves as the single source of truth for all {vitals.repos.total} repositories.<Cite id={5} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} /> Fowler's principle of a "single authoritative data source" applies here at the organizational level — every repo entry carries status, dependencies, documentation tier, and promotion state. Automated scripts validate the registry against the live state of every repo, checking CI/CD, documentation, dependency integrity, and constitutional compliance.<Cite id={6} author="Humble, Jez and David Farley" title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation" source="Addison-Wesley" year={2010} />
-      </p>
+      		</p>
+      	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="json" caption={`Registry entry structure — each of ${vitals.repos.total} repos carries this metadata`} filename="registry-v2.json (excerpt)">
 {`{
@@ -107,9 +141,17 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
       </p>
 
       <h2>The Dependency Rule</h2>
-      <p>
-        The most important constraint, and the one that generated the most creative tension: <strong>no back-edges</strong>. Theory feeds art feeds commerce — I→II→III — and that flow is enforced automatically.<Cite id={9} author="Martin, Robert C." title="Clean Architecture: A Craftsman's Guide to Software Structure and Design" source="Prentice Hall" year={2017} /> Martin's Dependency Rule — that source code dependencies must point only inward — is applied here at the organizational level. This forced clean API boundaries and created genuine stakes: theory must commit to art without knowing if it will become commerce. 31 dependency edges, zero circular dependencies, validated on every change.<Cite id={10} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} />
-      </p>
+      <ShibuiContent id="eight-organ-system.the-dependency-rule.p1">
+      	<span slot="entry">
+      		<p>I enforced one strict rule: ideas can only flow in one direction. Theory feeds art, art feeds commerce, and nothing flows backward. This forced clean boundaries between the organs and created real stakes -- theory has to commit to art without knowing if it will ever become a product. 31 dependency edges, zero circular dependencies.</p>
+      	</span>
+      	<span slot="elevated">
+      		<p>
+        The most important constraint, and the one that generated the most creative tension: <strong>no back-edges</strong>. Theory feeds art feeds commerce — I→II→III — and that flow is enforced automatically.<Cite id={9} author="Martin, Robert C." title="Clean Architecture: A Craftsman's Guide to Software Structure and Design" source="Prentice Hall" year={2017} /> Martin's <ShibuiTerm term="Dependency Rule" definition="Robert C. Martin's architectural principle that source code dependencies must point only inward toward high-level policies, never outward toward low-level mechanisms" /> — that source code dependencies must point only inward — is applied here at the organizational level. This forced clean API boundaries and created genuine stakes: theory must commit to art without knowing if it will become commerce. 31 dependency edges, zero circular dependencies, validated on every change.<Cite id={10} author="Ostrom, Elinor" title="Governing the Commons: The Evolution of Institutions for Collective Action" source="Cambridge University Press" year={1990} />
+      		</p>
+      	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Organ dependency flow diagram" caption="Enforced dependency direction: theory feeds art feeds commerce. No back-edges permitted.">
         <pre class="architecture-diagram"><code>{`┌──────────┐    ┌──────────┐    ┌──────────┐
@@ -166,9 +208,17 @@ jobs:
       </p>
 
       <h2>Why This Is Art</h2>
-      <p>
-        The choice of eight organs (not seven, not ten) is a design decision. The Greek naming scheme is an aesthetic decision. The no-back-edges rule creates dramatic tension.<Cite id={12} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery and Invention" source="Harper Perennial" year={1996} /> Csikszentmihalyi's framework situates creativity at the intersection of domain, field, and individual — this system is simultaneously the domain (the eight-organ architecture), the field (the governance rules that evaluate work), and the individual practice (the daily decisions about what to build). The promotion state machine creates narrative arcs for each project. This isn't an engineer who also makes art, or an artist who codes on the side — the governance model, the registry schema, the dependency graph, <em>these are the work</em>.
-      </p>
+      <ShibuiContent id="eight-organ-system.why-this-is-art.p1">
+      	<span slot="entry">
+      		<p>I chose eight organs deliberately. I chose Greek names deliberately. The no-back-edges rule creates dramatic tension on purpose. This isn't an engineer who also makes art, or an artist who codes on the side -- the governance model, the registry, the dependency graph, these are the creative work itself.</p>
+      	</span>
+      	<span slot="elevated">
+      		<p>
+        The choice of eight organs (not seven, not ten) is a design decision. The Greek naming scheme is an aesthetic decision. The no-back-edges rule creates dramatic tension.<Cite id={12} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery and Invention" source="Harper Perennial" year={1996} /> Csikszentmihalyi's framework situates creativity at the intersection of <ShibuiTerm term="domain, field, and individual" definition="Csikszentmihalyi's systems model of creativity, where innovation requires a symbolic domain, a field of gatekeepers who evaluate novelty, and an individual who produces variations" /> — this system is simultaneously the domain (the eight-organ architecture), the field (the governance rules that evaluate work), and the individual practice (the daily decisions about what to build). The promotion state machine creates narrative arcs for each project. This isn't an engineer who also makes art, or an artist who codes on the side — the governance model, the registry schema, the dependency graph, <em>these are the work</em>.
+      		</p>
+      	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <SketchContainer
         sketchId="network-graph"
@@ -180,9 +230,17 @@ jobs:
       />
 
       <h2>Results</h2>
-      <p>
-        The system launched on 2026-02-11 with 9/9 launch criteria met. All 8 organs are operational.<Cite id={13} author="Deming, W. Edwards" title="Out of the Crisis" source="MIT Press" year={1986} /> Deming's quality management principles — measure, validate, improve — are embedded in the monthly audit cycle. 228 validation checks pass across the Platinum validation suite, covering CI workflow presence, CHANGELOG files, architectural decision records, badge rows, and implementation status fields for every repo. POSSE distribution is live (Mastodon + Discord). Jekyll/GitHub Pages publishes 36 meta-system essays (~132K words) with an Atom RSS feed.
-      </p>
+      <ShibuiContent id="eight-organ-system.results.p1">
+      	<span slot="entry">
+      		<p>I launched the system on 2026-02-11 with all 9 launch criteria met and all 8 organs operational. 228 validation checks pass across the full suite, POSSE distribution is live on Mastodon and Discord, and 36 meta-system essays are published with an RSS feed.</p>
+      	</span>
+      	<span slot="elevated">
+      		<p>
+        The system launched on 2026-02-11 with 9/9 launch criteria met. All 8 organs are operational.<Cite id={13} author="Deming, W. Edwards" title="Out of the Crisis" source="MIT Press" year={1986} /> Deming's <ShibuiTerm term="quality management" definition="W. Edwards Deming's systematic approach to continuous improvement through statistical measurement, validation cycles, and feedback loops" /> principles — measure, validate, improve — are embedded in the monthly audit cycle. 228 validation checks pass across the Platinum validation suite, covering CI workflow presence, CHANGELOG files, architectural decision records, badge rows, and implementation status fields for every repo. POSSE distribution is live (Mastodon + Discord). Jekyll/GitHub Pages publishes 36 meta-system essays (~132K words) with an Atom RSS feed.
+      		</p>
+      	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Validation results summary" caption="Platinum validation suite: 228/228 checks passing across all 8 organs">
         <StatGrid stats={[
@@ -226,9 +284,17 @@ jobs:
       </div>
 
       <h2>Repository Standards</h2>
-      <p>
+      <ShibuiContent id="eight-organ-system.repository-standards.p1">
+      	<span slot="entry">
+      		<p>I set a quality floor for every repository: minimum README lengths, CI/CD workflows, and architectural decision records. This functions as a contract between the system and its audiences -- whether you're a hiring manager or a grant reviewer, you can trust the documentation is substantive and current.</p>
+      	</span>
+      	<span slot="elevated">
+      		<p>
         Every repository meets a defined quality floor that functions as a contract between the system and its audiences. READMEs require 2,000+ words minimum (flagships: 3,000+), written for dual audiences of grant reviewers and hiring managers. {vitals.substance.ci_passing} repositories carry CI/CD workflows. 130+ architectural decision records document key design choices — technology selections, dependency declarations, naming decisions, and tradeoff analyses.<Cite id={16} author="Shneiderman, Ben" title="Human-Centered AI" source="Oxford University Press" year={2022} /> The Platinum validation suite adds checks for CI workflow presence, CHANGELOG files, ADRs, badge rows, and implementation status fields — 228 checks passing across the full suite.
-      </p>
+      		</p>
+      	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="yaml" caption="seed.yaml contract schema — every repository declares its organ membership, produces/consumes edges, and event subscriptions" filename="seed.yaml (excerpt)">
 {`organ: I

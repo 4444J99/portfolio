@@ -5,6 +5,8 @@ import Figure from '../../components/academic/Figure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
@@ -22,9 +24,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       <h2>The Problem: Narrative Theory Without Infrastructure</h2>
 <SketchContainer sketchId="lenses" height="var(--space-4xl)" mobileHeight="var(--space-3xl)" ariaLabel="Overlapping narrative lens refraction" />
 
+<ShibuiContent id="narratological-lenses.the-problem-narrative-theory-without-infrastructure.p1">
+	<span slot="entry">
+		<p>I noticed that narrative analysis has a century of precise structural frameworks -- Propp's plot functions, Genette's discourse taxonomy -- but none of them are executable. They exist only as paper artifacts. I built this project to turn those frameworks into typed Python algorithms with confidence scores and testable assertions.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        Narrative analysis has operated for a century on frameworks that are structurally precise but computationally inert. Vladimir Propp demonstrated in 1928 that Russian wondertales could be decomposed into thirty-one sequential functions — a formal grammar of plot — yet his morphology remained a paper artifact, executed only by human readers marking up texts by hand.<Cite id={1} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1928} /> Gerard Genette's taxonomy of narrative discourse — distinguishing order, duration, frequency, mood, and voice — provided an analytical apparatus of extraordinary precision, yet it too remained confined to close reading, applicable only at the pace of a single scholar working through a single text.<Cite id={2} author="Genette, Gerard" title="Narrative Discourse: An Essay in Method" source="Cornell University Press" year={1972} /> This project asks what happens when these frameworks stop being interpretive vocabularies and become executable algorithms: typed Python models with diagnostic outputs, confidence scores, and testable assertions. The goal is not to automate literary criticism but to give narrative theory the same computational infrastructure that other formal disciplines — linguistics, logic, mathematics — have long taken for granted.
+        Narrative analysis has operated for a century on frameworks that are structurally precise but computationally inert. Vladimir Propp demonstrated in 1928 that Russian wondertales could be decomposed into thirty-one sequential functions — a formal grammar of plot — yet his <ShibuiTerm term="Propp's morphology" definition="Vladimir Propp's 1928 discovery that all Russian fairy tales share the same thirty-one sequential plot functions, forming a universal grammar of narrative structure" /> remained a paper artifact, executed only by human readers marking up texts by hand.<Cite id={1} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1928} /> <ShibuiTerm term="Genette's framework" definition="Gerard Genette's systematic taxonomy for analyzing narrative discourse across five dimensions: order, duration, frequency, mood, and voice" /> — distinguishing order, duration, frequency, mood, and voice — provided an analytical apparatus of extraordinary precision, yet it too remained confined to close reading, applicable only at the pace of a single scholar working through a single text.<Cite id={2} author="Genette, Gerard" title="Narrative Discourse: An Essay in Method" source="Cornell University Press" year={1972} /> This project asks what happens when these frameworks stop being interpretive vocabularies and become executable algorithms: typed Python models with diagnostic outputs, confidence scores, and testable assertions. The goal is not to automate literary criticism but to give narrative theory the same computational infrastructure that other formal disciplines — linguistics, logic, mathematics — have long taken for granted.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Monorepo architecture — four packages sharing a common core library, each exposing a different interface to the same analytical engine"
@@ -40,9 +50,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       />
 
       <h2>Analytical Frameworks as Algorithms</h2>
+<ShibuiContent id="narratological-lenses.analytical-frameworks-as-algorithms.p1">
+	<span slot="entry">
+		<p>I translated humanistic frameworks into computational primitives without losing their interpretive richness. Propp's plot functions become a finite state machine, Greimas's actantial model becomes six typed roles on three axes, and Barthes's narrative codes become detection heuristics. Each framework is a separate module that shares a common interface so they can be composed and cross-referenced.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        The core intellectual challenge is translating humanistic frameworks into computational primitives without flattening the interpretive richness that makes them valuable. Propp's morphology provides the clearest entry point: his thirty-one functions (Absentation, Interdiction, Violation, Reconnaissance, and so on) form an ordered sequence with defined transition rules — essentially a finite state machine for plot.<Cite id={1} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1928} /> Algirdas Julien Greimas's actantial model abstracts further, reducing any narrative to six actantial roles (Subject, Object, Sender, Receiver, Helper, Opponent) organized into three axes of desire, communication, and power — a structural semantics that applies across genres and media.<Cite id={3} author="Greimas, Algirdas Julien" title="Structural Semantics: An Attempt at a Method" source="University of Nebraska Press" year={1966} /> Roland Barthes's distinction between five narrative codes — hermeneutic, proairetic, semantic, symbolic, and cultural — provides yet another decomposition, one that foregrounds the reader's experience of meaning-construction rather than the text's internal grammar.<Cite id={4} author="Barthes, Roland" title="S/Z: An Essay" source="Hill and Wang" year={1970} /> Each framework becomes a separate analysis module in the core library, with its own typed models, detection heuristics, and output schemas — but all sharing a common interface contract that allows frameworks to be composed, compared, and cross-referenced.
+        The core intellectual challenge is translating humanistic frameworks into computational primitives without flattening the interpretive richness that makes them valuable. Propp's morphology provides the clearest entry point: his thirty-one functions (Absentation, Interdiction, Violation, Reconnaissance, and so on) form an ordered sequence with defined transition rules — essentially a finite state machine for plot.<Cite id={1} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1928} /> Algirdas Julien Greimas's <ShibuiTerm term="actantial model" definition="Greimas's reduction of any narrative to six structural roles (Subject, Object, Sender, Receiver, Helper, Opponent) on three axes of desire, communication, and power" /> abstracts further, reducing any narrative to six actantial roles (Subject, Object, Sender, Receiver, Helper, Opponent) organized into three axes of desire, communication, and power — a structural semantics that applies across genres and media.<Cite id={3} author="Greimas, Algirdas Julien" title="Structural Semantics: An Attempt at a Method" source="University of Nebraska Press" year={1966} /> Roland Barthes's distinction between five <ShibuiTerm term="narrative codes" definition="Barthes's five channels through which a text produces meaning: hermeneutic (enigma), proairetic (action), semantic (connotation), symbolic (theme), and cultural (shared knowledge)" /> — hermeneutic, proairetic, semantic, symbolic, and cultural — provides yet another decomposition, one that foregrounds the reader's experience of meaning-construction rather than the text's internal grammar.<Cite id={4} author="Barthes, Roland" title="S/Z: An Essay" source="Hill and Wang" year={1970} /> Each framework becomes a separate analysis module in the core library, with its own typed models, detection heuristics, and output schemas — but all sharing a common interface contract that allows frameworks to be composed, compared, and cross-referenced.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="python" caption="Typed models for actantial analysis — Greimas's six roles encoded as a dataclass with confidence scoring and structural relation tracking" filename="narratological_core/models/actantial.py">
 {`from dataclasses import dataclass, field
@@ -94,9 +112,17 @@ class ActantialDiagnostic:
       </CodeStructure>
 
       <h2>The Compendium: Twenty-Eight Formalized Frameworks</h2>
+<ShibuiContent id="narratological-lenses.the-compendium-twenty-eight-formalized-frameworks.p1">
+	<span slot="entry">
+		<p>I built a library of twenty-eight narrative frameworks spanning classical drama, film theory, television craft, global storytelling traditions, interactive media, and comics. Each one is stored as both a research study and a validated JSON model, kept in sync so edits to the scholarship are automatically reflected in the computational version.</p>
+	</span>
+	<span slot="elevated">
       <p>
         The system's analytical breadth is defined by its compendium — a living library of twenty-eight formalized narrative frameworks spanning classical, film, television, global, interactive, comics, and meta-analytical traditions. Classical frameworks include Aristotle's dramatic structure, Bharata Muni's Natyasastra, Ovid's metamorphic narrative, Plato's dialectical form, Horace's decorum principles, and African oral epic traditions. Film frameworks encode the directorial theories of Tarkovsky (time-pressure), Bergman (interiority), Tarantino (discovery writing), Lynch (dream logic), and Kubrick (non-submersible units). Television frameworks formalize Phoebe Waller-Bridge's layered obstacle technique, Larry David's comedy geometry, and South Park's therefore/but causal structure. Global traditions include Kishotenketsu (the Japanese four-act structure that operates without conflict) and the Heroine's Journey (Murdock's model of internal integration). Interactive narrative frameworks encode the design philosophies of Zelda (exploration-driven) and Final Fantasy (ensemble-driven). Comics frameworks include Alan Moore's formalism, Grant Morrison's hypersigil technique, and Jack Kirby's mythopoeia.<Cite id={3} author="Greimas, Algirdas Julien" title="Structural Semantics: An Attempt at a Method" source="University of Nebraska Press" year={1966} /> Each framework is stored as both a completed Markdown study (in <code>specs/02-completed-studies/</code>) and a validated JSON extract (in <code>specs/03-structured-data/</code>), with a synchronization mechanism ensuring that edits to the research source are reflected in the computational model.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <h2>Deep Diagnostics</h2>
       <p>
@@ -104,9 +130,17 @@ class ActantialDiagnostic:
       </p>
 
       <h2>Six-Package Architecture</h2>
+<ShibuiContent id="narratological-lenses.six-package-architecture.p1">
+	<span slot="entry">
+		<p>I structured the monorepo as six packages that all share the same analytical core. The core library holds all the domain logic, and the CLI, REST API, MCP server, VS Code extension, and web dashboard are just different interfaces into it. One engine, six ways to access it.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        The monorepo is structured as six distinct packages, each serving a different consumer while sharing the same analytical core. This separation follows the ports-and-adapters pattern: the core library contains all domain logic — models, algorithms, diagnostics, the unified compendium of narratological definitions — while the CLI, API, MCP server, VS Code extension, and web dashboard are adapters that expose that logic through different interfaces.<Cite id={5} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The Python core bundles a unified compendium of narratological algorithms as structured JSON, with a loader that resolves packaged resources first and falls back to repository paths for local development. The CLI (built on Typer) enables terminal-based analysis for researchers who work in scripts and pipelines. The FastAPI service provides programmatic access for downstream ORGAN-II and ORGAN-III systems. The MCP server (built on FastMCP) exposes the analytical engine through the Model Context Protocol, enabling AI assistants to invoke narratological analysis as a tool call. The VS Code extension provides snippets and tagging for researchers working directly in the editor. The React web dashboard enables interactive visual exploration.<Cite id={6} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} />
+        The monorepo is structured as six distinct packages, each serving a different consumer while sharing the same analytical core. This separation follows the <ShibuiTerm term="ports-and-adapters" definition="An architectural pattern (also called hexagonal architecture) where domain logic lives at the center and all external interfaces are interchangeable adapters plugged into defined ports" /> pattern: the core library contains all domain logic — models, algorithms, diagnostics, the unified compendium of narratological definitions — while the CLI, API, MCP server, VS Code extension, and web dashboard are adapters that expose that logic through different interfaces.<Cite id={5} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> The Python core bundles a unified compendium of narratological algorithms as structured JSON, with a loader that resolves packaged resources first and falls back to repository paths for local development. The CLI (built on Typer) enables terminal-based analysis for researchers who work in scripts and pipelines. The FastAPI service provides programmatic access for downstream ORGAN-II and ORGAN-III systems. The MCP server (built on FastMCP) exposes the analytical engine through the Model Context Protocol, enabling AI assistants to invoke narratological analysis as a tool call. The VS Code extension provides snippets and tagging for researchers working directly in the editor. The React web dashboard enables interactive visual exploration.<Cite id={6} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} />
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Package comparison table showing six packages with their technologies and purposes" caption="Six-package architecture — each package exposes the same analytical engine through a different interface modality" number={1}>
         <div class="table-wrap">
@@ -167,9 +201,17 @@ class ActantialDiagnostic:
       </p>
 
       <h2>Diagnostic Output: Beyond Classification</h2>
+<ShibuiContent id="narratological-lenses.diagnostic-output-beyond-classification.p1">
+	<span slot="entry">
+		<p>I designed the output as a full diagnostic, not a label. When the engine runs a Proppian analysis, it reports which functions were found, at what confidence, with what evidence, and which expected functions are missing. This structured format lets different analyses be cross-referenced and aggregated across large corpora.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        The system's output is not a label but a diagnostic — a structured report that tells the analyst not just <em>what</em> was detected but <em>how confident</em> the detection is, <em>what evidence</em> supports it, and <em>what structural relations</em> connect it to other detections. When the engine runs a Proppian analysis, it does not simply say "this is a hero's journey." It reports precisely which morphological functions were detected, at what confidence level, with what ordering violations (if any), and which functions are expected but absent.<Cite id={7} author="Moretti, Franco" title="Distant Reading" source="Verso Books" year={2013} /> Moretti's argument for "distant reading" — analyzing literature not through close attention to individual texts but through computational aggregation of patterns across thousands — requires exactly this kind of structured, machine-readable output. The diagnostic model enables composability: an actantial analysis can be cross-referenced with a Proppian analysis to identify where Greimas's Subject maps onto Propp's Hero function, revealing structural homologies that close reading might miss.<Cite id={8} author="Jockers, Matthew L." title="Macroanalysis: Digital Methods and Literary History" source="University of Illinois Press" year={2013} /> Jockers's macroanalytic method depends on the ability to aggregate and compare structured outputs across corpora — the diagnostic format is designed to feed precisely this kind of computational literary scholarship.
+        The system's output is not a label but a diagnostic — a structured report that tells the analyst not just <em>what</em> was detected but <em>how confident</em> the detection is, <em>what evidence</em> supports it, and <em>what structural relations</em> connect it to other detections. When the engine runs a Proppian analysis, it does not simply say "this is a hero's journey." It reports precisely which morphological functions were detected, at what confidence level, with what ordering violations (if any), and which functions are expected but absent.<Cite id={7} author="Moretti, Franco" title="Distant Reading" source="Verso Books" year={2013} /> Moretti's argument for "<ShibuiTerm term="distant reading" definition="Franco Moretti's method of analyzing literature computationally across thousands of texts to reveal patterns invisible to close reading of individual works" />" — analyzing literature not through close attention to individual texts but through computational aggregation of patterns across thousands — requires exactly this kind of structured, machine-readable output. The diagnostic model enables composability: an actantial analysis can be cross-referenced with a Proppian analysis to identify where Greimas's Subject maps onto Propp's Hero function, revealing structural homologies that close reading might miss.<Cite id={8} author="Jockers, Matthew L." title="Macroanalysis: Digital Methods and Literary History" source="University of Illinois Press" year={2013} /> Jockers's macroanalytic method depends on the ability to aggregate and compare structured outputs across corpora — the diagnostic format is designed to feed precisely this kind of computational literary scholarship.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Analysis pipeline — from raw text input through framework selection, detection, confidence scoring, and structural mapping to typed diagnostic output"
@@ -190,9 +232,17 @@ class ActantialDiagnostic:
       />
 
       <h2>Composable Frameworks and Cross-Reference</h2>
+<ShibuiContent id="narratological-lenses.composable-frameworks-and-cross-reference.p1">
+	<span slot="entry">
+		<p>I designed the frameworks to be composable. When you run Propp, Greimas, and Genette against the same text, the engine maps where their outputs align and where they disagree. Those disagreements are the most interesting results -- they point to genuine ambiguities in the narrative that no single framework could surface alone.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        The most powerful analytical results emerge not from applying a single framework but from composing multiple frameworks against the same text and examining where their outputs converge, diverge, or complement each other. A Proppian analysis detects sequential plot functions; an actantial analysis detects role assignments on axes of desire, communication, and power; a Genettean analysis detects focalization shifts and temporal ordering. When all three run against the same narrative segment, the diagnostic engine can map Propp's "Hero" function onto Greimas's Subject role and Genette's internal focalization, revealing that a protagonist's agency is simultaneously a plot function, a structural position, and a perspective anchor.<Cite id={2} author="Genette, Gerard" title="Narrative Discourse: An Essay in Method" source="Cornell University Press" year={1972} /> This compositional approach reflects a design principle borrowed from software architecture: each framework is a module with a stable interface, and the system's value grows combinatorially as modules are composed rather than linearly as they are added.<Cite id={5} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> Cross-referencing also surfaces disagreements — cases where frameworks assign contradictory structural roles to the same entity — and these disagreements are diagnostically valuable, pointing to genuine ambiguities in the narrative rather than analytical errors.
+        The most powerful analytical results emerge not from applying a single framework but from composing multiple frameworks against the same text and examining where their outputs converge, diverge, or complement each other. A Proppian analysis detects sequential plot functions; an actantial analysis detects role assignments on axes of desire, communication, and power; a Genettean analysis detects <ShibuiTerm term="focalization" definition="Genette's term for the narrative perspective through which events are perceived, distinguishing who sees from who speaks in a story" /> shifts and temporal ordering. When all three run against the same narrative segment, the diagnostic engine can map Propp's "Hero" function onto Greimas's Subject role and Genette's internal focalization, revealing that a protagonist's agency is simultaneously a plot function, a structural position, and a perspective anchor.<Cite id={2} author="Genette, Gerard" title="Narrative Discourse: An Essay in Method" source="Cornell University Press" year={1972} /> This compositional approach reflects a design principle borrowed from software architecture: each framework is a module with a stable interface, and the system's value grows combinatorially as modules are composed rather than linearly as they are added.<Cite id={5} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} /> Cross-referencing also surfaces disagreements — cases where frameworks assign contradictory structural roles to the same entity — and these disagreements are diagnostically valuable, pointing to genuine ambiguities in the narrative rather than analytical errors.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="python" caption="Cross-framework composition — running multiple analyses against the same text and mapping structural correspondences" filename="narratological_core/compose.py">
 {`from narratological_core.frameworks import (
@@ -245,9 +295,17 @@ def compose_analysis(
       />
 
       <h2>Bridge to Generative Work</h2>
+<ShibuiContent id="narratological-lenses.bridge-to-generative-work.p1">
+	<span slot="entry">
+		<p>I built this as theory infrastructure that feeds directly into generative work. A Proppian analysis can drive a music system to shift harmonic mode at narrative turning points. An actantial analysis can determine the spatial layout of a visualization. The lenses turn scholarly frameworks into API endpoints that art tools and product prototypes can call.</p>
+	</span>
+	<span slot="elevated">
       <p>
         The narratological lenses project occupies a specific position within the eight-organ system: it is ORGAN-I (Theoria) infrastructure that enables work in ORGAN-II (Poiesis) and ORGAN-III (Ergon). When narrative theory is encoded as executable algorithms with typed outputs, those outputs become inputs for generative systems. A Proppian analysis that identifies the "Villainy" and "Lack" functions at specific text positions can drive a generative music system to shift harmonic mode at those structural inflection points. An actantial analysis that maps Subject-Object-Opponent relations can inform the spatial layout of an interactive visualization, positioning entities according to their structural roles.<Cite id={9} author="Murray, Janet H." title="Hamlet on the Holodeck: The Future of Narrative in Cyberspace" source="MIT Press" year={1997} /> Murray's vision of the computer as a medium for procedural, participatory, spatial, and encyclopedic storytelling requires exactly this kind of machine-readable narrative intelligence — not stories generated by algorithms, but analytical structures that algorithms can consume and transform. The lenses project makes theory operational: it turns ORGAN-I's scholarly frameworks into API endpoints that ORGAN-II's art tools and ORGAN-III's product prototypes can call.<Cite id={10} author="Manovich, Lev" title="Software Takes Command" source="Bloomsbury Academic" year={2013} /> Manovich's thesis that software has become the engine of cultural production implies that the boundary between analysis and generation is permeable — the same typed models that describe a narrative's structure can be used to synthesize new structures that satisfy the same constraints.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Project statistics for Narratological Algorithmic Lenses" caption="System metrics — a six-package monorepo encoding twenty-eight narratological frameworks as composable, testable Python algorithms with 290+ tests across eight development phases." number={2}>
         <StatGrid stats={[
@@ -295,9 +353,17 @@ def compose_analysis(
       </Figure>
 
       <h2>Why This Approach Matters</h2>
+<ShibuiContent id="narratological-lenses.why-this-approach-matters.p1">
+	<span slot="entry">
+		<p>I built this because digital humanities tools like topic modeling and sentiment analysis bypass the structural vocabularies narratologists spent a century creating. This project encodes those frameworks as first-class computational objects with typed models and testable assertions. When a narratological claim is a function with tests, scholarly debate gains a new modality.</p>
+	</span>
+	<span slot="elevated">
       <p>
         The digital humanities have produced remarkable tools for corpus analysis — topic modeling, sentiment analysis, named entity recognition — but these tools largely bypass the rich structural vocabularies that narratologists have spent a century developing. Propp's functions, Greimas's actants, Genette's focalization categories, and Barthes's codes represent decades of careful theoretical work about how stories actually organize meaning, yet computational literary studies have largely ignored them in favor of statistical methods borrowed from natural language processing.<Cite id={4} author="Barthes, Roland" title="S/Z: An Essay" source="Hill and Wang" year={1970} /> This project fills that gap by encoding narratological frameworks as first-class computational objects — not approximations or metaphors, but faithful implementations with typed models, validation logic, and confidence scoring. The result is a system where disagreements between frameworks become debuggable, where analytical claims are testable assertions, and where the entire history of narrative theory becomes a composable toolkit rather than a bibliography.<Cite id={3} author="Greimas, Algirdas Julien" title="Structural Semantics: An Attempt at a Method" source="University of Nebraska Press" year={1966} /> When a narratological claim is encoded as a function with assertions, scholarly debate gains a new modality: not just argument and counter-argument, but test case and counter-example.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <References entries={[
         { id: 1, author: "Propp, Vladimir", title: "Morphology of the Folktale", source: "University of Texas Press", year: 1928 },

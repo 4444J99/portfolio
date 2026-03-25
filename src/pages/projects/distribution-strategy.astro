@@ -5,6 +5,8 @@ import Figure from '../../components/academic/Figure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import vitals from '../../data/vitals.json';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
@@ -21,9 +23,17 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
       <h2>The Distribution Problem</h2>
 <SketchContainer sketchId="scatter" height="250px" mobileHeight="180px" ariaLabel="Content distribution scatter pattern" />
 
+      <ShibuiContent id="distribution-strategy.the-distribution-problem.p1">
+	<span slot="entry">
+		<p>I realized that building a massive system means nothing if nobody ever sees it. Most engineers treat distribution as an afterthought -- a tweet or a Slack link. I decided to make distribution a first-class concern with its own dedicated infrastructure.</p>
+	</span>
+	<span slot="elevated">
       <p>
         You can build {vitals.repos.total} repositories with {vitals.logos.words.toLocaleString()} words of documentation and it means nothing if nobody encounters the work. Distribution is the most systematically underthought problem in creative technology: engineers and artists invest enormous energy in building, then treat the question of who sees the work as an afterthought — a tweet after launch, a link in a Slack channel, a conference talk if they happen to know someone on the program committee.<Cite id={1} author="Shirky, Clay" title="Here Comes Everybody: The Power of Organizing Without Organizations" source="Penguin Press" year={2008} />
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="POSSE distribution flow: canonical content originates in the organ system and syndicates outward through defined channels"
@@ -40,9 +50,17 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
       />
 
       <h2>The POSSE Principle</h2>
+      <ShibuiContent id="distribution-strategy.the-posse-principle.p1">
+	<span slot="entry">
+		<p>I make sure my work starts on my own website first. This way, I own everything I create instead of just handing it over to social media companies. After it's safely on my site, I share it elsewhere to reach more people, but the original version always stays under my control.</p>
+	</span>
+	<span slot="elevated">
       <p>
-        The distribution strategy is built on the POSSE principle: Publish on your Own Site, Syndicate Everywhere. I directed the architectural commitment to long-term content ownership, where all content originates in the organ system's own repositories — the canonical source lives in infrastructure the practitioner controls — and gets syndicated outward through defined channels.<Cite id={3} author="Berners-Lee, Tim" title="Weaving the Web: The Original Design and Ultimate Destiny of the World Wide Web" source="Harper Business" year={1999} />
+        The distribution strategy is built on the <ShibuiTerm term="POSSE" definition="Publish on your Own Site, Syndicate Elsewhere -- an IndieWeb principle where canonical content lives on infrastructure you control and copies flow outward" /> principle: Publish on your Own Site, Syndicate Everywhere. I directed the architectural commitment to long-term content ownership, where all content originates in the organ system's own repositories — the canonical source lives in infrastructure the practitioner controls — and gets syndicated outward through defined channels.<Cite id={3} author="Berners-Lee, Tim" title="Weaving the Web: The Original Design and Ultimate Destiny of the World Wide Web" source="Harper Business" year={1999} />
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="yaml" caption="Distribution workflow configuration: automated POSSE syndication from canonical source to multiple channels" filename=".github/workflows/distribute-content.yml (excerpt)">
 {`name: Distribute Content (POSSE)
@@ -131,9 +149,17 @@ jobs:
       </Figure>
 
       <h2>Channel-Native Adaptation</h2>
-      <p>
-        The critical distinction in this distribution strategy is between cross-posting and channel-native adaptation. Cross-posting takes a single piece of content and copies it to multiple platforms unchanged — a practice that violates the norms of every platform simultaneously. I implemented a genuine re-framing process for each channel's discourse conventions, audience expectations, and technical affordances.<Cite id={7} author="McLuhan, Marshall" title="Understanding Media: The Extensions of Man" source="McGraw-Hill" year={1964} />
+      <ShibuiContent id="distribution-strategy.channel-native-adaptation.p1">
+	<span slot="entry">
+		<p>I do not cross-post -- I genuinely re-frame each piece of content for the channel it is going to. A Mastodon thread has different conventions than a newsletter digest, which is different from a GitHub Pages essay. Each channel gets content adapted to its discourse norms, not a copy-paste.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The critical distinction in this distribution strategy is between cross-posting and <ShibuiTerm term="channel-native adaptation" definition="Genuinely re-framing content for each platform's discourse conventions, audience expectations, and technical affordances rather than copying identical text" />. Cross-posting takes a single piece of content and copies it to multiple platforms unchanged — a practice that violates the norms of every platform simultaneously. I implemented a genuine re-framing process for each channel's discourse conventions, audience expectations, and technical affordances.<Cite id={7} author="McLuhan, Marshall" title="Understanding Media: The Extensions of Man" source="McGraw-Hill" year={1964} />
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Content adaptation pipeline: raw canonical content is analyzed, adapted per channel, distributed, and measured"
@@ -156,9 +182,17 @@ jobs:
       />
 
       <h2>Automated Distribution Infrastructure</h2>
+      <ShibuiContent id="distribution-strategy.automated-distribution-infrastructure.p1">
+	<span slot="entry">
+		<p>I replaced my manual checklists with an automated system that handles everything whenever I finish a project. I built a pipeline that double-checks my work for errors, updates my portfolio across different platforms, and formats the same content for social media and professional sites simultaneously. This ensures my work is always consistent and up-to-date everywhere without me having to repeat the same steps by hand.</p>
+	</span>
+	<span slot="elevated">
       <p>
         The distribution system is not a manual checklist but an automated pipeline implemented as GitHub Actions workflows. The <code>distribute-content.yml</code> workflow extracts canonical content from the organ repositories, applies channel-specific adaptation scripts, and publishes to each target platform through authenticated API calls. Mastodon distribution was verified with HTTP 200 responses; Discord distribution was verified with HTTP 204 responses.<Cite id={1} author="Shirky, Clay" title="Here Comes Everybody: The Power of Organizing Without Organizations" source="Penguin Press" year={2008} />
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="python" caption="Channel adaptation script: transforms canonical essay content into Mastodon-native thread format" filename="scripts/adapt-mastodon.py (excerpt)">
 {`def adapt_for_mastodon(essay: Essay) -> list[str]:
@@ -224,9 +258,17 @@ jobs:
       />
 
       <h2>Content Calendar Architecture</h2>
-      <p>
-        The content calendar is driven by external rhythms rather than internal cadences. Grant deadlines (Knight Foundation, NEA, Mellon Foundation, NSF) trigger increased visibility 2-4 weeks beforehand. Conference seasons (SIGGRAPH in July-August, Ars Electronica in September, ISEA in June) create attention windows for submissions and related content. The academic calendar shapes posting density: reduced during exam periods, increased at the start of semesters when researchers form new interests.<Cite id={4} author="Doctorow, Cory" title="Information Doesn't Want to Be Free: Laws for the Internet Age" source="McSweeney's" year={2014} />
+      <ShibuiContent id="distribution-strategy.content-calendar-architecture.p1">
+	<span slot="entry">
+		<p>I timed my content calendar around external rhythms rather than arbitrary internal cadences. Grant deadlines trigger increased visibility two to four weeks beforehand, conference seasons create attention windows for technical content, and the academic calendar shapes posting density. The schedule responds to when specific audiences are actually paying attention.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The <ShibuiTerm term="content calendar" definition="A strategic publishing schedule aligned to external rhythms like grant deadlines, conference seasons, and audience attention windows rather than arbitrary cadences" /> is driven by external rhythms rather than internal cadences. Grant deadlines (Knight Foundation, NEA, Mellon Foundation, NSF) trigger increased visibility 2-4 weeks beforehand. Conference seasons (SIGGRAPH in July-August, Ars Electronica in September, ISEA in June) create attention windows for submissions and related content. The academic calendar shapes posting density: reduced during exam periods, increased at the start of semesters when researchers form new interests.<Cite id={4} author="Doctorow, Cory" title="Information Doesn't Want to Be Free: Laws for the Internet Age" source="McSweeney's" year={2014} />
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <div class="table-wrap">
         <table>
@@ -279,9 +321,17 @@ jobs:
       </CodeStructure>
 
       <h2>Measuring Distribution Without Vanity Metrics</h2>
-      <p>
-        The distribution strategy deliberately avoids vanity metrics — follower counts, like ratios, impression numbers — in favor of metrics that indicate whether the content reached the intended audiences and served the intended purposes.<Cite id={2} author="Jenkins, Henry" title="Convergence Culture: Where Old and New Media Collide" source="NYU Press" year={2006} /> The measurement framework tracks leading indicators weekly (new followers, engagement rate per post, click-through rate to canonical URLs), lagging indicators quarterly (grant application outcomes, interview invitations, conference acceptance rate), and health indicators monthly (audience segment composition, content mix ratio, channel reliability). Raw follower counts are explicitly excluded from success criteria — what matters is whether the right people encountered the right content through the right channels.
+      <ShibuiContent id="distribution-strategy.measuring-distribution-without-vanity-metrics.p1">
+	<span slot="entry">
+		<p>I deliberately avoid vanity metrics like follower counts and like ratios. Instead I track whether the right people encountered the right content: weekly leading indicators like click-through rates to canonical URLs, quarterly lagging indicators like conference acceptance rates and interview invitations, and monthly health checks on audience segment composition.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The distribution strategy deliberately avoids <ShibuiTerm term="vanity metrics" definition="Engagement numbers like follower counts and like ratios that look impressive but do not indicate whether content reached its intended audience or served its purpose" /> — follower counts, like ratios, impression numbers — in favor of metrics that indicate whether the content reached the intended audiences and served the intended purposes.<Cite id={2} author="Jenkins, Henry" title="Convergence Culture: Where Old and New Media Collide" source="NYU Press" year={2006} /> The measurement framework tracks leading indicators weekly (new followers, engagement rate per post, click-through rate to canonical URLs), lagging indicators quarterly (grant application outcomes, interview invitations, conference acceptance rate), and health indicators monthly (audience segment composition, content mix ratio, channel reliability). Raw follower counts are explicitly excluded from success criteria — what matters is whether the right people encountered the right content through the right channels.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Distribution strategy metrics summary" caption="Key metrics for the POSSE distribution system across the eight-organ architecture">
         <StatGrid stats={[

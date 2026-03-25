@@ -5,6 +5,8 @@ import Figure from '../../components/academic/Figure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
@@ -35,28 +37,36 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 		ariaLabel="Data ingestion stream visualization"
 	/>
 
-	<p>
-		Public record data in the United States is structurally fragmented. Each state maintains
-		its own Uniform Commercial Code (UCC) filing system, often with proprietary interfaces,
-		inconsistent data schemas, and aggressive anti-scraping measures. The Merchant Cash
-		Advance (MCA) industry — a multi-billion-dollar alternative lending sector serving small
-		and mid-size businesses — depends on these filings as the single most reliable signal
-		that a business has active financing and may need additional capital. Yet a broker trying
-		to prospect across all fifty states faces compounding costs: each Secretary of State
-		portal requires separate navigation, often with CAPTCHAs, session limits, or
-		bulk-download restrictions. A human researcher might cover two to three states per day.
-		<Cite
-			id={1}
-			author="Trask, Stephen"
-			title="The High Cost of Data Fragmentation"
-			source="Journal of Digital Commerce"
-			year={2022}
-		/> I directed the architecture of a platform that replaces this manual fragmentation with
-		an automated, AI-driven pipeline: sixty-plus autonomous agents extracting UCC filings
-		continuously across all fifty states, enriching them with multi-source intelligence, and
-		delivering scored, outreach-ready leads through a full-featured React application with
-		integrated CRM, compliance tooling, and communications infrastructure.
-	</p>
+	<ShibuiContent id="public-record-data-scrapper.the-challenge-of-50-state-scale.p1">
+		<span slot="entry">
+			<p>I directed the architecture of a platform that automates public record extraction across all 50 US states. Each state has its own UCC filing system with different interfaces and anti-scraping measures — a human researcher covers two or three states per day. I replaced that with 60+ autonomous agents extracting filings continuously, enriching them with multi-source intelligence, and delivering scored leads through a full React application.</p>
+		</span>
+		<span slot="elevated">
+			<p>
+				Public record data in the United States is structurally fragmented. Each state maintains
+				its own <ShibuiTerm term="Uniform Commercial Code" definition="A standardized set of laws governing commercial transactions in the US, including UCC-1 financing statements that signal active business lending" /> (UCC) filing system, often with proprietary interfaces,
+				inconsistent data schemas, and aggressive anti-scraping measures. The Merchant Cash
+				Advance (MCA) industry — a multi-billion-dollar alternative lending sector serving small
+				and mid-size businesses — depends on these filings as the single most reliable signal
+				that a business has active financing and may need additional capital. Yet a broker trying
+				to prospect across all fifty states faces compounding costs: each Secretary of State
+				portal requires separate navigation, often with CAPTCHAs, session limits, or
+				bulk-download restrictions. A human researcher might cover two to three states per day.
+				<Cite
+					id={1}
+					author="Trask, Stephen"
+					title="The High Cost of Data Fragmentation"
+					source="Journal of Digital Commerce"
+					year={2022}
+				/> I directed the architecture of a platform that replaces this manual fragmentation with
+				an automated, AI-driven pipeline: sixty-plus autonomous agents extracting UCC filings
+				continuously across all fifty states, enriching them with multi-source intelligence, and
+				delivering scored, outreach-ready leads through a full-featured React application with
+				integrated CRM, compliance tooling, and communications infrastructure.
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<MermaidDiagram
 		caption="Three-layer platform architecture: autonomous collection agents feed into an enrichment and scoring engine, which delivers intelligence to broker-facing tools with integrated compliance."
@@ -95,24 +105,32 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 	/>
 
 	<h2>Technical Architecture</h2>
-	<p>
-		The platform is implemented as a TypeScript monorepo with a React 19 frontend deployed
-		to Vercel, an Express backend serving a RESTful API, PostgreSQL for transactional
-		storage, Redis for caching and rate limiting, and BullMQ for background job processing.
-		The monorepo contains three application targets — a primary web application, a Tauri
-		desktop application for field data collection, and a mobile application target — sharing
-		code through internal packages for the database client, type definitions, and a unified
-		UI component library built on Radix UI.<Cite
-			id={2}
-			author="Newman, Sam"
-			title="Building Microservices: Designing Fine-Grained Systems"
-			source="O'Reilly Media"
-			year={2015}
-		/> Newman's argument for decomposing systems along business capability boundaries
-		applies to the service layer: the backend implements nineteen domain services, each
-		owning a distinct slice of the business logic — from prospect management and ML-based
-		scoring to underwriting analysis and state-specific disclosure generation.
-	</p>
+	<ShibuiContent id="public-record-data-scrapper.technical-architecture.p1">
+		<span slot="entry">
+			<p>I built this as a TypeScript monorepo: React 19 frontend on Vercel, Express API backend, PostgreSQL, Redis, and BullMQ for background jobs. Three application targets — web, Tauri desktop, and mobile — share code through internal packages. The backend implements nineteen domain services, each owning a distinct slice of the business logic.</p>
+		</span>
+		<span slot="elevated">
+			<p>
+				The platform is implemented as a TypeScript monorepo with a React 19 frontend deployed
+				to Vercel, an Express backend serving a RESTful API, PostgreSQL for transactional
+				storage, Redis for caching and rate limiting, and BullMQ for background job processing.
+				The monorepo contains three application targets — a primary web application, a Tauri
+				desktop application for field data collection, and a mobile application target — sharing
+				code through internal packages for the database client, type definitions, and a unified
+				UI component library built on Radix UI.<Cite
+					id={2}
+					author="Newman, Sam"
+					title="Building Microservices: Designing Fine-Grained Systems"
+					source="O'Reilly Media"
+					year={2015}
+				/> Newman's argument for decomposing systems along business capability boundaries
+				applies to the service layer: the backend implements nineteen domain services, each
+				owning a distinct slice of the business logic — from prospect management and ML-based
+				scoring to underwriting analysis and state-specific disclosure generation.
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<p>
 		The data collection layer uses a <strong>Polymorphic Agent Architecture</strong>.
@@ -181,26 +199,34 @@ export class AgentOrchestrator {
 	</CodeStructure>
 
 	<h2>Nineteen Domain Services</h2>
-	<p>
-		The backend's service-oriented architecture reflects a deliberate decomposition along
-		business capability boundaries rather than technical layers. Each service owns a
-		distinct domain concept and can evolve independently.<Cite
-			id={4}
-			author="Fowler, Martin"
-			title="Patterns of Enterprise Application Architecture"
-			source="Addison-Wesley"
-			year={2002}
-		/> Fowler's domain model pattern — where business logic lives in rich domain objects
-		rather than in service-layer scripts — is applied throughout: a Prospect is not a
-		passive data transfer object but an entity that can compute its own priority score,
-		evaluate its qualification tier, and generate its compliance disclosure requirements.
-		The nineteen services span the full lifecycle of a lead: from initial UCC filing
-		extraction (ProspectsService, EnrichmentService) through qualification and scoring
-		(ScoringService, QualificationService, StackAnalysisService) to outreach and deal
-		management (ContactsService, DealsService, CommunicationsService) to underwriting and
-		compliance (UnderwritingService, DisclosureService, ConsentService, AuditService) and
-		finally to portfolio monitoring (PortfolioService, AlertService).
-	</p>
+	<ShibuiContent id="public-record-data-scrapper.nineteen-domain-services.p1">
+		<span slot="entry">
+			<p>I decomposed the backend into nineteen services organized by business capability, not technical layer. Each service owns a domain concept — a Prospect can compute its own priority score and generate its own compliance disclosures. The services span the full lead lifecycle: extraction, qualification, scoring, outreach, deal management, underwriting, compliance, and portfolio monitoring.</p>
+		</span>
+		<span slot="elevated">
+			<p>
+				The backend's service-oriented architecture reflects a deliberate decomposition along
+				business capability boundaries rather than technical layers. Each <ShibuiTerm term="domain service" definition="A software component that owns a single business concept and its rules, evolving independently from other services" /> owns a
+				distinct domain concept and can evolve independently.<Cite
+					id={4}
+					author="Fowler, Martin"
+					title="Patterns of Enterprise Application Architecture"
+					source="Addison-Wesley"
+					year={2002}
+				/> Fowler's domain model pattern — where business logic lives in rich domain objects
+				rather than in service-layer scripts — is applied throughout: a Prospect is not a
+				passive data transfer object but an entity that can compute its own priority score,
+				evaluate its qualification tier, and generate its compliance disclosure requirements.
+				The nineteen services span the full lifecycle of a lead: from initial UCC filing
+				extraction (ProspectsService, EnrichmentService) through qualification and scoring
+				(ScoringService, QualificationService, StackAnalysisService) to outreach and deal
+				management (ContactsService, DealsService, CommunicationsService) to underwriting and
+				compliance (UnderwritingService, DisclosureService, ConsentService, AuditService) and
+				finally to portfolio monitoring (PortfolioService, AlertService).
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<Figure
 		alt="Nineteen domain services organized by pipeline stage"
@@ -279,8 +305,13 @@ export class AgentOrchestrator {
 	</Figure>
 
 	<h2>Database Schema and Migration Discipline</h2>
+<ShibuiContent id="public-record-data-scrapper.database-schema-and-migration-discipline.p1">
+	<span slot="entry">
+		<p>I built the PostgreSQL schema for multitenancy from the start, using nine versioned migrations with rollback support. The migration sequence traces the system's evolution from initial UCC filings through row-level security, deal management, compliance tracking, and portfolio monitoring. Every migration has both an up and down path.</p>
+	</span>
+	<span slot="elevated">
 	<p>
-		The PostgreSQL schema supports multitenancy from the ground up, implemented through nine
+		The PostgreSQL schema supports <ShibuiTerm term="multitenancy" definition="A software architecture where a single instance serves multiple isolated customers, each seeing only their own data" /> from the ground up, implemented through nine
 		versioned migrations with rollback support. The migration sequence traces the system's
 		architectural evolution: the initial schema establishes UCC filings, prospects, and
 		enrichment data; subsequent migrations add normalization triggers, status enum alignment,
@@ -298,6 +329,9 @@ export class AgentOrchestrator {
 		normalized into a single relational model. Every migration includes both an up and a
 		down path, enabling rollback to any prior schema version without data loss.
 	</p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<CodeStructure
 		lang="sql"
@@ -336,9 +370,14 @@ ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;`}
 	</CodeStructure>
 
 	<h2>Enrichment Pipeline and ML Scoring</h2>
+<ShibuiContent id="public-record-data-scrapper.enrichment-pipeline-and-ml-scoring.p1">
+	<span slot="entry">
+		<p>I transform raw UCC filings into multidimensional prospect profiles by pulling from ten data sources -- six free-tier and four paid-tier. An ML scoring model assigns each prospect a priority score, health grade, growth signals, revenue estimate, and competitive position. The model is trained on MCA-specific financing patterns, not generic firmographic data.</p>
+	</span>
+	<span slot="elevated">
 	<p>
 		Raw UCC filings tell you that a company has a lien filed by a lender — nothing more. The
-		enrichment pipeline transforms this thin signal into a multidimensional prospect profile
+		<ShibuiTerm term="enrichment pipeline" definition="A staged data-processing chain that augments raw records with additional context from external sources to increase their analytical value" /> transforms this thin signal into a multidimensional prospect profile
 		by pulling from six free-tier sources (SEC EDGAR, OSHA, USPTO, Census Bureau, SAM.gov,
 		Google Places) and four paid-tier sources (Dun & Bradstreet, Clearbit, Experian,
 		ZoomInfo). Each enrichment source runs as an independent agent within the BullMQ worker
@@ -357,6 +396,9 @@ ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;`}
 		than generic firmographic data, giving it a vertical advantage over horizontal sales
 		intelligence platforms.
 	</p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<MermaidDiagram
 		caption="Enrichment pipeline flow — raw UCC filings pass through tiered data sources before ML scoring produces a multidimensional prospect profile."
@@ -414,6 +456,11 @@ ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;`}
 	</p>
 
 	<h2>Testing and Quality Infrastructure</h2>
+<ShibuiContent id="public-record-data-scrapper.testing-and-quality-infrastructure.p1">
+	<span slot="entry">
+		<p>I maintain 2,055 tests across 91 files in eleven categories -- from agentic system tests through frontend components to end-to-end integration. Pre-commit hooks run ESLint and Prettier on staged files, and CI runs the full test suite with TypeScript strict-mode checking and security scanning on every push. Zod validates data at every boundary.</p>
+	</span>
+	<span slot="elevated">
 	<p>
 		The platform maintains 2,055 tests across 91 test files, organized into eleven
 		categories: agentic system tests (~200), state agent tests (~250), entry point agent
@@ -436,6 +483,9 @@ ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;`}
 		schema validation at every data boundary — API inputs, database outputs, and external
 		API responses.
 	</p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<CodeStructure
 		lang="typescript"
@@ -465,6 +515,11 @@ router.get('/api/prospects', async (req, res) => {
 	</CodeStructure>
 
 	<h2>Compliance as a First-Class Concern</h2>
+<ShibuiContent id="public-record-data-scrapper.compliance-as-a-first-class-concern.p1">
+	<span slot="entry">
+		<p>I treated compliance as a native architectural concern, not a bolt-on. Four services enforce regulatory requirements as executable constraints: state-specific disclosures are auto-generated, TCPA consent is verified before any outreach, DNC lists are checked, and an immutable audit trail logs every communication with timestamp, content, and consent status.</p>
+	</span>
+	<span slot="elevated">
 	<p>
 		The MCA industry operates under an evolving regulatory landscape where state-specific
 		disclosure requirements — California's SB 1235 mandating APR disclosure on commercial
@@ -483,9 +538,12 @@ router.get('/api/prospects', async (req, res) => {
 			source="Basic Books"
 			year={1999}
 		/> Lessig's observation that code is law takes on literal force in a regulated
-		industry: the compliance services are not policy documents that brokers might ignore but
+		industry: the <ShibuiTerm term="compliance-as-code" definition="Encoding regulatory requirements as executable system constraints that enforce rules automatically rather than relying on manual adherence" /> approach means the compliance services are not policy documents that brokers might ignore but
 		executable constraints that prevent non-compliant outreach at the system level.
 	</p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<Figure
 		alt="Compliance service matrix"
@@ -563,6 +621,11 @@ router.get('/api/prospects', async (req, res) => {
 	</Figure>
 
 	<h2>Design Decisions and Tradeoffs</h2>
+<ShibuiContent id="public-record-data-scrapper.design-decisions-and-tradeoffs.p1">
+	<span slot="entry">
+		<p>I chose a unified TypeScript monorepo over polyglot microservices to eliminate integration errors through shared types. I used Puppeteer for adversarial portals because headless Chrome can render what raw HTTP cannot. The tiered data model lets the platform provide real value at zero cost while reserving premium enrichment for subscribers.</p>
+	</span>
+	<span slot="elevated">
 	<p>
 		The decision to build a monorepo with a unified TypeScript stack — rather than a
 		polyglot microservice architecture — reflects a pragmatic assessment of operational
@@ -582,6 +645,9 @@ router.get('/api/prospects', async (req, res) => {
 			year={2015}
 		/>
 	</p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<p>
 		The broader architectural claim is that vertical SaaS — purpose-built for a specific

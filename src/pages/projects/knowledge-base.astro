@@ -6,6 +6,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import PrismNav from '../../components/PrismNav.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
@@ -24,9 +26,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       <h2>The Evaporation Problem</h2>
 <SketchContainer sketchId="spiral" height="250px" mobileHeight="180px" ariaLabel="Golden spiral knowledge growth" />
 
-      <p>
+      <ShibuiContent id="knowledge-base.the-evaporation-problem.p1">
+	<span slot="entry">
+		<p>I built a system to capture what I learn from AI conversations before it disappears. Every chat with Claude, ChatGPT, or Gemini generates real knowledge, but it vanishes into inaccessible interfaces the moment the session ends. My Knowledge Base ingests from nine sources, breaks conversations into searchable units, and surfaces connections I never explicitly made.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         Every meaningful AI conversation generates knowledge that evaporates. You spend ninety minutes with Claude working through a recursive data structure design, and afterward that knowledge exists only inside a vendor-specific chat interface — unsearchable, unstructured, disconnected from every other conversation you have ever had. No export pathway, no atomization, no cross-conversation search, no intelligence extraction. This is not a new problem but an intensified form of an old one.<Cite id={1} author="Polanyi, Michael" title="The Tacit Dimension" source="University of Chicago Press" year={1966} /> Polanyi observed that we know more than we can tell — tacit knowledge resists codification. AI conversations produce a hybrid form: the dialogue itself is explicit text, but the understanding it generates often remains tacit, trapped in the user's memory and the chat log's inaccessible architecture. Vannevar Bush anticipated this crisis of intellectual record-keeping in 1945, proposing a "memex" — a device for storing, linking, and retrieving the trails of one's intellectual work.<Cite id={2} author="Bush, Vannevar" title="As We May Think" source="The Atlantic Monthly" year={1945} /> My Knowledge Base is the memex for the AI conversation era: a system that ingests from nine sources, decomposes conversations into atomic knowledge units, indexes them across three search modalities, and extracts intelligence that the original conversations only implied.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="End-to-end knowledge pipeline — nine sources converge through export, atomization, and indexing into a unified intelligence layer"
@@ -53,9 +63,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       />
 
       <h2>Multi-Source Export</h2>
-      <p>
+      <ShibuiContent id="knowledge-base.multi-source-export.p1">
+	<span slot="entry">
+		<p>I designed the ingestion layer to pull conversations from nine different AI platforms into one unified format. Since most platforms lack proper export APIs, the system uses browser automation to extract conversations and normalize them through source adapters I specified.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         The first subsystem solves the ingestion problem: AI platforms do not offer robust export APIs, so the system uses browser automation (Playwright) to extract conversations. I directed the implementation of the <a href="https://github.com/organvm-i-theoria/my-knowledge-base/tree/main/src/adapters" target="_blank">source adapters</a> to normalize conversations from nine disparate platforms into a common intermediate representation.<Cite id={3} author="Engelbart, Douglas C." title="Augmenting Human Intellect: A Conceptual Framework" source="Stanford Research Institute" year={1962} />
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="typescript" caption="Source adapter interface and atomizer pipeline — the contract every ingestion source must satisfy" filename="atomizer-pipeline.ts">
 {`interface SourceAdapter {
@@ -94,9 +112,17 @@ type AtomizationStrategy =
       </CodeStructure>
 
       <h2>Five-Strategy Atomizer</h2>
-      <p>
+      <ShibuiContent id="knowledge-base.five-strategy-atomizer.p1">
+	<span slot="entry">
+		<p>I built a system to turn my raw chat logs into a searchable library. Instead of just saving every word, I created a process that identifies the key ideas, summarizes the context, and tags the important lessons learned. This ensures that every conversation becomes a useful resource I can actually find and use later, rather than just a pile of unorganized transcripts.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         Raw conversations are not knowledge — they are transcripts of a knowledge-generating process, filled with false starts, clarifications, and tangential exploration. The atomizer decomposes these transcripts into the smallest self-contained knowledge units using five distinct strategies, each tuned for a different conversational pattern.<Cite id={5} author="Sowa, John F." title="Knowledge Representation: Logical, Philosophical, and Computational Foundations" source="Brooks/Cole" year={2000} /> Sowa's framework for knowledge representation emphasizes that the granularity of representation determines what can be retrieved and reasoned about — too coarse and connections are lost, too fine and context evaporates. The atomizer navigates this tension by applying the appropriate strategy based on conversational structure: topic-boundary detection splits at natural subject transitions, question-answer extraction pairs explicit queries with their resolutions, code-explanation pairing links implementation to rationale, decision-rationale extraction captures the reasoning behind choices, and concept-definition isolation identifies when a new term or framework is being established. Each strategy produces atoms at a different granularity level, and the system indexes all of them — a query can match at the concept level, the decision level, or the code level depending on what the user is searching for.<Cite id={6} author="Minsky, Marvin" title="The Society of Mind" source="Simon & Schuster" year={1986} /> Minsky's thesis that intelligence emerges from the interaction of many simple agents maps onto the atomizer architecture: no single strategy captures all knowledge, but their collective output covers the full spectrum of what a conversation contains.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Five atomization strategies with granularity and typical output" caption="Each atomization strategy targets a distinct conversational pattern, producing knowledge units at different levels of granularity" number={1}>
         <div class="table-wrap">
@@ -152,9 +178,17 @@ type AtomizationStrategy =
       </Figure>
 
       <h2>Triple-Modal Search</h2>
-      <p>
-        Search is the system's primary interface — the mechanism by which stored knowledge becomes accessible knowledge. The index operates in three modes simultaneously: SQLite FTS5 for exact keyword matching with BM25 ranking, ChromaDB for semantic vector search using sentence embeddings, and Reciprocal Rank Fusion (RRF) to merge results from both modalities into a single ranked list.<Cite id={7} author="Croft, W. Bruce, Donald Metzler, and Trevor Strohl" title="Search Engines: Information Retrieval in Practice" source="Addison-Wesley" year={2010} /> Croft's analysis of information retrieval demonstrates that keyword and semantic search fail in complementary ways: keyword search misses synonyms and paraphrases, while vector search can lose precision on specific technical terms. The triple-modal architecture exploits this complementarity. When a user searches for "BFS cycle detection," FTS5 surfaces atoms containing those exact terms while ChromaDB retrieves semantically related atoms about graph traversal, depth-first alternatives, and visited-set implementations. RRF then interleaves these result sets using reciprocal rank weighting — an atom that ranks highly in both modalities scores higher than one that dominates a single modality.<Cite id={8} author="Manning, Christopher D., Prabhakar Raghavan, and Hinrich Schutze" title="Introduction to Information Retrieval" source="Cambridge University Press" year={2008} /> Manning's treatment of evaluation metrics — precision, recall, mean reciprocal rank — informed the decision to use RRF specifically: it requires no training data, no weight tuning, and produces stable rankings even when the underlying modalities have different score distributions.
+      <ShibuiContent id="knowledge-base.triple-modal-search.p1">
+	<span slot="entry">
+		<p>I built the search to run three modes simultaneously: exact keyword matching, semantic vector search, and a fusion algorithm that merges both result sets. Keyword search catches exact terms; vector search finds related concepts even when the words differ. The fusion layer interleaves them so results that rank well in both modes rise to the top without any manual tuning.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        Search is the system's primary interface — the mechanism by which stored knowledge becomes accessible knowledge. The index operates in three modes simultaneously: SQLite <ShibuiTerm term="FTS5" definition="SQLite's full-text search extension that builds inverted indexes for fast keyword matching with BM25 relevance ranking" /> for exact keyword matching with BM25 ranking, <ShibuiTerm term="ChromaDB" definition="An open-source vector database that stores and queries high-dimensional embeddings for semantic similarity search" /> for semantic vector search using sentence embeddings, and <ShibuiTerm term="Reciprocal Rank Fusion" definition="A parameter-free algorithm that merges multiple ranked result lists by summing the reciprocal of each item's rank across lists" /> (RRF) to merge results from both modalities into a single ranked list.<Cite id={7} author="Croft, W. Bruce, Donald Metzler, and Trevor Strohl" title="Search Engines: Information Retrieval in Practice" source="Addison-Wesley" year={2010} /> Croft's analysis of information retrieval demonstrates that keyword and semantic search fail in complementary ways: keyword search misses synonyms and paraphrases, while <ShibuiTerm term="vector search" definition="Finding similar items by comparing their numerical embedding representations in high-dimensional space using distance metrics like cosine similarity" /> can lose precision on specific technical terms. The triple-modal architecture exploits this complementarity. When a user searches for "BFS cycle detection," FTS5 surfaces atoms containing those exact terms while ChromaDB retrieves semantically related atoms about graph traversal, depth-first alternatives, and visited-set implementations. RRF then interleaves these result sets using reciprocal rank weighting — an atom that ranks highly in both modalities scores higher than one that dominates a single modality.<Cite id={8} author="Manning, Christopher D., Prabhakar Raghavan, and Hinrich Schutze" title="Introduction to Information Retrieval" source="Cambridge University Press" year={2008} /> Manning's treatment of evaluation metrics — precision, recall, mean reciprocal rank — informed the decision to use RRF specifically: it requires no training data, no weight tuning, and produces stable rankings even when the underlying modalities have different score distributions.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Search architecture — parallel keyword and semantic retrieval fused through Reciprocal Rank Fusion"
@@ -175,9 +209,17 @@ type AtomizationStrategy =
       />
 
       <h2>Intelligence Layer</h2>
-      <p>
+      <ShibuiContent id="knowledge-base.intelligence-layer.p1">
+	<span slot="entry">
+		<p>I built an intelligence layer on top of search that surfaces things I didn't know I knew. It runs three LLM-powered processes: extracting patterns across conversations, generating normalized tags, and detecting relationships between atoms that were never explicitly connected. It works with Anthropic, OpenAI, or Ollama, so the whole system can run fully local with zero API keys.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         Search retrieves what you already know to look for. The intelligence layer surfaces what you did not know you knew. Three LLM-powered processes run over the indexed atoms: insight extraction identifies patterns and principles that span multiple conversations, smart tagging generates a controlled vocabulary that normalizes terminology across sources, and relationship detection discovers connections between atoms that were never explicitly linked in the original conversations.<Cite id={9} author="Berners-Lee, Tim" title="Linked Data" source="W3C Design Issues" year={2006} /> Berners-Lee's linked data principles — use URIs to name things, use HTTP URIs so people can look them up, provide useful information, include links to other URIs — translate directly into the knowledge graph's architecture: every atom has a stable identifier, every relationship is typed and traversable, and the graph is exportable via vis.js for visual exploration. The system supports three LLM backends interchangeably — Anthropic, OpenAI, and Ollama — meaning the intelligence layer can operate fully locally with zero API keys when privacy or cost constraints require it.<Cite id={10} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> Meadows's systems thinking framework reveals why the intelligence layer matters: knowledge is not a stock to be accumulated but a flow to be maintained. The intelligence layer converts static atoms into a dynamic system where new connections emerge as the graph grows, feedback loops between search behavior and tagging quality tighten over time, and the system's utility increases superlinearly with the volume of ingested material.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="typescript" caption="Search fusion algorithm — Reciprocal Rank Fusion merges keyword and semantic results without weight tuning" filename="search-fusion.ts">
 {`// View implementation at:
@@ -221,9 +263,17 @@ function reciprocalRankFusion(
       </CodeStructure>
 
       <h2>Knowledge Graph and Downstream Integration</h2>
-      <p>
-        The knowledge graph is the system's connective tissue — a directed graph where nodes are atoms and edges are typed relationships (supports, contradicts, extends, exemplifies, depends-on). BFS traversal from any atom reveals its neighborhood of related knowledge, and the graph is exportable to vis.js for interactive visual exploration in the browser.<Cite id={9} author="Berners-Lee, Tim" title="Linked Data" source="W3C Design Issues" year={2006} /> The graph is not a static index but a living structure that grows with every ingestion cycle. When the intelligence layer detects a new relationship between atoms from different conversations — perhaps a design pattern discussed with Claude in January connects to an implementation strategy explored with Gemini in March — it adds an edge, and the graph's topology shifts. This is where the system transcends individual conversation recovery and becomes genuine epistemological infrastructure: it reveals the structure of your thinking across time, platforms, and contexts. The knowledge base feeds downstream organs in the eight-organ system: extracted patterns seed generative art experiments in ORGAN-II, search architecture decisions inform ORGAN-III product specifications, and intelligence outputs become raw material for ORGAN-V public essays.<Cite id={10} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> This cross-organ feeding is not metaphorical — the export pipeline produces structured JSON that other systems consume programmatically, closing the loop between knowledge capture and creative production.
+      <ShibuiContent id="knowledge-base.knowledge-graph-and-downstream-integration.p1">
+	<span slot="entry">
+		<p>I built a knowledge graph where atoms are nodes and typed relationships (supports, contradicts, extends) are edges. It grows automatically as the intelligence layer discovers new connections between conversations I had months apart on different platforms. The graph feeds downstream projects: patterns seed generative art, architecture decisions inform product specs, and insights become essay material.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The <ShibuiTerm term="knowledge graph" definition="A network data structure where entities are nodes and their semantic relationships are typed, directed edges enabling traversal and discovery" /> is the system's connective tissue — a directed graph where nodes are atoms and edges are typed relationships (supports, contradicts, extends, exemplifies, depends-on). BFS traversal from any atom reveals its neighborhood of related knowledge, and the graph is exportable to vis.js for interactive visual exploration in the browser.<Cite id={9} author="Berners-Lee, Tim" title="Linked Data" source="W3C Design Issues" year={2006} /> The graph is not a static index but a living structure that grows with every ingestion cycle. When the intelligence layer detects a new relationship between atoms from different conversations — perhaps a design pattern discussed with Claude in January connects to an implementation strategy explored with Gemini in March — it adds an edge, and the graph's topology shifts. This is where the system transcends individual conversation recovery and becomes genuine epistemological infrastructure: it reveals the structure of your thinking across time, platforms, and contexts. The knowledge base feeds downstream organs in the eight-organ system: extracted patterns seed generative art experiments in ORGAN-II, search architecture decisions inform ORGAN-III product specifications, and intelligence outputs become raw material for ORGAN-V public essays.<Cite id={10} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> This cross-organ feeding is not metaphorical — the export pipeline produces structured JSON that other systems consume programmatically, closing the loop between knowledge capture and creative production.
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Knowledge graph structure — atoms connected by typed relationships, traversable via BFS and exportable to vis.js"
@@ -244,9 +294,17 @@ function reciprocalRankFusion(
       />
 
       <h2>Architecture and Testing</h2>
-      <p>
+      <ShibuiContent id="knowledge-base.architecture-and-testing.p1">
+	<span slot="entry">
+		<p>I built the system in TypeScript strict mode with SQLite for storage, ChromaDB for vector search, and over 200 tests covering the full pipeline. Search quality is measured against hand-labeled relevance judgments. The entire system can run fully local with Ollama, so my knowledge infrastructure doesn't depend on any single vendor's availability or pricing.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         The system is implemented in TypeScript with strict mode enabled, backed by SQLite for structured storage and full-text search, ChromaDB for vector embeddings, and a knowledge graph with BFS traversal and vis.js export. The test suite exceeds 200 tests covering the full pipeline: source adapter mocking, atomization strategy correctness, search ranking quality (measured by mean reciprocal rank against hand-labeled relevance judgments), intelligence layer output validation, and graph traversal properties.<Cite id={7} author="Croft, W. Bruce, Donald Metzler, and Trevor Strohl" title="Search Engines: Information Retrieval in Practice" source="Addison-Wesley" year={2010} /> Croft's emphasis on evaluation-driven development — measuring retrieval quality against ground truth before and after each system change — shaped the testing methodology. The architecture supports three LLM backends (Anthropic, OpenAI, Ollama) interchangeably through a provider abstraction layer, which means the entire system can operate fully locally with Ollama, requiring zero API keys and sending no data to external services. This is not merely a deployment convenience but an architectural commitment: knowledge infrastructure should not depend on the continued availability or pricing of any single vendor.<Cite id={8} author="Manning, Christopher D., Prabhakar Raghavan, and Hinrich Schutze" title="Introduction to Information Retrieval" source="Cambridge University Press" year={2008} />
       </p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="System architecture layers and technology choices" caption="Four architectural layers with their storage, search, and intelligence technologies" number={2}>
         <div class="table-wrap">

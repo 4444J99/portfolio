@@ -1,9 +1,9 @@
 {
-  "generated": "2026-03-25T00:33:36.983Z",
+  "generated": "2026-03-25T14:11:16.399Z",
   "tests": {
     "total": 289,
     "passed": 289,
-    "files": 33
+    "files": 34
   },
   "security": {
     "critical": 0,
@@ -50,12 +50,12 @@
     "seo": 92
   },
   "a11y": {
-    "status": "pass",
+    "status": "fail",
     "static": {
       "pagesAudited": 102,
       "critical": 0,
-      "serious": 0,
-      "status": "pass"
+      "serious": 20,
+      "status": "fail"
     },
     "runtime": {
       "pagesAudited": 44,

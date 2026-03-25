@@ -6,6 +6,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import PrismNav from '../../components/PrismNav.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
@@ -22,14 +24,30 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 				{ src: 'https://img.shields.io/github/last-commit/organvm-i-theoria/recursive-engine--generative-entity', alt: 'Last commit' },
 			]}>
 			<h2>The Question</h2>
-			<p>
-				Every software system tells a story — user flows are plot arcs, state machines are character development, error handling is conflict resolution. We treat these as metaphors. I wanted to find out what happens when you treat them as engineering principles.<Cite id={1} author="Aristotle" title="Poetics" source="Penguin Classics (trans. 1996)" year={-335} /> Aristotle's six elements of drama — plot, character, thought, diction, spectacle, song — are not literary ornaments but structural primitives. What if narrative structure, from Aristotle through Propp, could be encoded as executable rules?<Cite id={2} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1968} /> Not an AI that "writes stories" — a symbolic operating system where narrative principles govern how systems organize and evolve.
-			</p>
+			<ShibuiContent id="recursive-engine.the-question.p1">
+				<span slot="entry">
+					<p>Every software system already tells a story -- user flows are plot arcs, state machines are character development. We treat these as metaphors. I wanted to find out what happens when you treat them as actual engineering principles. Not an AI that writes stories, but a symbolic operating system where narrative rules govern how systems organize and evolve.</p>
+				</span>
+				<span slot="elevated">
+					<p>
+				Every software system tells a story — user flows are plot arcs, state machines are character development, error handling is conflict resolution. We treat these as metaphors. I wanted to find out what happens when you treat them as engineering principles.<Cite id={1} author="Aristotle" title="Poetics" source="Penguin Classics (trans. 1996)" year={-335} /> <ShibuiTerm term="Aristotle's four causes" definition="Aristotle's framework for explaining anything fully: material cause (what it's made of), formal cause (its structure), efficient cause (what made it), and final cause (its purpose)" /> — here reduced to his six elements of drama: plot, character, thought, diction, spectacle, song — are not literary ornaments but structural primitives. What if narrative structure, from Aristotle through Propp, could be encoded as executable rules?<Cite id={2} author="Propp, Vladimir" title="Morphology of the Folktale" source="University of Texas Press" year={1968} /> Not an AI that "writes stories" — a symbolic operating system where narrative principles govern how systems organize and evolve.
+					</p>
+				</span>
+			</ShibuiContent>
+			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 			<h2>What RE:GE Does</h2>
-			<p>
-				RE:GE is a pure Python engine where <strong>myths, identities, rituals, and recursive structures are first-class computational objects</strong>.<Cite id={3} author="Campbell, Joseph" title="The Hero with a Thousand Faces" source="New World Library" year={1949} /> Campbell's monomyth — the hero's departure, initiation, and return — becomes a function signature: entity state in, transformed state out. The engine implements <a href="https://github.com/organvm-i-theoria/recursive-engine--generative-entity/tree/main/src/organs" target="_blank">21 organ handlers</a> that process symbolic values through a ritual syntax DSL:
-			</p>
+			<ShibuiContent id="recursive-engine.what-re-ge-does.p1">
+				<span slot="entry">
+					<p>I built a Python engine where myths, identities, rituals, and recursive structures are real computational objects. It has 21 specialized handlers that process symbolic values through a custom language I designed for declaring narrative operations.</p>
+				</span>
+				<span slot="elevated">
+					<p>
+				RE:GE is a pure Python engine where <strong>myths, identities, rituals, and recursive structures are first-class computational objects</strong>.<Cite id={3} author="Campbell, Joseph" title="The Hero with a Thousand Faces" source="New World Library" year={1949} /> Campbell's <ShibuiTerm term="monomyth" definition="Joseph Campbell's theory that all hero myths share a single underlying structure of departure, initiation, and return" /> — the hero's departure, initiation, and return — becomes a function signature: entity state in, transformed state out. The engine implements <a href="https://github.com/organvm-i-theoria/recursive-engine--generative-entity/tree/main/src/organs" target="_blank">21 organ handlers</a> that process symbolic values through a ritual syntax DSL:
+					</p>
+				</span>
+			</ShibuiContent>
+			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 			<ul>
 				<li><strong>Myth organs</strong> — encode narrative archetypes as transformation rules. A hero's journey is a function: entity state in, transformed state out.</li>
 				<li><strong>Identity organs</strong> — manage how entities maintain coherence across transformations. When a character "changes," what persists?</li>
@@ -66,9 +84,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 			/>
 
 			<h2>System Architecture</h2>
-			<p>
-				RE:GE is organized into eight architectural layers, each with a single responsibility. The design draws from both the handler pattern in enterprise systems and the modular routing philosophy of audio signal processing — the central routing component is called the <em>Soul Patchbay</em>, a heap-based priority queue with collision detection and deadlock prevention.<Cite id={13} author="Buschmann, Frank, Regine Meunier, Hans Rohnert, Peter Sommerlad, and Michael Stal" title="Pattern-Oriented Software Architecture, Volume 1" source="Wiley" year={1996} />
-			</p>
+			<ShibuiContent id="recursive-engine.system-architecture.p1">
+				<span slot="entry">
+					<p>I organized the engine into eight layers, each with a single job. At the center is a priority queue I called the Soul Patchbay that routes symbolic operations to the right handler, with built-in collision detection and deadlock prevention.</p>
+				</span>
+				<span slot="elevated">
+					<p>
+				RE:GE is organized into eight architectural layers, each with a single responsibility. The design draws from both the <ShibuiTerm term="dispatcher pattern" definition="An architectural pattern where a central routing component receives requests and delegates them to the appropriate handler based on type, priority, or content" /> in enterprise systems and the modular routing philosophy of audio signal processing — the central routing component is called the <em>Soul Patchbay</em>, a heap-based priority queue with collision detection and deadlock prevention.<Cite id={13} author="Buschmann, Frank, Regine Meunier, Hans Rohnert, Peter Sommerlad, and Michael Stal" title="Pattern-Oriented Software Architecture, Volume 1" source="Wiley" year={1996} />
+					</p>
+				</span>
+			</ShibuiContent>
+			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 			<MermaidDiagram
 				caption="Eight-layer system architecture — from CLI input through parsing, validation, routing, and dispatch to the three processing subsystems"
@@ -85,9 +111,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 		BRIDGES --> PERSIST`}
 			/>
 
-			<p>
-				The dispatcher implements a six-phase lifecycle for every invocation: <code>PARSE → VALIDATE → QUEUE → EXECUTE → FORMAT → LOG</code>. This is not incidental sequencing — each phase is a distinct processing stage with its own failure modes and recovery strategies. The depth tracker enforces four-tier recursion ceilings that prevent unbounded self-reference while still allowing the system's recursive organs to operate meaningfully.<Cite id={5} author="Hofstadter, Douglas" title="Gödel, Escher, Bach: An Eternal Golden Braid" source="Basic Books" year={1979} />
-			</p>
+			<ShibuiContent id="recursive-engine.system-architecture.p2">
+				<span slot="entry">
+					<p>Every command goes through six stages: parse, validate, queue, execute, format, and log. Each stage has its own failure handling. I also built a depth tracker with four tiers of recursion limits to prevent the system from referencing itself infinitely while still allowing meaningful recursive operations.</p>
+				</span>
+				<span slot="elevated">
+					<p>
+				The dispatcher implements a six-phase lifecycle for every invocation: <code>PARSE → VALIDATE → QUEUE → EXECUTE → FORMAT → LOG</code>. This is not incidental sequencing — each phase is a distinct processing stage with its own failure modes and recovery strategies. The depth tracker enforces four-tier <ShibuiTerm term="recursive descent" definition="A parsing and processing technique where a system calls itself with progressively simpler inputs, requiring explicit depth limits to guarantee termination" /> ceilings that prevent unbounded self-reference while still allowing the system's recursive organs to operate meaningfully.<Cite id={5} author="Hofstadter, Douglas" title="Gödel, Escher, Bach: An Eternal Golden Braid" source="Basic Books" year={1979} />
+					</p>
+				</span>
+			</ShibuiContent>
+			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 			<Figure alt="Recursion depth tiers with corresponding limits and actions" caption="Four-tier recursion depth management — each tier serves a distinct purpose, from standard processing to emergency halt" number={1}>
 				<StatGrid stats={[
@@ -98,14 +132,30 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 				]} />
 			</Figure>
 
-			<p>
-				Every organ extends the <code>OrganHandler</code> abstract base class, which enforces consistent lifecycle management: invocation validation, state persistence, and participation in system-wide checkpointing. The registry manages organ lookup and bulk state operations. This design ensures that adding a new organ requires implementing a contract, not modifying the routing infrastructure — the open-closed principle applied to symbolic processing.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
-			</p>
+			<ShibuiContent id="recursive-engine.system-architecture.p3">
+				<span slot="entry">
+					<p>Every organ implements the same base contract, which handles validation, state persistence, and checkpointing. Adding a new organ means implementing that contract -- you never have to modify the routing infrastructure. The system grows by adding processors, not by rewiring the core.</p>
+				</span>
+				<span slot="elevated">
+					<p>
+				Every organ extends the <code><ShibuiTerm term="OrganHandler" definition="The abstract base class that all 21 organ processors must implement, enforcing a shared contract for validation, state persistence, and checkpointing" /></code> abstract base class, which enforces consistent lifecycle management: invocation validation, state persistence, and participation in system-wide checkpointing. The registry manages organ lookup and bulk state operations. This design ensures that adding a new organ requires implementing a contract, not modifying the routing infrastructure — the open-closed principle applied to symbolic processing.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
+					</p>
+				</span>
+			</ShibuiContent>
+			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 			<h2>The Ritual Syntax</h2>
-			<p>
+			<ShibuiContent id="recursive-engine.the-ritual-syntax.p1">
+				<span slot="entry">
+					<p>I designed a custom language for declaring symbolic operations. It has its own parser and interpreter, completely separate from Python. You write ritual invocations in a declarative syntax, and the engine parses and executes them.</p>
+				</span>
+				<span slot="elevated">
+					<p>
 				The engine parses and executes a domain-specific language for declaring symbolic operations.<Cite id={4} author="Fowler, Martin" title="Domain-Specific Languages" source="Addison-Wesley" year={2010} /> Fowler distinguishes between internal DSLs (embedded in a host language) and external DSLs (with their own parser) — RE:GE's ritual syntax is a fully external DSL, parsed and executed by a dedicated interpreter. This gives it the expressiveness of declaring symbolic operations declaratively while maintaining a clean separation from the underlying Python runtime.
-			</p>
+					</p>
+				</span>
+			</ShibuiContent>
+			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 			<CodeStructure lang="python" caption="Ritual syntax DSL — an external domain-specific language for declaring symbolic organ operations" filename="ritual_syntax.rege">
 {`INVOKE myth.hero_journey ON entity:protagonist
@@ -132,9 +182,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 			</p>
 
 			<h2>Implementation Details</h2>
-			<p>
+			<ShibuiContent id="recursive-engine.implementation-details.p1">
+				<span slot="entry">
+					<p>I chose Python deliberately and kept the dependency count to one: Click for the CLI. Everything else -- all 21 organs, protocols, bridges, and the orchestration engine -- is pure Python. I wanted the system to be portable, inspectable, and free of framework lock-in. It runs on Python 3.8 through 3.12.</p>
+				</span>
+				<span slot="elevated">
+					<p>
 				<strong>Why Python.</strong> RE:GE has a single runtime dependency: Click for the CLI framework. Everything else — all 21 organs, protocols, bridges, and the orchestration engine — is implemented in pure Python with no external libraries. This was a deliberate constraint.<Cite id={14} author="Hunt, Andrew and David Thomas" title="The Pragmatic Programmer" source="Addison-Wesley" year={1999} /> The system needed to be portable, inspectable, and free of framework lock-in. Python's dynamic typing and metaprogramming capabilities allow the DSL parser to construct Invocation objects reflectively, while the ABC pattern provides the structural guarantees needed for the organ handler contract. Python compatibility is verified across versions 3.8 through 3.12.
-			</p>
+					</p>
+				</span>
+			</ShibuiContent>
+			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 			<p>
 				<strong>The handler pattern.</strong> Each of the 21 organs is a class extending <code>OrganHandler</code>, implementing <code>invoke()</code> with organ-specific logic. Organs are registered in a central registry and looked up by name at dispatch time. This is structurally similar to the Strategy pattern but with a crucial difference: organs maintain internal state across invocations, which is persisted via the checkpoint system. An organ is not a stateless function — it is a processor with memory.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
 			</p>
@@ -244,9 +302,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 			</p>
 
 			<h2>The Discovery</h2>
-			<p>
+			<ShibuiContent id="recursive-engine.the-discovery.p1">
+				<span slot="entry">
+					<p>The biggest surprise wasn't technical -- it was creative. Having 21 distinct organ types with formal interfaces gave me more creative possibilities than working without structure. When you know what a transformation guarantees, you can safely compose it with others. Formalism enables creativity. That insight reshaped how I think about every system I build.</p>
+				</span>
+				<span slot="elevated">
+					<p>
 				The most surprising outcome wasn't technical — it was aesthetic. Having 21 distinct organ types with formal interfaces created <em>more</em> creative possibilities than working without structure.<Cite id={10} author="Csikszentmihalyi, Mihaly" title="Creativity: Flow and the Psychology of Discovery and Invention" source="Harper Perennial" year={1996} /> Csikszentmihalyi's research on flow states shows that creativity emerges not from total freedom but from the right constraints — challenge matched to skill, rules that channel rather than restrict. When you know what an identity transformation guarantees, you can safely compose it with a myth transformation. Formalism enables creativity. That insight reshaped how I think about every system I build.
-			</p>
+					</p>
+				</span>
+			</ShibuiContent>
+			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 			<h2>Technical Debt &amp; Future</h2>
 			<p>

@@ -5,6 +5,8 @@ import Figure from '../../components/academic/Figure.astro';
 import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 ---
@@ -19,9 +21,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       <h2>The Problem with Professional Identity</h2>
 <SketchContainer sketchId="orbits" height="250px" mobileHeight="180px" ariaLabel="Orbital social dynamics" />
 
-      <p>
-        The conventional curriculum vitae forces a fundamental act of self-falsification. A professional with twenty years of experience across theory, engineering, art, and systems architecture must compress that multidimensional identity into a single linear narrative — typically optimized for one imagined reader with one imagined set of priorities.<Cite id={1} author="Goffman, Erving" title="The Presentation of Self in Everyday Life" source="Anchor Books" year={1959} /> Goffman's dramaturgical analysis demonstrates that all social interaction involves strategic self-presentation: we perform different versions of ourselves for different audiences. The traditional CV denies this reality, demanding a single canonical performance regardless of audience. The result is a document that systematically disadvantages polymathic professionals — those whose value lies precisely in the breadth and interconnection of their capabilities.<Cite id={2} author="Bourdieu, Pierre" title="Distinction: A Social Critique of the Judgement of Taste" source="Harvard University Press" year={1984} /> Bourdieu's concept of cultural capital reveals how hiring processes reproduce class structures through credentialing rituals that privilege legibility over depth. This project asks: what if the CV were not a static document but a dynamic system — one that assembles itself in response to what the employer actually needs?
+      <ShibuiContent id="life-my-midst-in.the-problem-with-professional-identity.p1">
+	<span slot="entry">
+		<p>I designed a system that flips the traditional resume on its head. Instead of forcing a multidimensional career into one flat document, this application asks the employer what they actually need — then assembles a tailored view of my professional identity in real time. The employer becomes the interviewee, and the CV builds itself.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The conventional curriculum vitae forces a fundamental act of self-falsification. A professional with twenty years of experience across theory, engineering, art, and systems architecture must compress that multidimensional identity into a single linear narrative — typically optimized for one imagined reader with one imagined set of priorities.<Cite id={1} author="Goffman, Erving" title="The Presentation of Self in Everyday Life" source="Anchor Books" year={1959} /> Goffman's <ShibuiTerm term="dramaturgical analysis" definition="A sociological framework treating everyday social interaction as theatrical performance, where individuals manage impressions for different audiences" /> demonstrates that all social interaction involves strategic self-presentation: we perform different versions of ourselves for different audiences. The traditional CV denies this reality, demanding a single canonical performance regardless of audience. The result is a document that systematically disadvantages polymathic professionals — those whose value lies precisely in the breadth and interconnection of their capabilities.<Cite id={2} author="Bourdieu, Pierre" title="Distinction: A Social Critique of the Judgement of Taste" source="Harvard University Press" year={1984} /> Bourdieu's concept of cultural capital reveals how hiring processes reproduce class structures through credentialing rituals that privilege legibility over depth. This project asks: what if the CV were not a static document but a dynamic system — one that assembles itself in response to what the employer actually needs?
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="System flow: the employer visits a unique link, answers diagnostic questions, selects a mask, and receives a filtered CV view assembled in real time"
@@ -42,9 +52,17 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       />
 
       <h2>Technical Architecture</h2>
-      <p>
-        The system is a full-stack monorepo implementing hexagonal architecture — a pattern where the core business logic has no dependencies on frameworks, databases, or delivery mechanisms.<Cite id={3} author="Cockburn, Alistair" title="Hexagonal Architecture" source="alistair.cockburn.us" year={2005} /> I directed the architectural specification for a <strong>Next.js 16 frontend</strong> (React Server Components, streaming SSR) and a <strong>Fastify 5 REST API</strong>, implemented as interchangeable adapters around a framework-agnostic core. A Node.js orchestrator manages long-running processes — credential verification, compatibility scoring, and the autonomous Hunter Protocol. The monorepo shares four packages: Zod schemas for runtime type validation, a core logic library, a narrative model that structures professional identity as a directed acyclic graph, and a design system implementing the visual language.<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} />
+      <ShibuiContent id="life-my-midst-in.technical-architecture.p1">
+	<span slot="entry">
+		<p>I architected this as a full-stack monorepo using hexagonal architecture, so the core business logic stays completely independent of any framework. The frontend is Next.js 16 with React Server Components, the API is Fastify 5, and four shared packages handle validation, identity modeling, and the design system.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The system is a full-stack monorepo implementing <ShibuiTerm term="hexagonal architecture" definition="A design pattern (also called ports and adapters) where core business logic has zero dependencies on frameworks, databases, or delivery mechanisms" /> — a pattern where the core business logic has no dependencies on frameworks, databases, or delivery mechanisms.<Cite id={3} author="Cockburn, Alistair" title="Hexagonal Architecture" source="alistair.cockburn.us" year={2005} /> I directed the architectural specification for a <strong>Next.js 16 frontend</strong> (React Server Components, streaming SSR) and a <strong>Fastify 5 REST API</strong>, implemented as interchangeable adapters around a framework-agnostic core. A Node.js orchestrator manages long-running processes — credential verification, compatibility scoring, and the autonomous Hunter Protocol. The monorepo shares four packages: Zod schemas for runtime type validation, a core logic library, a narrative model that structures professional identity as a directed acyclic graph, and a design system implementing the visual language.<Cite id={4} author="Fowler, Martin" title="Patterns of Enterprise Application Architecture" source="Addison-Wesley" year={2002} />
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <CodeStructure lang="typescript" caption="Mask system type definition — 16 identity masks across three cognitive categories, each defining how the same underlying professional truth is filtered for a specific audience" filename="packages/core/src/masks/types.ts">
 {`// View canonical definitions at: 
@@ -87,9 +105,17 @@ type MaskId =
       </CodeStructure>
 
       <h2>The Mask System</h2>
-      <p>
+      <ShibuiContent id="life-my-midst-in.the-mask-system.p1">
+	<span slot="entry">
+		<p>I created 16 professional "masks" organized into three categories: cognitive, expressive, and operational. Each mask is a truthful lens on the same career — a systems-architect view emphasizes abstraction and integration, while a creative-director view foregrounds aesthetic judgment. They don't invent different people; they highlight different dimensions of the same one.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         The core innovation is a taxonomy of 16 professional masks organized across three categories: cognitive (how you think), expressive (how you communicate), and operational (how you build).<Cite id={5} author="Jung, Carl G." title="Psychological Types" source="Routledge (trans. 1971)" year={1921} /> Jung's theory of psychological types established that individuals operate through different dominant cognitive functions — thinking, feeling, sensation, intuition — and that these functions manifest differently depending on context. The mask system operationalizes this insight for professional identity. A "systems-architect" mask emphasizes abstraction, pattern recognition, and cross-domain integration. A "creative-director" mask foregrounds aesthetic judgment, narrative coherence, and visual language. Both are truthful representations of the same professional — they differ not in what they claim but in what they emphasize.<Cite id={6} author="Gardner, Howard" title="Frames of Mind: The Theory of Multiple Intelligences" source="Basic Books" year={1983} /> Gardner's multiple intelligences framework provides the empirical grounding: professional competence is not unitary but manifests across linguistic, logical-mathematical, spatial, musical, bodily-kinesthetic, interpersonal, intrapersonal, and naturalistic domains. The 16 masks map onto these domains, ensuring that no dimension of professional identity is systematically invisible.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Mask categories and their filtering behavior" caption="The 16 professional masks organized by cognitive category, showing representative filtering behavior for each" number={1}>
         <div class="table-wrap">
@@ -172,9 +198,17 @@ type MaskId =
       </Figure>
 
       <h2>Verifiable Credentials</h2>
-      <p>
-        Professional claims are cheap. Anyone can list "10 years of experience" or "led a team of 20." The system integrates W3C Verifiable Credentials to provide cryptographic proof of professional claims without requiring trust in the claimant.<Cite id={7} author="W3C" title="Verifiable Credentials Data Model v2.0" source="W3C Recommendation" year={2022} /> Each credential — employment history, project contributions, skill demonstrations, educational achievements — is issued as a signed JSON-LD document that can be independently verified against the issuer's public key. The employer viewing a filtered CV sees not just claims but verified claims, with visual indicators distinguishing cryptographically attested facts from self-reported assertions. This architecture aligns with the broader movement toward self-sovereign identity: the professional controls their own credential wallet, choosing what to present and to whom, without depending on centralized platforms like LinkedIn to mediate trust.<Cite id={8} author="Allen, Christopher" title="The Path to Self-Sovereign Identity" source="Life with Alacrity (blog)" year={2016} /> Allen's ten principles of self-sovereign identity — existence, control, access, transparency, persistence, portability, interoperability, consent, minimization, protection — guided every design decision in the credential subsystem.
+      <ShibuiContent id="life-my-midst-in.verifiable-credentials.p1">
+	<span slot="entry">
+		<p>I integrated W3C Verifiable Credentials so that professional claims on this CV are cryptographically provable, not just stated. Each credential is a signed document that anyone can independently verify. The employer sees which claims are attested and which are self-reported, and I control my own credential wallet without depending on LinkedIn or any other platform.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        Professional claims are cheap. Anyone can list "10 years of experience" or "led a team of 20." The system integrates <ShibuiTerm term="W3C Verifiable Credentials" definition="A W3C standard for cryptographically signed digital documents that let anyone independently verify a claim without trusting the presenter" /> to provide cryptographic proof of professional claims without requiring trust in the claimant.<Cite id={7} author="W3C" title="Verifiable Credentials Data Model v2.0" source="W3C Recommendation" year={2022} /> Each credential — employment history, project contributions, skill demonstrations, educational achievements — is issued as a signed JSON-LD document that can be independently verified against the issuer's public key. The employer viewing a filtered CV sees not just claims but verified claims, with visual indicators distinguishing cryptographically attested facts from self-reported assertions. This architecture aligns with the broader movement toward <ShibuiTerm term="self-sovereign identity" definition="A model where individuals own and control their digital credentials without depending on any centralized platform or issuing authority" />: the professional controls their own credential wallet, choosing what to present and to whom, without depending on centralized platforms like LinkedIn to mediate trust.<Cite id={8} author="Allen, Christopher" title="The Path to Self-Sovereign Identity" source="Life with Alacrity (blog)" year={2016} /> Allen's ten principles of self-sovereign identity — existence, control, access, transparency, persistence, portability, interoperability, consent, minimization, protection — guided every design decision in the credential subsystem.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="Five-factor compatibility scoring pipeline — employer responses are decomposed into weighted factors, scored against the candidate's professional graph, and synthesized into a composite recommendation"
@@ -200,9 +234,17 @@ type MaskId =
       />
 
       <h2>Compatibility Scoring</h2>
-      <p>
-        The five-factor compatibility scorer operates on the responses the employer provides during the diagnostic interview. Rather than asking "Do you want a frontend developer?" — a question that presupposes the categorization — the system asks about team dynamics, project complexity, communication patterns, growth expectations, and compensation philosophy. These responses are parsed into five orthogonal dimensions: <strong>skill match</strong> (technical capability alignment), <strong>values alignment</strong> (ethical and cultural compatibility), <strong>growth fit</strong> (trajectory compatibility over a 2-5 year horizon), <strong>sustainability</strong> (whether the role's demands match the candidate's working style), and <strong>compensation</strong> (mutual economic fit).<Cite id={9} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> Meadows' systems thinking framework — particularly her concept of leverage points — informs the weighting: values alignment and growth fit are weighted more heavily than skill match because they predict long-term success more reliably than technical overlap alone. Each factor produces a 0-1 score, and the weighted synthesis generates both a composite number and a ranked list of recommended masks. The system does not produce a binary accept/reject; it produces a nuanced profile of mutual fit.
+      <ShibuiContent id="life-my-midst-in.compatibility-scoring.p1">
+	<span slot="entry">
+		<p>I built a five-factor scoring system that evaluates mutual fit rather than just technical skill overlap. Instead of asking "do you need a frontend developer," it asks about team dynamics, growth expectations, and compensation philosophy. Values alignment and growth trajectory are weighted more heavily than technical match because they predict long-term success far better.</p>
+	</span>
+	<span slot="elevated">
+		<p>
+        The five-factor <ShibuiTerm term="compatibility scoring" definition="A multi-dimensional assessment that produces a weighted composite score measuring mutual fit across several independent factors" /> operates on the responses the employer provides during the diagnostic interview. Rather than asking "Do you want a frontend developer?" — a question that presupposes the categorization — the system asks about team dynamics, project complexity, communication patterns, growth expectations, and compensation philosophy. These responses are parsed into five orthogonal dimensions: <strong>skill match</strong> (technical capability alignment), <strong>values alignment</strong> (ethical and cultural compatibility), <strong>growth fit</strong> (trajectory compatibility over a 2-5 year horizon), <strong>sustainability</strong> (whether the role's demands match the candidate's working style), and <strong>compensation</strong> (mutual economic fit).<Cite id={9} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> Meadows' systems thinking framework — particularly her concept of leverage points — informs the weighting: values alignment and growth fit are weighted more heavily than skill match because they predict long-term success more reliably than technical overlap alone. Each factor produces a 0-1 score, and the weighted synthesis generates both a composite number and a ranked list of recommended masks. The system does not produce a binary accept/reject; it produces a nuanced profile of mutual fit.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <Figure alt="Compatibility factor weighting rationale" caption="Compatibility factor weights — values alignment and growth fit receive higher weights because they predict long-term professional success more reliably than technical skill match alone" number={2}>
         <div class="table-wrap">
@@ -252,9 +294,17 @@ type MaskId =
       </Figure>
 
       <h2>The Hunter Protocol</h2>
-      <p>
+      <ShibuiContent id="life-my-midst-in.the-hunter-protocol.p1">
+	<span slot="entry">
+		<p>I built an autonomous job search agent that flips the traditional model. Instead of me endlessly scrolling job boards, the Hunter Protocol continuously scans opportunities and scores them against my full professional profile using the same five-factor compatibility model. It only surfaces roles that clear a quality threshold, complete with a breakdown and a draft application narrative.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         Most job search tools are passive: they wait for the candidate to search, filter, and apply. The Hunter Protocol inverts this. Running as an autonomous Node.js process within the orchestrator, it continuously monitors job boards, company career pages, and professional networks for opportunities that match the candidate's full professional graph — not a keyword-reduced summary.<Cite id={10} author="Simon, Herbert A." title="The Sciences of the Artificial" source="MIT Press" year={1996} /> Simon's concept of bounded rationality explains why traditional job search fails: the search space is too large and the evaluation criteria too complex for manual scanning. The Hunter Protocol applies satisficing strategies — Simon's term for finding solutions that are good enough rather than optimal — across the opportunity space, using the same five-factor compatibility model to score potential matches before the candidate ever sees them. Opportunities that clear a configurable threshold are queued with a compatibility breakdown, recommended masks, and a draft narrative tailored to the specific role.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <MermaidDiagram
         caption="The I to II to III pipeline — theoretical frameworks from ORGAN-I inform design patterns in ORGAN-II, which become production products in ORGAN-III"
@@ -272,9 +322,17 @@ type MaskId =
       />
 
       <h2>The I-II-III Pipeline</h2>
-      <p>
+      <ShibuiContent id="life-my-midst-in.the-i-ii-iii-pipeline.p1">
+	<span slot="entry">
+		<p>This project is the clearest example of how my eight-organ system actually works in practice. Theoretical frameworks from the research organ become computable structures in the design organ, which become production code in the engineering organ. It is not a description of how hiring works -- it is a working prescription for how it should work, backed by 68+ commits and 21 database migrations.</p>
+	</span>
+	<span slot="elevated">
+		<p>
         This project is the most architecturally complete demonstration of the eight-organ system's core thesis: that theory, design, and production are not separate activities but phases of a single creative-institutional pipeline.<Cite id={9} author="Meadows, Donella H." title="Thinking in Systems: A Primer" source="Chelsea Green Publishing" year={2008} /> The mask taxonomy draws directly on ORGAN-I's ontological frameworks — Jung's psychological types, Gardner's multiple intelligences, Goffman's dramaturgical analysis — and translates them into computable structures. The hexagonal architecture pattern, refined through ORGAN-II design work, becomes the production skeleton. The W3C Verifiable Credentials integration demonstrates that institutional-grade trust mechanisms can coexist with individual sovereignty.<Cite id={10} author="Simon, Herbert A." title="The Sciences of the Artificial" source="MIT Press" year={1996} /> Simon's distinction between natural and artificial sciences — where the artificial is concerned with how things ought to be rather than how they are — captures the project's ambition: this is not a description of how hiring works but a prescription for how it should work, implemented as a working system with 68+ commits, 21 database migrations, and a test suite that validates every claim the system makes about itself.
       </p>
+	</span>
+      </ShibuiContent>
+      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
       <h2>By the Numbers</h2>
       <Figure alt="Project statistics for in-midst-my-life" caption="System metrics — a full-stack SaaS application with hexagonal architecture, verifiable credentials, and autonomous job search" number={3}>

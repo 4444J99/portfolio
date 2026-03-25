@@ -93,7 +93,12 @@ const efficiencyMultiplier = Math.round(vitals.logos.words / 200 / 400);
 		the AI cannot infer — test counts, coverage percentages, deployment URLs,
 		architectural decisions not evident from code alone.
 	</p>
-	<p>
+	<ShibuiContent id="ai-conductor.context-assembly.p1">
+		<span slot="entry">
+			<p>I learned that context assembly is the most important phase -- it determines the ceiling of output quality. Give the AI thin context and you get generic boilerplate. Give it specific test counts, real architectural decisions, and actual deployment details and the output reads like someone who understands the project wrote it. The difference isn't the AI's capability; it's the human's preparation.</p>
+		</span>
+		<span slot="elevated">
+			<p>
 		Context assembly is the most important phase because it determines the ceiling of
 		output quality. An AI given thin context produces thin documentation — generic
 		boilerplate about "leveraging cutting-edge technologies." An AI given rich context —
@@ -102,7 +107,10 @@ const efficiencyMultiplier = Math.round(vitals.logos.words / 200 / 400);
 		project. The difference is not in the AI's capability. It is in the human's
 		preparation. For the Silver Sprint (58 READMEs), context assembly took approximately
 		15-30 minutes per repo, totaling 20-30 hours across all repos.<Cite id={4} author="Brooks, Frederick P." title="The Mythical Man-Month: Essays on Software Engineering" source="Addison-Wesley" year={1975} />
-	</p>
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<h3>Phase 2: Generation (AI-Led)</h3>
 	<p>
@@ -169,12 +177,20 @@ const efficiencyMultiplier = Math.round(vitals.logos.words / 200 / 400);
 	/>
 
 	<h2>Token Economics</h2>
-	<p>
+	<ShibuiContent id="ai-conductor.token-economics.p1">
+		<span slot="entry">
+			<p>I discovered that the bottleneck shifts completely. Writing hundreds of thousands of words is no longer the expensive part -- reviewing them for accuracy, voice, and positioning is. I measure effort in LLM API tokens now, not human-hours. The economics are fundamentally different from traditional authoring.</p>
+		</span>
+		<span slot="elevated">
+			<p>
 		The fundamental economic insight: the bottleneck shifts from production to review.
 		Writing {wordsK}K words is no longer the expensive part. Reviewing {wordsK}K words for
 		accuracy, voice, and positioning is. Effort is measured in LLM API tokens, not
 		human-hours.<Cite id={7} author="Brynjolfsson, Erik and Andrew McAfee" title="The Second Machine Age: Work, Progress, and Prosperity in a Time of Brilliant Technologies" source="W. W. Norton" year={2014} />
-	</p>
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 	<div class="table-wrap">
 		<table>
 			<thead>
@@ -278,13 +294,21 @@ V6  Organ Checks         8/8 organs verified individually`}
 	</p>
 
 	<h2>Risks and Mitigations</h2>
-	<p>
+	<ShibuiContent id="ai-conductor.risks-and-mitigations.p1">
+		<span slot="entry">
+			<p>I wrote a constitutional amendment acknowledging that the same inputs produce different outputs across AI models and across time. Every AI-generated deliverable requires human review. The risks are real and specific -- I observed hallucinated details in 15-20% of drafts, voice drift after about 40 READMEs, and broken cross-references that only automated scripts caught.</p>
+		</span>
+		<span slot="elevated">
+			<p>
 		Amendment D of the system constitution — the AI Non-Determinism Acknowledgment —
 		states: "Same inputs produce different strategic outputs across AI models and across
 		time. All AI-generated deliverables require human review."<Cite id={9} author="Floridi, Luciano" title="The Ethics of Artificial Intelligence" source="Oxford University Press" year={2023} />
 		Floridi argues that AI transparency is not merely ethical — it's epistemologically
 		necessary. The risks are real, specific, and observed during production.
-	</p>
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<Figure alt="Risk mitigation strategy" caption="Four-layer defense against common AI-generated content failures, with observed incidence rates">
 		<div class="table-wrap">
@@ -302,7 +326,12 @@ V6  Organ Checks         8/8 organs verified individually`}
 		</div>
 	</Figure>
 
-	<p>
+	<ShibuiContent id="ai-conductor.risks-and-mitigations.p2">
+		<span slot="entry">
+			<p>I found that voice drift is the subtlest risk. Over a long generation session of 58 READMEs, AI output becomes more formulaic. The first five are distinctive; by number 40, everything starts converging. I solved this by batching by organ -- generating all repos within one domain together with domain-specific voice direction, then moving to the next.</p>
+		</span>
+		<span slot="elevated">
+			<p>
 		Voice drift deserves particular attention. Over a long generation session (58 READMEs
 		in a single sprint), AI output becomes more formulaic. The first 5 READMEs in a
 		sprint are the most distinctive; by README 40, the human attention to voice
@@ -310,7 +339,10 @@ V6  Organ Checks         8/8 organs verified individually`}
 		with ORGAN-I-specific context, then ORGAN-II, then ORGAN-III. The theoretical
 		precision of ORGAN-I READMEs remains distinct from the commercial, metric-oriented
 		register of ORGAN-III.
-	</p>
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<h2>Attribution and Transparency</h2>
 	<p>
@@ -328,7 +360,12 @@ V6  Organ Checks         8/8 organs verified individually`}
 	</p>
 
 	<h2>What This Model Does Not Do</h2>
-	<p>
+	<ShibuiContent id="ai-conductor.what-this-model-does-not-do.p1">
+		<span slot="entry">
+			<p>I want to be clear about the boundaries. The conductor model does not write code -- the code was written by a human developer over years. It does not replace human judgment about strategy or quality. It does not guarantee accuracy. And it does not produce creative insight -- the human structures the thinking, and the AI executes the structure and generates the prose.</p>
+		</span>
+		<span slot="elevated">
+			<p>
 		The conductor model does not write code. The {wordsK}K words are documentation —
 		READMEs, essays, profiles, governance files. The code in the system was written by a
 		human developer over years of sustained effort. The model does not replace human
@@ -336,7 +373,10 @@ V6  Organ Checks         8/8 organs verified individually`}
 		Amendment D exists because AI-generated content requires verification. And it does not
 		produce creative insight: the meta-system essays are structured by human thinking; the
 		AI executes the structure and generates the prose.<Cite id={11} author="Licklider, J.C.R." title="Man-Computer Symbiosis" source="IRE Transactions on Human Factors in Electronics" year={1960} />
-	</p>
+			</p>
+		</span>
+	</ShibuiContent>
+	<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<h2>Results</h2>
 	<p>

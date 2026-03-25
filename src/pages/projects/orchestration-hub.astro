@@ -6,6 +6,8 @@ import MermaidDiagram from '../../components/academic/MermaidDiagram.astro';
 import References from '../../components/academic/References.astro';
 import PrismNav from '../../components/PrismNav.astro';
 import StatGrid from '../../components/StatGrid.astro';
+import ShibuiContent from '../../components/shibui/ShibuiContent.astro';
+import ShibuiTerm from '../../components/shibui/ShibuiTerm.astro';
 import SketchContainer from '../../components/sketches/SketchContainer.astro';
 import vitals from '../../data/vitals.json';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
@@ -32,6 +34,11 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 		ariaLabel="Message routing between nodes"
 	/>
 
+<ShibuiContent id="orchestration-hub.the-problem-scale-without-legibility.p1">
+	<span slot="entry">
+		<p>I needed a single place that could answer "what exists, what's its status, and who owns it?" across all my repositories. Most multi-repo systems rely on tribal knowledge that breaks at scale, breaks when you onboard new contributors, and breaks when you need to answer a simple question: is this system healthy?</p>
+	</span>
+	<span slot="elevated">
 	<p>
 		Every system with {vitals.repos.total} repositories needs a single place that answers "what exists,
 		what's its status, and who owns it?"<Cite
@@ -52,6 +59,9 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 			year={1975}
 		/>
 	</p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<MermaidDiagram
 		caption="The orchestration hub as information nexus — all governance flows pass through the registry"
@@ -69,6 +79,11 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 	/>
 
 	<h2>The Solution</h2>
+<ShibuiContent id="orchestration-hub.the-solution.p1">
+	<span slot="entry">
+		<p>I built a machine-readable JSON registry that serves as the single source of truth for the entire system. Every repository entry carries its status, documentation tier, dependencies, and promotion state. The registry is not documentation about the system -- it is the system's self-knowledge.</p>
+	</span>
+	<span slot="elevated">
 	<p>
 		A machine-readable JSON registry (<code>registry-v2.json</code>) that serves as the single source
 		of truth for the entire eight-organ system.<Cite
@@ -91,6 +106,9 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 			year={1990}
 		/>
 	</p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<Figure
 		alt="Organ hub architecture diagram"
@@ -127,6 +145,11 @@ Hub validates all 31 dependency edges.`}</code></pre>
 	</Figure>
 
 	<h2>Registry Architecture</h2>
+<ShibuiContent id="orchestration-hub.registry-architecture.p1">
+	<span slot="entry">
+		<p>I designed the registry as a single JSON file with a versioned envelope. It carries a deployment model, system-wide counts, and an audit history that the monthly workflow appends to automatically. Every health check ever run is recorded right in the file.</p>
+	</span>
+	<span slot="elevated">
 	<p>
 		The v2 registry is a single JSON file with a versioned envelope wrapping per-organ repository
 		arrays. The top-level structure carries a deployment model declaration, a summary block with
@@ -138,10 +161,13 @@ Hub validates all 31 dependency edges.`}</code></pre>
 			title="Design Patterns: Elements of Reusable Object-Oriented Software"
 			source="Addison-Wesley"
 			year={1994}
-		/> The schema follows the Composite pattern — each repository is a leaf node, organs are
+		/> The schema follows the <ShibuiTerm term="Composite pattern" definition="A Gang of Four design pattern where individual objects and groups of objects share a common interface, enabling uniform traversal at any granularity" /> — each repository is a leaf node, organs are
 		composites, and the registry root allows queries at any granularity without traversing the entire
 		structure.
 	</p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<CodeStructure
 		lang="json"
@@ -245,10 +271,15 @@ jq '[.organs[].repositories[]
 	</CodeStructure>
 
 	<h2>Validation Pipeline</h2>
+<ShibuiContent id="orchestration-hub.validation-pipeline.p1">
+	<span slot="entry">
+		<p>I set up a validation pipeline that runs on every pull request touching a dependency manifest. It fetches the registry and governance rules, classifies the PR's source organ, then runs three sequential checks before allowing a merge. No dependency can be added except through a PR that passes all three.</p>
+	</span>
+	<span slot="elevated">
 	<p>
 		The validation pipeline runs on every pull request that touches a dependency manifest in any organ
 		repository. It fetches the central registry and governance rules from this hub, classifies the
-		pull request's source organ, then runs three sequential checks before allowing a merge.<Cite
+		pull request's source organ, then runs three sequential checks before allowing a <ShibuiTerm term="merge gate" definition="A CI enforcement point that blocks code integration until all automated quality and policy checks pass" />.<Cite
 			id={6}
 			author="Humble, Jez and David Farley"
 			title="Continuous Delivery: Reliable Software Releases through Build, Test, and Deploy Automation"
@@ -258,6 +289,9 @@ jq '[.organs[].repositories[]
 		path for changing system state — applies at the governance layer: no dependency may be added
 		except through a PR that passes all three checks.
 	</p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<MermaidDiagram
 		caption="Validation pipeline — three sequential checks gate every cross-organ dependency change"
@@ -309,8 +343,13 @@ jq '[.organs[].repositories[]
 	</CodeStructure>
 
 	<h2>Governance as Code</h2>
+<ShibuiContent id="orchestration-hub.governance-as-code.p1">
+	<span slot="entry">
+		<p>I codified the governance model as a machine-readable JSON constitution with six articles and four amendments. The most important rule: no back-edges in the dependency graph. Theory feeds art feeds commerce, and that direction is validated automatically across all 31 dependency edges on every pull request.</p>
+	</span>
+	<span slot="elevated">
 	<p>
-		The governance model is codified in <code>governance-rules.json</code> — a machine-readable
+		The <ShibuiTerm term="governance-as-code" definition="Encoding organizational rules, policies, and constraints as machine-readable files that are version-controlled, testable, and automatically enforced" /> model is codified in <code>governance-rules.json</code> — a machine-readable
 		constitution with six articles and four amendments.<Cite
 			id={7}
 			author="Scott, James C."
@@ -320,7 +359,7 @@ jq '[.organs[].repositories[]
 		/> Scott's critique of "high modernist" schemes warns against legibility imposed without local
 		knowledge — these governance rules encode both top-down constraints (no back-edges, mandatory
 		documentation) and bottom-up flexibility (promotion is earned, not assigned). The most important
-		constraint: <strong>no back-edges</strong> in the dependency graph. Theory feeds art feeds
+		constraint: <strong><ShibuiTerm term="no-back-edges rule" definition="A dependency constraint requiring that information flow only in one direction through a layered system, preventing circular coupling" /></strong> in the dependency graph. Theory feeds art feeds
 		commerce (I→II→III), validated automatically across all 31 dependency edges.<Cite
 			id={8}
 			author="Martin, Robert C."
@@ -329,6 +368,9 @@ jq '[.organs[].repositories[]
 			year={2017}
 		/>
 	</p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<MermaidDiagram
 		caption="Governance article enforcement — each constitutional article maps to an automated check"
@@ -448,8 +490,13 @@ gh workflow run validate-dependencies.yml \\
 	</p>
 
 	<h2>Why a Registry Matters</h2>
+<ShibuiContent id="orchestration-hub.why-a-registry-matters.p1">
+	<span slot="entry">
+		<p>I built the registry because a machine-readable source of truth enables everything else: CI workflows query it, monthly audits generate reports from it, and the portfolio site reads from the same data as the governance scripts. The registry is what makes this governable rather than merely large.</p>
+	</span>
+	<span slot="elevated">
 	<p>
-		A machine-readable registry enables automation (CI/CD workflows query it), auditing (monthly
+		A machine-readable <ShibuiTerm term="registry" definition="A centralized, queryable data store that serves as the single source of truth for all entities and their relationships in a system" /> enables automation (CI/CD workflows query it), auditing (monthly
 		health checks generate reports from it), and honest portfolio presentation (the portfolio site
 		reads from the same source of truth as the governance scripts).<Cite
 			id={10}
@@ -468,6 +515,9 @@ gh workflow run validate-dependencies.yml \\
 			year={1990}
 		/>
 	</p>
+	</span>
+</ShibuiContent>
+<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
 
 	<h2>Tradeoffs & Lessons</h2>
 	<ul>

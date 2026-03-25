@@ -35,6 +35,14 @@
     for (var i = 0; i < entries.length; i++) entries[i].setAttribute('aria-hidden', showEntry ? 'false' : 'true');
     for (var j = 0; j < elevateds.length; j++) elevateds[j].setAttribute('aria-hidden', showEntry ? 'true' : 'false');
 
+    // Toggle focusability of interactive elements (avoid aria-hidden-focus axe violation)
+    var hiddenLinks = document.querySelectorAll(
+      showEntry
+        ? '.shibui-content__elevated a, .shibui-content__elevated button'
+        : '.shibui-content__entry a, .shibui-content__entry button'
+    );
+    for (var k = 0; k < hiddenLinks.length; k++) hiddenLinks[k].setAttribute('tabindex', '-1');
+
     // Persist if this was a first visit inference
     if (!stored) {
       try {
