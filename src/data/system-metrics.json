@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated": "2026-03-25T06:58:34.414496+00:00",
+  "generated": "2026-03-26T07:03:46.347645+00:00",
   "computed": {
     "total_repos": 116,
     "active_repos": 62,
@@ -66,17 +66,16 @@
     "_note": "Edit these by hand. calculate-metrics.py preserves this section."
   },
   "registry": {
-    "total_repos": 125,
+    "total_repos": 127,
     "total_organs": 8,
     "operational_organs": 8,
     "implementation_status": {
-      "ACTIVE": 63,
+      "ACTIVE": 71,
       "ARCHIVED": 54,
-      "PROTOTYPE": 1,
-      "UNKNOWN": 7
+      "PROTOTYPE": 2
     },
     "ci_coverage": 106,
-    "dependency_edges": 58,
+    "dependency_edges": 60,
     "organs": {
       "ORGAN-I": {
         "name": "Theory",
@@ -88,7 +87,7 @@
       },
       "ORGAN-III": {
         "name": "Commerce",
-        "total_repos": 29
+        "total_repos": 30
       },
       "ORGAN-IV": {
         "name": "Orchestration",
@@ -108,7 +107,7 @@
       },
       "META-ORGANVM": {
         "name": "Meta",
-        "total_repos": 12
+        "total_repos": 13
       }
     }
   },

@@ -1,14 +1,14 @@
 {
-  "title": "ORGANVM — Eight-Organ Creative-Institutional System",
+  "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
-    "total_repos": 116,
-    "active_repos": 62,
-    "archived_repos": 53,
-    "dependency_edges": 55,
-    "ci_workflows": 104,
+    "total_repos": 127,
+    "active_repos": 71,
+    "archived_repos": 54,
+    "dependency_edges": 60,
+    "ci_workflows": 106,
     "operational_organs": 8,
-    "sprints_completed": 0
+    "sprints_completed": 33
   },
   "organs": [
     {
@@ -34,7 +34,7 @@
       "name": "Commerce",
       "greek": "Ergon",
       "org": "organvm-iii-ergon",
-      "repo_count": 29,
+      "repo_count": 30,
       "status": "OPERATIONAL",
       "description": "Product platforms, deployed systems, customer-facing tools, B2B/B2C applications"
     },
@@ -79,11 +79,11 @@
       "name": "META-ORGANVM",
       "greek": "META-ORGANVM",
       "org": "",
-      "repo_count": 12,
+      "repo_count": 13,
       "status": "OPERATIONAL",
       "description": "Umbrella organization coordinating all 7 organ orgs. System-wide governance, cross-organ visibility, and institutional identity."
     }
   ],
   "sprint_history": [],
-  "generated": "2026-03-25T06:58:34.414496+00:00"
+  "generated": "2026-03-26T07:40:58.898321+00:00"
 }
