@@ -1,9 +1,9 @@
 {
-  "generated": "2026-03-27T21:23:28.189Z",
+  "generated": "2026-03-27T21:41:24.133Z",
   "tests": {
     "total": 289,
     "passed": 289,
-    "files": 34
+    "files": 35
   },
   "security": {
     "critical": 0,
@@ -1704,7 +1704,7 @@
   },
   "build": {
     "pages": 102,
-    "bundleFiles": 67
+    "bundleFiles": 66
   },
   "sources": {
     "tests": ".quality/vitest-report.json",
