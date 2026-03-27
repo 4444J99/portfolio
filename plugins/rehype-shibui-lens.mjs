@@ -205,6 +205,17 @@ export default function rehypeShibuiLens() {
 	loadVocabulary();
 
 	return (tree) => {
+		// Build a set of nodes inside skip-worthy ancestors (header, nav, footer, etc.)
+		const skipNodes = new WeakSet();
+		const skipTags = new Set(['header', 'nav', 'footer', 'pre', 'code', 'script', 'style']);
+		visit(tree, 'element', (node) => {
+			if (skipTags.has(node.tagName)) {
+				visit(node, 'element', (child) => {
+					skipNodes.add(child);
+				});
+			}
+		});
+
 		visit(tree, 'element', (node, index, parent) => {
 			// Skip elements already wrapped by manual ShibuiContent
 			if (
@@ -219,13 +230,9 @@ export default function rehypeShibuiLens() {
 
 			// Only process <p> elements in main content areas
 			if (node.tagName !== 'p') return;
-			// Skip paragraphs inside code blocks, nav, footer, header
-			if (
-				!parent ||
-				['pre', 'code', 'nav', 'footer', 'header', 'script', 'style'].includes(parent.tagName)
-			) {
-				return;
-			}
+			if (!parent) return;
+			// Skip paragraphs inside structural ancestors (header, nav, footer, etc.)
+			if (skipNodes.has(node)) return;
 
 			const text = hastToString(node);
 			if (text.length < 80) return; // skip short paragraphs
