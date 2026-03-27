@@ -5,9 +5,11 @@
 			"package": "yaml",
 			"advisory": "GHSA-48c2-rrv3-qjmp",
 			"severity": "moderate",
-			"reason": "In @astrojs/language-server dev dependency chain (yaml → yaml-language-server → volar-service-yaml → @astrojs/language-server → @astrojs/check). Not reachable at runtime — dev-only type checking tool. Fix requires breaking @astrojs/check upgrade.",
-			"added": "2026-03-27",
-			"expires": "2026-06-27"
+			"reason": "In @astrojs/language-server dev dependency chain. Not reachable at runtime — dev-only type checking tool. Fix requires breaking @astrojs/check upgrade.",
+			"owner": "4444j99",
+			"created": "2026-03-27",
+			"expires": "2026-04-10",
+			"trackingIssue": "none — upstream @astrojs/check must release fix"
 		}
 	]
 }
