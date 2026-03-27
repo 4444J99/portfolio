@@ -1,0 +1,16 @@
+---
+// src/components/home/StatPill.astro
+// Compact metric display: value + label in a pill.
+
+interface Props {
+	value: string;
+	label: string;
+}
+
+const { value, label } = Astro.props;
+---
+
+<span class="stat-pill">
+	<span class="stat-pill__value">{value}</span>
+	<span class="stat-pill__label">{label}</span>
+</span>

@@ -1,0 +1,74 @@
+---
+// src/components/home/ControlsBentoCell.astro
+// Bento cell containing the view toggle and depth control.
+
+import DepthControl from '../shibui/DepthControl.astro';
+---
+
+<div class="bento-cell controls-cell">
+	<div class="controls-cell__view-toggle">
+		<span class="controls-cell__label">View</span>
+		<div class="bento-view-toggle" role="radiogroup" aria-label="Portfolio view">
+			<button class="bento-view-toggle__btn bento-view-toggle__btn--active" data-bento-view="engineering" role="radio" aria-checked="true">
+				Engineering
+			</button>
+			<button class="bento-view-toggle__btn" data-bento-view="creative" role="radio" aria-checked="false">
+				Creative
+			</button>
+		</div>
+	</div>
+
+	<div class="controls-cell__depth">
+		<span class="controls-cell__label">Depth</span>
+		<DepthControl />
+	</div>
+</div>
+
+<style>
+	.controls-cell {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
+		justify-content: center;
+	}
+
+	.controls-cell__label {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--text-muted);
+		display: block;
+		margin-bottom: var(--space-2xs);
+	}
+
+	.bento-view-toggle {
+		display: flex;
+		background: var(--bg-primary);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		overflow: hidden;
+	}
+
+	.bento-view-toggle__btn {
+		flex: 1;
+		padding: var(--space-2xs) var(--space-sm);
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		letter-spacing: 0.03em;
+		border: none;
+		background: transparent;
+		color: var(--text-muted);
+		cursor: pointer;
+		transition: all var(--transition-fast);
+	}
+
+	.bento-view-toggle__btn--active {
+		background: color-mix(in srgb, var(--accent) 15%, transparent);
+		color: var(--accent);
+	}
+
+	.bento-view-toggle__btn:hover:not(.bento-view-toggle__btn--active) {
+		color: var(--text-secondary);
+	}
+</style>
