@@ -1,0 +1,81 @@
+---
+// src/components/home/BentoCard.astro
+// Compact single-face project card (1x1 cell) for non-featured projects.
+
+import { base } from '../../utils/paths';
+
+interface Props {
+	title: string;
+	slug: string;
+	tags: string[];
+	skills: string[];
+	organ: string;
+	organColor: string;
+}
+
+const { title, slug, tags, skills, organ, organColor } = Astro.props;
+const href = `${base}projects/${slug}/`;
+---
+
+<a
+	href={href}
+	class="bento-cell bento-card"
+	style={`--organ-color: ${organColor}`}
+	data-skills={skills.join(',')}
+	data-tags={tags.join(',')}
+>
+	<span class="bento-card__organ">{organ}</span>
+	<h3 class="bento-card__title" transition:name={`project-${slug}`}>{title}</h3>
+	<div class="bento-card__tags" data-tags-view="engineering">
+		{skills.slice(0, 2).map((s) => <span class="bento-card__tag">{s}</span>)}
+	</div>
+	<div class="bento-card__tags" data-tags-view="creative">
+		{tags.slice(0, 2).map((t) => <span class="bento-card__tag">{t}</span>)}
+	</div>
+</a>
+
+<style>
+	.bento-card {
+		border-left: 2px solid var(--organ-color, var(--accent));
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xs);
+	}
+
+	.bento-card__organ {
+		font-family: var(--font-mono);
+		font-size: 0.6rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--organ-color, var(--accent));
+	}
+
+	.bento-card__title {
+		font-family: var(--font-heading);
+		font-size: 1rem;
+		line-height: 1.2;
+	}
+
+	.bento-card__tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2xs);
+		margin-top: auto;
+	}
+
+	.bento-card__tag {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		padding: 2px var(--space-xs);
+		background: color-mix(in srgb, var(--organ-color, var(--accent)) 8%, transparent);
+		border-radius: var(--radius-sm);
+		color: var(--text-muted);
+	}
+
+	:global([data-portfolio-view='creative']) [data-tags-view='engineering'] {
+		display: none;
+	}
+	:global([data-portfolio-view='engineering']) [data-tags-view='creative'] {
+		display: none;
+	}
+</style>
