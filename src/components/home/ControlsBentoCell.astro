@@ -72,3 +72,52 @@ import DepthControl from '../shibui/DepthControl.astro';
 		color: var(--text-secondary);
 	}
 </style>
+
+<script>
+function initBentoViewToggle() {
+	const btns = document.querySelectorAll<HTMLButtonElement>('[data-bento-view]');
+	if (!btns.length) return;
+
+	// Read initial state from main element
+	const main = document.querySelector('main');
+	const currentView = main?.getAttribute('data-portfolio-view') || 'engineering';
+
+	// Set initial active state
+	btns.forEach(btn => {
+		const view = btn.getAttribute('data-bento-view');
+		const isActive = view === currentView;
+		btn.classList.toggle('bento-view-toggle__btn--active', isActive);
+		btn.setAttribute('aria-checked', String(isActive));
+	});
+
+	// Bind click handlers
+	btns.forEach(btn => {
+		btn.addEventListener('click', () => {
+			const view = btn.getAttribute('data-bento-view');
+			if (!view || !main) return;
+
+			// Update main data attribute (drives all CSS-based view switching)
+			main.setAttribute('data-portfolio-view', view);
+
+			// Update button states
+			btns.forEach(b => {
+				const isActive = b.getAttribute('data-bento-view') === view;
+				b.classList.toggle('bento-view-toggle__btn--active', isActive);
+				b.setAttribute('aria-checked', String(isActive));
+			});
+
+			// Persist to localStorage (same key as IndexFilters)
+			try { localStorage.setItem('portfolio-view', view); } catch {}
+
+			// Sync with IndexFilters toggle if it exists
+			document.querySelectorAll<HTMLButtonElement>('.view-toggle__btn').forEach(b => {
+				const filterView = b.textContent?.trim().toLowerCase();
+				b.classList.toggle('view-toggle__btn--active', filterView === view);
+				b.setAttribute('aria-pressed', String(filterView === view));
+			});
+		});
+	});
+}
+
+document.addEventListener('astro:page-load', initBentoViewToggle);
+</script>

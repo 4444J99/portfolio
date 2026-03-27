@@ -1,14 +1,13 @@
 ---
-import { SKETCH_NAMES } from '@4444j99/sketches';
+import BentoGrid from '../components/home/BentoGrid.astro';
 import ConsultCTA from '../components/home/ConsultCTA.astro';
-import HeroSection from '../components/home/HeroSection.astro';
+import ControlsBentoCell from '../components/home/ControlsBentoCell.astro';
+import FeaturedBentoCard from '../components/home/FeaturedBentoCard.astro';
+import HeroBentoCell from '../components/home/HeroBentoCell.astro';
 import IndexFilters from '../components/home/IndexFilters.astro';
-import PersonaCards from '../components/home/PersonaCards.astro';
 import ProjectGrid from '../components/home/ProjectGrid.astro';
 import { organColorMap } from '../data/organ-colors';
 import { categoryFilters, featuredNumbers, organGroups, skillFilters } from '../data/organ-groups';
-import personasData from '../data/personas.json';
-import vitals from '../data/vitals.json';
 import Layout from '../layouts/Layout.astro';
 import { base } from '../utils/paths';
 
@@ -17,6 +16,11 @@ const resolvedGroups = organGroups.map((group) => ({
 	...group,
 	projects: group.projects.map((p) => ({ ...p, href: `${base}projects/${p.slug}/` })),
 }));
+
+const allProjects = resolvedGroups.flatMap((g) =>
+	g.projects.map((p) => ({ ...p, organ: g.name, organColor: organColorMap[g.organ] || 'var(--accent)' })),
+);
+const featured = allProjects.filter((p) => featuredNumbers.has(p.number)).slice(0, 2);
 ---
 
 <Layout
@@ -25,57 +29,21 @@ const resolvedGroups = organGroups.map((group) => ({
 	mainAttrs={{ 'data-portfolio-view': 'engineering' }}
 	keywords={['AI Orchestration', 'Systems Architect', 'Platform Governance', 'Logocentric Architecture', 'Staff Engineer', 'Multi-Agent Systems', 'Python', 'TypeScript', 'CI/CD Automation']}
 >
-    <HeroSection resolvedGroups={resolvedGroups} />
-
-    <div class="home-pair">
-      <section class="home-pair__stats">
-        <div class="stat-grid" data-stats-view="engineering" data-reveal>
-          <div class="stat">
-            <div class="stat-value">{vitals.substance.code_files.toLocaleString()}</div>
-            <div class="stat-label">Code Files</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{vitals.substance.test_files}</div>
-            <div class="stat-label">Test Files</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{vitals.substance.ci_passing}</div>
-            <div class="stat-label">CI Passing</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{vitals.repos.total}</div>
-            <div class="stat-label">Repos</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{vitals.substance.automated_tests.toLocaleString()}+</div>
-            <div class="stat-label">Tests</div>
-          </div>
-        </div>
-        <div class="stat-grid" data-stats-view="creative" style="display: none;">
-          <div class="stat">
-            <div class="stat-value">{vitals.repos.total}</div>
-            <div class="stat-label">Repos</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{vitals.repos.orgs}</div>
-            <div class="stat-label">Orgs</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{Math.floor(vitals.logos.words / 1000)}K</div>
-            <div class="stat-label">Words</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{vitals.logos.essays}</div>
-            <div class="stat-label">Essays</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">{SKETCH_NAMES.length}</div>
-            <div class="stat-label">Sketches</div>
-          </div>
-        </div>
-      </section>
-      <PersonaCards personas={personasData.personas} />
-    </div>
+    <BentoGrid>
+      <HeroBentoCell />
+      <ControlsBentoCell />
+      {featured.map((p) => (
+        <FeaturedBentoCard
+          title={p.title}
+          tagline={p.tagline}
+          slug={p.slug}
+          tags={p.tags}
+          skills={p.skills}
+          organ={p.organ}
+          organColor={p.organColor}
+        />
+      ))}
+    </BentoGrid>
 
     <ProjectGrid
       resolvedGroups={resolvedGroups}
@@ -123,46 +91,6 @@ const resolvedGroups = organGroups.map((group) => ({
     padding: 0 var(--space-lg);
   }
 
-  .home-pair__stats {
-    background: var(--bg-card);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-    display: flex;
-    align-items: center;
-  }
-
-  .home-pair__stats .stat-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md);
-    justify-content: center;
-    width: 100%;
-  }
-
-  .home-pair__stats .stat {
-    text-align: center;
-    flex: 1 1 auto;
-    min-width: 80px;
-  }
-
-  .home-pair__stats .stat-value {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
-  }
-
-  .home-pair__stats .stat-label {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    margin-top: var(--space-2xs);
-  }
-
   .home-pair__contact {
     background: var(--bg-card);
     backdrop-filter: blur(16px);
@@ -205,32 +133,6 @@ const resolvedGroups = organGroups.map((group) => ({
 
   .contact__link:hover {
     color: var(--accent-text);
-  }
-
-  /* Override PersonaCards spacing when inside the pair */
-  .home-pair :global(.persona-cards) {
-    padding: 0;
-    border-bottom: none;
-    background: var(--bg-card);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-lg);
-  }
-
-  .home-pair :global(.persona-cards__grid) {
-    grid-template-columns: 1fr;
-    gap: var(--space-sm);
-  }
-
-  .home-pair :global(.persona-cards__heading) {
-    font-size: 1rem;
-    margin-bottom: var(--space-md);
-  }
-
-  .home-pair :global(.persona-cards__item) {
-    padding: var(--space-sm) var(--space-md);
   }
 
   /* Override ConsultCTA spacing when inside the pair */
