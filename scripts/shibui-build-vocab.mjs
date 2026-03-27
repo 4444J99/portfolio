@@ -6,7 +6,6 @@
 
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 const __dirname =
 	import.meta.dirname ?? import.meta.url.replace('file://', '').replace(/\/[^/]+$/, '');
