@@ -451,27 +451,45 @@ html[data-shibui-depth="overview"] .shibui-bridge {
 }
 
 @media (min-width: 768px) {
-	.bento-grid { grid-template-columns: repeat(2, 1fr); }
+	.bento-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 @media (min-width: 1024px) {
-	.bento-grid { grid-template-columns: repeat(4, 1fr); }
+	.bento-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
 }
 
-.bento-cell--span-2 { grid-column: span 2; }
-.bento-cell--span-3 { grid-column: span 3; }
-.bento-cell--span-full { grid-column: 1 / -1; }
-.bento-cell--row-2 { grid-row: span 2; }
+.bento-cell--span-2 {
+	grid-column: span 2;
+}
+.bento-cell--span-3 {
+	grid-column: span 3;
+}
+.bento-cell--span-full {
+	grid-column: 1 / -1;
+}
+.bento-cell--row-2 {
+	grid-row: span 2;
+}
 
 @media (max-width: 767px) {
 	.bento-cell--span-2,
 	.bento-cell--span-3,
-	.bento-cell--span-full { grid-column: span 1; }
-	.bento-cell--row-2 { grid-row: span 1; }
+	.bento-cell--span-full {
+		grid-column: span 1;
+	}
+	.bento-cell--row-2 {
+		grid-row: span 1;
+	}
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-	.bento-cell--row-2 { grid-row: span 1; }
+	.bento-cell--row-2 {
+		grid-row: span 1;
+	}
 }
 
 .bento-cell {
@@ -479,35 +497,65 @@ html[data-shibui-depth="overview"] .shibui-bridge {
 	border: 1px solid var(--border);
 	border-radius: var(--radius-lg);
 	padding: var(--space-lg);
-	transition: border-color var(--transition-fast), background var(--transition-fast);
+	transition:
+		border-color var(--transition-fast),
+		background var(--transition-fast);
 }
 
-.bento-cell:hover { border-color: var(--border-hover); }
+.bento-cell:hover {
+	border-color: var(--border-hover);
+}
 
-a.bento-cell { text-decoration: none; color: inherit; display: block; }
+a.bento-cell {
+	text-decoration: none;
+	color: inherit;
+	display: block;
+}
 
 a.bento-cell:hover {
 	background: color-mix(in srgb, var(--bg-card) 90%, var(--accent) 10%);
 	border-color: color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
-a.bento-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-.bento-cell--hero { background: transparent; border: none; padding: var(--space-xl) var(--space-lg); }
-
-.stat-pills { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-md); }
-
-.stat-pill {
-	display: inline-flex; align-items: baseline; gap: var(--space-2xs);
-	font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);
-	background: color-mix(in srgb, var(--accent) 8%, transparent);
-	border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-	border-radius: var(--radius-sm); padding: var(--space-2xs) var(--space-sm);
+a.bento-cell:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
 }
 
-.stat-pill__value { color: var(--accent); font-weight: 600; }
+.bento-cell--hero {
+	background: transparent;
+	border: none;
+	padding: var(--space-xl) var(--space-lg);
+}
 
-.bento-card--featured { border-left: 3px solid var(--organ-color, var(--accent)); }
+.stat-pills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-xs);
+	margin-top: var(--space-md);
+}
+
+.stat-pill {
+	display: inline-flex;
+	align-items: baseline;
+	gap: var(--space-2xs);
+	font-family: var(--font-mono);
+	font-size: 0.8rem;
+	color: var(--text-secondary);
+	background: color-mix(in srgb, var(--accent) 8%, transparent);
+	border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+	border-radius: var(--radius-sm);
+	padding: var(--space-2xs) var(--space-sm);
+}
+
+.stat-pill__value {
+	color: var(--accent);
+	font-weight: 600;
+}
+
+.bento-card--featured {
+	border-left: 3px solid var(--organ-color, var(--accent));
+}
 
 html {
 	font-size: 16px;

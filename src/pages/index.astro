@@ -18,7 +18,11 @@ const resolvedGroups = organGroups.map((group) => ({
 }));
 
 const allProjects = resolvedGroups.flatMap((g) =>
-	g.projects.map((p) => ({ ...p, organ: g.name, organColor: organColorMap[g.organ] || 'var(--accent)' })),
+	g.projects.map((p) => ({
+		...p,
+		organ: g.name,
+		organColor: organColorMap[g.organ] || 'var(--accent)',
+	})),
 );
 const featured = allProjects.filter((p) => featuredNumbers.has(p.number)).slice(0, 2);
 ---

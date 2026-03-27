@@ -3,10 +3,10 @@
 // Above-fold hero: name, title, proof metrics, available badge.
 // Dual-view aware via data-hero-view attributes.
 
-import StatPill from './StatPill.astro';
 import { SKETCH_NAMES } from '@4444j99/sketches';
 import vitals from '../../data/vitals.json';
 import { base } from '../../utils/paths';
+import StatPill from './StatPill.astro';
 
 const wordsK = Math.floor(vitals.logos.words / 1000);
 const sketchCount = SKETCH_NAMES.length;

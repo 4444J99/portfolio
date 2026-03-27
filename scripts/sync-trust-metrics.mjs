@@ -119,9 +119,7 @@ async function syncVitals() {
 			},
 			logos: {
 				essays: fs.existsSync(LOGOS_DIR)
-					? fs
-							.readdirSync(LOGOS_DIR)
-							.filter((f) => f.endsWith('.md') || f.endsWith('.mdx')).length
+					? fs.readdirSync(LOGOS_DIR).filter((f) => f.endsWith('.md') || f.endsWith('.mdx')).length
 					: (existingVitals.logos?.essays ?? 0),
 				words: c.total_words_numeric ?? c.word_counts?.total ?? existingVitals.logos?.words ?? 0,
 			},
