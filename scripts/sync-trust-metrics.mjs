@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const QUALITY_DIR = path.join(__dirname, '../.quality');
+const LOGOS_DIR = path.join(__dirname, '../src/content/logos');
 const DATA_DIR = path.join(__dirname, '../src/data');
 const VITALS_PATH = path.join(DATA_DIR, 'vitals.json');
 const TRUST_VITALS_PATH = path.join(DATA_DIR, 'trust-vitals.json');
@@ -117,8 +118,10 @@ async function syncVitals() {
 				ci_coverage_pct: existingVitals.substance?.ci_coverage_pct ?? 90,
 			},
 			logos: {
-				essays: c.word_counts
-					? Math.round(c.word_counts.essays / 3000)
+				essays: fs.existsSync(LOGOS_DIR)
+					? fs
+							.readdirSync(LOGOS_DIR)
+							.filter((f) => f.endsWith('.md') || f.endsWith('.mdx')).length
 					: (existingVitals.logos?.essays ?? 0),
 				words: c.total_words_numeric ?? c.word_counts?.total ?? existingVitals.logos?.words ?? 0,
 			},
