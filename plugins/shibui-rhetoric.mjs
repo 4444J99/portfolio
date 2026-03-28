@@ -111,8 +111,12 @@ export function f2_termSubstitution(text, vocabulary) {
 // drop low-information filler. Ported from narratological-lenses
 // Necessity Diagnostic concept.
 
-/** Filler phrases that add no information (low entropy) */
+/** Filler phrases that add no information (low entropy).
+ *  Sources: Shannon entropy heuristics + vox--publica anti-pattern detectors
+ *  AP-01 (generic corporate), AP-02 (chatty filler), AP-03 (emotional reassurance),
+ *  AP-08 (enthusiasm replacing architecture), AP-09 (motivational filler). */
 const LOW_ENTROPY_PATTERNS = [
+	// Original entropy-based patterns
 	/\b(?:as (?:widely |is well |has been )?(?:documented|noted|observed|discussed|established|recognized|known))\b/i,
 	/\b(?:it (?:is|should be) (?:worth |important to )?not(?:ed?|ing|eworthy) that)\b/i,
 	/\b(?:in (?:this|the) (?:context|regard|sense|respect))\b/i,
@@ -120,7 +124,23 @@ const LOW_ENTROPY_PATTERNS = [
 	/\b(?:broadly speaking|generally speaking|in general terms)\b/i,
 	/\b(?:from (?:a|the|an) (?:\w+ )?(?:perspective|standpoint|point of view))\b/i,
 	/\b(?:it (?:can|could|may|might) be (?:argued|said|suggested|noted) that)\b/i,
-	/\b(?:fundamentally|essentially|basically|ultimately)\b/i,
+	// AP-01: Generic corporate smoothness (vox--publica)
+	/\b(?:leverage synergies|paradigm shift|best[- ]in[- ]class|thought leader|game[- ]?changer)\b/i,
+	/\b(?:move the needle|circle back|low[- ]hanging fruit|deep dive|value[- ]add)\b/i,
+	/\b(?:cutting[- ]edge|next[- ]generation|world[- ]class|state[- ]of[- ]the[- ]art|industry[- ]leading)\b/i,
+	// AP-02: Chatty filler (vox--publica)
+	/\b(?:at the end of the day|when all is said and done|it goes without saying)\b/i,
+	/\b(?:needless to say|to be honest|the bottom line is|the thing is)\b/i,
+	/\b(?:having said that|that being said|all things considered|by and large)\b/i,
+	// AP-03: Emotional reassurance replacing specification
+	/\b(?:don't worry|rest assured|have no fear|trust me on this)\b/i,
+	/\b(?:it's going to be (?:great|amazing|incredible|fantastic))\b/i,
+	// AP-08: Enthusiasm replacing architecture
+	/\b(?:incredibly powerful|truly revolutionary|absolutely essential|game-changing)\b/i,
+	/\b(?:breathtakingly elegant|mind-blowingly|phenomenally)\b/i,
+	// AP-09: Motivational filler
+	/\b(?:the sky is the limit|anything is possible|dream big|reach for the stars)\b/i,
+	/\b(?:unlock your potential|take it to the next level|push the envelope)\b/i,
 ];
 
 /** Markers of high-information content (high entropy) */
@@ -162,6 +182,18 @@ export function f3_scoreSentence(sentence) {
 	if (/\b(?:perhaps|possibly|arguably|somewhat|relatively|fairly|rather)\b/i.test(sentence)) {
 		score -= 0.1;
 	}
+
+	// AP-04 penalty: ornamental abstraction (vox--publica)
+	const abstractNouns = sentence.match(
+		/\b(?:ontology|epistemology|hermeneutics|phenomenology|praxis|dialectic|teleology|axiom)\b/gi,
+	);
+	if (abstractNouns && abstractNouns.length >= 2) score -= 0.15;
+
+	// AP-06 penalty: mythic inflation without structural payload (vox--publica)
+	const mythicTerms = sentence.match(
+		/\b(?:transcendent|primordial|sacred|alchemical|divine|eternal|cosmic|archetypal)\b/gi,
+	);
+	if (mythicTerms && mythicTerms.length >= 1 && !/\b\d/.test(sentence)) score -= 0.1;
 
 	return Math.max(0, Math.min(1, score));
 }
@@ -232,42 +264,74 @@ export function f4_registerShift(text) {
 	);
 
 	// Mode shift: written formality → spoken directness
-	// "In order to" → "To"
+	// Source: vox--architectura-gubernatio REGISTER_TRANSFORMATION_MATRIX.yaml
+	// Genre: academic_prose → public. Strategy: lead with legibility, follow with precision.
+
+	// Phrase-level compression (academic → direct)
 	result = result.replace(/\bIn order to\b/gi, 'To');
-	// "Due to the fact that" → "Because"
 	result = result.replace(/\bDue to the fact that\b/gi, 'Because');
-	// "It is important to note that" → "" (remove entirely)
+	result = result.replace(/\bWith respect to\b/gi, 'About');
+	result = result.replace(/\bIn the context of\b/gi, 'In');
+	result = result.replace(/\bWith regard to\b/gi, 'About');
+	result = result.replace(/\bIn light of\b/gi, 'Given');
+	result = result.replace(/\bFor the purpose of\b/gi, 'To');
+	result = result.replace(/\bIn the event that\b/gi, 'If');
+	result = result.replace(/\bAt this point in time\b/gi, 'Now');
+	result = result.replace(/\bPrior to\b/gi, 'Before');
+	result = result.replace(/\bSubsequent to\b/gi, 'After');
+	result = result.replace(/\bIn the absence of\b/gi, 'Without');
+	result = result.replace(/\bNotwithstanding\b/gi, 'Despite');
+	result = result.replace(/\bIn accordance with\b/gi, 'Following');
 	result = result.replace(
-		/\bIt is (?:important|worth noting|critical|essential|necessary) (?:to note |to observe )?that\b/gi,
+		/\bA(?:n)? (?:significant |considerable |substantial )?(?:number|amount|quantity) of\b/gi,
+		'Many',
+	);
+
+	// Remove hedging constructions entirely (AP-09 remediation)
+	result = result.replace(
+		/\bIt is (?:important|worth noting|critical|essential|necessary|interesting) (?:to note |to observe |to recognize |to acknowledge )?that\b/gi,
 		'',
 	);
-	// "With respect to" → "About"
-	result = result.replace(/\bWith respect to\b/gi, 'About');
-	// "In the context of" → "In"
-	result = result.replace(/\bIn the context of\b/gi, 'In');
-	// "Utiliz(e/ing)" → "us(e/ing)"
-	result = result.replace(/\butiliz(e|es|ed|ing)\b/gi, (_, suffix) => `us${suffix}`);
-	// "Implement(ation)" → "build/built" (in non-technical contexts)
+	result = result.replace(
+		/\bIt (?:should|must|can) be (?:noted|emphasized|stressed|recognized) that\b/gi,
+		'',
+	);
+
+	// Latinate → Anglo-Saxon substitution (register downshift)
+	// vox--publica AP-04 (ornamental abstraction) remediation
+	result = result.replace(/\butiliz(e|es|ed|ing)\b/gi, (_, s) => `us${s}`);
 	result = result.replace(/\bimplement(?:ed|s)?\b/gi, 'built');
 	result = result.replace(/\bimplementation\b/gi, 'building');
-	// "Facilitate(s/d)" → "help(s/ed)"
 	result = result.replace(/\bfacilitat(e|es|ed|ing)\b/gi, (_, s) => {
 		const map = { e: 'help', es: 'helps', ed: 'helped', ing: 'helping' };
 		return map[s] || 'help';
 	});
-	// "Demonstrate(s/d)" → "show(s/ed)"
 	result = result.replace(/\bdemonstrat(e|es|ed|ing)\b/gi, (_, s) => {
 		const map = { e: 'show', es: 'shows', ed: 'showed', ing: 'showing' };
 		return map[s] || 'show';
 	});
-	// "Constitute(s)" → "make(s) up" / "is"
 	result = result.replace(/\bconstitutes?\b/gi, 'makes up');
-	// "Methodology" → "method" / "approach"
 	result = result.replace(/\bmethodology\b/gi, 'approach');
-	// "Paradigm" → "model" / "approach"
 	result = result.replace(/\bparadigm\b/gi, 'model');
-	// "Discourse" → "conversation" / "discussion"
 	result = result.replace(/\bdiscourse\b/gi, 'discussion');
+	result = result.replace(/\bcommence\b/gi, 'start');
+	result = result.replace(/\bterminate\b/gi, 'end');
+	result = result.replace(/\bsubsequently\b/gi, 'then');
+	result = result.replace(/\bapproximately\b/gi, 'about');
+	result = result.replace(/\bnevertheless\b/gi, 'still');
+	result = result.replace(/\bconsequently\b/gi, 'so');
+	result = result.replace(/\bpreclude\b/gi, 'prevent');
+	result = result.replace(/\bameliorat(e|es|ed|ing)\b/gi, (_, s) => {
+		const map = { e: 'improve', es: 'improves', ed: 'improved', ing: 'improving' };
+		return map[s] || 'improve';
+	});
+	result = result.replace(/\bascertain\b/gi, 'find out');
+	result = result.replace(/\bendeavor\b/gi, 'try');
+	result = result.replace(/\bsufficient\b/gi, 'enough');
+	result = result.replace(/\bfundamentally\b/gi, 'at its core');
+	result = result.replace(/\bessentially\b/gi, 'really');
+	result = result.replace(/\bbasically\b/gi, 'really');
+	result = result.replace(/\bultimately\b/gi, 'in the end');
 
 	// Clean up artifacts from transformations
 	result = result.replace(/\s{2,}/g, ' ');
