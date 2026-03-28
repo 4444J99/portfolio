@@ -15,6 +15,7 @@ import { resolve } from 'node:path';
 import { toString as hastToString } from 'hast-util-to-string';
 import rs from 'text-readability';
 import { visit } from 'unist-util-visit';
+import { simplify as rhetoricalSimplify } from './shibui-rhetoric.mjs';
 
 // ─── Vocabulary ───────────────────────────────────────────────────────────────
 
@@ -87,46 +88,24 @@ function scoreComplexity(text) {
 
 // ─── Entry text generation (rule-based) ───────────────────────────────────────
 
+// ─── Vocabulary Map for F2 ────────────────────────────────────────────────────
+let vocabularyMap = null;
+
+function getVocabularyMap() {
+	if (vocabularyMap) return vocabularyMap;
+	vocabularyMap = new Map();
+	for (const { key, term, definition } of definedTerms) {
+		vocabularyMap.set(key, { term, definition });
+	}
+	return vocabularyMap;
+}
+
 /**
  * Generate a simplified entry version of a paragraph.
- * Rule-based mechanical simplification — no LLM needed.
+ * Uses the five rhetorical transformation functions (F1-F5).
  */
 function generateEntry(text) {
-	let entry = text;
-
-	// Strip citation markers: (Author, 2024), [1], etc.
-	entry = entry.replace(/\([A-Z][^)]*\d{4}[^)]*\)/g, '');
-	entry = entry.replace(/\[\d+\]/g, '');
-
-	// Replace domain terms with definitions (first occurrence only)
-	for (const { term, definition, pattern } of definedTerms) {
-		// Only replace if the definition is shorter than the term context
-		if (definition.length < 80) {
-			let replaced = false;
-			entry = entry.replace(pattern, (match) => {
-				if (replaced) return match;
-				replaced = true;
-				return definition.split('—')[0].split('–')[0].trim();
-			});
-		}
-	}
-
-	// Take first 2 sentences
-	const sentences = entry.match(/[^.!?]+[.!?]+/g) || [entry];
-	entry = sentences.slice(0, 2).join(' ').trim();
-
-	// Clean up extra spaces, orphaned punctuation
-	entry = entry
-		.replace(/\s{2,}/g, ' ')
-		.replace(/\s+([.,;:])/g, '$1')
-		.trim();
-
-	// Cap at 300 chars
-	if (entry.length > 300) {
-		entry = entry.slice(0, 297).replace(/\s\S*$/, '') + '...';
-	}
-
-	return entry;
+	return rhetoricalSimplify(text, getVocabularyMap());
 }
 
 // ─── Term annotation ──────────────────────────────────────────────────────────
