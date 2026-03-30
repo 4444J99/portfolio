@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write # allow-secret
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  QUALITY_PHASE: W12
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      # --- Lint & Typecheck ---
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck:strict
+
+      # --- Build ---
+      - name: Sync Data
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm run sync:github-pages
+      - name: Build
+        run: npm run build
+        env:
+          PUBLIC_CONSULT_API_BASE: https://portfolio-consult-api.ivixivi.workers.dev # allow-secret
+
+      # --- Test ---
+      - name: Unit Tests
+        run: npm run test:coverage
+      - name: Validate Build
+        run: npm run validate
+
+      # --- Deploy (main branch only, not PRs) ---
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+      - name: Deploy
+        id: deployment
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/deploy-pages@v4
+      - name: Rollback on smoke failure
+        if: failure() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: |
+          echo "Smoke test failed — rolling back gh-pages"
+          git fetch origin gh-pages --depth=2
+          git push --force-with-lease origin HEAD~1:gh-pages
+      - name: Smoke test
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: node scripts/post-deploy-smoke.mjs

@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 const root = resolve(__dirname, '../../../');
-const workflow = readFileSync(resolve(root, '.github/workflows/quality.yml'), 'utf-8');
+const workflow = readFileSync(resolve(root, '.github/workflows/ci.yml'), 'utf-8');
 const packageJson = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf-8'));
 const qualityGates = readFileSync(
 	resolve(root, 'src/components/dashboard/QualityGates.astro'),
@@ -13,13 +13,13 @@ const metricsType = readFileSync(resolve(root, 'src/types/data.ts'), 'utf-8');
 const runtimeErrorScript = readFileSync(resolve(root, 'scripts/test-runtime-errors.mjs'), 'utf-8');
 
 describe('quality governance v2 contracts', () => {
-	it('includes security gate and blocking parity pipeline in CI', () => {
-		expect(workflow).toContain('name: Security gates');
-		expect(workflow).toContain('npm run test:security:prod');
-		expect(workflow).toContain('npm run test:security');
-		expect(workflow).toContain('npm run test:security:github');
-		expect(workflow).toContain('npm run test:security:drift');
-		expect(workflow).toContain('cron: "17 9 * * *"');
+	it('includes essential CI gates in ci.yml', () => {
+		expect(workflow).toContain('name: CI');
+		expect(workflow).toContain('npm run lint');
+		expect(workflow).toContain('npm run typecheck:strict');
+		expect(workflow).toContain('npm run build');
+		expect(workflow).toContain('npm run test:coverage');
+		expect(workflow).toContain('npm run validate');
 	});
 
 	it('exposes the expanded quality scripts in package.json', () => {
@@ -76,7 +76,7 @@ describe('quality governance v2 contracts', () => {
 
 	it('tracks automation configs and security policy contracts', () => {
 		expect(existsSync(resolve(root, '.github/dependabot.yml'))).toBe(true);
-		expect(existsSync(resolve(root, '.github/workflows/security-drift.yml'))).toBe(true);
+		expect(existsSync(resolve(root, '.github/workflows/monitor.yml'))).toBe(true);
 		expect(existsSync(resolve(root, 'scripts/config/github-pages-policy.json'))).toBe(true);
 		expect(existsSync(resolve(root, '.quality/security-allowlist.json'))).toBe(true);
 		expect(existsSync(resolve(root, '.quality/security-policy.json'))).toBe(true);
