@@ -212,6 +212,8 @@ export default function rehypeShibuiLens() {
 			if (!parent) return;
 			// Skip paragraphs inside structural ancestors (header, nav, footer, etc.)
 			if (skipNodes.has(node)) return;
+			// Skip paragraphs already scored (prevents duplicate attrs on post-build re-processing)
+			if (node.properties?.['data-shibui-c'] || node.properties?.['dataShibuiC']) return;
 
 			const text = hastToString(node);
 			if (text.length < 80) return; // skip short paragraphs

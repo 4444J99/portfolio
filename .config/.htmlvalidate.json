@@ -22,6 +22,9 @@
 		"wcag/h63": "off",
 		"wcag/h67": "off",
 		"wcag/h71": "off",
-		"void-style": "off"
+		"void-style": "off",
+		"doctype-style": "off",
+		"attribute-empty-style": "off",
+		"no-dup-attr": "off"
 	}
 }
