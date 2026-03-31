@@ -51,15 +51,19 @@
 </div>
 
 <script>
+  declare const plausible: ((event: string, opts?: { props?: Record<string, string> }) => void) | undefined;
+
   function initOnboarding() {
-    const panel = document.getElementById('shibui-onboarding');
-    if (!panel) return;
+    const el = document.getElementById('shibui-onboarding');
+    if (!el) return;
 
     if (localStorage.getItem('shibui-depth')) {
-      panel.remove();
+      el.remove();
       return;
     }
 
+    // Narrow to non-null for closures
+    const panel = el;
     const cards = panel.querySelectorAll<HTMLButtonElement>('[data-depth]');
     const skipBtn = document.getElementById('shibui-onboarding-skip');
     const backdrop = panel.querySelector<HTMLElement>('.shibui-onboarding__backdrop');

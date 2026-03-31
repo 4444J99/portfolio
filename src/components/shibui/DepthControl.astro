@@ -28,6 +28,8 @@
 <script>
   import { nextDepth, stepDepth, writeStoredDepth, enforceFloor, DEPTH_LABELS, DEPTH_CYCLE, type ShibuiDepth } from '../../utils/shibui';
 
+  declare const plausible: ((event: string, opts?: { props?: Record<string, string> }) => void) | undefined;
+
   function initDepthControl() {
     const btn = document.querySelector<HTMLButtonElement>('[data-shibui-control]');
     if (!btn) return;
