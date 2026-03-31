@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated": "2026-03-27T07:02:31.176187+00:00",
+  "generated": "2026-03-31T07:08:44.257523+00:00",
   "computed": {
     "total_repos": 116,
     "active_repos": 62,
@@ -66,11 +66,11 @@
     "_note": "Edit these by hand. calculate-metrics.py preserves this section."
   },
   "registry": {
-    "total_repos": 127,
+    "total_repos": 128,
     "total_organs": 8,
     "operational_organs": 8,
     "implementation_status": {
-      "ACTIVE": 71,
+      "ACTIVE": 72,
       "ARCHIVED": 54,
       "PROTOTYPE": 2
     },
@@ -87,7 +87,7 @@
       },
       "ORGAN-III": {
         "name": "Commerce",
-        "total_repos": 30
+        "total_repos": 31
       },
       "ORGAN-IV": {
         "name": "Orchestration",
