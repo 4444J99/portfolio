@@ -17,6 +17,7 @@ import SketchLifecycle from '../components/scripts/SketchLifecycle.astro';
 import ThemeRestore from '../components/scripts/ThemeRestore.astro';
 import WebVitals from '../components/scripts/WebVitals.astro';
 import ShibuiGlint from '../components/shibui/ShibuiGlint.astro';
+import ShibuiOnboarding from '../components/shibui/ShibuiOnboarding.astro';
 import { canonicalBase } from '../utils/paths';
 
 interface Props {
@@ -63,6 +64,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
     <FontFaces />
     <ClientRouter />
     <title>{title}</title>
+    <script defer data-domain="4444j99.github.io" src="https://plausible.io/js/script.js"></script>
   </head>
   <body>
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
@@ -80,6 +82,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
   <ThemeRestore />
   <ShibuiRestore />
   <ShibuiGlint />
+  <ShibuiOnboarding />
   <WebVitals />
   <ErrorBeacon />
 </html>

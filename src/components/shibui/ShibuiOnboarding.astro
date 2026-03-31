@@ -1,0 +1,280 @@
+---
+// src/components/shibui/ShibuiOnboarding.astro
+// First-visit onboarding panel for depth control.
+// Shows three cards explaining the depth modes and sets preference to localStorage.
+---
+
+<div class="shibui-onboarding" id="shibui-onboarding" role="dialog" aria-labelledby="shibui-onboarding-title" aria-modal="true">
+  <div class="shibui-onboarding__backdrop"></div>
+  <div class="shibui-onboarding__panel">
+    <h2 id="shibui-onboarding-title" class="shibui-onboarding__title">Choose your reading depth</h2>
+    <div class="shibui-onboarding__cards">
+      <button class="shibui-onboarding__card" data-depth="overview">
+        <div class="shibui-onboarding__icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="20" cy="20" r="8" fill="currentColor" opacity="0.3" />
+          </svg>
+        </div>
+        <span class="shibui-onboarding__card-title">Overview</span>
+        <span class="shibui-onboarding__card-desc">Simple and clear. For quick browsing.</span>
+        <span class="shibui-onboarding__card-action">Choose</span>
+      </button>
+      <button class="shibui-onboarding__card" data-depth="standard">
+        <div class="shibui-onboarding__icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="20" cy="20" r="5" fill="currentColor" opacity="0.3" />
+          </svg>
+        </div>
+        <span class="shibui-onboarding__card-title">Standard</span>
+        <span class="shibui-onboarding__card-desc">Full text with highlighted concepts. For curious readers.</span>
+        <span class="shibui-onboarding__card-action">Choose</span>
+      </button>
+      <button class="shibui-onboarding__card" data-depth="full">
+        <div class="shibui-onboarding__icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="20" cy="20" r="10" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="20" cy="20" r="4" fill="currentColor" />
+          </svg>
+        </div>
+        <span class="shibui-onboarding__card-title">Full</span>
+        <span class="shibui-onboarding__card-desc">Everything, unfiltered. For specialists.</span>
+        <span class="shibui-onboarding__card-action">Choose</span>
+      </button>
+    </div>
+    <button class="shibui-onboarding__skip" id="shibui-onboarding-skip">Skip for now</button>
+  </div>
+</div>
+
+<script>
+  function initOnboarding() {
+    const panel = document.getElementById('shibui-onboarding');
+    if (!panel) return;
+
+    if (localStorage.getItem('shibui-depth')) {
+      panel.remove();
+      return;
+    }
+
+    const cards = panel.querySelectorAll<HTMLButtonElement>('[data-depth]');
+    const skipBtn = document.getElementById('shibui-onboarding-skip');
+    const backdrop = panel.querySelector<HTMLElement>('.shibui-onboarding__backdrop');
+
+    function dismiss() {
+      panel.classList.add('shibui-onboarding--hiding');
+      setTimeout(() => panel.remove(), 250);
+    }
+
+    function chooseDepth(depth: string) {
+      document.documentElement.dataset.shibuiDepth = depth;
+      localStorage.setItem('shibui-depth', depth);
+      dismiss();
+
+      if (typeof plausible !== 'undefined') {
+        plausible('Depth Change', { props: { from: 'onboarding', to: depth } });
+      }
+    }
+
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const depth = card.dataset.depth;
+        if (depth) chooseDepth(depth);
+      });
+    });
+
+    skipBtn?.addEventListener('click', dismiss);
+    backdrop?.addEventListener('click', dismiss);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') dismiss();
+    });
+
+    requestAnimationFrame(() => {
+      panel.classList.add('shibui-onboarding--visible');
+    });
+  }
+
+  initOnboarding();
+  document.addEventListener('astro:after-swap', initOnboarding);
+</script>
+
+<style is:global>
+  .shibui-onboarding {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal, 1000);
+  }
+
+  .shibui-onboarding--visible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: shibui-onboarding-fade-in var(--transition-base) ease-out;
+  }
+
+  .shibui-onboarding--hiding {
+    animation: shibui-onboarding-fade-out var(--transition-fast) ease-in forwards;
+  }
+
+  @keyframes shibui-onboarding-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes shibui-onboarding-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .shibui-onboarding__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  .shibui-onboarding__panel {
+    position: relative;
+    background: var(--bg-card, #181818);
+    border: 1px solid var(--accent, #d4a853);
+    border-radius: var(--radius-lg, 1rem);
+    padding: var(--space-xl, 1.5rem);
+    max-width: 720px;
+    width: 90%;
+    animation: shibui-onboarding-scale-in var(--transition-base) ease-out;
+  }
+
+  @keyframes shibui-onboarding-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .shibui-onboarding__title {
+    font-family: var(--font-heading, Syne);
+    font-size: 1.5rem;
+    color: var(--text-primary, #fff);
+    text-align: center;
+    margin: 0 0 var(--space-lg, 1.25rem);
+  }
+
+  .shibui-onboarding__cards {
+    display: flex;
+    gap: var(--space-md, 0.75rem);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .shibui-onboarding__cards {
+      flex-direction: column;
+    }
+  }
+
+  .shibui-onboarding__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs, 0.25rem);
+    background: transparent;
+    border: 1px solid var(--border, #2a2a2a);
+    border-radius: var(--radius-md, 0.5rem);
+    padding: var(--space-md, 0.75rem);
+    cursor: pointer;
+    transition:
+      border-color var(--transition-fast, 150ms),
+      background var(--transition-fast, 150ms),
+      transform var(--transition-fast, 150ms);
+    min-width: 140px;
+    flex: 1;
+    max-width: 200px;
+  }
+
+  .shibui-onboarding__card:hover,
+  .shibui-onboarding__card:focus-visible {
+    border-color: var(--accent, #d4a853);
+    background: color-mix(in srgb, var(--accent, #d4a853) 8%, transparent);
+    transform: translateY(-2px);
+  }
+
+  .shibui-onboarding__icon {
+    color: var(--accent, #d4a853);
+    margin-bottom: var(--space-xs, 0.25rem);
+  }
+
+  .shibui-onboarding__card-title {
+    font-family: var(--font-mono, JetBrains Mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary, #fff);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .shibui-onboarding__card-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #b0b0b0);
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .shibui-onboarding__card-action {
+    font-family: var(--font-mono, JetBrains Mono);
+    font-size: 0.7rem;
+    color: var(--accent, #d4a853);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: var(--space-xs, 0.25rem);
+    opacity: 0;
+    transition: opacity var(--transition-fast, 150ms);
+  }
+
+  .shibui-onboarding__card:hover .shibui-onboarding__card-action,
+  .shibui-onboarding__card:focus-visible .shibui-onboarding__card-action {
+    opacity: 1;
+  }
+
+  .shibui-onboarding__skip {
+    display: block;
+    margin: var(--space-lg, 1.25rem) auto 0;
+    background: transparent;
+    border: none;
+    color: var(--text-muted, #707070);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: color var(--transition-fast, 150ms);
+  }
+
+  .shibui-onboarding__skip:hover,
+  .shibui-onboarding__skip:focus-visible {
+    color: var(--text-secondary, #b0b0b0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shibui-onboarding--visible {
+      animation: none;
+    }
+
+    .shibui-onboarding__panel {
+      animation: none;
+    }
+  }
+</style>

@@ -1,0 +1,20 @@
+{
+	"name": "@4444j99/shibui-rhetoric",
+	"version": "0.1.0",
+	"type": "module",
+	"main": "index.mjs",
+	"exports": {
+		".": "./index.mjs"
+	},
+	"scripts": {
+		"test": "node --test test/rhetoric.test.mjs"
+	},
+	"keywords": [
+		"rhetoric",
+		"simplification",
+		"readability",
+		"linguistics",
+		"text-transformation"
+	],
+	"license": "MIT"
+}

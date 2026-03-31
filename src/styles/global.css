@@ -416,28 +416,52 @@ html[data-shibui-depth="full"] [data-shibui-c] .shibui-term[data-definition] {
 	display: none;
 	color: var(--accent);
 	font-family: var(--font-mono);
-	font-size: 0.8rem;
+	font-size: 0.85rem;
 	letter-spacing: 0.03em;
 	cursor: pointer;
-	border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-	border-radius: var(--radius-sm);
-	background: color-mix(in srgb, var(--accent) 5%, transparent);
-	padding: var(--space-xs) var(--space-sm);
-	margin-top: var(--space-sm);
+	border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+	border-radius: var(--radius-md);
+	background: color-mix(in srgb, var(--accent) 8%, transparent);
+	padding: var(--space-sm) var(--space-md);
+	margin-top: var(--space-md);
 	transition:
 		color var(--transition-fast),
 		background var(--transition-fast),
-		border-color var(--transition-fast);
+		border-color var(--transition-fast),
+		transform var(--transition-fast);
 }
 
 .shibui-bridge:hover {
 	color: var(--text-primary);
-	background: color-mix(in srgb, var(--accent) 12%, transparent);
+	background: color-mix(in srgb, var(--accent) 15%, transparent);
 	border-color: var(--accent);
+	transform: translateX(2px);
+}
+
+.shibui-bridge::after {
+	content: "\2192";
+	margin-left: var(--space-xs);
+	display: inline-block;
+	transition: transform var(--transition-fast);
+}
+
+.shibui-bridge:hover::after {
+	animation: shibui-bridge-arrow 400ms ease-in-out infinite;
+}
+
+@keyframes shibui-bridge-arrow {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	50% {
+		transform: translateX(4px);
+	}
 }
 
 html[data-shibui-depth="overview"] .shibui-bridge {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 }
 
 /* --- Bento Grid Layout --- */

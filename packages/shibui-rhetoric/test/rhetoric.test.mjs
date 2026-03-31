@@ -9,9 +9,7 @@ import {
 	f5_classifySentences,
 	f5_coherencePreservation,
 	simplify,
-} from '../shibui-rhetoric.mjs';
-
-// ─── F1: Complexity Reduction ─────────────────────────────────────────────────
+} from '../index.mjs';
 
 describe('F1: Complexity Reduction', () => {
 	it('removes non-restrictive relative clauses', () => {
@@ -50,8 +48,6 @@ describe('F1: Complexity Reduction', () => {
 	});
 });
 
-// ─── F2: Term Substitution ────────────────────────────────────────────────────
-
 describe('F2: Term Substitution', () => {
 	const vocab = new Map([
 		[
@@ -82,7 +78,6 @@ describe('F2: Term Substitution', () => {
 		]);
 		const input = 'alpha beta gamma delta.';
 		const result = f2_termSubstitution(input, bigVocab);
-		// At most 3 substitutions
 		const origWords = ['alpha', 'beta', 'gamma', 'delta'];
 		const remaining = origWords.filter((w) => result.includes(w));
 		assert.ok(remaining.length >= 1, 'At least one original term should remain');
@@ -92,8 +87,6 @@ describe('F2: Term Substitution', () => {
 		assert.equal(f2_termSubstitution('hello world', new Map()), 'hello world');
 	});
 });
-
-// ─── F3: Information Density ──────────────────────────────────────────────────
 
 describe('F3: Information Density', () => {
 	it('scores filler sentences low', () => {
@@ -116,8 +109,6 @@ describe('F3: Information Density', () => {
 		assert.ok(result.includes('$1-3'), 'Data sentence preserved');
 	});
 });
-
-// ─── F4: Register Shift ──────────────────────────────────────────────────────
 
 describe('F4: Register Shift', () => {
 	it('shifts passive to first-person active', () => {
@@ -143,8 +134,6 @@ describe('F4: Register Shift', () => {
 		assert.ok(result.includes('used') || result.includes('us'));
 	});
 });
-
-// ─── F5: Coherence Preservation ───────────────────────────────────────────────
 
 describe('F5: Coherence Preservation', () => {
 	it('classifies first sentence as nucleus', () => {
@@ -173,8 +162,6 @@ describe('F5: Coherence Preservation', () => {
 		assert.ok(result.includes('However'), '"However" nucleus preserved');
 	});
 });
-
-// ─── Composition ──────────────────────────────────────────────────────────────
 
 describe('simplify() composition', () => {
 	it('produces shorter output than input', () => {

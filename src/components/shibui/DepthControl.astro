@@ -47,9 +47,14 @@
     }
 
     function applyDepth(depth: ShibuiDepth) {
+      const fromDepth = getCurrentDepth();
       depth = enforceFloor(depth, getPageFloor());
       document.documentElement.dataset.shibuiDepth = depth;
       writeStoredDepth(depth);
+
+      if (typeof plausible !== 'undefined' && fromDepth !== depth) {
+        plausible('Depth Change', { props: { from: fromDepth, to: depth } });
+      }
 
       // Update visual state of rings
       if (middleRing) middleRing.setAttribute('opacity', depth === 'overview' ? '0.25' : '1');
@@ -135,6 +140,11 @@
             // Toggle aria-hidden on the elevated layer
             const elevated = content.querySelector('[data-shibui-layer="elevated"]');
             if (elevated) elevated.setAttribute('aria-hidden', 'false');
+          }
+
+          if (typeof plausible !== 'undefined') {
+            const unitId = btn.dataset.unitId || btn.dataset.shibuiBridgeLabel || 'unknown';
+            plausible('Bridge Click', { props: { section: unitId, action: expanded ? 'collapse' : 'expand' } });
           }
         }
       });
