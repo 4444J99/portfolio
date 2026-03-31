@@ -30,7 +30,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 		</p>
 			</span>
 		</ShibuiContent>
-		<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+		<button class="shibui-bridge" type="button">This section goes deeper</button>
 		<p>
 			Xenakis opened the field in 1963 by applying stochastic mathematics to compositional structures, arguing that music could be generated from probability clouds rather than authored note-by-note.<Cite id={12} author="Xenakis, Iannis" title="Formalized Music: Thought and Mathematics in Composition" source="Pendragon Press" year={1963} /> Cope's Experiments in Musical Intelligence demonstrated that style-specific grammars could generate plausible new works in the manner of established composers.<Cite id={13} author="Cope, David" title="Computers and Musical Style" source="A-R Editions" year={1991} /> This project stands in both traditions — procedural in its generation, but grounded in an external symbolic system rather than a corpus of prior compositions.
 		</p>
@@ -46,7 +46,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 		</p>
 			</span>
 		</ShibuiContent>
-		<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+		<button class="shibui-bridge" type="button">This section goes deeper</button>
 
 		<h3>Markov Chain Melodic Generation</h3>
 		<ShibuiContent id="generative-music.algorithmic-composition-techniques.p2">
@@ -59,7 +59,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 		</p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button">This section goes deeper</button>
 
 		<CodeStructure lang="typescript" caption="Markov transition matrix computation — transition probabilities shift with symbolic event intensity" filename="markov-melody.ts">
 {`// View implementation at:
@@ -101,7 +101,7 @@ function buildMatrix(eventIntensity: number): MarkovMatrix[] {
 		</p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button">This section goes deeper</button>
 
 		<CodeStructure lang="typescript" caption="L-system rhythm engine — production rules selected by ritual phase identifier" filename="lsystem-rhythm.ts">
 {`// View implementation at:
@@ -150,7 +150,7 @@ function expandRhythm(axiom: RhythmToken[], phase: string, depth: number): Rhyth
 		</p>
 			</span>
 		</ShibuiContent>
-		<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+		<button class="shibui-bridge" type="button">This section goes deeper</button>
 
 		<h3>Layer 2: The Sonification Bridge</h3>
 		<p>
@@ -278,7 +278,7 @@ function sonify(event: SymbolicEvent): MusicalParams {
 		</p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button">This section goes deeper</button>
 		<ShibuiContent id="generative-music.the-discovery-recursion-sounds-like-counterpoint.p2">
 	<span slot="entry">
 		<p>I gave each recursive level its own melodic voice, derived from but distinct from its parent. Listeners consistently describe it as "voices arguing" or "a conversation with itself" -- accurately capturing the self-referential structure without knowing anything about the underlying system. The formal math created a musical insight that pure intuition wouldn't have found.</p>
@@ -289,7 +289,7 @@ function sonify(event: SymbolicEvent): MusicalParams {
 		</p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button">This section goes deeper</button>
 		<p>
 			The timbral layer manager implements this insight directly: depth 0 assigns a sine-wave voice at the base frequency; depth 1 assigns a sawtooth voice with a Markov chain derived from the parent's transitions; depth 2 adds a filtered noise voice whose cutoff frequency tracks the parent's harmonic density. Each voice layer follows species counterpoint rules — first species (note against note) at low intensity, second and third species (syncopated and florid) as transformation intensity rises. The voices are rendered through independent WebAudio oscillator nodes connected to a shared gain envelope, so each layer can be independently muted for rehearsal or diagnostic purposes.
 		</p>
@@ -305,7 +305,7 @@ function sonify(event: SymbolicEvent): MusicalParams {
 		</p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button">This section goes deeper</button>
 
 		<MermaidDiagram
 			caption="Time-mapping approaches attempted — from linear compression through event-driven to the final continuous-with-punctuation model"

@@ -34,7 +34,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 					</p>
 				</span>
 			</ShibuiContent>
-			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+			<button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
 
 			<h2>What RE:GE Does</h2>
 			<ShibuiContent id="recursive-engine.what-re-ge-does.p1">
@@ -47,7 +47,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 					</p>
 				</span>
 			</ShibuiContent>
-			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+			<button class="shibui-bridge" type="button" data-shibui-bridge-label="system">This section goes deeper</button>
 			<ul>
 				<li><strong>Myth organs</strong> — encode narrative archetypes as transformation rules. A hero's journey is a function: entity state in, transformed state out.</li>
 				<li><strong>Identity organs</strong> — manage how entities maintain coherence across transformations. When a character "changes," what persists?</li>
@@ -94,7 +94,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 					</p>
 				</span>
 			</ShibuiContent>
-			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+			<button class="shibui-bridge" type="button" data-shibui-bridge-label="architecture">This section goes deeper</button>
 
 			<MermaidDiagram
 				caption="Eight-layer system architecture — from CLI input through parsing, validation, routing, and dispatch to the three processing subsystems"
@@ -121,7 +121,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 					</p>
 				</span>
 			</ShibuiContent>
-			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+			<button class="shibui-bridge" type="button" data-shibui-bridge-label="architecture">This section goes deeper</button>
 
 			<Figure alt="Recursion depth tiers with corresponding limits and actions" caption="Four-tier recursion depth management — each tier serves a distinct purpose, from standard processing to emergency halt" number={1}>
 				<StatGrid stats={[
@@ -142,7 +142,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 					</p>
 				</span>
 			</ShibuiContent>
-			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+			<button class="shibui-bridge" type="button" data-shibui-bridge-label="architecture">This section goes deeper</button>
 
 			<h2>The Ritual Syntax</h2>
 			<ShibuiContent id="recursive-engine.the-ritual-syntax.p1">
@@ -155,7 +155,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 					</p>
 				</span>
 			</ShibuiContent>
-			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+			<button class="shibui-bridge" type="button" data-shibui-bridge-label="spec">This section goes deeper</button>
 
 			<CodeStructure lang="python" caption="Ritual syntax DSL — an external domain-specific language for declaring symbolic organ operations" filename="ritual_syntax.rege">
 {`INVOKE myth.hero_journey ON entity:protagonist
@@ -192,7 +192,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 					</p>
 				</span>
 			</ShibuiContent>
-			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+			<button class="shibui-bridge" type="button" data-shibui-bridge-label="code">This section goes deeper</button>
 			<p>
 				<strong>The handler pattern.</strong> Each of the 21 organs is a class extending <code>OrganHandler</code>, implementing <code>invoke()</code> with organ-specific logic. Organs are registered in a central registry and looked up by name at dispatch time. This is structurally similar to the Strategy pattern but with a crucial difference: organs maintain internal state across invocations, which is persisted via the checkpoint system. An organ is not a stateless function — it is a processor with memory.<Cite id={7} author="Gamma, Erich, Richard Helm, Ralph Johnson, and John Vlissides" title="Design Patterns: Elements of Reusable Object-Oriented Software" source="Addison-Wesley" year={1994} />
 			</p>
@@ -312,7 +312,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 					</p>
 				</span>
 			</ShibuiContent>
-			<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+			<button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
 
 			<h2>Technical Debt &amp; Future</h2>
 			<p>

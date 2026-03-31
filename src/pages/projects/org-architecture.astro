@@ -31,7 +31,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       </p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
 
       <MermaidDiagram
         caption="Inheritance flow — the .github repository propagates governance, CI/CD, and AI configurations to every org repository that does not define its own"
@@ -65,7 +65,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       </p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button" data-shibui-bridge-label="system">This section goes deeper</button>
 
       <CodeStructure lang="yaml" caption="Reusable CI workflow with SHA-pinned actions for supply-chain security — called by every repository in the organization" filename=".github/workflows/ci-pipeline.yml">
 {`name: CI Pipeline
@@ -120,7 +120,7 @@ jobs:
       </p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button" data-shibui-bridge-label="implementation">This section goes deeper</button>
 
       <Figure alt="Security scanning tools comparison" caption="Security scanning tool matrix — three complementary tools covering secrets detection, static analysis, and dependency vulnerabilities">
         <div class="table-wrap">
@@ -177,7 +177,7 @@ jobs:
       </p>
 	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="system">This section goes deeper</button>
 
       <CodeStructure lang="yaml" caption="AI agent configuration — production security agent with scoped permissions and Copilot integration" filename=".github/agents/security-reviewer.yml">
 {`name: security-reviewer
@@ -220,7 +220,7 @@ copilot:
       </p>
 	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
 
       <Figure alt="Governance features mapped to Ostrom's institutional design principles" caption="Mapping Ostrom's eight institutional design principles to the .github repository's governance implementation">
         <div class="table-wrap">
@@ -250,7 +250,7 @@ copilot:
       </p>
 	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
 
       <MermaidDiagram
         caption="Inheritance override decision tree — repositories inherit all organizational defaults unless they define explicit overrides, which are tracked by the monthly health audit"
@@ -280,7 +280,7 @@ copilot:
       </p>
 	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="dataflow">This section goes deeper</button>
 
       <CodeStructure lang="python" caption="Health score calculation — evaluating repository compliance against organizational standards with weighted scoring across governance dimensions." filename="src/automation/calculate_health_score.py">
 {`from dataclasses import dataclass
@@ -333,7 +333,7 @@ class HealthReport:
       </p>
 	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="details">This section goes deeper</button>
 
       <Figure alt="Test coverage across automation modules" caption="Test coverage matrix — sixty-plus unit tests organized across automation, AI framework, and security domains.">
         <div class="table-wrap">

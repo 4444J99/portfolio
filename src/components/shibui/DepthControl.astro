@@ -126,19 +126,42 @@
     });
   }
 
+  // Bridge button label map — contextual text driven by data-shibui-bridge-label attribute
+  const BRIDGE_LABELS: Record<string, string> = {
+    architecture: 'See the architecture',
+    evidence: 'Read the evidence',
+    details: 'View technical details',
+    implementation: 'Explore the implementation',
+    code: 'Dive into the code',
+    dataflow: 'Trace the data flow',
+    system: 'Inspect the system',
+    logic: 'Unpack the logic',
+    analysis: 'Access the full analysis',
+    spec: 'Open the specification',
+  };
+  const DEFAULT_BRIDGE = 'See the full picture';
+
+  function bridgeText(btn: HTMLButtonElement): string {
+    const label = btn.dataset.shibuiBridgeLabel;
+    return (label && BRIDGE_LABELS[label]) || DEFAULT_BRIDGE;
+  }
+
   // Local expand: clicking a bridge button toggles `data-shibui-expanded` on its sibling ShibuiContent
   function initBridgeExpanders() {
     document.querySelectorAll<HTMLButtonElement>('.shibui-bridge').forEach(btn => {
+      // Set initial contextual text (replaces generic HTML fallback)
+      btn.textContent = bridgeText(btn);
+
       btn.addEventListener('click', () => {
         const content = btn.previousElementSibling as HTMLElement | null;
         if (content?.classList.contains('shibui-content')) {
           const expanded = content.hasAttribute('data-shibui-expanded');
           if (expanded) {
             content.removeAttribute('data-shibui-expanded');
-            btn.textContent = 'This section goes deeper \u2192';
+            btn.textContent = bridgeText(btn);
           } else {
             content.setAttribute('data-shibui-expanded', '');
-            btn.textContent = 'Show less \u2190';
+            btn.textContent = 'Show less';
             // Toggle aria-hidden on the elevated layer
             const elevated = content.querySelector('[data-shibui-layer="elevated"]');
             if (elevated) elevated.setAttribute('aria-hidden', 'false');

@@ -34,7 +34,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       </p>
 	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
 
       <MermaidDiagram
         caption="Core deliberation flow — agents are created with positions, engage in structured debate rounds, face audience voting, and produce governance outcomes"
@@ -64,7 +64,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
       </p>
 	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="architecture">This section goes deeper</button>
 
       <CodeStructure lang="python" caption="Agent lifecycle management — creation, debate assignment, and state transitions through the deliberation pipeline" filename="api/agents.py">
 {`from fastapi import APIRouter, HTTPException
@@ -138,7 +138,7 @@ async def enter_debate(agent_id: str, debate_id: str) -> Agent:
       </p>
 	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="logic">This section goes deeper</button>
 
       <Figure alt="Comparison of deliberation models" caption="Deliberation model comparison — the Coliseum implements adversarial debate with structured rounds, contrasted with consensus and voting approaches" number={1}>
         <div class="table-wrap">
@@ -204,7 +204,7 @@ async def enter_debate(agent_id: str, debate_id: str) -> Agent:
       </p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button" data-shibui-bridge-label="system">This section goes deeper</button>
 
       <MermaidDiagram
         caption="User progression state machine — audiences advance through tiers by accumulating deliberation engagement, unlocking new capabilities at each level"
@@ -242,7 +242,7 @@ async def enter_debate(agent_id: str, debate_id: str) -> Agent:
       </p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button" data-shibui-bridge-label="logic">This section goes deeper</button>
 
       <CodeStructure lang="python" caption="Voting session lifecycle — three-phase process with multi-dimensional weighted ballots and idempotent finalization" filename="api/voting.py">
 {`from pydantic import BaseModel, Field
@@ -333,7 +333,7 @@ class VotingSession(BaseModel):
       </p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button" data-shibui-bridge-label="spec">This section goes deeper</button>
 
       <Figure alt="Project statistics for AI Council Coliseum" caption="AI Council Coliseum system metrics — a multi-agent deliberation platform with gamified audience governance" number={2}>
         <StatGrid stats={[
@@ -357,7 +357,7 @@ class VotingSession(BaseModel):
       </p>
 	</span>
 </ShibuiContent>
-<button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+<button class="shibui-bridge" type="button" data-shibui-bridge-label="analysis">This section goes deeper</button>
 
       <References entries={[
         { id: 1, author: "Russell, Stuart and Peter Norvig", title: "Artificial Intelligence: A Modern Approach", source: "Pearson", year: 2020 },

@@ -27,7 +27,7 @@ interface Props {
 const { resolvedGroups } = Astro.props;
 
 const engineeringTitle =
-	'AI Orchestration Architect building model-agnostic swarms and enterprise-grade distributed backends.';
+	'AI Orchestration Architect designing systems that orchestrate themselves. No micromanagement. Just systems that evolve.';
 const creativeTitle =
 	'Bridging MFA-level narrative theory with meta-certified engineering to build living, logocentric systems.';
 
@@ -49,7 +49,7 @@ function splitWords(text: string) {
         <ShibuiContent id="hero.engineering.title">
           <span slot="entry">
             <h1 class="hero__title" data-reveal style="animation-delay: 100ms">
-              I design AI systems that manage themselves — building the infrastructure that lets teams scale without scaling headcount.
+              15 years building systems that build themselves. I design AI agents that orchestrate themselves — no micromanagement, just systems that evolve.
             </h1>
           </span>
           <span slot="elevated">
@@ -60,7 +60,7 @@ function splitWords(text: string) {
             </h1>
           </span>
         </ShibuiContent>
-        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+        <button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
         <ShibuiContent id="hero.engineering.sub">
           <span slot="entry">
             <p class="hero__sub" data-reveal style="animation-delay: 200ms">
@@ -75,7 +75,7 @@ function splitWords(text: string) {
             </p>
           </span>
         </ShibuiContent>
-        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+        <button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
       </div>
 
       <div class="hero__view" data-hero-view="creative" style="display: none;">
@@ -94,7 +94,7 @@ function splitWords(text: string) {
             </h1>
           </span>
         </ShibuiContent>
-        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+        <button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
         <ShibuiContent id="hero.creative.sub">
           <span slot="entry">
             <p class="hero__sub">
@@ -109,7 +109,7 @@ function splitWords(text: string) {
             </p>
           </span>
         </ShibuiContent>
-        <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+        <button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
       </div>
 
       <div class="hero__credentials" data-reveal style="animation-delay: 280ms">

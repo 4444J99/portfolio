@@ -36,7 +36,7 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
       		</p>
       	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
 
       <SketchContainer
         sketchId="octagon"
@@ -56,7 +56,7 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
       		</p>
       	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="architecture">This section goes deeper</button>
 
       <div class="table-wrap">
         <table>
@@ -86,7 +86,7 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
       		</p>
       	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="architecture">This section goes deeper</button>
 
       <h2>The Registry</h2>
       <ShibuiContent id="eight-organ-system.the-registry.p1">
@@ -99,7 +99,7 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
       		</p>
       	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="system">This section goes deeper</button>
 
       <CodeStructure lang="json" caption={`Registry entry structure — each of ${vitals.repos.total} repos carries this metadata`} filename="registry-v2.json (excerpt)">
 {`{
@@ -151,7 +151,7 @@ const wordsK = Math.floor(vitals.logos.words / 1000);
       		</p>
       	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="spec">This section goes deeper</button>
 
       <Figure alt="Organ dependency flow diagram" caption="Enforced dependency direction: theory feeds art feeds commerce. No back-edges permitted.">
         <pre class="architecture-diagram"><code>{`┌──────────┐    ┌──────────┐    ┌──────────┐
@@ -218,7 +218,7 @@ jobs:
       		</p>
       	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="evidence">This section goes deeper</button>
 
       <SketchContainer
         sketchId="network-graph"
@@ -240,7 +240,7 @@ jobs:
       		</p>
       	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="analysis">This section goes deeper</button>
 
       <Figure alt="Validation results summary" caption="Platinum validation suite: 228/228 checks passing across all 8 organs">
         <StatGrid stats={[
@@ -294,7 +294,7 @@ jobs:
       		</p>
       	</span>
       </ShibuiContent>
-      <button class="shibui-bridge" type="button">This section goes deeper &#8594;</button>
+      <button class="shibui-bridge" type="button" data-shibui-bridge-label="spec">This section goes deeper</button>
 
       <CodeStructure lang="yaml" caption="seed.yaml contract schema — every repository declares its organ membership, produces/consumes edges, and event subscriptions" filename="seed.yaml (excerpt)">
 {`organ: I
