@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated": "2026-04-03T07:03:37.975533+00:00",
+  "generated": "2026-04-04T06:56:34.239458+00:00",
   "computed": {
     "total_repos": 116,
     "active_repos": 62,
@@ -67,8 +67,8 @@
   },
   "registry": {
     "total_repos": 128,
-    "total_organs": 8,
-    "operational_organs": 8,
+    "total_organs": 9,
+    "operational_organs": 9,
     "implementation_status": {
       "ACTIVE": 72,
       "ARCHIVED": 54,
@@ -108,6 +108,10 @@
       "META-ORGANVM": {
         "name": "Meta",
         "total_repos": 13
+      },
+      "ORGAN-PSG": {
+        "name": "Process Sequence Governance",
+        "total_repos": 0
       }
     }
   },

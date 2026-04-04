@@ -7,7 +7,7 @@
     "archived_repos": 54,
     "dependency_edges": 60,
     "ci_workflows": 106,
-    "operational_organs": 8,
+    "operational_organs": 9,
     "sprints_completed": 33
   },
   "organs": [
@@ -75,6 +75,15 @@
       "description": "Content distribution, social amplification, audience building, POSSE automation, release coordination, press/announcement strategy"
     },
     {
+      "key": "ORGAN-PSG",
+      "name": "Process Sequence Governance",
+      "greek": "ORGAN-PSG",
+      "org": "",
+      "repo_count": 0,
+      "status": "OPERATIONAL",
+      "description": "System-wide foundational specification (SPEC-023) for sequence-governed work, requiring genesis SOPs and evidence-based evolution."
+    },
+    {
       "key": "META-ORGANVM",
       "name": "META-ORGANVM",
       "greek": "META-ORGANVM",
@@ -85,5 +94,5 @@
     }
   ],
   "sprint_history": [],
-  "generated": "2026-04-03T07:42:56.415042+00:00"
+  "generated": "2026-04-04T07:32:27.014287+00:00"
 }
