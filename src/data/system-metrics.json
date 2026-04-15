@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated": "2026-04-14T07:26:01.276029+00:00",
+  "generated": "2026-04-15T07:26:32.863287+00:00",
   "computed": {
     "total_repos": 116,
     "active_repos": 62,
@@ -66,20 +66,20 @@
     "_note": "Edit these by hand. calculate-metrics.py preserves this section."
   },
   "registry": {
-    "total_repos": 128,
-    "total_organs": 9,
-    "operational_organs": 9,
+    "total_repos": 145,
+    "total_organs": 10,
+    "operational_organs": 10,
     "implementation_status": {
-      "ACTIVE": 72,
+      "ACTIVE": 89,
       "ARCHIVED": 54,
       "PROTOTYPE": 2
     },
-    "ci_coverage": 106,
+    "ci_coverage": 107,
     "dependency_edges": 60,
     "organs": {
       "ORGAN-I": {
         "name": "Theory",
-        "total_repos": 22
+        "total_repos": 26
       },
       "ORGAN-II": {
         "name": "Art",
@@ -87,15 +87,15 @@
       },
       "ORGAN-III": {
         "name": "Commerce",
-        "total_repos": 31
+        "total_repos": 32
       },
       "ORGAN-IV": {
         "name": "Orchestration",
-        "total_repos": 18
+        "total_repos": 22
       },
       "ORGAN-V": {
         "name": "Public Process",
-        "total_repos": 2
+        "total_repos": 6
       },
       "ORGAN-VI": {
         "name": "Community",
@@ -103,7 +103,7 @@
       },
       "ORGAN-VII": {
         "name": "Marketing",
-        "total_repos": 4
+        "total_repos": 6
       },
       "META-ORGANVM": {
         "name": "Meta",
@@ -112,6 +112,10 @@
       "ORGAN-PSG": {
         "name": "Process Sequence Governance",
         "total_repos": 0
+      },
+      "PERSONAL": {
+        "name": "Personal / Liminal",
+        "total_repos": 2
       }
     }
   },

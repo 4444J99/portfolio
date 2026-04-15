@@ -2,12 +2,12 @@
   "title": "ORGANVM \u2014 Eight-Organ Creative-Institutional System",
   "tagline": "A living system of 8 organs coordinating theory, art, commerce, orchestration, public process, community, marketing, and governance.",
   "metrics": {
-    "total_repos": 128,
-    "active_repos": 72,
+    "total_repos": 145,
+    "active_repos": 89,
     "archived_repos": 54,
     "dependency_edges": 60,
-    "ci_workflows": 106,
-    "operational_organs": 9,
+    "ci_workflows": 107,
+    "operational_organs": 10,
     "sprints_completed": 33
   },
   "organs": [
@@ -16,7 +16,7 @@
       "name": "Theory",
       "greek": "Theoria",
       "org": "organvm-i-theoria",
-      "repo_count": 22,
+      "repo_count": 26,
       "status": "OPERATIONAL",
       "description": "Epistemological frameworks, recursive engines, ontological systems, conceptual research"
     },
@@ -34,7 +34,7 @@
       "name": "Commerce",
       "greek": "Ergon",
       "org": "organvm-iii-ergon",
-      "repo_count": 31,
+      "repo_count": 32,
       "status": "OPERATIONAL",
       "description": "Product platforms, deployed systems, customer-facing tools, B2B/B2C applications"
     },
@@ -43,7 +43,7 @@
       "name": "Orchestration",
       "greek": "Taxis",
       "org": "organvm-iv-taxis",
-      "repo_count": 18,
+      "repo_count": 22,
       "status": "OPERATIONAL",
       "description": "Cross-organ routing, governance, promotion automation, system coordination, dependency management"
     },
@@ -52,7 +52,7 @@
       "name": "Public Process",
       "greek": "Logos",
       "org": "organvm-v-logos",
-      "repo_count": 2,
+      "repo_count": 6,
       "status": "OPERATIONAL",
       "description": "Essays, marginalia, process documentation, building in public, RSS/newsletter, audience engagement"
     },
@@ -70,7 +70,7 @@
       "name": "Marketing",
       "greek": "Kerygma",
       "org": "organvm-vii-kerygma",
-      "repo_count": 4,
+      "repo_count": 6,
       "status": "OPERATIONAL",
       "description": "Content distribution, social amplification, audience building, POSSE automation, release coordination, press/announcement strategy"
     },
@@ -84,6 +84,15 @@
       "description": "System-wide foundational specification (SPEC-023) for sequence-governed work, requiring genesis SOPs and evidence-based evolution."
     },
     {
+      "key": "PERSONAL",
+      "name": "Personal / Liminal",
+      "greek": "PERSONAL",
+      "org": "",
+      "repo_count": 2,
+      "status": "OPERATIONAL",
+      "description": "Personal infrastructure outside the eight-organ system. Operator environment, agent configuration, secrets management."
+    },
+    {
       "key": "META-ORGANVM",
       "name": "META-ORGANVM",
       "greek": "META-ORGANVM",
@@ -94,5 +103,5 @@
     }
   ],
   "sprint_history": [],
-  "generated": "2026-04-14T08:10:19.961585+00:00"
+  "generated": "2026-04-15T08:11:58.657715+00:00"
 }
