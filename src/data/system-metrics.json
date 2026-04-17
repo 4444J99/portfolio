@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated": "2026-04-16T07:26:27.679405+00:00",
+  "generated": "2026-04-17T07:27:18.775206+00:00",
   "computed": {
     "total_repos": 116,
     "active_repos": 62,
@@ -66,16 +66,16 @@
     "_note": "Edit these by hand. calculate-metrics.py preserves this section."
   },
   "registry": {
-    "total_repos": 145,
+    "total_repos": 146,
     "total_organs": 10,
     "operational_organs": 10,
     "implementation_status": {
-      "ACTIVE": 89,
+      "ACTIVE": 90,
       "ARCHIVED": 54,
       "PROTOTYPE": 2
     },
     "ci_coverage": 107,
-    "dependency_edges": 60,
+    "dependency_edges": 62,
     "organs": {
       "ORGAN-I": {
         "name": "Theory",
@@ -107,7 +107,7 @@
       },
       "META-ORGANVM": {
         "name": "Meta",
-        "total_repos": 13
+        "total_repos": 14
       },
       "ORGAN-PSG": {
         "name": "Process Sequence Governance",
