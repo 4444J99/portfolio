@@ -296,7 +296,7 @@ npm run test:sketches
 - **Biome** (not ESLint): tabs, single quotes, trailing commas, line width 100. Config at `biome.json`.
 - **Commit messages**: imperative mood, conventional prefixes (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`)
 - **Astro directives**: `class:list` for conditional classes, `is:inline` for client-side scripts
-- `lodash-es` pinned to 4.17.23 in overrides (prototype pollution fix)
+- `lodash` and `lodash-es` overridden to `>=4.18.1` (code injection + prototype pollution fixes)
 
 ## Companion References
 
