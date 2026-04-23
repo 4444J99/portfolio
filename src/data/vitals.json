@@ -1,19 +1,19 @@
 {
   "repos": {
-    "total": 147,
-    "active": 91,
-    "orgs": 10
+    "total": 116,
+    "active": 62,
+    "orgs": 8
   },
   "substance": {
-    "code_files": 2940,
-    "test_files": 400,
+    "code_files": 23121,
+    "test_files": 4337,
     "automated_tests": 2000,
-    "ci_passing": 107,
+    "ci_passing": 104,
     "ci_coverage_pct": 73
   },
   "logos": {
-    "essays": 29,
-    "words": 300000
+    "essays": 49,
+    "words": 740907
   },
-  "timestamp": "2026-04-23T08:17:43.076563+00:00"
+  "timestamp": "2026-04-21T07:44:09.544396+00:00"
 }
