@@ -12,3 +12,8 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    ignore:
+      # Block typescript major bumps until @astrojs/check supports TS 6+
+      # (peer-dep ^5.0.0 → 6.0.3 caused npm ci ERESOLVE → CI failure for 9d)
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
