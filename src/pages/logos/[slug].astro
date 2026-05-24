@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { base } from '../../utils/paths';
 
 export async function getStaticPaths() {
 	const logos = await getCollection('logos');
@@ -22,7 +23,7 @@ const { Content } = await render(entry);
   <article class="essay-article">
     <div class="container essay-container">
       <header class="essay-header">
-        <a href="/portfolio/logos/" class="back-link">← Back to Logos</a>
+        <a href={`${base}logos/`} class="back-link">← Back to Logos</a>
         <h1 class="essay-title">{entry.data.title}</h1>
         <div class="essay-meta">
           <time datetime={entry.data.pubDate.toISOString()}>

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { base } from '../utils/paths';
 
 const mentions = [
 	{
@@ -52,7 +53,7 @@ const mentions = [
           </div>
           <div class="card">
             <h3>Operative Handbook</h3>
-            <p>Explore the full eight-organ architecture in the <a href="/portfolio/directory/">system directory</a> and review live quality metrics on the <a href="/portfolio/dashboard/">dashboard</a>.</p>
+            <p>Explore the full eight-organ architecture in the <a href={`${base}directory/`}>system directory</a> and review live quality metrics on the <a href={`${base}dashboard/`}>dashboard</a>.</p>
           </div>
         </div>
       </div>
