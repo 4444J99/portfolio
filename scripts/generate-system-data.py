@@ -103,7 +103,7 @@ def compute_vitals(canonical: dict, snapshot: dict | None = None) -> dict:
     code_files = canonical.get("code_files", total_repos * 20)
     test_files = canonical.get("test_files", auto_tests // 5)
 
-    return {
+    vitals = {
         "repos": {
             "total": total_repos,
             "active": c.get("active_repos", 0),
