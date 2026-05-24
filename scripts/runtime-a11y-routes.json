@@ -170,6 +170,15 @@
       ]
     },
     {
+      "path": "/projects/a-mavs-olevm",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
       "path": "/projects/aetheria-rpg",
       "checks": [
         "nav-menu",
@@ -207,6 +216,15 @@
     },
     {
       "path": "/projects/block-warfare",
+      "checks": [
+        "nav-menu",
+        "dropdown-menu",
+        "search-dialog",
+        "theme-toggle"
+      ]
+    },
+    {
+      "path": "/projects/collective-persona-operations",
       "checks": [
         "nav-menu",
         "dropdown-menu",
