@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { base } from '../../utils/paths';
 
 export async function getStaticPaths() {
 	const pathos = await getCollection('pathos');
@@ -21,7 +22,7 @@ const { Content } = await render(entry);
   <article class="pathos-article">
     <div class="container pathos-container">
       <header class="pathos-header">
-        <a href="/portfolio/pathos/" class="back-link">&larr; Back to Pathos</a>
+        <a href={`${base}pathos/`} class="back-link">&larr; Back to Pathos</a>
         <h1 class="pathos-title">{entry.data.title}</h1>
         <div class="pathos-meta">
           <time datetime={entry.data.date.toISOString()}>
