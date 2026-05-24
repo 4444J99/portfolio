@@ -1,9 +1,13 @@
 ---
 import StatGrid from '../components/StatGrid.astro';
 import omegaData from '../data/omega.json';
+import testimonialsData from '../data/testimonials.json';
 import vitals from '../data/vitals.json';
 import Layout from '../layouts/Layout.astro';
+import type { Testimonial } from '../types/data';
 import { base } from '../utils/paths';
+
+const testimonials: Testimonial[] = testimonialsData.testimonials;
 
 const soakDay = omegaData.soak.streak_days;
 const targetDay = omegaData.soak.target_days;
@@ -79,10 +83,37 @@ const feedbackCriteria = [
       </div>
 
       <h2 class="section__heading" data-reveal>Current Feedback Logs</h2>
-      <div class="empty-state">
-        <p>No external testimonials logged yet. System is currently in autonomous soak mode.</p>
-        <p class="small">Refer to <a href={`${base}omega/`}>Omega Criterion #7</a> for tracking status.</p>
-      </div>
+      {testimonials.length > 0 ? (
+        <div class="testimonial-grid">
+          {testimonials.map((t) => (
+            <figure class="testimonial-card" data-reveal>
+              <blockquote class="testimonial-card__quote">{t.quote}</blockquote>
+              <figcaption class="testimonial-card__meta">
+                <span class="testimonial-card__name">{t.name}</span>
+                {t.role && <span class="testimonial-card__role">{t.role}</span>}
+                {t.source &&
+                  (t.sourceUrl ? (
+                    <a
+                      class="testimonial-card__source"
+                      href={t.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {t.source}
+                    </a>
+                  ) : (
+                    <span class="testimonial-card__source">{t.source}</span>
+                  ))}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <p>No external testimonials logged yet. System is currently in autonomous soak mode.</p>
+          <p class="small">Refer to <a href={`${base}omega/`}>Omega Criterion #7</a> for tracking status.</p>
+        </div>
+      )}
     </div>
   </section>
 </Layout>
@@ -191,5 +222,45 @@ const feedbackCriteria = [
   }
   .btn--secondary:hover {
     background: var(--bg-card);
+  }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+  }
+  .testimonial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: var(--space-xl);
+    margin: 0;
+  }
+  .testimonial-card__quote {
+    margin: 0 0 var(--space-md);
+    border-left: 2px solid var(--accent);
+    padding-left: var(--space-md);
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+  .testimonial-card__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .testimonial-card__name {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .testimonial-card__role {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .testimonial-card__source {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: var(--space-xs);
   }
 </style>
