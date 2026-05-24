@@ -66,6 +66,15 @@ export interface SystemMetrics {
 	essays: { total: number };
 }
 
+export interface Testimonial {
+	name: string;
+	role?: string;
+	quote: string;
+	date?: string;
+	source?: string;
+	sourceUrl?: string;
+}
+
 export interface Essay {
 	path: string;
 	filename: string;

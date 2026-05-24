@@ -4,6 +4,10 @@ interface Env {
 	ALLOWED_ORIGINS?: string;
 	LOG_HASH_SALT?: string;
 	KNOWLEDGE_API_URL?: string;
+	// Commerce (Stripe) — checkout is inert until both are set as secrets.
+	STRIPE_SECRET_KEY?: string;
+	STRIPE_PRICE_ID?: string;
+	SITE_URL?: string;
 }
 
 interface ConsultRequestBody {
@@ -276,6 +280,48 @@ ${contextSection}
 Be specific, practical, and implementation-oriented. When grounded context is available, reference specific repos and capabilities by name.`;
 }
 
+async function handleCheckout(request: Request, env: Env, corsHeaders: Headers): Promise<Response> {
+	if (!env.STRIPE_SECRET_KEY || !env.STRIPE_PRICE_ID) {
+		return jsonResponse(
+			{ ok: false, code: 'NOT_CONFIGURED', message: 'Checkout is not configured.' },
+			503,
+			corsHeaders,
+		);
+	}
+	const siteUrl = request.headers.get('Origin') || env.SITE_URL || 'https://4444j99.github.io';
+	try {
+		const params = new URLSearchParams();
+		params.set('mode', 'payment');
+		params.set('line_items[0][price]', env.STRIPE_PRICE_ID);
+		params.set('line_items[0][quantity]', '1');
+		params.set('success_url', `${siteUrl}/portfolio/consult/?checkout=success`);
+		params.set('cancel_url', `${siteUrl}/portfolio/consult/?checkout=cancel`);
+		const res = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`,
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			body: params.toString(),
+		});
+		if (!res.ok) {
+			return jsonResponse(
+				{ ok: false, code: 'STRIPE_ERROR', message: 'Could not create checkout session.' },
+				502,
+				corsHeaders,
+			);
+		}
+		const session = (await res.json()) as { id?: string; url?: string };
+		return jsonResponse({ ok: true, id: session.id, url: session.url }, 200, corsHeaders);
+	} catch {
+		return jsonResponse(
+			{ ok: false, code: 'STRIPE_ERROR', message: 'Could not create checkout session.' },
+			502,
+			corsHeaders,
+		);
+	}
+}
+
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const origin = request.headers.get('Origin');
@@ -288,6 +334,10 @@ export default {
 
 		if (request.method === 'GET' && url.pathname === '/health') {
 			return jsonResponse({ ok: true, service: 'consult-api' }, 200, corsHeaders);
+		}
+
+		if (request.method === 'POST' && url.pathname === '/api/checkout') {
+			return handleCheckout(request, env, corsHeaders);
 		}
 
 		if (request.method !== 'POST' || url.pathname !== '/api/consult') {
