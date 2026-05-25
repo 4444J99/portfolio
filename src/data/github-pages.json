@@ -1,7 +1,7 @@
 {
   "schemaVersion": "github-pages-index.v2.1",
   "syncCoreVersion": "2.1.0",
-  "generatedAt": "2026-05-24T09:04:48.691Z",
+  "generatedAt": "2026-05-25T10:55:36.910Z",
   "owners": [
     "4444J99",
     "organvm-i-theoria",
@@ -31,10 +31,10 @@
     "pagesConcurrency": 8,
     "probeConcurrency": 8,
     "probeTimeoutMs": 8000,
-    "discoverDurationMs": 962,
-    "pagesDurationMs": 254,
-    "probeDurationMs": 198,
-    "totalDurationMs": 1415
+    "discoverDurationMs": 890,
+    "pagesDurationMs": 287,
+    "probeDurationMs": 274,
+    "totalDurationMs": 1452
   },
   "repos": [
     {
@@ -48,7 +48,7 @@
       "cname": null,
       "sourceBranch": "main",
       "sourcePath": "/",
-      "updatedAt": "2026-05-18T10:20:49Z",
+      "updatedAt": "2026-05-25T10:25:11Z",
       "featured": false,
       "priority": 0,
       "hidden": false,
@@ -56,9 +56,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.493Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.636Z",
       "probeMethod": "head",
-      "probeLatencyMs": 43,
+      "probeLatencyMs": 273,
       "lastError": null
     },
     {
@@ -72,7 +72,7 @@
       "cname": null,
       "sourceBranch": "main",
       "sourcePath": "/",
-      "updatedAt": "2026-04-23T19:35:33Z",
+      "updatedAt": "2026-05-24T18:44:54Z",
       "featured": false,
       "priority": 0,
       "hidden": false,
@@ -80,9 +80,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.493Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.636Z",
       "probeMethod": "head",
-      "probeLatencyMs": 37,
+      "probeLatencyMs": 47,
       "lastError": null
     },
     {
@@ -104,7 +104,7 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.493Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.636Z",
       "probeMethod": "head",
       "probeLatencyMs": 57,
       "lastError": null
@@ -120,7 +120,7 @@
       "cname": null,
       "sourceBranch": "main",
       "sourcePath": "/",
-      "updatedAt": "2026-05-23T08:34:38Z",
+      "updatedAt": "2026-05-24T19:34:13Z",
       "featured": true,
       "priority": 100,
       "hidden": false,
@@ -128,9 +128,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.493Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.636Z",
       "probeMethod": "head",
-      "probeLatencyMs": 45,
+      "probeLatencyMs": 52,
       "lastError": null
     },
     {
@@ -152,9 +152,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.493Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.636Z",
       "probeMethod": "head",
-      "probeLatencyMs": 70,
+      "probeLatencyMs": 66,
       "lastError": null
     },
     {
@@ -176,9 +176,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.493Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.636Z",
       "probeMethod": "head",
-      "probeLatencyMs": 52,
+      "probeLatencyMs": 54,
       "lastError": null
     },
     {
@@ -200,9 +200,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.493Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.636Z",
       "probeMethod": "head",
-      "probeLatencyMs": 82,
+      "probeLatencyMs": 58,
       "lastError": null
     },
     {
@@ -224,9 +224,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.493Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.636Z",
       "probeMethod": "head",
-      "probeLatencyMs": 74,
+      "probeLatencyMs": 61,
       "lastError": null
     },
     {
@@ -248,9 +248,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.530Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.683Z",
       "probeMethod": "head",
-      "probeLatencyMs": 49,
+      "probeLatencyMs": 37,
       "lastError": null
     },
     {
@@ -272,9 +272,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.536Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.688Z",
       "probeMethod": "head",
-      "probeLatencyMs": 42,
+      "probeLatencyMs": 35,
       "lastError": null
     },
     {
@@ -296,9 +296,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.538Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.690Z",
       "probeMethod": "head",
-      "probeLatencyMs": 46,
+      "probeLatencyMs": 41,
       "lastError": null
     },
     {
@@ -320,9 +320,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.545Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.693Z",
       "probeMethod": "head",
-      "probeLatencyMs": 56,
+      "probeLatencyMs": 32,
       "lastError": null
     },
     {
@@ -344,9 +344,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.550Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.694Z",
       "probeMethod": "head",
-      "probeLatencyMs": 50,
+      "probeLatencyMs": 47,
       "lastError": null
     },
     {
@@ -368,9 +368,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.563Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.697Z",
       "probeMethod": "head",
-      "probeLatencyMs": 40,
+      "probeLatencyMs": 50,
       "lastError": null
     },
     {
@@ -392,9 +392,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.567Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.702Z",
       "probeMethod": "head",
-      "probeLatencyMs": 51,
+      "probeLatencyMs": 107,
       "lastError": null
     },
     {
@@ -416,9 +416,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.575Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.720Z",
       "probeMethod": "head",
-      "probeLatencyMs": 31,
+      "probeLatencyMs": 58,
       "lastError": null
     },
     {
@@ -440,9 +440,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.578Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.723Z",
       "probeMethod": "head",
-      "probeLatencyMs": 51,
+      "probeLatencyMs": 74,
       "lastError": null
     },
     {
@@ -464,9 +464,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.579Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.725Z",
       "probeMethod": "head",
-      "probeLatencyMs": 49,
+      "probeLatencyMs": 74,
       "lastError": null
     },
     {
@@ -488,9 +488,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.584Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.731Z",
       "probeMethod": "head",
-      "probeLatencyMs": 106,
+      "probeLatencyMs": 146,
       "lastError": null
     },
     {
@@ -512,9 +512,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-05-24T09:04:48.600Z",
+      "lastCheckedAt": "2026-05-25T10:55:36.741Z",
       "probeMethod": "head",
-      "probeLatencyMs": 91,
+      "probeLatencyMs": 128,
       "lastError": null
     }
   ]

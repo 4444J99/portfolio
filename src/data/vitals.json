@@ -15,5 +15,22 @@
     "essays": 29,
     "words": 300000
   },
-  "timestamp": "2026-05-24T09:04:30.706745+00:00"
+  "timestamp": "2026-05-25T10:55:20.053321+00:00",
+  "organism": {
+    "density": 0.253,
+    "entities": 148,
+    "edges": 0,
+    "ammoi": "AMMOI:25% E:0 T:0 C:0 Ev24h:2 [ORGAN-VI:76%, ORGAN-VII:75%, META-ORGANVM:63%]"
+  },
+  "omega": {
+    "met": 5,
+    "total": 20
+  },
+  "promotion_pipeline": {
+    "ARCHIVED": 54,
+    "CANDIDATE": 1,
+    "GRADUATED": 59,
+    "LOCAL": 27,
+    "PUBLIC_PROCESS": 7
+  }
 }
