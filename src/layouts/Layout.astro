@@ -65,6 +65,13 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://4444j99.github.io').hr
     <ClientRouter />
     <title>{title}</title>
     <script is:inline defer data-domain="4444j99.github.io" src="https://plausible.io/js/script.js"></script>
+    {
+      import.meta.env.PUBLIC_CLARITY_ID && (
+        <script is:inline define:vars={{ clarityId: import.meta.env.PUBLIC_CLARITY_ID }}>
+          {`(function(c,l,a,r,i){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};var t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;var y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",clarityId);`}
+        </script>
+      )
+    }
   </head>
   <body>
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
