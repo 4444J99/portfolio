@@ -1,0 +1,74 @@
+---
+// Support CTAs for issue #53 (revenue_status + MRR).
+// Inert until the operator supplies the URLs via env:
+//   PUBLIC_SPONSORS_URL         — GitHub Sponsors page (recurring / MRR)
+//   PUBLIC_SUPPORT_PAYMENT_URL  — Stripe Payment Link (one-time / revenue_status)
+const sponsorsUrl = import.meta.env.PUBLIC_SPONSORS_URL?.trim();
+const supportPaymentUrl = import.meta.env.PUBLIC_SUPPORT_PAYMENT_URL?.trim();
+const hasAny = Boolean(sponsorsUrl || supportPaymentUrl);
+---
+
+{
+  hasAny && (
+    <div class="support-block">
+      <span class="support-block__label">Support this work</span>
+      {sponsorsUrl && (
+        <a
+          class="support-block__btn support-block__btn--sponsor"
+          href={sponsorsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span aria-hidden="true">&hearts;</span> Sponsor
+        </a>
+      )}
+      {supportPaymentUrl && (
+        <a
+          class="support-block__btn"
+          href={supportPaymentUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          One-time gift
+        </a>
+      )}
+    </div>
+  )
+}
+
+<style>
+  .support-block {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+  .support-block__label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  .support-block__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: var(--space-2xs) var(--space-sm);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    transition:
+      border-color var(--transition-fast),
+      color var(--transition-fast);
+  }
+  .support-block__btn:hover {
+    border-color: var(--accent);
+    color: var(--accent-text);
+  }
+  .support-block__btn--sponsor:hover {
+    border-color: var(--accent-hover);
+    color: var(--accent-hover);
+  }
+</style>
