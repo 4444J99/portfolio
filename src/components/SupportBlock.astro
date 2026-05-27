@@ -3,6 +3,9 @@
 // Inert until the operator supplies the URLs via env:
 //   PUBLIC_SPONSORS_URL         — GitHub Sponsors page (recurring / MRR)
 //   PUBLIC_SUPPORT_PAYMENT_URL  — Stripe Payment Link (one-time / revenue_status)
+
+export type Props = {};
+
 const sponsorsUrl = import.meta.env.PUBLIC_SPONSORS_URL?.trim();
 const supportPaymentUrl = import.meta.env.PUBLIC_SUPPORT_PAYMENT_URL?.trim();
 const hasAny = Boolean(sponsorsUrl || supportPaymentUrl);
@@ -42,7 +45,6 @@ const hasAny = Boolean(sponsorsUrl || supportPaymentUrl);
     align-items: center;
     flex-wrap: wrap;
     gap: var(--space-sm);
-    margin-top: var(--space-md);
   }
   .support-block__label {
     font-size: 0.8rem;
@@ -66,9 +68,11 @@ const hasAny = Boolean(sponsorsUrl || supportPaymentUrl);
   .support-block__btn:hover {
     border-color: var(--accent);
     color: var(--accent-text);
+    opacity: 1;
   }
   .support-block__btn--sponsor:hover {
     border-color: var(--accent-hover);
     color: var(--accent-hover);
+    opacity: 1;
   }
 </style>
