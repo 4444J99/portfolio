@@ -16,5 +16,5 @@ This repo participates in the **PERSONAL (Personal / Liminal)** swarm.
 - Adhere to unidirectional flow: I→II→III
 - Never commit secrets or credentials
 
-*Last synced: 2026-04-14T21:32:19Z*
+*Last synced: 2026-06-07T14:00:33Z*
 <!-- ORGANVM:AUTO:END -->
