@@ -1,7 +1,7 @@
 {
   "schemaVersion": "github-pages-index.v2.1",
   "syncCoreVersion": "2.1.0",
-  "generatedAt": "2026-06-06T09:06:38.971Z",
+  "generatedAt": "2026-06-07T09:45:42.642Z",
   "owners": [
     "4444J99",
     "organvm-i-theoria",
@@ -13,14 +13,14 @@
     "organvm-vii-kerygma",
     "meta-organvm"
   ],
-  "totalRepos": 20,
+  "totalRepos": 21,
   "syncStatus": "ok",
   "syncWarnings": [],
   "stats": {
     "ownersRequested": 9,
     "reposDiscovered": 85,
-    "reposWithPages": 20,
-    "pagesResolved": 20,
+    "reposWithPages": 21,
+    "pagesResolved": 21,
     "erroredRepos": 1,
     "unreachableRepos": 0,
     "warningCount": 0,
@@ -31,10 +31,10 @@
     "pagesConcurrency": 8,
     "probeConcurrency": 8,
     "probeTimeoutMs": 8000,
-    "discoverDurationMs": 902,
-    "pagesDurationMs": 248,
-    "probeDurationMs": 305,
-    "totalDurationMs": 1456
+    "discoverDurationMs": 1245,
+    "pagesDurationMs": 417,
+    "probeDurationMs": 513,
+    "totalDurationMs": 2176
   },
   "repos": [
     {
@@ -56,9 +56,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.665Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.129Z",
       "probeMethod": "head",
-      "probeLatencyMs": 103,
+      "probeLatencyMs": 179,
       "lastError": null
     },
     {
@@ -80,9 +80,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.666Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.129Z",
       "probeMethod": "head",
-      "probeLatencyMs": 117,
+      "probeLatencyMs": 175,
       "lastError": null
     },
     {
@@ -104,9 +104,33 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.666Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.129Z",
       "probeMethod": "head",
-      "probeLatencyMs": 109,
+      "probeLatencyMs": 177,
+      "lastError": null
+    },
+    {
+      "owner": "4444J99",
+      "repo": "github-stars",
+      "fullName": "4444J99/github-stars",
+      "repoUrl": "https://github.com/4444J99/github-stars",
+      "pageUrl": "https://4444j99.github.io/github-stars/",
+      "status": null,
+      "buildType": "workflow",
+      "cname": null,
+      "sourceBranch": "main",
+      "sourcePath": "/",
+      "updatedAt": "2026-06-07T07:09:59Z",
+      "featured": false,
+      "priority": 0,
+      "hidden": false,
+      "label": null,
+      "httpStatus": 200,
+      "reachable": true,
+      "redirectTarget": null,
+      "lastCheckedAt": "2026-06-07T09:45:42.130Z",
+      "probeMethod": "head",
+      "probeLatencyMs": 172,
       "lastError": null
     },
     {
@@ -120,7 +144,7 @@
       "cname": null,
       "sourceBranch": "main",
       "sourcePath": "/",
-      "updatedAt": "2026-06-05T13:14:47Z",
+      "updatedAt": "2026-06-06T09:06:43Z",
       "featured": true,
       "priority": 100,
       "hidden": false,
@@ -128,9 +152,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.666Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.130Z",
       "probeMethod": "head",
-      "probeLatencyMs": 130,
+      "probeLatencyMs": 171,
       "lastError": null
     },
     {
@@ -152,9 +176,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.666Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.130Z",
       "probeMethod": "head",
-      "probeLatencyMs": 150,
+      "probeLatencyMs": 175,
       "lastError": null
     },
     {
@@ -176,9 +200,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.666Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.130Z",
       "probeMethod": "head",
-      "probeLatencyMs": 143,
+      "probeLatencyMs": 295,
       "lastError": null
     },
     {
@@ -200,9 +224,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.666Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.130Z",
       "probeMethod": "head",
-      "probeLatencyMs": 219,
+      "probeLatencyMs": 212,
       "lastError": null
     },
     {
@@ -224,9 +248,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.666Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.301Z",
       "probeMethod": "head",
-      "probeLatencyMs": 214,
+      "probeLatencyMs": 148,
       "lastError": null
     },
     {
@@ -248,9 +272,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.769Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.302Z",
       "probeMethod": "head",
-      "probeLatencyMs": 148,
+      "probeLatencyMs": 170,
       "lastError": null
     },
     {
@@ -272,9 +296,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.775Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.304Z",
       "probeMethod": "head",
-      "probeLatencyMs": 132,
+      "probeLatencyMs": 165,
       "lastError": null
     },
     {
@@ -296,9 +320,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.783Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.305Z",
       "probeMethod": "head",
-      "probeLatencyMs": 131,
+      "probeLatencyMs": 179,
       "lastError": null
     },
     {
@@ -320,9 +344,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.796Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.306Z",
       "probeMethod": "head",
-      "probeLatencyMs": 130,
+      "probeLatencyMs": 164,
       "lastError": null
     },
     {
@@ -344,9 +368,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.809Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.308Z",
       "probeMethod": "head",
-      "probeLatencyMs": 135,
+      "probeLatencyMs": 204,
       "lastError": null
     },
     {
@@ -368,9 +392,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.816Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.342Z",
       "probeMethod": "head",
-      "probeLatencyMs": 117,
+      "probeLatencyMs": 140,
       "lastError": null
     },
     {
@@ -392,9 +416,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.880Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.425Z",
       "probeMethod": "head",
-      "probeLatencyMs": 60,
+      "probeLatencyMs": 199,
       "lastError": null
     },
     {
@@ -416,9 +440,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.885Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.449Z",
       "probeMethod": "head",
-      "probeLatencyMs": 48,
+      "probeLatencyMs": 140,
       "lastError": null
     },
     {
@@ -440,9 +464,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.907Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.469Z",
       "probeMethod": "head",
-      "probeLatencyMs": 53,
+      "probeLatencyMs": 160,
       "lastError": null
     },
     {
@@ -464,9 +488,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.914Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.470Z",
       "probeMethod": "head",
-      "probeLatencyMs": 45,
+      "probeLatencyMs": 154,
       "lastError": null
     },
     {
@@ -488,9 +512,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.917Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.472Z",
       "probeMethod": "head",
-      "probeLatencyMs": 53,
+      "probeLatencyMs": 170,
       "lastError": null
     },
     {
@@ -512,9 +536,9 @@
       "httpStatus": 200,
       "reachable": true,
       "redirectTarget": null,
-      "lastCheckedAt": "2026-06-06T09:06:38.926Z",
+      "lastCheckedAt": "2026-06-07T09:45:42.482Z",
       "probeMethod": "head",
-      "probeLatencyMs": 35,
+      "probeLatencyMs": 152,
       "lastError": null
     }
   ]
