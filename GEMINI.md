@@ -93,7 +93,7 @@ Deployments only trigger via GitHub Actions (`deploy.yml`) after the full `quali
 ### Governance
 - *Standard ORGANVM governance applies*
 
-*Last synced: 2026-06-07T14:00:33Z*
+*Last synced: 2026-06-08T16:26:25Z*
 
 ## Active Handoff Protocol
 
@@ -172,7 +172,7 @@ Convergences: 2 | Run: `organvm network map --repo portfolio` | `organvm network
 
 ## Task Queue (from pipeline)
 
-**228** pending tasks | Last pipeline: unknown
+**225** pending tasks | Last pipeline: unknown
 
 - `409935c01615` Engine — similarity_engine.py [astro, cloudflare, p5.js]
 - `9ebc34b18470` Output — similarity-clusters.json [astro, cloudflare, p5.js]
@@ -182,18 +182,18 @@ Convergences: 2 | Run: `organvm network map --repo portfolio` | `organvm network
 - `2a99dbecff79` ORGAN-II — OPERATIONAL [astro, cloudflare, p5.js]
 - `ca9794c3bde2` Registry — AUTHORITATIVE [astro, cloudflare, p5.js]
 - `57d7bb37e7ae` A — 1777490789085.md [vercel]
-- ... and 220 more
+- ... and 217 more
 
-Cross-organ links: 2227 | Top tags: `chezmoi`, `bash`, `python`, `go`, `mcp`
+Cross-organ links: 2227 | Top tags: `chezmoi`, `bash`, `python`, `mcp`, `go`
 
 Run: `organvm atoms pipeline --write && organvm atoms fanout --write`
 
 
 ## System Density (auto-generated)
 
-AMMOI: 25% | Edges: 0 | Tensions: 0 | Clusters: 0 | Adv: 27 | Events(24h): 38806
+AMMOI: 25% | Edges: 0 | Tensions: 0 | Clusters: 0 | Adv: 27 | Events(24h): 41370
 Structure: 8 organs / 149 repos / 1654 components (depth 17) | Inference: 0% | Organs: META-ORGANVM:63%, ORGAN-I:53%, ORGAN-II:48%, ORGAN-III:55% +5 more
-Last pulse: 2026-06-07T14:00:21 | Δ24h: n/a | Δ7d: n/a
+Last pulse: 2026-06-08T16:26:13 | Δ24h: 0.0% | Δ7d: vacuum
 
 
 ## Logos Documentation Layer
