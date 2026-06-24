@@ -1,3 +1,5 @@
+import { ALLOWED_ATTRS, ALLOWED_TAGS, escapeHtml, sanitizeHtml } from '../../lib/html-sanitize';
+
 interface Env {
 	AI?: Ai;
 	CONSULT_DB?: D1Database;
@@ -172,12 +174,6 @@ const FALLBACK_ORGANS: FallbackOrgan[] = [
 		keywords: ['distribution', 'audience', 'marketing', 'newsletter'],
 	},
 ];
-
-const ALLOWED_TAGS = ['h2', 'h3', 'p', 'strong', 'em', 'code', 'ul', 'li', 'br'];
-const ALLOWED_ATTRS: Record<string, string[]> = {
-	h2: ['class'],
-	p: ['class'],
-};
 
 // ---------------------------------------------------------------------------
 // Knowledge API integration
@@ -771,15 +767,6 @@ function extractAiText(raw: unknown): string {
 	return '';
 }
 
-function escapeHtml(input: string): string {
-	return input
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;')
-		.replace(/'/g, '&#039;');
-}
-
 function markdownToHtml(markdown: string): string {
 	const safe = escapeHtml(markdown);
 	let html = safe
@@ -798,22 +785,6 @@ function markdownToHtml(markdown: string): string {
 		})
 		.join('');
 	return sanitizeHtml(html);
-}
-
-function sanitizeHtml(html: string): string {
-	return html.replace(
-		/<\/?([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>/g,
-		(tag: string, name: string, attrs: string) => {
-			const lowerName = name.toLowerCase();
-			if (!ALLOWED_TAGS.includes(lowerName)) return '';
-			if (tag.startsWith('</')) return `</${lowerName}>`;
-			const allowedAttrs = ALLOWED_ATTRS[lowerName] || [];
-			const safeAttrs = (attrs.match(/\s[\w-]+="[^"]*"/g) || []).filter((attr) =>
-				allowedAttrs.some((allowed) => attr.trimStart().startsWith(`${allowed}=`)),
-			);
-			return `<${lowerName}${safeAttrs.join('')}>`;
-		},
-	);
 }
 
 function trimForStorage(value: string, max: number): string {

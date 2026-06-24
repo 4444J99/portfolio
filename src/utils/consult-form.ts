@@ -3,6 +3,10 @@
  * Used by the AI Capability Advisor on the consult page.
  */
 
+import { escapeHtml, sanitizeHtml } from '../../lib/html-sanitize';
+
+export { escapeHtml, sanitizeHtml };
+
 export interface OrganProfile {
 	id: string;
 	title: string;
@@ -20,12 +24,6 @@ export interface RenderAnalysis {
 	source: 'worker' | 'local-fallback';
 	durationMs?: number;
 }
-
-const ALLOWED_TAGS = ['h2', 'h3', 'p', 'strong', 'em', 'code', 'ul', 'li', 'br'];
-const ALLOWED_ATTRS: Record<string, string[]> = {
-	h2: ['class'],
-	p: ['class'],
-};
 
 export const INDUSTRY_LABELS: Record<string, string> = {
 	education: 'Education & EdTech',
@@ -147,31 +145,6 @@ export const ORGAN_PROFILES: OrganProfile[] = [
 		keywords: ['marketing', 'distribution', 'audience', 'newsletter', 'reach', 'acquisition'],
 	},
 ];
-
-export function escapeHtml(str: string): string {
-	return str
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;')
-		.replace(/'/g, '&#039;');
-}
-
-export function sanitizeHtml(html: string): string {
-	return html.replace(
-		/<\/?([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>/g,
-		(tag: string, name: string, attrs: string) => {
-			const lowerName = name.toLowerCase();
-			if (!ALLOWED_TAGS.includes(lowerName)) return '';
-			if (tag.startsWith('</')) return `</${lowerName}>`;
-			const allowedAttrs = ALLOWED_ATTRS[lowerName] || [];
-			const safeAttrs = (attrs.match(/\s[\w-]+="[^"]*"/g) || []).filter((attr: string) =>
-				allowedAttrs.some((allowed: string) => attr.trimStart().startsWith(`${allowed}=`)),
-			);
-			return `<${lowerName}${safeAttrs.join('')}>`;
-		},
-	);
-}
 
 export function markdownToHtml(markdown: string): string {
 	const safeText = escapeHtml(markdown);
