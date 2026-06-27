@@ -87,13 +87,14 @@ Security ratchet checkpoints: `2026-02-21` `moderate<=5, low<=4`, `2026-02-28` `
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Usage
 
 ### Prerequisites
 - Node.js >= 22
 - npm
 
-### Installation
+### Install
+
 ```bash
 git clone https://github.com/4444j99/portfolio
 cd portfolio
@@ -101,25 +102,93 @@ npm install
 ```
 
 ### Development
+
 ```bash
-npm run dev
+npm run dev          # sync:vitals, then astro dev → localhost:4321/portfolio/
+npm run lint:fix     # Biome autofix (tabs, single quotes, trailing commas, width 100)
+npm run preflight    # Pre-push gate: lint → typecheck:strict → build → validate → sync:a11y-routes → test
 ```
 
-### Production Build
+### Build & Preview
+
 ```bash
-npm run build
-npm run preview
+npm run build        # generate-badges → sync:vitals → sync:omega → sync:identity → astro build → pagefind
+npm run preview      # Serve the built dist/
 ```
 
-### Consult API (Cloudflare Worker)
+### Tests
 
-The consult page now uses a Cloudflare Worker endpoint instead of browser-side third-party SDK calls.
+```bash
+npm run test           # Vitest unit + integration
+npm run test:watch     # Vitest in watch mode
+npm run test:coverage  # Coverage report (V8 provider)
 
-1. Set up and deploy the worker in [`workers/consult-api/README.md`](workers/consult-api/README.md).
-2. Set `PUBLIC_CONSULT_API_BASE` to your worker origin (for example, `https://portfolio-consult-api.<subdomain>.workers.dev`).
-3. Redeploy the Astro site.
+# Require npm run build first:
+npm run test:a11y            # axe-core audit on built HTML
+npm run test:e2e:smoke       # Playwright smoke (mobile + desktop viewports)
+npm run test:runtime:errors  # Runtime error telemetry
 
-If `PUBLIC_CONSULT_API_BASE` is not set, the consult page still works using deterministic fallback analysis.
+# Workspace packages (Node built-in test runner, not Vitest):
+npm run test:github-pages-core
+npm run test:quality-ratchet-kit
+npm run test:sketches
+```
+
+### Data Sync
+
+```bash
+npm run sync:vitals       # .quality/*.json → vitals.json, trust-vitals.json, landing.json
+npm run sync:omega        # targets.json → omega.json (maturity scorecard)
+npm run sync:identity     # system-metrics.json → about.json
+npm run sync:a11y-routes  # Rebuild route manifest after adding/removing pages or personas
+npm run generate-data     # Regenerate src/data/ from sibling Python repo
+```
+
+### Strike Intelligence Engine
+
+Requires the `gemini` CLI. Falls back to `[DRAFT]` templates when unavailable.
+
+```bash
+# Create a strike target (defaults to systems-architect persona)
+npm run strike:new "Company Name" "Role Title"
+
+# Specify a persona from src/data/personas.json
+npm run strike:new "Company Name" "Role Title" "persona-id"
+
+# AI-discover candidates per persona → src/data/scout-candidates.json
+npm run strike:scout
+
+# Batch-process intake/job-descriptions/ directory
+npm run strike:sweep
+```
+
+After `strike:new`, the tailored landing page appears at `/portfolio/for/<slug>` and `npm run build:resume` generates the PDF.
+
+### Quality Pipeline
+
+```bash
+npm run quality:local:no-lh  # Full CI-parity: security → lint → typecheck:strict → build → all tests → badges → verify
+npm run quality:local        # Same + Lighthouse (requires Chrome)
+```
+
+### Consult Worker (Cloudflare)
+
+The `/consult` page POSTs to a Cloudflare Worker backed by D1. When `PUBLIC_CONSULT_API_BASE` is unset the page falls back to deterministic capability analysis.
+
+```bash
+npm run consult:worker:dev             # Local dev via wrangler --remote (requires CF auth)
+npm run consult:worker:deploy          # Deploy worker to Cloudflare
+npm run consult:worker:migrate:remote  # Apply D1 migrations to production
+```
+
+Set `PUBLIC_CONSULT_API_BASE` to your worker origin (e.g. `https://portfolio-consult-api.<subdomain>.workers.dev`) in the Astro deployment environment before building. Full API contract: [`workers/consult-api/README.md`](workers/consult-api/README.md).
+
+### Resume PDFs & QR Codes
+
+```bash
+npm run build:resume  # Render per-persona resume YAML → PDF
+npm run build:qr      # Generate QR codes
+```
 
 ---
 
