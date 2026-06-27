@@ -9,6 +9,7 @@ let fontDataCache: ArrayBuffer | null = null;
 
 const LOCAL_FONT_PATHS = [
 	'public/fonts/syne-latin.ttf',
+	'node_modules/katex/dist/fonts/KaTeX_Main-Regular.ttf',
 	'/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
 	'/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf',
 ];

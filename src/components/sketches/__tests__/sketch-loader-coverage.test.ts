@@ -9,6 +9,16 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+type MockP5Shape = {
+	remove: ReturnType<typeof vi.fn>;
+	noLoop: ReturnType<typeof vi.fn>;
+	loop: ReturnType<typeof vi.fn>;
+	redraw: ReturnType<typeof vi.fn>;
+	draw: ReturnType<typeof vi.fn>;
+};
+
+type TestIntersectionEntry = Pick<IntersectionObserverEntry, 'isIntersecting' | 'target'>;
+
 // ---------------------------------------------------------------------------
 // p5 mock — same shape as in sketch-loader.test.ts
 // ---------------------------------------------------------------------------
@@ -19,8 +29,8 @@ vi.mock('p5', () => ({
 		loop = vi.fn();
 		redraw = vi.fn();
 		draw = vi.fn();
-		constructor(sketch: (p: Record<string, unknown>) => void) {
-			const p: Record<string, unknown> = {
+		constructor(sketch: (p: MockP5Shape) => void) {
+			const p: MockP5Shape = {
 				remove: vi.fn(),
 				noLoop: vi.fn(),
 				loop: vi.fn(),
@@ -106,8 +116,7 @@ const ALL_SKETCH_IDS = [
 ];
 
 describe('sketch-loader — extended coverage', () => {
-	let observerCallback: (entries: { isIntersecting: boolean; target: HTMLElement }[]) => void =
-		() => {};
+	let observerCallback: (entries: TestIntersectionEntry[]) => void = () => {};
 	const mockObserve = vi.fn();
 	const mockUnobserve = vi.fn();
 	const mockDisconnect = vi.fn();
@@ -122,12 +131,31 @@ describe('sketch-loader — extended coverage', () => {
 			}),
 		);
 
-		class MockIntersectionObserver {
-			observe = mockObserve;
-			unobserve = mockUnobserve;
-			disconnect = mockDisconnect;
-			constructor(cb: (entries: { isIntersecting: boolean; target: HTMLElement }[]) => void) {
-				observerCallback = cb;
+		class MockIntersectionObserver implements IntersectionObserver {
+			readonly root = null;
+			readonly rootMargin = '0px';
+			readonly thresholds = [];
+
+			constructor(cb: IntersectionObserverCallback) {
+				observerCallback = (entries: TestIntersectionEntry[]): void => {
+					cb(entries as IntersectionObserverEntry[], this);
+				};
+			}
+
+			observe(target: Element): void {
+				mockObserve(target);
+			}
+
+			unobserve(target: Element): void {
+				mockUnobserve(target);
+			}
+
+			disconnect(): void {
+				mockDisconnect();
+			}
+
+			takeRecords(): IntersectionObserverEntry[] {
+				return [];
 			}
 		}
 
@@ -181,9 +209,8 @@ describe('sketch-loader — extended coverage', () => {
 	// -----------------------------------------------------------------------
 	it('invokes background sketch lambda via reinitPage', async () => {
 		// Remove PerformanceObserver so scheduleBackgroundInit takes the direct setTimeout path
-		const origPO = (window as any).PerformanceObserver;
-		// @ts-expect-error
-		delete window.PerformanceObserver;
+		const origPO = window.PerformanceObserver;
+		Reflect.deleteProperty(window, 'PerformanceObserver');
 
 		const bg = document.createElement('canvas');
 		bg.id = 'bg-canvas';
@@ -199,7 +226,7 @@ describe('sketch-loader — extended coverage', () => {
 
 		expect(getSketchInstance(bg)).toBeDefined();
 
-		if (origPO) (window as any).PerformanceObserver = origPO;
+		if (origPO) window.PerformanceObserver = origPO;
 	});
 
 	// -----------------------------------------------------------------------

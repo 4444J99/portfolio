@@ -1,5 +1,9 @@
 import type p5 from 'p5';
 
+type SketchFn = (p: p5, container: HTMLElement) => void;
+type SketchModule = { default: SketchFn };
+type SketchModuleLoader = () => Promise<SketchModule>;
+
 declare global {
 	interface IdleDeadline {
 		readonly didTimeout: boolean;
@@ -14,10 +18,7 @@ declare global {
 	}
 }
 
-const sketchModules: Record<
-	string,
-	() => Promise<{ default: (p: p5, container: HTMLElement) => void }>
-> = {
+const sketchModules = {
 	// Existing (10)
 	hero: () => import('./hero-sketch'),
 	'organ-system': () => import('./organ-system-sketch'),
@@ -51,11 +52,15 @@ const sketchModules: Record<
 	weave: () => import('./weave-sketch'),
 	// Background (always-on)
 	background: () => import('./background-sketch'),
-};
+} satisfies Record<string, SketchModuleLoader>;
+
+export type SketchId = keyof typeof sketchModules;
+
+const sketchModuleIds = new Set(Object.keys(sketchModules) as SketchId[]);
 
 const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 let prefersReducedMotion = motionQuery.matches;
-motionQuery.addEventListener('change', (e) => {
+motionQuery.addEventListener('change', (e: MediaQueryListEvent): void => {
 	prefersReducedMotion = e.matches;
 	// Re-apply to already-running instances — the persistent #bg-canvas survives
 	// navigations and would otherwise keep animating after reduced-motion is enabled.
@@ -70,7 +75,7 @@ motionQuery.addEventListener('change', (e) => {
 });
 
 // Defer background sketch boot on the heaviest interactive routes.
-const BACKGROUND_DEFER_ROUTES = new Set([
+const BACKGROUND_DEFER_ROUTES: ReadonlySet<string> = new Set([
 	`${import.meta.env.BASE_URL}architecture`,
 	`${import.meta.env.BASE_URL}gallery`,
 ]);
@@ -101,10 +106,20 @@ function shouldBootBackground(pathname = window.location.pathname): boolean {
 	return !BACKGROUND_DEFER_ROUTES.has(normalizePath(pathname));
 }
 
-function showFallback(container: HTMLElement, sketchId: string) {
+function isSketchId(sketchId: string | undefined): sketchId is SketchId {
+	return typeof sketchId === 'string' && sketchModuleIds.has(sketchId as SketchId);
+}
+
+function applyResponsiveHeight(container: HTMLElement): void {
+	const height = container.dataset.height || '500px';
+	const mobileHeight = container.dataset.mobileHeight || '350px';
+	container.style.height = isMobile() ? mobileHeight : height;
+}
+
+function showFallback(container: HTMLElement, sketchId: string): void {
 	const fallback = container.querySelector('.sketch-noscript');
-	if (fallback) {
-		(fallback as HTMLElement).style.display = 'flex';
+	if (fallback instanceof HTMLElement) {
+		fallback.style.display = 'flex';
 	} else {
 		const el = document.createElement('div');
 		el.style.cssText =
@@ -114,14 +129,15 @@ function showFallback(container: HTMLElement, sketchId: string) {
 	}
 }
 
-function processQueue() {
+function processQueue(): void {
 	while (activeInits < MAX_CONCURRENT && initQueue.length > 0) {
-		const next = initQueue.shift()!;
+		const next = initQueue.shift();
+		if (!next) return;
 		doInitSketch(next);
 	}
 }
 
-function initSketch(container: HTMLElement) {
+function initSketch(container: HTMLElement): void {
 	if (instances.has(container)) return;
 
 	if (activeInits >= MAX_CONCURRENT) {
@@ -132,15 +148,13 @@ function initSketch(container: HTMLElement) {
 	doInitSketch(container);
 }
 
-function doInitSketch(container: HTMLElement) {
+function doInitSketch(container: HTMLElement): void {
 	if (instances.has(container)) return;
 	activeInits++;
 
 	const sketchId = container.dataset.sketch;
-	const height = container.dataset.height || '500px';
-	const mobileHeight = container.dataset.mobileHeight || '350px';
 
-	if (!sketchId || !sketchModules[sketchId]) {
+	if (!isSketchId(sketchId)) {
 		console.error('[sketch] unknown sketch id:', sketchId);
 		showFallback(container, sketchId || 'unknown');
 		activeInits--;
@@ -148,24 +162,24 @@ function doInitSketch(container: HTMLElement) {
 		return;
 	}
 
-	container.style.height = isMobile() ? mobileHeight : height;
+	applyResponsiveHeight(container);
 
 	const loader = sketchModules[sketchId];
 
 	Promise.all([import('p5'), loader()])
-		.then(([p5Module, sketchModule]) => {
+		.then(([p5Module, sketchModule]): void => {
 			const P5 = p5Module.default;
 			const sketchFn = sketchModule.default;
 
 			try {
-				const instance = new P5((p: p5) => {
+				const instance = new P5((p: p5): void => {
 					sketchFn(p, container);
 
 					// For reduced motion: render a fully-grown static frame then stop
 					if (prefersReducedMotion && p.draw) {
 						const originalDraw = p.draw.bind(p);
 						let warmupFrames = 60;
-						p.draw = () => {
+						p.draw = (): void => {
 							originalDraw();
 							warmupFrames--;
 							if (warmupFrames <= 0) {
@@ -175,7 +189,7 @@ function doInitSketch(container: HTMLElement) {
 
 						const originalMousePressed = p.mousePressed?.bind(p);
 						if (originalMousePressed) {
-							p.mousePressed = () => {
+							p.mousePressed = (): void => {
 								originalMousePressed();
 								p.redraw();
 							};
@@ -185,31 +199,31 @@ function doInitSketch(container: HTMLElement) {
 				instances.set(container, instance);
 			} catch (err) {
 				console.error('[sketch]', sketchId, 'p5 constructor error:', err);
-				showFallback(container, sketchId!);
+				showFallback(container, sketchId);
 			}
 		})
-		.catch((err) => {
+		.catch((err: unknown): void => {
 			console.error('[sketch]', sketchId, 'load error:', err);
-			showFallback(container, sketchId!);
+			showFallback(container, sketchId);
 		})
-		.finally(() => {
+		.finally((): void => {
 			activeInits--;
 			processQueue();
 		});
 }
 
-function deferInit(container: HTMLElement) {
+function deferInit(container: HTMLElement): void {
 	const rect = container.getBoundingClientRect();
 	const aboveFold = rect.top < window.innerHeight;
 
 	if (aboveFold && 'requestIdleCallback' in window) {
-		window.requestIdleCallback(() => initSketch(container), { timeout: 2000 });
+		window.requestIdleCallback((): void => initSketch(container), { timeout: 2000 });
 	} else {
 		initSketch(container);
 	}
 }
 
-function observeSketches() {
+function observeSketches(): void {
 	observedContainers = Array.from(
 		document.querySelectorAll<HTMLElement>('.sketch-container[data-sketch]'),
 	);
@@ -217,37 +231,32 @@ function observeSketches() {
 
 	if ('IntersectionObserver' in window) {
 		sketchObserver = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						deferInit(entry.target as HTMLElement);
-						sketchObserver?.unobserve(entry.target);
-					}
-				});
+			(entries: IntersectionObserverEntry[]): void => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting || !(entry.target instanceof HTMLElement)) continue;
+					deferInit(entry.target);
+					sketchObserver?.unobserve(entry.target);
+				}
 			},
 			{ rootMargin: '200px' },
 		);
-		containers.forEach((c) => sketchObserver!.observe(c));
+		containers.forEach((container) => sketchObserver?.observe(container));
 	} else {
 		containers.forEach(deferInit);
 	}
 
 	if (!resizeHandler) {
-		resizeHandler = () => {
+		resizeHandler = (): void => {
 			if (resizeTimer) clearTimeout(resizeTimer);
-			resizeTimer = setTimeout(() => {
-				observedContainers.forEach((container) => {
-					const height = container.dataset.height || '500px';
-					const mobileHeight = container.dataset.mobileHeight || '350px';
-					container.style.height = isMobile() ? mobileHeight : height;
-				});
+			resizeTimer = setTimeout((): void => {
+				observedContainers.forEach(applyResponsiveHeight);
 			}, 100);
 		};
 		window.addEventListener('resize', resizeHandler);
 	}
 }
 
-function initBackground() {
+function initBackground(): void {
 	const bg = document.getElementById('bg-canvas');
 	if (!bg || instances.has(bg)) return;
 
@@ -255,18 +264,18 @@ function initBackground() {
 	if (!loader) return;
 
 	Promise.all([import('p5'), loader()])
-		.then(([p5Module, sketchModule]) => {
+		.then(([p5Module, sketchModule]): void => {
 			const P5 = p5Module.default;
 			const sketchFn = sketchModule.default;
 
 			try {
-				const instance = new P5((p: p5) => {
+				const instance = new P5((p: p5): void => {
 					sketchFn(p, bg);
 
 					if (prefersReducedMotion && p.draw) {
 						const originalDraw = p.draw.bind(p);
 						let warmupFrames = 60;
-						p.draw = () => {
+						p.draw = (): void => {
 							originalDraw();
 							warmupFrames--;
 							if (warmupFrames <= 0) {
@@ -280,22 +289,22 @@ function initBackground() {
 				console.error('[bg-sketch] p5 constructor error:', err);
 			}
 		})
-		.catch((err) => {
+		.catch((err: unknown): void => {
 			console.error('[bg-sketch] load error:', err);
 		});
 }
 
-function scheduleBackgroundInit() {
-	const startInit = () => {
+function scheduleBackgroundInit(): void {
+	const startInit = (): void => {
 		if ('requestIdleCallback' in window) {
-			window.requestIdleCallback(() => initBackground(), { timeout: 3000 });
+			window.requestIdleCallback((): void => initBackground(), { timeout: 3000 });
 		} else {
 			setTimeout(initBackground, 100);
 		}
 	};
 
 	if ('PerformanceObserver' in window) {
-		const po = new PerformanceObserver(() => {
+		const po = new PerformanceObserver((): void => {
 			po.disconnect();
 			startInit();
 		});
@@ -310,7 +319,7 @@ function scheduleBackgroundInit() {
 }
 
 /** Remove all active p5 instances and reset state. */
-export function teardown() {
+export function teardown(): void {
 	if (resizeTimer) {
 		clearTimeout(resizeTimer);
 		resizeTimer = null;
@@ -337,7 +346,7 @@ export function teardown() {
 }
 
 /** Tear down per-page sketches but preserve the #bg-canvas instance. */
-export function teardownPage() {
+export function teardownPage(): void {
 	if (resizeTimer) {
 		clearTimeout(resizeTimer);
 		resizeTimer = null;
@@ -376,7 +385,7 @@ export function teardownPage() {
 }
 
 /** Re-observe per-page sketch containers after a View Transition swap. */
-export function reinitPage() {
+export function reinitPage(): void {
 	if (shouldBootBackground()) {
 		scheduleBackgroundInit();
 	}
@@ -389,7 +398,7 @@ export function getSketchInstance(el: HTMLElement): p5 | undefined {
 }
 
 /** Pause (noLoop) a sketch in the given container. */
-export function pauseSketch(el: HTMLElement) {
+export function pauseSketch(el: HTMLElement): void {
 	const inst = instances.get(el);
 	if (inst) {
 		inst.noLoop();
@@ -398,7 +407,7 @@ export function pauseSketch(el: HTMLElement) {
 }
 
 /** Resume (loop) a sketch in the given container. */
-export function resumeSketch(el: HTMLElement) {
+export function resumeSketch(el: HTMLElement): void {
 	const inst = instances.get(el);
 	if (inst) {
 		inst.loop();
@@ -407,7 +416,7 @@ export function resumeSketch(el: HTMLElement) {
 }
 
 /** Full init: background + per-page sketches. Called once on first load. */
-export function initSketches() {
+export function initSketches(): void {
 	if (shouldBootBackground()) {
 		scheduleBackgroundInit();
 	}

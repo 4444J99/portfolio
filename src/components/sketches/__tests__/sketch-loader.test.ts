@@ -8,14 +8,24 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 const loaderSource = readFileSync(resolve(__dirname, '../sketch-loader.ts'), 'utf-8');
 
 const moduleEntries = [...loaderSource.matchAll(/['"]?([a-z-]+)['"]?:\s*\(\)\s*=>\s*import\(/g)];
-const registeredIds = moduleEntries.map((m) => m[1]);
+const registeredIds = moduleEntries.flatMap((m) => (m[1] ? [m[1]] : []));
+
+type MockP5Shape = {
+	remove: ReturnType<typeof vi.fn>;
+	noLoop: ReturnType<typeof vi.fn>;
+	loop: ReturnType<typeof vi.fn>;
+	redraw: ReturnType<typeof vi.fn>;
+	draw: ReturnType<typeof vi.fn>;
+};
+
+type TestIntersectionEntry = Pick<IntersectionObserverEntry, 'isIntersecting' | 'target'>;
 
 // Mock p5 and sketch modules at top level
 vi.mock('p5', () => {
 	return {
 		default: class MockP5 {
-			constructor(sketch: any) {
-				const p = {
+			constructor(sketch: (p: MockP5Shape) => void) {
+				const p: MockP5Shape = {
 					remove: vi.fn(),
 					noLoop: vi.fn(),
 					loop: vi.fn(),
@@ -63,7 +73,7 @@ describe('sketch registry (static)', () => {
 });
 
 describe('sketch-loader runtime', () => {
-	let observerCallback: (entries: any[]) => void;
+	let observerCallback: (entries: TestIntersectionEntry[]) => void = () => {};
 	const mockObserve = vi.fn();
 	const mockUnobserve = vi.fn();
 	const mockDisconnect = vi.fn();
@@ -78,13 +88,32 @@ describe('sketch-loader runtime', () => {
 			}),
 		);
 
-		class MockIntersectionObserver {
-			constructor(cb: any) {
-				observerCallback = cb;
+		class MockIntersectionObserver implements IntersectionObserver {
+			readonly root = null;
+			readonly rootMargin = '0px';
+			readonly thresholds = [];
+
+			constructor(cb: IntersectionObserverCallback) {
+				observerCallback = (entries: TestIntersectionEntry[]): void => {
+					cb(entries as IntersectionObserverEntry[], this);
+				};
 			}
-			observe = mockObserve;
-			unobserve = mockUnobserve;
-			disconnect = mockDisconnect;
+
+			observe(target: Element): void {
+				mockObserve(target);
+			}
+
+			unobserve(target: Element): void {
+				mockUnobserve(target);
+			}
+
+			disconnect(): void {
+				mockDisconnect();
+			}
+
+			takeRecords(): IntersectionObserverEntry[] {
+				return [];
+			}
 		}
 
 		vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
@@ -406,9 +435,8 @@ describe('sketch-loader runtime', () => {
 
 	it('falls back to setTimeout when no PerformanceObserver', async () => {
 		// Remove PerformanceObserver
-		const origPO = (window as any).PerformanceObserver;
-		// @ts-expect-error
-		delete window.PerformanceObserver;
+		const origPO = window.PerformanceObserver;
+		Reflect.deleteProperty(window, 'PerformanceObserver');
 
 		const bg = document.createElement('canvas');
 		bg.id = 'bg-canvas';
@@ -422,20 +450,18 @@ describe('sketch-loader runtime', () => {
 		}
 
 		if (origPO) {
-			(window as any).PerformanceObserver = origPO;
+			window.PerformanceObserver = origPO;
 		}
 	});
 
 	it('falls back to setTimeout when no requestIdleCallback', async () => {
 		// Remove requestIdleCallback
-		const origRIC = (window as any).requestIdleCallback;
-		// @ts-expect-error
-		delete window.requestIdleCallback;
+		const origRIC = window.requestIdleCallback;
+		Reflect.deleteProperty(window, 'requestIdleCallback');
 
 		// Also remove PerformanceObserver to use setTimeout path
-		const origPO = (window as any).PerformanceObserver;
-		// @ts-expect-error
-		delete window.PerformanceObserver;
+		const origPO = window.PerformanceObserver;
+		Reflect.deleteProperty(window, 'PerformanceObserver');
 
 		const bg = document.createElement('canvas');
 		bg.id = 'bg-canvas';
@@ -449,17 +475,16 @@ describe('sketch-loader runtime', () => {
 		}
 
 		if (origRIC) {
-			(window as any).requestIdleCallback = origRIC;
+			window.requestIdleCallback = origRIC;
 		}
 		if (origPO) {
-			(window as any).PerformanceObserver = origPO;
+			window.PerformanceObserver = origPO;
 		}
 	});
 
 	it('observeSketches falls back without IntersectionObserver', async () => {
 		const origIO = window.IntersectionObserver;
-		// @ts-expect-error
-		delete window.IntersectionObserver;
+		Reflect.deleteProperty(window, 'IntersectionObserver');
 
 		const container = document.createElement('div');
 		container.className = 'sketch-container';
