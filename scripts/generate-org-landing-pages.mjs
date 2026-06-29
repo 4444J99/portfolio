@@ -17,6 +17,7 @@
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { escapeHtml } from '../lib/html-sanitize.mjs';
 
 const PAGES_JSON = resolve('src/data/github-pages.json');
 const OUTPUT_DIR = resolve('dist-org-pages');
@@ -86,14 +87,6 @@ const HUB_LINKS = [
 		desc: '49 published essays',
 	},
 ];
-
-function escapeHtml(str) {
-	return str
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;');
-}
 
 function generatePage(owner, repos) {
 	const organ = ORGANS[owner];
